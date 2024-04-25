@@ -21,7 +21,7 @@ Make a copy of this doc (using the File menu) and share it with `hd-tas@stolaf.e
 
 Enter your username here: 
 +----------+
-|          |
+|...          |
 +----------+
 
 
