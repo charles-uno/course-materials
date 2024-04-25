@@ -1,0 +1,48 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 6: Hanging Chain\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+Two rigid posts of height $H$ stand at $x=-L$ and $x=L$. A chain of length $\ell$ hangs between them. The mass of the chain, $m$, is uniformly distributed along its length.
+\begin{enumerate}
+\item Draw a picture!
+\item Write down the potential energy of a small section of the chain $dm$, then write down an integral over $dm$ for the potential energy of the entire chain.
+\item Rearrange your potential energy integral into rectangular coordinates. 
+\item The length of the chain is fixed. Write down that constraint as another integral, then rearrange it into the same coordinates as above.
+\item Combine your two integrals into a single expression using a Lagrange multiplier $\lambda$.
+\item Use the Euler-Lagrange equation to find a differential equation describing the chain.
+
+Hint: recall when $f(y, y', x)$ doesn't depend on $x$, the EL equation can be rewritten: 
+$$
+\frac{\partial f}{\partial y} - \frac{d}{dx} \frac{\partial f}{\partial y'} = 0
+\quad\quad\rightarrow\quad\quad
+f - y' \frac{\partial f}{\partial y'} = \text{constant}
+$$
+\item Solve the differential equation to get an expression $y(x)$.
+
+Hint: try the substitution $\cosh u = \alpha y + \beta$, where $\alpha$ and $\beta$ are constants. Note also:
+\begin{align*}
+    \tfrac{d}{du} \cosh u &= \sinh u&
+    \tfrac{d}{du} \sinh u &= \cosh u&
+    \cosh^2 u - \sinh^2 u &= 1
+\end{align*}
+\item Explain the significance of any undetermined constants in your expression $y(x)$. Give a simple expression relating each constant to known quantities (you do not need to solve those expressions). 
+\end{enumerate}
+\end{document}
