@@ -2,6 +2,8 @@
 
 Taught at St Olaf College, Spring 2024
 
+Partial course. The curriculum was mostly set by [Melissa Lynn](https://wp.stolaf.edu/mscs/mscs-faculty-staff-listing/), but she was unable to complete the semester. 
+
 Course listing for CS 241: https://catalog.stolaf.edu/academic-programs/computer-science
 
 ## Labs
