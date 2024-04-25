@@ -1,18 +1,18 @@
-	.section .rodata
+    .section .rodata
 input_prompt:
-	.ascii	"Enter a character: \0"
+    .ascii "Enter a character: \0"
 char_format:
-	.ascii	"%c\0"
+    .ascii "%c\0"
 reply:
-	.ascii	"Flipped case: %c\12\0"
+    .ascii "Flipped case: %c\12\0"
 
-	.text
-	.global flip_char_case
+    .text
+    .global flip_char_case
 flip_char_case:
-	@ set up stack frame, no local variables
-	push	{fp, lr}
-	add	fp, sp, #4
-	sub	sp, sp, #0
+    @ set up stack frame, no local variables
+    push {fp, lr}
+    add fp, sp, #4
+    sub sp, sp, #0
     @ input r0 is an ascii char
     @ for uppercase letter (65-90) return the corresponding lowercase ascii value
     @ for lowercase letter (97-122) return the corresponding uppercase ascii value
@@ -36,20 +36,20 @@ return:
     pop {fp, lr}
     bx lr
 
-	.text
-	.global main
-main:	
-	push	{fp, lr}
+    .text
+    .global main
+main: 
+    push {fp, lr}
     @ stack frame, one local variable
-	add	fp, sp, #4
-	sub	sp, sp, #4
+    add fp, sp, #4
+    sub sp, sp, #4
 
-	ldr	r0, input_prompt_ptr
-	bl	printf
+    ldr r0, input_prompt_ptr
+    bl printf
 
-	ldr	r0, char_format_ptr
-	sub	r1, fp, #8
-	bl 	scanf
+    ldr r0, char_format_ptr
+    sub r1, fp, #8
+    bl  scanf
 
     @ input char is at fp-8. load to r0
     ldr r0, [fp, #-8]
@@ -57,18 +57,18 @@ main:
 
     @ move return from r0
     mov r1, r0
-	ldr	r0, reply_ptr
+    ldr r0, reply_ptr
     bl printf
 
-	@ return 0, restore stack frame
-	mov	r0, #0
-	sub	sp, fp, #4
-	pop	{fp, pc}
+    @ return 0, restore stack frame
+    mov r0, #0
+    sub sp, fp, #4
+    pop {fp, pc}
 
 input_prompt_ptr:
-	.word	input_prompt
+    .word input_prompt
 char_format_ptr:
-	.word 	char_format
+    .word  char_format
 reply_ptr:
-	.word 	reply
+    .word  reply
 
