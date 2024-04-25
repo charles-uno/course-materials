@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 7: The Ramp is Fixed This Time\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+A ball rolls without slipping down a ramp of angle $\theta$. The ramp is fixed. 
+
+\begin{enumerate}
+\item Draw a picture!
+\item Write down the Lagrangian for this system in terms of $x$ (the position of the ball) and $\phi$ (the ball's rotation). Recall that the rotational kinetic energy of a sphere is:
+$$
+T_{rot} = \tfrac{1}{2} I \dot{\phi}^2
+\quad\quad\text{where $I=\tfrac{2}{5}mr^2$ for a sphere rotating around its center}
+$$
+\item What is the relationship between $x$ and $\phi$ for the ball to roll without slipping?
+
+Hint: constraints should take the form $g(x, \phi) = \text{const}$
+\item Use the Euler-Lagrange equation with a Lagrange multiplier $\lambda$ to get the equations of motion for the system.
+$$
+\frac{\partial \mathcal{L}}{\partial x} + \lambda \frac{\partial g}{\partial x} = \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{x}}
+\quad\quad\text{and likewise for $\phi$}
+$$
+\item Use your equations of motion and your constraint to solve for $\ddot{x}$. How does it compare to the acceleration of a block sliding down a frictionless ramp? 
+\item What is the value of the Lagrange multiplier $\lambda$? What is its physical significance?
+
+\end{enumerate}
+
+
+\end{document}
