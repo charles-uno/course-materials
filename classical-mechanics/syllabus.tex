@@ -1,0 +1,111 @@
+\documentclass[10pt]{article}
+\usepackage{hyperref}
+\textheight=9.5in
+\topmargin=-1in
+\headheight=0in
+
+\pagestyle{empty}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\setlength{\parindent}{0in}
+
+
+\begin{document}
+
+\begin{center}
+{\bf Physics 374 B -- Classical Mechanics -- Fall 2020\\}
+\end{center}
+\hrule
+
+\vskip0.1in
+\textbf{Instructor:} Charles Fyfe (fyfe1@stolaf.edu)
+\vskip0.1in
+\textbf{Class Time:} Monday, Wednesday, and Friday 10:45-11:40am via Zoom 
+\vskip0.1in
+\textbf{Office Hours:} Monday 2-3pm, Wednesday 1-2pm, and Friday 9-10am via Zoom. I am also happy to meet by appointment.
+\vskip0.1in
+\textbf{Textbooks:} Classical Mechanics (John R Taylor), plus supplemental readings
+\vskip0.1in
+\textbf{Software:} Python. Mathematica may also be useful
+\vskip0.1in
+\textbf{Grades:} Approximately half the points for the course will be assigned in the first half of the semester. Points will be weighted per:
+\begin{center}\begin{minipage}{3in}
+Final Exam\dotfill 20\%\\
+Homework \dotfill 20\%\\
+Midterm Exam\dotfill 15\%\\
+Participation\dotfill 10\%\\
+Projects \dotfill 15\%\\
+Quizzes \dotfill 20\%\\
+\end{minipage}
+\end{center}
+\textbf{Course Objectives:} This course will focus on the formulation of classical mechanics using calculus of variations, which is partly motivated by the deficiencies of the Newtonian approach. We will discuss Lagrangians, Hamiltonians, central forces, and oscillators. Time permitting, we may delve into more exotic topics.
+\vskip.10in
+\textbf{Homework:} Reading and problems will be assigned most days, and due by class time on Fridays. Analytical work is to be written neatly and scanned to PDF (or even better, typed up in \LaTeX or Mathematica). For Python code, please upload a screenshot and put a link to your code on \texttt{glowscript.org} as a comment. 
+\vskip.10in
+\textbf{Projects:} Each student will create several short videos and publish them to YouTube. Feel free to peruse past projects for reference. 
+\vskip.10in
+\textbf{Extensions:} Requests for extensions can generally be accommodated, provided you have a reason. Please be timely about asking, so I can hold off on posting the solution. I cannot accept work after the solution has been posted.
+\vskip.10in
+\textbf{Honor Code:} Students are encouraged to work together (with exceptions) but each student is to turn in their own work. Make sure to credit the people you work with. Please do not look up solutions online. 
+\vskip.10in
+\textbf{Academic Support:} Students should expect to spend 2-3 hours outside of class to prepare for each class period. If you find yourself spending significantly more time than that on homework, please see me and/or contact the Academic Support Center.
+\vskip.10in
+\textbf{Important Dates:}
+\begin{center} \begin{minipage}{3in}
+\begin{flushleft}
+Quiz 1 \dotfill Sept 11 \\
+Midterm Exam \dotfill Oct 5\\
+Project Idea \dotfill Oct 14\\
+Quiz 2 \dotfill Nov 6\\
+Final Exam \dotfill Nov 21, 9am-11am\\
+\end{flushleft}
+\end{minipage}
+\end{center}
+
+\newpage
+
+\begin{center}
+{\bf Physics 374 B -- Classical Mechanics -- Fall 2020\\}
+\end{center}
+\hrule
+
+\vskip0.1in
+
+\textbf{Grading Scale for Analytical Work}
+\vskip0.1in
+
+Each analytical problem will be graded out of 3 points. Expect two or three problems to be graded per week. (Solutions will be posted for all problems.)
+
+\begin{center}
+\begin{tabular}{ c p{10cm} }
+ 0 & No serious attempt, or dimensionally incorrect final answer. \\ 
+ 1 & Some progress, but not close to a solution. \\  
+ 2 & Correct mathematical solution without discussion. Alternatively, significant mathematical problems but thorough discussion of expected physical behaviors.\\
+ 3 & Math is correct, or very close. Includes a brief discussion of the solution, such as behavior in limiting cases.
+\end{tabular}
+\end{center}
+
+\vskip0.1in
+\textbf{Grading Scale for Numerical Work}
+\vskip0.1in
+
+Numerical work is graded out of 6 points: 3 points for output and 3 points for the code itself. For the output of the code, I'm especially looking for:
+
+\begin{itemize}
+    \item Can I easily tell what's going on? Sensible use of colors, textures, sizes. 
+    \item Can I easily understand the graph? Labels, etc.
+    \item Does the system behave physically?
+\end{itemize}
+
+For the code itself, I'm looking for:
+
+\begin{itemize}
+    \item Use of \texttt{main} as an entry point. Best practice is to define functions (and maybe a few global variables) first, then call \texttt{main} to begin execution.
+    \item Sensible use of helper functions. Be wary of copy-pasting the same code in multiple places. Also be wary of any function longer than 20 lines.
+    \item Documentation, including descriptive variable names. Brief comments are appropriate on parts of the code that are particularly important or confusing. Write something you could easily come back to in six months!
+    \item Minimize ``magic numbers.'' For example, if I change \texttt{spring\_length=20} to \texttt{spring\_length=10}, the position of the ball should still be calculated appropriately. Similarly, if I change \texttt{gravity=9.8} to \texttt{gravity=0} in one place, forces and energies should all still be self-consistent. 
+\end{itemize}
+
+Some of these ideas may be new, so you'll be granted some wiggle room early in the semester.
+
+\end{document}

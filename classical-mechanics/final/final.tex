@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,graphicx,hyperref,xcolor}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\usepackage{fancyhdr}
+\rhead{}
+
+\pagestyle{fancy}
+\lhead{Physics 374B Final Exam}
+\rhead{Fall 2020}
+\cfoot{\thepage}
+
+\begin{document}
+
+Name: \makebox[2in]{\hrulefill}
+
+\vspace{0.5in}
+
+\begin{itemize}
+    \item You should plan to spend about two hours on this exam. More time is allowed, but please don't spend all weekend on it.
+    \item Turn in your work to the folder outside Darla's office (RNS 236) by noon Monday. If you're off campus, send me a \textbf{legible} scan of your work.
+    \item Work on your own. You may not reference external resources such as your notes or the book.
+    \item Number your pages. Put your name on each page.
+    \item Each item is worth the same number of points. Some are more difficult than others.
+    \item I have confidence in you!
+\end{itemize}
+
+\vfill
+
+I pledge my honor that on this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work \makebox[2in]{\hrulefill}
+
+\vspace{0.5in}
+
+I have intentionally not signed this pledge \makebox[2in]{\hrulefill}
+
+\newpage
+
+\section*{Problem 1}
+
+We are interested in the power output ($P$) of a wind turbine as a function of the mass density of air ($\rho$), the area swept out by the blades ($A$), and the velocity of the wind through the blades ($v$).
+
+\begin{itemize}
+    \item What are the units of power, mass density, area, and velocity? You may look these up if necessary.
+    \item Suppose $P = \rho^{\alpha} A^{\beta} v^{\gamma}$, then write down a system of linear equations relating $\alpha$, $\beta$, and $\gamma$. 
+    \item Solve the system of equations to write $P$ in terms of $\rho$, $A$, and/or $v$.
+    \item The typical wind speed at St Olaf is 1\% faster than at Carleton. However, due to the increased altitude, the air density at St Olaf is also 1\% less dense\footnote{This is an exaggeration!}. Where would you expect a turbine to produce more power?
+\end{itemize}
+
+\newpage
+
+\section*{Problem 2}
+
+These questions refer to the video projects made by your classmates. 
+
+\begin{itemize}
+    \item Sketch a double pendulum and an asymmetric double torsion pendulum. Label any quantity that you would expect to show up in the Lagrangian. The letter $K$ is used for torsion constants (like spring constants for twisting).
+    \item For a simple pendulum, a small-angle approximation is required to get a pencil-and-paper solution. Do you expect that would also be the case for a double pendulum? How about for an ADTP? Explain your reasoning.
+    
+    Hint: recall that no such approximation is necessary for the coupled oscillator.
+    \item Argue briefly that the three-body problem has been solved.
+    \item Argue briefly that the three-body problem has not been solved. 
+    
+\end{itemize}
+
+\newpage
+
+\section*{Problem 3}
+
+A thin circular tire of mass $M$ and radius $R$ rolls without slipping on a flat surface. It rolls over a nail of mass $m$, which gets stuck in the tire. Let $X$ be the horizontal position of the center of the tire, and $\phi$ be the position of the nail on the wheel, measured clockwise from the bottom.
+
+\begin{itemize}
+    \item Draw a picture! Make sure $X$ and $\phi$ are clearly marked.
+    \item Argue (using words) that $X = R\phi$. Is this a suitable constraint for using a Lagrange multiplier? If so, what force of constraint would the multiplier $\lambda$ correspond to?
+    \item Write down the kinetic energy (translation and rotation) of the tire. Show that it can be rearranged to look like:
+    \begin{align*}
+        T_\text{tire} = M R^2 \dot{\phi}^2
+    \end{align*}
+    \item What is the position $(x, y)$ of the nail in terms of $\phi$? Use that to calculate its velocity, $(\dot{x}, \dot{y})$, and show:
+    \begin{align*}
+        T_\text{nail} = m R^2 \dot{\phi}^2 \left( 1 - \cos \phi \right) 
+    \end{align*}
+    \item Write down the Lagrangian, and show that the equation of motion is:
+    \begin{align*}
+        m R^2 \dot{\phi}^2 \sin\phi - m g R \sin\phi = 2 (M+m) R^2 \ddot{\phi} - 2 m R^2 \ddot{\phi} \cos\phi + 2 m R^2 \dot{\phi}^2 \sin\phi
+    \end{align*}
+    \item Approximate $\sin\phi$ and $\cos\phi$ for the case where $\phi \approx 0$, and neglect any term that is quadratic or higher in $\phi$, $\dot{\phi}$ and/or $\ddot{\phi}$. Show the result is:
+    \begin{align*}
+        \ddot{\phi} = -\frac{m g}{2 M R} \phi
+    \end{align*}
+    \item Solve the above equation for $\phi(t)$ and describe the motion in words. Comment on limiting cases for $g$, $R$, and the ratio of the masses. Do these make sense?
+    \item Now go back to the full equation of motion and approximate $\sin\phi$ and/or $\cos\phi$ when $\phi \approx \pi$. Show the result is:
+    \begin{align*}
+        \ddot{\varepsilon} &= \frac{mg}{2R(M+2m)} \varepsilon & &\text{where $\varepsilon=\phi - \pi$}
+    \end{align*}
+    \item Solve the equation above for $\varepsilon(t)$ and describe the motion in words. Comment on limiting cases. 
+    
+\end{itemize}
+
+\newpage
+
+\section*{Problem 4}
+
+Two bodies interact via a central potential of the form:
+\begin{align*}
+    U(r) &= \alpha r^7
+\end{align*}
+
+\begin{itemize}
+    \item The equation of motion for two bodies interacting via a central potential $U(r)$ can be found on the last page. Briefly explain the significance of the constants $\ell$ and $\mu$. Also explain how it's possible for us to explain the motion of two bodies using only a single coordinate, $r$. 
+    \item Sketch the potential $U(r)$, the centripetal ``potential,'' and the effective potential. Based on that sketch, do you expect a circular orbit to be stable or unstable? Explain your reasoning.
+    \item Show that the radius of a circular orbit is given by:
+    \begin{align*}
+        r_0^9 &= \frac{\ell^2}{7 \alpha \mu}
+    \end{align*}
+    \item Show that the effective potential near $r_0$ can be approximated as:
+    \begin{align*}
+        U_\text{eff}(r) \approx \frac{9 \ell^2}{14 \mu r_0^2} + \frac{1}{2} \frac{9 \ell^2}{\mu r_0^4} \, (r - r_0)^2
+    \end{align*}
+    \item Using the above approximation, show that small perturbations from a circular orbit are described by:
+    \begin{align*}
+        \ddot{\varepsilon} &= - \frac{9 \ell^2}{\mu^2 r_0^4} \varepsilon &
+        & \text{where $\varepsilon = r - r_0$}
+    \end{align*}
+    \item Show that the angular frequency of a circular orbit is given by:
+    \begin{align*}
+        \dot{\phi} = \frac{\ell}{\mu r_0^2}
+    \end{align*}
+    \item Sketch the path of an orbit perturbed slightly from $r_0$. Does the orbit close?
+\end{itemize}
+
+\newpage
+
+\section*{For Reference}
+
+When $x \approx x_0$, the function $f(x)$ can be approximated:
+\begin{align*}
+    f(x) = f(x_0) + f'(x_0) \, (x - x_0) + \tfrac{1}{2} f''(x_0) \, (x - x_0)^2 + \cdots
+\end{align*}
+
+Equation of motion for two bodies interacting via a central potential:
+\begin{align*}
+    \mu \ddot{r} = -\frac{d}{dr} \left[ \frac{\ell^2}{2 \mu r^2} + U(r) \right]
+\end{align*}
+
+Euler-Lagrange equation, true for each coordinate $x$ that $\mathcal{L}$ depends on:
+\begin{align*}
+    \frac{\partial \mathcal{L}}{\partial x} &= \frac{d}{dt} \frac{\partial \mathcal{L}}{\partial \dot{x}}
+\end{align*}
+
+Moment of inertia for a thin ring: $I = M R^2$
+
+Orbital angular momentum: $\vec{\ell} = \vec{r} \times \vec{p}$, or alternatively $\ell = m r^2 \dot{\phi}$
+
+\end{document}
