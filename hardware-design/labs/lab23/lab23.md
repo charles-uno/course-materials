@@ -20,9 +20,9 @@ cd lab23
 Make a copy of this doc (using the File menu) and share it with `hd-tas@stolaf.edu`, then enter all your work in your shared copy. Please use your St. Olaf email account (`@stolaf.edu`). Please use the default document name "Copy of Lab ...", so we can find your work. We don't need your name in the document name
 
 Enter your username here: 
-+----------+
-|...          |
-+----------+
+|----------|
+|          |
+|----------|
 
 
 
