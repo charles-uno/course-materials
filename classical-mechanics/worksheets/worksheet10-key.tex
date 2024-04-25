@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools,mathabx,siunitx}
+\sisetup{tight-spacing=true}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 10: Lagrangian Mechanics in an Electromagnetic Field\\
+\\
+Name: \purple{SOLUTION}\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+A particle with mass $m$ and charge $q$ begins at rest in a constant electric field $\vec{E}$ and a constant magnetic field $\vec{B}$. The electric field points in the $x$ direction and the magnetic field points in the $y$ direction. 
+\begin{enumerate}
+    \item What is the vector potential $\vec{A}$ for this system? There are several possible answers.
+    \item What is the scalar potential $V$ for this system?
+    \item What is the Lagrangian for this system? 
+    \item Show that the equations of motion are as follows:
+    \begin{align*}
+        m \ddot{x} &= qE - qB\dot{z} &
+        m \ddot{y} &= 0 &
+        m \ddot{z} &= qB \dot{x}
+    \end{align*}
+    \item Perform a change of variables from $x$ and $z$ to $v_x=\dot{x}$ and $v_z=\dot{z}$. Then show that the equations of motion can be rewritten in the familiar forms below:
+    \begin{align*}
+        \ddot{v_x} &= -\omega^2 v_x &
+        \ddot{v_z} &= -\omega^2 v_z + \alpha
+    \end{align*}
+    \item Solve the equations of motion for $v_x(t)$ and $v_z(t)$, and use initial conditions to find the value of any undetermined constants. Confirm that your solutions satisfy the original (coupled) equations of motion. 
+    \item What does the motion look like? Draw a picture. 
+\end{enumerate}
+
+For reference:
+\begin{align*}
+    \mathcal{L} &= \tfrac{1}{2} m \dot{\vec{r}}^2 - qV + q \dot{\vec{r}} \cdot \vec{A} &
+    \vec{B} &= \nabla \times \vec{A} &
+    \vec{E} &= -\nabla V - \frac{\partial \vec{A}}{\partial t} &
+\end{align*}
+And in rectangular coordinates:
+$$
+\nabla \times \vec{A} = 
+\left[
+{\begin{array}{c}
+    \partial_x \\
+    \partial_y \\
+    \partial_z
+  \end{array} }
+\right]
+\times
+\left[
+{\begin{array}{c}
+    A_x \\
+    A_y \\
+    A_z
+  \end{array} }
+\right]
+=
+\left[
+{\begin{array}{c}
+    \partial_y A_z - \partial_z A_y \\
+    \partial_z A_x - \partial_x A_z \\
+    \partial_x A_y - \partial_y A_x
+\end{array} }
+\right]
+\quad\quad\text{where $\partial_x=\frac{\partial}{\partial x}$}
+$$
+
+\newpage 
+
+\purple{
+
+From the definitions above:
+$$
+\vec{B}
+=
+\nabla \times \vec{A}
+=
+\left[
+{\begin{array}{c}
+    \partial_y A_z - \partial_z A_y \\
+    \partial_z A_x - \partial_x A_z \\
+    \partial_x A_y - \partial_y A_x
+\end{array} }
+\right]
+=
+\left[
+{\begin{array}{c}
+    0 \\
+    B \\
+    0
+\end{array} }
+\right]
+$$
+One option is $\vec{A}=Bz\hat{x}$. Then the first term of the $y$ component of $\vec{B}$ is $B$ and all other components are zero. We could alternatively choose $\vec{A}=-Bx\hat{z}$, in which case the second term of the $y$ component of $\vec{B}$ is $B$ and all other terms are zero.
+
+The fields are constant, so $\frac{\partial \vec{A}}{\partial t}=0$, which means:
+$$
+\vec{E}
+=
+\nabla V
+=
+\left[
+{\begin{array}{c}
+    \partial_x V \\
+    \partial_y V \\
+    \partial_z V
+\end{array} }
+\right]
+=
+\left[
+{\begin{array}{c}
+    E \\
+    0 \\
+    0
+\end{array} }
+\right]
+$$
+This is satisfied easily enough with $V=Ex$. 
+
+Sticking with rectangular coordinates, the Lagrangian can be written:
+$$
+\mathcal{L}
+=
+\tfrac{1}{2} m \dot{\vec{r}}^2 - qV + q\dot{\vec{r}}\cdot\vec{A}
+=
+\tfrac{1}{2} m (\dot{x}^2 + \dot{y}^2 + \dot{z}^2) - qEx + q\dot{x}Bz 
+$$
+Plugging into the Euler-Lagrange equation, using $\vec{A}=Bz\hat{x}$, we would instead get:
+\begin{align*}
+    qE &= \frac{d}{dt} \left[ m\dot{x} + qBz\right] &
+    0 &= m \ddot{y} &
+    qB\dot{x} &= m \ddot{z}
+\end{align*}
+If we had instead used $\vec{A}=-Bx\hat{z}$, we would get:
+\begin{align*}
+    qE - qB\dot{z} &= m\ddot{x}&
+    0 &= m \ddot{y} &
+    qB\dot{x} &= m \ddot{z}
+\end{align*}
+The two shake out the same, as we would expect, and give the expected equations of motion. We can also note right away that the equation of motion in $y$ is trivial -- constant velocity. From here on, we can just worry about the other two components. 
+
+These are second-order differential equations, but there are no $x$ or $z$ terms -- only their derivatives. So we can drop a dot across the board by changing variables:
+\begin{align*}
+    \dot{x} &\rightarrow v_x &
+    \dot{z} &\rightarrow v_z
+\end{align*}
+So:
+\begin{align*}
+    m \dot{v_x} &= qE - qBv_z &
+    m \dot{v_z} &= qBv_x
+\end{align*}
+In order to decouple the differential equations, we take a time derivative of the first, then substitute the second into it to eliminate $v_z$:
+\begin{align*}
+    m \ddot{v_x} &= - qB\dot{v_z} &
+    &\rightarrow&
+    m \ddot{v_x} &= - qB \left( \frac{qB}{m} v_x \right)
+\end{align*}
+Giving:
+\begin{align*}
+    \ddot{v_x} &= -\omega^2 v_x &
+    &\text{where}&
+    \omega &= \frac{qB}{m}
+\end{align*}
+This is the same differential equation we saw for the harmonic oscillator, so we know the solution is:
+\begin{align*}
+    v_x(t) &= \alpha \cos \left( \omega t - \phi_0 \right) &
+    \text{where $\alpha$ and $\phi_0$ are constants}
+\end{align*}
+From there, we can evaluate $\dot{v_x}$ directly and plug back into our equation of motion to get $v_z(t)$:
+\begin{align*}
+    m \dot{v_x} &= qE - qBv_z &
+    &\rightarrow&
+    v_z (t) &= \tfrac{E}{B} + \alpha \sin \left( \omega t - \phi_0 \right)
+\end{align*}
+Now it's just a matter of lining up our undetermined constants ($\alpha$ and $\phi_0$) with our initial conditions. We know the particle starts at rest:
+\begin{align*}
+    v_x(0) &= \alpha \cos \left( - \phi_0 \right) &
+    v_z(0) &= \tfrac{E}{B} + \alpha \sin \left( - \phi_0 \right)
+\end{align*}
+Assuming $\alpha \not= 0$, we can get $v_x(0)=0$ by setting $\phi_0=\tfrac{\pi}{2}$. Essentially, we're shifting our cosine curve sideways so it looks like a sine curve (and our sine curve in $v_z$ will look like a negative cosine). From there, the second equation is satisfied by $\alpha=\tfrac{E}{B}$. So finally:
+\begin{align*}
+    v_x(0) &= \tfrac{E}{B} \sin \omega t &
+    v_z(0) &= \tfrac{E}{B} \left( 1 - \cos \omega t \right) &
+    & \text{where $\omega = \tfrac{qB}{m}$}
+\end{align*}
+The velocity in $x$ oscillates back and forth around zero, so there is no net movement in the $x$ direction. The velocity in $z$ oscillates back and forth around $\tfrac{E}{B}$, so that's the average velocity. Putting those two motions together, the path of the particle is a cycloid, like we saw for the brachistochrone. The particle is initially pulled in the $x$ direction by the electric field. But the faster it goes, the more strongly its path is curved by the magnetic field. Ultimately it's turned around completely and the electric field slows the particle back to a stop, after a time $\tfrac{2\pi}{\omega}$, a distance $\tfrac{E}{B} \frac{2\pi}{\omega}$ in the $z$ direction from where it started. Then the process begins again. 
+
+This is called the E Cross B drift. The electric field is in the $x$ direction, and the magnetic field is in the $y$ direction, but the net velocity of the particle is in $z$, or $\left< \vec{v} \right> = \frac{\vec{E} \times \vec{B}}{B^2}$
+
+
+
+
+
+}
+
+\end{document}

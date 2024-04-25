@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools,mathabx,siunitx}
+\sisetup{tight-spacing=true}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 9: Planetary Wobbles\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+Earth interacts with the Sun via a gravitational potential:
+$$
+U(r) = -\frac{G m_\Earth m_\Sun}{r}
+$$
+
+\begin{enumerate}
+    \item Show that the equation of motion is as follows. Explain the significance of each term.
+    $$
+    \mu \ddot{r} = -\frac{d}{dr} \left[ \frac{\ell^2}{2 \mu r^2} -\frac{G \mu M}{r} \right]
+    $$
+    \item Sketch the gravitational potential, the centripetal potential, and the effective potential.
+    \item Find the value $r_0$ at which $\ddot{r}=0$ and explain its significance. It's a bit messy, so be sure to double check your units!
+    \item Approximate the effective potential near $r_0$ as a quadratic. Recall:
+    $$
+    f(x) \approx f(x_0) + f'(x_0) \; (x - x_0) + \tfrac{1}{2} f''(x) \; (x - x_0)^2 + \cdots
+    \quad\quad\text{near $x_0$}
+    $$
+    \item Perform a change of variables $(r - r_0) \rightarrow \epsilon$. Show that the equation of motion can now be written as:
+    $$
+    \ddot{\epsilon} = - \omega^2 \epsilon
+    $$
+    \item Solve the equation of motion for $\epsilon(t)$. What is the value of $\omega$? How does this number line up with the motion of the Earth?
+\end{enumerate}
+
+The values below may be useful. Note $\ell_\Earth$ is Earth's orbital angular momentum.
+\begin{align*}
+    m_\Sun &= \SI{1.99e30}{\kilo\gram} &
+    G &= \SI{6.67e-11}{\newton\meter^2/\kilogram^2} & \\
+    m_\Earth &= \SI{5.97e24}{\kilo\gram} & 
+    \ell_\Earth &= \SI{2.66e40}{\joule \second}
+\end{align*}
+
+\end{document}

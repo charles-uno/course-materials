@@ -1,0 +1,60 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools,mathabx,siunitx}
+\sisetup{tight-spacing=true}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 11: Weakly Coupled Oscillators\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+Two blocks ($m_1$ and $m_2$) are suspended by three springs ($k_1$, $k_2$, and $k_3$) between fixed walls. All motion is confined to the $x$ direction.
+\begin{enumerate}
+    \item Draw a picture!
+    \item Using forces, show that the equations of motion can be written in the form:
+    \begin{align*}
+        \mathbf{M} \ddot{\vec{x}} &= - \mathbf{K} \vec{x} &
+        &\text{where $\mathbf{M}$ and $\mathbf{K}$ are $2\times2$ matrices}
+    \end{align*}
+    \item Guess that the positions $x_1$ and $x_2$ can be written as sines and cosines, written more succinctly as exponentials. Then show that the equations of motion can be rewritten:
+    \begin{align*}
+        -\omega^2 \mathbf{M} \vec{a} &= - \mathbf{K} \vec{a} &
+        &\text{where $\vec{a}$ is a constant 2D vector}
+    \end{align*}
+    
+    
+    
+\end{enumerate}
+    
+
+
+$$
+\left[
+{\begin{array}{cc}
+   k_1 + k_2 - \omega^2 m_1 & -k_2\\
+   -k_2 & k_2 + k_3 - \omega^2 m_2\\
+  \end{array} }
+\right]
+\left[
+{\begin{array}{c}
+    a_1\\
+    a_2\\
+  \end{array} }
+\right]
+=0
+$$
+
+\end{document}

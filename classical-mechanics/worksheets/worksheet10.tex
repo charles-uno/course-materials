@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools,mathabx,siunitx}
+\sisetup{tight-spacing=true}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 10: Lagrangian Mechanics in an Electromagnetic Field\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+A particle with mass $m$ and charge $q$ begins at rest in a constant electric field $\vec{E}$ and a constant magnetic field $\vec{B}$. The electric field points in the $x$ direction and the magnetic field points in the $y$ direction. 
+\begin{enumerate}
+    \item What is the vector potential $\vec{A}$ for this system? There are several possible answers.
+    \item What is the scalar potential $V$ for this system?
+    \item What is the Lagrangian for this system? 
+    \item Show that the equations of motion are as follows:
+    \begin{align*}
+        m \ddot{x} &= qE - qB\dot{z} &
+        m \ddot{y} &= 0 &
+        m \ddot{z} &= qB \dot{x}
+    \end{align*}
+    \item Perform a change of variables from $x$ and $z$ to $v_x=\dot{x}$ and $v_z=\dot{z}$. Then show that the equations of motion can be rewritten in the familiar forms below:
+    \begin{align*}
+        \ddot{v_x} &= -\omega^2 v_x &
+        \ddot{v_z} &= -\omega^2 v_z + \alpha
+    \end{align*}
+    \item Solve the equations of motion for $v_x(t)$ and $v_z(t)$, and use initial conditions to find the value of any undetermined constants. Confirm that your solutions satisfy the original (coupled) equations of motion. 
+    \item What does the motion look like? Draw a picture. 
+\end{enumerate}
+
+For reference:
+\begin{align*}
+    \mathcal{L} &= \tfrac{1}{2} m \dot{\vec{r}}^2 - qV + q \dot{\vec{r}} \cdot \vec{A} &
+    \vec{B} &= \nabla \times \vec{A} &
+    \vec{E} &= -\nabla V - \frac{\partial \vec{A}}{\partial t} &
+\end{align*}
+And in rectangular coordinates:
+$$
+\nabla \times \vec{A} = 
+\left[
+{\begin{array}{c}
+    \partial_x \\
+    \partial_y \\
+    \partial_z
+  \end{array} }
+\right]
+\times
+\left[
+{\begin{array}{c}
+    A_x \\
+    A_y \\
+    A_z
+  \end{array} }
+\right]
+=
+\left[
+{\begin{array}{c}
+    \partial_y A_z - \partial_z A_y \\
+    \partial_z A_x - \partial_x A_z \\
+    \partial_x A_y - \partial_y A_x
+\end{array} }
+\right]
+\quad\quad\text{where $\partial_x=\frac{\partial}{\partial x}$}
+$$
+
+\end{document}
