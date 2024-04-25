@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\newcommand{\varz}{z}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 8: Introduction to Central Forces\\
+\\
+Name:\\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+You hold a ball of mass $m_1$ in your hand. A second ball of mass $m_2$ hangs directly below it, connected by a spring of natural length $L$ and spring constant $k$. At $t=0$, you let go of the top ball and it falls due to gravity. 
+
+\begin{enumerate}
+    \item Draw a picture!
+    \item Write down the Lagrangian for this system in terms of the ball positions $z_1$ and $z_2$. 
+    \item Use the Euler-Lagrange equation to write down equations of motion in terms of $z_1$ and $z_2$. Do not try to solve them. What do you notice?
+    \item Rewrite your Lagrangian in terms of center of mass coordinates:
+    \begin{align*}
+        M &= m_1 + m_2 & 
+        \mu &= \frac{m_1 m_2}{M} &
+        \varz &= z_1 - z_2 &
+        Z &= \frac{m_1 z_1 + m_2 z_2}{M}
+    \end{align*}
+    Hint: start by plugging in $z_1 = Z + \tfrac{m_2}{M} \varz$ and $z_2 = Z - \tfrac{m_1}{M} \varz$
+    \item Use the Euler-Lagrange equation to come up with equations of motion for $\varz$ and $Z$. How are these different from what you saw above?
+    \item Solve the equations of motion.
+    \item Plug $z_1$ and $z_2$ back into your solutions for $Z$ and $\varz$. What does the motion look like?
+    \item Convince yourself that the solution satisfies your equations of motion for $z_1$ and $z_2$.
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools,framed}
+\usepackage[noabbrev]{cleveref}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\usepackage{fancyhdr}
+\rhead{}
+
+\pagestyle{fancy}
+\lhead{Physics 374B Notes}
+\rhead{Fall 2020}
+\cfoot{\thepage}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% Add a background color to block quotes for emphasis
+\let\oldquote=\quote
+\let\endoldquote=\endquote
+\colorlet{shadecolor}{orange!12}
+\renewenvironment{quote}{\begin{shaded*}\begin{oldquote}}{\end{oldquote}\end{shaded*}}
+
+\begin{document}
+
+\section*{Lagrange Multipliers}
+
+Let's say we're looking to maximize a quantity $U$ given by:
+\begin{align}
+    \label{defu}
+    U = \displaystyle\int_{x_1}^{x_2} f(y, y', x) \; dx    
+\end{align}
+Note that primes show differentiation with respect to $x$. For example, $y' = \tfrac{dy}{dx}$.
+
+Furthermore, say our system is constrained by an expression of the form:
+\begin{align}
+    \label{defc}
+    C = \displaystyle\int_{x_1}^{x_2} g(y, y', x) \; dx
+\end{align}
+Where $C$ is some fixed constant.
+
+Suppose $y(x)$ is our solution: a path that gives a stationary point in $U$ subject to our constraint $C$. Then consider an adjacent path:
+\begin{align}
+    \label{defy}
+    Y(x) = y(x) + \alpha \, \eta(x)
+\end{align}
+We insist that $\eta(x_1) = \eta(x_2) = 0$. That is, $Y(x)$ and $y(x)$ must share the same endpoints. The function $\eta$ must also respect our constraint from \cref{defc}. Regardless of $\alpha$, $C$ must remain fixed:
+\begin{align}
+    \frac{dC}{d\alpha} = \frac{d}{d\alpha} \displaystyle\int_{x_1}^{x_2} g(y, y', x) \; dx = 0
+\end{align}
+Expanding via the chain rule and evaluating a few well-behaved terms:
+\begin{align}
+    \frac{dC}{d\alpha} &= \displaystyle\int_{x_1}^{x_2} \underbrace{ \frac{\partial g}{\partial \alpha} }_{0} + \frac{\partial g}{\partial y} \underbrace{ \frac{dy}{d\alpha} }_{\eta} + \frac{\partial g}{\partial y'} \underbrace{ \frac{dy'}{d\alpha} }_{\eta'} \; dx \notag \\
+    &= \displaystyle\int_{x_1}^{x_2} \eta \frac{\partial g}{\partial y} + \eta' \frac{\partial g}{\partial y'} \; dx
+\end{align}
+Recall that $\eta=0$ at the endpoints, so we can use integration by parts to rearrange the second term, then factor out an $\eta$:
+\begin{align}
+\label{dcdalpha}
+\frac{dC}{d\alpha}
+=
+\displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial g}{\partial y} - \frac{d}{dx} \frac{\partial g}{\partial y'} \right] \eta \; dx    
+\end{align}
+Using identical steps, we can come up with an analogous expression for $\tfrac{dU}{d\alpha}$:
+\begin{align}
+\label{dudalpha}
+\frac{dU}{d\alpha}
+=
+\displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial f}{\partial y} - \frac{d}{dx} \frac{\partial f}{\partial y'} \right] \eta \; dx
+\end{align}
+If $\eta(x)$ we an arbitrary function, we could make the argument\footnote{
+Let $\int \eta(x) h(x) dx = 0$, where $\eta$ is an arbitrary function. Then suppose $h(x_0) \not = 0$ in our domain. We can then construct $\eta(x)$ to be nonzero at $x_0$ but zero everywhere else. Hence the integral is nonzero, a contradiction. So $h(x)$ must be uniformly zero.
+} that he bracketed quantities in \cref{dudalpha} must be uniformly zero, which would give the usual Euler-Lagrange equation. However, because of our constraint from \cref{defc}, $\eta(x)$ is not quite arbitrary and the bracketed expression may be nonzero.
+
+We resolve this issue by combining our two expressions, with the aid of an undetermined multiplier $\lambda$:
+\begin{align}
+    \frac{dU^*}{d\alpha} &= \frac{dU}{d\alpha} + \lambda \frac{dC}{d\alpha} \notag \\
+    \label{defustar}
+    &= \displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial f}{\partial y} - \frac{d}{dx} \frac{\partial f}{\partial y'} \right] \eta \; dx + \lambda \displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial g}{\partial y} - \frac{d}{dx} \frac{\partial g}{\partial y'} \right] \eta \; dx \notag \\
+    &= \displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial f}{\partial y} - \frac{d}{dx} \frac{\partial f}{\partial y'} + \lambda \frac{\partial g}{\partial y} - \lambda \frac{d}{dx} \frac{\partial g}{\partial y'} \right] \eta \; dx \notag \\
+    &= \displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial (f + \lambda g)}{\partial y} - \frac{d}{dx} \frac{\partial (f + \lambda g)}{\partial y'} \right] \eta \; dx
+\end{align}
+Recall that $\tfrac{dU}{d\alpha} = 0$ at the stationary point $\alpha=0$, and $\tfrac{dC}{d\alpha}=0$ as long as $\eta$ is consistent with the constraint from \cref{defc}. Therefore their sum must be zero at the stationary point as long as $\eta$ respects the constraint. Therefore:
+\begin{align}
+    \displaystyle\int_{x_1}^{x_2} \left[ \frac{\partial (f + \lambda g)}{\partial y} - \frac{d}{dx} \frac{\partial (f + \lambda g)}{\partial y'} \right] \eta \; dx = 0 \quad\quad\text{at $\alpha=0$}
+\end{align}
+\begin{quote}
+    From here, we have to argue that the bracketed quantity is uniformly zero. We know this is true, but the logic isn't quite clicking. The multiplier $\lambda$ isn't much help since it's constant, rather than a function of $x$. By including $g$, is the constraint ``baked in" to $\eta$ so we can again treat it as an arbitrary function? 
+\end{quote}
+We can further note that this is the Euler-Lagrange equation for an integrand $f + \lambda g$. So we may equivalently write that a stationary point in $U$ from \cref{defu}, respecting the constraint from \cref{defc}, is a stationary point of $U^*$:
+\begin{align}
+    U^* = \displaystyle\int_{x_1}^{x_2} f(y, y', x) + \lambda \, g(y, y', x) \; dx
+\end{align}
+
+\end{document}

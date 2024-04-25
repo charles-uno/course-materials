@@ -1,0 +1,148 @@
+\documentclass[10pt]{article}
+\usepackage{hyperref}
+\textheight=9.5in
+\topmargin=-1in
+\headheight=0in
+
+\pagestyle{empty}
+
+% Add a background color to block quotes, for assignments
+\usepackage{framed}
+\usepackage{xcolor}
+\let\oldquote=\quote
+\let\endoldquote=\endquote
+\colorlet{shadecolor}{orange!12}
+\renewenvironment{quote}{\begin{shaded*}\begin{oldquote}}{\end{oldquote}\end{shaded*}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\begin{document}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\begin{center}
+{\bf PHYSICS 374B NOTES}
+\end{center}
+\hrule
+\vskip0.15in
+
+NOTE: not quite sure about this one
+
+\section*{Proof of the Euler-Lagrange Equation}
+
+Let's say we're looking at motion in two dimensions. We're going from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$. Let's also write $y$ as a function of $x$. (We'll generalize further later in the semester.)
+
+Suppose also that we're integrating some quantity over the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$, and we want to minimize that integral. Call it $S$:
+$$
+S = \displaystyle\int_{x_1}^{x_2} f(y, y', x) dx
+$$
+The value $S$ could be any number of different things. It could be time -- as we saw last time, light follows the path that minimizes its travel time. It could be distance -- when planning the path of an airplane, it's more complicated than drawing a straight line on a map. If we're planning a road trip, perhaps we want to minimize gasoline consumption. And so on. 
+
+Say $Y(x)$ is the solution we're looking for. It's the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$ that minimizes $S$. For example, if we're trying to minimize distance on a flat surface, $Y(x)$ is a straight line. 
+
+Then let's look at a different path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$, called $Y_*$:
+$$
+Y_*(x) = Y(x) + \alpha \, \eta(x)
+$$
+The function $\eta(x)$ tells us about the difference between $Y$ (the ideal path) and $Y_*$ (the non-ideal path). It can be pretty much anything. If $\eta$ is a sine wave, $Y_*$ will wobble around $Y$. If $\eta$ is a parabola, $Y_*$ will overshoot $Y$ and come back. We insist only that $\eta(x_1)=\eta(x_2)=0$, since $Y$ and $Y_*$ must have the same endpoints.
+
+The parameter $\alpha$ lets us control the scale of the difference between $Y_*$ is from $Y$. When $\alpha$ is large, $Y_*$ is very different from $Y$. When $\alpha=0$, there is no difference. In other words, when $\alpha=0$, $Y_*$ is the path that minimizes $S$. So:
+$$
+\frac{dS}{d\alpha} =0 \quad \textrm{at} \quad \alpha=0
+$$
+We'll get back to that fact in a moment. First, we need an expression for $\frac{dS}{d\alpha}$, evaluating the integral over the path $Y_*(x)$.
+$$
+\frac{dS}{d\alpha} =
+\frac{d}{d\alpha} \displaystyle\int_{x_1}^{x_2} dx \; f(Y, Y', x) =
+\displaystyle\int_{x_1}^{x_2} dx \; \frac{d}{d\alpha} f(Y, Y', x) =
+\displaystyle\int_{x_1}^{x_2} dx \; \frac{d}{d\alpha} f(y + \alpha \eta, y' + \alpha \eta', x)
+$$
+Expanding further via the chain rule:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[
+    \frac{\partial f}{\partial \alpha} +
+    \frac{\partial f}{\partial y} \frac{\partial y}{\partial \alpha} +
+    \frac{\partial f}{\partial y'} \frac{\partial y'}{\partial \alpha} +
+    \frac{\partial f}{\partial x} \frac{\partial x}{\partial \alpha}
+\right]
+$$
+Expanding further via the chain rule:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[
+    \frac{\partial f}{\partial \alpha} +
+    \frac{\partial f}{\partial Y} \frac{\partial Y}{\partial \alpha} +
+    \frac{\partial f}{\partial Y'} \frac{\partial Y'}{\partial \alpha} +
+    \frac{\partial f}{\partial x} \frac{\partial x}{\partial \alpha}
+\right]
+$$
+Several terms can be tidied up right away:
+\begin{itemize}
+    \item $f$ does not depend directly on $\alpha$, so $\frac{\partial f}{\partial \alpha} = 0$
+    \item $x$ does not depend on $\alpha$ at all, so $\frac{\partial x}{\partial \alpha} = 0$
+    \item We're evaluating $f$ along the path $Y_*(x)$, so $\frac{\partial y}{\partial \alpha} = \eta$ and likewise for $y'$
+\end{itemize}
+Leaving:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[ \eta \frac{\partial f}{\partial y} + \eta' \frac{\partial f}{\partial y'} \right]
+$$
+We use the product rule\footnote{In situations like this, it's also called integration by parts.} to get $\eta'$ in terms of more convenient quantities: 
+$$
+\frac{d}{dx} \left( \eta \frac{\partial f}{\partial y'} \right) = \eta' \frac{\partial f}{\partial y'} + \eta \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right)
+\quad \mathrm{or} \quad 
+\eta' \frac{\partial f}{\partial y'} = \frac{d}{dx} \left( \eta \frac{\partial f}{\partial y'} \right) - \eta \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right) 
+$$
+Plugging that in:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[
+    \eta \frac{\partial f}{\partial y} +
+    \frac{d}{d x} \left( \eta \frac{\partial f}{\partial y'} \right) -
+    \eta \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right) 
+\right]
+$$
+The middle term is zero because $\eta(x_1) = \eta(x_2) = 0$:
+$$
+\displaystyle\int_{x_1}^{x_2} dx \; \frac{d}{d x} \left( \eta \frac{\partial f}{\partial y'} \right) = 
+\left[ \eta \frac{\partial f}{\partial y'} \right]_{x_1}^{x_2} = 
+\eta(x_2) \left( ... \right) - \eta(x_1) \left( ... \right)
+$$
+That leaves:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \eta \; \left[
+    \frac{\partial f}{\partial y} -
+    \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right) 
+\right]
+$$
+Recall that we're specifically concerned with the case where $\frac{dS}{d\alpha}=0$. Recall also that $\eta(x)$ is arbitrary. Those conditions can only both be true if the bracketed quantity is uniformly zero. The result is the Euler-Lagrange equation:
+$$
+\frac{\partial f}{\partial y} -
+\frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right)
+= 0
+$$
+If you want to minimize $\int dx f(y, y', x)$, plug $f$ into the above equation and solve. The result will be the path $y(x)$ that minimizes that integral.
+
+\section*{Example Usage}
+
+Let's use the Euler-Lagrange equation to find the shortest distance between two points on a flat plane. In the above section, we used $x$ and $y$ as generalized coordinates. Below, we'll use them specifically as rectangular coordinates. 
+
+The distance from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$ is given by:
+$$
+L = \displaystyle\int_{(x_1, y_1)}^{(x_2, y_2)} \sqrt{dx^2 + dy^2} =
+\displaystyle\int_{x_1}^{x_2} dx \; \sqrt{1 + \left(\frac{dy}{dx} \right)^2} = 
+\displaystyle\int_{x_1}^{x_2} dx \; \sqrt{1 + y'^2}
+$$
+The integrand above is $f$:
+$$
+f(y, y', x) = \sqrt{1 + y'^2}
+$$
+We can start by taking a few derivatives:
+$$
+\frac{\partial f}{\partial y} = 0
+\quad \mathrm{and} \quad
+\frac{\partial f}{\partial y'} = \frac{y'}{ \sqrt{1 + y'^2} }
+$$
+Plugging those back into the Euler-Lagrange equation, we get:
+$$
+0 - \frac{d}{dx} \left( \frac{y'}{ \sqrt{1 + y'^2} } \right) = 0
+$$
+In other words, $\frac{y'}{ \sqrt{1 + y'^2} }$ is constant, which means $y'$ is constant, meaning that $y(x)$ has a constant slope. As expected, the shortest path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$ is a straight line.
+
+\end{document}

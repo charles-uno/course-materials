@@ -1,0 +1,384 @@
+\documentclass[10pt]{article}
+\usepackage{hyperref}
+\textheight=9.5in
+\topmargin=-1in
+\headheight=0in
+
+\pagestyle{empty}
+
+% Add a background color to block quotes, for assignments
+\usepackage{framed}
+\usepackage{xcolor}
+\let\oldquote=\quote
+\let\endoldquote=\endquote
+\colorlet{shadecolor}{orange!12}
+\renewenvironment{quote}{\begin{shaded*}\begin{oldquote}}{\end{oldquote}\end{shaded*}}
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\begin{document}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\begin{center}
+{\bf PHYSICS 374B NOTES}
+\end{center}
+\hrule
+\vskip0.15in
+
+\section*{Friday, August 21}
+
+\subsection*{Introductions}
+
+Hi all!
+
+I'm Dr Charles Fyfe. You can call me Charles. I'll be filling in for Amy Kolan this semester so she can spend time with her new grandkid. 
+
+First up -- is everyone connected? I'm gonna quickly call roll. Please reply out loud. Then we'll know we can all hear each other. Also please correct me if I mispronounce your name, or if you would prefer to be called something else.
+
+AND, let's throw a little ice breaker in here. When I call your name, I'd like you to share one little thing about yourself. Musical instrument, favorite food, something annoying that happened to you. 
+
+(Work through any issues, or refer people to IT)
+
+If able, I'd prefer you to keep your video cameras on. Talking to a blank screen is really soul-crushing. If this is a problem for you, please send me a message privately.
+
+Part of being new here is that I've never met any of you before. We haven't bumped into each other in the hall, or even ever seen each others' faces before. I'd like to remedy that a little bit. 
+
+I've recorded a one-minute video introducing myself. There's a link on Moodle. I'd like you all to do the same. Pronouns, hobbies, where you're from, fun facts about you, whatever you like. Do that for Monday. It should only take a minute or two. 
+
+Does that make sense?
+
+Next up I'd like to spend a minute on Zoom etiquette:
+
+It's generally OK to interrupt me with questions. If I'm really on a roll, maybe wait until I take a breath. Use your judgment. It's also OK to use the ``raise hand" feature on Zoom, or type a question in the chat. 
+
+I usually have a handful of different windows open, so I may not see those questions right away. If it's been more than a minute or two and I haven't acknowledged you, please say something. 
+
+Keep in mind that we might have to revisit interruptions if the internet is really choppy. Multiple people accidentally talking over each other can waste a lot of time. We're gonna have to play that by ear. 
+
+Everybody with me so far?
+
+Alright. 
+
+The syllabus is posted on Moodle. You should read through it. I just want to run through a few quick points. 
+
+\begin{itemize}
+
+    \item Reading assignments and homework will be assigned most days, then due on Fridays. So the assignments for today, Monday, and Wednesday will all be collected together on the 28th.
+
+    \item Homework will typically include some analytical work and some numerical work.
+    
+    \item The analytical work is going to be a lot of math, but keep in mind that it's not just about the math. Each solution you write up should include a brief discussion of how you checked it. Dimensional analysis and limiting cases are the big ones. We'll get more into this on Monday. 
+    
+    \item Numerical work is to be done in Python. I think the other section is using Mathematica. Basically leveling up the VPython labs you did as first years. I imagine some of you are looking at grad school, some at the private sector -- either way, Python is a really good tool to have in your belt. 
+    
+    \item Working together is allowed, with exceptions, but everyone turns in their own work. Also make sure you credit the people you work with. We all know solutions are available online. Please do not look them up.
+
+    \item For in-class worksheets, groups will be assigned randomly, and I'll mix them up regularly. 
+    
+    \item Projects. I'll be assigning a handful of video projects this semester. Some shorter ones before the midterm, then a bigger final project. I'd like you to put these on YouTube. If you search for ``physics 374" you can find past projects for reference. 
+
+\end{itemize}
+
+How does that all sound? Any questions?
+
+\subsection*{Racism, Diversity, and Inclusion}
+
+I'd like to take a few minutes to talk about racism, diversity, and inclusion. These are issues that St Olaf takes seriously. So does the physics department, and so do I personally. 
+    
+I can't pretend to have all the answers here. But I can tell you that, the more you learn about the history of race in the United States, the more you realize racial injustice is not a thing of the distant past. Many of your parents were probably alive when the Voting Rights Act was passed, or when the Supreme Court ruled on Loving v Virginia. Just fifty years ago, interracial marriage was illegal in many states. Banks and landlords are \textit{still} getting busted for refusing to serve people based on the color of their skin. There's a national conversation going on right now about equity in general, and racism in particular, and it's long overdue. 
+
+There are a few reasons I specifically want to talk about racism, diversity, and inclusion \textit{here}. At St Olaf, in a physics class. 
+
+First, St Olaf is a particularly white institution. Lutheran Norwegian-ness is part of the history, identity, and culture of this place. Norwegian sweaters, Christmasfest, and the Scandinavian trinkets in the bookstore. Some of you may find that quaint or welcoming. Not everyone does. When I studied here a decade ago, I took classes from 20 or 30 different professors. Just one was a person of color. You may also have heard about the departure of Professor Gibbs over the summer. She wrote an open letter detailing the ``white rage" she encountered as a Black woman professor. If you haven't read it, I encourage you to do so. 
+
+Link: \href{https://www.theolafmessenger.com/2020/former-professor-michelle-gibbs-implicates-ole-culture-in-letter-following-resignation-sparks-discussion-of-anti-racist-action-on-campus/}{Letter from Prof Gibbs}
+    
+The other reason I want to talk about racism, diversity, and inclusion is that physics in particular has problems in those areas. Graduates in physics are mostly white, and mostly men, and we have data suggesting that it's not a matter of interest or natural ability. It's a matter of culture. Our textbooks focus on the contributions of a handful of white men. That's who all the equations and units are named after. And there's this machismo of physics being the \textit{best} or \textit{purest} or \textit{hardest} science. That you have to be a genius to do it -- ``genius" being a term very much entangled in whiteness and maleness. 
+
+GPA is not a litmus test for who gets to be a physicist. Neither is how you look, or where you come from. Please be mindful of the values behind your words and actions. It's easy to perpetuate a toxic culture, even if you don't intend to. 
+
+\begin{quote}
+    There's a tendency in physics to lionize a small number of figures in the history of the field: Amp\`ere, Bohr, Coulomb, Dirac, Einstein, Faraday, etc. But physics was not built by just a handful of white men. Your assignment is to create three one-minute videos, each highlighting the work of a different non-white and/or non-male physicist. Historical figures and contemporary researchers are both fair game. All three videos must be completed before the midterm. No repeats, please. You are also expected to watch all of the videos created by your classmates. \textbf{All three videos must be done by October 2}
+\end{quote}
+
+I'm gonna split you up into groups. I'd like you to talk about racism, diversity, and inclusion. Here are a few questions to get you started
+
+\begin{itemize}
+
+    \item People have been studying physics and astronomy for thousands of years, all around the world. How many physicists and astronomers can you name? How many of them were European men from the last 500 years? How do you feel about that?
+
+    \item What makes a good physicist?
+
+    \item How can you celebrate an identity without excluding people who don't share that identity?
+
+    \item When doing group work in your physics classes, who tends to talk the most? Is it different in non-physics classes?
+\end{itemize}
+
+Thanks for your patience and humility. Racism, diversity and inclusion can be hard to talk about. I'd encourage you to spend some time in self-reflection, and to be mindful of how these topics intersect with institutions that are ostensibly objective or unbiased.
+
+I'll see you next time, where we'll get into some physics. Stay healthy, check Moodle. 
+
+\begin{quote}
+    Read chapter 1 of Taylor
+\end{quote}
+
+\begin{quote}
+    Python refresher. Turn the ball on a spring into a spring pendulum
+\end{quote}
+
+\section*{Monday, August 24}
+
+\subsection*{Newtonian Mechanics}
+
+No lecture here. Jump right into the frictionless ramp worksheet. Likely won't finish the worksheet today.
+
+\subsection*{Dimensional Analysis and Limiting Cases}
+
+\begin{quote}
+    Read chapter 1 of Morin (PDF). Note: dimensional analysis is super important! If your solution to a test or homework problem is dimensionally incorrect, that's a zero. It's like if I ask you how tall you are and you say ``five gallons." It's nonsense. I'd much rather see no math at all, but an explanation in words of how the system should behave in extreme cases.
+\end{quote}
+
+\begin{quote}
+    Problems 1.2, 1.4, 1.12, 1.15, 1.18 in Morin. \textbf{Due August 28}
+\end{quote}
+
+Note: we'll look at more dimensional analysis problems later in the course. Amy points to here: \url{http://www.physics.umd.edu/rgroups/ripe/perg/abp/think/mech/mechda.htm}
+
+\section*{Wednesday, August 26}
+
+\subsection*{Newtonian Mechanics (Continued)}
+
+Last time, we got a pretty good handle in groups for qualitatively how this system behaves. The plan today is to turn that into equations of motion. We're gonna jump back into groups in just a minute, but first I'd like to quickly review what we figured out last time. 
+
+\begin{itemize}
+
+    \item What does momentum look like in this system?
+    
+    \item What's the net force on the block?
+    
+    \item What does the acceleration of the block look like?
+    
+    \item What coordinates might be convenient to solve this problem?
+    
+\end{itemize}
+
+Finish up the worksheet. If we have a few minutes to kill, talk about how the behavior of the system would change if we replaced the square block with a ball of equal mass. (Nothing would change. No friction means no torque.)
+
+\section*{Friday, August 28}
+
+\begin{quote}
+    Read Taylor 6.1-6.3 for Monday. Do problems 6.1, 6.1, and 6.3 \textbf{Due September 4}
+\end{quote}
+
+\begin{quote}
+    Create a rigid pendulum in Python (a ball on a weightless rigid string). This can be done using forces or energy. Note that there is a pendulum example on glowscript.org, but it'll probably be more confusing than helpful, since it uses Lagrangians. \textbf{Due September 4}
+    
+    I'll get the grading rubric for numerical work added to the syllabus on Moodle today. Basically, half the points are ``does it work?'' and the other half are for ``is the code legible?''. Descriptive variable names, sensible use of helper functions, comments on confusing parts, stuff like that. 
+
+    Legible code is incredibly important out in the wild. It means you can send your code to a collaborator and they can understand it. It also means you can come back to your code six months later and see how it works, rather than working it all out from scratch. 
+\end{quote}
+
+How did the homework go? Are there any questions people want to chat about before we get started?
+
+\subsection*{Limitations of Newtonian Mechanics}
+
+Alright
+
+So what were your impressions from the worksheet last time? The block on a ramp?
+
+Hard, right? 
+
+I'm not going to have you turn in your work for this worksheet. I didn't want to overload you this week as you got back into remote learning, and also re-familiarized yourselves with Python.
+
+In the future, you will be writing up group worksheets as part of your homework, due the following Friday. Depending on how things are looking on this one, we might keep working on it on Monday. Regardless, it'll be due Friday, along with whatever we work on Monday and Wednesday. 
+
+I'll be assigning less work from the book to balance it out. Working as a group is really important to learning physics, and book problems aren't as conductive to that at present. 
+
+So, talking a little bit more about the worksheet from last time, what made it hard?
+
+- Coordinates were weird
+- Normal forces were also weird, right? 
+
+Issues like this pop up in a lot of problems. It's a fundamental limitation of the Newtonian way of solving problems. 
+
+- Many problems have forces of constraint. Block sliding on a ramp. Bead on a wire. Skateboard on a half-pipe. You have the ``real'' forces like gravity, then you also have to add additional forces based on how the elements of the system restrict one another. Normal forces are a real thing! They actually exist. They're not just mathematical weirdness. But we don't necessarily know how big they are. They're hard to measure. And we usually don't care. 
+
+- As problems get more complicated, geometry can also get trickier. Not all problems line up nicely with cartesian coordinates. So squares, 90 degree angles. We also have cylindrical and spherical coordinates, but those are only helpful in problems that have a lot of symmetry in very specific ways. There are a lot of problems where it's just hard to write down which way the forces are pointing!
+
+We're going to spend a decent chunk of this class looking at a whole different way of solving physics problems, called calculus of variations. This is what Lagrangians are based on, which I think we'll get into next week. It's also behind Hamiltonians, which we'll get to later in the semester. 
+
+We're going to get into a rigorous definition on Monday. But the basic idea of calculus of variations is that we're finding paths that minimize *something*. Time, distance, etc. So we're going to get into it today with a minimization problem. 
+
+Pull up your whiteboards. I've got the new worksheet up there. 
+
+\section*{Monday, August 31}
+
+First up, any questions from last time or the weekend?
+
+Spend about 10 minutes finishing up the worksheet from Friday. Really want to get through part 5 and 6. 
+
+Does anyone recognize what we ended up with at the end of the worksheet? Snell's law!
+
+We just proved that Snell's law is equivalent to saying ``light takes the shortest path'' -- also known as Fermat's principle. 
+
+It turns out, everything you know about optics can be proved in terms of Fermat's principle. Microscopes, telescopes, mirrors. Mathematically, you can prove all of those by minimizing the time is takes for light to go from one point to another. 
+
+...
+
+One thing I really want to stress is that Fermat's principle is not new physics. 
+
+The Persian mathematician \href{https://en.wikipedia.org/wiki/Ibn_Sahl_(mathematician)}{Ibn Sahl} wrote about Snell's law 500 years before Fermat was born. 
+
+What Fermat's principle \textit{is}, is a mathematical tool that makes proving Snell's law convenient.
+
+We could also prove Snell's law starting from Maxwell's equations, or from conservation of momentum. You might even look at how to do those in future classes. But Fermat's principle is probably the easiest way to do it. 
+
+And that's really the point of this course. For the most part, we're not looking at new physics. We'll be looking at ramps, and springs, and orbits, and mirrors, and all sorts of physical systems that look like what you've seen before. But we'll be looking at those systems using new mathematical tools. 
+
+
+
+
+
+
+
+
+\subsection*{Calculus of Variations}
+
+One particularly important tool is calculus of variations. This is the backbone of lagrangian and hamiltonian mechanics, which we'll be studying a lot in this course. There are applications in quantum mechanics and statistical mechanics as well. 
+
+Time to break out the whiteboards. I'll be using the ``lecture and office hours'' board. 
+
+Let's say we're looking at motion in two dimensions. We're going from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$.
+
+And let's write $y$ as a function of $x$. Basically, this means we're assuming no backtracking in $x$. We'll handle the more general case later in the semester. 
+
+Suppose we're integrating some quantity over the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$, and we want to minimize that integral. Call it $S$. 
+
+$$
+S = \displaystyle\int_{x_1}^{x_2} f(y, y', x) dx
+$$
+
+This could be time, like we did with the worksheet. Sometimes we want to minimize the distance crossed. Or maybe we're driving, and we want to minimize how much gasoline we burn. 
+
+...
+
+This next part is a little weird. Please ask questions if you have them.
+
+...
+
+Say $y(x)$ is the right answer. It's the path that minimizes $S$. 
+
+Then let's look at $Y$ (big Y):
+
+$$
+Y(x) = y(x) + \alpha \eta(x)
+$$
+
+Here, $\eta$ is our deviation from the path. So
+
+$$
+\eta(x_1) = \eta(x_2) = 0
+$$
+
+Since we still need to start and end at the same points. But in between $x_1$ and $x_2$, $\eta$ is an arbitrary function. It can look like whatever it wants. 
+
+And $\alpha$ is a number that allows us to scale the size of that deviation up and down. 
+
+When $\alpha$ is big, the path $Y(x)$ is super wrong. And when $\alpha=0$, we have the correct answer. So $\alpha=0$ is a minimium in $S$. In other words:
+
+$$
+\frac{dS}{d\alpha} = 0 \quad \mathrm{when} \quad \alpha=0
+$$
+
+If we bump that derivative into the integral, we get:
+
+$$
+\frac{dS}{d\alpha} = 0 = \displaystyle\int_{x_1}^{x_2} dx \frac{df}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \frac{\partial f}{\partial Y} \frac{\partial Y}{\partial \alpha} + \frac{\partial f}{\partial Y'} \frac{\partial Y'}{\partial \alpha}
+$$
+
+We can rewrite these derivatives in terms of stuff we're more familiar with.
+$$
+\frac{\partial f}{\partial Y} = \frac{\partial f}{\partial y} \quad \mathrm{and} \quad \frac{\partial f}{\partial Y} = \frac{\partial f}{\partial y'} \quad \mathrm{and} \quad \frac{\partial Y'}{\partial \alpha} = \eta \quad \mathrm{and} \quad \frac{\partial Y'}{\partial \alpha} = \eta'
+$$
+
+So:
+$$
+\frac{dS}{d\alpha} = 0 = \displaystyle\int_{x_1}^{x_2} dx \; \eta \frac{\partial f}{\partial y} + \eta' \frac{\partial f}{\partial y'}
+$$
+
+We know $f$, and we care about $y$ and $y'$. But remember $\eta$ is some arbitrary function. We definitely can't have that in our final result. And $\eta'$ is even worse. 
+
+
+
+
+\hrule
+
+\hrule
+
+\hrule
+
+
+Group work: Frictionless mass on a block again, but with Lagrangian. More convenient? Certainly the setup is easier to wrap your head around. 
+
+
+
+
+
+
+\subsection*{Numerical Modeling}
+
+\begin{itemize}
+
+    \item Concept: velocity is staggered from position by half a time step. This matters whenever there's a coupling between staggered quantities. For example, trying to look at potential energy and kinetic energy together, or using velocity and position to compute force from a magnetic field. See \url{https://en.wikipedia.org/wiki/Midpoint_method}. There are loads of different (and better) algorithms. This one in particular is a commonly-used upgrade to the Euler method for numerically solving a differential equation. 
+
+    \item Numerical work: On Moodle, you'll find a script modeling the motion of a charged particle in the equatorial plane of a dipole magnetic field using Euler's method. Update the script to use the midpoint method. Try making the time step bigger and smaller (smaller time steps are more accurate, but also more computationally intensive.)
+
+    \item Project idea: Euler method for numerically solving a differential equation vs midpoint vs Runge-Kutta
+
+\end{itemize}
+
+\subsection*{Calculus of Variations}
+
+\begin{itemize}
+
+    \item Read Taylor 6.1 to 6.3
+    
+    \item Lecture: derivation of the single variable EL equation
+    
+    \item Lecture: time of least descent (example 6.2). Seems appropriate if we're going to revisit a cycloid curve a few times. 
+    
+    \item Lecture: proof that time to the bottom of a cycloid is independent of initial position (Taylor 6.25). This problem is a bit tedious, but the outcome is super satisfying. 
+    
+    \item Homework: some combination of 6.1 (sphere geodesic), 6.4 (Snell's law), 6.10 (EL with one side constant), 6.18 (straight line in polar coordinates), 6.19 (soap bubble between two rings), 
+
+    \item Additional resource: Feynman lecture on Lagrangians and action at \url{http://liberzon.csl.illinois.edu/teaching/FeynmanLecturesOnPhysicsChapter2-19.pdf}. Amy asks students to spend 2 hours reading and understanding it. 
+
+    \item Additional reading on the calculus of variations: \url{http://www-history.mcs.st-andrews.ac.uk/Extras/Calculus_of_Variations.html}
+
+    \item Numerical work: A bead released from rest on a brachistrochrone (example 6.2) wire will take the same amount of time to reach the bottom, regardless of starting height. Seems fishy, right? Model a brachistochrone in Python, and plot the trajectories of several beads. Note that getting the bead to follow the wire is trickier than it may seem; don't be shy about getting help!
+
+\end{itemize}
+
+\subsection*{Lagrangian Mechanics}
+
+\begin{itemize}
+
+    \item Taylor 7.19 (frictionless \textit{light} ramp under a block)
+
+    \item Taylor 7.9: Lagrangian from electromagnetic fields
+
+    \item Note: Amy covers Lagrange multipliers (Taylor 7.10) here, but I think we're skipping it this time around. 
+
+
+
+    \item Group work: Consider an electron (mass $m$, charge $q$) in a constant electric field $\textbf{E} \parallel \hat{x}$ and constant magnetic field $\textbf{B} \parallel \hat{y}$. Solve for the equations of motion from the Lorentz force, then again using the Lagrangian. What do you notice?
+
+\end{itemize}
+
+
+
+
+
+
+\end{document}

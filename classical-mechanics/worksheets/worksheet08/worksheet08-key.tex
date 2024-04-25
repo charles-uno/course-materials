@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb,graphicx,xcolor,mathtools}
+
+\newcommand{\purple}[1]{{\color{purple} #1}}
+
+\newcommand{\varz}{z}
+
+\begin{document}
+
+PHYS 374 Fall 2020\hfill Worksheet 8: Introduction to Central Forces\\
+\\
+Name: \purple{SOLUTION} \\
+\\
+Please submit as a PDF on Moodle. Include any calculations made using external tools.
+
+\hrulefill
+\\
+\\
+You hold a ball of mass $m_1$ in your hand. A second ball of mass $m_2$ hangs directly below it, connected by a spring of natural length $L$ and spring constant $k$. At $t=0$, you let go of the top ball and it falls due to gravity. 
+
+\begin{enumerate}
+    \item Draw a picture!
+    \item Write down the Lagrangian for this system in terms of the ball positions $z_1$ and $z_2$. 
+    \item Use the Euler-Lagrange equation to write down equations of motion in terms of $z_1$ and $z_2$. Do not try to solve them. What do you notice?
+    \item Rewrite your Lagrangian in terms of center of mass coordinates:
+    \begin{align*}
+        M &= m_1 + m_2 & 
+        \mu &= \frac{m_1 m_2}{M} &
+        \varz &= z_1 - z_2 &
+        Z &= \frac{m_1 z_1 + m_2 z_2}{M}
+    \end{align*}
+    Hint: start by plugging in $z_1 = Z + \tfrac{m_2}{M} \varz$ and $z_2 = Z - \tfrac{m_1}{M} \varz$
+    \item Use the Euler-Lagrange equation to come up with equations of motion for $\varz$ and $Z$. How are these different from what you saw above?
+    \item Solve the equations of motion.
+    \item Plug $z_1$ and $z_2$ back into your solutions for $Z$ and $\varz$. What does the motion look like?
+    \item Convince yourself that the solution satisfies your equations of motion for $z_1$ and $z_2$.
+\end{enumerate}
+
+\newpage
+
+\purple{
+
+The Lagrangian for this system in terms of $z_1$ and $z_2$ is:
+$$
+\mathcal{L} = \tfrac{1}{2} m_1 \dot{z_1}^2 + \tfrac{1}{2} m_2 \dot{z_2}^2 - m_1 g z_1 - m_2 g z_2 - \tfrac{1}{2} k \left( z_1 - z_2 - L \right)^2
+$$
+Giving the equations of motion:
+\begin{align*}
+    m_1 \ddot{z_1} &= -m_1 g - k \left( z_1 - z_2 - L \right) \\
+    m_2 \ddot{z_2} &= -m_2 g + k \left( z_1 - z_2 - L \right) \\
+\end{align*}
+These equations are coupled, so it would be necessary to solve them as a system -- a fair amount of work.
+
+After a bit of algebra, the Lagrangian in center of mass variables looks like:
+$$
+\mathcal{L} = \underbrace{ \tfrac{1}{2} M \dot{Z}^2 - M g Z }_{\mathcal{L}_\text{cm}} + \underbrace{ \tfrac{1}{2} \mu \dot{z}^2 - \tfrac{1}{2} k \left( z - L \right)^2 }_{\mathcal{L}_\text{rel}}
+$$
+Notably, there is no coupling between the center of mass terms ($M$ and $Z$) and the relative movement ($\mu$ and $z$). So each can be solved independently. 
+
+Plugging the center of mass terms into the Euler-Lagrange equation shows the system free-falling:
+$$
+M\ddot{Z} = -Mg
+\quad\quad\rightarrow\quad\quad
+Z(t) = Z_0 + V_0 t - \tfrac{1}{2}gt^2
+$$
+The system started at rest, so $V_0=0$. We might as well also measure relative to the starting position of the center of mass, so $Z_0=0$ as well.
+
+The relative motion shows oscillation:
+$$
+\mu \ddot{z} = - k \left( z - L \right)
+\quad\quad\rightarrow\quad\quad
+z(t) = L + \delta \cos ( \omega t + \phi_0 )
+$$
+Where $\omega=\sqrt{k/\mu}$. Note also that the system starts at rest, $\dot{z}=0$, so $\phi_0=0$. The constant $\delta$ above is the initial (and maximum) stretch. We can find the value of $\delta$ by balancing the force of tension against the weight of the hanging bottom mass. That said, we'll carry $\delta$ and $\omega$ forward for brevity.
+$$
+m_2 g = k \delta
+\quad\quad\rightarrow\quad\quad
+\delta = \frac{m_2 g}{k}
+$$
+So the full solution in center of mass coordinates is:
+$$
+Z(t) = -\tfrac{1}{2} g t^2
+\quad\text{and}\quad
+z(t) = L + \delta \cos \omega t 
+\quad\text{where}\quad
+\omega=\sqrt{\tfrac{k}{\mu}}
+\quad\text{and}\quad
+\delta = \frac{m_2 g}{k}
+$$
+Substituting back in our original variables, we get:
+\begin{align*}
+    z_1(t) &= Z(t) + \frac{m_2}{M} z(t) = -\tfrac{1}{2} g t^2 + \frac{m_2}{M} L + \frac{m_2}{M} \delta \cos \omega t \\
+    z_2(t) &= Z(t) - \frac{m_1}{M} z(t) = -\tfrac{1}{2} g t^2 - \frac{m_1}{M}L - \frac{m_1}{M} \cos \omega t
+\end{align*}
+The coordinates $Z$ and $z$ showed the whole system free-faling, while the relative position oscillated at a frequency of $\sqrt{k/\mu}$. Once we change variables back into $z_1$ and $z_2$, we see that the same holds true. Both masses have a free-fall term. Each also has a constant displacement (note we are measuring from the starting position of the center of mass). And finally the two masses each have an oscillation term. The amplitude of the oscillation may not be the same (the lighter mass moves more) but the oscillations remain in sync and mirrored.
+
+As a side note, we can see when $t$ is small:
+\begin{align*}
+    \dot{z_2}(t) &= -g t + \frac{m_1}{M} \delta \omega \sin \omega t \\
+    \dot{z_2}(t) &\approx -gt + \frac{m_1}{M} \delta \omega^2 t \\
+    \dot{z_2}(t) &\approx -gt + \frac{m_1}{M} \left( \frac{m_2 g}{k} \right) \left( \frac{k}{\mu} \right) t \\
+    \dot{z_2}(t) &\approx 0
+\end{align*}
+That is, regardless of the relative masses and the stiffness of the spring, the bottom mass feels zero acceleration the moment we release the system.
+
+Finally, plugging these back into our original equations of motion:
+\begin{align*}
+    m_1 \ddot{z_1} &= -m_1 g - k \left( z_1 - z_2 - L\right) \\
+    m_1 \left( -g - \frac{m_2}{M} \delta \omega^2 \cos \omega t \right) &= 
+    -m_1 g - k \left( L + \delta \cos \omega t - L \right) \\
+    -m_1 g - m_1 \frac{m_2}{M} \delta \left( \frac{k}{\mu} \right) \cos \omega t &= 
+    -m_1 g - k \delta \cos \omega t
+\end{align*}
+The tangle of mass terms cancel out and the two sides line up. The expression for $z_2$ works out similarly.
+
+
+
+
+
+}
+
+
+
+\end{document}

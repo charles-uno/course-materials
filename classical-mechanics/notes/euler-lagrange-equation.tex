@@ -1,0 +1,172 @@
+\documentclass[10pt]{article}
+\usepackage{hyperref}
+\textheight=9.5in
+\topmargin=-1in
+\headheight=0in
+
+\pagestyle{empty}
+
+% Add a background color to block quotes, for assignments
+\usepackage{framed}
+\usepackage{xcolor}
+\let\oldquote=\quote
+\let\endoldquote=\endquote
+\colorlet{shadecolor}{orange!12}
+\renewenvironment{quote}{\begin{shaded*}\begin{oldquote}}{\end{oldquote}\end{shaded*}}
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\begin{document}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\begin{center}
+{\bf PHYSICS 374B NOTES}
+\end{center}
+\hrule
+\vskip0.15in
+
+\section*{Setting up a Minimization Problem}
+
+Let's say we're trying to find the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$ that takes the least amount of time. Setting that up as an integral, we have:
+$$
+T = \displaystyle\int_{x_1, y_1}^{x_2, y_2} \frac{d\ell}{v(x, y)} =
+\displaystyle\int_{x_1, y_1}^{x_2, y_2} \frac{ \sqrt{dx^2 + dy^2} }{v(x, y)}
+$$
+We can then express $y$ as a function of $x$, giving us an integral over a single variable:
+$$
+T =
+\displaystyle\int_{x_1}^{x_2} \frac{dx}{v} \sqrt{1 + \left( \frac{dy}{dx} \right)^2} =
+\displaystyle\int_{x_1}^{x_2} \frac{dx}{v} \sqrt{1 + y'^2}
+$$
+Note that $v$ above depends on position. This would be the case, for example, if we were looking at the path of light crossing through a region with a non-uniform index of refraction. 
+
+As it turns out, situations like this come up pretty often. Sometimes we want to find the path that minimizes time. Other times we want to find the path that minimizes distance crossed. The Euler-Lagrange equation gives us a powerful tool to solve this sort of problem.
+
+\section*{The Euler-Lagrange Equation}
+
+Suppose also that we're integrating some quantity over the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$, and we want to minimize that integral. Call the integrand $f$, and the quantity we want to minimize $S$:
+$$
+S = \displaystyle\int_{x_1}^{x_2} f(y, y', x) dx
+$$
+In the example up top, $S$ is travel time and $f=\frac{1}{v}\sqrt{1+y'^2}$. Here, we're keeping it more general. This same technique can also be used to minimize distance, energy loss, etc. Note also that we're using the letters $x$ and $y$ to represent our coordinates, but we won't make any assumptions about rectangular coordinates. The polar coordinates $\rho$ and $\phi$ would work just as well.
+
+Let's say $y(x)$ is the answer we're looking for. It's the path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$ that minimizes $S$. Then let's also define another path from $\left( x_1, y_1 \right)$ to $\left( x_2, y_2 \right)$, called $Y$:
+$$
+Y(x) = y(x) + \alpha \, \eta(x)
+$$
+The function $\eta(x)$ tells us the ``shape" of the difference between $y$ (the ideal path) and $Y$ (the non-ideal path). It can be pretty much anything. If $\eta$ is a sine wave, $Y$ will wobble around $y$. If $\eta$ is a parabola, $Y$ will overshoot $y$ and come back. We insist only that $\eta(x_1)=\eta(x_2)=0$, since $y$ and $Y$ must have the same endpoints.
+
+The parameter $\alpha$ lets us control the ``size" of the difference between $Y$ and $y$. When $\alpha$ is large, $Y$ is very different from $y$. When $\alpha=0$, there is no difference. In other words, when $\alpha=0$, $Y$ is the path that minimizes $S$.
+$$
+\frac{dS}{d\alpha} =0 \quad \textrm{at} \quad \alpha=0
+$$
+To go any further, we need an expression for $\frac{dS}{d\alpha}$:
+$$
+\frac{dS}{d\alpha} =
+\frac{d}{d\alpha} \displaystyle\int_{x_1}^{x_2} dx \; f(Y, Y', x) =
+\displaystyle\int_{x_1}^{x_2} dx \; \frac{d}{d\alpha} f(Y, Y', x)
+$$
+Notably, $\frac{d}{d\alpha} f(Y, Y', x)$ represents the derivative $\frac{df}{d\alpha}$ evaluated at $(Y, Y', x)$. We can break things down further using the chain rule, omitting arguments for brevity: 
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[
+    \frac{\partial f}{\partial \alpha} +
+    \frac{\partial f}{\partial y} \frac{\partial y}{\partial \alpha} +
+    \frac{\partial f}{\partial y'} \frac{\partial y'}{\partial \alpha} +
+    \frac{\partial f}{\partial x} \frac{\partial x}{\partial \alpha}
+\right]
+$$
+We can tidy up several terms right away:
+\begin{itemize}
+    \item $f$ does not depend directly on $\alpha$, so $\frac{\partial f}{\partial \alpha} = 0$
+    \item $x$ does not depend on $\alpha$ at all, so $\frac{\partial x}{\partial \alpha} = 0$
+    \item We're evaluating $f$ along the path $Y(x)$, so $\frac{\partial y}{\partial \alpha} = \eta$, and likewise for $\eta'$
+\end{itemize}
+That leaves:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \left[ \eta \frac{\partial f}{\partial y} + \eta' \frac{\partial f}{\partial y'} \right]
+$$
+Recall that $\eta$ is an arbitrary function, so it can't be part of our final expression. Neither can its derivative, $\eta'$. We can get rid of $\eta'$ using integration by parts:
+$$
+\frac{dS}{d\alpha} = 
+    \left[ \eta \frac{\partial f}{\partial y'} \right]_{x_1}^{x_2} + 
+    \displaystyle\int_{x_1}^{x_2} dx \; \left[
+    \eta \frac{\partial f}{\partial y} -
+    \eta \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right) 
+\right]
+$$
+\begin{quote}
+    \textbf{Aside: Integration by Parts}
+    
+    For functions $m(x)$ and $n(x)$, the product rule says:
+    $$
+    \frac{d}{dx} \left( m \, n \right) = m \, \frac{dn}{dx} + \frac{dm}{dx} \, n
+    $$
+    Which we can rewrite:
+    $$
+    \frac{dm}{dx} \, n = 
+    \frac{d}{dx} \left( m \, n \right) - m \, \frac{dn}{dx}
+    $$
+    This is often applied to rearrange integrals as follows:
+    $$
+    \displaystyle\int_{x_1}^{x_2} dx \; \frac{dm}{dx} \, n =
+    \displaystyle\int_{x_1}^{x_2} dx \; \left[ \frac{d}{dx} \left( m \, n \right) - m \, \frac{dn}{dx} \right] =
+    $$
+    The first term, being the integral of a total derivative, can be evaluated at its endpoints:
+    $$
+    \displaystyle\int_{x_1}^{x_2} dx \; \frac{dm}{dx} \, n =
+    \left[ m \, n \right]_{x_1}^{x_2} - 
+    \displaystyle\int_{x_1}^{x_2} dx \; m \, \frac{dn}{dx}
+    $$
+\end{quote}
+The first term on the left side above vanishes, since $\eta(x_1)=\eta(x_2)=0$:
+$$
+\left[ \eta \frac{\partial f}{\partial y'} \right]_{x_1}^{x_2} =
+\eta(x_2) \frac{\partial f(...)}{\partial y'} - 
+\eta(x_1) \frac{\partial f(...)}{\partial y'} = 
+0 - 0
+$$
+That leaves:
+$$
+\frac{dS}{d\alpha} = \displaystyle\int_{x_1}^{x_2} dx \; \eta \; \left[
+    \frac{\partial f}{\partial y} -
+    \frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right) 
+\right]
+$$
+Recall that we're specifically concerned with the case where $\frac{dS}{d\alpha}=0$. Recall also that $\eta(x)$ is arbitrary. Those conditions can only both be true if the bracketed quantity is uniformly zero\footnote{See page 221 of the text for a more thorough argument.}. The result is the Euler-Lagrange equation:
+$$
+\frac{\partial f}{\partial y} -
+\frac{d}{dx} \left( \frac{\partial f}{\partial y'} \right)
+= 0
+$$
+
+\section*{Finishing our Example}
+
+Recall from up top, we calculate travel time per:
+$$
+T =
+\displaystyle\int_{x_1}^{x_2} \frac{dx}{v} \sqrt{1 + y'^2}
+\quad \mathrm{so} \quad
+f(y, y', x) = \frac{\sqrt{1 + y'^2}}{v}
+$$
+To make this a quick example, let's say $v$ is constant. Then we can evaluate some derivatives:
+$$
+\frac{\partial f}{\partial y} = 0
+\quad \mathrm{and} \quad
+\frac{\partial f}{\partial y'} = \frac{y'}{ v \sqrt{1 + y'^2} }
+$$
+Plugging those back into the Euler-Lagrange equation, we get:
+$$
+0 - \frac{d}{dx} \left( \frac{y'}{ v \sqrt{1 + y'^2} } \right) = 0
+$$
+In other words, $\frac{y'}{ v \sqrt{1 + y'^2} }$ is constant. This can only be the case if $y'$ is constant, since there are no other variables. Or:
+$$
+y'(x) = m \quad \mathrm{(constant)}
+$$
+We can then integrate to get $y(x)$, picking up a constant of integration along the way:
+$$
+y(x) = m \, x + C
+$$
+In other words, to minimize travel time in a region of constant velocity, the path is a straight line. The constants $m$ and $C$ can be determined using the endpoints $x_1$ and $x_2$. 
+
+\end{document}
