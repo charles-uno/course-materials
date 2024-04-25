@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,hyperref,xcolor}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+
+\usepackage{fancyhdr}
+
+\rhead{}
+\lhead{Guides and tutorials}
+
+\pagestyle{fancy}
+\lhead{Physics 374B Quiz 1}
+\rhead{Fall 2020}
+\cfoot{\thepage}
+
+
+\begin{document}
+
+Name: \makebox[2in]{\hrulefill}
+
+\vspace{0.5in}
+
+\begin{itemize}
+    \item Begin at 10:45am. Return your answers by 11:45am via email. 
+    \item Work on your own. Do not refer to any outside materials such as notes, homework, or the text.
+    \item Please join the Zoom meeting. I will put you each in your own breakout room. You do not need to be on screen. To ask a question, use the ``Ask for help" button. If it takes me more than a minute or two to show up, try again. Sometimes Zoom gets confused.
+    \item Each bullet point is worth the same amount. They are not all equally difficult. You do not need to complete them in order.
+    \item After you're done, drop off your quiz in Regents. There will be an envelope outside Darla's office (RNS 236) until 3pm. This is so she can send me scans in case photos are not legible. Make sure your name is on every page!
+    \item I have confidence in you!
+\end{itemize}
+
+\vfill
+
+I pledge my honor that on this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work \makebox[2in]{\hrulefill}
+
+\vspace{0.5in}
+
+I have intentionally not signed this pledge \makebox[2in]{\hrulefill}
+
+\newpage
+
+\section*{Problem 1}
+
+The event horizon of a black hole is the point beyond which gravity is so strong that nothing can escape -- not even light. We are interested in using dimensional analysis to express the radius of the event horizon in terms of the gravitational constant $G$, the black hole mass $M$, and/or the speed of light $c$. 
+
+\begin{itemize}
+    \item Show that the units of $G$ are $[length]^3 [mass]^{-1} [time]^{-2}$
+    
+    Hint: The gravitational force between two objects is given by $F = G\frac{m_1 m_2}{r^2}$, where $m_1$ and $m_2$ are masses and $r$ is the distance between them.
+    \item Suppose $R = G^{\alpha} M^{\beta} c^{\gamma}$, then write down a system of linear equations relating $\alpha$, $\beta$, and $\gamma$. 
+    \item Solve the system of equations to write $R$ in terms of $G$, $M$, and/or $c$
+    \item Does this solution make sense? What would happen if the black hole gained mass, or if the speed of light got faster?
+\end{itemize}
+
+\newpage
+
+\section*{Problem 2}
+
+Consider a cone with constant slope $\lambda$. The relationship between Cartesian coordinates and cone coordinates is:
+$$
+x=\rho \sin\phi
+\quad \quad 
+y=\rho \cos\phi
+\quad \quad
+z=\lambda\rho
+$$
+
+\begin{itemize}
+    \item Show that the expression for a small path $d\ell$ along the surface of the cone is given by:
+    $$
+    d\ell = \sqrt{ \left( 1 + \lambda^2 \right) d\rho^2 + \rho^2 d\phi^2}
+    $$
+    \item Let $(\rho_1, \phi_1)$ and $(\rho_2, \phi_2)$ be two points on the surface of the cone, neither of which is the tip. Show that a path from $(\rho_1, \phi_1)$ to $(\rho_2, \phi_2)$ can be written:
+    $$
+    \ell = \displaystyle \int_{\rho_1}^{\rho_2} d\rho \sqrt{1 + \lambda^2 + \rho^2 \phi'^2}
+    \quad \mathrm{where} \quad
+    \phi' = \frac{d\phi}{d\rho}
+    $$
+    \item In the above expression, we have chosen $\rho$ as the independent variable and written $\phi = \phi(\rho)$. Why might that be more convenient than the other way around?
+    \item Let $\phi(\rho)$ describe a path from $(\rho_1, \phi_1)$ to $(\rho_2, \phi_2)$. Show that the length of that path is minimized when $\phi(\rho)$ satisfies the following differential equation:
+    $$
+    \frac{d\phi}{d\rho} = \frac{k}{\rho^2} \frac{\sqrt{1 + \lambda^2} }{\sqrt{1 - \left( \frac{k}{\rho} \right)^2}}
+    \quad \quad 
+    \text{where $k$ is a constant}
+    $$
+    Hint: the Euler-Lagrange equation for $f(\phi, \phi', \rho)$ is \; $\frac{\partial f}{\partial \phi} - \frac{d}{d \rho} \left( \frac{\partial f}{\partial \phi'} \right) = 0$
+    \item Separate and solve the above differential equation. Show the result is:
+    $$
+    \phi(\rho) = \phi_0 + \sqrt{1 + \lambda^2} \cos^{-1} \left( \frac{\rho_0}{\rho} \right)
+    $$
+    Or, if you prefer:
+    $$
+    \rho(\phi) = \frac{\rho_0}{ \cos \left( \frac{\phi - \phi_0}{ \sqrt{1 + \lambda^2} } \right) }
+    $$
+    Hint: try the substitution $\cos(u) = \frac{k}{\rho}$    
+    \item Discuss the limiting case where $\lambda \rightarrow 0$. Does this solution make sense?
+    Hint: in polar coordinates, a straight line on a plane takes the form:
+    $$
+    \rho(\phi) = \frac{\rho_0}{ \cos \left( \phi - \phi_0 \right) }
+    $$
+\end{itemize}
+
+\end{document}
