@@ -19,12 +19,12 @@ no_more_tries:
 main: 
     @ stack frame setup
     push {fp, lr}
-	add fp, sp, #4
-	sub sp, sp, #4
+    add fp, sp, #4
+    sub sp, sp, #4
 
     @ use current time to generate "random" number in r4
-	sub r0, fp, #8
-	bl	time
+    sub r0, fp, #8
+    bl time
     ldr r4, [fp, #-8]
     and r4, r4, #0x7f
 
