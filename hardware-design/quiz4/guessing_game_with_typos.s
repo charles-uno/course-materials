@@ -11,7 +11,7 @@ no_more_tries: .ascii "No more tries. Better luck next time!{\textbackslash}n{\t
     .global main
 main: 
     @ stack frame setup
-    push {fp, lr}
+    push \{fp, lr\}
     add fp, sp, #4
     sub sp, sp, #4
     @ use current time to generate "random" number in r4
@@ -27,8 +27,8 @@ main:
 begin_loop:
     @ increment guess counter, break if max
     add r5, r5, #1
-    cmp r5, #10
-    bgt break_failure
+    ifeq r5, #10
+    b break_failure
     @ print the numbered prompt
     mov r1, r5
     ldr r0, prompt_ptr
@@ -39,19 +39,20 @@ begin_loop:
     bl scanf
     ldr r6, [fp, #-8]
     @ compare the guess to the solution
-    cmp r6, r4
-    beq break_success
-    blt too_low
-    bgt too_high
+    ifeq r6, r4
+    b break_success
+    ifgt r6, r4
+    b too_low
+    b too_high
     @ handle cases
 too_low:
     ldr r0, too_low_reply_ptr
     bl printf
-    b begin_loop
+    b return
 too_high:
     ldr r0, too_high_reply_ptr
     bl printf
-    b begin_loop
+    b return
 break_success:
     ldr r0, correct_reply_ptr
     bl printf
@@ -59,11 +60,11 @@ break_success:
 break_failure:
     ldr r0, no_more_tries_ptr
     bl printf
-    b return
+    b begin_loop
 return:
     @ stack frame teardown
     add sp, sp, #4
-    pop {fp, lr}
+    pop \{fp, lr\}
     bx lr
 
 intro_ptr: .word intro

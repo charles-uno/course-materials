@@ -1,0 +1,246 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{alltt, amssymb, amsmath,graphicx,hyperref,xcolor}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\usepackage{fancyhdr}
+\rhead{}
+
+\pagestyle{fancy}
+\lhead{St Olaf College}
+\chead{CS 241}
+\rhead{Spring 2024}
+
+\cfoot{\thepage}
+
+\begin{document}
+
+Name: \makebox[3in]{\hrulefill}
+
+\vfill
+
+\begin{center}
+{\huge Quiz 4 Practice}
+\end{center}
+
+\begin{itemize}
+    \item This is a practice quiz. You do not need to sign the pledge. You do not need to turn it in. 
+    \item I encourage you to try it alone first to test your own understanding. You are welcome to review with your peers after.
+    \item This is probably a bit harder than the real quiz.
+\end{itemize}
+
+\vfill
+
+I pledge my honor that on this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work 
+
+\hfill Signed: \makebox[3in]{\hrulefill}
+
+$\square$\quad I have intentionally not signed the pledge. (check only if appropriate)
+\newpage
+
+\section*{Standard: Assembly Programming II}
+
+On the next page is the skeleton of an Assembly program with comments. 
+
+This program reads in two numbers from the terminal. It passes the \textit{memory addresses} of those values into the function \texttt{add\_two\_numbers\_by\_address}, along with a third memory address where the result should be stored. The function performs the addition, stores the result at the given address, and returns that address. Back in \texttt{main}, the program loads the result and prints it. It should look like this:
+
+\begin{alltt}
+    > ./add_by_address
+    Enter a number: 42
+    Enter another number: 51
+    The sum of those numbers is: 93
+\end{alltt}
+
+Please fill in the missing code. Use a blank sheet.
+
+Memory diagrams are not required but you may find one helpful.
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the exam
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the exam
+
+\newpage
+
+\begin{alltt}
+@ ascii global variables
+
+    .text
+    .global add_two_numbers_by_address
+add_two_numbers_by_address:
+    @ stack frame setup
+
+    @ read the two input values from memory
+
+    @ add them
+    
+    @ write the result to memory
+
+    @ return the address of the result
+
+    @ stack frame teardown
+
+    .text
+    .global main
+main: 
+    @ stack frame setup
+
+    @ print prompts, read values
+
+    @ set input values for the function call
+
+    @ call add_two_numbers_by_address
+
+    @ load the result from memory
+
+    @ print the output
+
+    @ return 0, stack frame teardown
+
+@ pointers to ascii global variables
+\end{alltt}
+
+\newpage
+
+\begin{center}
+(blank page)
+\end{center}
+
+\newpage
+
+\section*{Standard: Assembly Programming III}
+
+On the following page is an Assembly program for a number guessing game. The program picks a ``random'' number between 0 and 127. The user has ten chances to guess it. After each wrong guess, the program tells if it was too high or too low. It looks like this:
+
+\begin{alltt}
+    > ./guessing_game
+    I'm thinking of a number 0 to 127
+    Guess #1: 23
+    Too low!
+    Guess #2: 78
+    Too low!
+    Guess #3: 105
+    Too high!
+    Guess #4: 87
+    Too low!
+    Guess #5: 93
+    Too low!
+    Guess #6: 95
+    Correct!
+\end{alltt}
+
+Ten of the lines in the program have mistakes. Find them and fix them. 
+
+A memory diagram is not required but you may find it helpful.
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the exam
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the exam
+
+\newpage
+
+\begin{alltt}
+    .section .rodata
+intro: .ascii "I'm thinking of a number 0 to 127{\textbackslash}n{\textbackslash}0"
+prompt: .ascii "Guess #%d: {\textbackslash}0"
+input_format: .ascii "%d{\textbackslash}0"
+too_high_reply: .ascii "Too high!{\textbackslash}n{\textbackslash}0"
+too_low_reply: .ascii "Too low!{\textbackslash}n{\textbackslash}0"
+correct_reply: .ascii "Correct!{\textbackslash}n{\textbackslash}0"
+no_more_tries: .ascii "No more tries. Better luck next time!{\textbackslash}n{\textbackslash}0"
+
+    .text
+    .global main
+main: 
+    @ stack frame setup
+    push \{fp, lr\}
+    add fp, sp, #4
+    sub sp, sp, #4
+    @ use current time to generate "random" number in r4
+    sub r0, fp, #8      @ no errors
+    bl time             @ in these
+    ldr r4, [fp, #-8]   @ four lines
+    and r4, r4, #0x7f   @ i promise
+    @ init guess counter
+    mov r5, #0
+    @ print game intro
+    ldr r0, intro_ptr
+    bl printf
+begin_loop:
+    @ increment guess counter, break if max
+    add r5, r5, #1
+    ifeq r5, #10
+    b break_failure
+    @ print the numbered prompt
+    mov r1, r5
+    ldr r0, prompt_ptr
+    bl printf
+    @ read in the guess
+    sub r1, fp, #8
+    ldr r0, input_format_ptr
+    bl scanf
+    ldr r6, [fp, #-8]
+    @ compare the guess to the solution
+    ifeq r6, r4
+    b break_success
+    ifgt r6, r4
+    b too_low
+    b too_high
+    @ handle cases
+too_low:
+    ldr r0, too_low_reply_ptr
+    bl printf
+    b return
+too_high:
+    ldr r0, too_high_reply_ptr
+    bl printf
+    b return
+break_success:
+    ldr r0, correct_reply_ptr
+    bl printf
+    b return
+break_failure:
+    ldr r0, no_more_tries_ptr
+    bl printf
+    b begin_loop
+return:
+    @ stack frame teardown
+    add sp, sp, #4
+    pop \{fp, lr\}
+    bx lr
+
+intro_ptr: .word intro
+prompt_ptr: .word prompt
+input_format_ptr: .word input_format
+too_high_reply_ptr: .word too_high_reply
+too_low_reply_ptr: .word too_low_reply
+correct_reply_ptr: .word correct_reply
+no_more_tries_ptr: .word no_more_tries
+\end{alltt}
+
+
+\newpage
+
+\begin{center}
+(blank page)
+\end{center}
+
+
+\end{document}
