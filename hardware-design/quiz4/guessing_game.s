@@ -14,44 +14,36 @@ main:
     push {fp, lr}
     add fp, sp, #4
     sub sp, sp, #4
-
     @ use current time to generate "random" number in r4
     sub r0, fp, #8      @ no errors
     bl time             @ in these
     ldr r4, [fp, #-8]   @ four lines
     and r4, r4, #0x7f   @ i promise
-
     @ init guess counter
     mov r5, #0
-
     @ print game intro
     ldr r0, intro_ptr
     bl printf
-
-    @ begin loop
 begin_loop:
-    @ increment guess counter, maybe break
+    @ increment guess counter, break if max
     add r5, r5, #1
     cmp r5, #10
     bgt break_failure
-
     @ print the numbered prompt
     mov r1, r5
     ldr r0, prompt_ptr
     bl printf
-
     @ read in the guess
     sub r1, fp, #8
     ldr r0, input_format_ptr
     bl scanf
     ldr r6, [fp, #-8]
-
     @ compare the guess to the solution
     cmp r6, r4
     beq break_success
     blt too_low
     bgt too_high
-    @ handle cases: too high, too low, correct
+    @ handle cases
 too_low:
     ldr r0, too_low_reply_ptr
     bl printf
