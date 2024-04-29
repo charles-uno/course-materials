@@ -1,34 +1,66 @@
 @ ascii globals go here
     .section .rodata
-running_tally: .ascii "The first %d odd numbers add to: %d\n\0"
+prompt: .ascii "Please input a character: \0"
+char_format: .ascii "%c\0"
+reply_uppercase: .ascii "Input is an uppercase letter\n\0"
+reply_lowercase: .ascii "Input is a lowercase letter\n\0"
+reply_number: .ascii "Input is a number\n\0"
+reply_other: .ascii "Input is something else\n\0"
 
     .text
     .global main
 main: 
-    @ stack frame setup, no local variables
+    @ stack frame setup, one local variable
     push {fp, lr}
-    @ init loop counter and running sum
-    mov r4, #0
-    mov r5, #0
-begin_loop:
-    @ increment loop counter
-    add r4, r4, #1
-    @ the nth odd number is 2n-1. add that to the running sum
-    add r5, r5, r4
-    add r5, r5, r4
-    sub r5, r5, #1
-    @ print the running sum
-    ldr r0, running_tally_ptr
-    mov r1, r4
-    mov r2, r5
+    add fp, sp, #4
+    sub sp, sp, #4
+    @ print the prompt
+    ldr r0, prompt_ptr
     bl printf
-    @ check break condition
-    cmp r4, #10
-    blt begin_loop
+    @ read the value and load it
+    ldr r0, char_format_ptr
+    sub r1, fp, #8
+    bl scanf
+    ldr r4, [fp, #-8]
+    @ numbers is 48-57
+    @ uppercase is ascii 65-90
+    @ lowercase is ascii 97-122
+    cmp r4, #48
+    blt other
+    cmp r4, #57
+    ble number
+    cmp r4, #65
+    blt other
+    cmp r4, #90
+    ble uppercase
+    cmp r4, #97
+    blt other
+    cmp r4, #122
+    ble lowercase
+    b other
+uppercase:
+    ldr r0, reply_uppercase_ptr
+    b print_and_return
+lowercase:
+    ldr r0, reply_lowercase_ptr
+    b print_and_return
+number:
+    ldr r0, reply_number_ptr
+    b print_and_return
+other:
+    ldr r0, reply_other_ptr
+print_and_return:
+    bl printf
     @ return 0, stack frame teardown
     mov r0, #0
+    add sp, sp, #4
     pop {fp, lr}
     bx lr
 
 @ pointers to ascii globals
-running_tally_ptr: .word running_tally
+prompt_ptr: .word prompt
+char_format_ptr: .word char_format
+reply_uppercase_ptr: .word reply_uppercase
+reply_lowercase_ptr: .word reply_lowercase
+reply_number_ptr: .word reply_number
+reply_other_ptr: .word reply_other
