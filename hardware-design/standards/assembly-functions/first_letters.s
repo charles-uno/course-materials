@@ -1,5 +1,8 @@
+@ NOTE: this one does not work. not sure why we seem to be unable to overwrite a char in the middle of a string. also sed faults
+
     .section .rodata
 prompt: .ascii "what is your name? \0"
+string_format: .ascii "%s\0"
 output: .ascii "the first three letters of your name: %s\n\0"
 
     .text
@@ -8,7 +11,7 @@ insert_null:
     @ set up stack frame, no local variables
     push {fp, lr}
     add fp, sp, #4
-    mov r1, #0
+    mov r1, #'X'
     str r1, [r0]
     @ stack frame teardown, return 0
     mov r0, #0
@@ -25,32 +28,16 @@ main:
     @ print prompt
     ldr r0, prompt_ptr
     bl printf
-
-
-
-    @ fp-8 is n1, initialize to 4
-    mov r4, #4
-    str r4, [fp, #-8]
-    @ fp-12 is n2, initialize to 7
-    mov r5, #7
-    str r5, [fp, #-12]
-    @ fp-16 is n1_plus
-    mov r0, r4
-    bl add_one
-    str r0, [fp, #-16]
-    @ fp-20 is n2_plus
-    mov r0, r5
-    bl add_one
-    str r0, [fp, #-20]
-    @ Load and print n1, n1_plus
+    @ read in value, hope it doesn't overflow
+    ldr r0, string_format_ptr
+    sub r1, fp, #8
+    bl scanf
+    @ insert a null byte so we only print the first characters
+    sub r0, fp, #16
+    bl insert_null
+    @ print the string. it'll stop when it hits the null
     ldr r0, output_ptr
-    ldr r1, [fp, #-8]
-    ldr r2, [fp, #-16]
-    bl printf
-    @ Load and print n2, n2_plus
-    ldr r0, output_ptr
-    ldr r1, [fp, #-12]
-    ldr r2, [fp, #-20]
+    sub r1, fp, #8
     bl printf
     @ stack frame teardown, return 0
     mov r0, #0
@@ -59,4 +46,5 @@ main:
 
 prompt_ptr: .word prompt
 output_ptr: .word output
+string_format_ptr: .word string_format
 
