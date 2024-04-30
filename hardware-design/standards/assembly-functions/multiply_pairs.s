@@ -21,27 +21,27 @@ main:
     add fp, sp, #4
     sub sp, sp, #24
     @ fp-8 is a, initialize to 4
-    mov r4, #4
-    str r4, [fp, #-8]
+    mov r0, #4
+    str r0, [fp, #-8]
     @ fp-12 is b, initialize to 9
-    mov r5, #9
-    str r5, [fp, #-12]
+    mov r0, #9
+    str r0, [fp, #-12]
     @ fp-16 is c, initialize to 7
-    mov r6, #7
-    str r6, [fp, #-16]
+    mov r0, #7
+    str r0, [fp, #-16]
     @ fp-20 is a*b
-    mov r0, r4
-    mov r1, r5
+    ldr r0, [fp, #-8]
+    ldr r1, [fp, #-12]
     bl mul_two
     str r0, [fp, #-20]
     @ fp-24 is b*c
-    mov r0, r5
-    mov r1, r6
+    ldr r0, [fp, #-12]
+    ldr r1, [fp, #-16]
     bl mul_two
     str r0, [fp, #-24]
     @ fp-28 is c*a
-    mov r0, r6
-    mov r1, r4
+    ldr r0, [fp, #-16]
+    ldr r1, [fp, #-8]
     bl mul_two
     str r0, [fp, #-28]
 

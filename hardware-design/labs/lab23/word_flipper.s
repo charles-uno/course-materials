@@ -52,13 +52,13 @@ begin_loop:
     sub r1, fp, #8
     bl  scanf
 
-    @ input char is at fp-8. load to r0 for input, r4 for comparison
+    @ input char is at fp-8. load to r0 for input, r3 for comparison
     ldr r0, [fp, #-8]
-    mov r4, r0
+    mov r3, r0
     bl flip_char_case
 
-    @ r4 is the input. r0 is flipped. so r4 != r0 indicates a letter
-    cmp r4, r0
+    @ r3 is the input. r0 is flipped. so r3 != r0 indicates a letter
+    cmp r3, r0
     beq end_loop
 
     mov r1, r0

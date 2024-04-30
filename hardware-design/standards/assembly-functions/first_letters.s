@@ -1,37 +1,45 @@
     .section .rodata
-output: .ascii "%d + 1 = %d\12\0"
+prompt: .ascii "what is your name? \0"
+output: .ascii "the first three letters of your name: %s\n\0"
 
     .text
-    .global add_one
-add_one:
+    .global insert_null
+insert_null:
     @ set up stack frame, no local variables
     push {fp, lr}
     add fp, sp, #4
-    @ input is x, return x+1
-    add r0, r0, #1
-    @ stack frame teardown
+    mov r1, #0
+    str r1, [r0]
+    @ stack frame teardown, return 0
+    mov r0, #0
     pop {fp, lr}
     bx lr
 
     .text
     .global main
 main: 
-    @ stack frame setup, four local variables
+    @ stack frame setup, make room for a big string
     push {fp, lr}
     add fp, sp, #4
-    sub sp, sp, #16
+    sub sp, sp, #400
+    @ print prompt
+    ldr r0, prompt_ptr
+    bl printf
+
+
+
     @ fp-8 is n1, initialize to 4
-    mov r0, #4
-    str r0, [fp, #-8]
+    mov r4, #4
+    str r4, [fp, #-8]
     @ fp-12 is n2, initialize to 7
-    mov r0, #7
-    str r0, [fp, #-12]
+    mov r5, #7
+    str r5, [fp, #-12]
     @ fp-16 is n1_plus
-    ldr r0, [fp, #-8]
+    mov r0, r4
     bl add_one
     str r0, [fp, #-16]
     @ fp-20 is n2_plus
-    ldr r0, [fp, #-12]
+    mov r0, r5
     bl add_one
     str r0, [fp, #-20]
     @ Load and print n1, n1_plus
@@ -49,5 +57,6 @@ main:
     sub sp, fp, #4
     pop {fp, pc}
 
+prompt_ptr: .word prompt
 output_ptr: .word output
 

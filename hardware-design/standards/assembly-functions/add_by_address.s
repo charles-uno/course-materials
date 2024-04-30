@@ -11,11 +11,11 @@ add_two_numbers_by_address:
     push {fp, lr}
     add fp, sp, #4
     @ load values from the input addresses
-    ldr r4, [r0]
-    ldr r5, [r1]
+    ldr r0, [r0]
+    ldr r1, [r1]
     @ compute the sum and store the result
-    add r6, r4, r5
-    str r6, [r2]
+    add r0, r0, r1
+    str r0, [r2]
     mov r0, r2
     @ restore previous stack frame
     pop {fp, lr}

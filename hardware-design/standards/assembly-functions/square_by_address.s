@@ -10,10 +10,10 @@ square_by_address:
     push {fp, lr}
     add fp, sp, #4
     @ load value from the input address
-    ldr r4, [r0]
+    ldr r0, [r0]
     @ compute the square and store the result
-    mul r5, r4, r4
-    str r5, [r1]
+    mul r0, r0, r0
+    str r0, [r1]
     mov r0, r1
     @ restore previous stack frame
     pop {fp, lr}
