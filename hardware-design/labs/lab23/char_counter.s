@@ -44,7 +44,7 @@ main:
     bl printf
 
     @ initialize the length counter
-    mov r4, #0
+    mov r3, #0
 
 begin_loop:
     ldr r0, char_format_ptr
@@ -61,11 +61,11 @@ begin_loop:
     bne end_loop
 
 letter:
-    add r4, r4, #1
+    add r3, r3, #1
     b begin_loop
 end_loop:
     ldr r0, report_length_ptr
-    mov r1, r4
+    mov r1, r3
     bl printf
 
     @ return 0, restore stack frame
