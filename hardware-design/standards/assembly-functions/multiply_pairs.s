@@ -70,28 +70,3 @@ main:
 
 output_ptr: .word output
 
-
-
-@ function mul_two
-	@ two parameters: x, y
-	@ returns x*y
-
-@ main
-	@ set up stack frame for main
-	@ local variables: a, b, c, a_times_b, b_times_c, a_times_c
-
-	@ initialize a to 4
-
-	@ initialize b to 9
-
-	@ initialize c to 7
-
-	@ call mul_two on a and b, and store the result to a_times_b
-
-	@ call mul_two on b and c, and store the result to b_times_c
-
-	@ call mul_two on a and c, and store the result to a_times_c
-
-	@ return 0
-
-	@ tear down stack frame for main

@@ -1,10 +1,7 @@
     .section .rodata
-prompt:
-    .ascii "Enter a number: \0"
-input_format:
-    .ascii "%d\0"
-reply:
-    .ascii "The square of that number is: %d\n\0"
+prompt: .ascii "Enter a number: \0"
+input_format: .ascii "%d\0"
+reply: .ascii "The square of that number is: %d\n\0"
 
     .text
     .global square_by_address
@@ -49,10 +46,7 @@ main:
     pop {fp, lr}
     bx lr
 
-prompt_ptr:
-    .word prompt
-input_format_ptr:
-    .word input_format
-reply_ptr:
-    .word reply
+prompt_ptr: .word prompt
+input_format_ptr: .word input_format
+reply_ptr: .word reply
 

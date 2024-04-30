@@ -1,12 +1,8 @@
     .section .rodata
-prompt_1:
-    .ascii "Enter a number: \0"
-prompt_2:
-    .ascii "Enter another number: \0"
-input_format:
-    .ascii "%d\0"
-reply:
-    .ascii "The sum of those numbers is: %d\n\0"
+prompt_1: .ascii "Enter a number: \0"
+prompt_2: .ascii "Enter another number: \0"
+input_format: .ascii "%d\0"
+reply: .ascii "The sum of those numbers is: %d\n\0"
 
     .text
     .global add_two_numbers
@@ -58,12 +54,8 @@ main:
     pop {fp, lr}
     bx lr
 
-prompt_1_ptr:
-    .word prompt_1
-prompt_2_ptr:
-    .word prompt_2
-input_format_ptr:
-    .word input_format
-reply_ptr:
-    .word reply
+prompt_1_ptr: .word prompt_1
+prompt_2_ptr: .word prompt_2
+input_format_ptr: .word input_format
+reply_ptr: .word reply
 
