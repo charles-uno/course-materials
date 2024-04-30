@@ -22,14 +22,13 @@ Name: \makebox[3in]{\hrulefill}
 \vfill
 
 \begin{center}
-{\huge Quiz 4 Practice}
+{\huge Quiz 4}
 \end{center}
 
 \begin{itemize}
-    \item This is a practice quiz. You do not need to sign the pledge. You do not need to turn it in. 
-    \item I encourage you to try it alone first to test your own understanding. You are welcome to review with your peers after.
-    \item The standards AP2 and AP3 do not cover terminal input/output. You will not be penalized for mistakes on input/output syntax.
-    \item This is probably a bit harder than the real quiz.
+    \item The standards AP2 and AP3 do not cover global variables or terminal input/output. You will \underline{not} be penalized for syntax errors on those.
+    \item Please make sure your work is legible. There is a blank page following each exercise. More paper is available if needed.
+    \item I have confidence in you!
 \end{itemize}
 
 \vfill
@@ -43,7 +42,7 @@ $\square$\quad I have intentionally not signed the pledge. (check only if approp
 
 \section*{Standard: Assembly Programming II}
 
-On the next page is the skeleton of an Assembly program with comments. 
+On the next page is a commented skeleton for an Assembly program. 
 
 This program reads in two numbers from the terminal. It passes the \textit{memory addresses} of those values into the function \texttt{add\_two\_numbers\_by\_address}, along with a third memory address where the result should be stored. The function performs the addition, stores the result at the given address, and returns that address. Back in \texttt{main}, the program loads the result and prints it. It should look like this:
 
@@ -54,7 +53,7 @@ This program reads in two numbers from the terminal. It passes the \textit{memor
     The sum of those numbers is: 93
 \end{alltt}
 
-Please fill in the missing code. Use a blank sheet.
+Please fill in the missing code. 
 
 A memory diagram is not required, but you may find it helpful.
 
@@ -75,9 +74,8 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on th
 \begin{alltt}
 @ ascii global variables
 
-    .text
-    .global add_two_numbers_by_address
-add_two_numbers_by_address:
+@ define function add_two_numbers_by_address
+
     @ stack frame setup
 
     @ read the two input values from memory
@@ -90,12 +88,11 @@ add_two_numbers_by_address:
 
     @ stack frame teardown
 
-    .text
-    .global main
-main: 
+@ define function main
+
     @ stack frame setup
 
-    @ print prompts, read values
+    @ print prompts, read values to memory
 
     @ set input values for the function call
 
@@ -139,7 +136,9 @@ On the following page is an Assembly program for a number guessing game. The pro
     Correct!
 \end{alltt}
 
-Ten of the lines in the program have mistakes. Find them and fix them. 
+Please fill in the missing logic. 
+
+There are several correct ways to write the solution. You do not need to follow the comments exactly.
 
 \vfill
 
@@ -173,56 +172,50 @@ main:
     add fp, sp, #4
     sub sp, sp, #4
     @ use current time to generate "random" number in r4
-    sub r0, fp, #8      @ no errors
-    bl time             @ in these
-    ldr r4, [fp, #-8]   @ four lines
-    and r4, r4, #0x7f   @ i promise
-    @ init guess counter
-    mov r5, #0
+    sub r0, fp, #8
+    bl time
+    ldr r4, [fp, #-8]
+    and r4, r4, #0x7f
     @ print game intro
     ldr r0, intro_ptr
     bl printf
-begin_loop:
-    @ increment guess counter, break if max
-    add r5, r5, #1
-    ifeq r5, #10
-    b break_failure
+    @ init guess counter
+
+
+    @ top of loop
+
+
+    @ increment guess counter
+
+
+    @ break if there are no more guesses
+
+
     @ print the numbered prompt
-    mov r1, r5
-    ldr r0, prompt_ptr
-    bl printf
+
+
     @ read in the guess
-    sub r1, fp, #8
-    ldr r0, input_format_ptr
-    bl scanf
-    ldr r6, [fp, #-8]
-    @ compare the guess to the solution
-    ifeq r6, r4
-    b break_success
-    ifgt r6, r4
-    b too_low
-    b too_high
-    @ handle cases
-too_low:
-    ldr r0, too_low_reply_ptr
-    bl printf
-    b return
-too_high:
-    ldr r0, too_high_reply_ptr
-    bl printf
-    b return
-break_success:
-    ldr r0, correct_reply_ptr
-    bl printf
-    b return
-break_failure:
-    ldr r0, no_more_tries_ptr
-    bl printf
-    b begin_loop
-return:
-    @ stack frame teardown
+
+
+    @ check guess, jump to appropriate response
+
+
+    @ case: guess is too small
+
+
+    @ case: guess is too large
+
+
+    @ case: guess is correct
+
+
+    @ case: no more guesses
+
+
+    @ stack frame teardown, return 0
     add sp, sp, #4
     pop \{fp, lr\}
+    mov r0, #0
     bx lr
 
 intro_ptr: .word intro
