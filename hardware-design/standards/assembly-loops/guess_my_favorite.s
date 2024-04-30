@@ -36,7 +36,7 @@ handle_correct_guess:
     ldr r0, correct_reply_ptr
     bl printf
     @ stack frame teardown
-    add sp, sp, #4
+    sub sp, fp, #4
     pop {fp, lr}
     bx lr
 

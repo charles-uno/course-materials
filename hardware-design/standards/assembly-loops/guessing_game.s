@@ -62,7 +62,7 @@ break_failure:
     b return
 return:
     @ stack frame teardown
-    add sp, sp, #4
+    sub sp, fp, #4
     pop {fp, lr}
     bx lr
 

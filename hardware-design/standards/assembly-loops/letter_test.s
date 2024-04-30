@@ -53,7 +53,7 @@ print_and_return:
     bl printf
     @ return 0, stack frame teardown
     mov r0, #0
-    add sp, sp, #4
+    sub sp, fp, #4
     pop {fp, lr}
     bx lr
 
