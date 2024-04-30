@@ -23,6 +23,12 @@ Emulator: https://cpulator.01xz.net/?sys=arm
 
 ## Standards
 
+- Assembly 1: global variables and input/output
+- Assembly 2: local variables and functions
+- Assembly 3: conditionals and loops
+
+## Standards-Based Grading
+
 - Quiz 1: standards 1, 2
 - Quiz 2: standards 3, 4
 - Exam 1: standards 1-4
