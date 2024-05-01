@@ -1,35 +1,61 @@
-@ Global constants
-@ current_prompt: string prompting the user to enter the current year
-@ birth_prompt: string prompting the user to enter their birth year
-@ input_string: formatting string for reading the user’s input
-@ print_age: formatting string for printing the age the user turns this year
+    .section .rodata
+current_year_prompt: .ascii "what year is it? \0"
+birth_year_prompt: .ascii "what year were you born? \0"
+input_string: .ascii "%d\0"
+print_age: .ascii "you will turn %d this year\n\0"
 
 @ function compute_age
+
+    .text
+    .global compute_age
+compute_age:
+    @ set up stack frame, no local variables
+    push {fp, lr}
+    add fp, sp, #4
 	@ two parameters: birth_year and this_year
 	@ returns this_year - birth_year; the age they will turn this year
+	sub r0, r1, r0
+    @ stack frame teardown
+    pop {fp, lr}
+    bx lr
 
-@ main
-	@ set up stack frame for main
-	@ local variables: current_year, user_birth_year, age
-	@ [fp, #-8] is current_year, an integer
-	@ [fp, #-12] is user_birth_year, an integer
-	@ [fp, #-16] is age, an integer
+    .text
+    .global main
+main: 
+    @ stack frame setup, three local variables
+    push {fp, lr}
+    add fp, sp, #4
+    sub sp, sp, #12
+    @ fp-8 is birth year. read it in
+	ldr r0, birth_year_prompt_ptr
+	bl printf
+	ldr r0, input_string_ptr
+	sub r1, fp, #8
+	bl scanf
+	@ fp-12 is current year. read it in
+	ldr r0, current_year_prompt_ptr
+	bl printf
+	ldr r0, input_string_ptr
+	sub r1, fp, #12
+	bl scanf
+	@ function expects current year in r0, birth year in r1
+	ldr r0, [fp, #-8]
+	ldr r1, [fp, #-12]
+	bl compute_age
+	@ result is in r0. store it in fp-16 in case we need it later
+	sub r1, fp, #16
+	str r0, [r1]
+	@ report the result
+	ldr r0, print_age_ptr
+	@ oops we overwrote the age in r0, load it from memory
+	ldr r1, [fp, #-16]
+	bl printf
+    @ stack frame teardown, return 0
+    mov r0, #0
+    sub sp, fp, #4
+    pop {fp, pc}
 
-
-	@ prompt the user to enter the current year, and store input
-
-	@ prompt the user to enter their birth year, and store the input
-
-	@ call compute_age on user_birth_year and current_year
-
-	@ store return value to age
-
-	@ report the age the user turns this year
-
-	@ return 0
-
-	@ tear down stack frame for main
-
-
-@ Pointers
-@ pointers to strings
+current_year_prompt_ptr: .word current_year_prompt
+birth_year_prompt_ptr: .word birth_year_prompt
+input_string_ptr: .word input_string
+print_age_ptr: .word print_age
