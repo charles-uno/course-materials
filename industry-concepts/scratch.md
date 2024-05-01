@@ -4,6 +4,7 @@
 - agile, standups
 - peer reviews
 - feature flags (killswitches)
+- system design
 
 
 run the class as one big project? example: tic-tac-toe app. probably want browser for faster iteration, one less thing to worry about
