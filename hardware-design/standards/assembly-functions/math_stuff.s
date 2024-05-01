@@ -55,7 +55,7 @@ main:
     str r0, [r1]
     @ report the result
     ldr r0, report_product_ptr
-    @ oops we overwrote r0. better load the product
+    @ oops we overwrote r0. better load it from memory
     ldr r1, [fp, #-20]
     bl printf
     @ stack frame teardown, return 0
