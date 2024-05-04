@@ -42,16 +42,15 @@ $\square$\quad I have intentionally not signed the pledge. (check only if approp
 
 \section*{Standard: Assembly Programming II}
 
-On the next page is a commented skeleton for an Assembly program. 
-
-This program reads in two numbers from the terminal. It passes the \textit{memory addresses} of those values into the function \texttt{add\_two\_numbers\_by\_address}, along with a third memory address where the result should be stored. The function performs the addition, stores the result at the given address, and returns that address. Back in \texttt{main}, the program loads the result and prints it. It should look like this:
-
-\begin{alltt}
-    > ./add_by_address
-    Enter a number: 42
-    Enter another number: 51
-    The sum of those numbers is: 93
-\end{alltt}
+On the next page is a commented skeleton for an Assembly program. It does the following:
+\begin{itemize}
+    \item Set an initial value \texttt{x} and store it to a local variable.
+    \item Call the function \texttt{plus\_one} to compute \texttt{x+1}. Store the result.
+    \item Load the values from memory and print them. For example:
+    \begin{alltt}
+    4 + 1 = 5
+    \end{alltt}
+\end{itemize}
 
 Please fill in the missing code. 
 
@@ -72,39 +71,32 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on th
 \newpage
 
 \begin{alltt}
-@ ascii global variables
+    .section .rodata
+plus_one_output: .ascii "%d + 1 = %d{\textbackslash}n{\textbackslash}0"
 
-@ define function add_two_numbers_by_address
+    .text
+plus_one:
+    @ input is x. return x+1
 
-    @ stack frame setup
 
-    @ read the two input values from memory
+    .global main
+main: 
+    @ stack frame setup, local variables
 
-    @ add them
-    
-    @ write the result to memory
 
-    @ return the address of the result
+    @ set initial value, store it
 
-    @ stack frame teardown
 
-@ define function main
+    @ call plus_one, store result
 
-    @ stack frame setup
 
-    @ print prompts, read values to memory
+    @ load both values and print them
 
-    @ set input values for the function call
 
-    @ call add_two_numbers_by_address
+    @ stack frame teardown, return 0
 
-    @ load the result from memory
 
-    @ print the output
-
-    @ return 0, stack frame teardown
-
-@ pointers to ascii global variables
+plus_one_output_ptr: .word plus_one_output
 \end{alltt}
 
 \newpage
@@ -117,28 +109,25 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on th
 
 \section*{Standard: Assembly Programming III}
 
-On the following page is an Assembly program for a number guessing game. The program picks a ``random'' number between 0 and 127. The user has ten chances to guess it. After each wrong guess, the program tells if it was too high or too low. It looks like this:
-
-\begin{alltt}
-    > ./guessing_game
-    I'm thinking of a number 0 to 127
-    Guess #1: 23
-    Too low!
-    Guess #2: 78
-    Too low!
-    Guess #3: 105
-    Too high!
-    Guess #4: 87
-    Too low!
-    Guess #5: 93
-    Too low!
-    Guess #6: 95
+On the next page is a commented skeleton for an Assembly program. It does the following:
+\begin{itemize}
+    \item Prompt the user to enter the number \texttt{5}.
+    \item Check if they entered the right number.
+    \item If not, ask them again (and again, and again, etc). For example:
+    \begin{alltt}
+    Please enter 5: 4
+    Incorrect!
+    Please enter 5: 12
+    Incorrect!
+    Please enter 5: 5
     Correct!
-\end{alltt}
+    \end{alltt}
+\end{itemize}
 
-Please fill in the missing logic. 
+Please fill in the missing code. 
 
 There are several correct ways to write the solution. You do not need to follow the comments exactly.
+
 
 \vfill
 
@@ -156,75 +145,42 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on th
 
 \begin{alltt}
     .section .rodata
-intro: .ascii "I'm thinking of a number 0 to 127{\textbackslash}n{\textbackslash}0"
-prompt: .ascii "Guess #%d: {\textbackslash}0"
+prompt: .ascii "Please enter 5: {\textbackslash}0"
 input_format: .ascii "%d{\textbackslash}0"
-too_high_reply: .ascii "Too high!{\textbackslash}n{\textbackslash}0"
-too_low_reply: .ascii "Too low!{\textbackslash}n{\textbackslash}0"
-correct_reply: .ascii "Correct!{\textbackslash}n{\textbackslash}0"
-no_more_tries: .ascii "No more tries. Better luck next time!{\textbackslash}n{\textbackslash}0"
+reply_incorrect: .ascii "Incorrect!{\textbackslash}n{\textbackslash}0"
+reply_correct: .ascii "Correct!{\textbackslash}n{\textbackslash}0"
 
     .text
     .global main
 main: 
     @ stack frame setup
-    push \{fp, lr\}
-    add fp, sp, #4
-    sub sp, sp, #4
-    @ use current time to generate "random" number in r4
-    sub r0, fp, #8
-    bl time
-    ldr r4, [fp, #-8]
-    and r4, r4, #0x7f
-    @ print game intro
-    ldr r0, intro_ptr
+
+
+    @ print the prompt
+    ldr r0, prompt_ptr
     bl printf
-    @ init guess counter
-
-
-    @ top of loop
-
-
-    @ increment guess counter
-
-
-    @ break if there are no more guesses
-
-
-    @ print the numbered prompt
-
-
     @ read in the guess
+    sub r1, fp, #8
+    ldr r0, input_format_ptr
+    bl scanf
+    ldr r2, [fp, #-8]
+    @ compare the guess to the solution
 
 
-    @ check guess, jump to appropriate response
+    @ maybe repeat the loop
 
 
-    @ case: guess is too small
-
-
-    @ case: guess is too large
-
-
-    @ case: guess is correct
-
-
-    @ case: no more guesses
+    @ maybe break
 
 
     @ stack frame teardown, return 0
-    add sp, sp, #4
-    pop \{fp, lr\}
-    mov r0, #0
-    bx lr
 
-intro_ptr: .word intro
+
 prompt_ptr: .word prompt
 input_format_ptr: .word input_format
-too_high_reply_ptr: .word too_high_reply
-too_low_reply_ptr: .word too_low_reply
-correct_reply_ptr: .word correct_reply
-no_more_tries_ptr: .word no_more_tries
+reply_correct_ptr: .word reply_correct
+reply_incorrect_ptr: .word reply_incorrect
+
 \end{alltt}
 
 

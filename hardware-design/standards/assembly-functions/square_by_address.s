@@ -4,22 +4,25 @@ input_format: .ascii "%d\0"
 reply: .ascii "The square of that number is: %d\n\0"
 
     .text
-    .global square_by_address
 square_by_address:
-    @ stack frame setup
+    @ stack frame setup, no local variables
     push {fp, lr}
     add fp, sp, #4
-    @ load value from the input address
+    @ load the value of x from its address
+    @ two input variables
+    @ the first is the address of the input value
+    @ the second is the address to hold the result
     ldr r0, [r0]
-    @ compute the square and store the result
+    @ compute the square
     mul r0, r0, r0
+    @ store the result in the given address
     str r0, [r1]
+    @ return that address
     mov r0, r1
     @ restore previous stack frame
     pop {fp, lr}
     bx lr
 
-    .text
     .global main
 main: 
     @ stack frame setup, two local variables
@@ -32,6 +35,8 @@ main:
     ldr r0, input_format_ptr
     sub r1, fp, #8
     bl  scanf
+    @ address of the value
+    @ empty local variable to hold the result
     @ send variable addresses to function
     sub r0, fp, #8
     sub r1, fp, #12
