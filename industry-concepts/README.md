@@ -18,9 +18,8 @@ This project will require significant collaboration between students. They will 
 ## Working as a Team
 
 - Code reviews. Coding conventions. Style guides. Merge conflicts.
-- Agile workflow. Standups. Self-organizing teams. Resilience to changing priorities.
-- Peer feedback. Keeping notes that make it easy to brag about yourself and others. Asking for help. Giving constructive feedback.
-- Concept: you own the quality of your work. Writing unit tests, integrat
+- Agile workflow. Standups. Self-organizing teams. Resilience to changing priorities. Asking for help.
+- Peer feedback. Keeping notes that make it easy to brag about yourself and others. Giving constructive feedback.
 
 ## Testing and Deployment
 
