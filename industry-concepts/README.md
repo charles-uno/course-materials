@@ -3,7 +3,7 @@
 This is a concept for a class. It does not exist yet. Not sure if it ever will. The idea is:
 
 - School focuses mostly on individual achievement, but most "real" software is written by teams. Prepare students to work productively as part of a team.
-- The tech industry has made huge process improvements in recent decades. Pipelines vs manual deployments, agile vs waterfall. Expose students to these ideas and set them up to be a part of in ongoing forward movement.
+- The tech industry has made huge process improvements in recent decades. Pipelines vs manual deployments, agile vs waterfall, test-driven development. Expose students to these ideas and set them up to be a part of in ongoing forward movement.
 
 # Course Structure
 
