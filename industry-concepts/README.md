@@ -44,5 +44,11 @@ containers. docker
 
 ## Feature Flags
 
-- AKA killswitches. 
+- AKA killswitches.
+
+# Readings
+
+https://how.complexsystems.fail/
+
+the devops handbook
 
