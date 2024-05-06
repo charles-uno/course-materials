@@ -38,6 +38,10 @@ This project will require significant collaboration between students. They will 
 
 ## System Design
 
+## infrastructure as code
+
+containers. docker
+
 ## Feature Flags
 
 - AKA killswitches. 
