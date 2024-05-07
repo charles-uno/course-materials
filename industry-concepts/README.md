@@ -33,7 +33,7 @@ This project will require significant collaboration between students. They will 
 
 - Forms of telemetry: counters, timers, structured logs (eg stack traces). 
 - Bug reports.
-- Privacy concerns. Storing and retaining user data. 
+- Privacy concerns. Collecting and retaining user data. 
 - Dashboards and alerts.
 
 ## System Design
