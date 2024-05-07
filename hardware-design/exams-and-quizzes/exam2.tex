@@ -1,0 +1,346 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb, amsmath,graphicx,hyperref,xcolor}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+
+\usepackage{fancyhdr}
+\rhead{}
+
+\pagestyle{fancy}
+\lhead{St Olaf College}
+\chead{CS 241}
+\rhead{Spring 2024}
+
+\cfoot{\thepage}
+
+\begin{document}
+
+Name: \makebox[3in]{\hrulefill
+%NAME
+\hrulefill}
+
+\vfill
+
+\begin{center}
+{\huge Exam 2}
+\end{center}
+
+\begin{itemize}
+    \item This is a closed-book exam. Please do not use outside resources such as notes, past work, or other people. 
+    \item This exam should be doable in under an hour. If you need a little bit of extra time, that's fine. Please don't spend all day on it. 
+    \item The classroom is available at the regular time. You are also welcome to choose a different time/place that works for you. 
+    \item Once done, scan in your work and email it to me at \texttt{fyfe1@stolaf.edu}. Work must be turned in \underline{by Wednesday night}.
+    \item If you have already demonstrated proficiency on a standard, you can skip it here. If you don't remember, check your grade on Moodle.
+    \item I have confidence in you!
+\end{itemize}
+
+\vfill
+
+I pledge my honor that on this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work 
+
+\hfill Signed: \makebox[3in]{\hrulefill}
+
+$\square$\quad I have intentionally not signed the pledge. (check only if appropriate)
+\newpage
+
+\section*{Assembly Programming I}
+
+%STANDARD_AP1
+
+The following page has the skeleton of an Assembly program with comments. The program does the following:
+\begin{itemize}
+    \item Create global variables \texttt{n\_koalas} and \texttt{n\_thumbs}
+    \item Use \texttt{printf} to ask the user how many koalas they have
+    \item Use \texttt{scanf} to accept a value and store it to \texttt{n\_koalas}
+    \item Multiply the value by six and store it in \texttt{n\_thumbs}
+    \item Use \texttt{printf} to report the total number of thumbs
+\end{itemize}
+
+For example:
+\begin{verbatim}
+    How many koalas do you have? 4
+    That's a total of 24 thumbs!
+\end{verbatim}
+
+Please fill in the missing code
+
+Note: koalas have two thumbs on each hand, plus one thumb per foot. Six thumbs per koala.
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the final
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the final
+
+\newpage
+
+
+
+\begin{verbatim}
+@ global constants
+
+
+
+@ global variables
+
+
+
+@ main
+
+
+    
+    @ stack frame setup, no local variables
+
+
+
+    @ print the prompt
+
+
+
+    @ read the value n_koalas
+
+
+
+    @ compute n_thumbs and store the value
+
+
+
+    @ load n_thumbs and print the reply
+
+
+
+    @ stack frame teardown, return zero
+
+
+
+@ pointers
+\end{verbatim}
+\newpage
+
+
+\section*{Memory Diagrams}
+
+%STANDARD_MR
+
+The following page has an Assembly program. It does the following:
+\begin{itemize}
+    \item Allocate two local variables: \texttt{x} and \texttt{x\_squared}
+    \item Store a value to \texttt{x}
+    \item Send the \underline{addresses} of both variables to the function \texttt{square\_by\_address}
+    \item The function loads \texttt{x}, computes its square, and stores it in \texttt{x\_squared}
+    \item Back in main, load the values and print them
+\end{itemize}
+
+The output looks like:
+\begin{verbatim}
+    17 squared is 289
+\end{verbatim}
+
+Please draw a memory diagram showing the values in registers and main memory at the indicated line. In cases where you don't know the literal value, write what it is --- for example, ``old lr". 
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the exam
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the exam
+
+\newpage
+
+\begin{verbatim}
+    .section .rodata
+output: .ascii "%d squared is %d\n\0"
+
+    .text
+square_by_address:
+    push {fp, lr}
+    add fp, sp, #4
+    @ load value from input address
+    ldr r0, [r0]
+    @ square it and store the result
+    mul r0, r0, r0
+    str r0, [r1]
+    mov r0, #0
+    @               STOP HERE FOR MEMORY DIAGRAM
+    pop {fp, pc}
+
+    .global main
+main: 
+    push {fp, lr}
+    add fp, sp, #4
+    sub sp, sp, #8
+    @ fp-8 is x, fp-12 is x_squared
+    mov r0, #17
+    str r0, [fp, #-8]
+    @ pass the addresses to the function
+    sub r0, fp, #8
+    sub r1, fp, #12
+    bl square_by_address
+    @ load the values and print them
+    ldr r1, [fp, #-8]
+    ldr r2, [fp, #-12]
+    ldr r0, output_ptr
+    bl printf
+    mov r0, #0
+    sub sp, fp, #4
+    pop {fp, pc}
+
+output_ptr: .word output
+\end{verbatim}
+
+\newpage
+
+\section*{Assembly Programming II}
+
+%STANDARD_AP2
+
+The following page has the skeleton of an Assembly program with comments. The program does the following:
+\begin{itemize}
+    \item Allocate local variables \texttt{x}, \texttt{y}, \texttt{z}, and \texttt{xyz}.
+    \item Store initial values \texttt{x = 5}, \texttt{y = 7}, and \texttt{z = 11}
+    \item Pass the values \texttt{x}, \texttt{y}, and \texttt{z} to the function \texttt{multiply\_three}
+    \item Within the function, calculate \texttt{x*y*z} and return it
+    \item Back in \texttt{main}, store the result to \texttt{xyz}
+\end{itemize}
+
+Please fill in the missing code
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the final
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the final
+
+\newpage
+
+\begin{verbatim}
+@ function multiply_three
+
+
+
+    @ return x*y*z
+
+
+
+@ function main
+
+
+    
+    @ stack frame setup, four local variables
+
+
+
+    @ store initial values for x, y, and z
+
+
+
+    @ call multiply_three
+
+
+
+    @ store return value as xyz
+
+
+
+    @ stack frame teardown, return 0
+
+
+
+\end{verbatim}
+
+\newpage
+
+\section*{Standard: Assembly Programming III}
+
+%STANDARD_AP3
+
+The following page has the skeleton of an Assembly program with comments. The program does the following:
+\begin{itemize}
+    \item Initialize the sum to \texttt{0}
+    \item Prompt the user for a number, read it in, and add it to the sum
+    \item If the sum is less than 100, loop again
+    \item Otherwise, exit the loop and print the sum
+\end{itemize}
+
+For example:
+\begin{verbatim}
+    Please give a number: 12
+    Please give a number: 45
+    Please give a number: 3
+    Please give a number: 0
+    Please give a number: 97
+    The sum of all those numbers is: 157
+\end{verbatim}
+
+Please fill in the missing code
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{R}: You are close! Half credit. Submit a revision for full credit
+
+$\square$ \textbf{S}: Partial proficiency. Half credit. Try again on the final
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency. Try again on the final
+
+\newpage
+
+\begin{verbatim}
+@ global constants
+
+
+
+@ function main
+
+    
+    
+    @ stack frame setup
+
+
+
+    @ print the prompt
+
+
+
+    @ read in the value
+
+
+
+    @ maybe repeat the loop
+
+    
+    
+    @ print the result
+
+
+
+    @ stack frame teardown, return 0
+
+
+
+@ pointers
+\end{verbatim}
+
+\end{document}
