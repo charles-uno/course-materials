@@ -38,15 +38,14 @@ class Student:
 
 def main() -> int:
     args = parse_args()
+    raw_exam = get_raw_exam(args.exam_path)
     students = get_students(args.grades_path, args.proficiency_score)
     for student in students:
-        create_exam(args.exam_path, student)
+        create_exam(raw_exam, student)
     return 0
 
 
-def create_exam(exam_path: str, student: Student) -> None:
-    with open(exam_path, "r") as handle:
-        exam_source = "".join(handle.readlines())
+def create_exam(exam_source: str, student: Student) -> None:
     exam_source = exam_source.replace(TEX_NAME, student.name)
     for p in student.proficiencies:
         begin_macro = TEX_STANDARD_BEGIN + p
@@ -56,16 +55,15 @@ def create_exam(exam_path: str, student: Student) -> None:
         before = exam_source.split(begin_macro)[0]
         after = exam_source.split(end_macro)[-1]
         exam_source = before + after
-    # If the student is already proficient in all standards, don't bother
-    # creating an exam
-    if TEX_STANDARD_BEGIN not in exam_source:
-        print("SKIP", student.name)
+    # sanity check: how many standards does this student have left?
+    n_standards = exam_source.count(TEX_STANDARD_BEGIN)
+    print(student.name.rjust(30), n_standards, "standards")
+    if not n_standards:
         return
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_path = os.path.join(OUTPUT_DIR, slug(student.name) + ".tex")
     with open(output_path, "w") as handle:
         handle.write(exam_source)
-        print("OK", student.name)
     return
 
 
@@ -111,6 +109,11 @@ def get_student_proficiencies(
         if v >= proficiency_score:
             proficiencies.append(standard_short_name)
     return frozenset(proficiencies)
+
+
+def get_raw_exam(exam_path: str) -> str:
+    with open(exam_path, "r") as handle:
+        return "".join(handle.readlines())
 
 
 def parse_args() -> Namespace:
