@@ -171,6 +171,11 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 %BEGIN_AP3
 
+The following page has the skeleton of an Assembly program that adds up the numbers from 1 to 1000. Please fill in the missing code. 
+
+Note: you may put your work on a separate sheet of paper.
+
+
 \vfill
 
 \rule[1ex]{\textwidth}{.1pt}
@@ -182,6 +187,47 @@ $\square$ \textbf{S}: Partial proficiency. Half credit
 $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \newpage
+
+\begin{verbatim}
+    .section .rodata
+result: .ascii "The sum from 0 to 1000 is: %d\n\0"
+
+    .text
+    .global main
+main: 
+    @ stack frame setup, no local variables
+    push {fp, lr}
+    add fp, sp, #4
+    @ initialize loop counter and sum
+
+
+
+
+    @ increment loop counter
+
+
+
+    
+    @ update the sum
+
+
+    
+    
+    @ check loop condition, maybe repeat
+
+
+
+    
+    @ report result
+    ldr r0, result_ptr
+    mov r1, r5
+    bl printf
+    @ return 0, stack frame teardown
+    mov r0, #0
+    pop {fp, pc}
+
+result_ptr: .word result
+\end{verbatim}
 
 %END_AP3
 
