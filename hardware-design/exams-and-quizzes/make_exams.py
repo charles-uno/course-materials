@@ -48,7 +48,11 @@ def main() -> int:
 
 def show_next_step() -> None:
     print("\nNow to generate PDFs, run:")
-    print(blue("    pushd output && for SRC in *.tex; do pdflatex $SRC; done; popd"))
+    print(
+        blue(
+            f"    pushd {OUTPUT_DIR} && for SRC in *.tex; do pdflatex $SRC; done; popd"
+        )
+    )
 
 
 def create_exam(exam_source: str, student: Student) -> None:
