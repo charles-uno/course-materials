@@ -2,3 +2,7 @@ a.out
 .DS_Store
 grades.csv
 output/
+# LaTeX files
+*.aux
+*.log
+*.out

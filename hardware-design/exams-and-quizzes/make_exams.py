@@ -42,7 +42,17 @@ def main() -> int:
     students = get_students(args.grades_path, args.completion_threshold)
     for student in students:
         create_exam(raw_exam, student)
+    show_next_step()
     return 0
+
+
+def show_next_step() -> None:
+    print("\nNow to generate PDFs, run:")
+    print(
+        blue(
+            "    pushd output && for SRC in *.tex; do pdflatex $SRC; done; rm *.aux *.log *.out; popd"
+        )
+    )
 
 
 def create_exam(exam_source: str, student: Student) -> None:
@@ -58,7 +68,12 @@ def create_exam(exam_source: str, student: Student) -> None:
     # sanity check: how many standards does this student have left?
     n_standards_remaining = exam_source.count(TEX_STANDARD_BEGIN)
     if not n_standards_remaining:
-        print(n_standards_remaining, "standards remaining for", student.name, "(skip)")
+        print(
+            n_standards_remaining,
+            "standards remaining for",
+            student.name,
+            "(no exam needed)",
+        )
         return
     print(n_standards_remaining, "standards remaining for", student.name)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -133,6 +148,10 @@ def parse_args() -> Namespace:
         help="score that indicates completion of a standard",
     )
     return parser.parse_args()
+
+
+def blue(text: str) -> str:
+    return f"\u001b[34m{text}\u001b[0m"
 
 
 class MissingSubstitution(Exception):
