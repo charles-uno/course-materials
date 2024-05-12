@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
 """
-Accepts the path to a LaTeX file, the source for an exam. Creates a
-directory of new LaTeX files, one personalized to each student. 
-
-Student names and standards are loaded from grades.csv, the exported grades
-from Moodle (plain text format). LaTeX files are then modified according to
-inline annotation:
+Student names and standards are loaded from the Moodle grades CSV. Then the
+exam source is personalized according to inline annotation:
 
 1. The student's name is swapped in for %NAME. 
 2. If the student has completed standard FOO, omit from %BEGIN_FOO to %END_FOO.
+
+Finally, the personalized source files are compiled to PDFs.
 """
 
 from argparse import ArgumentParser, Namespace
