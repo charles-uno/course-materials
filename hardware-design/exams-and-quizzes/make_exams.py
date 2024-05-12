@@ -16,12 +16,14 @@ from argparse import ArgumentParser, Namespace
 import csv
 from dataclasses import dataclass
 import os
+import subprocess
 import sys
 from typing import Any
 
 CSV_KEY_STANDARD_PREFIX = "Standard "
 CSV_KEY_FIRST_NAME = "First name"
 CSV_KEY_LAST_NAME = "Last name"
+CSV_KEY_EMAIL = "Email address"
 
 TEX_NAME = "%NAME"
 TEX_STANDARD_BEGIN = "%BEGIN_"
@@ -33,6 +35,7 @@ OUTPUT_DIR = "output"
 @dataclass(frozen=True)
 class Student:
     name: str
+    username: str
     standards_completed: frozenset[str]
 
 
@@ -42,17 +45,7 @@ def main() -> int:
     students = get_students(args.grades_path, args.completion_threshold)
     for student in students:
         create_exam(raw_exam, student)
-    show_next_step()
     return 0
-
-
-def show_next_step() -> None:
-    print("\nNow to generate PDFs, run:")
-    print(
-        blue(
-            f"    pushd {OUTPUT_DIR} && for SRC in *.tex; do pdflatex $SRC; done; popd"
-        )
-    )
 
 
 def create_exam(exam_source: str, student: Student) -> None:
@@ -70,31 +63,30 @@ def create_exam(exam_source: str, student: Student) -> None:
     if not n_standards_remaining:
         print(
             n_standards_remaining,
-            "standards remaining for",
+            "standards left for",
             student.name,
-            "(no exam needed)",
+            "(no exam generated)",
         )
         return
-    print(n_standards_remaining, "standards remaining for", student.name)
+    print(
+        n_standards_remaining,
+        "standards left for",
+        student.name,
+    )
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    output_path = os.path.join(OUTPUT_DIR, slug(student.name) + ".tex")
+    # usernames should be safe from collisions and special characters
+    output_path = os.path.join(OUTPUT_DIR, student.username + ".tex")
     with open(output_path, "w") as handle:
         handle.write(exam_source)
+    subprocess.run(
+        [
+            "pdflatex",
+            f"-output-directory={OUTPUT_DIR}",
+            output_path,
+        ],
+        capture_output=True,
+    )
     return
-
-
-def slug(name: str) -> str:
-    # "normalize" the name so we can use it for a file path
-    substitutions = {"é": "e"}
-    chars = []
-    for c in name.lower():
-        if c == " " or c.isalnum:
-            chars.append(c)
-        elif c in substitutions:
-            chars.append(substitutions[c])
-        else:
-            raise MissingSubstitution(f"please add handling for: {c}")
-    return "".join(chars).replace(" ", "-")
 
 
 def get_students(grades_path: str, completion_threshold: int) -> list[Student]:
@@ -105,8 +97,13 @@ def get_students(grades_path: str, completion_threshold: int) -> list[Student]:
     for line in csv_lines:
         student_map = dict(zip(column_names, line))
         name = student_map[CSV_KEY_FIRST_NAME] + " " + student_map[CSV_KEY_LAST_NAME]
+        username = student_map[CSV_KEY_EMAIL].split("@")[0]
         standards_completed = get_standards_completed(student_map, completion_threshold)
-        students.append(Student(name=name, standards_completed=standards_completed))
+        students.append(
+            Student(
+                name=name, username=username, standards_completed=standards_completed
+            )
+        )
     return students
 
 
@@ -148,14 +145,6 @@ def parse_args() -> Namespace:
         help="score that indicates completion of a standard",
     )
     return parser.parse_args()
-
-
-def blue(text: str) -> str:
-    return f"\u001b[34m{text}\u001b[0m"
-
-
-class MissingSubstitution(Exception):
-    pass
 
 
 class AmbiguousAnnotation(Exception):
