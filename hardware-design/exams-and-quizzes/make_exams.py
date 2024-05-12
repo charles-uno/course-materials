@@ -41,7 +41,7 @@ def main() -> int:
     students = get_students(args.grades_path, args.proficiency_score)
     for student in students:
         create_exam(args.exam_path, student)
-        break
+    return 0
 
 
 def create_exam(exam_path: str, student: Student) -> None:
@@ -66,6 +66,7 @@ def create_exam(exam_path: str, student: Student) -> None:
     with open(output_path, "w") as handle:
         handle.write(exam_source)
         print("OK", student.name)
+    return
 
 
 def slug(name: str) -> str:
