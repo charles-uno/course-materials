@@ -44,6 +44,14 @@ def create_exam(exam_path: str, student: Student) -> None:
     with open(exam_path, "r") as handle:
         exam_source = "".join(handle.readlines())
     exam_source = exam_source.replace(TEX_NAME, student.name)
+    for p in student.proficiencies:
+        begin_macro = TEX_STANDARD_BEGIN + p
+        end_macro = TEX_STANDARD_END + p
+        if exam_source.count(begin_macro) != 1 or exam_source.count(end_macro) != 1:
+            raise AmbiguousAnnotation(f"ambiguous annotation for standard {p}")
+        before = exam_source.split(begin_macro)[0]
+        after = exam_source.split(end_macro)[-1]
+        exam_source = before + after
 
     print(slug(student.name), ":", student)
 
@@ -108,6 +116,10 @@ def parse_args() -> Namespace:
 
 
 class MissingSubstitution(Exception):
+    pass
+
+
+class AmbiguousAnnotation(Exception):
     pass
 
 
