@@ -15,6 +15,7 @@ from Moodle. LaTeX files are then modified according to inline annotation:
 from argparse import ArgumentParser, Namespace
 import csv
 from dataclasses import dataclass
+import os
 import sys
 from typing import Any
 
@@ -25,6 +26,8 @@ CSV_KEY_LAST_NAME = "Last name"
 TEX_NAME = "%NAME"
 TEX_STANDARD_BEGIN = "%BEGIN_"
 TEX_STANDARD_END = "%END_"
+
+OUTPUT_DIR = "make_exams_output"
 
 
 @dataclass(frozen=True)
@@ -38,6 +41,7 @@ def main() -> int:
     students = get_students(args.grades_path, args.proficiency_score)
     for student in students:
         create_exam(args.exam_path, student)
+        break
 
 
 def create_exam(exam_path: str, student: Student) -> None:
@@ -52,8 +56,16 @@ def create_exam(exam_path: str, student: Student) -> None:
         before = exam_source.split(begin_macro)[0]
         after = exam_source.split(end_macro)[-1]
         exam_source = before + after
-
-    print(slug(student.name), ":", student)
+    # If the student is already proficient in all standards, don't bother
+    # creating an exam
+    if TEX_STANDARD_BEGIN not in exam_source:
+        print("SKIP", student.name)
+        return
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    output_path = os.path.join(OUTPUT_DIR, slug(student.name) + ".tex")
+    with open(output_path, "w") as handle:
+        handle.write(exam_source)
+        print("OK", student.name)
 
 
 def slug(name: str) -> str:
