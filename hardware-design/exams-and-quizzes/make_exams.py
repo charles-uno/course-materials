@@ -5,11 +5,11 @@ Accepts the path to a LaTeX file, the source for an exam. Creates a
 directory of new LaTeX files, one personalized to each student. 
 
 Student names and standards are loaded from grades.csv, the exported grades
-from Moodle. LaTeX files are then modified according to inline annotation:
+from Moodle (plain text format). LaTeX files are then modified according to
+inline annotation:
 
 1. The student's name is swapped in for %NAME. 
-2. If the student has already completed the standard FOO, omit all content
-   between %BEGIN_FOO and %END_FOO. 
+2. If the student has completed standard FOO, omit from %BEGIN_FOO to %END_FOO.
 """
 
 from argparse import ArgumentParser, Namespace
@@ -27,7 +27,7 @@ TEX_NAME = "%NAME"
 TEX_STANDARD_BEGIN = "%BEGIN_"
 TEX_STANDARD_END = "%END_"
 
-OUTPUT_DIR = "make_exams_output"
+OUTPUT_DIR = "output"
 
 
 @dataclass(frozen=True)
@@ -56,11 +56,11 @@ def create_exam(exam_source: str, student: Student) -> None:
         after = exam_source.split(end_macro)[-1]
         exam_source = before + after
     # sanity check: how many standards does this student have left?
-    n_standards = exam_source.count(TEX_STANDARD_BEGIN)
-    if not n_standards:
-        print(n_standards, "standards remaining for", student.name, "(skip)")
+    n_standards_remaining = exam_source.count(TEX_STANDARD_BEGIN)
+    if not n_standards_remaining:
+        print(n_standards_remaining, "standards remaining for", student.name, "(skip)")
         return
-    print(n_standards, "standards remaining for", student.name)
+    print(n_standards_remaining, "standards remaining for", student.name)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_path = os.path.join(OUTPUT_DIR, slug(student.name) + ".tex")
     with open(output_path, "w") as handle:
