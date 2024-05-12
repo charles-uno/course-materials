@@ -2,41 +2,64 @@
 
 """
 Accepts the path to a LaTeX file, the source for an exam. Creates a
-directory of new LaTeX files, one for each student. Student exams are
-personalized by omitting any standard where that student has already
-demonstrated proficiency. 
+directory of new LaTeX files, one personalized to each student. 
 
-Proficiency is judged according to grades.csv, the grades exported from Moodle.
+Student names and standards are loaded from grades.csv, the exported grades
+from Moodle. LaTeX files are then modified according to inline annotation:
 
-Content is then omitted according to inline annotation in the LaTeX source. For
-example, if a student has shown proficiency in the "MD" standard, it'll chop
-out anything between the following two lines:
-% BEGIN_MD
-% END_MD
+1. The student's name is swapped in for %NAME. 
+2. If the student has already demonstrated proficiency in the standard FOO,
+   omit all content between %BEGIN_FOO and %END_FOO. 
 """
 
 from argparse import ArgumentParser, Namespace
 import csv
 from dataclasses import dataclass
 import sys
-from typing import Any, TypedDict
+from typing import Any
 
 CSV_KEY_STANDARD_PREFIX = "Standard "
 CSV_KEY_FIRST_NAME = "First name"
 CSV_KEY_LAST_NAME = "Last name"
 
-
-def main() -> int:
-    args = parse_args()
-    students = get_students(args.grades_path, args.proficiency_score)
-    for student in students:
-        print(student)
+TEX_NAME = "%NAME"
+TEX_STANDARD_BEGIN = "%BEGIN_"
+TEX_STANDARD_END = "%END_"
 
 
 @dataclass(frozen=True)
 class Student:
     name: str
     proficiencies: frozenset[str]
+
+
+def main() -> int:
+    args = parse_args()
+    students = get_students(args.grades_path, args.proficiency_score)
+    for student in students:
+        create_exam(args.exam_path, student)
+
+
+def create_exam(exam_path: str, student: Student) -> None:
+    with open(exam_path, "r") as handle:
+        exam_source = "".join(handle.readlines())
+    exam_source = exam_source.replace(TEX_NAME, student.name)
+
+    print(slug(student.name), ":", student)
+
+
+def slug(name: str) -> str:
+    # "normalize" the name so we can use it for a file path
+    substitutions = {"é": "e"}
+    chars = []
+    for c in name.lower():
+        if c == " " or c.isalnum:
+            chars.append(c)
+        elif c in substitutions:
+            chars.append(substitutions[c])
+        else:
+            raise MissingSubstitution(f"please add handling for: {c}")
+    return "".join(chars).replace(" ", "-")
 
 
 def get_students(grades_path: str, proficiency_score: int) -> list[Student]:
@@ -82,6 +105,10 @@ def parse_args() -> Namespace:
         "-p", "--proficiency_score", default=50, help="score that indicates proficiency"
     )
     return parser.parse_args()
+
+
+class MissingSubstitution(Exception):
+    pass
 
 
 if __name__ == "__main__":
