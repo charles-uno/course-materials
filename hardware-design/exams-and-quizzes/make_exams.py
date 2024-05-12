@@ -8,8 +8,8 @@ Student names and standards are loaded from grades.csv, the exported grades
 from Moodle. LaTeX files are then modified according to inline annotation:
 
 1. The student's name is swapped in for %NAME. 
-2. If the student has already demonstrated proficiency in the standard FOO,
-   omit all content between %BEGIN_FOO and %END_FOO. 
+2. If the student has already completed the standard FOO, omit all content
+   between %BEGIN_FOO and %END_FOO. 
 """
 
 from argparse import ArgumentParser, Namespace
@@ -33,13 +33,13 @@ OUTPUT_DIR = "make_exams_output"
 @dataclass(frozen=True)
 class Student:
     name: str
-    proficiencies: frozenset[str]
+    standards_completed: frozenset[str]
 
 
 def main() -> int:
     args = parse_args()
     raw_exam = get_raw_exam(args.exam_path)
-    students = get_students(args.grades_path, args.proficiency_score)
+    students = get_students(args.grades_path, args.completion_threshold)
     for student in students:
         create_exam(raw_exam, student)
     return 0
@@ -47,19 +47,20 @@ def main() -> int:
 
 def create_exam(exam_source: str, student: Student) -> None:
     exam_source = exam_source.replace(TEX_NAME, student.name)
-    for p in student.proficiencies:
-        begin_macro = TEX_STANDARD_BEGIN + p
-        end_macro = TEX_STANDARD_END + p
+    for s in student.standards_completed:
+        begin_macro = TEX_STANDARD_BEGIN + s
+        end_macro = TEX_STANDARD_END + s
         if exam_source.count(begin_macro) != 1 or exam_source.count(end_macro) != 1:
-            raise AmbiguousAnnotation(f"ambiguous annotation for standard {p}")
+            raise AmbiguousAnnotation(f"ambiguous annotation for standard {s}")
         before = exam_source.split(begin_macro)[0]
         after = exam_source.split(end_macro)[-1]
         exam_source = before + after
     # sanity check: how many standards does this student have left?
     n_standards = exam_source.count(TEX_STANDARD_BEGIN)
-    print(student.name.rjust(30), n_standards, "standards")
     if not n_standards:
+        print(n_standards, "standards remaining for", student.name, "(skip)")
         return
+    print(n_standards, "standards remaining for", student.name)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     output_path = os.path.join(OUTPUT_DIR, slug(student.name) + ".tex")
     with open(output_path, "w") as handle:
@@ -81,7 +82,7 @@ def slug(name: str) -> str:
     return "".join(chars).replace(" ", "-")
 
 
-def get_students(grades_path: str, proficiency_score: int) -> list[Student]:
+def get_students(grades_path: str, completion_threshold: int) -> list[Student]:
     students = []
     with open(grades_path, "r") as handle:
         csv_lines = list(csv.reader(handle))
@@ -89,15 +90,15 @@ def get_students(grades_path: str, proficiency_score: int) -> list[Student]:
     for line in csv_lines:
         student_map = dict(zip(column_names, line))
         name = student_map[CSV_KEY_FIRST_NAME] + " " + student_map[CSV_KEY_LAST_NAME]
-        proficiencies = get_student_proficiencies(student_map, proficiency_score)
-        students.append(Student(name=name, proficiencies=proficiencies))
+        standards_completed = get_standards_completed(student_map, completion_threshold)
+        students.append(Student(name=name, standards_completed=standards_completed))
     return students
 
 
-def get_student_proficiencies(
-    student_map: dict[str, Any], proficiency_score: int
+def get_standards_completed(
+    student_map: dict[str, Any], completion_threshold: int
 ) -> frozenset[str]:
-    proficiencies = []
+    get_standards_completed = []
     for key, val in student_map.items():
         if not key.startswith(CSV_KEY_STANDARD_PREFIX):
             continue
@@ -106,9 +107,9 @@ def get_student_proficiencies(
             v = float(val)
         except ValueError:
             continue
-        if v >= proficiency_score:
-            proficiencies.append(standard_short_name)
-    return frozenset(proficiencies)
+        if v >= completion_threshold:
+            get_standards_completed.append(standard_short_name)
+    return frozenset(get_standards_completed)
 
 
 def get_raw_exam(exam_path: str) -> str:
@@ -119,14 +120,17 @@ def get_raw_exam(exam_path: str) -> str:
 def parse_args() -> Namespace:
     parser = ArgumentParser(
         prog="make_exams",
-        description="generate personalized exams, skipping standards where a student has already demonstrated proficiency",
+        description="generate personalized exams, skipping completed standards",
     )
     parser.add_argument("exam_path", help="path to the annotated TEX exam file")
     parser.add_argument(
         "-g", "--grades_path", default="grades.csv", help="path to the CSV grades file"
     )
     parser.add_argument(
-        "-p", "--proficiency_score", default=50, help="score that indicates proficiency"
+        "-c",
+        "--completion_threshold",
+        default=50,
+        help="score that indicates completion of a standard",
     )
     return parser.parse_args()
 
