@@ -26,6 +26,7 @@ CSV_KEY_EMAIL = "Email address"
 TEX_NAME = "%NAME"
 TEX_STANDARD_BEGIN = "%BEGIN_"
 TEX_STANDARD_END = "%END_"
+TEX_STANDARDS = "%STANDARDS"
 
 OUTPUT_DIR = "output"
 
@@ -56,20 +57,25 @@ def create_exam(exam_source: str, student: Student) -> None:
         before = exam_source.split(begin_macro)[0]
         after = exam_source.split(end_macro)[-1]
         exam_source = before + after
-    # sanity check: how many standards does this student have left?
-    n_standards_remaining = exam_source.count(TEX_STANDARD_BEGIN)
-    if not n_standards_remaining:
+
+    remaining_standards = [
+        x.split("_")[-1]
+        for x in exam_source.split()
+        if x.startswith(TEX_STANDARD_BEGIN)
+    ]
+    remaining_standards_pretty = ", ".join(remaining_standards)
+    exam_source = exam_source.replace(TEX_STANDARDS, remaining_standards_pretty)
+
+    if not remaining_standards:
         print(
-            n_standards_remaining,
-            "standards left for",
             student.name,
-            "(no exam generated)",
+            "(all standards complete)",
         )
         return
     print(
-        n_standards_remaining,
-        "standards left for",
         student.name,
+        ":",
+        remaining_standards_pretty,
     )
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     # usernames should be safe from collisions and special characters
