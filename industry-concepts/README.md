@@ -52,3 +52,5 @@ https://how.complexsystems.fail/
 
 the devops handbook
 
+how long to work on something before asking for help? what is important for people to be able to find what they need within that much time?
+
