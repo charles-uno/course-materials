@@ -29,8 +29,9 @@ Name: \makebox[3in]{\hrulefill
 
 \begin{itemize}
 
-    \item This exam covers the following standards: %STANDARDS.
-    \item Extra paper is available. 
+    \item This exam covers the following standards: %STANDARDS
+    .
+    \item Please use as much scratch paper as you need to ensure that your answers are complete and legible.
     \item I have confidence in you!
 \end{itemize}
 
@@ -48,13 +49,19 @@ $\square$\quad I have intentionally not signed the pledge. (check only if approp
 \section*{Data Representation}
 
 \begin{enumerate}
-\item Convert the hexadecimal number \texttt{0xBEEF} directly to unsigned binary (do not convert to decimal in between).
+\item Convert the unsigned binary number \texttt{0b00100001} to decimal.
 \vfill
 
-\item Compute the following addition of two's complement binary integers: \texttt{0b00111000 + 0b11101001}. Then convert the values to decimal and confirm your result.
+\item Convert the decimal integer \texttt{-23} to 8-bit two's complement binary.
 \vfill
 
-\item Write the string ``\texttt{Beef!}'' as a sequence of ASCII values. How many bytes would you need to store it? An ASCII table is included on the next page.
+\item Compute the following subtraction of two's complement binary integers: \texttt{0b00111000 - 0b00010111}. Leave your answer in binary.
+\vfill
+
+\item Convert the hexadecimal number \texttt{0x05FE} directly to unsigned binary.
+\vfill
+
+\item Write the string \texttt{"Hello!"} as a sequence of ASCII values. An ASCII table is included on the next page.
 \vfill
 \end{enumerate}
 
@@ -81,13 +88,14 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 \section*{Logic Representation}
 
 \begin{enumerate}
-\item Draw a logic circuit with two inputs and one output. Regardless of the input values, the output should always be true.
+\item Consider the boolean function \texttt{f(A,B,C)=(A NAND B) XOR (NOT C)}. Make a truth table for this function. Draw a logic circuit for this function.
+
 \vfill
 
-\item Let $f(A, B, C)$ be true if $A$, $B$, and $C$ are all true, false otherwise. Write $f$ in terms of the basic boolean functions AND, OR, NOT, NAND, NOR, and/or XOR. 
+\item Let \texttt{f(A, B, C)} be true if \texttt{A}, \texttt{B}, and \texttt{C} are all true, false otherwise. Write \texttt{f} in terms of the basic boolean functions \texttt{AND}, \texttt{OR}, \texttt{NOT}, \texttt{NAND}, \texttt{NOR}, and/or \texttt{XOR}. 
 \vfill
 
-\item Draw a logic circuit representing the sum of two one-bit unsigned binary numbers: \texttt{0bA + 0bB = 0bCD}. There should be two input bits (\texttt{A} and \texttt{B}) and two output bits (\texttt{C} and \texttt{D}). Also produce the truth table for this circuit.
+\item Draw a logic circuit representing the sum of two one-bit unsigned binary numbers: \texttt{0bA + 0bB = 0bCD}. There should be two input bits (\texttt{A} and \texttt{B}) and two output bits (\texttt{C} and \texttt{D}). 
 \vfill
 \end{enumerate}
 
@@ -110,14 +118,22 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 \section*{Hardware Components}
 
 \begin{enumerate}
+\item What is the role of main memory in a computer?
+\vfill
+
+\item What is the role of the control unit in a computer?
+\vfill
+
+\item What is the role of the central processing unit in a computer?
+\vfill
+
+\item What is the role of the arithmetic logic unit in a computer?
+\vfill
+
 \item What are cores, processes, and threads? How do they relate, and how are they different?
 \vfill
 
 \item Your Raspberry Pi has a 64-bit CPU with a clock speed of 1.5GHz. What do these numbers mean?
-\vfill
-
-\item What is one similarity between registers and main memory? What is one difference?
-\vfill
 \end{enumerate}
 
 \vfill
@@ -140,12 +156,25 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 
 \begin{enumerate}
-\item What are the address bus, control bus, and data bus? What sort of information does each carry?
+\item Write a detailed explanation of what happens in the fetch phase. Be sure to include which hardware components are involved, how each hardware component is involved, and what information is sent over the control, data, and address bus.
 \vfill
 
-\item Briefly explain each phase of the fetch-decode-execute-store cycle. How does this cycle relate to CPU pipelining?
+\item Same as above, but for the decode phase.
 \vfill
 
+\item Same as above, but for the execute phase.
+\vfill
+
+\item Same as above, but for the store phase.
+\vfill
+
+\item Explain how CPU pipelining works.
+\vfill
+
+\item What is a data hazard?
+\vfill
+
+\item What is a control hazard?
 \end{enumerate}
 
 \vfill
@@ -385,7 +414,7 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \section*{Standard: Assembly Programming III}
 
-The following page has the skeleton of an Assembly program that adds up the numbers from 1 to 1000. Please fill in the missing code. 
+The following page has the skeleton of an Assembly program that uses a loop (not a formula) to add up the numbers from 1 to 1000. Please fill in the missing code. 
 
 Note: there are a few different ways to write a loop. Your code does not need to line up exactly with the comments.
 
