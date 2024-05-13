@@ -2,7 +2,6 @@
 output: .ascii "%d + 1 = %d\12\0"
 
     .text
-    .global add_one
 add_one:
     @ set up stack frame, no local variables
     push {fp, lr}
@@ -10,10 +9,8 @@ add_one:
     @ input is x, return x+1
     add r0, r0, #1
     @ stack frame teardown
-    pop {fp, lr}
-    bx lr
+    pop {fp, pc}
 
-    .text
     .global main
 main: 
     @ stack frame setup, four local variables

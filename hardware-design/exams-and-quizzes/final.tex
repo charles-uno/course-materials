@@ -28,7 +28,9 @@ Name: \makebox[3in]{\hrulefill
 \end{center}
 
 \begin{itemize}
-    \item If you have already demonstrated proficiency on a standard, you can skip it here. If you don't remember, check your grade on Moodle.
+
+    \item This exam covers only the standards where you have not yet demonstrated proficiency.
+    \item Extra paper is available. 
     \item I have confidence in you!
 \end{itemize}
 
@@ -45,6 +47,17 @@ $\square$\quad I have intentionally not signed the pledge. (check only if approp
 
 \section*{Data Representation}
 
+\begin{enumerate}
+\item Convert the hexadecimal number \texttt{0xBEEF} directly to unsigned binary (do not convert to decimal in between).
+\vfill
+
+\item Compute the following addition of two's complement binary integers: \texttt{0b00111000 + 0b11101001}. Then convert the values to decimal and confirm your result.
+\vfill
+
+\item Write the string ``\texttt{Beef!}'' as a sequence of ASCII values. How many bytes would you need to store it? An ASCII table is included on the next page.
+\vfill
+\end{enumerate}
+
 \vfill
 
 \rule[1ex]{\textwidth}{.1pt}
@@ -57,11 +70,26 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \newpage
 
+\includegraphics[width=\textwidth]{wikimedia-ascii-table.png}
+
+\newpage
+
 %END_DR
 
 %BEGIN_LR
 
 \section*{Logic Representation}
+
+\begin{enumerate}
+\item Draw a logic circuit with two inputs and one output. Regardless of the input values, the output should always be true.
+\vfill
+
+\item Let $f(A, B, C)$ be true if $A$, $B$, and $C$ are all true, false otherwise. Write $f$ in terms of the basic boolean functions AND, OR, NOT, NAND, NOR, and/or XOR. 
+\vfill
+
+\item Draw a logic circuit representing the sum of two one-bit unsigned binary numbers: \texttt{0bA + 0bB = 0bCD}. There should be two input bits (\texttt{A} and \texttt{B}) and two output bits (\texttt{C} and \texttt{D}). Also produce the truth table for this circuit.
+\vfill
+\end{enumerate}
 
 \vfill
 
@@ -81,6 +109,17 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \section*{Hardware Components}
 
+\begin{enumerate}
+\item What are cores, processes, and threads? How do they relate, and how are they different?
+\vfill
+
+\item Your Raspberry Pi has a 64-bit CPU with a clock speed of 1.5GHz. What do these numbers mean?
+\vfill
+
+\item What is one similarity between registers and main memory? What is one difference?
+\vfill
+\end{enumerate}
+
 \vfill
 
 \rule[1ex]{\textwidth}{.1pt}
@@ -99,6 +138,16 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \section*{Hardware Interactions}
 
+
+\begin{enumerate}
+\item What are the address bus, control bus, and data bus? What sort of information does each carry?
+\vfill
+
+\item Briefly explain each phase of the fetch-decode-execute-store cycle. How does this cycle relate to CPU pipelining?
+\vfill
+
+\end{enumerate}
+
 \vfill
 
 \rule[1ex]{\textwidth}{.1pt}
@@ -112,24 +161,6 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 \newpage
 
 %END_HI
-
-%BEGIN_AP1
-
-\section*{Assembly Programming I}
-
-\vfill
-
-\rule[1ex]{\textwidth}{.1pt}
-
-$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
-
-$\square$ \textbf{S}: Partial proficiency. Half credit
-
-$\square$ \textbf{I}: You have not yet demonstrated proficiency
-
-\newpage
-
-%END_AP1
 
 %BEGIN_MD
 
@@ -149,9 +180,26 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 %END_MD
 
-%BEGIN_AP2
+%BEGIN_AP1
 
-\section*{Assembly Programming II}
+\section*{Assembly Programming I}
+
+The following page has the skeleton of an Assembly program with comments. The program does the following:
+\begin{itemize}
+    \item Create global variables \texttt{n\_sandwiches} and \texttt{n\_slices}
+    \item Use \texttt{printf} to ask the user how many sandwiches they have
+    \item Use \texttt{scanf} to accept a value and store it to \texttt{n\_sandwiches}
+    \item Multiply the value by two and store it in \texttt{n\_slices}
+    \item Use \texttt{printf} to report the number of slices of bread
+\end{itemize}
+
+For example:
+\begin{verbatim}
+    How many sandwiches do you have? 4
+    That's 8 slices of bread!
+\end{verbatim}
+
+Please fill in the missing code
 
 \vfill
 
@@ -165,6 +213,114 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \newpage
 
+\begin{verbatim}
+@ global constants
+
+
+
+@ global variables
+
+
+
+@ main
+
+
+    
+    @ stack frame setup, no local variables
+
+
+
+    @ print the prompt
+
+
+
+    @ read the value n_sandwiches
+
+
+
+    @ compute n_slices and store the value
+
+
+
+    @ load n_slices and print the reply
+
+
+
+    @ stack frame teardown, return zero
+
+
+
+@ pointers
+\end{verbatim}
+
+%END_AP1
+
+%BEGIN_AP2
+
+\section*{Assembly Programming II}
+
+The following page has the skeleton of an Assembly program with comments. The program does the following:
+\begin{itemize}
+    \item Allocate local variables \texttt{x} and \texttt{x\_plus\_two} in \texttt{main}
+    \item Store the value \texttt{12} in \texttt{x}
+    \item Call the function \texttt{add\_one} with input \texttt{x}
+    \item Call the function \texttt{add\_one} again on the return value from the first call
+    \item Store the final result in \texttt{x\_plus\_two}
+\end{itemize}
+
+Please fill in the missing code
+
+\vfill
+
+\rule[1ex]{\textwidth}{.1pt}
+
+$\square$ \textbf{P}: You have demonstrated proficiency. Full credit. Well done!
+
+$\square$ \textbf{S}: Partial proficiency. Half credit
+
+$\square$ \textbf{I}: You have not yet demonstrated proficiency
+
+\newpage
+
+\begin{verbatim}
+@ function add_one
+
+
+
+    @ return input + 1
+
+
+
+@ function main
+
+
+    
+    @ stack frame setup, two local variables
+
+
+
+    @ store initial value for x
+
+
+
+    @ call add_one
+
+
+
+    @ call add_one again
+
+
+
+    @ store x_plus_two
+
+
+
+    @ stack frame teardown, return 0
+
+
+
+\end{verbatim}
+
 \section*{Standard: Assembly Programming III}
 
 %END_AP2
@@ -173,8 +329,7 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 The following page has the skeleton of an Assembly program that adds up the numbers from 1 to 1000. Please fill in the missing code. 
 
-Note: you may put your work on a separate sheet of paper.
-
+Note: there are a few different ways to write a loop. Your code does not need to line up exactly with the comments.
 
 \vfill
 
