@@ -197,11 +197,9 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 The following page has an Assembly program. It does the following:
 \begin{itemize}
-    \item Allocate two local variables: \texttt{x} and \texttt{x\_squared}
-    \item Store a value to \texttt{x}
-    \item Send the \underline{addresses} of both variables to the function \texttt{square\_by\_address}
-    \item The function loads \texttt{x}, computes its square, and stores it in \texttt{x\_squared}
-    \item Back in main, load the values and print them
+    \item Allocate a local variable \texttt{x} and store a value to it
+    \item Call the function \texttt{get\_square} on \texttt{x}
+    \item Back in main, print the results
 \end{itemize}
 
 The output looks like:
@@ -209,7 +207,7 @@ The output looks like:
     16 squared is 256
 \end{verbatim}
 
-Please draw a memory diagram showing the values in registers and main memory at the indicated line. In cases where you don't know the literal value, write what it is --- for example, ``old lr". 
+Please draw \underline{two memory diagrams}, one for each of the indicated lines. The diagram should show the values in registers and main memory at that time. In cases where you don't know the literal value, write what it is --- for example, ``old lr". 
 
 
 \vfill
@@ -229,33 +227,31 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 output: .ascii "%d squared is %d\n\0"
 
     .text
-square_by_address:
+get_square:
     push {fp, lr}
     add fp, sp, #4
-    @ load value from input address
     ldr r3, [r0]
     @ square it and store the result
-    mul r2, r3, r3
-    str r2, [r1]
-    mov r0, #0
-    @               STOP HERE FOR MEMORY DIAGRAM
+    mul r3, r0, r0
+    mov r0, r3
+    @             STOP HERE FOR MEMORY DIAGRAM 1
     pop {fp, pc}
 
     .global main
 main: 
     push {fp, lr}
     add fp, sp, #4
-    sub sp, sp, #8
-    @ fp-8 is x, fp-12 is x_squared
-    mov r0, #16
-    str r0, [fp, #-8]
-    @ pass the addresses to the function
-    sub r0, fp, #8
-    sub r1, fp, #12
+    sub sp, sp, #4
+    @ fp-8 is x
+    mov r1, #16
+    str r1, [fp, #-8]
+    @ load x and pass it into the function
+    ldr r0, [fp, #-8]
     bl square_by_address
-    @ load the values and print them
+    @ print the results
+    mov r2, r0
     ldr r1, [fp, #-8]
-    ldr r2, [fp, #-12]
+    @             STOP HERE FOR MEMORY DIAGRAM 2
     ldr r0, output_ptr
     bl printf
     mov r0, #0
@@ -414,9 +410,11 @@ $\square$ \textbf{I}: You have not yet demonstrated proficiency
 
 \section*{Standard: Assembly Programming III}
 
-The following page has the skeleton of an Assembly program that uses a loop (not a formula) to add up the numbers from 1 to 1000. Please fill in the missing code. 
+The following page has the skeleton of an Assembly program that uses a loop to add up the numbers from 1 to 1000. Please fill in the missing code. 
 
 Note: there are a few different ways to write a loop. Your code does not need to line up exactly with the comments.
+
+Also note: there is a formula to compute this sum directly. Do not use the formula. Use a loop.
 
 \vfill
 
