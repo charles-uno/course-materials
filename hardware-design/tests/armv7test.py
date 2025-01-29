@@ -4,10 +4,12 @@ import argparse
 import os
 import subprocess as sp
 import sys
-from typing import Optional, TypedDict
+from typing import Optional
+from dataclasses import dataclass
 
 
-class TestArgs(TypedDict):
+@dataclass
+class TestArgs:
     src: str
     input: Optional[str]
     output: Optional[str]
@@ -24,14 +26,11 @@ def main() -> int:
 
 
 def build_run_and_check(args: TestArgs):
-    src = args["src"]
-    input = args["input"]
-    output = args["output"]
-    if not os.path.isfile(src):
-        raise TestFailure(f"input file not found: {src}")
+    if not os.path.isfile(args.src):
+        raise TestFailure(f"input file not found: {args.src}")
     if os.path.isfile("a.out"):
         os.remove("a.out")
-    sp.getoutput(f"gcc {src} -o a.out")
+    sp.getoutput(f"gcc {args.src} -o a.out")
     if not os.path.isfile("a.out"):
         raise TestFailure("build failed")
     # Note: no input is potentially different from empty string input
@@ -41,9 +40,13 @@ def build_run_and_check(args: TestArgs):
         proc = sp.Popen(
             ["./a.out"], stdout=sp.PIPE, stdin=sp.PIPE, stderr=sp.PIPE, text=True
         )
-        stdout = proc.communicate(input=input)[0]
-    if stdout != output:
-        raise TestFailure(f"expected output '{output}' but got '{stdout}'")
+        proc_reply = proc.communicate(input=args.input)
+        stdout = proc_reply[0]
+        return_code = proc_reply[2]
+    if args.output and stdout != args.output:
+        raise TestFailure(f"expected output '{args.output}' but got '{stdout}'")
+    if return_code != 0:
+        raise TestFailure(f"expected return code 0 but got '{return_code}'")
 
 
 def parse_args() -> TestArgs:
