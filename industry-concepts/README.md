@@ -41,7 +41,7 @@ A significant portion of the course grade will be based on the peer reviews they
 
 ## Pipelines and Deployment
 
-- How hard is it for you to launch your code on a brand new server? Or 100 brand new servers? How sensitive are you to the exact specs of those servers?
+- How hard is it for you to launch your code on a brand new server? Or 100 brand new servers? How sensitive are you to the exact specs of those servers? Pets vs cattle.
 - Deploy on commit. Automated tests. Blue/green deployment. Probably some usage of GitHub Actions.
 - Containers. Docker, Docker Compose, Kubernetes (probably just discussion, not hands-on)
 
