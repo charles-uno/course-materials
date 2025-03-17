@@ -3,7 +3,6 @@
 # exit on error
 set -e
 
-
 # Lowercase to uppercase
 ./armtest char_flipper.s -i 'g' -o 'Enter a letter: Flipped case: G'
 
