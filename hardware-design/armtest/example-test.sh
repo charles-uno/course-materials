@@ -4,3 +4,5 @@
 set -e
 
 ./armtest char_flipper.s -i 'g' -o 'Enter a character: Flipped case: G'
+
+# TODO: non-letter? nonzero return?

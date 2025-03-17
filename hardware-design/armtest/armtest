@@ -12,7 +12,8 @@ from dataclasses import dataclass
 class TestArgs:
     src: str
     input: Optional[str]
-    output: str
+    output: Optional[str]
+    returncode: int
 
 
 def main() -> int:
@@ -55,12 +56,13 @@ def build_run_and_check(args: TestArgs):
     else:
         proc_reply = proc.communicate(input=args.input.encode("ascii"))
     stdout = proc_reply[0].decode("utf-8")
+
     # Don't worry about trailing whitespace or newlines
-    if stdout.rstrip() != args.output.rstrip():
+    if args.output is not None and stdout.rstrip() != args.output.rstrip():
         raise TestFailure(
             f"expected output '{args.output.rstrip()}' but got '{stdout.rstrip()}'"
         )
-    if proc.return_code != 0:
+    if proc.return_code != args.returncode:
         stderr = proc_reply[1].decode("utf-8").strip()
         if "\n" in stderr:
             stderr = stderr.splitlines()[0] + "..."
@@ -75,12 +77,22 @@ def parse_args() -> TestArgs:
     # Note: no input is potentially different from empty string input
     parser.add_argument("-i", "--input", help="input string to provide to the program")
     parser.add_argument(
-        "-o", "--output", help="expected output from the build program", default=""
+        "-o", "--output", help="expected output from the program", default=None
+    )
+    parser.add_argument(
+        "-r",
+        "--returncode",
+        help="expected return code from the program",
+        type=int,
+        default=0,
     )
     args = parser.parse_args()
     # Use a daraclass for typing
     return TestArgs(
-        src=args.src, input=vars(args).get("input"), output=vars(args).get("output")
+        src=args.src,
+        input=vars(args).get("input"),
+        output=vars(args).get("output"),
+        returncode=vars(args).get("returncode"),
     )
 
 
