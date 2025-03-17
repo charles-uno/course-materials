@@ -62,7 +62,7 @@ def build_run_and_check(args: TestArgs):
         raise TestFailure(
             f"expected output '{args.output.rstrip()}' but got '{stdout.rstrip()}'"
         )
-    if proc.return_code != args.returncode:
+    if proc.returncode != args.returncode:
         stderr = proc_reply[1].decode("utf-8").strip()
         if "\n" in stderr:
             stderr = stderr.splitlines()[0] + "..."

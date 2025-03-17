@@ -1,10 +1,12 @@
     .section .rodata
 input_prompt:
-    .ascii "Enter a character: \0"
+    .ascii "Enter a letter: \0"
 char_format:
     .ascii "%c\0"
 reply:
     .ascii "Flipped case: %c\12\0"
+error:
+    .ascii "Invalid letter: %c\12\0"
 
     .text
     .global flip_char_case
@@ -51,17 +53,30 @@ main:
     sub r1, fp, #8
     bl  scanf
 
-    @ input char is at fp-8. load to r0
+    @ input char is at fp-8. load to r0 and r4
     ldr r0, [fp, #-8]
+    mov r4, r0
     bl flip_char_case
 
-    @ move return from r0
+    @ if the original and flipped values are equal, the input was invalid. exit 1
+    cmp r0, r4
+    beq bad_reply
+good_reply:
     mov r1, r0
     ldr r0, reply_ptr
     bl printf
-
-    @ return 0, restore stack frame
+    @ return 0 (ok)
     mov r0, #0
+    b exit
+bad_reply:
+    mov r1, r4
+    ldr r0, error_ptr
+    bl printf
+    @ return 1 (bad)
+    mov r0, #1
+    b exit
+exit:
+    @ restore stack frame
     sub sp, fp, #4
     pop {fp, pc}
 
@@ -71,3 +86,5 @@ char_format_ptr:
     .word  char_format
 reply_ptr:
     .word  reply
+error_ptr:
+    .word  error
