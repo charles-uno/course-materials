@@ -67,7 +67,7 @@ def build_run_and_check(args: TestArgs):
         if "\n" in stderr:
             stderr = stderr.splitlines()[0] + "..."
         raise TestFailure(
-            f"got unexpected returncode {proc.return_code}, stderr: '{stderr}'"
+            f"got unexpected returncode {proc.returncode}, stderr: '{stderr}'"
         )
 
 
