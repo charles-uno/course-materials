@@ -2,7 +2,7 @@
 @ prompt: string asking the user to enter a number
 .section .rodata
 prompt:
-.ascii "enter a number: \n\0"
+.ascii "enter a number: \0"
 .align 2
 
 @ input string: formatting string for reading the user’s input
