@@ -31,14 +31,14 @@ num:
 main:
 push {fp, lr}
 mov fp, sp
-sub sp, sp, #8  @ Allocate space for local variable (square)
+sub sp, sp, #4  @ Allocate space for local variable (square)
 
 @ ask the user to enter a number
-ldr r0, =prompt
+ldr r0, prompt_ptr
 bl printf
 
 @ store the response in num
-ldr r0, =input_string
+ldr r0, input_string_ptr
 ldr r1, =num
 bl scanf
 
@@ -56,7 +56,7 @@ ldr r1, [r1]         @ Load num
 ldr r2, [fp, #-8]    @ Load square
 
 @ print a sentence saying what the square of number is
-ldr r0, =print_report
+ldr r0, print_report_ptr
 mov r1, r1   @ First argument (num)
 mov r2, r2   @ Second argument (square)
 bl printf
@@ -64,7 +64,7 @@ bl printf
 @ return 0
 @ tear down stack frame for main
 mov r0, #0
-add sp, sp, #8
+add sp, sp, #4
 pop {fp, lr}
 bx lr
 
@@ -74,8 +74,8 @@ bx lr
 prompt_ptr:
 .word prompt
 
-input_ptr:
+input_string_ptr:
 .word input_string
 
-print_ptr:
+print_report_ptr:
 .word print_report
