@@ -53,9 +53,14 @@ def build_run_and_check(args: TestArgs):
     # Watch out - subprocess uses bytes, not unicode strings
     if args.input is None:
         proc_reply = proc.communicate()
+        stdout = proc_reply[0].decode("utf-8")
     else:
-        proc_reply = proc.communicate(input=args.input.encode("ascii"))
-    stdout = proc_reply[0].decode("utf-8")
+        input = args.input.replace("\\n", "\n").encode("utf-8")
+
+        print("sending input:", repr(args.input), "->", input)
+
+        proc_reply = proc.communicate(input=input)
+        stdout = proc_reply[0].decode("utf-8")
 
     # Don't worry about trailing whitespace or newlines
     if args.output is not None and stdout.rstrip() != args.output.rstrip():
@@ -75,7 +80,9 @@ def parse_args() -> TestArgs:
     parser = argparse.ArgumentParser(description="test tool for arm v7 via gcc")
     parser.add_argument("src", help="name of the assembly file to build and test")
     # Note: no input is potentially different from empty string input
-    parser.add_argument("-i", "--input", help="input string to provide to the program")
+    parser.add_argument(
+        "-i", "--input", help="program input. use newlines for multiple inputs"
+    )
     parser.add_argument(
         "-o", "--output", help="expected output from the program", default=None
     )
