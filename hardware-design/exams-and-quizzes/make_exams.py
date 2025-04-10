@@ -17,12 +17,13 @@ import os
 import random
 import subprocess
 import sys
-from typing import Any
+from typing import Any, Optional
 
 CSV_KEY_STANDARD_PREFIX = "Standard "
 CSV_KEY_FIRST_NAME = "First name"
 CSV_KEY_LAST_NAME = "Last name"
 CSV_KEY_EMAIL = "Email address"
+CSV_KEY_SECTION = "Section"
 
 TEX_NAME = "%NAME"
 TEX_STANDARD_BEGIN = "%BEGIN_STANDARD_"
@@ -37,6 +38,7 @@ class Student:
     name: str
     username: str
     standards_completed: frozenset[str]
+    section: Optional[str]
 
 
 def main() -> int:
@@ -108,10 +110,14 @@ def get_students(grades_path: str, completion_threshold: int) -> list[Student]:
         student_map = dict(zip(column_names, line))
         name = student_map[CSV_KEY_FIRST_NAME] + " " + student_map[CSV_KEY_LAST_NAME]
         username = student_map[CSV_KEY_EMAIL].split("@")[0]
+        section = student_map.get(CSV_KEY_SECTION, "").upper()
         standards_completed = get_standards_completed(student_map, completion_threshold)
         students.append(
             Student(
-                name=name, username=username, standards_completed=standards_completed
+                name=name,
+                username=username,
+                standards_completed=standards_completed,
+                section=section,
             )
         )
     return students

@@ -96,61 +96,87 @@ Demonstrate understanding of boolean expressions and operations, logic circuits 
 
 Demonstrate understanding of assembly programming by writing a program using global variables, local variables, input with \texttt{scanf}, and/or output with \texttt{printf}.
 
-Write an assembly program called \texttt{adder.s} that does the following:
+Write an assembly program called \texttt{thumbs.s} that does the following:
 \begin{itemize}
-\item Ask the user to enter a number, and store their response in a \textbf{global variable} called \texttt{num1}.
-\item Ask the user to enter a number again, and store their response in another \textbf{global variable} called \texttt{num2}.
-\item Compute the sum of \texttt{num1} and \texttt{num2}, and storing the result to a \textbf{global variable} called \texttt{total}.
-\item Print the sentence ``The sum of \{num1\} and \{num2\} is \{total\}'', where \{num1\} is replaced with the value of \texttt{num1}, \{num2\} is replaced with the value of \texttt{num2}, and \{total\} is replaced with the value of \texttt{total}. For example, if the user entered 2 and 3, the program would print ``The sum of 2 and 3 is 5''.
+\item Ask the user to enter an integer
+\item Read input and store it in a global variable named \texttt{num}
+\item Ask the user again to enter an integer (you may reuse the same prompt)
+\item Read input and store it in a local variable
+\item Load both variables and compute their sum
+\item Print a response: ``The sum of those numbers is X'' (replacing X with the actual sum)
 \end{itemize}
-Below are comments outlining the structure of this program. You may write your assembly code between the comments, or on a separate sheet of paper. If you write on a separate sheet of paper, you do not need to rewrite the comments.
 
-\textbf{square.s}
+The comments below lay out the general structure of the program. You may write your code between the comments or on another sheet
+
+\newpage 
+
+\textbf{adder.s}
 
 \begin{verbatim}
 @ Global constants
-@ prompt: string asking the user to enter a number
 
 
-@ input_string: formatting string for reading the user's input
-
-
-@ print_report: formatting string for reporting the sum of the user's numbers
 
 
 @ Global variables
 
 
+
+
 @ main
 
-     @ set up stack frame for main
+
+
+
+    @ stack frame setup, one local variable
+
+
 
      
-     @ ask the user to enter a number
+    @ ask the user to enter a number
+
+
 
      
-     @ store the response in num1
+    @ store the response in num1
+
+
 
      
-     @ ask the user to enter a number again
+    @ ask the user to enter a number again
+
+
 
      
-     @ store the response in num2
+    @ store the response in num2
 
 
-     @ load the values of num1 and num2, add them, and store the result in total
+
+
+    @ load the values and compute their sum
+
+
+
+
+    @ print the response
+
+
 
      
-     @ print a sentence saying what the sum of the numbers is
+    @ return 0
 
-     
-     @ return 0
 
-     @ tear down stack frame for main
+
+
+    @ stack frame teardown
+
+
 
 
 @ Pointers
-@ pointers to strings
+
+
+
 
 \end{verbatim}
 
@@ -182,15 +208,13 @@ Demonstrate understanding of hardware components and their purposes through answ
 
 \pagebreak
 
-For each of the following, include which hardware components are involved, information sent on the address, control, and/or data bus, and the use of and updates to special registers.
-\item Write a detailed description of what happens in the fetch phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the fetch phase of instruction execution in the von Neumann architecture. Which hardware components and/or special registers are involved?
 \vfill
-\item Write a detailed description of what happens in the decode phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the decode phase of instruction execution in the von Neumann architecture. Which hardware components and/or special registers are involved?
 \vfill
-\item Write a detailed description of what happens in the execute phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the execute phase of instruction execution in the von Neumann architecture. Which hardware components and/or special registers are involved?
 \vfill
-\item Write a detailed description of what happens in the store phase of instruction execution in the von Neumann architecture.
-\vfill
+\item Write a detailed description of what happens in the store phase of instruction execution in the von Neumann architecture. Which hardware components and/or special registers are involved?
 \end{enumerate}
 
 \vfill
