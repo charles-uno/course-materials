@@ -4,8 +4,8 @@
 Student names and standards are loaded from the Moodle grades CSV. Then the
 exam source is personalized according to inline annotation:
 
-1. The student's name is swapped in for %NAME. 
-2. If the student has completed standard FOO, omit from %BEGIN_FOO to %END_FOO.
+1. The student's name is swapped in for %NAME.
+2. If the student has completed standard FOO, omit from %BEGIN_STANDARD_FOO to %END_STANDARD_FOO.
 
 Finally, the personalized source files are compiled to PDFs.
 """
@@ -14,6 +14,7 @@ from argparse import ArgumentParser, Namespace
 import csv
 from dataclasses import dataclass
 import os
+import random
 import subprocess
 import sys
 from typing import Any
@@ -24,8 +25,8 @@ CSV_KEY_LAST_NAME = "Last name"
 CSV_KEY_EMAIL = "Email address"
 
 TEX_NAME = "%NAME"
-TEX_STANDARD_BEGIN = "%BEGIN_"
-TEX_STANDARD_END = "%END_"
+TEX_STANDARD_BEGIN = "%BEGIN_STANDARD_"
+TEX_STANDARD_END = "%END_STANDARD_"
 TEX_STANDARDS = "%STANDARDS"
 
 OUTPUT_DIR = "output"
@@ -42,8 +43,13 @@ def main() -> int:
     args = parse_args()
     raw_exam = get_raw_exam(args.exam_path)
     students = get_students(args.grades_path, args.completion_threshold)
+
+    if args.debug:
+        students = [random.choice(students)]
+
     for student in students:
         create_exam(raw_exam, student)
+
     return 0
 
 
@@ -79,14 +85,14 @@ def create_exam(exam_source: str, student: Student) -> None:
     )
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     # usernames should be safe from collisions and special characters
-    output_path = os.path.join(OUTPUT_DIR, student.username + ".tex")
-    with open(output_path, "w") as handle:
+    tex_path = os.path.join(OUTPUT_DIR, student.username + ".tex")
+    with open(tex_path, "w") as handle:
         handle.write(exam_source)
     subprocess.run(
         [
             "pdflatex",
             f"-output-directory={OUTPUT_DIR}",
-            output_path,
+            tex_path,
         ],
         capture_output=True,
     )
@@ -114,7 +120,7 @@ def get_students(grades_path: str, completion_threshold: int) -> list[Student]:
 def get_standards_completed(
     student_map: dict[str, Any], completion_threshold: int
 ) -> frozenset[str]:
-    get_standards_completed = []
+    standards_completed = []
     for key, val in student_map.items():
         if not key.startswith(CSV_KEY_STANDARD_PREFIX):
             continue
@@ -124,8 +130,8 @@ def get_standards_completed(
         except ValueError:
             continue
         if v >= completion_threshold:
-            get_standards_completed.append(standard_short_name)
-    return frozenset(get_standards_completed)
+            standards_completed.append(standard_short_name)
+    return frozenset(standards_completed)
 
 
 def get_raw_exam(exam_path: str) -> str:
@@ -143,9 +149,15 @@ def parse_args() -> Namespace:
         "-g", "--grades_path", default="grades.csv", help="path to the CSV grades file"
     )
     parser.add_argument(
+        "-d",
+        "--debug",
+        action="store_true",
+        help="do one student at random instead of them all",
+    )
+    parser.add_argument(
         "-c",
         "--completion_threshold",
-        default=50,
+        default=100,
         help="score that indicates completion of a standard",
     )
     return parser.parse_args()

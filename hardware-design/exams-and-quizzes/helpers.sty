@@ -1,0 +1,65 @@
+\ProvidesPackage{helpers}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb, amsmath,graphicx,hyperref,xcolor}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{1em}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.2}
+
+\newcommand{\standardsfooter}{
+\rule[1ex]{\textwidth}{.1pt}
+$\square$ You have demonstrated proficiency. Full credit. Well done! \\
+$\square$ You are close! Half credit. Revise within a week for full credit \\
+$\square$ You have shown partial proficiency. Half credit. Please try again next time \\
+$\square$ You have not yet demonstrated proficiency. Please try again next time
+}
+
+
+\newcommand{\standardsfooterfinal}{
+\rule[1ex]{\textwidth}{.1pt}
+$\square$ You have demonstrated proficiency. Full credit. Well done! \\
+$\square$ You have shown partial proficiency. Half credit \\
+$\square$ You have not yet demonstrated proficiency
+}
+
+
+
+
+\newcommand{\testrules}{
+\begin{itemize}
+  \item This is a closed-book exam. Please do not use outside resources such as notes, past work, or other people. 
+  \item You have the full class time for this exam.
+  \item You have three opportunities to demonstrate proficiency for each standard (test, retest, final). Once you get it, you're done. 
+  \item I have confidence in you!
+\end{itemize}
+}
+
+
+\newcommand{\practicetestrules}{
+This is a practice exam. You do not need to submit it. It is not worth any points. The real Test 1 will be administered as follows:
+
+\testrules
+}
+
+
+
+\newcommand{\pledge}{
+I pledge my honor that on this examination I have neither given nor received assistance not explicitly approved by the professor and that I have seen no dishonest work 
+
+\hfill Signed: \makebox[3in]{\hrulefill}
+
+$\square$\quad I have intentionally not signed the pledge. (check only if appropriate)
+}
+
+
+\usepackage{fancyhdr}
+\rhead{}
+
+\pagestyle{fancy}
+\lhead{St Olaf College}
+\chead{CS 241}
+\rhead{Spring 2025}
+
+\cfoot{\thepage}
