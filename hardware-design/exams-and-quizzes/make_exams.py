@@ -52,7 +52,16 @@ def main() -> int:
     for student in students:
         create_exam(raw_exam, student)
 
+    if not args.debug:
+        remove_intermediate_files()
+
     return 0
+
+
+def remove_intermediate_files() -> None:
+    for filename in os.listdir(OUTPUT_DIR):
+        if not filename.endswith(".pdf"):
+            os.remove(os.path.join(OUTPUT_DIR, filename))
 
 
 def create_exam(exam_source: str, student: Student) -> None:
@@ -158,7 +167,7 @@ def parse_args() -> Namespace:
         "-d",
         "--debug",
         action="store_true",
-        help="do one student at random instead of them all",
+        help="stop after one student, keep intermediate files",
     )
     parser.add_argument(
         "-c",
