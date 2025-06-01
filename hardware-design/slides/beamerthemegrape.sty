@@ -1,0 +1,86 @@
+\RequirePackage{tikz, xcolor, textpos}
+\usetikzlibrary{shapes.geometric}
+\definecolor{TextColor}{RGB}{0, 0, 0}
+\definecolor{AccentColor}{RGB}{104, 78, 167}
+\definecolor{PaperColor}{RGB}{255, 255, 255}
+
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+
+\setbeamercolor{title}{fg=PaperColor}
+\setbeamercolor{frametitle}{fg=PaperColor}
+\setbeamercolor{author}{fg=TextColor}
+\setbeamercolor{institute}{fg=TextColor}
+\setbeamercolor{date}{fg=TextColor}
+\setbeamercolor{normal text}{fg=TextColor}
+\setbeamercolor{item}{fg=TextColor}
+\setbeamercolor{section in toc}{fg=TextColor}
+\setbeamercolor{section page}{fg=PaperColor}
+\setbeamercolor{section title}{fg=PaperColor}
+\setbeamercolor{section name}{fg=PaperColor}
+\setbeamercolor{section in head/foot}{fg=TextColor}
+\setbeamercolor{block title}{fg=TextColor}
+\setbeamercolor{block title}{fg=TextColor}
+\setbeamercolor{part title}{fg=red}
+\setbeamercolor{subtitle}{fg=red}
+
+% omit navigation panel from the bottom of each slide
+\setbeamertemplate{navigation symbols}{}
+
+% default slide background
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle (\paperwidth, \paperheight);
+        \fill[color=PaperColor] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+        \fill[color=AccentColor] (0,10) rectangle(\the\paperwidth,8);
+    \end{tikzpicture}
+}
+
+% title page background and layout
+\setbeamertemplate{title page}{
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[fill=AccentColor] (0, 0) rectangle (1, 0.5);
+\draw[fill=PaperColor] (0, 0.5) rectangle (1, 1);
+\node at (0.5, 0.4) {\usebeamertemplate{title}};
+\node at (0.5, 0.6) {\usebeamerfont{institute}\insertinstitute \;\; \textbullet \;\; \usebeamerfont{author}\insertauthor};
+\node at (0.5, 0.9) {\usebeamertemplate{date}};
+\end{scope}
+\end{tikzpicture}
+}
+
+% section page
+\newcommand{\Section}[1]{
+\section{#1}
+\begin{frame}
+\sectionpage
+\end{frame}
+}
+
+\setbeamertemplate{section page}{
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[fill=PaperColor] (0, 0) rectangle (1, 1);
+\draw[fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
+\node at (0.5, 0.5) {\insertsectionhead};
+\end{scope}
+\end{tikzpicture}
+}
+
+% subsection
+\newcommand{\Subsection}[1]{
+\subsection{#1}
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[fill=PaperColor] (0, 0) rectangle (1, 1);
+\draw[fill=AccentColor] (0, 0.3) rectangle (1, 0.7);
+\node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
+\end{scope}
+\end{tikzpicture}
+\end{frame}
+}
+
+
+
