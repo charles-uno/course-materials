@@ -13,18 +13,41 @@ We can use sequences of 0s and 1s to represent information
 \Subsection{Positive Integers in Binary}
 
 \begin{frame}{Numbers in Base Ten (aka Decimal)}
-Let's start by talking about how we write numbers normally. For example, let's look at the number 2051. 
+Let's start by talking about how we write numbers normally. 
+
+For example, let's look at the number 109: 
 \begin{align*}
-2051 &= 2000 \;+\; 50 \;+\; 1 \\
-&= 2 \times 10^3 \;+\; 0 \times 10^2 \;+\; 5 \times 10^1 \;+\; 1 \times 10^0
+109 &= 100 \;+\; 0 \;+\; 9 \\
+&= 1 \times 10^2 \;+\; 0 \times 10^1 \;+\; 9 \times 10^0
 \end{align*}
-This way of writing numbers is called base ten. Each place in the number is scaled by a power of ten, and the digit in that place is less than ten. 
-Base ten is convenient for people because we have ten fingers. 
-Computers don't have fingers.
+This way of writing numbers is called base ten.
+We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
+
+In terms of math, there is nothing special about base ten. 
+We probably use it because we have ten fingers. 
+Some ancient civilizations used sompletely different systems for counting!
 \end{frame}
     
 \begin{frame}{Numbers in Base Two (aka Binary)}
-We always use the prefix ``0b'' to avoid confusion
+Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
+
+\begin{align*}
+0b1101101 &= 
+1 \! \times \! 2^6 +
+1 \! \times \! 2^5 +
+0 \! \times \! 2^4 +
+1 \! \times \! 2^3 +
+1 \! \times \! 2^2 +
+0 \! \times \! 2^1 +
+1 \! \times \! 2^0 \\
+&= 64 + 32 + 8 + 4 + 1 \\
+&= 109 \\
+\end{align*}
+Importantly: we always use the prefix ``0b'' to avoid confusion when writing numbers in binary.
+
+1101 is one thousand one hundred and one
+
+0b1101 is thirteen
 \end{frame}
 
 \begin{frame}{Converting from Binary to Decimal}
