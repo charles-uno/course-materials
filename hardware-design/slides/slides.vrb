@@ -1,8 +1,4 @@
-
-\Section{Assembly Fundamentals}
-
-
-\begin{frame}[fragile]{Hello World in Assembly}
+\frametitle{Hello World in Assembly}
 
 \begin{verbatim}
 .section .rodata
@@ -16,8 +12,4 @@ main:
     mov r0, #0
     bl exit
 \end{verbatim}
-
-\end{frame}
-
-
 
