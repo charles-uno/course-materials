@@ -57,12 +57,49 @@ Importantly: we always use the prefix ``0b'' to avoid confusion when writing num
 \end{frame}
 
 \begin{frame}{Addition in Binary}
-We'll come back to overflow later \\
+Binary addition works just like decimal addition. 
+Start from the right, add straight down, and carry when you run out of digits.
+
+For example:
+\[
+\begin{array}{ccccccccc}
+    1 &   & 1 & 1 & 1 &   &   &   &   \\ 
+      & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ 
+    + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+    \hline
+    1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\ 
+\end{array}
+\]
 We'll come back to subtraction later
 \end{frame}
-    
+
 \begin{frame}{Multiplication in Binary}
-We'll come back to division later
+Binary multiplication works just like decimal multiplication. 
+Multiply the top number by the rightmost digit of the bottom number.
+Then move to the next line, add a zero, and repeat for the next digit.
+Finally, add up the lines. For example:
+\[
+\begin{array}{cccccc}
+        &   &        & 1 & 1 & 0 \\ 
+        &   & \times & 1 & 0 & 1 \\
+    \hline
+        &   &        & 1 & 1 & 0 \\ 
+        &   & 0      & 0 & 0 & 0 \\
+        + & 1 & 1      & 0 & 0 & 0 \\
+        \hline 
+        & 1 & 1      & 1 & 1 & 0 \\
+\end{array}
+\]
+\end{frame}
+
+
+\begin{frame}{Division in Binary}
+To divide by 2, shift the whole number one place to the right.
+
+To divide by 4, shift the whole number two places to the right. 
+
+That's as deep as we go in this class. If you're curious to learn more, see the textbook.
+
 \end{frame}
 
 \begin{frame}{Sample Exercises}
