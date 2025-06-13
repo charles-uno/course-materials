@@ -63,7 +63,7 @@ Start from the right, add straight down, and carry when you run out of digits.
 For example:
 \[
 \begin{array}{ccccccccc}
-    1 &   & 1 & 1 & 1 &   &   &   &   \\ 
+    1 & 1 & 1 & 1 & 1 &   &   &   &   \\ 
       & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ 
     + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
     \hline
@@ -112,21 +112,42 @@ Make sure to show your work.
     \vfill
     \item Add 0b1001 + 0b1011 in binary. Convert to decimal to check your work.
     \vfill
-    \item Multiply 0b101 $\times$ 0b110 in binary. Convert to decimal to verify your work.
+    \item Multiply 0b1101 $\times$ 0b110 in binary. Convert to decimal to verify your work.
     \vfill 
 \end{enumerate}
 \end{frame}
 
 \Subsection{Negative Numbers}
 
-\begin{frame}{What Does Subtraction Mean?}
-\end{frame}
 
 \begin{frame}{First Attempt: Signed Magnitude}
+
+We can use the first digit to hold the sign, then the rest of the digits to hold magnitue:
+
+    \begin{itemize}
+        \item 0b\Highlight{0}1011001 is positive 10110001, so 89
+        \item 0b\Highlight{1}1011001 is negative 1011001, so -89 
+    \end{itemize}
+
+What are some upsides of this convention?
+
+
 \end{frame}
 
 \begin{frame}{Addition with Signed Magnitude}
+
+
+
 \end{frame}
+
+
+\begin{frame}{Subtraction with Signed Magnitude}
+Subtraction is just shorthand for adding a negative number.
+
+
+\end{frame}
+
+
 
 \begin{frame}{Zero with Signed Magnitude}
 \end{frame}
