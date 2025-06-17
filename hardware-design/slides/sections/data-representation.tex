@@ -70,7 +70,8 @@ For example:
     1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\ 
 \end{array}
 \]
-We'll come back to subtraction later
+
+Question: what happens if we try to perform this operation but we only have 8 bits to store the answer? 
 \end{frame}
 
 \begin{frame}{Multiplication in Binary}
@@ -133,31 +134,56 @@ This is nice and straightforward!
 
 \end{frame}
 
-\begin{frame}{Addition with Signed Magnitude}
-    For positive numbers, addition works just the same. 
+\begin{frame}{Addition and Subtraction with Signed Magnitude}
+    Adding positive numbers works just the same. But what happens if we throw a minus sign in there?
+    
+    For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then: 
 
-    What about adding two negative numbers?
+    \[
+\begin{array}{ccccccccc}
+      & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\ 
+    + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+    \hline
+      & ? & ? & ? & ? & ? & ? & ? & ? \\ 
+\end{array}
+\]
 
-    What about a positive number and a negative number?
+We know the result should be 7 (0b00000111). But our regular rules for addition do not get us there.
 \end{frame}
-
-
-\begin{frame}{Subtraction with Signed Magnitude}
-Subtracting is the same as adding a negative number.
-
-$12 - 5 = 12 + (-5)$
-
-$-12 - 5 = -12 + (-5)$
-
-\end{frame}
-
-
 
 \begin{frame}{Zero with Signed Magnitude}
+
+Using signed magnitude, 0b00000000 is zero. 
+
+And 0b10000000 is negative zero (which is also zero).
+
+Using this convention, we have to worry about the difference between numerical equality and bitwise equality. That seems pretty messy.
+\end{frame}
+
+\begin{frame}{Can We Do Better?}
+Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
+\begin{itemize}
+    \item We want positive numbers to work like we expect
+    \item We want 0b00000000 to be zero, with no ambiguity
+    \item We want addition and subtraction to work the same for positive and negative
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Another Idea: Two's Complement}
+    We know 1 - 1 = 0. Put another way, 1 + (-1) = 0. Can we work backwards from there to figure out how to write -1?
+    \[
+        \begin{array}{ccccccccc}
+              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+            + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 
+            \hline
+              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+        \end{array}
+        \]
+
+Remember: on a computer, our numbers have to fit in a set number of bits. Anything past that gets thrown away. This is called an overflow error. In this case, overflow works in our favor!
 \end{frame}
+
+
 
 \begin{frame}{Addition with Two's Complement}
 \end{frame}
