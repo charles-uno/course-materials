@@ -2,202 +2,205 @@
 \Section{Data Representation}
 
 \begin{frame}{How do computers store information?}
-Computers work using electrical signals which can be on or off. If we let:
-\begin{itemize}
-    \item On means 1
-    \item Off means 0
-\end{itemize}
-We can use sequences of 0s and 1s to represent information
+    Computers work using electrical signals which can be on or off. If we let:
+    \begin{itemize}
+        \item On means 1
+        \item Off means 0
+    \end{itemize}
+    We can use sequences of 0s and 1s to represent information
 \end{frame}
 
 \Subsection{Positive Integers in Binary}
 
 \begin{frame}{Numbers in Base Ten (aka Decimal)}
-Let's start by talking about how we write numbers normally. 
+    Let's start by talking about how we write numbers normally.
 
-For example, let's look at the number 109: 
-\begin{align*}
-109 &= 100 \;+\; 0 \;+\; 9 \\
-&= 1 \times 10^2 \;+\; 0 \times 10^1 \;+\; 9 \times 10^0
-\end{align*}
-This way of writing numbers is called base ten.
-We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
+    For example, let's look at the number 109:
+    \begin{align*}
+        109 & = 100 \;+\; 0 \;+\; 9                                   \\
+            & = 1 \times 10^2 \;+\; 0 \times 10^1 \;+\; 9 \times 10^0
+    \end{align*}
+    This way of writing numbers is called base ten.
+    We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
 
-In terms of math, there is nothing special about base ten. 
-We probably use it because we have ten fingers. 
-Some ancient civilizations used sompletely different systems for counting!
+    In terms of math, there is nothing special about base ten. We probably use it
+    because we have ten fingers. Some ancient civilizations used sompletely
+    different systems for counting!
 \end{frame}
-    
+
 \begin{frame}{Numbers in Base Two (aka Binary)}
-Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
+    Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
 
-\begin{align*}
-0b1101101 &= 
-1 \! \times \! 2^6 +
-1 \! \times \! 2^5 +
-0 \! \times \! 2^4 +
-1 \! \times \! 2^3 +
-1 \! \times \! 2^2 +
-0 \! \times \! 2^1 +
-1 \! \times \! 2^0 \\
-&= 64 + 32 + 0 + 8 + 4 + 0 + 1 \\
-&= 109 \\
-\end{align*}
-Importantly: we always use the prefix ``0b'' to avoid confusion when writing numbers in binary.
+    \begin{align*}
+        0b1101101 & =
+        1 \! \times \! 2^6 +
+        1 \! \times \! 2^5 +
+        0 \! \times \! 2^4 +
+        1 \! \times \! 2^3 +
+        1 \! \times \! 2^2 +
+        0 \! \times \! 2^1 +
+        1 \! \times \! 2^0                        \\
+                  & = 64 + 32 + 0 + 8 + 4 + 0 + 1 \\
+                  & = 109                         \\
+    \end{align*}
+    Importantly: we always use the prefix ``0b'' to avoid confusion when writing numbers in binary.
 
-1101 is one thousand one hundred and one
+    1101 is one thousand one hundred and one
 
-0b1101 is thirteen
+    0b1101 is thirteen
 \end{frame}
-
 
 \begin{frame}{Converting from Decimal to Binary}
 
-If the number is odd, append a 1 on the left. Otherwise, append a 0. Then divide your decimal number by two and ignore any remainder. Repeat until your decimal number is zero. \\
+    If the number is odd, append a 1 on the left. Otherwise, append a 0. Then
+    divide your decimal number by two and ignore any remainder. Repeat until your
+    decimal number is zero. \\
 
-For example, starting with 58:
+    For example, starting with 58:
 
-\begin{itemize}
-\item 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
-\item 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14. 
-\item 14 is odd, so append \Highlight{0}10. Divide by two, leaving 7.
-\item 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
-\item 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
-\item 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
-\end{itemize}
+    \begin{itemize}
+        \item 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
+        \item 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14.
+        \item 14 is odd, so append \Highlight{0}10. Divide by two, leaving 7.
+        \item 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
+        \item 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
+        \item 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
+    \end{itemize}
 
-So 58 in binary is 0b111010.
+    So 58 in binary is 0b111010.
 
 \end{frame}
 
 \begin{frame}{Converting from Binary to Decimal}
 
-We can confirm by converting back. The rightmost bit is worth 1, then 2, then 4, and so on:
+    We can confirm by converting back. The rightmost bit is worth 1, then 2, then
+    4, and so on:
 
-\begin{align*}
-    0b111010 &= 
-1 \! \times \! 2^5 +
-1 \! \times \! 2^4 +
-1 \! \times \! 2^3 +
-0 \! \times \! 2^2 +
-1 \! \times \! 2^1 +
-0 \! \times \! 2^0 \\
- &= 32 + 16  + 8 + 0 + 2 + 0\\
- &= 58
-\end{align*}
+    \begin{align*}
+        0b111010 & =
+        1 \! \times \! 2^5 +
+        1 \! \times \! 2^4 +
+        1 \! \times \! 2^3 +
+        0 \! \times \! 2^2 +
+        1 \! \times \! 2^1 +
+        0 \! \times \! 2^0                    \\
+                 & = 32 + 16  + 8 + 0 + 2 + 0 \\
+                 & = 58
+    \end{align*}
 
 \end{frame}
 
 \begin{frame}{Addition in Binary}
-Binary addition works just like decimal addition. 
-Start from the right, add straight down, and carry when you run out of digits.
+    Binary addition works just like decimal addition.
+    Start from the right, add straight down, and carry when you run out of digits.
 
-For example:
-\[
-\begin{array}{ccccccccc}
-    1 & 1 & 1 & 1 & 1 &   &   &   &   \\ 
-      & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\ 
-    + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
-    \hline
-    1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\ 
-\end{array}
-\]
+    For example:
+    \[
+        \begin{array}{ccccccccc}
+            1 & 1 & 1 & 1 & 1 &   &   &   &   \\
+              & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
+            + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+            \hline
+            1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+        \end{array}
+    \]
 
-Question: what happens if we try to perform this operation but we only have 8 bits to store the answer? 
+    Question: what happens if we try to perform this operation but we only have 8
+    bits to store the answer?
 \end{frame}
 
 \begin{frame}{Multiplication in Binary}
-Binary multiplication works just like decimal multiplication. 
-Multiply the top number by the rightmost digit of the bottom number.
-Then move to the next line, add a zero, and repeat for the next digit.
-Finally, add up the lines. For example:
-\[
-\begin{array}{cccccc}
-        &   &        & 1 & 1 & 0 \\ 
-        &   & \times & 1 & 0 & 1 \\
-    \hline
-        &   &        & 1 & 1 & 0 \\ 
-        &   & 0      & 0 & 0 & 0 \\
-        + & 1 & 1      & 0 & 0 & 0 \\
-        \hline 
-        & 1 & 1      & 1 & 1 & 0 \\
-\end{array}
-\]
+    Binary multiplication works just like decimal multiplication.
+    Multiply the top number by the rightmost digit of the bottom number.
+    Then move to the next line, add a zero, and repeat for the next digit.
+    Finally, add up the lines. For example:
+    \[
+        \begin{array}{cccccc}
+              &   &        & 1 & 1 & 0 \\
+              &   & \times & 1 & 0 & 1 \\
+            \hline
+              &   &        & 1 & 1 & 0 \\
+              &   & 0      & 0 & 0 & 0 \\
+            + & 1 & 1      & 0 & 0 & 0 \\
+            \hline
+              & 1 & 1      & 1 & 1 & 0 \\
+        \end{array}
+    \]
 \end{frame}
 
-
 \begin{frame}{Division in Binary}
-To divide by 2, shift the bits one place to the right. \\
+    To divide by 2, shift the bits one place to the right. \\
 
-To divide by 4, shift the bits two places to the right. \\
+    To divide by 4, shift the bits two places to the right. \\
 
-That's about as deep as we go in this class. If you're curious to learn more, see the textbook.
+    That's about as deep as we go in this class. If you're curious to learn more,
+    see the textbook.
 
 \end{frame}
 
 \begin{frame}{Sample Exercises}
-Make sure to show your work.
-\vfill 
-\begin{enumerate}
-    \item Convert 0b1011 from binary to decimal. 
+    Make sure to show your work.
     \vfill
-    \item Convert 47 from decimal to binary.
-    \vfill
-    \item Add 0b1001 + 0b1011 in binary. Convert to decimal to check your work.
-    \vfill
-    \item Multiply 0b1101 $\times$ 0b110 in binary. Convert to decimal to verify your work.
-    \vfill 
-\end{enumerate}
+    \begin{enumerate}
+        \item Convert 0b1011 from binary to decimal. \vfill
+        \item Convert 47 from decimal to binary. \vfill
+        \item Add 0b1001 + 0b1011 in binary. Convert to decimal to check your work. \vfill
+        \item Multiply 0b1101 $\times$ 0b110 in binary. Convert to decimal to verify your
+              work. \vfill
+    \end{enumerate}
 \end{frame}
 
 \Subsection{Negative Numbers}
 
 \begin{frame}{First Attempt: Signed Magnitude}
 
-We can use the first digit to hold the sign, then the rest of the digits to hold magnitue:
+    We can use the first digit to hold the sign, then the rest of the digits to
+    hold magnitue:
 
     \begin{itemize}
         \item 0b\Highlight{0}1011001 is positive 10110001, so 89
-        \item 0b\Highlight{1}1011001 is negative 1011001, so -89 
+        \item 0b\Highlight{1}1011001 is negative 1011001, so -89
     \end{itemize}
 
-This is nice and straightforward!
+    This is nice and straightforward!
 
 \end{frame}
 
 \begin{frame}{Addition and Subtraction with Signed Magnitude}
     Adding positive numbers works just the same. But what happens if we throw a minus sign in there?
-    
-    For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then: 
+
+    For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then:
 
     \[
-\begin{array}{ccccccccc}
-      & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\ 
-    + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
-    \hline
-      & ? & ? & ? & ? & ? & ? & ? & ? \\ 
-\end{array}
-\]
+        \begin{array}{ccccccccc}
+              & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+            + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+            \hline
+              & ? & ? & ? & ? & ? & ? & ? & ? \\
+        \end{array}
+    \]
 
-We know the result should be 7 (0b00000111). But our regular rules for addition do not get us there.
+    We know the result should be 7 (0b00000111). But our regular rules for addition
+    do not get us there.
 \end{frame}
 
 \begin{frame}{Zero with Signed Magnitude}
 
-Using signed magnitude, 0b00000000 is zero. 
+    Using signed magnitude, 0b00000000 is zero.
 
-And 0b10000000 is negative zero (which is also zero).
+    And 0b10000000 is negative zero (which is also zero).
 
-Using this convention, we have to worry about the difference between numerical equality and bitwise equality. That seems pretty messy.
+    Using this convention, we have to worry about the difference between numerical
+    equality and bitwise equality. That seems pretty messy.
 \end{frame}
 
 \begin{frame}{Can We Do Better?}
-Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
-\begin{itemize}
-    \item We want positive numbers to work like we expect
-    \item We want 0b00000000 to be zero, with no ambiguity
-    \item We want addition and subtraction to work the same for positive and negative
-\end{itemize}
+    Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
+    \begin{itemize}
+        \item We want positive numbers to work like we expect
+        \item We want 0b00000000 to be zero, with no ambiguity
+        \item We want addition and subtraction to work the same for positive and negative
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Another Idea: Two's Complement}
@@ -205,21 +208,20 @@ Signed magnitude was a swing and a miss. What do we want when we talk about nega
     \[
         \begin{array}{ccccccccc}
               & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-            + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 
+            + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
             \hline
-              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
         \end{array}
-        \]
+    \]
 
-Remember: on a computer, our numbers have to fit in a set number of bits. 
-Anything past that gets thrown away. 
-This is called overflow.
-In this case, overflow works in our favor!
+    Remember: on a computer, our numbers have to fit in a set number of bits.
+    Anything past that gets thrown away. This is called overflow. In this case,
+    overflow works in our favor!
 \end{frame}
 
 \begin{frame}{Working Backwards from Zero}
     We can use the same trick to identify the rest of the negative numbers:
-        \begin{itemize}
+    \begin{itemize}
         \item 0b00000000 is 0
         \item 0b11111111 is -1
         \item 0b11111110 is -2
@@ -227,27 +229,30 @@ In this case, overflow works in our favor!
         \item 0b11111100 is -4
         \item etc
     \end{itemize}
-        \end{frame}
+\end{frame}
 
 \begin{frame}{Flipping Signs in Two's Complement}
-    To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers. 
+    To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers.
 
     For example:
-        \begin{itemize}
+    \begin{itemize}
         \item 55 is 0b01010111
         \item Flip the bits: 0b10101000
         \item Add 1: 0b10101001
         \item So -55 is 0b10101001
-    \end{frame}
-    
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Sample Exercises}
-Make sure to show your work.
-\begin{enumerate}
-    \item Convert 0b10010111 from two's complement binary to decimal.
-    \item Convert -47 from decimal to two's complement binary. 
-    \item Subtract 0b01101001 - 0b10001100. These are two's complement binary numbers. Convert to decimal to check your result.
-    \item Add 0b01101001 + 0b10001100. These are two's complement binary numbers. Convert to decimal to check your result.
-\end{enumerate}
+    Make sure to show your work.
+    \begin{enumerate}
+        \item Convert 0b10010111 from two's complement binary to decimal.
+        \item Convert -47 from decimal to two's complement binary.
+        \item Subtract 0b01101001 - 0b10001100. These are two's complement binary numbers.
+              Convert to decimal to check your result.
+        \item Add 0b01101001 + 0b10001100. These are two's complement binary numbers. Convert
+              to decimal to check your result.
+    \end{enumerate}
 \end{frame}
 
 \Subsection{Hexadecimal}
@@ -262,4 +267,4 @@ Make sure to show your work.
     images
     JSON
 \end{frame}
-    
+
