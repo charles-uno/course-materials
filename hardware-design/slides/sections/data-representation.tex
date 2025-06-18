@@ -217,20 +217,32 @@ This is called overflow.
 In this case, overflow works in our favor!
 \end{frame}
 
+\begin{frame}{Working Backwards from Zero}
+    We can use the same trick to identify the rest of the negative numbers:
+        \begin{itemize}
+        \item 0b00000000 is 0
+        \item 0b11111111 is -1
+        \item 0b11111110 is -2
+        \item 0b11111101 is -3
+        \item 0b11111100 is -4
+        \item etc
+    \end{itemize}
+        \end{frame}
+
 \begin{frame}{Flipping Signs in Two's Complement}
-Working backwards:
-    \begin{itemize}
-    \item 0b00000000 is 0
-    \item 0b11111111 is -1
-    \item 0b11111110 is -2
-    \item 0b11111101 is -3
-    \item 0b11111100 is -4
-    \item etc
-\end{itemize}
-
-To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers. 
-\end{frame}
-
+    Working backwards:
+        \begin{itemize}
+        \item 0b00000000 is 0
+        \item 0b11111111 is -1
+        \item 0b11111110 is -2
+        \item 0b11111101 is -3
+        \item 0b11111100 is -4
+        \item etc
+    \end{itemize}
+    
+    To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers. 
+    \end{frame}
+    
 \begin{frame}{Sample Exercises}
 Make sure to show your work.
 \begin{enumerate}
