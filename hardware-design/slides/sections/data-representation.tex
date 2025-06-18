@@ -120,7 +120,6 @@ Make sure to show your work.
 
 \Subsection{Negative Numbers}
 
-
 \begin{frame}{First Attempt: Signed Magnitude}
 
 We can use the first digit to hold the sign, then the rest of the digits to hold magnitue:
@@ -180,26 +179,33 @@ Signed magnitude was a swing and a miss. What do we want when we talk about nega
         \end{array}
         \]
 
-Remember: on a computer, our numbers have to fit in a set number of bits. Anything past that gets thrown away. This is called an overflow error. In this case, overflow works in our favor!
+Remember: on a computer, our numbers have to fit in a set number of bits. 
+Anything past that gets thrown away. 
+This is called overflow.
+In this case, overflow works in our favor!
 \end{frame}
 
+\begin{frame}{Flipping Signs in Two's Complement}
+Working backwards:
+    \begin{itemize}
+    \item 0b00000000 is 0
+    \item 0b11111111 is -1
+    \item 0b11111110 is -2
+    \item 0b11111101 is -3
+    \item 0b11111100 is -4
+    \item etc
+\end{itemize}
 
-
-\begin{frame}{Addition with Two's Complement}
-\end{frame}
-
-\begin{frame}{Zero with Two's Complement}
-\end{frame}
-
-\begin{frame}{Subtraction with Two's Complement}
+To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers. 
 \end{frame}
 
 \begin{frame}{Sample Exercises}
 Make sure to show your work.
-\vfill 
 \begin{enumerate}
-    \item TODO
-    \vfill 
+    \item Convert 0b10010111 from two's complement binary to decimal.
+    \item Convert -47 from decimal to two's complement binary. 
+    \item Subtract 0b01101001 - 0b10001100. These are two's complement binary numbers. Convert to decimal to check your result.
+    \item Add 0b01101001 + 0b10001100. These are two's complement binary numbers. Convert to decimal to check your result.
 \end{enumerate}
 \end{frame}
 
