@@ -50,10 +50,42 @@ Importantly: we always use the prefix ``0b'' to avoid confusion when writing num
 0b1101 is thirteen
 \end{frame}
 
-\begin{frame}{Converting from Binary to Decimal}
-\end{frame}
 
 \begin{frame}{Converting from Decimal to Binary}
+
+If the number is odd, append a 1 on the left. Otherwise, append a 0. Then divide your decimal number by two and ignore any remainder. Repeat until your decimal number is zero. \\
+
+For example, starting with 58:
+
+\begin{itemize}
+\item 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
+\item 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14. 
+\item 14 is odd, so append \Highlight{0}10. Divide by two, leaving 7.
+\item 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
+\item 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
+\item 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
+\end{itemize}
+
+So 58 in binary is 0b111010.
+
+\end{frame}
+
+\begin{frame}{Converting from Binary to Decimal}
+
+We can confirm by converting back. The rightmost bit is worth 1, then 2, then 4, and so on:
+
+\begin{align*}
+    0b111010 &= 
+1 \! \times \! 2^5 +
+1 \! \times \! 2^4 +
+1 \! \times \! 2^3 +
+0 \! \times \! 2^2 +
+1 \! \times \! 2^1 +
+0 \! \times \! 2^0 \\
+ &= 32 + 16  + 8 + 0 + 2 + 0\\
+ &= 58
+\end{align*}
+
 \end{frame}
 
 \begin{frame}{Addition in Binary}
@@ -95,11 +127,11 @@ Finally, add up the lines. For example:
 
 
 \begin{frame}{Division in Binary}
-To divide by 2, shift the whole number one place to the right.
+To divide by 2, shift the bits one place to the right. \\
 
-To divide by 4, shift the whole number two places to the right. 
+To divide by 4, shift the bits two places to the right. \\
 
-That's as deep as we go in this class. If you're curious to learn more, see the textbook.
+That's about as deep as we go in this class. If you're curious to learn more, see the textbook.
 
 \end{frame}
 
