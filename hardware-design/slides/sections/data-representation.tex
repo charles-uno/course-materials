@@ -230,17 +230,14 @@ In this case, overflow works in our favor!
         \end{frame}
 
 \begin{frame}{Flipping Signs in Two's Complement}
-    Working backwards:
-        \begin{itemize}
-        \item 0b00000000 is 0
-        \item 0b11111111 is -1
-        \item 0b11111110 is -2
-        \item 0b11111101 is -3
-        \item 0b11111100 is -4
-        \item etc
-    \end{itemize}
-    
     To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers. 
+
+    For example:
+        \begin{itemize}
+        \item 55 is 0b01010111
+        \item Flip the bits: 0b10101000
+        \item Add 1: 0b10101001
+        \item So -55 is 0b10101001
     \end{frame}
     
 \begin{frame}{Sample Exercises}
