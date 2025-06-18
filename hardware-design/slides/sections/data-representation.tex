@@ -229,6 +229,20 @@
         \item 0b11111100 is -4
         \item etc
     \end{itemize}
+
+\end{frame}
+
+\begin{frame}{The Sign Bit (Again)}
+    We only have 256 possible integers. How do we decide where the positives end and the negatives begin?
+
+    Unsigned int: bits are worth 1, 2, 4, 8, 16, 32, 64, 128
+
+    Signed magnitude: bits are worth $\pm1, \pm2, \pm4, \pm8, \pm16, \pm32, \pm64$,
+    and the last bit tells us whether to use positive or negative (yikes)
+
+    Two's complement: bits are worth 1, 2, 4, 8, 16, 32, 64, \Highlight{-128}
+
+    Range of possible values is -128 to 127.
 \end{frame}
 
 \begin{frame}{Flipping Signs in Two's Complement}
@@ -246,6 +260,25 @@
     \end{itemize}
 
     What happens if we negate zero?
+\end{frame}
+
+\begin{frame}{Overflow}
+    Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
+
+    Try adding 0b01101001 + 0b01011010:
+    \[
+        \begin{array}{ccccccccc}
+              &   & 1 & 1 & 1 &   &   &   &   \\
+              & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+            + & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+            \hline
+              & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+        \end{array}
+    \]
+
+    These are two's complement numbers. Convert them to decimal. What just
+    happened?
+
 \end{frame}
 
 \begin{frame}{Sample Exercises}

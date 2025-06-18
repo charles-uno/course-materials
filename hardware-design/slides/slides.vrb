@@ -1,6 +1,6 @@
 \frametitle{Hello World in Assembly}
 
-\begin{verbatim}
+    \begin{verbatim}
 .section .rodata
 greeting: .ascii "Hello World!\n\0"
 
