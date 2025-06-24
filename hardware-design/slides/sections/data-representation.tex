@@ -18,7 +18,7 @@
     For example, let's look at the number 109:
     \begin{align*}
         109 & = 100 \;+\; 0 \;+\; 9                                   \\
-            & = 1 \times 10^2 \;+\; 0 \times 10^1 \;+\; 9 \times 10^0
+            & = 1 \Times 10^2 \;+\; 0 \Times 10^1 \;+\; 9 \Times 10^0
     \end{align*}
     This way of writing numbers is called base ten.
     We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
@@ -33,13 +33,13 @@
 
     \begin{align*}
         0b1101101 & =
-        1 \! \times \! 2^6 +
-        1 \! \times \! 2^5 +
-        0 \! \times \! 2^4 +
-        1 \! \times \! 2^3 +
-        1 \! \times \! 2^2 +
-        0 \! \times \! 2^1 +
-        1 \! \times \! 2^0                        \\
+        1 \Times 2^6 +
+        1 \Times 2^5 +
+        0 \Times 2^4 +
+        1 \Times 2^3 +
+        1 \Times 2^2 +
+        0 \Times 2^1 +
+        1 \Times 2^0                              \\
                   & = 64 + 32 + 0 + 8 + 4 + 0 + 1 \\
                   & = 109                         \\
     \end{align*}
@@ -78,12 +78,12 @@
 
     \begin{align*}
         0b111010 & =
-        1 \! \times \! 2^5 +
-        1 \! \times \! 2^4 +
-        1 \! \times \! 2^3 +
-        0 \! \times \! 2^2 +
-        1 \! \times \! 2^1 +
-        0 \! \times \! 2^0                    \\
+        1 \Times 2^5 +
+        1 \Times 2^4 +
+        1 \Times 2^3 +
+        0 \Times 2^2 +
+        1 \Times 2^1 +
+        0 \Times 2^0                          \\
                  & = 32 + 16  + 8 + 0 + 2 + 0 \\
                  & = 58
     \end{align*}
@@ -343,11 +343,54 @@
 \begin{frame}{Arithmetic in Hexadecimal}
 
     Addition and multiplication work in hexadecimal just like they do in binary and
-    decimal.
+    decimal. Just be careful about carrying.
+
+    \[
+        \begin{array}{ccccc}
+            1 &   &   & 1 &   \\
+              & 4 & 1 & 7 & B \\
+            + & C & 2 & 0 & F \\
+            \hline
+            1 & 0 & 3 & 8 & A \\
+        \end{array}
+    \]
 
 \end{frame}
 
 \Subsection{Fractions and Decimals}
+
+\begin{frame}{The Decimal Point}
+
+    Sometimes we need to store numbers that aren't integers. \\
+
+    Before we worry about binary, what does 21.867 mean? \\
+
+    \begin{align*}
+        21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times ?? + 6 \Times ?? + 7 \Times ??
+    \end{align*}
+
+\end{frame}
+
+\begin{frame}{The Decimal Point}
+
+    In decimal:
+    \begin{align*}
+        21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
+               & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
+    \end{align*}
+
+    In binary, we can use the same idea:
+    \begin{align*}
+        0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
+                  & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
+                  & = 5.25                                                                                             \\
+    \end{align*}
+
+\end{frame}
+
+\begin{frame}{Fixed Point Representation}
+
+\end{frame}
 
 \Subsection{Structured Data}
 
