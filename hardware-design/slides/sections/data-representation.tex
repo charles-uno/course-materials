@@ -138,7 +138,7 @@
 
 \end{frame}
 
-\begin{frame}{Sample Exercises}
+\begin{frame}{Exercises}
     Make sure to show your work.
     \vfill
     \begin{enumerate}
@@ -281,7 +281,7 @@
 
 \end{frame}
 
-\begin{frame}{Sample Exercises}
+\begin{frame}{Exercises}
     Make sure to show your work.
     \begin{enumerate}
         \item Convert 0b10010111 from two's complement binary to decimal.
@@ -357,6 +357,13 @@
 
 \end{frame}
 
+\begin{frame}{Exercises}
+    Make sure to show your work.
+    \begin{enumerate}
+        \item TODO
+    \end{enumerate}
+\end{frame}
+
 \Subsection{Fractions and Decimals}
 
 \begin{frame}{The Decimal Point}
@@ -390,6 +397,113 @@
 
 \begin{frame}{Fixed Point Representation}
 
+    The computer just stores 1s and 0s, not decimal points. How do we distinguish
+    these values?
+    \begin{itemize}
+        \item 0b0101110.1 = 46.5
+        \item 0b010111.01 = 23.25
+        \item 0b01011.101 = 11.625
+    \end{itemize}
+
+    One option is to specify the location of the decimal point ahead of time. For
+    example, we could say that our eight-bit binary decimal always has two decimal
+    bits. \\
+
+    What is an upside of this approach? What is a downside?
+
+\end{frame}
+
+\begin{frame}{Floating Point Representation}
+
+    Floating point numbers are a bit more complicated, but much more flexible. For
+    a 16-bit floating point number we get:
+
+    \begin{itemize}
+        \item 1 bit for the sign
+        \item 5 bits for the exponent (value -14 to 15)
+        \item 10 bits for the significand (value 0 to 1023)
+    \end{itemize}
+
+    To turn those components into a value we use:
+    \begin{align*}
+        \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
+    \end{align*}
+
+    Why offset the exponent?
+
+    Why add 1 to the significand fraction?
+
+\end{frame}
+
+% Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
+
+\begin{frame}{Floating Point Examples}
+
+    \begin{align*}
+        \underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
+                                                                                                                       & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
+                                                                                                                       & = 1                                                                  \\
+    \end{align*}
+    \begin{align*}
+        0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
+                                 & \approx 0.33325195                                                     \\
+    \end{align*}
+    \begin{align*}
+        1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
+                                 & = -65504                                                                \\
+    \end{align*}
+
+    Why
+\end{frame}
+
+\begin{frame}{Floating Point Special Cases}
+
+    \[
+        \begin{array}{ccccr}
+            0 & 00000 & 0000000000     & = 0          \\
+            1 & 00000 & 0000000000     & = -0         \\
+            0 & 11111 & 0000000000     & = \infty     \\
+            1 & 11111 & 0000000000     & = -\infty    \\
+            0 & 11111 & \text{nonzero} & = \text{NaN} \\
+        \end{array}
+    \]
+
+    There's more to it than this. If you're curious, read up on subnormal numbers
+    \href{https://en.wikipedia.org/wiki/Half-precision_floating-point_format}{here}
+
+\end{frame}
+
+\begin{frame}{Floating Point for Big Integers}
+
+    If we're dealing with big numbers, floating point often works better than fixed
+    point. This is true even if both formats use the same number of bits.
+
+    \begin{itemize}
+        \item 8-bit unsigned integer: max value 255
+        \item 16-bit unsigned integer: max value 65,535
+        \item 32-bit unsigned integer: max value 4,294,967,295
+        \item 16-bit floating point: max value 65,504 (also handles negatives, fractions)
+        \item \mbox{32-bit floating point: max value 340,282,346,638,528,859,811,704,183,484,516,925,440}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Floating Point Limitations}
+
+    So what's the catch?
+
+\end{frame}
+
+\begin{frame}{Exercises}
+    Make sure to show your work.
+    \begin{enumerate}
+        \item Convert 0b100110.10 from fixed-point binary to decimal.
+        \item Convert 23.75 from decimal to fixed-point binary.
+        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to
+              confirm your result.
+        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is
+              equal to -3.5 in decimal.
+    \end{enumerate}
 \end{frame}
 
 \Subsection{Structured Data}
