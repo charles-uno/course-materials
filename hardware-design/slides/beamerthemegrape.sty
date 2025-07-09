@@ -14,12 +14,12 @@
 
 \hypersetup{
     colorlinks=true,
+    % internal links
     linkcolor=AccentColor,
     filecolor=AccentColor,      
+    % external links
     urlcolor=AccentColor,
     }
-
-
 
 \setbeamercolor{title}{fg=PaperColor}
 \setbeamercolor{frametitle}{fg=PaperColor}
@@ -72,19 +72,20 @@
 % section page
 \newcommand{\Section}[1]{
 \section{#1}
-\begin{frame}
-\sectionpage
-\end{frame}
-}
-
-\setbeamertemplate{section page}{
+\begin{frame}{#1}
+% do not use \sectionpage because it makes the section name into a link and the color gets lost
 \begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
-\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
-\draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
-\draw[draw=AccentColor, fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
-\node at (0.5, 0.5) {\insertsectionhead};
-\end{scope}
-\end{tikzpicture}
+    \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+    \draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
+    \draw[draw=AccentColor, fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
+    \node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
+    \end{scope}
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents[currentsection,sectionstyle=hide,subsectionstyle=show/show/hide]
+\end{frame}
 }
 
 % subsection
