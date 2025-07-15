@@ -1,6 +1,44 @@
 
 \Section{Assembly Fundamentals}
 
+\begin{frame}{Hello World in C}
+\end{frame}
+
+
+\begin{frame}[fragile]{Compiling C Code}
+
+The following command compiles a program in C:
+
+\begin{verbatim}
+    gcc hello.c -o hello
+\end{verbatim}
+
+This creates several intermediate files, eventually creating an executable file (which we can run).
+`hello.c'
+preprocessor
+`hello.i'
+compiler
+`hello.s'
+assembler
+`hello.o'
+linker
+`hello'
+
+\end{frame}
+
+
+
+
+\begin{frame}{What is Assembly?}
+\end{frame}
+
+
+\begin{frame}{Why Learn Assembly?}
+\end{frame}
+
+
+
+
 \begin{frame}[fragile]{Hello World in Assembly}
 
     \begin{verbatim}
@@ -15,6 +53,21 @@ main:
     mov r0, #0
     bl exit
 \end{verbatim}
-
 \end{frame}
+
+
+
+
+\Subsection{Global Variables}
+
+
+\Subsection{Printf and Scanf}
+
+
+\Subsection{Automated Testing}
+
+
+
+
+
 

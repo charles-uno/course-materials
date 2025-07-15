@@ -12,4 +12,3 @@ main:
     mov r0, #0
     bl exit
 \end{verbatim}
-
