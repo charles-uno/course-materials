@@ -26,9 +26,6 @@ linker
 
 \end{frame}
 
-
-
-
 \begin{frame}{What is Assembly?}
 \end{frame}
 
@@ -52,41 +49,35 @@ main:
     \Highlight{@ print the string from r0}
     bl printf
     \Highlight{@ return 0 (normal exit status)}
-    mov r0, #0
+    mov r0, \#0
     bl exit
 \end{alltt}
 \end{frame}
 
-
-
-\begin{frame}[fragile]{Hello World in Assembly}
-\begin{alltt}
-    \begin{array}{ r | l }
-        & \Highlight{@ global read-only data (aka constants)} \\
-        & .section .rodata \\
-        0x5000 & greeting: .ascii "Hello World!\n\0" \\
-        & \\
-        & \Highlight{@ execution starts here} \\
-        & .section .text \\
-        & .global main \\
-        & main: \\
-        0x5004 &    \Highlight{@ load the string address to r0} \\
-        0x5008 &    ldr r0, =greeting \\
-        &    \Highlight{@ print the string from r0} \\
-        0x500c &    bl printf \\
-        &    \Highlight{@ return 0 (normal exit status)} \\
-        0x5010 &    mov r0, #0 \\
-        0x5014 &    bl exit \\
-    \end{array}
-\end{alltt}
-\end{frame}
-
-
-
-
+\begin{frame}{Hello World with Instruction Addresses}
+    \begin{alltt}    
+        \begin{tabular}{ r | l  }
+            - & \Highlight{@ global read-only data (aka constants)} \\
+            - & .section .rodata \\
+            - & greeting: .ascii "Hello World!\n\0" \\
+            - & \Highlight{@ execution starts here} \\
+            - & .section .text \\
+            - & .global main \\
+            - & main: \\
+            - & \quad \Highlight{@ load the string address to r0} \\
+            0x5000 & \quad ldr r0, =greeting \\
+            - & \quad \Highlight{@ print the string from r0} \\
+            0x5004 & \quad bl printf \\
+            - & \quad \Highlight{@ return 0 (normal exit status)} \\
+            0x5008 & \quad mov r0, \#0 \\
+            0x500c & \quad bl exit \\
+                \end{tabular}
+        \end{alltt}
+    \end{frame}
+    
 
 \begin{frame}{Memory Diagram}
-\begin{alltt}    
+\begin{alltt}
     \begin{tabular}{ r | l p{5mm} r | l }
         \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
         r0 & fizz && 0x3fe8 & buzz \\
@@ -98,6 +89,105 @@ main:
         lr & fizz && 0x4000 & buzz \\
         \end{tabular}
     \end{alltt}
+\end{frame}
+
+\begin{frame}{Hello World Walkthrough (0)}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{2mm} r | l p{2mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} && \multicolumn{2}{c}{Memory} \\
+            r0 & ? && 0x3fe8 & ? && 0x4fe8 & ldr r0, =greeting \\
+            r1 & ? && 0x3fec & ? && 0x4fec & bl printf \\
+            r2 & ? && 0x3ff0 & Hell && 0x4ff0 & mov r0, \#0 \\
+            r3 & ? && 0x3ff4 & o Wo && 0x4ff4 & bl exit \\
+            sp & ? && 0x3ff8 & rld! && 0x4ff8 & ? \\
+            pc & 0x4fe8 && 0x3ffc & {\textbackslash}0 && 0x4ffc & ? \\
+            lr & ? && 0x4000 & ? && 0x5000 & ? \\
+            \end{tabular}
+        \end{alltt}
+\end{frame}
+
+
+
+\begin{frame}{Hello World Walkthrough (1)}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{2mm} r | l p{2mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} && \multicolumn{2}{c}{Memory} \\
+            r0 & 0x3ff0 && 0x3fe8 & ? && 0x4fe8 & ldr r0, =greeting \\
+            r1 & ? && 0x3fec & ? && 0x4fec & bl printf \\
+            r2 & ? && 0x3ff0 & Hell && 0x4ff0 & mov r0, \#0 \\
+            r3 & ? && 0x3ff4 & o Wo && 0x4ff4 & bl exit \\
+            sp & ? && 0x3ff8 & rld! && 0x4ff8 & ? \\
+            pc & 0x4fec && 0x3ffc & {\textbackslash}0 && 0x4ffc & ? \\
+            lr & ? && 0x4000 & ? && 0x5000 & ? \\
+            \end{tabular}
+        \end{alltt}
+
+        Execute \texttt{ldr} to load the address of global constant \texttt{greeting} to \texttt{r0}
+        
+        Also increment \texttt{pc}
+
+\end{frame}
+
+\begin{frame}{Hello World Walkthrough (2)}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{2mm} r | l p{2mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} && \multicolumn{2}{c}{Memory} \\
+            r0 & ? && 0x3fe8 & ? && 0x4fe8 & ldr r0, =greeting \\
+            r1 & ? && 0x3fec & ? && 0x4fec & bl printf \\
+            r2 & ? && 0x3ff0 & Hell && 0x4ff0 & mov r0, \#0 \\
+            r3 & ? && 0x3ff4 & o Wo && 0x4ff4 & bl exit \\
+            sp & ? && 0x3ff8 & rld! && 0x4ff8 & ? \\
+            pc & 0x4ff0 && 0x3ffc & {\textbackslash}0 && 0x4ffc & ? \\
+            lr & ? && 0x4000 & ? && 0x5000 & ? \\
+            \end{tabular}
+        \end{alltt}
+
+        Use \texttt{bl} to call the built-in function \texttt{printf}, which looks at the address from \texttt{r0} and prints the data as a null-terminated string
+        
+        Also increment \texttt{pc}
+
+
+\end{frame}
+
+\begin{frame}{Hello World Walkthrough (3)}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{2mm} r | l p{2mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} && \multicolumn{2}{c}{Memory} \\
+            r0 & 0 && 0x3fe8 & ? && 0x4fe8 & ldr r0, =greeting \\
+            r1 & ? && 0x3fec & ? && 0x4fec & bl printf \\
+            r2 & ? && 0x3ff0 & Hell && 0x4ff0 & mov r0, \#0 \\
+            r3 & ? && 0x3ff4 & o Wo && 0x4ff4 & bl exit \\
+            sp & ? && 0x3ff8 & rld! && 0x4ff8 & ? \\
+            pc & 0x4ff4 && 0x3ffc & {\textbackslash}0 && 0x4ffc & ? \\
+            lr & ? && 0x4000 & ? && 0x5000 & ? \\
+            \end{tabular}
+        \end{alltt}
+
+        Move the value zero to \texttt{r0}
+
+        Also increment \texttt{pc}
+
+
+\end{frame}
+
+\begin{frame}{Hello World Walkthrough (4)}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{2mm} r | l p{2mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} && \multicolumn{2}{c}{Memory} \\
+            r0 & 0 && 0x3fe8 & ? && 0x4fe8 & ldr r0, =greeting \\
+            r1 & ? && 0x3fec & ? && 0x4fec & bl printf \\
+            r2 & ? && 0x3ff0 & Hell && 0x4ff0 & mov r0, \#0 \\
+            r3 & ? && 0x3ff4 & o Wo && 0x4ff4 & bl exit \\
+            sp & ? && 0x3ff8 & rld! && 0x4ff8 & ? \\
+            pc & 0x4fe8 && 0x3ffc & {\textbackslash}0 && 0x4ffc & ? \\
+            lr & ? && 0x4000 & ? && 0x5000 & ? \\
+            \end{tabular}
+        \end{alltt}
+
+        Exit from the program. The value in \texttt{r0} is the returncode
+
+        Update \texttt{pc} to point to instructions for whatever called our program
+
 \end{frame}
 
 
