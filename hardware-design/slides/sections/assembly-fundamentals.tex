@@ -1,5 +1,5 @@
 
-\Section{Assembly Fundamentals}
+\Section{Assembly Globals and IO}
 
 \begin{frame}{Hello World in C}
 \end{frame}
@@ -65,12 +65,12 @@ main:
             - & .global main \\
             - & main: \\
             - & \quad \Highlight{@ load the string address to r0} \\
-            0x5000 & \quad ldr r0, =greeting \\
+            0x3fe4 & \quad ldr r0, =greeting \\
             - & \quad \Highlight{@ print the string from r0} \\
-            0x5004 & \quad bl printf \\
+            0x3fe8 & \quad bl printf \\
             - & \quad \Highlight{@ return 0 (normal exit status)} \\
-            0x5008 & \quad mov r0, \#0 \\
-            0x500c & \quad bl exit \\
+            0x3fec & \quad mov r0, \#0 \\
+            0x3ff0 & \quad bl exit \\
                 \end{tabular}
         \end{alltt}
     \end{frame}
