@@ -65,12 +65,12 @@ main:
             - & .global main \\
             - & main: \\
             - & \quad \Highlight{@ load the string address to r0} \\
-            0x3fe4 & \quad ldr r0, =greeting \\
+            0x4fe0 & \quad ldr r0, =greeting \\
             - & \quad \Highlight{@ print the string from r0} \\
-            0x3fe8 & \quad bl printf \\
+            0x4fe4 & \quad bl printf \\
             - & \quad \Highlight{@ return 0 (normal exit status)} \\
-            0x3fec & \quad mov r0, \#0 \\
-            0x3ff0 & \quad bl exit \\
+            0x4fe8 & \quad mov r0, \#0 \\
+            0x4fec & \quad bl exit \\
                 \end{tabular}
         \end{alltt}
     \end{frame}
@@ -79,14 +79,15 @@ main:
     \begin{alltt}
         \begin{tabular}{ r | l p{5mm} r | l }
             \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & ? && 0x4fe4 & ldr r0, =greeting \\
-            r1 & ? && 0x4fe8 & bl printf \\
-            r2 & ? && 0x4fec & mov r0, \#0 \\
-            r3 & ? && 0x4ff0 & bl exit \\
-            r4 & ? && 0x4ff4 & Hell \\
-            sp & ? && 0x4ff8 & o Wo \\
-            pc & 0x4fe4 && 0x4ffc & rld! \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
+            r0 & ? && 0x4fe0 & ldr r0, =greeting \\
+            r1 & ? && 0x4fe4 & bl printf \\
+            r2 & ? && 0x4fe8 & mov r0, \#0 \\
+            r3 & ? && 0x4fec & bl exit \\
+            r4 & ? && 0x4ff0 & Hell \\
+            sp & ? && 0x4ff4 & o Wo \\
+            fp & ? && 0x4ff8 & rld! \\
+            pc & 0x4fe0 && 0x4ffc & {\textbackslash}0 \\
+            lr & ? && 0x5000 & ? \\
             \end{tabular}
         \end{alltt}
 
@@ -98,14 +99,15 @@ The operating system loads instructions and global constants into memory. The pr
     \begin{alltt}
         \begin{tabular}{ r | l p{5mm} r | l }
             \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & 0x4ff4 && 0x3fe4 & ldr r0, =greeting \\
-            r1 & ? && 0x4fe8 & bl printf \\
-            r2 & ? && 0x4fec & mov r0, \#0 \\
-            r3 & ? && 0x4ff0 & bl exit \\
-            r4 & ? && 0x4ff4 & Hell \\
-            sp & ? && 0x4ff8 & o Wo \\
-            pc & 0x4fe8 && 0x4ffc & rld! \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
+            r0 & 0x4ff0 && 0x4fe0 & ldr r0, =greeting \\
+            r1 & ? && 0x4fe4 & bl printf \\
+            r2 & ? && 0x4fe8 & mov r0, \#0 \\
+            r3 & ? && 0x4fec & bl exit \\
+            r4 & ? && 0x4ff0 & Hell \\
+            sp & ? && 0x4ff4 & o Wo \\
+            fp & ? && 0x4ff8 & rld! \\
+            pc & 0x4fe4 && 0x4ffc & {\textbackslash}0 \\
+            lr & ? && 0x5000 & ? \\
             \end{tabular}
         \end{alltt}
 
@@ -119,14 +121,15 @@ The operating system loads instructions and global constants into memory. The pr
     \begin{alltt}
         \begin{tabular}{ r | l p{5mm} r | l }
             \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & 0x4ff4 && 0x4fe4 & ldr r0, =greeting \\
-            r1 & ? && 0x4fe8 & bl printf \\
-            r2 & ? && 0x4fec & mov r0, \#0 \\
-            r3 & ? && 0x4ff0 & bl exit \\
-            r4 & ? && 0x4ff4 & Hell \\
-            sp & ? && 0x4ff8 & o Wo \\
-            pc & 0x4fec && 0x4ffc & rld! \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
+            r0 & 0x4ff0 && 0x4fe0 & ldr r0, =greeting \\
+            r1 & ? && 0x4fe4 & bl printf \\
+            r2 & ? && 0x4fe8 & mov r0, \#0 \\
+            r3 & ? && 0x4fec & bl exit \\
+            r4 & ? && 0x4ff0 & Hell \\
+            sp & ? && 0x4ff4 & o Wo \\
+            fp & ? && 0x4ff8 & rld! \\
+            pc & 0x4fe8 && 0x4ffc & {\textbackslash}0 \\
+            lr & ? && 0x5000 & ? \\
             \end{tabular}
         \end{alltt}
 
@@ -141,14 +144,15 @@ The operating system loads instructions and global constants into memory. The pr
     \begin{alltt}
         \begin{tabular}{ r | l p{5mm} r | l }
             \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & ? && 0x4fe4 & ldr r0, =greeting \\
-            r1 & ? && 0x4fe8 & bl printf \\
-            r2 & ? && 0x4fec & mov r0, \#0 \\
-            r3 & ? && 0x4ff0 & bl exit \\
-            r4 & ? && 0x4ff4 & Hell \\
-            sp & ? && 0x4ff8 & o Wo \\
-            pc & 0x4ff0 && 0x4ffc & rld! \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
+            r0 & 0 && 0x4fe0 & ldr r0, =greeting \\
+            r1 & ? && 0x4fe4 & bl printf \\
+            r2 & ? && 0x4fe8 & mov r0, \#0 \\
+            r3 & ? && 0x4fec & bl exit \\
+            r4 & ? && 0x4ff0 & Hell \\
+            sp & ? && 0x4ff4 & o Wo \\
+            fp & ? && 0x4ff8 & rld! \\
+            pc & 0x4fec && 0x4ffc & {\textbackslash}0 \\
+            lr & ? && 0x5000 & ? \\
             \end{tabular}
         \end{alltt}
 
@@ -163,16 +167,17 @@ The operating system loads instructions and global constants into memory. The pr
     \begin{alltt}
         \begin{tabular}{ r | l p{5mm} r | l }
             \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & ? && 0x4fe4 & ldr r0, =greeting \\
-            r1 & ? && 0x4fe8 & bl printf \\
-            r2 & ? && 0x4fec & mov r0, \#0 \\
-            r3 & ? && 0x4ff0 & bl exit \\
-            r4 & ? && 0x4ff4 & Hell \\
-            sp & ? && 0x4ff8 & o Wo \\
-            pc & ? && 0x4ffc & rld! \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
-            \end{tabular}
-        \end{alltt}
+            r0 & 0 && 0x4fe0 & ldr r0, =greeting \\
+            r1 & ? && 0x4fe4 & bl printf \\
+            r2 & ? && 0x4fe8 & mov r0, \#0 \\
+            r3 & ? && 0x4fec & bl exit \\
+            r4 & ? && 0x4ff0 & Hell \\
+            sp & ? && 0x4ff4 & o Wo \\
+            fp & ? && 0x4ff8 & rld! \\
+            pc & ? && 0x4ffc & {\textbackslash}0 \\
+            lr & ? && 0x5000 & ? \\
+        \end{tabular}
+    \end{alltt}
 
     Use \texttt{bl} to call the built-in \texttt{exit} function, which exits from the program. The value in \texttt{r0} is the returncode.
     

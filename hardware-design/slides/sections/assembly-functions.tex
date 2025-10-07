@@ -1,1 +1,20 @@
 \Section{Assembly Functions and Stack Frames}
+
+
+
+
+\begin{frame}{Stack Frame}
+    \begin{alltt}
+        \begin{tabular}{ r | l p{5mm} r | l }
+            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
+            r0 & ? && 0x4fe4 & - \\
+            r1 & ? && 0x4fe8 & - \\
+            r2 & ? && 0x4fec & - \\
+            r3 & ? && 0x4ff0 & - \\
+            r4 & ? && 0x4ff4 & - \\
+            sp & ? && 0x4ff8 & - \\
+            pc & ? && 0x4ffc & - \\
+            lr & ? && 0x5000 & {\textbackslash}0 \\
+            \end{tabular}
+        \end{alltt}
+    \end{frame}
