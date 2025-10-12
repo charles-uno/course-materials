@@ -6,3 +6,40 @@
 \begin{frame}{Bit Operations}
 \end{frame}
 
+
+\begin{frame}{Logic Gates}
+    \begin{circuitikz} \draw
+        (0,2) node[and port] (myand1) {}
+        (0,0) node[and port] (myand2) {}
+        (2,1) node[xnor port] (myxnor) {}
+        (myand1.out) -- (myxnor.in 1)
+        (myand2.out) -- (myxnor.in 2);
+        \end{circuitikz}
+    \end{frame}
+
+
+
+\begin{frame}{Transistors}
+
+    \begin{circuitikz}
+        \draw (0,0)
+        node[transformer] (T) {};
+        
+        \draw (T.B1)
+        to [D] (3,|-T.B1)
+        to [R] (3,|-T.B2)
+        -- (T.B2);
+        
+        {
+        \ctikzset{bipoles/resistor/width =0.4}
+        \draw (3,|-T.B1)
+        to [vR] (6,|-T.B1)
+        to [R] 
+        (6,-1) node [npn,xscale=-1,anchor=C,rotate=180] (npn) {} 
+        (npn.collector);
+        }
+        \end{circuitikz}
+
+\end{frame}
+
+
