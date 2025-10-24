@@ -59,7 +59,7 @@ main:
         \begin{tabular}{ r | l  }
             - & \Highlight{@ global read-only data (aka constants)} \\
             - & .section .rodata \\
-            - & greeting: .ascii "Hello World!\n\0" \\
+%            - & greeting: .ascii "Hello World!\n\0" \\
             - & \Highlight{@ execution starts here} \\
             - & .section .text \\
             - & .global main \\
@@ -196,9 +196,9 @@ The operating system loads instructions and global constants into memory. The pr
 leave local variable handling for later. str, ldr with brackets
 
 \begin{itemize}
-    \item add rd, rn, # ... add rd, rn1, rn2
-    \item sub rd, rn, # ... sub rd, rn1, rn2
-    \item mov rd, rn ... mov rd, #
+    \item add rd, rn, \# ... add rd, rn1, rn2
+    \item sub rd, rn, \# ... sub rd, rn1, rn2
+    \item mov rd, rn ... mov rd, \#
     \item mul rd, rn1, rn2
     \item ldr rd, =label
 %    \item ldr, rd, [rn]
