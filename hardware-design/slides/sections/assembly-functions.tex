@@ -7,39 +7,39 @@
 \begin{frame}{more commands in assembly}
 
 
-%    \begin{itemize}
-%        \item add rd, rn, # ... add rd, rn1, rn2
-%        \item sub rd, rn, # ... sub rd, rn1, rn2
-%        \item mov rd, rn ... mov rd, #
-%        \item mul rd, rn1, rn2
-%        \item ldr rd, =label
-%       \item NEW ldr, rd, [rn]
-%        \item NEW ldr, rd, [rn, #]
-%        \item NEW str rs, rn
-%        \item NEW push
-%        \item NEW pop
-%    \end{itemize}
-    
-    
-    \end{frame}
+	%    \begin{itemize}
+	%        \item add rd, rn, # ... add rd, rn1, rn2
+	%        \item sub rd, rn, # ... sub rd, rn1, rn2
+	%        \item mov rd, rn ... mov rd, #
+	%        \item mul rd, rn1, rn2
+	%        \item ldr rd, =label
+	%       \item NEW ldr, rd, [rn]
+	%        \item NEW ldr, rd, [rn, #]
+	%        \item NEW str rs, rn
+	%        \item NEW push
+	%        \item NEW pop
+	%    \end{itemize}
 
-    
+
+\end{frame}
+
+
 
 
 
 
 \begin{frame}{Stack Frame}
-    \begin{alltt}
-        \begin{tabular}{ r | l p{5mm} r | l }
-            \multicolumn{2}{c}{Registers} && \multicolumn{2}{c}{Memory} \\
-            r0 & ? && 0x4fe4 & - \\
-            r1 & ? && 0x4fe8 & - \\
-            r2 & ? && 0x4fec & - \\
-            r3 & ? && 0x4ff0 & - \\
-            r4 & ? && 0x4ff4 & - \\
-            sp & ? && 0x4ff8 & - \\
-            pc & ? && 0x4ffc & - \\
-            lr & ? && 0x5000 & {\textbackslash}0 \\
-            \end{tabular}
-        \end{alltt}
-    \end{frame}
+	\begin{alltt}
+		\begin{tabular}{ r | l p{5mm} r | l }
+			\multicolumn{2}{c}{Registers} &   & \multicolumn{2}{c}{Memory}                              \\
+			r0                            & ? &                            & 0x4fe4 & -                 \\
+			r1                            & ? &                            & 0x4fe8 & -                 \\
+			r2                            & ? &                            & 0x4fec & -                 \\
+			r3                            & ? &                            & 0x4ff0 & -                 \\
+			r4                            & ? &                            & 0x4ff4 & -                 \\
+			sp                            & ? &                            & 0x4ff8 & -                 \\
+			pc                            & ? &                            & 0x4ffc & -                 \\
+			lr                            & ? &                            & 0x5000 & {\textbackslash}0 \\
+		\end{tabular}
+	\end{alltt}
+\end{frame}

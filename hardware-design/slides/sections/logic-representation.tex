@@ -8,40 +8,44 @@
 
 
 \begin{frame}{Logic Gates}
-    \begin{circuitikz} \draw
-        (0,2) node[and port] (myand1) {}
-        (0,0) node[and port] (myand2) {}
-        (2,1) node[xnor port] (myxnor) {}
-        (myand1.out) -- (myxnor.in 1)
-        (myand2.out) -- (myxnor.in 2);
-        \end{circuitikz}
-    \end{frame}
+	\begin{circuitikz} \draw
+		(0,2) node[and port] (myand1) {}
+		(0,0) node[and port] (myand2) {}
+		(2,1) node[xnor port] (myxnor) {}
+		(myand1.out) -- (myxnor.in 1)
+		(myand2.out) -- (myxnor.in 2);
+	\end{circuitikz}
+\end{frame}
 
 
-    \Subsection{Transistors and Resistors}
+\Subsection{Transistors and Resistors}
 
 
 
 \begin{frame}{Transistors}
 
-    \begin{circuitikz}
-        \draw (0,0)
-        node[transformer] (T) {};
-        
-        \draw (T.B1)
-        to [D] (3,|-T.B1)
-        to [R] (3,|-T.B2)
-        -- (T.B2);
-        
-        {
-        \ctikzset{bipoles/resistor/width =0.4}
-        \draw (3,|-T.B1)
-        to [vR] (6,|-T.B1)
-        to [R] 
-        (6,-1) node [npn,xscale=-1,anchor=C,rotate=180] (npn) {} 
-        (npn.collector);
-        }
-        \end{circuitikz}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[npn] at (5.25, 6.02){};
+		\node[npn] at (5.25, 3.98){};
+		\draw (5.25, 2) to[american resistor, /tikz/circuitikz/bipoles/length=0.700cm] (5.25, 3.21);
+		\draw (5.25, 3.21) -- (7, 3.25);
+		\draw (4.41, 3.98) -- (3, 4);
+		\draw (4.41, 6.02) -- (3, 6);
+		\draw (5.25, 6.79) -- (5.25, 7);
+		\draw (3, 7) -- (5.25, 7) -- (7, 7);
+		\draw (3, 2) -- (5.25, 2) -- (7, 2);
+		\node[ground] at (7, 2){};
+		\draw (5.25, 5.25) -- (5.25, 4.75);
+		\node[ocirc] at (3, 6){};
+		\node[ocirc] at (3, 4){};
+		\node[ocirc] at (7, 3.25){};
+		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (6.5, 6.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 7){5V};
+		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (3.5, 5.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (3, 6){A};
+		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (3.5, 3.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (3, 4){B};
+		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (6.5, 3.625){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 4){A\&B};
+		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.465cm] at (6.5, 1.75){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 2){0V};
+	\end{tikzpicture}
 
 \end{frame}
 
