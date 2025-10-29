@@ -38,7 +38,7 @@
 	\begin{alltt}
 		\Highlight{@ global read-only data (aka constants)}
 		.section .rodata
-		greeting: .ascii "Hello World!\n\0"
+		greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0"
 
 		\Highlight{@ execution starts here}
 		.section .text
@@ -59,7 +59,7 @@
 		\begin{tabular}{ r | l  }
 			-      & \Highlight{@ global read-only data (aka constants)} \\
 			-      & .section .rodata                                    \\
-			%            - & greeting: .ascii "Hello World!\n\0" \\
+			%            - & greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0" \\
 			-      & \Highlight{@ execution starts here}                 \\
 			-      & .section .text                                      \\
 			-      & .global main                                        \\
@@ -202,7 +202,7 @@
 		\item mul rd, rn1, rn2
 		\item ldr rd, =label
 		\item ldr, rd, [rn]
-		\item ldr, rd, [rn, #]
+		\item ldr, rd, [rn, \#]
 		\item str rs, rn
 	\end{itemize}
 
