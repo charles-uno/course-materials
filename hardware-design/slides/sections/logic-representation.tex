@@ -7,66 +7,148 @@
 \end{frame}
 
 
-\begin{frame}{Logic Gates}
 
-    \begin{tikzpicture}
-        % Paths, nodes and wires:
-        \node[ieeestd and port] at (1.037, 10.345){};
-        \node[ieeestd nand port] at (7.08, 10.375){};
-        \node[ieeestd or port] at (1.143, 7.408){};
-        \node[ieeestd nor port] at (7.223, 7.22){};
-        \node[ieeestd xor port] at (1.106, 4.408){};
-        \node[ieeestd xnor port] at (7.132, 4.345){};
-        \node[ieeestd not port] at (12.877, 10.375){};
-        \node[ocirc] at (-0.044, 10.625){};
-        \node[ocirc] at (-0.044, 10.065){};
-        \node[ocirc] at (5.999, 10.655){};
-        \node[ocirc] at (5.999, 10.095){};
-        \node[ocirc] at (8.161, 10.375){};
-        \node[ocirc] at (2.119, 10.345){};
-        \node[ocirc] at (0.061, 7.688){};
-        \node[ocirc] at (0.061, 7.128){};
-        \node[ocirc] at (6.141, 7.5){};
-        \node[ocirc] at (6.141, 6.94){};
-        \node[ocirc] at (8.304, 7.22){};
-        \node[ocirc] at (2.224, 7.408){};
-        \node[ocirc] at (0.025, 4.688){};
-        \node[ocirc] at (0.025, 4.128){};
-        \node[ocirc] at (6.051, 4.625){};
-        \node[ocirc] at (6.051, 4.065){};
-        \node[ocirc] at (8.213, 4.345){};
-        \node[ocirc] at (2.188, 4.408){};
-        \node[ocirc] at (12, 10.375){};
-        \node[ocirc] at (13.75, 10.375){};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.448, 10.688){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.573, 11){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.448, 10.125){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.573, 10.375){B};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (5.595, 10.718){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.47, 11.03){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (5.595, 10.155){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.47, 10.405){B};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 7.75){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 8.062){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 7.187){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 7.438){B};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (5.705, 7.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.58, 7.875){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (5.705, 7){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.58, 7.25){B};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.442, 4.75){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.567, 5.062){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.442, 4.187){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.567, 4.437){B};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (5.584, 4.688){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.459, 5){A};
-        \node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (5.584, 4.125){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (5.459, 4.375){B};
-        \node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.438){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
-%        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{\text{A}}$};
-%        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.64, 4.438){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.25, 4.75){A\textasciicircumB};
-%        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (8.665, 4.438){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (8.276, 4.75){$\overline{\text{A^B}}$};
-        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.706, 7.438){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.317, 7.75){A|B};
-%        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (8.786, 7.313){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (8.397, 7.625){$\overline{\text{A|B}}$};
-        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.538, 10.375){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.148, 10.688){A\&B};
-%        \node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (8.58, 10.468){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (8.191, 10.78){$\overline{\text{A&B}}$};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (0.956, 11.375){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (0.456, 11.75){and};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (7.028, 11.28){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6.528, 11.655){nand};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (0.846, 8.313){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (0.346, 8.688){or};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (6.955, 8.125){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6.455, 8.5){nor};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (0.775, 5.313){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (0.275, 5.688){xor};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (6.83, 5.25){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6.33, 5.625){xnor};
-        \node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (12.75, 11.25){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (12.25, 11.625){not};
-    \end{tikzpicture}
+
+
+\begin{frame}{Logic Gates: NOT}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ieeestd not port] at (12.877, 10.375){};
+				\node[ocirc] at (12, 10.375){};
+				\node[ocirc] at (13.75, 10.375){};
+				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{\text{A}}$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{table}[]
+					\begin{tabular}{c c}
+						A & $\overline{\text{A}}$ \\
+						\hline
+						1 & 0                     \\
+						1 & 0                     \\
+						0 & 1                     \\
+						0 & 1
+					\end{tabular}
+				\end{table}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
+
+
+
+\begin{frame}{Logic Gates: AND, NAND}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ieeestd and port] at (1.11, 10.22){};
+				\node[ieeestd nand port] at (1.081, 7.47){};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){A\&B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A\&B}}$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{table}[]
+					\begin{tabular}{c c c c}
+						A & B & A\&B & $\overline{\text{A\&B}}$ \\
+						\hline
+						1 & 1 & 1    & 0                        \\
+						1 & 0 & 0    & 1                        \\
+						0 & 1 & 0    & 1                        \\
+						0 & 0 & 0    & 1
+					\end{tabular}
+				\end{table}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+\begin{frame}{Logic Gates: OR, NOR}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ieeestd or port] at (1.11, 10.22){};
+				\node[ieeestd nor port] at (1.081, 7.47){};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){A|B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A|B}}$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{table}[]
+					\begin{tabular}{c c c c}
+						A & B & A|B & $\overline{\text{A|B}}$ \\
+						\hline
+						1 & 1 & 1    & 0                        \\
+						1 & 0 & 1    & 0                        \\
+						0 & 1 & 1    & 0                        \\
+						0 & 0 & 0    & 1
+					\end{tabular}
+				\end{table}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+
+\begin{frame}{Logic Gates: XOR, XNOR}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ieeestd xor port] at (1.11, 10.22){};
+				\node[ieeestd xnor port] at (1.081, 7.47){};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
+				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){A{\textasciicircum}B};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A{\textasciicircum}B}}$};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{center}
+				\begin{table}[]
+					\begin{tabular}{c c c c}
+						A & B & A{\textasciicircum}B & $\overline{\text{A{\textasciicircum}B}}$ \\
+						\hline
+						1 & 1 & 0    & 1                        \\
+						1 & 0 & 1    & 0                        \\
+						0 & 1 & 1    & 0                        \\
+						0 & 0 & 0    & 1
+					\end{tabular}
+				\end{table}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+
+
 
 
 
