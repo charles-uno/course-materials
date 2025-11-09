@@ -1,55 +1,51 @@
 
 \Section{Boolean Logic}
 
-\Subsection{Truth Tables}
+\Subsection{Boolean Operators}
 
-\begin{frame}{Ones and Zeroes}
+\begin{frame}{What does boolean mean?}
 	\begin{itemize}
-		\item Boolean logic uses two values: true and false.
+		\item Boolean logic uses two values: true and false
 		\item On a computer, true is 1 and false is 0.
-		\item A single boolean value is simple. When we put multiple boolean values together, complex logic becomes possible.
+		\item When we put multiple boolean values together, complex logic becomes possible.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Truth Tables}
+
+	A boolean operator takes boolean input(s) and produces a boolean output. For example,
+
 	\begin{tabular}{c c c}
-		A & B & A or B \\
+		A & B & A and B \\
 		\hline
-		1 & 1 & 1      \\
-		1 & 0 & 1      \\
-		0 & 1 & 1      \\
+		1 & 1 & 1       \\
+		1 & 0 & 0       \\
+		0 & 1 & 0       \\
 		0 & 0 & 0
 	\end{tabular}
 \end{frame}
 
-\begin{frame}{Truth Tables}
-	\begin{tabular}{c c c}
-		A & B & (A or B) and \big((not A) or (not B)\big) \\
-		\hline
-		1 & 1 & 0                                         \\
-		1 & 0 & 1                                         \\
-		0 & 1 & 1                                         \\
-		0 & 0 & 0
-	\end{tabular}
-\end{frame}
 
-\Subsection{Logic Gates}
-
-\begin{frame}{Logic Gates: NOT}
-	We use an overline to indicate NOT. So $\overline{A}$ means "not A".
+\begin{frame}{Boolean Operators: NOT}
+	NOT takes a boolean value and flips it. We write NOT as an overline. 
+	\bigskip
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
+			The NOT gate looks like this:
+			\bigskip
+
 			\begin{tikzpicture}
 				% Paths, nodes and wires:
 				\node[ieeestd not port] at (12.877, 10.375){};
-				\node[ocirc] at (12, 10.375){};
-				\node[ocirc] at (13.75, 10.375){};
 				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
 				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{A}$};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
+			Truth table:
+			\bigskip
+
 			\begin{center}
 				\begin{tabular}{c c}
 					A & $\overline{A}$ \\
@@ -61,11 +57,11 @@
 		\end{column}
 	\end{columns}
 
-	You may also see $\neg A$ or $\sim A$
+You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 \end{frame}
 
 
-\begin{frame}{Logic Gates: AND, NAND}
+\begin{frame}{Boolean Operators: AND, NAND}
 	We use a dot to indicate AND. So $A \cdot B$ means "A and B". This is pretty easy to remember since the dot is also used for multiplication
 
 	NAND is its opposite. "A nand B" is the same as "not (A and B)"
@@ -102,7 +98,7 @@
 \end{frame}
 
 
-\begin{frame}{Logic Gates: OR, NOR}
+\begin{frame}{Boolean Operators: OR, NOR}
 	We use a plus sign for OR. So $A+B$ means "A or B".
 
 	NOR is its opposite
@@ -139,7 +135,7 @@
 \end{frame}
 
 
-\begin{frame}{Logic Gates: XOR, XNOR}
+\begin{frame}{Boolean Operators: XOR, XNOR}
 	XOR (pronounced "exor" or "zor") means exclusive OR. So A is true or B is true, but not both. It's indicated by $\text{A}\oplus\text{B}$
 
 	XNOR (pronounced like "exnor" or "snore")
@@ -182,10 +178,14 @@
 \end{frame}
 
 
-\Subsection{Logic Circuits}
+\Subsection{Boolean Expressions}
 
-\begin{frame}{Multiple Gates Together}
-	We can chain multiple gates together to perform complex operations. This is called a logic circuit
+\begin{frame}{Multiple Operators Together}
+	We can chain multiple operators together to perform complex operations.
+
+	Multiple gates is called a circuit
+
+	Multiple operators written down is called an expression
 
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
@@ -233,8 +233,6 @@
 		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){??};
 	\end{tikzpicture}
 \end{frame}
-
-
 
 
 \begin{frame}{Understanding a Logic Circuit}
@@ -402,9 +400,9 @@
 \begin{frame}{Arithmetic with Circuits}
 	The four possible cases are:
 	\begin{itemize}
-		\item $0b0 + 0b0 = 0b0$
-		\item $0b1 + 0b0 = 0b1$
-		\item $0b0 + 0b1 = 0b1$
+		\item $0b0 + 0b0 = 0b00$
+		\item $0b1 + 0b0 = 0b01$
+		\item $0b0 + 0b1 = 0b01$
 		\item $0b1 + 0b1 = 0b10$
 	\end{itemize}
 
@@ -420,18 +418,16 @@
 		\end{tabular}
 	\end{center}
 
-	Where C and D are the digits of the result
+	Where A and B are the input bits, C and D are the digits of the result
 \end{frame}
-
-
 
 
 \begin{frame}{Arithmetic with Circuits}
 	The four possible cases are:
 	\begin{itemize}
-		\item $0b0 + 0b0 = 0b0$
-		\item $0b1 + 0b0 = 0b1$
-		\item $0b0 + 0b1 = 0b1$
+		\item $0b0 + 0b0 = 0b00$
+		\item $0b1 + 0b0 = 0b01$
+		\item $0b0 + 0b1 = 0b01$
 		\item $0b1 + 0b1 = 0b10$
 	\end{itemize}
 
@@ -447,9 +443,9 @@
 		\end{tabular}
 	\end{center}
 
-What is the logical expression for C? How about D?
+	What is the logical expression for C? How about D?
 
-Let's draw the expression
+	Let's draw the expression
 
 \end{frame}
 
