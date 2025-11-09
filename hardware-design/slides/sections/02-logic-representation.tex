@@ -17,33 +17,31 @@
 	\begin{tabular}{c c c}
 		A & B & A or B \\
 		\hline
-		1 & 1 & 1       \\
-		1 & 0 & 1       \\
-		0 & 1 & 1       \\
+		1 & 1 & 1      \\
+		1 & 0 & 1      \\
+		0 & 1 & 1      \\
 		0 & 0 & 0
 	\end{tabular}
 \end{frame}
 
 \begin{frame}{Truth Tables}
 	\begin{tabular}{c c c}
-		A & B & (A or B) and \big((not A) or (not B)\big)  \\
+		A & B & (A or B) and \big((not A) or (not B)\big) \\
 		\hline
-		1 & 1 & 0       \\
-		1 & 0 & 1       \\
-		0 & 1 & 1       \\
+		1 & 1 & 0                                         \\
+		1 & 0 & 1                                         \\
+		0 & 1 & 1                                         \\
 		0 & 0 & 0
 	\end{tabular}
 \end{frame}
 
-
 \Subsection{Logic Gates}
-
 
 \begin{frame}{Logic Gates: NOT}
 
-	We use an overbar to indicate NOT. So $\overline{\text{A}}$ means "not A". 
+	We use an overbar to indicate NOT. So $\overline{A}$ means "not A".
 
-		\begin{columns}
+	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{tikzpicture}
 				% Paths, nodes and wires:
@@ -51,13 +49,13 @@
 				\node[ocirc] at (12, 10.375){};
 				\node[ocirc] at (13.75, 10.375){};
 				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{\text{A}}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{A}$};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c}
-					A & $\overline{\text{A}}$ \\
+					A & $\overline{A}$ \\
 					\hline
 					1 & 0                     \\
 					1 & 0                     \\
@@ -68,16 +66,16 @@
 		\end{column}
 	\end{columns}
 
-	You may also see $\neg\text{A}$ or $\sim\text{A}$
+	You may also see $\neg A$ or $\sim A$
 \end{frame}
 
 
 
 \begin{frame}{Logic Gates: AND, NAND}
 
-We use a dot to indicate AND. So $\text{A}\cdot\text{B}$ means "A and B". This is pretty easy to remember since the dot is also used for multiplication
+	We use a dot to indicate AND. So $A \cdot B$ means "A and B". This is pretty easy to remember since the dot is also used for multiplication
 
-NAND is its opposite. "A nand B" is the same as "not (A and B)"
+	NAND is its opposite. "A nand B" is the same as "not (A and B)"
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -89,26 +87,27 @@ NAND is its opposite. "A nand B" is the same as "not (A and B)"
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${\text{A}\cdot\text{B}}$};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A}\cdot\text{B}}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${A \cdot B}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{A \cdot B}$};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & $\text{A}\cdot\text{B}$ & $\overline{\text{A}\cdot\text{B}}$ \\
+					A & B & $A \cdot B$ & $\overline{A \cdot B}$ \\
 					\hline
-					1 & 1 & 1    & 0                        \\
-					1 & 0 & 0    & 1                        \\
-					0 & 1 & 0    & 1                        \\
-					0 & 0 & 0    & 1
+					1 & 1 & 1                       & 0                                  \\
+					1 & 0 & 0                       & 1                                  \\
+					0 & 1 & 0                       & 1                                  \\
+					0 & 0 & 0                       & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
 	\end{columns}
 
 
-	AND can also be indicated by $\text{A}\land\text{B}$ 
+
+	AND can also be indicated by $A \land B$ or $A \& B$
 \end{frame}
 
 
@@ -116,9 +115,9 @@ NAND is its opposite. "A nand B" is the same as "not (A and B)"
 
 \begin{frame}{Logic Gates: OR, NOR}
 
-We use a plus sign for OR. So A+B means "A or B". 
+	We use a plus sign for OR. So $A+B$ means "A or B".
 
-NOR is its opposite
+	NOR is its opposite
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -130,32 +129,32 @@ NOR is its opposite
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${\text{A}+\text{B}}$};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A}+\text{B}}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${A + B}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{A + B}$};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & $\text{A}+\text{B}$ & $\overline{\text{A}+\text{B}}$ \\
+					A & B & $A + B$ & $\overline{A + B}$ \\
 					\hline
-					1 & 1 & 1   & 0                       \\
-					1 & 0 & 1   & 0                       \\
-					0 & 1 & 1   & 0                       \\
-					0 & 0 & 0   & 1
+					1 & 1 & 1                   & 0                              \\
+					1 & 0 & 1                   & 0                              \\
+					0 & 1 & 1                   & 0                              \\
+					0 & 0 & 0                   & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
 	\end{columns}
 
-	You may also see $\text{A}\lor\text{B}$
+	You may also see $A \lor B$ or $A | B$
 \end{frame}
 
 
 \begin{frame}{Logic Gates: XOR, XNOR}
 	XOR (pronounced "exor" or "zor") means exclusive OR. So A is true or B is true, but not both. It's indicated by $\text{A}\oplus\text{B}$
 
-	XNOR (pronounced like "exnor" or "snore") 
+	XNOR (pronounced like "exnor" or "snore")
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{tikzpicture}
@@ -173,18 +172,18 @@ NOR is its opposite
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & ${\text{A}\oplus\text{B}}$ & $\overline{\text{A}\oplus\text{B}}$ \\
+					A & B & ${A \oplus B}$ & $\overline{A \oplus B}$ \\
 					\hline
-					1 & 1 & 0                    & 1                                        \\
-					1 & 0 & 1                    & 0                                        \\
-					0 & 1 & 1                    & 0                                        \\
-					0 & 0 & 0                    & 1
+					1 & 1 & 0                          & 1                                   \\
+					1 & 0 & 1                          & 0                                   \\
+					0 & 1 & 1                          & 0                                   \\
+					0 & 0 & 0                          & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
 	\end{columns}
 
-You may also see $\text{A}\veebar\text{B}$
+	You may also see $A \veebar B$ or $A \not\equiv B$
 \end{frame}
 
 
@@ -259,11 +258,70 @@ You may also see $\text{A}\veebar\text{B}$
 
 
 
+
+\begin{frame}{Adder with Carry}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ieeestd and port] at (5.205, 5){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (2.571, 3.688){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.259, 4){A};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.465cm] at (2.598, 2.964){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.286, 3.214){B};
+		\node[ieeestd xor port] at (5.205, 3.286){};
+		\node[jump crossing] at (3.854, 3.571){};
+		\draw (3.994, 3.571) -- (4.123, 3.566);
+		\draw (4.123, 3.006) -- (3, 3);
+		\draw (3.714, 3.571) -- (3, 3.571);
+		\draw (4.123, 4.72) -- (3.857, 4.714) -- (3.854, 3.711);
+		\draw (3.857, 3.429) -- (3.857, 3);
+		\draw (4.123, 5.28) -- (3.429, 5.286) -- (3.429, 3.571);
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (6.688, 5.027){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (6.375, 5.339){C};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (6.688, 3.286){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (6.375, 3.598){D};
+	\end{tikzpicture}
+\end{frame}
+
+
+
+\begin{frame}{Bigger Adder with Carry}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ieeestd and port] at (5.205, 5){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (2.571, 3.688){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.259, 4){B};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.465cm] at (2.598, 2.964){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.286, 3.214){C};
+		\node[ieeestd xor port] at (5.205, 3.286){};
+		\node[jump crossing] at (3.854, 3.571){};
+		\draw (3.994, 3.571) -- (4.123, 3.566);
+		\draw (4.123, 3.006) -- (3, 3);
+		\draw (3.714, 3.571) -- (3, 3.571);
+		\draw (4.123, 4.72) -- (3.857, 4.714) -- (3.854, 3.711);
+		\draw (3.857, 3.429) -- (3.857, 3);
+		\draw (4.123, 5.28) -- (3.429, 5.286) -- (3.429, 3.571);
+		\node[ieeestd xor port] at (7.776, 6){};
+		\node[ieeestd and port] at (7.776, 7.714){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (2.598, 6.402){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.286, 6.714){A};
+		\node[jump crossing] at (6.429, 6.283){};
+		\draw (6.571, 6.286) -- (6.714, 6.286);
+		\draw (6.695, 7.434) -- (6.429, 7.429) -- (6.429, 6.429);
+		\draw (6.695, 5.72) -- (6.429, 5.714);
+		\draw (6.429, 6.143) -- (6.429, 5.714) -- (6.429, 5) -- (6.286, 5);
+		\draw (6.695, 7.994) -- (6, 8) -- (6, 6.286) -- (6.286, 6.286);
+		\draw (6, 6.286) -- (3, 6.286);
+		\draw (6.286, 3.286) -- (8.857, 3.286);
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.402, 7.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.089, 8.054){D};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.429, 6.027){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.116, 6.339){E};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.402, 3.402){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.089, 3.714){F};
+	\end{tikzpicture}
+\end{frame}
+
+
+
+
 \begin{frame}{Exercises}
 
 	\begin{enumerate}
 		\item Draw a logic circuit for the boolean function
 		      $f(A, B) = (A \oplus B) + (A \cdot B)$
+
+		\item Draw a logic circuit for the boolean function
+		      $f(A, B) = (A xor B) nor (A and B)$
 
 		\item Write out the truth table for the boolean function
 		      $f(A, B) = (A + B) \cdot (\overline{A \cdot B})$. Do you recognize it?
