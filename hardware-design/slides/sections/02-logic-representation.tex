@@ -1,7 +1,7 @@
 
-\Section{Logic Representation}
+\Section{Boolean Logic}
 
-\Subsection{Boolean Logic}
+\Subsection{Truth Tables}
 
 \begin{frame}{Ones and Zeroes}
 
@@ -38,8 +38,7 @@
 \Subsection{Logic Gates}
 
 \begin{frame}{Logic Gates: NOT}
-
-	We use an overbar to indicate NOT. So $\overline{A}$ means "not A".
+	We use an overline to indicate NOT. So $\overline{A}$ means "not A".
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -57,9 +56,7 @@
 				\begin{tabular}{c c}
 					A & $\overline{A}$ \\
 					\hline
-					1 & 0                     \\
-					1 & 0                     \\
-					0 & 1                     \\
+					1 & 0              \\
 					0 & 1
 				\end{tabular}
 			\end{center}
@@ -96,21 +93,17 @@
 				\begin{tabular}{c c c c}
 					A & B & $A \cdot B$ & $\overline{A \cdot B}$ \\
 					\hline
-					1 & 1 & 1                       & 0                                  \\
-					1 & 0 & 0                       & 1                                  \\
-					0 & 1 & 0                       & 1                                  \\
-					0 & 0 & 0                       & 1
+					1 & 1 & 1           & 0                      \\
+					1 & 0 & 0           & 1                      \\
+					0 & 1 & 0           & 1                      \\
+					0 & 0 & 0           & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
 	\end{columns}
 
-
-
 	AND can also be indicated by $A \land B$ or $A \& B$
 \end{frame}
-
-
 
 
 \begin{frame}{Logic Gates: OR, NOR}
@@ -138,10 +131,10 @@
 				\begin{tabular}{c c c c}
 					A & B & $A + B$ & $\overline{A + B}$ \\
 					\hline
-					1 & 1 & 1                   & 0                              \\
-					1 & 0 & 1                   & 0                              \\
-					0 & 1 & 1                   & 0                              \\
-					0 & 0 & 0                   & 1
+					1 & 1 & 1       & 0                  \\
+					1 & 0 & 1       & 0                  \\
+					0 & 1 & 1       & 0                  \\
+					0 & 0 & 0       & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
@@ -174,10 +167,10 @@
 				\begin{tabular}{c c c c}
 					A & B & ${A \oplus B}$ & $\overline{A \oplus B}$ \\
 					\hline
-					1 & 1 & 0                          & 1                                   \\
-					1 & 0 & 1                          & 0                                   \\
-					0 & 1 & 1                          & 0                                   \\
-					0 & 0 & 0                          & 1
+					1 & 1 & 0              & 1                       \\
+					1 & 0 & 1              & 0                       \\
+					0 & 1 & 1              & 0                       \\
+					0 & 0 & 0              & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
@@ -196,6 +189,207 @@
 
 \Subsection{Logic Circuits}
 
+\begin{frame}{Multiple Gates Together}
+	We can chain multiple gates together to perform complex operations. This is called a logic circuit
+
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.571, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.259, 4.286){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.545, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.232, 5.054){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[jump crossing] at (3.429, 4.717){};
+		\draw (3.838, 4.709) -- (3.571, 4.714);
+		\draw (3.838, 4.149) -- (2, 4.143);
+		\draw (3.429, 4.577) -- (3.429, 4.143);
+		\draw (3.429, 4.857) -- (3.429, 5.857) -- (3.838, 5.863);
+		\draw (3.286, 4.714) -- (2, 4.714);
+		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (8.741, 5.312){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (8.429, 5.625){??};
+	\end{tikzpicture}
+
+	What does this one do?
+\end{frame}
+
+\begin{frame}{Understanding a Logic Circuit}
+	We can work from left to right, making note of what each gate does
+
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.571, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.259, 4.286){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.545, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.232, 5.054){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[jump crossing] at (3.429, 4.717){};
+		\draw (3.838, 4.709) -- (3.571, 4.714);
+		\draw (3.838, 4.149) -- (2, 4.143);
+		\draw (3.429, 4.577) -- (3.429, 4.143);
+		\draw (3.429, 4.857) -- (3.429, 5.857) -- (3.838, 5.863);
+		\draw (3.286, 4.714) -- (2, 4.714);
+		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){??};
+	\end{tikzpicture}
+\end{frame}
+
+
+
+
+\begin{frame}{Understanding a Logic Circuit}
+	We can work from left to right, making note of what each gate does
+
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.571, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.259, 4.286){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.545, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.232, 5.054){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[jump crossing] at (3.429, 4.717){};
+		\draw (3.838, 4.709) -- (3.571, 4.714);
+		\draw (3.838, 4.149) -- (2, 4.143);
+		\draw (3.429, 4.577) -- (3.429, 4.143);
+		\draw (3.429, 4.857) -- (3.429, 5.857) -- (3.838, 5.863);
+		\draw (3.286, 4.714) -- (2, 4.714);
+		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Understanding a Logic Circuit}
+	Then we can write the corresponding truth table
+
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.571, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.259, 4.286){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.545, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.232, 5.054){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[jump crossing] at (3.429, 4.717){};
+		\draw (3.838, 4.709) -- (3.571, 4.714);
+		\draw (3.838, 4.149) -- (2, 4.143);
+		\draw (3.429, 4.577) -- (3.429, 4.143);
+		\draw (3.429, 4.857) -- (3.429, 5.857) -- (3.838, 5.863);
+		\draw (3.286, 4.714) -- (2, 4.714);
+		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+	\end{tikzpicture}
+
+	\begin{center}
+		\begin{tabular}{c c c c c}
+			A & B & ${A + B}$ & $\overline{A \cdot B}$ & $(A+B) \cdot  (\overline{A \cdot B})$ \\
+			\hline
+			1 & 1 & 1         & 0                      & 0                                     \\
+			1 & 0 & 1         & 1                      & 1                                     \\
+			0 & 1 & 1         & 1                      & 1                                     \\
+			0 & 0 & 0         & 1                      & 0
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+
+
+\begin{frame}{Drawing a Logic Expression}
+	Similarly, if we have a logical expression, we can draw it as a diagram from right to left.
+
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (5.598, 5.741){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (4.857, 6.054){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.5, 4.884){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.857, 5.196){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Drawing a Logic Expression}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.402, 5.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.089, 6.054){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.375, 6.509){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.062, 6.821){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.357, 4.857){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.714, 5.17){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Drawing a Logic Expression}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.402, 5.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.089, 6.054){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.375, 6.509){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.062, 6.821){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.402, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.089, 4.286){B};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.375, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.062, 5.054){A};
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Drawing a Logic Expression}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.571, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.259, 4.286){B};
+		\node[ieeestd and port] at (7.205, 5.286){};
+		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (1.545, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (1.232, 5.054){A};
+		\node[ieeestd or port] at (4.919, 6.143){};
+		\node[ieeestd nand port] at (4.919, 4.429){};
+		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
+		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
+		\node[jump crossing] at (3.429, 4.717){};
+		\draw (3.838, 4.709) -- (3.571, 4.714);
+		\draw (3.838, 4.149) -- (2, 4.143);
+		\draw (3.429, 4.577) -- (3.429, 4.143);
+		\draw (3.429, 4.857) -- (3.429, 5.857) -- (3.838, 5.863);
+		\draw (3.286, 4.714) -- (2, 4.714);
+		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
+		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Functional Completeness}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item There are many ways to build gates from other gates.
+				\item It's even possible to build all gates using only NAND. This is called functional completeness.
+				\item Why might functional completeness be useful?
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\columnwidth]{images/functional-completeness.png}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 
 \begin{frame}{Logic Circuits}
