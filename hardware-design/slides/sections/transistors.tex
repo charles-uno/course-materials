@@ -1,34 +1,159 @@
 
 
-\Section{Transistors}
+\Section{Electrical Circuits}
 
 
-
-\begin{frame}{Transistors}
-
+\begin{frame}{The Setup}
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
-		\node[npn] at (5.25, 6.02){};
-		\node[npn] at (5.25, 3.98){};
-		\draw (5.25, 2) to[american resistor, /tikz/circuitikz/bipoles/length=0.700cm] (5.25, 3.21);
-		\draw (5.25, 3.21) -- (7, 3.25);
-		\draw (4.41, 3.98) -- (3, 4);
-		\draw (4.41, 6.02) -- (3, 6);
-		\draw (5.25, 6.79) -- (5.25, 7);
-		\draw (3, 7) -- (5.25, 7) -- (7, 7);
-		\draw (3, 2) -- (5.25, 2) -- (7, 2);
-		\node[ground] at (7, 2){};
-		\draw (5.25, 5.25) -- (5.25, 4.75);
-		\node[ocirc] at (3, 6){};
-		\node[ocirc] at (3, 4){};
-		\node[ocirc] at (7, 3.25){};
-		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (6.5, 6.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 7){5V};
-		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (3.5, 5.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (3, 6){A};
-		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.215cm] at (3.5, 3.875){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (3, 4){B};
-		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.715cm] at (6.5, 3.625){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 4){A\&B};
-		\node[shape=rectangle, minimum width=0.965cm, minimum height=0.465cm] at (6.5, 1.75){} node[anchor=north west, align=left, text width=0.577cm, inner sep=6pt] at (6, 2){0V};
+		\node[ground] at (2.571, 5.659){};
+		\node[sground, yscale=-1] at (2.571, 8.484){};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.857, 9){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.536, 9.286){3V};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.893, 5.286){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.571, 5.571){0V};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.536, 7.143){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.214, 7.429){input};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (2.429, 7.143){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (2.107, 7.429){logic};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (3.821, 7.143){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (3.5, 7.429){output};
 	\end{tikzpicture}
+\end{frame}
+
+
+
+\Subsection{Resistors}
+
+
+
+\begin{frame}{What is a resistor?}
+	light bulb
+
+	ceramic
+
+	the coils in your toaster
+
+	something to soak up energy
+
+	if you run electric current through it and it gets hot, it's a resistor (or at least has resistance)
+\end{frame}
+
+
+\begin{frame}{Voltage Drops in the Resistor}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ground] at (2.571, 5.659){};
+		\draw (2.571, 8.484) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (2.571, 7.199);
+		\node[sground, yscale=-1] at (2.571, 8.484){};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.964, 8.571){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.643, 8.857){3V};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.107, 6.143){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.786, 6.429){0V};
+		\draw[-latex] (1.571, 6.286) -- (2.286, 6.857);
+		\draw[-latex] (1.571, 6) -- (2.286, 5.571);
+		\draw (2.571, 7.199) -- (2.571, 5.659);
+	\end{tikzpicture}
+\end{frame}
+
+
+
+
+\begin{frame}{Voltage only drops if it has somewhere to go}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ground] at (2.571, 5.659){};
+		\draw (2.571, 8.484) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (2.571, 7.199);
+		\node[sground, yscale=-1] at (2.571, 8.484){};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.893, 7.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.571, 8.143){3V};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.857, 5.429){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.536, 5.714){0V};
+		\draw[-latex] (1.286, 8.143) -- (2.286, 8.571);
+		\draw[-latex] (1.429, 7.714) -- (2.286, 7.286);
+		\draw[-latex] (1.571, 5.429) -- (2.286, 5.571);
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{NOT ALLOWED}
+
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			We assume:
+			\begin{itemize}
+				\item Top rail fixed at 12V
+				\item Bottom rail fixed at 0V
+				\item Wires have zero resistance
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ground] at (2.571, 5.659){};
+				\node[sground, yscale=-1] at (2.571, 8.484){};
+				\draw (2.571, 8.484) -- (2.571, 5.659);
+			\end{tikzpicture}		\end{column}
+	\end{columns}
+
+	If you try to build this, one of those assumptions will fail
+
+
+
 
 \end{frame}
+
+
+\Subsection{Transistors}
+
+\begin{frame}{Historical Transistors}
+	\includegraphics[width=0.5\columnwidth]{images/tube-transistor-wiki}
+\end{frame}
+
+
+\begin{frame}{Modern Transistors}
+	\includegraphics[width=\columnwidth]{images/semiconductor-transistor-overkill}
+\end{frame}
+
+
+
+\begin{frame}{Transistor Behavior}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\draw (0, 5.429) -- (4, 5.429);
+		\node[ground] at (4, 5.429){};
+		\draw (0, 8) -- (4, 8);
+		\node[shape=rectangle, minimum width=0.893cm, minimum height=0.536cm] at (0.321, 7.857){} node[anchor=north west, align=left, text width=0.505cm, inner sep=6pt] at (-0.143, 8.143){12V};
+		\node[shape=rectangle, minimum width=0.893cm, minimum height=0.536cm] at (0.286, 5.714){} node[anchor=north west, align=left, text width=0.505cm, inner sep=6pt] at (-0.179, 6){0V};
+		\node[npn] at (2.571, 6.429){};
+		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.143, 6.714){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (-0.179, 7){A};
+		\draw (1.714, 6.429) -- (0, 6.429);
+		\draw (2.571, 7.199) -- (2.571, 8);
+		\draw (2.571, 5.659) -- (2.571, 5.429);
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}{Transistor Behavior}
+\end{frame}
+
+
+\begin{frame}{Transistor Behavior}
+\end{frame}
+
+
+
+\begin{frame}{Example Logic}
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\draw (0, 4) -- (4, 4);
+		\node[ground] at (4, 4){};
+		\draw (2.84, 7.484) to[american resistor] (2.857, 6);
+		\draw (0, 8) -- (4, 8);
+		\node[shape=rectangle, minimum width=1.75cm, minimum height=0.679cm] at (0.679, 7.643){} node[anchor=north west, align=left, text width=1.362cm, inner sep=6pt] at (-0.214, 8){12 Volts};
+		\node[shape=rectangle, minimum width=1.536cm, minimum height=0.679cm] at (0.643, 4.357){} node[anchor=north west, align=left, text width=1.148cm, inner sep=6pt] at (-0.143, 4.714){0 Volts};
+		\node[npn] at (2.84, 5){};
+		\draw (2.84, 7.484) -- (2.857, 8);
+		\draw (2.84, 4.23) -- (2.857, 4);
+		\draw (2, 5) -- (0, 5);
+		\draw (2.857, 6) -- (2.84, 5.77);
+		\draw (2.857, 5.857) -- (4, 5.857);
+		\node[shape=rectangle, minimum width=0.715cm, minimum height=0.679cm] at (0.232, 5.214){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (-0.143, 5.571){A};
+		\node[shape=rectangle, minimum width=0.715cm, minimum height=0.679cm] at (3.857, 6.214){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.482, 6.571){$\overline{A}$};
+	\end{tikzpicture}
+\end{frame}
+
 
 
