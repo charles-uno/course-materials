@@ -1,25 +1,13 @@
 \Section{Assembly Functions}
 
 
+\begin{frame}{Push and Pop}
 
+	When a program starts running, the OS loads the instructions into memory.
 
+	It also allocates memory for the program to use during execution
 
-\begin{frame}{more commands in assembly}
-
-
-	\begin{itemize}
-		\item add rd, rn, \# ... add rd, rn1, rn2
-		\item sub rd, rn, \# ... sub rd, rn1, rn2
-		\item mov rd, rn ... mov rd, \#
-		\item mul rd, rn1, rn2
-		\item ldr rd, =label
-		\item NEW ldr, rd, [rn]
-		\item NEW ldr, rd, [rn, \#]
-		\item NEW str rs, rn
-		\item NEW push
-		\item NEW pop
-	\end{itemize}
-
+	There is a special register called the stack pointer which provides the location of that memory
 
 \end{frame}
 
@@ -27,19 +15,99 @@
 
 
 
+\begin{frame}{Working Memory}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
 
-\begin{frame}{Stack Frame}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &   & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & ? &                            & 0x4fe4 & -                 \\
-			r1                            & ? &                            & 0x4fe8 & -                 \\
-			r2                            & ? &                            & 0x4fec & -                 \\
-			r3                            & ? &                            & 0x4ff0 & -                 \\
-			r4                            & ? &                            & 0x4ff4 & -                 \\
-			sp                            & ? &                            & 0x4ff8 & -                 \\
-			pc                            & ? &                            & 0x4ffc & -                 \\
-			lr                            & ? &                            & 0x5000 & {\textbackslash}0 \\
-		\end{tabular}
-	\end{alltt}
+			we do not know what piece of memory the OS will provide
+
+			arbitrarily say it starts at 0x5000
+
+			stack pointer points to the "bottom" of our available memory. we work our way "up" by subtracting from the stack pointer
+
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{alltt}
+				\begin{tabular}{ r | l }
+					0x4ff8 & \vdots           \\
+					0x4ffc & available        \\
+					0x5000 & available        \\
+					0x5004 & in use by parent \\
+					0x5008 & in use by parent \\
+					0x500c & \vdots           \\
+				\end{tabular}
+			\end{alltt}
+		\end{column}
+	\end{columns}
+
 \end{frame}
+
+
+\begin{frame}{Branch and Link}
+
+	New command: BL
+
+	Branch and Link
+
+	Branch = modify PC. Recall: PC tells us what to do next. Usually we just do the next line. In this case, we will jump to some other part of the program. This is how we call a function.
+
+	Link = set LR to the PC of the next line. Once we're done with the function, this is how we return to the parent context.
+
+\end{frame}
+
+
+\begin{frame}{Stack Frame Walkthrough}
+	\small
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{alltt}
+				\begin{tabular}{r | l}
+					       & {\quad}.section .rodata \\
+					       &                         \\
+					       & {\quad}.text            \\
+					       & func:                   \\
+					0x3fd4 & {\quad}push \{fp, lr\}  \\
+					0x3fd8 & {\quad}add fp, sp, \#4  \\
+					0x3fdc & {\quad}sub sp, sp, \#8  \\
+					0x3fe0 & {\quad}...              \\
+					0x3fe4 & {\quad}sub sp, fp, \#4  \\
+					0x3fe8 & {\quad}pop \{fp, pc\}   \\
+					       &                         \\
+					       & {\quad}.global main     \\
+					       & main:                   \\
+					0x3fec & {\quad}push \{fp, lr\}  \\
+					0x3ff0 & {\quad}add fp, sp, \#4  \\
+					0x3ff4 & {\quad}sub sp, sp, \#16 \\
+					0x3ff8 & {\quad}bl func          \\
+					0x3ffc & {\quad}sub sp, fp, \#4  \\
+					0x4000 & {\quad}pop \{fp, pc\}   \\
+				\end{tabular}
+			\end{alltt}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{alltt}
+				\begin{tabular}{ r | l}
+					\vdots & \vdots    \\
+					0x4ffc & available \\
+					0x5000 & available \\
+					0x5004 & in use    \\
+					\vdots & \vdots    \\
+				\end{tabular}
+			\end{alltt}
+
+			\vspace{1cm}
+
+			\begin{alltt}
+				\begin{tabular}{ r | l}
+					sp & 0x5004    \\
+					fp & parent fp \\
+					pc & 0x3fec    \\
+					lr & parent lr \\
+				\end{tabular}
+			\end{alltt}
+		\end{column}
+	\end{columns}
+
+\end{frame}
+
+
