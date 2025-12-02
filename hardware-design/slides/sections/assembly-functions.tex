@@ -1,6 +1,8 @@
 \Section{Assembly Functions}
 
 
+\Subsection{The Stack}
+
 \begin{frame}{Push and Pop}
 
 	When a program starts running, the OS loads the instructions into memory.
@@ -12,9 +14,6 @@
 \end{frame}
 
 
-
-
-
 \begin{frame}{Working Memory}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -24,6 +23,8 @@
 			arbitrarily say it starts at 0x5000
 
 			stack pointer points to the "bottom" of our available memory. we work our way "up" by subtracting from the stack pointer
+
+			The rules are the same when we call a function. It looks at SP to know the "bottom" of its available memory, then works up from there
 
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -43,6 +44,9 @@
 \end{frame}
 
 
+\Subsection{Calling a Function}
+
+
 \begin{frame}{Branch and Link}
 
 	New command: BL
@@ -54,6 +58,8 @@
 	Link = set LR to the PC of the next line. Once we're done with the function, this is how we return to the parent context.
 
 \end{frame}
+
+\Subsection{Stack Frames}
 
 
 \begin{frame}{Stack Frame Walkthrough}
@@ -69,7 +75,7 @@
 					0x3fd4 & {\quad}push \{fp, lr\}  \\
 					0x3fd8 & {\quad}add fp, sp, \#4  \\
 					0x3fdc & {\quad}sub sp, sp, \#4  \\
-					0x3fe0 & {\quad}...              \\
+					0x3fe0 & {\quad}@ ...            \\
 					0x3fe4 & {\quad}sub sp, fp, \#4  \\
 					0x3fe8 & {\quad}pop \{fp, pc\}   \\
 					       &                         \\
@@ -109,6 +115,8 @@
 	\end{columns}
 
 \end{frame}
+
+\Subsection{Local Variables}
 
 
 \begin{frame}{Local Variables}
