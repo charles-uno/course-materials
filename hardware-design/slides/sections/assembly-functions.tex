@@ -68,7 +68,7 @@
 					       & func:                   \\
 					0x3fd4 & {\quad}push \{fp, lr\}  \\
 					0x3fd8 & {\quad}add fp, sp, \#4  \\
-					0x3fdc & {\quad}sub sp, sp, \#8  \\
+					0x3fdc & {\quad}sub sp, sp, \#4  \\
 					0x3fe0 & {\quad}...              \\
 					0x3fe4 & {\quad}sub sp, fp, \#4  \\
 					0x3fe8 & {\quad}pop \{fp, pc\}   \\
@@ -77,7 +77,7 @@
 					       & main:                   \\
 					0x3fec & {\quad}push \{fp, lr\}  \\
 					0x3ff0 & {\quad}add fp, sp, \#4  \\
-					0x3ff4 & {\quad}sub sp, sp, \#12 \\
+					0x3ff4 & {\quad}sub sp, sp, \#8 \\
 					0x3ff8 & {\quad}bl func          \\
 					0x3ffc & {\quad}sub sp, fp, \#4  \\
 					0x4000 & {\quad}pop \{fp, pc\}   \\
