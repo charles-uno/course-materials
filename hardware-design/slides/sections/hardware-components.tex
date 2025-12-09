@@ -1,9 +1,5 @@
 
-\Section{Hardware Components}
-
-
-
-
+\Section{Von Neumann Architecture}
 
 \begin{frame}{Von Neumann Architecture}
 	\begin{itemize}
@@ -13,11 +9,161 @@
 	\includegraphics[width=\columnwidth]{images/von-neumann-architecture.png}
 \end{frame}
 
-\Subsection{The CPU}
+\Subsection{Parts of a Computer}
 
-\Subsection{Main Memory}
+\begin{frame}{CPU}
 
-\Subsection{Clock-Driven Execution}
+	Processing unit executes program instructions. Registers for storing the very specific pieces of data you're currently using. ALU which does the actual math. For example, if you're adding two numbers. Load into r0 and r1. Send them through the ALU. Store the result in r2.
+
+	Control unit drives execution. IR: instruction register. Holds the instruction currently being executed. PC: program counter. Holds the address of the next instruction.
+
+
+	Implements the processing unit and control unit of the von Neumann architecture
+	Functional units:
+	The arithmetic logic unit (ALU) performs arithmetic and logic operations
+	General purpose registers for storing program data
+	Control circuitry and special purpose registers for instruction execution
+	The clock drives the circuitry of the CPU to execute program instructions
+\end{frame}
+
+
+\begin{frame}{CPU}
+
+	It's all boolean logic!
+
+	\includegraphics[width=\columnwidth]{images/example-alu}
+	\includegraphics[width=\columnwidth]{images/register-file}
+	\includegraphics[width=\columnwidth]{images/full-cpu}
+
+\end{frame}
+
+
+\begin{frame}{Main Memory}
+	Stores program data and instructions
+
+	historically: tiny bits of magnetic field on a spinning disk
+
+	modern SSD: basically a bunch of NAND gates plugged into each other
+
+	https://en.wikipedia.org/wiki/Flash_memory#NAND_flash
+\end{frame}
+
+
+\begin{frame}{Busses}
+	\begin{itemize}
+		\item Address bus: what address in memory are we working with?
+		\item Control bus: what are we doing with that address? Eg read or write
+		\item Data bus: carries data between registers and memory
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Input and Output}
+
+	The input unit(s) load program data and instructions on the computer and initiate program execution.
+
+	The output unit(s) store or receive program results.
+
+\end{frame}
+
+
+\Subsection{Executing Instructions}
+
+\begin{frame}{FDEW}
+
+	\begin{itemize}
+		\item Fetch. Read the instruction from memory into IR (in the control unit of the CPU)
+		\item Decode. Set up the processing unit to perform the instruction. Send the instruction to the ALU, open gates to send appropriate registers to ALU inputs
+		\item Execute. Send the inputs and the instruction into the ALU, which computes the result
+		\item Write. Store the results from the ALU
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Fetch}
+	\includegraphics[width=\columnwidth]{images/fdew-fetch}
+
+	The control unit fetches the next instruction from memory.
+	The special register pc (program counter) in the control unit contains the address of the next instruction.
+	That address is sent on the address bus, from the control unit to memory.
+	The READ command is sent on the control bus, from the control unit to memory.
+	The memory unit reads the instruction at the given address, and sends them on the data bus to the control unit. The instruction is stored in the special register ir (instruction register).
+	The control unit increments the value of pc to the address of the next instruction.
+
+
+\end{frame}
+
+\begin{frame}{Decode}
+	\includegraphics[width=\columnwidth]{images/fdew-decode}
+
+	The control unit decodes the instruction.
+	After the fetch phase, the instruction is in the special register ir (instruction register) of the control unit.
+	The control unit decodes the operation to perform and the location of the operands from the instruction.
+	The control unit tells the processing unit what operation to perform.
+	The control unit fetches data operand values from their locations (CPU registers, memory, or instruction bits), sends as inputs to the processing unit.
+	(Often) no information sent over buses (between CPU and Memory).
+
+\end{frame}
+
+\begin{frame}{Execute}
+	\includegraphics[width=\columnwidth]{images/fdew-execute}
+
+	The processing unit executes the instruction.
+	In the processing unit, the ALU (arithmetic logic unit) performs the instruction operation on the instruction data operands (now stored in registers).
+	No information sent over buses (between CPU and Memory).
+
+	NOTE: this is the only part of the cycle that actually does any "real" work! The rest is overhead and bookkeeping
+\end{frame}
+
+\begin{frame}{Write}
+	\includegraphics[width=\columnwidth]{images/fdew-write}
+
+	The control unit stores the result of the executed instruction to memory.
+	The resulting value is sent on the data bus, from the control unit to memory.
+	The address of the storage location is sent on the address bus, from the control unit to memory.
+	The WRITE command is sent on the control bus, from the control unit to memory.
+	When the memory unit receives this information, it writes the value to memory at the specified address.
+
+	NOTE: write to memory vs writeback to registers. these both happen as necessary after execute. don't worry too much about it. we'll talk a bit more in memory hierarchy
+\end{frame}
+
+
+\begin{frame}{Clock-Driven Execution}
+	\begin{itemize}
+		\item Each step takes one CPU cycle
+		\item CPU speed is measured in GHz
+		\item 1 MHz = 1 million cycles per second
+		\item 1 GHz = 1 billion cycles per second
+	\end{itemize}
+
+	In the CPU, the clock drives the execution of instructions.
+	Used to determine when circuits from each stage become available.
+	Used to determine when outputs are ready to be inputs for next stage.
+	Time is discrete, not continuous. There is time 0, 1, 2, … but no time 1.5.
+	The processor's clock cycle time is the time between each clock tick. Units: seconds, nanoseconds, etc.
+	The processor's clock speed (or clock rate) is 1/(clock cycle time); the number of clock ticks per second. Units: megahertz, gigahertz, etc.
+	1 MHz = one million clock ticks per second
+	1 GHz = one billion clock ticks per second
+
+\end{frame}
+
+
+\begin{frame}{Why not just make the clock run faster?}
+
+	\begin{itemize}
+		\item Electricity moves at approximately the speed of light
+		\item Speed of light is about one foot per nanosecond
+		\item If the computer runs at 1 GHz, that's one cycle every nanosecond
+		\item Wires in the CPU are twisted and packed very tightly. How long do you suppose they would be if straightened?
+	\end{itemize}
+\end{frame}
+
+\Subsection{Von Neumann Bottleneck}
+
+\begin{frame}{Von Neumann Bottleneck}
+	Suppose you have an array of a billion integers in memory. You want to add 1 to each of them. How do you do it?
+\end{frame}
 
 \Subsection{Memory Hierarchy}
 
@@ -44,5 +190,48 @@
 		\item Latency
 		\item Capacity
 		\item Transfer rate (aka throughput)
+	\end{itemize}
+\end{frame}
+
+\Subsection{Instruction Walkthrough}
+
+\begin{frame}{foo bar}
+	\includegraphics[width=\columnwidth]{images/instruction-breakdown}
+	\begin{itemize}
+		\item fizz
+		\item buzz
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{foo bar}
+	\includegraphics[width=\columnwidth]{images/fdew-add-fetch}
+	\begin{itemize}
+		\item Memory address of the next instruction is stored in the special register pc (program counter). 
+		\item The CPU fetches the that instruction from memory into the special purpose register ir (instruction register). 
+		\item The address in pc is incremented, to hold the address of the next instruction.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Walkthrough: Decode}
+	\includegraphics[width=\columnwidth]{images/fdew-add-decode}
+	\begin{itemize}
+		\item The CPU breaks down the instruction bits from IR into its component parts
+		\item The opcode is sent to the ALU
+		\item Sources and destination are sent to the register file
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Walkthrough: Execute}
+	\includegraphics[width=\columnwidth]{images/fdew-add-execute}
+	\begin{itemize}
+		\item ALU performs the operation on the operands
+		\item ALU outputs result and condition code values associated with the result value.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Walkthrough: Write(back)}
+	\includegraphics[width=\columnwidth]{images/fdew-add-write}
+	\begin{itemize}
+		\item Result from ALU is stored in destination register
 	\end{itemize}
 \end{frame}
