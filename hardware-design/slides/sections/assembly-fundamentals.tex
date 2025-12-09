@@ -31,6 +31,18 @@
 
 
 \begin{frame}{Why Learn Assembly?}
+
+	in C, Java, Python, etc, there's a lot of work happening under the hood
+	objects, abstraction, variable scope
+	the language does a lot of work for you
+	makes the code more legible
+	lets you worry less about what's happening in the hardware
+
+	but we want to worry about the hardware!
+	each line of assembly code is one CPU instruction (more or less)
+	each type of processor has its own assembly dialect. the code you write on a pi will not work on another machine
+
+	helps us understand much more precisely what's happening
 \end{frame}
 
 
@@ -54,23 +66,34 @@
 	\end{alltt}
 \end{frame}
 
+
+
+\begin{frame}{Hello World in Assembly}
+
+	{\Huge
+		TODO: don't worry about PC yet? they haven't done the von neumann arch section yet}
+
+\end{frame}
+
+
+
 \begin{frame}{Hello World with Instruction Addresses}
 	\begin{alltt}
 		\begin{tabular}{ r | l }
-			-      & \Highlight{@ global read-only data (aka constants)} \\
-			-      & .section .rodata                                    \\
-			%            - & greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0" \\
-			-      & \Highlight{@ execution starts here}                 \\
-			-      & .section .text                                      \\
-			-      & .global main                                        \\
-			-      & main:                                               \\
-			-      & \quad \Highlight{@ load the string address to r0}   \\
-			0x4fe0 & \quad ldr r0, =greeting                             \\
-			-      & \quad \Highlight{@ print the string from r0}        \\
-			0x4fe4 & \quad bl printf                                     \\
-			-      & \quad \Highlight{@ return 0 (normal exit status)}   \\
-			0x4fe8 & \quad mov r0, \#0                                   \\
-			0x4fec & \quad bl exit                                       \\
+			-      & \Highlight{@ global read-only data (aka constants)}               \\
+			-      & .section .rodata                                                  \\
+			-      & greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0" \\
+			-      & \Highlight{@ execution starts here}                               \\
+			-      & .section .text                                                    \\
+			-      & .global main                                                      \\
+			-      & main:                                                             \\
+			-      & \quad \Highlight{@ load the string address to r0}                 \\
+			0x4fe0 & \quad ldr r0, =greeting                                           \\
+			-      & \quad \Highlight{@ print the string from r0}                      \\
+			0x4fe4 & \quad bl printf                                                   \\
+			-      & \quad \Highlight{@ return 0 (normal exit status)}                 \\
+			0x4fe8 & \quad mov r0, \#0                                                 \\
+			0x4fec & \quad bl exit                                                     \\
 		\end{tabular}
 	\end{alltt}
 \end{frame}
