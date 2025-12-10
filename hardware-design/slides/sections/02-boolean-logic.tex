@@ -77,13 +77,13 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
 				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicAnd{A}{B}};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{A \cdot B}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){\LogicNand{A}{B}};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & \LogicAnd{A}{B} & $\overline{A \cdot B}$ \\
+					A & B & \LogicAnd{A}{B} & \LogicNand{A}{B} \\
 					\hline
 					1 & 1 & 1           & 0                      \\
 					1 & 0 & 0           & 1                      \\
@@ -229,7 +229,7 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\draw (3.286, 4.714) -- (2, 4.714);
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
 		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){??};
 	\end{tikzpicture}
 \end{frame}
@@ -255,8 +255,8 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\draw (3.286, 4.714) -- (2, 4.714);
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 	\end{tikzpicture}
 \end{frame}
 
@@ -281,13 +281,13 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\draw (3.286, 4.714) -- (2, 4.714);
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 	\end{tikzpicture}
 
 	\begin{center}
 		\begin{tabular}{c c c c c}
-			A & B & ${A + B}$ & $\overline{A \cdot B}$ & $(A+B) \cdot  (\overline{A \cdot B})$ \\
+			A & B & ${A + B}$ & \LogicNand{A}{B} & $(A+B) \cdot  (\LogicNand{A}{B})$ \\
 			\hline
 			1 & 1 & 1         & 0                      & 0                                     \\
 			1 & 0 & 1         & 1                      & 1                                     \\
@@ -306,8 +306,8 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		% Paths, nodes and wires:
 		\node[ieeestd and port] at (7.205, 5.286){};
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (5.598, 5.741){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (4.857, 6.054){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.5, 4.884){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.857, 5.196){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.5, 4.884){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.857, 5.196){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 	\end{tikzpicture}
 \end{frame}
 
@@ -321,8 +321,8 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\node[ieeestd or port] at (4.919, 6.143){};
 		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.357, 4.857){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.714, 5.17){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.357, 4.857){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.714, 5.17){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 	\end{tikzpicture}
 \end{frame}
 
@@ -338,8 +338,8 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
 		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.402, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.089, 4.286){B};
 		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.375, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.062, 5.054){A};
 	\end{tikzpicture}
@@ -363,8 +363,8 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\draw (3.286, 4.714) -- (2, 4.714);
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){A+B};
-		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){$\overline{A \cdot B}$};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\overline{A \cdot B})$};
+		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(A+B) \cdot  (\LogicNand{A}{B})$};
 	\end{tikzpicture}
 \end{frame}
 
@@ -509,11 +509,11 @@ Full adders can be chained together. Carry in as well as carry out.
 \begin{frame}{Exercises}
 	\begin{enumerate}
 		\item Draw a logic circuit for the boolean function
-		      $f(A, B) = (A \oplus B) + (A \cdot B)$
+		      $f(A, B) = (A \oplus B) + (\LogicAnd{A}{B})$
 		\item Draw a logic circuit for the boolean function
 		      $f(A, B) = (A xor B) nor (A and B)$
 		\item Write out the truth table for the boolean function
-		      $f(A, B) = (A + B) \cdot (\overline{A \cdot B})$. Do you recognize it?
+		      $f(A, B) = (A + B) \cdot (\LogicNand{A}{B})$. Do you recognize it?
 	\end{enumerate}
 \end{frame}
 
