@@ -39,7 +39,7 @@
 				% Paths, nodes and wires:
 				\node[ieeestd not port] at (12.877, 10.375){};
 				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){$\overline{A}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){\LogicNot{A}};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -48,7 +48,7 @@
 
 			\begin{center}
 				\begin{tabular}{c c}
-					A & $\overline{A}$ \\
+					A & \LogicNot{A} \\
 					\hline
 					1 & 0              \\
 					0 & 1
