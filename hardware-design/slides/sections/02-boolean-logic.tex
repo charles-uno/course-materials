@@ -62,7 +62,7 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 
 
 \begin{frame}{Boolean Operators: AND, NAND}
-	We use a dot to indicate AND. So $A \cdot B$ means "A and B". This is pretty easy to remember since the dot is also used for multiplication
+	We use a dot to indicate AND. So \LogicAnd{A}{B} means "A and B". This is pretty easy to remember since the dot is also used for multiplication
 
 	NAND is its opposite. "A nand B" is the same as "not (A and B)"
 
@@ -76,14 +76,14 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${A \cdot B}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicAnd{A}{B}};
 				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{A \cdot B}$};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & $A \cdot B$ & $\overline{A \cdot B}$ \\
+					A & B & \LogicAnd{A}{B} & $\overline{A \cdot B}$ \\
 					\hline
 					1 & 1 & 1           & 0                      \\
 					1 & 0 & 0           & 1                      \\
