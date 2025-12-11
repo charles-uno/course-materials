@@ -27,7 +27,7 @@
 
 
 \begin{frame}{Boolean Operators: NOT}
-	NOT takes a boolean value and flips it. We write NOT as an overline. 
+	NOT takes a boolean value and flips it. We write NOT as an overline.
 	\bigskip
 
 	\begin{columns}
@@ -50,14 +50,14 @@
 				\begin{tabular}{c c}
 					A & \LogicNot{A} \\
 					\hline
-					1 & 0              \\
+					1 & 0            \\
 					0 & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
 	\end{columns}
 
-You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
+	You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 \end{frame}
 
 
@@ -85,10 +85,10 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\begin{tabular}{c c c c}
 					A & B & \LogicAnd{A}{B} & \LogicNand{A}{B} \\
 					\hline
-					1 & 1 & 1           & 0                      \\
-					1 & 0 & 0           & 1                      \\
-					0 & 1 & 0           & 1                      \\
-					0 & 0 & 0           & 1
+					1 & 1 & 1               & 0                \\
+					1 & 0 & 0               & 1                \\
+					0 & 1 & 0               & 1                \\
+					0 & 0 & 0               & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
@@ -122,10 +122,10 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\begin{tabular}{c c c c}
 					A & B & \LogicOr{A}{B} & \LogicNor{A}{B} \\
 					\hline
-					1 & 1 & 1       & 0                  \\
-					1 & 0 & 1       & 0                  \\
-					0 & 1 & 1       & 0                  \\
-					0 & 0 & 0       & 1
+					1 & 1 & 1              & 0               \\
+					1 & 0 & 1              & 0               \\
+					0 & 1 & 1              & 0               \\
+					0 & 0 & 0              & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
@@ -158,10 +158,10 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\begin{tabular}{c c c c}
 					A & B & \LogicXor{A}{B} & \LogicXnor{A}{B} \\
 					\hline
-					1 & 1 & 0              & 1                       \\
-					1 & 0 & 1              & 0                       \\
-					0 & 1 & 1              & 0                       \\
-					0 & 0 & 0              & 1
+					1 & 1 & 0               & 1                \\
+					1 & 0 & 1               & 0                \\
+					0 & 1 & 1               & 0                \\
+					0 & 0 & 0               & 1
 				\end{tabular}
 			\end{center}
 		\end{column}
@@ -289,10 +289,10 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 		\begin{tabular}{c c c c c}
 			A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & $(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$ \\
 			\hline
-			1 & 1 & 1         & 0                      & 0                                     \\
-			1 & 0 & 1         & 1                      & 1                                     \\
-			0 & 1 & 1         & 1                      & 1                                     \\
-			0 & 0 & 0         & 1                      & 0
+			1 & 1 & 1              & 0                & 0                                            \\
+			1 & 0 & 1              & 1                & 1                                            \\
+			0 & 1 & 1              & 1                & 1                                            \\
+			0 & 0 & 0              & 1                & 0
 		\end{tabular}
 	\end{center}
 \end{frame}
@@ -452,7 +452,7 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 
 
 \begin{frame}{The Half Adder}
-Full adders can be chained together. Carry in as well as carry out. 
+	Full adders can be chained together. Carry in as well as carry out.
 
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
