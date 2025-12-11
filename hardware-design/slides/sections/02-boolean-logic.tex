@@ -99,7 +99,7 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 
 
 \begin{frame}{Boolean Operators: OR, NOR}
-	We use a plus sign for OR. So \LogicOr{A}{B} means "A or B".
+	We use \LogicOr{A}{B} to mean "A or B".
 
 	NOR is its opposite
 
@@ -136,7 +136,7 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 
 
 \begin{frame}{Boolean Operators: XOR, XNOR}
-	XOR (pronounced "exor" or "zor") means exclusive OR. So A is true or B is true, but not both. It's indicated by $\text{A}\oplus\text{B}$
+	XOR (pronounced "exor" or "zor") means exclusive OR. So A is true or B is true, but not both. It's indicated by \LogicXor{A}{B}
 
 	XNOR (pronounced like "exnor" or "snore")
 	\begin{columns}
@@ -149,14 +149,14 @@ You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
 				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){${\text{A}\oplus\text{B}}$};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){$\overline{\text{A}\oplus\text{B}}$};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicXor{A}{B}};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){\LogicXnor{A}{B}};
 			\end{tikzpicture}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{center}
 				\begin{tabular}{c c c c}
-					A & B & ${A \oplus B}$ & $\overline{A \oplus B}$ \\
+					A & B & \LogicXor{A}{B} & \LogicXnor{A}{B} \\
 					\hline
 					1 & 1 & 0              & 1                       \\
 					1 & 0 & 1              & 0                       \\
@@ -509,7 +509,7 @@ Full adders can be chained together. Carry in as well as carry out.
 \begin{frame}{Exercises}
 	\begin{enumerate}
 		\item Draw a logic circuit for the boolean function
-		      $f(A, B) = (A \oplus B) + (\LogicAnd{A}{B})$
+		      $f(A, B) = (\LogicXor{A}{B}) + (\LogicAnd{A}{B})$
 		\item Draw a logic circuit for the boolean function
 		      $f(A, B) = (A xor B) nor (A and B)$
 		\item Write out the truth table for the boolean function
