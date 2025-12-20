@@ -16,21 +16,23 @@
 
 \begin{frame}[fragile]{Hello World in C}
 
-\begin{lstlisting}[language=C]
+\begin{minted}{C}
 #include <stdio.h>
 
 int main() {
 	printf("Hello, World!\n");
 	return 0;
 }
-\end{lstlisting}
+\end{minted}
 \end{frame}
 
 
 
 \begin{frame}[fragile]{Hello World in Assembly}
-
-\begin{lstlisting}[language=Assembly]
+% haven't yet found a perfect highlighter match
+% tasm - dislikes pound signs for int literals
+% nasm - dislikes comments with @
+	\begin{minted}{nasm}
 	@ global read-only data (aka constants)
 	.section .rodata
 	greeting: .ascii "Hello World!\n\0"
@@ -46,7 +48,7 @@ int main() {
 	@ return 0 (normal exit status)
 	mov r0, #0
 	bl exit
-\end{lstlisting}
+\end{minted}
 
 \end{frame}
 
