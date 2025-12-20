@@ -2,8 +2,55 @@
 \Section{Assembly Fundamentals}
 
 
-\begin{frame}{Hello World in C}
+\begin{frame}[fragile]{Hello World in Python}
+
+\begin{minted}{python}
+	#!/usr/bin/env python3
+
+	print('hello world!')
+\end{minted}
+
 \end{frame}
+	
+
+
+\begin{frame}[fragile]{Hello World in C}
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+	printf("Hello, World!\n");
+	return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Hello World in Assembly}
+
+\begin{lstlisting}[language=Assembly]
+	@ global read-only data (aka constants)
+	.section .rodata
+	greeting: .ascii "Hello World!\n\0"
+
+	@ execution starts here
+	.section .text
+	.global main
+	main:
+	@ load the string address to r0
+	ldr r0, =greeting
+	@ print the string from r0
+	bl printf
+	@ return 0 (normal exit status)
+	mov r0, #0
+	bl exit
+\end{lstlisting}
+
+\end{frame}
+
+
 
 
 \begin{frame}[fragile]{Compiling C Code}
@@ -49,13 +96,13 @@
 
 \begin{frame}{Memory and Registers}
 
-Memory is your bookshelf. 
+	Memory is your bookshelf.
 
-Register is your desk.
+	Register is your desk.
 
-If you want to read or write something, you have to take the notebook off your shelf and put it on the desk.
+	If you want to read or write something, you have to take the notebook off your shelf and put it on the desk.
 
-When coding in Assembly, we have to explicitly move data between memory and registers
+	When coding in Assembly, we have to explicitly move data between memory and registers
 
 \end{frame}
 
@@ -228,7 +275,7 @@ When coding in Assembly, we have to explicitly move data between memory and regi
 
 \Subsection{Global Variables}
 
-\Subsection{Basic Assembly Commands}
+\Subsection{Assembly Commands}
 
 \begin{frame}{commands in assembly}
 

@@ -13,6 +13,18 @@
 \usepackage{hyperref}
 \usepackage{alltt}
 
+% code highlighting
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  numbers=left,
+  commentstyle=\color{\AccentColor}\textit,
+}
+
+% original minted is broken with python 3.14 :|
+\usepackage{minted2}
+\usemintedstyle{manni}
+
 \hypersetup{
     colorlinks=true,
     % internal links

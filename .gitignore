@@ -7,3 +7,5 @@ output/
 *.aux
 *.log
 *.out
+*.data.minted
+_minted*
