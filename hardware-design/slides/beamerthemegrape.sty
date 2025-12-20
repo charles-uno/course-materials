@@ -13,15 +13,13 @@
 \usepackage{hyperref}
 \usepackage{alltt}
 
-% code highlighting
-\usepackage{listings}
-\lstset{
-  basicstyle=\ttfamily,
-  numbers=left,
-  commentstyle=\color{\AccentColor}\textit,
-}
-
-% original minted is broken with python 3.14 :|
+% HEADS UP!
+% minted is a pain in the ass, but the quality is much better than the next best option. specifically:
+% must build with -shall-escape
+% must have python installed with latexminted
+% the latexminted package seems to have been bundled with something, as I did not have to install it manually on 2025 Mac OS
+% 
+% original minted is broken with python 3.14 so use minted 2 as a workaround until the fix is deployed :|
 \usepackage{minted2}
 \usemintedstyle{manni}
 
