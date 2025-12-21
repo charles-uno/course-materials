@@ -1,112 +1,135 @@
-
 \Section{Assembly Fundamentals}
+
+\begin{frame}[fragile]{Hello World in C}
+	\begin{minted}{C}
+		#include <stdio.h>
+
+		int main() {
+			printf("Hello world!\n");
+			return 0;
+		}
+	\end{minted}
+
+	Your local C compiler can turn this into an executable, which you can then run:
+
+	\begin{minted}{bash}
+		$ gcc hello.c
+		$ ./a.out
+		Hello world!
+	\end{minted}
+\end{frame}
 
 
 \begin{frame}[fragile]{Hello World in Python}
+	\begin{minted}{python}
+		#!/usr/bin/env python3
 
-\begin{minted}{python}
-	#!/usr/bin/env python3
+		print('Hello world!')
+	\end{minted}
 
-	print('hello world!')
-\end{minted}
-
+	You can run this using your local Python interpreter:
+	\begin{minted}{bash}
+		$ ./hello.py
+		Hello world!
+	\end{minted}
 \end{frame}
-	
-
-
-\begin{frame}[fragile]{Hello World in C}
-
-\begin{minted}{C}
-#include <stdio.h>
-
-int main() {
-	printf("Hello, World!\n");
-	return 0;
-}
-\end{minted}
-\end{frame}
-
-
 
 \begin{frame}[fragile]{Hello World in Assembly}
-% haven't yet found a perfect highlighter match
-% tasm - dislikes pound signs for int literals
-% nasm - dislikes comments with @
-	\begin{minted}{nasm}
-	@ global read-only data (aka constants)
-	.section .rodata
-	greeting: .ascii "Hello World!\n\0"
+	% haven't yet found a perfect highlighter match
+	% tasm - dislikes pound signs for int literals
+	% nasm, gas - dislikes comments with @
+	% ca65 - comments and a lot of commands all black
+	% llvm, dasm16, hsail - nope
+	% hsail
+	\begin{minted}{tasm}
+		.section .rodata
+		greeting: .ascii "Hello world!\n\0"
 
-	@ execution starts here
-	.section .text
-	.global main
-	main:
-	@ load the string address to r0
-	ldr r0, =greeting
-	@ print the string from r0
-	bl printf
-	@ return 0 (normal exit status)
-	mov r0, #0
-	bl exit
-\end{minted}
+		.section .text
+		.global _start
+		_start:
+		ldr r0, =greeting
+		bl printf
+		mov r0, #0
+		bl exit
+	\end{minted}
+
+	You can assemble this into an executable and run it on your Raspberry Pi:
+	\begin{minted}{bash}
+		$ gcc hello.s
+		$ ./a.out
+		Hello world!
+	\end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{What makes assembly special?}
+	\begin{itemize}
+		\item It takes a lot of lines to do anything
+		\item There is so much boilerplates
+		\item Yikes
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{What makes assembly special?}
+
+	\begin{itemize}
+		\item Every computer architecture is a little bit different. An Intel CPU and an AMD CPU can both run the same logic, but they will do things in slightly different ways.
+		\item When coding in C, you (mostly) don't have to worry about it. The compiler figures out how to make your logic work on the current hardware.
+		\item Same for Python. The interpreter (written in C and compiled) figures out how to make your logic work on the current hardware.
+		\item Assembly is not like that. Intel assembly is tied to the hardware specifics of the Intel CPU. ARM assembly is a different language.
+		\item We study assembly because we want to talk about what is happening on hardware.
+	\end{itemize}
+
+	%	The following command compiles a program in C:
+	%	\begin{minted}{bash}
+	%		gcc hello.c -o hello
+	%	\end{minted}
+	%	This creates several intermediate files, eventually creating an executable file (which we can run).
+	%	`hello.c' -> preprocessor -> `hello.i' -> compiler -> `hello.s' -> assembler -> `hello.o' -> linker -> `hello'
+
+\end{frame}
+
+% per wikipedia:
+% Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
+
+\begin{frame}{Important Terminology}
+
+	Memory stores data and program instructions
+	CPU does the work
+	Registers are tiny tiny bits of storage right next to the CPU
+
+	Memory is your bookshelf
+	Desk is registers
+	You are the CPU
+	If you want to read or write anything, you have to take the book from your shelf and put it on the desk.
+
+
+	In C and Python, you don't worry about registers. You declare variables in memory and the compiler figures out how and when to do appropriate reads and writes
+	In Assembly, you have to manually shuffle values back and forth between memory and the registers
 
 \end{frame}
 
 
+\begin{frame}[fragile]{Hello World in Assembly (again)}
+	\begin{minted}{tasm}
+		.section .rodata
+		greeting: .ascii "Hello world!\n\0"
 
+		.section .text
+		.global _start
+		_start:
+		ldr r0, =greeting
+		bl printf
+		mov r0, #0
+		bl exit
+	\end{minted}
 
-\begin{frame}[fragile]{Compiling C Code}
-
-	The following command compiles a program in C:
-
-	\begin{verbatim}
-    gcc hello.c -o hello
-\end{verbatim}
-
-	This creates several intermediate files, eventually creating an executable file (which we can run).
-	`hello.c'
-	preprocessor
-	`hello.i'
-	compiler
-	`hello.s'
-	assembler
-	`hello.o'
-	linker
-	`hello'
-
-\end{frame}
-
-\begin{frame}{What is Assembly?}
+	Let's walk through what's happening on each line
 \end{frame}
 
 
-\begin{frame}{Why Learn Assembly?}
 
-	in C, Java, Python, etc, there's a lot of work happening under the hood
-	objects, abstraction, variable scope
-	the language does a lot of work for you
-	makes the code more legible
-	lets you worry less about what's happening in the hardware
-
-	but we want to worry about the hardware!
-	each line of assembly code is one CPU instruction (more or less)
-	each type of processor has its own assembly dialect. the code you write on a pi will not work on another machine
-
-	helps us understand much more precisely what's happening
-\end{frame}
-
-
-\begin{frame}{Memory and Registers}
-
-	Memory is your bookshelf.
-
-	Register is your desk.
-
-	If you want to read or write something, you have to take the notebook off your shelf and put it on the desk.
-
-	When coding in Assembly, we have to explicitly move data between memory and registers
-
-\end{frame}
 
 
 \begin{frame}[fragile]{Hello World in Assembly}
