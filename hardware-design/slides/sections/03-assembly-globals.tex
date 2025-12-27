@@ -93,8 +93,21 @@
 % per wikipedia:
 % Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
 
-\begin{frame}{Important Terminology}
+\begin{frame}{Registers and Memory}
+	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
+\end{frame}
 
+\begin{frame}{Registers and Memory}
+	\begin{itemize}
+		\item The \emph{CPU} is where computations actually happen.
+		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \emph{registers}. 
+		\item All other data is stored in \emph{memory} (aka RAM). This includes data as well as the program instructions themselves. 
+		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out. 
+		\item When coding in Assembly, we manually move data back and forth between memory and registers.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Registers and Memory}
 	Memory stores data and program instructions
 	CPU does the work
 	Registers are tiny tiny bits of storage right next to the CPU
@@ -109,6 +122,7 @@
 	In Assembly, you have to manually shuffle values back and forth between memory and the registers
 
 \end{frame}
+
 
 
 \begin{frame}[fragile]{Hello World in Assembly (again)}
