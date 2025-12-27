@@ -1,11 +1,8 @@
 @ global constants
 .section .rodata
-prompt:
-.ascii "how many koalas do you have? \0"
-input_fmt:
-.ascii "%d\0"
-report:
-.ascii "that's %d thumbs!\n\0"
+prompt: .ascii "how many koalas do you have? \0"
+input_fmt: .ascii "%d\0"
+report: .ascii "that's %d thumbs!\n\0"
 
 @ global variables
 .section .data
@@ -33,4 +30,4 @@ mov r1, r3
 bl printf
 
 mov r0, #0
-bl exit
+b exit
