@@ -38,7 +38,7 @@
 \setbeamercolor{title}{fg=PaperColor}
 \setbeamercolor{frametitle}{fg=PaperColor}
 \setbeamercolor{author}{fg=TextColor}
-\setbeamercolor{institute}{fg=TextColor}
+\setbeamercolor{institute}{fg=PaperColor}
 \setbeamercolor{date}{fg=TextColor}
 \setbeamercolor{normal text}{fg=TextColor}
 \setbeamercolor{item}{fg=TextColor}
@@ -84,8 +84,9 @@
 \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
 \draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.5);
 \draw[draw=PaperColor, fill=PaperColor] (0, 0.5) rectangle (1, 1);
+\node at (0.5, 0.25) {\usebeamertemplate{institute}};
 \node at (0.5, 0.4) {\usebeamertemplate{title}};
-\node at (0.5, 0.6) {\usebeamerfont{institute}\insertinstitute \;\; \textbullet \;\; \usebeamerfont{author}\insertauthor};
+\node at (0.5, 0.6) {\usebeamertemplate{author}};
 \node at (0.5, 0.9) {\usebeamertemplate{date}};
 \end{scope}
 \end{tikzpicture}

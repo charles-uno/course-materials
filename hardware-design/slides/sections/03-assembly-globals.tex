@@ -1,5 +1,13 @@
 \Section{Assembly Globals}
 
+\begin{frame}{Coding in Assembly}
+
+	You'll be doing coding exercises on an online emulator, as well as on your Raspberry Pi
+
+\end{frame}
+
+\Subsection{Why study assembly?}
+
 \begin{frame}[fragile]{Hello World in C}
 	\begin{minted}{C}
 		#include <stdio.h>
@@ -22,14 +30,12 @@
 
 \begin{frame}[fragile]{Hello World in Python}
 	\begin{minted}{python}
-		#!/usr/bin/env python3
-
 		print('Hello world!')
 	\end{minted}
 
 	You can run this using your local Python interpreter:
 	\begin{minted}{bash}
-		$ ./hello.py
+		$ python3 hello.py
 		Hello world!
 	\end{minted}
 \end{frame}
@@ -62,8 +68,7 @@
 	\end{minted}
 \end{frame}
 
-
-\begin{frame}[fragile]{What makes assembly special?}
+\begin{frame}{What makes assembly special?}
 	\begin{itemize}
 		\item It takes a lot of lines to do anything
 		\item There is so much boilerplates
@@ -71,8 +76,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{What makes assembly special?}
-
+\begin{frame}{What makes assembly special?}
 	\begin{itemize}
 		\item Every computer architecture is a little bit different. An Intel CPU and an AMD CPU can both run the same logic, but they will do things in slightly different ways.
 		\item When coding in C, you (mostly) don't have to worry about it. The compiler figures out how to make your logic work on the current hardware.
@@ -93,6 +97,57 @@
 % per wikipedia:
 % Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
 
+\Subsection{Global Constants}
+
+\begin{frame}{Global Constants}
+	\begin{itemize}
+		\item A global constant is defined in the code
+		\item Its value does not change during runtime
+		\item It has a name
+		\item We can use the name to load the \textbf{address} of that value
+	\end{itemize}
+\end{frame}
+
+\Subsection{Printf}
+
+
+\begin{frame}[fragile]{Favorite Number}
+	\begin{minted}{tasm}
+		.section .rodata
+		output_str: .ascii "My favorite number is %d\n\0"
+		favorite_num: .word 123
+		
+		.section .text
+		.global main
+		main:
+		ldr r0, =output_str
+		ldr r1, =favorite_num
+		ldr r1, [r1]
+		bl printf
+		mov r0, #0
+		b exit
+	\end{minted}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+\Subsection{Global Variables}
+
+\Subsection{Scanf}
+
+
+
+
+
+
 \begin{frame}{Registers and Memory}
 	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
 \end{frame}
@@ -100,9 +155,9 @@
 \begin{frame}{Registers and Memory}
 	\begin{itemize}
 		\item The \emph{CPU} is where computations actually happen.
-		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \emph{registers}. 
-		\item All other data is stored in \emph{memory} (aka RAM). This includes data as well as the program instructions themselves. 
-		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out. 
+		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \emph{registers}.
+		\item All other data is stored in \emph{memory} (aka RAM). This includes data as well as the program instructions themselves.
+		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out.
 		\item When coding in Assembly, we manually move data back and forth between memory and registers.
 	\end{itemize}
 \end{frame}
@@ -310,9 +365,6 @@
 
 
 
-\Subsection{Global Constants}
-
-\Subsection{Global Variables}
 
 \Subsection{Assembly Commands}
 
@@ -334,7 +386,6 @@
 \end{frame}
 
 
-\Subsection{Printf and Scanf}
 
 
 \Subsection{Memory Diagrams}
