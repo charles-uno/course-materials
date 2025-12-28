@@ -111,6 +111,30 @@
 \Subsection{Printf}
 
 
+\begin{frame}[fragile]{Output with Printf}
+	\begin{itemize}
+		\item We use \texttt{printf} to print output to the terminal
+		\item This same functionality exists in other languages, sometimes under the same name
+	\end{itemize}
+
+	Example in C for legibility
+
+	\begin{minted}{C}
+		const char* name = "charles";
+		printf("hello my name is %s\n", name);
+	\end{minted}
+
+	\begin{minted}{C}
+	const int year = 2026;
+	printf("the current year is %d\n", year);
+\end{minted}
+
+\end{frame}
+
+% more about format specifiers: https://www.geeksforgeeks.org/c/format-specifiers-in-c/
+
+
+
 \begin{frame}[fragile]{Favorite Number}
 	\begin{minted}{tasm}
 		.section .rodata
@@ -129,8 +153,13 @@
 	\end{minted}
 \end{frame}
 
-
-
+\begin{frame}{Favorite Number}
+	\begin{itemize}
+		\item This code is very similar to the earlier hello world code
+		\item The difference is, we now have a global constant number as well as the string
+		\item Strings are passed into \texttt{printf} by address. Numbers are passed in by value
+	\end{itemize}
+\end{frame}
 
 
 
