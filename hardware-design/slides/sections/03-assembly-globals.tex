@@ -110,14 +110,11 @@
 
 \Subsection{Printf}
 
-
-\begin{frame}[fragile]{Output with Printf}
+\begin{frame}[fragile]{Printf in C}
 	\begin{itemize}
-		\item We use \texttt{printf} to print output to the terminal
-		\item This same functionality exists in other languages, sometimes under the same name
+		\item We use \texttt{printf} to print output to the terminal in assembly
+		\item Let's look at C first. The functionality is the same and C is more legible
 	\end{itemize}
-
-	Example in C for legibility
 
 	\begin{minted}{C}
 		const char* name = "charles";
@@ -127,25 +124,52 @@
 	\begin{minted}{C}
 	const int year = 2026;
 	printf("the current year is %d\n", year);
-\end{minted}
+	\end{minted}
+\end{frame}
 
+
+\begin{frame}{Format Specifiers}
+	\begin{itemize}
+		\item \texttt{\%d} - interpret the value as an integer
+		\item \texttt{\%c} - interpret the value as a character
+		\item \texttt{\%s} - interpret the value as a pointer to a null-terminated string
+		\item Values are just ones and zeroes! You can use whatever format specifier you want. But you might not like the results
+		\item Why do we use a pointer to the string instead of the string itself?
+		% because it might not fit in the register
+	\end{itemize}
 \end{frame}
 
 % more about format specifiers: https://www.geeksforgeeks.org/c/format-specifiers-in-c/
 
+\begin{frame}[fragile]{Printf in Assembly}
 
-
-\begin{frame}[fragile]{Favorite Number}
 	\begin{minted}{tasm}
 		.section .rodata
-		output_str: .ascii "My favorite number is %d\n\0"
-		favorite_num: .word 123
+		output: .ascii "hello my name is %s\n\0"
+		name: .ascii "charles"
+
+		.section .text
+		.global main
+		main:
+		ldr r0, =output
+		ldr r1, =name
+		bl printf
+		mov r0, #0
+		b exit
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Printf in Assembly}
+	\begin{minted}{tasm}
+		.section .rodata
+		output_str: .ascii "the current year is %d\n\0"
+		current_year: .word 2026
 		
 		.section .text
 		.global main
 		main:
 		ldr r0, =output_str
-		ldr r1, =favorite_num
+		ldr r1, =current_year
 		ldr r1, [r1]
 		bl printf
 		mov r0, #0
@@ -153,9 +177,31 @@
 	\end{minted}
 \end{frame}
 
+
+
+
+\begin{frame}[fragile]{Printf in Assembly}
+
+
+	We'll get deeper into function calls later. For now:
+\begin{itemize}
+	\item \Arm{printf} is a function
+	\item \Arm{bl printf} is how we call it
+	\item \Arm{printf} looks at \Arm{r0} for its first argument (the output string)
+	\item if the output string includes a format identifier, it grabs the value from \Arm{r1}
+	\item if the output string includes another formst identifier, it grabs the value from \Arm{r2}, etc
+	\end{itemize}
+
+\end{frame}
+
+
+
 \begin{frame}{Favorite Number}
+
+
+
 	\begin{itemize}
-		\item This code is very similar to the earlier hello world code
+		\item Strings are passed 
 		\item The difference is, we now have a global constant number as well as the string
 		\item Strings are passed into \texttt{printf} by address. Numbers are passed in by value
 	\end{itemize}
