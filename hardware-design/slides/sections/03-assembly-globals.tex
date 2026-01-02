@@ -97,6 +97,31 @@
 % per wikipedia:
 % Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
 
+
+\Subsection{Registers and Memory}
+
+
+
+
+
+
+\begin{frame}{Registers and Memory}
+	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
+\end{frame}
+
+\begin{frame}{Registers and Memory}
+We'll dig deeper into the hardware later. For now, let's just look at three new terms:
+	\begin{itemize}
+		\item The \textbf{CPU} is where computations actually happen.
+		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \textbf{registers}.
+		\item All other data is stored in \textbf{memory} (aka RAM). This includes data as well as the program instructions themselves.
+		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out.
+		\item When coding in Assembly, we manually move data back and forth between memory and registers.
+	\end{itemize}
+\end{frame}
+
+
+
 \Subsection{Global Constants}
 
 \begin{frame}{Global Constants}
@@ -135,7 +160,7 @@
 		\item \texttt{\%s} - interpret the value as a pointer to a null-terminated string
 		\item Values are just ones and zeroes! You can use whatever format specifier you want. But you might not like the results
 		\item Why do we use a pointer to the string instead of the string itself?
-		% because it might not fit in the register
+		      % because it might not fit in the register
 	\end{itemize}
 \end{frame}
 
@@ -179,29 +204,51 @@
 
 
 
-
 \begin{frame}[fragile]{Printf in Assembly}
-
-
-	We'll get deeper into function calls later. For now:
-\begin{itemize}
-	\item \Arm{printf} is a function
-	\item \Arm{bl printf} is how we call it
-	\item \Arm{printf} looks at \Arm{r0} for its first argument (the output string)
-	\item if the output string includes a format identifier, it grabs the value from \Arm{r1}
-	\item if the output string includes another formst identifier, it grabs the value from \Arm{r2}, etc
-	\end{itemize}
-
+	\begin{minted}{tasm}
+		.section .rodata
+		output: .ascii "who has %d thumbs and wrote this? %s\n\0"
+		name: .ascii "charles\0"
+		n_thumbs: .word 2
+		
+		.section .text
+		.global main
+		main:
+		ldr r0, =output
+		ldr r3, =n_thumbs
+		ldr r3, [r1]
+		ldr r2, =name
+		bl printf
+		mov r0, #0
+		b exit
+	\end{minted}
 \end{frame}
 
 
+\begin{frame}{Calling Printf}
+	We'll get deeper into function calls later. For now:
+	\begin{itemize}
+		\item \Arm{printf} is a function
+		\item \Arm{bl printf} is how we call it
+		\item \Arm{printf} looks at \Arm{r0} for its first argument (the output string)
+		\item if the output string includes a format identifier, it grabs the value from \Arm{r1}
+		\item if the output string includes another formst identifier, it grabs the value from \Arm{r2}, etc
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Loading Values from Memory}
+	\begin{itemize}
+		\item The above code also used the command \Arm{ldr}. This command loads value from memory in two ways
+		\item \Arm{ldr r3, =n_thumbs} loads the address of global variable \Arm{n_thumbs} into \Arm{r3}
+		\item \Arm{ldr r1, [r3]} goes to the address at \Arm{r3} and puts the value in \Arm{r1}
+		\item It is very easy to mix this up!
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Favorite Number}
-
-
-
 	\begin{itemize}
-		\item Strings are passed 
+		\item Strings are passed
 		\item The difference is, we now have a global constant number as well as the string
 		\item Strings are passed into \texttt{printf} by address. Numbers are passed in by value
 	\end{itemize}
@@ -219,39 +266,6 @@
 \Subsection{Scanf}
 
 
-
-
-
-
-\begin{frame}{Registers and Memory}
-	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
-\end{frame}
-
-\begin{frame}{Registers and Memory}
-	\begin{itemize}
-		\item The \emph{CPU} is where computations actually happen.
-		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \emph{registers}.
-		\item All other data is stored in \emph{memory} (aka RAM). This includes data as well as the program instructions themselves.
-		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out.
-		\item When coding in Assembly, we manually move data back and forth between memory and registers.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Registers and Memory}
-	Memory stores data and program instructions
-	CPU does the work
-	Registers are tiny tiny bits of storage right next to the CPU
-
-	Memory is your bookshelf
-	Desk is registers
-	You are the CPU
-	If you want to read or write anything, you have to take the book from your shelf and put it on the desk.
-
-
-	In C and Python, you don't worry about registers. You declare variables in memory and the compiler figures out how and when to do appropriate reads and writes
-	In Assembly, you have to manually shuffle values back and forth between memory and the registers
-
-\end{frame}
 
 
 
