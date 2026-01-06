@@ -22,8 +22,8 @@ bl scanf
 ldr x1, =num_koalas
 ldr x1, [x1]
 // each koala has 6 thumbs
-mov r2, 6
-mul r3, r1, r2
+mov x2, 6
+mul x3, x1, x2
 
 ldr x0, =report
 mov x1, x3
