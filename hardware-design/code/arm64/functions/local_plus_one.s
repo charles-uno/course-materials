@@ -8,22 +8,22 @@
 .text
 add_one:
     sub sp, sp, 16
-    str fp, [sp, 8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 8
 
     add x0, x0, 1
 
-    ldr lr, [sp]
-    ldr fp, [sp, 8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 16
     ret
 
 .global main
 main: 
     sub sp, sp, 24
-    str fp, [sp, 8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 16
 
     ldr x0, =prompt
@@ -39,8 +39,8 @@ main:
     ldr x1, [x1]
     bl printf
 
-    ldr lr, [sp]
-    ldr fp, [sp, 8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 24
     ret
     

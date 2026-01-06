@@ -16,14 +16,14 @@
 add_one:
     // stack frame setup, no local variables
     sub sp, sp, 16
-    str fp, [sp, -8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 8
     // call nested function
     bl add_one_impl
     // stack frame teardown
-    ldr lr, [sp]
-    ldr fp, [sp, -8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 16
     // pass along nested return
     ret
@@ -31,22 +31,22 @@ add_one:
 add_one_impl:
     // stack frame setup, no local variables
     sub sp, sp, 16
-    str fp, [sp, -8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 8
     // return input +1
     add x0, x0, 1
     // stack frame teardown
-    ldr lr, [sp]
-    ldr fp, [sp, -8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 16
     ret
 
 main: 
     // stack frame setup, no local variables
     sub sp, sp, 16
-    str fp, [sp, -8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 8
     // prompt for input
     ldr x0, =prompt
@@ -66,8 +66,8 @@ main:
     ldr x1, [x1]
     bl printf
     // stack frame teardown
-    ldr lr, [sp]
-    ldr fp, [sp, -8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 16
     // return 0
     mov x0, 0
