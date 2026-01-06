@@ -11,7 +11,7 @@ add_one:
     sub sp, sp, 16
     str fp, [sp, -8]
     str lr, [sp]
-    add fp, sp, 16
+    add fp, sp, 8
 
     add x0, x0, 1
 
@@ -26,19 +26,16 @@ main:
     sub sp, sp, 16
     str fp, [sp, -8]
     str lr, [sp]
-    add fp, sp, 16
+    add fp, sp, 8
 
     ldr x0, =prompt
     bl printf
-
     ldr x0, =input_fmt
     ldr x1, =n
     bl scanf
-
     ldr x0, =n
     ldr x0, [x0]
     bl add_one
-
     mov x2, x0
     ldr x0, =output
     ldr x1, =n
@@ -48,6 +45,5 @@ main:
     ldr lr, [sp]
     ldr fp, [sp, -8]
     add sp, sp, 16
-
     ret
     

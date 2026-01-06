@@ -18,7 +18,7 @@ add_one:
     sub sp, sp, 16
     str fp, [sp, -8]
     str lr, [sp]
-    add fp, sp, 16
+    add fp, sp, 8
     // call nested function
     bl add_one_impl
     // stack frame teardown
@@ -33,7 +33,7 @@ add_one_impl:
     sub sp, sp, 16
     str fp, [sp, -8]
     str lr, [sp]
-    add fp, sp, 16
+    add fp, sp, 8
     // return input +1
     add x0, x0, 1
     // stack frame teardown
@@ -47,7 +47,7 @@ main:
     sub sp, sp, 16
     str fp, [sp, -8]
     str lr, [sp]
-    add fp, sp, 16
+    add fp, sp, 8
     // prompt for input
     ldr x0, =prompt
     bl printf

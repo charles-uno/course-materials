@@ -1,13 +1,20 @@
-    .section .rodata
-prompt: .ascii "Please enter 5: \0"
-input_format: .ascii "%d\0"
-reply_incorrect: .ascii "Incorrect!\n\0"
-reply_correct: .ascii "Correct!\n\0"
+.section .rodata
+    prompt: .ascii "Please enter 5: \0"
+    input_format: .ascii "%d\0"
+    reply_incorrect: .ascii "Incorrect!\n\0"
+    reply_correct: .ascii "Correct!\n\0"
 
-    .text
-    .global main
+.text
+.global main
 main: 
-    // stack frame setup
+    // stack frame setup, one local variable
+    sub sp, sp, 24
+    str lr, [sp, -16]
+    str fp, [sp, -8]
+    add fp, sp, 16
+
+
+
     push {fp, lr}
     add fp, sp, #4
     sub sp, sp, #4
