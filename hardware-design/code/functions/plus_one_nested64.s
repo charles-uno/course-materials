@@ -56,8 +56,8 @@ main:
     ldr x0, =n
     ldr x0, [x0]
     bl add_one
-    mov x2, x0
 
+    mov x2, x0
     ldr x0, =output
     ldr x1, =n
     ldr x1, [x1]
