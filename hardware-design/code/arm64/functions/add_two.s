@@ -9,31 +9,31 @@
 .global main
 main:
     // stack frame setup, two local variables
-    sub sp, sp, 32
+    sub sp, sp, 64
     str fp, [sp]
     str lr, [sp, 8]
-    add fp, sp, 24
+    add fp, sp, 48
 
     ldr x0, =prompt
     bl printf
     ldr x0, =format
-    mov x1, fp
+    add x1, sp, 16
     bl  scanf
 
     ldr x0, =prompt
     bl printf
     ldr x0, =format
-    sub x1, fp, 8
+    add x1, sp, 32
     bl  scanf
 
-    ldr x0, [fp]
-    ldr x1, [fp, -8]
+    ldr x0, [sp, 16]
+    ldr x1, [sp, 32]
     add x1, x0, x1
     ldr x0, =reply
     bl printf
 
     ldr lr, [sp, 8]
     ldr fp, [sp]
-    add sp, sp, 32
+    add sp, sp, 64
     ret
 
