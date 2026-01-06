@@ -10,8 +10,8 @@
 main:
     // stack frame setup, two local variables
     sub sp, sp, 32
-    str fp, [sp, 8]
-    str lr, [sp]
+    str fp, [sp]
+    str lr, [sp, 8]
     add fp, sp, 24
 
     ldr x0, =prompt
@@ -32,8 +32,8 @@ main:
     ldr x0, =reply
     bl printf
 
-    ldr lr, [sp]
-    ldr fp, [sp, 8]
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
     add sp, sp, 32
     ret
 

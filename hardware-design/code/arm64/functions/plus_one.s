@@ -12,14 +12,11 @@ add_one:
     str fp, [sp]
     str lr, [sp, 8]
     add fp, sp, 8
-
     add x0, x0, 1
-
     ldr lr, [sp, 8]
     ldr fp, [sp]
     add sp, sp, 16
     ret
-
 
 .global main
 main: 
@@ -27,7 +24,6 @@ main:
     str fp, [sp]
     str lr, [sp, 8]
     add fp, sp, 8
-
     ldr x0, =prompt
     bl printf
     ldr x0, =input_fmt
@@ -41,7 +37,6 @@ main:
     ldr x1, =n
     ldr x1, [x1]
     bl printf
-
     ldr lr, [sp, 8]
     ldr fp, [sp]
     add sp, sp, 16
