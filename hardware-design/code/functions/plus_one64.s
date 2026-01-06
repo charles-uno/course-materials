@@ -6,10 +6,6 @@
 .section .data
     n: .word 0
 
-
-// https://developer.arm.com/documentation/ddi0602/2025-12/Base-Instructions/STR--immediate---Store-register--immediate--?lang=en
-// https://stackoverflow.com/questions/64638627/explain-arm64-instruction-stp
-
 .text
 add_one:
     sub sp, sp, 16
