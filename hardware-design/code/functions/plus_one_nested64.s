@@ -17,6 +17,20 @@ add_one:
     str lr, [sp]
     add fp, sp, 16
 
+    bl add_one_impl
+
+    ldr lr, [sp]
+    ldr fp, [sp, -8]
+    add sp, sp, 16
+    ret
+
+
+add_one_impl:
+    sub sp, sp, 16
+    str fp, [sp, -8]
+    str lr, [sp]
+    add fp, sp, 16
+
     add x0, x0, 1
 
     ldr lr, [sp]
