@@ -10,30 +10,30 @@
 main:
     // stack frame setup, two local variables
     sub sp, sp, 32
-    str fp, [sp]
-    str lr, [sp, 8]
+    str fp, [sp, 16]
+    str lr, [sp, 24]
     add fp, sp, 24
 
     ldr x0, =prompt
     bl printf
     ldr x0, =format
-    mov x1, fp
+    sub x1, fp, 16
     bl  scanf
 
     ldr x0, =prompt
     bl printf
     ldr x0, =format
-    sub x1, fp, 8
+    sub x1, fp, 24
     bl  scanf
 
-    ldr x0, [fp]
-    ldr x1, [fp, -8]
+    ldr x0, [fp, -16]
+    ldr x1, [fp, -24]
     add x1, x0, x1
     ldr x0, =reply
     bl printf
 
-    ldr lr, [sp, 8]
-    ldr fp, [sp]
+    ldr lr, [fp]
+    ldr fp, [fp, -8]
     add sp, sp, 32
     ret
 
