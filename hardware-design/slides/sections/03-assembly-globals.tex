@@ -1,9 +1,11 @@
 \Section{Assembly Globals}
 
 \begin{frame}{Coding in Assembly}
-
-	You'll be doing coding exercises on an online emulator, as well as on your Raspberry Pi
-
+	\begin{itemize}
+		\item We'll be doing some coding exercises in assembly on emulators and on a Raspberry Pi
+		\item Assembly code can be super efficient. Ours won't be. That's not why we're here
+		\item We are not studying to become assembly developers. We are here for the core concepts
+	\end{itemize}
 \end{frame}
 
 \Subsection{Why study assembly?}
@@ -223,17 +225,17 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 	\begin{itemize}
 		\item \Arm{printf} is a function
 		\item \Arm{bl printf} is how we call it
-		\item \Arm{printf} looks at \Arm{r0} for its first argument (the output string)
-		\item if the output string includes a format identifier, it grabs the value from \Arm{r1}
-		\item if the output string includes another formst identifier, it grabs the value from \Arm{r2}, etc
+		\item \Arm{printf} looks at \Arm{x0} for its first argument (the output string)
+		\item if the output string includes a format identifier, it grabs the value from \Arm{x1}
+		\item if the output string includes another formst identifier, it grabs the value from \Arm{x2}, etc
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Loading Values from Memory}
 	\begin{itemize}
 		\item The above code also used the command \Arm{ldr}. This command loads value from memory in two ways
-		\item \Arm{ldr r3, =n_thumbs} loads the address of global variable \Arm{n_thumbs} into \Arm{r3}
-		\item \Arm{ldr r1, [r3]} goes to the address at \Arm{r3} and puts the value in \Arm{r1}
+		\item \Arm{ldr x3, =n_thumbs} loads the address of global variable \Arm{n_thumbs} into \Arm{x3}
+		\item \Arm{ldr x1, [x3]} goes to the address at \Arm{x3}, loads the value, and stores it in \Arm{x1}
 		\item It is very easy to mix this up!
 	\end{itemize}
 \end{frame}
