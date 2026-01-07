@@ -49,15 +49,15 @@
 	% hsail
 	\begin{minted}{tasm}
 		.section .rodata
-		greeting: .ascii "Hello world!\n\0"
+			greeting: .ascii "Hello world!\n\0"
 
 		.section .text
-		.global _start
-		_start:
-		ldr r0, =greeting
-		bl printf
-		mov r0, #0
-		bl exit
+		.global main
+		main:
+			ldr x0, =greeting
+			bl printf
+			mov x0, 0
+			ret
 	\end{minted}
 
 	You can assemble this into an executable and run it on your Raspberry Pi:
@@ -100,11 +100,6 @@
 
 \Subsection{Registers and Memory}
 
-
-
-
-
-
 \begin{frame}{Registers and Memory}
 	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
 \end{frame}
@@ -119,8 +114,6 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 		\item When coding in Assembly, we manually move data back and forth between memory and registers.
 	\end{itemize}
 \end{frame}
-
-
 
 \Subsection{Global Constants}
 
@@ -170,35 +163,35 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 
 	\begin{minted}{tasm}
 		.section .rodata
-		output: .ascii "hello my name is %s\n\0"
-		name: .ascii "charles"
+			output: .ascii "hello my name is %s\n\0"
+			name: .ascii "charles"
 
 		.section .text
 		.global main
 		main:
-		ldr r0, =output
-		ldr r1, =name
-		bl printf
-		mov r0, #0
-		b exit
+			ldr x0, =output
+			ldr x1, =name
+			bl printf
+			mov x0, 0
+			ret
 	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]{Printf in Assembly}
 	\begin{minted}{tasm}
 		.section .rodata
-		output_str: .ascii "the current year is %d\n\0"
-		current_year: .word 2026
+			output_str: .ascii "the current year is %d\n\0"
+			current_year: .word 2026
 		
 		.section .text
 		.global main
 		main:
-		ldr r0, =output_str
-		ldr r1, =current_year
-		ldr r1, [r1]
-		bl printf
-		mov r0, #0
-		b exit
+			ldr x0, =output_str
+			ldr x1, =current_year
+			ldr x1, [x1]
+			bl printf
+			mov x0, 0
+			ret
 	\end{minted}
 \end{frame}
 
@@ -207,20 +200,20 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 \begin{frame}[fragile]{Printf in Assembly}
 	\begin{minted}{tasm}
 		.section .rodata
-		output: .ascii "who has %d thumbs and wrote this? %s\n\0"
-		name: .ascii "charles\0"
-		n_thumbs: .word 2
+			output: .ascii "who has %d thumbs and wrote this? %s\n\0"
+			name: .ascii "charles\0"
+			n_thumbs: .word 2
 		
 		.section .text
 		.global main
 		main:
-		ldr r0, =output
-		ldr r3, =n_thumbs
-		ldr r3, [r1]
-		ldr r2, =name
-		bl printf
-		mov r0, #0
-		b exit
+			ldr x0, =output
+			ldr x3, =n_thumbs
+			ldr x3, [x1]
+			ldr x2, =name
+			bl printf
+			mov x0, 0
+			ret
 	\end{minted}
 \end{frame}
 
@@ -272,15 +265,15 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 \begin{frame}[fragile]{Hello World in Assembly (again)}
 	\begin{minted}{tasm}
 		.section .rodata
-		greeting: .ascii "Hello world!\n\0"
+			greeting: .ascii "Hello world!\n\0"
 
 		.section .text
-		.global _start
-		_start:
-		ldr r0, =greeting
-		bl printf
-		mov r0, #0
-		bl exit
+		.global main
+		main:
+			ldr x0, =greeting
+			bl printf
+			mov x0, 0
+			ret
 	\end{minted}
 
 	Let's walk through what's happening on each line
