@@ -4,7 +4,7 @@
 .text
 .global main
 main: 
-    // stack frame setup
+    // stack frame setup, no local variables
     sub sp, sp, 16
     str fp, [sp]
     str lr, [sp, 8]
