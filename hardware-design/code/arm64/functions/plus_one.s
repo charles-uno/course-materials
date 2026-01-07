@@ -8,22 +8,22 @@
 
 .text
 add_one:
-    sub sp, sp, 16
+    sub sp, sp, 0x20
     str fp, [sp]
-    str lr, [sp, 8]
-    add fp, sp, 8
+    str lr, [sp, 0x10]
+    add fp, sp, 0x10
     add x0, x0, 1
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 16
+    add sp, sp, 0x20
     ret
 
 .global main
 main: 
-    sub sp, sp, 16
+    sub sp, sp, 0x20
     str fp, [sp]
-    str lr, [sp, 8]
-    add fp, sp, 8
+    str lr, [sp, 0x10]
+    add fp, sp, 0x10
     ldr x0, =prompt
     bl printf
     ldr x0, =input_fmt
@@ -37,8 +37,8 @@ main:
     ldr x1, =n
     ldr x1, [x1]
     bl printf
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 16
+    add sp, sp, 0x20
     ret
     

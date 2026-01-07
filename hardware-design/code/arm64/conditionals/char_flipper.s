@@ -6,9 +6,9 @@
 .text
 flip_char_case:
     // stack frame setup, no local variables
-    sub sp, sp, 16
+    sub sp, sp, 0x20
     str fp, [sp]
-    str lr, [sp, 8]
+    str lr, [sp, 0x10]
     // for uppercase letter (65-90) return the corresponding lowercase ascii value
     // for lowercase letter (97-122) return the corresponding uppercase ascii value
     // anything else return the input unchanged
@@ -28,9 +28,9 @@ lower_to_upper:
     sub x0, x0, 32
     b return
 return:
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 16
+    add sp, sp, 0x20
     ret
 
 .text

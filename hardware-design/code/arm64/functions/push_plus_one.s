@@ -10,19 +10,19 @@
 
 .text
 add_one:
-    str lr, [sp, -16]!
-    str fp, [sp, -16]!
-    add fp, sp, 16
+    str lr, [sp, -0x10]!
+    str fp, [sp, -0x10]!
+    add fp, sp, 0x10
     add x0, x0, 1
-    ldr fp, [sp], 16
-    ldr lr, [sp], 16
+    ldr fp, [sp], 0x10
+    ldr lr, [sp], 0x10
     ret
 
 .global main
 main: 
-    str lr, [sp, -16]!
-    str fp, [sp, -16]!
-    add fp, sp, 16
+    str lr, [sp, -0x10]!
+    str fp, [sp, -0x10]!
+    add fp, sp, 0x10
     ldr x0, =prompt
     bl printf
     ldr x0, =input_fmt
@@ -36,7 +36,7 @@ main:
     ldr x1, =n
     ldr x1, [x1]
     bl printf
-    ldr fp, [sp], 16
-    ldr lr, [sp], 16
+    ldr fp, [sp], 0x10
+    ldr lr, [sp], 0x10
     ret
     

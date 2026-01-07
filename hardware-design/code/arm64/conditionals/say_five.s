@@ -11,10 +11,10 @@
 .global main
 main: 
     // stack frame setup, no local variables
-    sub sp, sp, 16
+    sub sp, sp, 0x20
     str fp, [sp]
-    str lr, [sp, 8]
-    add fp, sp, 24
+    str lr, [sp, 0x10]
+    add fp, sp, 0x10
 begin_loop:
     // ask for input
     ldr x0, =prompt
@@ -39,7 +39,7 @@ break:
     bl printf
     // stack frame teardown, return zero
     mov x0, 0
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 16
+    add sp, sp, 0x20
     ret
