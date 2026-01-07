@@ -1,41 +1,45 @@
 .section .rodata
     prompt: .ascii "Please enter 5: \0"
-    input_format: .ascii "%d\0"
-    reply_incorrect: .ascii "Incorrect!\n\0"
+    input_fmt: .ascii "%d\0"
+    reply_incorrect: .ascii "Incorrect! %d is not 5\n\0"
     reply_correct: .ascii "Correct!\n\0"
+
+.section .data
+    guess: .word 0
 
 .text
 .global main
 main: 
-    // stack frame setup, one local variable
-    sub sp, sp, 24
-    str lr, [sp, -16]
-    str fp, [sp, -8]
-    add fp, sp, 16
-
-
-
-    push {fp, lr}
-    add fp, sp, #4
-    sub sp, sp, #4
+    // stack frame setup
+    sub sp, sp, 16
+    str fp, [sp]
+    str lr, [sp, 8]
+    add fp, sp, 24
 begin_loop:
-    // print the prompt
+    // ask for input
     ldr x0, =prompt
     bl printf
-    // read in the guess
-    sub x1, fp, #8
-    ldr x0, =input_format
+    // read the guess to memory
+    ldr x0, =input_fmt
+    ldr x1, =guess
     bl scanf
-    ldr x2, [fp, #-8]
-    // compare the guess to the solution
-    cmp x2, #5
+    // load the guess from memory
+    ldr x1, =guess
+    ldr x1, [x1]
+    // check if the guess is correct
+    cmp x1, 5
+    // if the guess is correct, we're done
     beq break
+    // otherwise, try again
     ldr x0, =reply_incorrect
     bl printf
     b begin_loop
 break:
     ldr x0, =reply_correct
     bl printf
-    // stack frame teardown
-    sub sp, fp, #4
-    pop {fp, pc}
+    // stack frame teardown, return zero
+    mov x0, 0
+    ldr lr, [sp, 8]
+    ldr fp, [sp]
+    add sp, sp, 16
+    ret
