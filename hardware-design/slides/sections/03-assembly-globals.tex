@@ -164,7 +164,7 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 	\begin{minted}{tasm}
 		.section .rodata
 			output: .ascii "hello my name is %s\n\0"
-			name: .ascii "charles"
+			name: .ascii "charles\0"
 
 		.section .text
 		.global main
