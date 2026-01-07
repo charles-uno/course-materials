@@ -1,22 +1,14 @@
-// NOTE: does not quite work yet
-
-
 .section .rodata
     prompt: .ascii "Enter a word: \0"
     char_format: .ascii "%c\0"
     newline: .ascii "\n\0"
 
-    debug: .ascii "%c -> %c\n\0"
-
 .text
 flip_char_case:
     // stack frame setup, no local variables
-    sub sp, sp, 16
+    sub sp, sp, 0x20
     str fp, [sp]
-    str lr, [sp, 8]
-
-    mov x1, x0
-    
+    str lr, [sp, 0x10]
     // for uppercase letter (65-90) return the corresponding lowercase ascii value
     // for lowercase letter (97-122) return the corresponding uppercase ascii value
     // anything else return the input unchanged
@@ -36,60 +28,46 @@ lower_to_upper:
     sub x0, x0, 32
     b return
 return:
-
-    mov x2, x0
-    ldr x0, =debug
-    bl printf
-    mov x0, x2
-
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 16
+    add sp, sp, 0x20
     ret
 
-.text
 .global main
 main:
     // stack frame setup, one local variable
-    sub sp, sp, 32
+    sub sp, sp, 0x30
     str fp, [sp]
-    str lr, [sp, 8]
-    add fp, sp, 24
+    str lr, [sp, 0x10]
+    add fp, sp, 0x20
     // display the prompt
     ldr x0, =prompt
     bl printf
-    // loop over the input characters one by one
+    // use scanf to process characters one at a time. this works because the
+    // os buffers the input and only feeds it in as we ask for it
 begin_loop:
     ldr x0, =char_format
-    add x1, sp, 24
+    add x1, sp, 0x20
     bl  scanf
-    // load input character from memory
-    ldr x0, [sp, 24]
-    // we only care about the last 8 bits. ignore the rest
+    ldr x0, [sp, 0x20]
+    // we only care about the bottom 8 bits. clear out anything else
     and x0, x0, 0xff
-
-    mov x4, x0
-
-    // flip the character in x0
     bl flip_char_case
-    // compare original to flipped. if it changed, it's a letter
-
-    cmp x0, x4
+    // reload the original. if the char did not change, it's not a letter
+    ldr x1, [sp, 0x20]
+    and x1, x1, 0xff
+    cmp x0, x1
     beq end_loop
-
     mov x1, x0
     ldr x0, =char_format
     bl printf
     b begin_loop
     
 end_loop:
-    // print newline
     ldr x0, =newline
-//    mov x1, '\n'
     bl printf
-
     // return 0, restore stack frame
-    ldr lr, [sp, 8]
+    ldr lr, [sp, 0x10]
     ldr fp, [sp]
-    add sp, sp, 32
+    add sp, sp, 0x30
     ret
