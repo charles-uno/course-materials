@@ -37,9 +37,9 @@
 % show subsections later
 \setcounter{tocdepth}{2}
 
-\input{sections/00-syllabus.tex}
+\input{../syllabus/syllabus.tex}
 
-\input{sections/01-data-representation.tex}
+\input{../standards/data-representation/slides.tex}
 % positive integers in binary
 % arithmetic in binary
 % negtive integers
@@ -47,22 +47,13 @@
 % fractions
 % structured data
 
-\input{sections/02-boolean-logic.tex}
+\input{../standards/boolean-logic/slides.tex}
 % boolean operators
 % boolean expressions
 % boolean circuits
 % resistors & transistors
 
-\input{sections/03-assembly-globals.tex}
-% why study assembly?
-% global variables
-% mov
-% printf
-% ldr
-% scanf
-% add, mul
-
-\input{sections/04-instructions-on-hardware.tex}
+\input{../standards/instructions-on-hardware/slides.tex}
 % parts of a computer
 % memory hierarchy
 % executing instructions
@@ -73,7 +64,22 @@
 % data hazards
 % control hazards
 
-\input{sections/05-assembly-functions.tex}
+\input{../standards/assembly-globals/slides.tex}
+% why study assembly?
+% global variables
+% mov
+% printf
+% ldr
+% scanf
+% add, mul
+
+\input{../standards/os-concepts/slides.tex}
+% booting
+% forking
+% threads, cores, processes
+% async
+
+\input{../standards/assembly-functions/slides.tex}
 % memory diagrams
 % the stack
 % calling a function
@@ -82,21 +88,16 @@
 % push, pop
 % nested function calls
 
-\input{sections/networking.tex}
-
-\input{sections/assembly-conditionals.tex}
+\input{../standards/assembly-conditionals/slides.tex}
 % b, beq, bne, ...
 % if/else
 % while loops
 % for loops
 
-\input{sections/multiprocessing.tex}
-% booting
-% forking
-% threads, cores, processes
-% async
+\input{../standards/networking/slides.tex}
 
-\input{sections/appendix.tex}
+
+% \input{../standards/appendix/appendix.tex}
 % vscode setup
 % pi setup
 % csgit setup

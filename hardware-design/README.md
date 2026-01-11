@@ -1,3 +1,15 @@
+
+> TODO: update the readme! this is way out of date
+> include info about building the slides. dependencies, make
+> include link to the course on doenet
+
+> TODO: add ability to build the syllabus outside the slide deck? maybe each section is its own tex file. then we can just import in both places
+> or maybe the course intro in the slides doesn't need to cover the whole syllabus... that's probably a better solution
+
+
+
+
+
 # Hardware Design
 
 Taught at St Olaf College, Spring 2024
@@ -5,6 +17,16 @@ Taught at St Olaf College, Spring 2024
 Partial course. The curriculum was mostly set by [Melissa Lynn](https://wp.stolaf.edu/mscs/mscs-faculty-staff-listing/), but she was unable to complete the semester. 
 
 Course listing for CS 241: https://catalog.stolaf.edu/academic-programs/computer-science
+
+
+
+
+## Slides
+
+Requires MikTex, MacTex, or similar. The big install. 
+
+Tikz circuit diagrams created using this tool: https://www.circuit2tikz.tf.fau.de/designer/
+
 
 ## Labs
 
