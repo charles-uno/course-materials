@@ -9,3 +9,11 @@ output/
 *.out
 *.data.minted
 _minted*
+*.nav
+*.snm 
+*.toc
+*.pdf 
+*.vrb
+*.fdb_latexmk
+*.fls
+*.synctex.gz
