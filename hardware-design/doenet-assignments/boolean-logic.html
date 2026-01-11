@@ -1,0 +1,3595 @@
+<!-- 
+
+this might belong with hardware components?
+
+<section>
+    <title>Bits and Bytes</title>
+    <p>A <alert>byte</alert> is the smallest addressable unit of memory in a computer.</p>
+    <p>How many bits are typically in a byte? <answer>8</answer></p>
+    <p>How many bits are in 4 bytes? <answer>32</answer></p>
+    <p>How many bits are in 8 bytes? <answer>64</answer></p>
+</section>
+ -->
+
+
+
+<section>
+    <title>Boolean Functions</title>
+    <p>Complete the truth table for each of the basic boolean functions below.</p>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ OR } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+    </tabular>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ AND } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+    </tabular>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell colSpan="2">
+                <m>\textrm{ NOT } A</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+    </tabular>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ NAND } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+    </tabular>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ NOR } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+    </tabular>
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ XOR } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+    </tabular>
+</section>
+
+
+<section>
+    <title>Logic Gates</title>
+
+    <p>Read Section 5.3 from the course textbook, Dive Into Systems. Take notes as
+        you read through these sections. After completing the reading, write a summary below. This summary will be
+        graded manually. Note: this
+        part may be done before, after, and/or during your work on the exercises below.</p>
+    <answer handGraded>
+        <textInput expanded />
+    </answer>
+
+    <p>For each logic gate pictured below, select the basic Boolean function that it corresponds to.</p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,3)" fixed>A</text>
+        <text anchor="(-8,-3)" fixed>B</text>
+        <lineSegment endpoints="(-7,3) (-3.5,3)" fixed styleNumber="5" />
+        <lineSegment endpoints="(-7,-3) (-3.5,-3)" fixed styleNumber="5" />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(2cos(t)-5, 5 sin(t))</curve>
+        <curve through="(-5,5) (1,4) (5,0)" styleNumber="5" fixed />
+        <curve through="(-5,-5) (1,-4) (5,0)" styleNumber="5" fixed />
+        <lineSegment endpoints="(5,0) (7,0)" styleNumber="5" fixed />
+        <text anchor="(8,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice>A AND B</choice>
+            <choice>A NAND B</choice>
+            <choice>A NOR B</choice>
+            <choice>NOT A</choice>
+            <choice credit="1">A OR B</choice>
+            <choice>A XOR B</choice>
+        </choiceInput>
+    </answer>
+    <p></p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,3)" fixed>A</text>
+        <text anchor="(-8,-3)" fixed>B</text>
+        <lineSegment endpoints="(-7,3) (-5,3)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-3) (-5,-3)" styleNumber="5" fixed />
+        <polyline vertices="(0,5) (-5,5) (-5,-5) (0,-5)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(5 cos(t), 5 sin(t))</curve>
+        <lineSegment endpoints="(5,0) (7,0)" styleNumber="5" fixed />
+        <text anchor="(8,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice credit="1">A AND B</choice>
+            <choice>A NAND B</choice>
+            <choice>A NOR B</choice>
+            <choice>NOT A</choice>
+            <choice>A OR B</choice>
+            <choice>A XOR B</choice>
+        </choiceInput>
+    </answer>
+    <p></p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,3)" fixed>A</text>
+        <text anchor="(-8,-3)" fixed>B</text>
+        <lineSegment endpoints="(-7,3) (-4.5,3)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-3) (-4.5,-3)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(2cos(t)-5, 5 sin(t))</curve>
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(2cos(t)-6, 5 sin(t))</curve>
+        <curve through="(-6,5) (1,4) (5,0)" styleNumber="5" fixed />
+        <curve through="(-6,-5) (1,-4) (5,0)" styleNumber="5" fixed />
+        <lineSegment endpoints="(5,0) (7,0)" styleNumber="5" fixed />
+        <text anchor="(8,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice>A AND B</choice>
+            <choice>A NAND B</choice>
+            <choice>A NOR B</choice>
+            <choice>NOT A</choice>
+            <choice>A OR B</choice>
+            <choice credit="1">A XOR B</choice>
+        </choiceInput>
+    </answer>
+    <p></p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,3)" fixed>A</text>
+        <text anchor="(-8,-3)" fixed>B</text>
+        <lineSegment endpoints="(-7,3) (-5,3)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-3) (-5,-3)" styleNumber="5" fixed />
+        <polyline vertices="(-1,5) (-5,5) (-5,-5) (-1,-5)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(5 cos(t)-1, 5 sin(t))</curve>
+        <circle center="(5,0)" radius="1" styleNumber="5" fixed />
+        <lineSegment endpoints="(6,0) (8,0)" styleNumber="5" fixed />
+        <text anchor="(9,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice>A AND B</choice>
+            <choice credit="1">A NAND B</choice>
+            <choice>A NOR B</choice>
+            <choice>NOT A</choice>
+            <choice>A OR B</choice>
+            <choice>A XOR B</choice>
+        </choiceInput>
+    </answer>
+    <p></p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,3)" fixed>A</text>
+        <text anchor="(-8,-3)" fixed>B</text>
+        <lineSegment endpoints="(-7,3) (-3.5,3)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-3) (-3.5,-3)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(2cos(t)-5, 5 sin(t))</curve>
+        <curve through="(-5,5) (1,4) (4,0)" styleNumber="5" fixed />
+        <curve through="(-5,-5) (1,-4) (4,0)" styleNumber="5" fixed />
+        <circle center="(5,0)" radius="1" styleNumber="5" fixed />
+        <lineSegment endpoints="(6,0) (8,0)" styleNumber="5" fixed />
+        <text anchor="(9,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice>A AND B</choice>
+            <choice>A NAND B</choice>
+            <choice credit="1">A NOR B</choice>
+            <choice>NOT A</choice>
+            <choice>A OR B</choice>
+            <choice>A XOR B</choice>
+        </choiceInput>
+    </answer>
+    <p></p>
+    <graph size="tiny" displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,0)" fixed>A</text>
+        <lineSegment endpoints="(-7,0) (-5,0)" styleNumber="5" fixed />
+        <polyline vertices="(4,0) (-5,5) (-5,-5) (4,0)" styleNumber="5" fixed />
+        <circle center="(5,0)" radius="1" styleNumber="5" fixed />
+        <lineSegment endpoints="(6,0) (8,0)" styleNumber="5" fixed />
+        <text anchor="(9,0)" fixed>?</text>
+    </graph>
+    <answer>
+        <choiceInput inline>
+            <choice>A AND B</choice>
+            <choice>A NAND B</choice>
+            <choice>A NOR B</choice>
+            <choice credit="1">NOT A</choice>
+            <choice>A OR B</choice>
+            <choice>A XOR B</choice>
+        </choiceInput>
+    </answer>
+</section>
+
+
+<section>
+    <title>
+        Boolean Expressions
+    </title>
+
+    <p>Complete the truth table below for the function <me>f(A,B,C) = (A \textrm{ AND } B)\textrm{ OR }(B \textrm{ AND
+            }C),</me> using the helper columns <m>A \textrm{ AND } B</m> and <m>B \textrm{ AND }C</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ AND } B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>B \textrm{ AND }C</m>
+            </cell>
+            <cell colSpan="4">
+                <m>(A \textrm{ AND } B)\textrm{ OR }</m>
+                <m>(B \textrm{ AND }C)</m>
+            </cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a11" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a12" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a13" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a11=0 and $a12=0 and $a13=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a21" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a22" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a23" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a21=0 and $a22=0 and $a23=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a31" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a32" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a33" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a31=0 and $a32=0 and $a33=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a41" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a42" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a43" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a41=0 and $a42=1 and $a43=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a51" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a52" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a53" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a51=0 and $a52=0 and $a53=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a61" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a62" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a63" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a61=0 and $a62=0 and $a63=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a71" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a72" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a73" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a71=1 and $a72=0 and $a73=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a81" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="a82" />
+            </cell>
+            <cell colSpan="4">
+                <textInput name="a83" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$a81=1 and $a82=1 and $a83=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <p>Show that <me>A\textrm{ XOR }(A \textrm{ AND } B) = A \textrm{ AND } (\textrm{NOT } B)</me> by creating two truth
+        tables, one for each side of the equation, and verifying that the (final) columns are identical.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ AND } B</m>
+            </cell>
+            <cell colSpan="3">
+                <m>A \textrm{ XOR } (A\textrm{ AND }B)</m>
+            </cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b11" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="b12" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$b11=0 and $b12=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b21" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="b22" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$b21=0 and $b22=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b31" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="b32" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$b31=0 and $b32=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b41" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="b42" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$b41=1 and $b42=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>\textrm{NOT } B</m>
+            </cell>
+            <cell colSpan="3">
+                <m>A \textrm{ AND } (\textrm{NOT }B)</m>
+            </cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="c11" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="c12" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$c11=1 and $c12=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="c21" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="c22" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$c21=0 and $c22=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="c31" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="c32" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$c31=1 and $c32=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="c41" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="c42" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$c41=0 and $c42=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <p>Show that <me>A\textrm{ NAND } B = (\textrm{NOT } A) \textrm{ OR } (\textrm{NOT } B)</me> by creating two truth
+        tables, one for each side of the equation, and verifying that the (final) columns are identical.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>A \textrm{ NAND } B</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <answer type="text">1</answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <answer type="text">0</answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>\textrm{NOT } A</m>
+            </cell>
+            <cell colSpan="2">
+                <m>\textrm{NOT } B</m>
+            </cell>
+            <cell colSpan="3">
+                <m>(\textrm{NOT } A) \textrm{ OR } (\textrm{NOT }B)</m>
+            </cell>
+            <cell></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="d11" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="d12" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="d13" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$d11=1 and $d12=1 and $d13=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="d21" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="d22" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="d23" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$d21=1 and $d22=0 and $d23=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="d31" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="d32" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="d33" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$d31=0 and $d32=1 and $d33=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="d41" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="d42" />
+            </cell>
+            <cell colSpan="3">
+                <textInput name="d43" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$d41=0 and $d42=0 and $d43=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section>
+    <title>Logic Circuits</title>
+
+    <p>Read Section 5.4.1 from the course textbook, Dive Into Systems. Take notes as
+        you read through these sections. After completing the reading, write a summary below. This summary will be
+        graded manually. Note: this
+        part may be done before, after, and/or during your work on the exercises below.</p>
+    <answer handGraded>
+        <textInput expanded />
+    </answer>
+
+    
+    <graph displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,5)" fixed>A</text>
+        <text anchor="(-8,0)" fixed>B</text>
+        <text anchor="(-8,-5)" fixed>C</text>
+        <lineSegment endpoints="(-7,5) (-5, 5)" styleNumber="5" fixed />
+        <polyline vertices="(-7,0) (-6, 0) (-6, 4) (-5,4)" styleNumber="5" fixed />
+        <polyline vertices="(-7,0) (-6, 0) (-6, -4) (-5,-4)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-5) (-5, -5)" styleNumber="5" fixed />
+
+        <polyline vertices="(-4,3.5) (-5,3.5) (-5,5.5) (-4,5.5)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(cos(t)-4, sin(t)+4.5)</curve>
+
+        <polyline vertices="(-4,-3.5) (-5,-3.5) (-5,-5.5) (-4,-5.5)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(cos(t)-4, -sin(t)-4.5)</curve>
+
+        <polyline vertices="(-3,4.5) (-2,4.5) (-2,.5) (-.7,.5)" fixed styleNumber="5" />
+        <polyline vertices="(-3,-4.5) (-2,-4.5) (-2,-.5) (-.7,-.5)" fixed styleNumber="5" />
+
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(.4cos(t)-1, sin(t))</curve>
+        <curve through="(-1,1) (0,.75) (1,0)" styleNumber="5" fixed />
+        <curve through="(-1,-1) (0,-.75) (1,0)" styleNumber="5" fixed />
+
+        <lineSegment endpoints="(1,0) (2,0)" styleNumber="5" fixed />
+        <text anchor="(3,0)" fixed>f(A,B,C)</text>
+    </graph>
+
+    <p>For the logic circuit pictured above, complete the following truth table.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell colSpan="2">
+                <m>f(A,B,C)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a2" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a3" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a4" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a5" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a6" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="a7" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="a8" />
+            </cell>
+        </row>
+    </tabular>
+
+    <p>
+        <answer>
+            <award>
+                <when>
+                    $a1 = 0 and $a2=0 and $a3=0 and $a4=1 and $a5=0 and $a6=0 and $a7=1 and $a8=1
+                </when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Complete the definition of <m>f</m> for the logic circuit above:</p>
+
+    <p>
+        <m>f(A,B,C) = (A</m>
+        <choiceInput name="a9" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B)</m>
+        <choiceInput name="a10" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="a11_" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <answer>
+            <award>
+                <when>$a9.selectedIndices=1 and $a10.selectedIndices=5 and $a11_.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+
+    <graph displayMode="inline" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,5)" fixed>A</text>
+        <text anchor="(-8,0)" fixed>B</text>
+        <text anchor="(-8,-5)" fixed>C</text>
+        <lineSegment endpoints="(-7,5) (-4.8, 5)" styleNumber="5" fixed />
+        <polyline vertices="(-7,0) (-6, 0) (-6, 4) (-4.8,4)" styleNumber="5" fixed />
+        <polyline vertices="(-7,0) (-3.5, 0) (-3.5, -4) (-2.5,-4)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-5) (-6, -5)" styleNumber="5" fixed />
+
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(.4cos(t)-5.2, sin(t)+4.5)</curve>
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(.4cos(t)-5, sin(t)+4.5)</curve>
+        <curve through="(-5,5.5) (-4,5.25) (-3,4.5)" styleNumber="5" fixed />
+        <curve through="(-5,3.5) (-4,3.75) (-3,4.5)" styleNumber="5" fixed />
+
+        <polyline vertices="(-4,-5) (-6,-4) (-6,-6) (-4,-5)" styleNumber="5" fixed />
+        <circle center="(-3.75,-5)" radius=".25" styleNumber="5" fixed />
+        <lineSegment endpoints="(-3.5,-5) (-2.5,-5)" styleNumber="5" fixed />
+
+        <polyline vertices="(-1.5,-3.5) (-2.5,-3.5) (-2.5,-5.5) (-1.5,-5.5)" styleNumber="5" fixed />
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(cos(t)-1.5, sin(t)-4.5)</curve>
+        <circle center="(-.25,-4.5)" radius=".25" styleNumber="5" fixed />
+
+        <polyline vertices="(-3,4.5) (1,4.5) (1,.5) (2.4,.5)" fixed styleNumber="5" />
+        <polyline vertices="(0,-4.5) (1,-4.5) (1,-.5) (2.4,-.5)" fixed styleNumber="5" />
+
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(.4cos(t)+2, sin(t))</curve>
+        <curve through="(2,1) (3,.75) (4,0)" styleNumber="5" fixed />
+        <curve through="(2,-1) (3,-.75) (4,0)" styleNumber="5" fixed />
+        <circle center="(4.25,0)" radius=".25" styleNumber="5" fixed />
+
+        <lineSegment endpoints="(4.5,0) (5.5,0)" styleNumber="5" fixed />
+        <text anchor="(5.5,0)" positionFromAnchor="right" fixed>g(A,B,C)</text>
+    </graph>
+
+    <p>For the logic circuit pictured above, complete the following truth table.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell colSpan="2">
+                <m>g(A,B,C)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b2" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b3" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b4" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b5" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b6" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="b7" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="b8" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $b1=0 and $b2=0 and $b3=0 and $b4=0 and $b5=0 and $b6=0 and $b7=1 and $b8=0
+            </when>
+        </award>
+    </answer>
+
+    <p>Complete the definition of <m>g</m> for the logic circuit above:</p>
+
+    <p>
+        <m>g(A,B,C) = (A</m>
+        <choiceInput name="b9" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B)</m>
+        <choiceInput name="b10" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="b11_" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(</m>
+        <choiceInput name="b12_" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C))</m>
+        <answer>
+            <award>
+                <when>$b9.selectedIndices=6 and $b10.selectedIndices=3 and $b11_.selectedIndices=2 and
+                    $b12_.selectedIndices=4</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Consider the boolean function <m>e(A,B)</m> with logic circuit pictured below.</p>
+
+    <graph displayMode="inline" aspectRatio="2/1" displayXAxis="false" displayYAxis="false" showNavigation="false">
+        <text anchor="(-8,2)" fixed>A</text>
+        <text anchor="(-8,-2)" fixed>B</text>
+        <lineSegment endpoints="(-7,2) (-5,2)" styleNumber="5" fixed />
+        <lineSegment endpoints="(-7,-2) (-5,-2)" styleNumber="5" fixed />
+
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(3*.2cos(t)-5.4, 3*sin(t))</curve>
+        <curve variable="t" parMin="-pi/2" parMax="pi/2" styleNumber="5" fixed>(3*.2cos(t)-5, 3*sin(t))</curve>
+        <curve through="(-5,3) (-3,2.5) (-1.5,0)" styleNumber="5" fixed />
+        <curve through="(-5,-3) (-3,-2.5) (-1.5,0)" styleNumber="5" fixed />
+
+        <lineSegment endpoints="(-1.5,0) (.5,0)" styleNumber="5" fixed />
+
+        <polyline vertices="(3.5,0) (.5,3) (.5,-3) (3.5,0)" styleNumber="5" fixed />
+        <curve variable="t" parMin="0" parMax="2pi" styleNumber="5" fixed>(.25*cos(t)+3.75, .5*sin(t))</curve>
+
+        <lineSegment endpoints="(4,0) (5,0)" styleNumber="5" fixed />
+        <text anchor="(6,0)" fixed>e(A,B)</text>
+    </graph>
+
+    <p>For the logic circuit pictured above, complete the following truth table.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell colSpan="2">
+                <m>e(A,B)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="c1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="c2" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="c3" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="c4" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $c1=1 and $c2=0 and $c3=0 and $c4=1
+            </when>
+        </award>
+    </answer>
+
+
+    <p>Complete the definition of <m>e</m> for the logic circuit above:</p>
+
+    <p>
+        <m>e(A,B) = </m>
+        <choiceInput name="c5" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(A</m>
+        <choiceInput name="c6" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B)</m>
+        <answer>
+            <award>
+                <when>$c5.selectedIndices=4 and $c6.selectedIndices=6</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Looking at the truth table for this function, how would you describe it more simply?</p>
+
+    <answer>
+        <textInput name="equalityExplanation" expanded />
+        <award>
+            <when>
+                <text>$equalityExplanation</text> != <text></text>
+            </when>
+        </award>
+    </answer>
+</section>
+
+
+<section>
+    <title>1-bit Addition</title>
+
+    <p>The possible results of adding two 1-bit integers (in binary) are:
+        <me>0 + 0 = 0</me>
+        <me>1 + 0 = 1</me>
+        <me>0 + 1 = 1</me>
+        <me>1 + 1 = 10</me>
+        In the last case, we require two digits (to avoid an overflow error). So, addition of two single digit binary
+        numbers will have two outputs: one output for the resulting one’s digit (call this output <m>sum(A,B)</m>), and
+        one output for the resulting carry digit (call this output <m>carry(A,B)</m>). Fill in the truth table below for
+        these operations.
+    </p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>sum(A,B)</m>
+            </cell>
+            <cell>
+                <m>carry(A,B)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="sum1" />
+            </cell>
+            <cell>
+                <textInput name="carry1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="sum2" />
+            </cell>
+            <cell>
+                <textInput name="carry2" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="sum3" />
+            </cell>
+            <cell>
+                <textInput name="carry3" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="sum4" />
+            </cell>
+            <cell>
+                <textInput name="carry4" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $sum1=0 and $sum2=1 and $sum3=1 and $sum4=0 and $carry1=0 and $carry2=0 and $carry3=0 and $carry4=1
+            </when>
+        </award>
+    </answer>
+
+    <p>Each of these is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>sum(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice>A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice credit="1">A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Which operation matches <m>carry(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice credit="1">A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+</section>
+
+<section>
+    <title>2-bit Addition</title>
+
+    <p>Next, we’ll build a logic circuit that can perform 2-bit addition. Let’s remember our algorithm for addition. To
+        add <c>0b11</c> and <c>0b01</c>,</p>
+
+    <image source='doenet:cid=bafkreieksdv6tqti4srxghhmb25hkdfqdgghbxnviynmdj6zd7so676dby'
+        description='Example showing how to add binary numbers 11 and 01 to get 100' asfilename='two_bit_sum.jpg'
+        width='200' mimeType='image/jpeg' />
+
+    <p>Starting from the right, we add 1 and 1 to get 0 with a 1 to carry. Then, we add the carried digit to 1 and 0 to
+        get 0 with another 1 to carry. This last carry gives us the leading 1.</p>
+
+    <p>We need three bits to represent the sum (with no overflow error). From left to right, we’ll call them four_digit
+        (this is the 1 above), two_digit, and one_digit, describing the meaning of the digit in binary. We’ll refer to
+        the carry digits as carry_one (rightmost) and carry_two (leftmost, would be overflow if we were limited to two
+        bits).</p>
+
+    <p>Label the bits of the numbers we are adding as AB and CD. In the example above, A would be 1 (blue), B would be 1
+        (red), C would be 0, and D would be 1 (green). Complete the truth table below with the results for one_digit,
+        carry_one, two_digit, carry_two, and four_digit. You may find it helpful to write out the computations by hand
+        before filling in the table.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell>
+                <m>D</m>
+            </cell>
+            <cell colSpan="2">one_digit</cell>
+            <cell colSpan="2">carry_one</cell>
+            <cell colSpan="2">two_digit</cell>
+            <cell colSpan="2">carry_two</cell>
+            <cell colSpan="2">four_digit</cell>
+            <cell colSpan="2"></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit1=0 and $carry_one1=0 and $two_digit1=0 and $carry_two1=0 and $four_digit1=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit2=1 and $carry_one2=0 and $two_digit2=0 and $carry_two2=0 and $four_digit2=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit3=0 and $carry_one3=0 and $two_digit3=1 and $carry_two3=0 and $four_digit3=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit4=1 and $carry_one4=0 and $two_digit4=1 and $carry_two4=0 and $four_digit4=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit5=1 and $carry_one5=0 and $two_digit5=0 and $carry_two5=0 and $four_digit5=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit6=0 and $carry_one6=1 and $two_digit6=1 and $carry_two6=0 and $four_digit6=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit7=1 and $carry_one7=0 and $two_digit7=1 and $carry_two7=0 and $four_digit7=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit8=0 and $carry_one8=1 and $two_digit8=0 and $carry_two8=1 and $four_digit8=1
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit9=0 and $carry_one9=0 and $two_digit9=1 and $carry_two9=0 and $four_digit9=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit10=1 and $carry_one10=0 and $two_digit10=1 and $carry_two10=0 and
+                            $four_digit10=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit11=0 and $carry_one11=0 and $two_digit11=0 and $carry_two11=1 and
+                            $four_digit11=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit12=1 and $carry_one12=0 and $two_digit12=0 and $carry_two12=1 and
+                            $four_digit12=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit13=1 and $carry_one13=0 and $two_digit13=1 and $carry_two13=0 and
+                            $four_digit13=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit14=0 and $carry_one14=1 and $two_digit14=0 and $carry_two14=1 and
+                            $four_digit14=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit15=1 and $carry_one15=0 and $two_digit15=0 and $carry_two15=1 and
+                            $four_digit15=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit16=0 and $carry_one16=1 and $two_digit16=1 and $carry_two16=1 and
+                            $four_digit16=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(B,D)=B</m>
+        <choiceInput name="one_digit_op" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_op.selectedIndices=6</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output carry_one can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>carry_one<m>(B,D)=B</m>
+        <choiceInput name="carry_one_op" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$carry_one_op.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>two_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="two_digit_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <choiceInput name="two_digit_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="two_digit_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$two_digit_op1.selectedIndices=6 and $two_digit_op2.selectedIndices=6 and
+                    $two_digit_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output carry_two can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>carry_two<m>(A,B,C,D)=(A</m>
+        <choiceInput name="carry_two_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
+        <choiceInput name="carry_two_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="carry_two_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$carry_two_op1.selectedIndices=1 and $carry_two_op2.selectedIndices=1 and
+                    $carry_two_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>four_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="four_digit_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
+        <choiceInput name="four_digit_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="four_digit_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$four_digit_op1.selectedIndices=1 and $four_digit_op2.selectedIndices=1 and
+                    $four_digit_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Note: As part of Homework 3, you will build a logic circuit in Circuitverse to perform the 2-bit addition
+        computation, and use the truth table produced above to test your circuit.</p>
+
+</section>
+
+<section>
+    <title>1-bit Multiplication</title>
+
+    <p>When we multiply two 1-bit binary numbers, the result will always be 1-bit, which we’ll call <m>mul(A,B)</m>.
+        Complete the table below for all combinations of <m>A</m> and <m>B</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>mul(A,B)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="mul1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="mul2" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="mul3" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="mul4" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $mul1=0 and $mul2=0 and $mul3=0 and $mul4=1
+            </when>
+        </award>
+    </answer>
+
+    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>mul(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice credit="1">A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+
+</section>
+
+<section>
+    <title>2-bit Multiplication</title>
+
+    <p>Next, let’s remember how 2-bit multiplication works. We’ll multiply <c>0b11</c> and <c>0b11</c>.</p>
+
+    <image source='doenet:cid=bafkreib55oulnqeu2lezw6hspsr2jr5byqjimvv4rrc3aeeqzvdo4oilue'
+        description='Example showing how to multiply binary numbers 11 and 11'
+        asfilename='Screenshot 2024-09-17 at 8.53.46 PM.png' width='196' mimeType='image/png' />
+
+    <p>We will need four bits to express the result of multiplying two 2-bit integers. We’ll call these bits (from left
+        to right) eight_digit, four_digit, two_digit, one_digit.</p>
+
+    <p>Label the bits of the numbers we are multiplying as <m>AB</m> and <m>CD</m>. In the example above, <m>A</m> would
+        be 1 (blue), <m>B</m> would be 1 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).</p>
+
+    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(B,D)=B</m>
+        <choiceInput name="one_digit_mul" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_mul.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>two_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="two_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <choiceInput name="two_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="two_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <answer>
+            <award>
+                <when>$two_digit_mul1.selectedIndices=1 and $two_digit_mul2.selectedIndices=6 and
+                    $two_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>four_digit<m>(A,B,C,D)=((A</m> AND <m>D)</m>
+        <choiceInput name="four_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m> AND <m>C))</m>
+        <choiceInput name="four_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(A</m>
+        <choiceInput name="four_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <answer>
+            <award>
+                <when>$four_digit_mul1.selectedIndices=1 and $four_digit_mul2.selectedIndices=6 and
+                    $four_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output eight_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>eight_digit<m>(A,B,C,D)=A</m>
+        <choiceInput name="eight_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B</m>
+        <choiceInput name="eight_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C</m>
+        <choiceInput name="eight_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$eight_digit_mul1.selectedIndices=1 and $eight_digit_mul2.selectedIndices=1 and
+                    $eight_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>4-bit Two's Complement Negation</title>
+
+
+    <p>Read Section 5.4.2 from the course textbook, Dive Into Systems. Take notes as
+        you read through these sections. After completing the reading, write a summary below. This summary will be
+        graded manually. Note: this
+        part may be done before, after, and/or during your work on the exercises below.</p>
+
+    <answer handGraded>
+        <textInput expanded />
+    </answer>
+
+
+
+    <p>Finally, let's build a circuit to perform negation for two's complement binary integers. Recall that we can
+        negate a two's complement binary integer by flipping the bits, and adding 1. This is what our circuit will do.
+    </p>
+
+    <p>First, let's figure out how we can flip a single bit <m>A</m>, calling the result <m>flip(A)</m>. Complete the
+        table below for all values of <m>A</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>flip(A)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>
+                <textInput name="flip1" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>
+                <textInput name="flip2" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $flip1=1 and $flip2=0
+            </when>
+        </award>
+    </answer>
+
+    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>flip(A)</m>? <answer>
+            <choiceInput inline>
+                <choice>A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice credit="1">NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Next, let’s remember how we can add 1 to a 4-bit binary integer. We’ll add 1 to <c>0b1011</c>.</p>
+
+    <image source='doenet:cid=bafkreihs52jrd2zgusubavj7h5mbnhyzbuouuwv6ngytgx7v4pvjnro72e'
+        description='Example showing how to add 1 to binary number 1011'
+        asfilename='Screenshot 2024-09-17 at 9.35.59 PM.png' width='248' mimeType='image/png' />
+
+    <p>We will need four bits to express the result of adding 1 to a 4-bit integer (remember that we'll ignore any final
+        carry digit). We’ll call these bits (from left to right) eight_digit, four_digit, two_digit, one_digit.</p>
+
+    <p>Label the bits of the number we are adding 1 to as <m>ABCD</m>. In the example above, <m>A</m> would be 1 (blue),
+        <m>B</m> would be 0 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).
+    </p>
+
+    <p>The output one_digit can be computed from the input bit <m>D</m>. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(D)=</m>
+        <choiceInput name="one_digit_add" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_add.selectedIndices=4</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits <m>C</m> and <m>D</m>. Which basic boolean function is
+        used for this computation?</p>
+
+    <p>two_digit<m>(C,D)=C</m>
+        <choiceInput name="two_digit_add" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$two_digit_add.selectedIndices=6</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits <m>B</m>, <m>C</m>, and <m>D</m>. Which basic boolean
+        functions are used for this computation?</p>
+
+    <p>four_digit<m>(B,C,D)=B</m>
+        <choiceInput name="four_digit_add1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(C</m>
+        <choiceInput name="four_digit_add2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$four_digit_add1.selectedIndices=6 and $four_digit_add2.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output eight_digit can be computed from the input bits <m>A</m>, <m>B</m>, <m>C</m>, and <m>D</m>. Which
+        basic boolean functions are used for this computation?</p>
+
+    <p>eight_digit<m>(A,B,C,D)=A</m>
+        <choiceInput name="eight_digit_add1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="eight_digit_add2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C</m>
+        <choiceInput name="eight_digit_add3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$eight_digit_add1.selectedIndices=6 and $eight_digit_add2.selectedIndices=1 and
+                    $eight_digit_add3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Note: As part of the homework, you will build a logic circuit in Circuitverse to negate 4-bit two's complement
+        integers.</p>
+
+
+</section>
+
+<section>
+    <title>Two-Way 1-Bit Multiplexer</title>
+
+    <p>When programming, we often want to write a program that does one thing under certain conditions, and a different
+        thing under different conditions. For example, in Python:</p>
+
+    <pre>
+    if x == 1: 
+        print(“that number is 1”)
+    else:
+        print(“that number is not 1”)
+      </pre>
+
+    <p>In this lab, you’ll figure out how this works at the level of logic circuits.</p>
+
+    <p>We’ll start with the simplest case: suppose we have two 1-bit binary integers <m>A</m> and <m>B</m>. Suppose we
+        have another 1-bit number, <m>S</m>. When <m>S</m> is 1, we want to use the value <m>A</m>. When <m>S</m> is 0,
+        we want to use the value <m>B</m>. Call the value used <c>result</c>.</p>
+
+    <p>Note: Think of <m>S</m> as the true/false value of a condition in an <c>if</c> statement, such as <c>x == 1</c>
+        above.</p>
+
+    <p>Complete the table the values of “result” for all combinations of values for A, B, and S.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>S</m>
+            </cell>
+            <cell>
+                <c>result</c>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="result1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="result2" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="result3" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="result4" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="result5" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="result6" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="result7" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="result8" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $result1=0 and $result2=0 and $result3=1 and $result4=0 and $result5=0 and $result6=1 and $result7=1 and
+                $result8=1
+            </when>
+        </award>
+    </answer>
+
+    <p>Now find a formula for <c>result</c> in terms of <m>A</m>, <m>B</m>, and <m>S</m>, using basic boolean functions
+        (AND, OR, NOT, NAND, NOR, XOR). Hint: remember, if <m>S</m> is 1, use the value of <m>A</m>; if <m>S</m> is 0,
+        use the value of <m>B</m>.</p>
+
+    <p>
+        <c>result</c>
+        <m>(A,B,S)=(S</m>
+        <choiceInput name="two_way_one_bit_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>A)</m>
+        <choiceInput name="two_way_one_bit_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>((</m>NOT <m>S)</m>
+        <choiceInput name="two_way_one_bit_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B)</m>
+        <answer>
+            <award>
+                <when>$two_way_one_bit_op1.selectedIndices=1 and $two_way_one_bit_op2.selectedIndices>=5 and
+                    $two_way_one_bit_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Two-Way 2-bit Multiplexer</title>
+
+    <p>Next, suppose we have two 2-bit binary integers, <m>AB</m> and <m>CD</m> (where <m>A</m>, <m>B</m>, <m>C</m>, and
+        <m>D</m> are the individual bits. Suppose we also have a 1-bit number, <m>S</m>. When <m>S</m> is 1, we want to
+        use the integer <m>AB</m>. When <m>S</m> is 0, we want to use the integer <m>CD</m>. Call the value used <m>EF
+        </m> (where <m>E</m> and <m>F</m> are individual bits).
+    </p>
+
+    <p>Complete the table the values of <m>E</m> and <m>F</m> for all combinations of values for <m>AB</m>, <m>CD</m>,
+        and <m>S</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell>
+                <m>D</m>
+            </cell>
+            <cell>
+                <m>S</m>
+            </cell>
+            <cell>
+                <m>E</m>
+            </cell>
+            <cell>
+                <m>F</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E1" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F1" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E1=0 and $F1=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E2" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F2" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E2=0 and $F2=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E3" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F3" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E3=0 and $F3=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E4" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F4" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E4=0 and $F4=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E5" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F5" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E5=1 and $F5=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E6" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F6" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E6=0 and $F6=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E7" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F7" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E7=1 and $F7=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E8" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F8" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E8=0 and $F8=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E9" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F9" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E9=0 and $F9=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E10" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F10" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E10=0 and $F10=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E11" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F11" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E11=0 and $F11=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E12" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F12" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E12=0 and $F12=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E13" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F13" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E13=1 and $F13=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E14" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F14" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E14=0 and $F14=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E15" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F15" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E15=1 and $F15=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E16" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F16" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E16=0 and $F16=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E17" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F17" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E17=0 and $F17=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E18" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F18" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E18=1 and $F18=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E19" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F19" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E19=0 and $F19=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E20" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F20" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E20=1 and $F20=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E21" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F21" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E21=1 and $F21=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E22" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F22" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E21=1 and $F21=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E23" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F23" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E23=1 and $F23=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E24" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F24" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E24=1 and $F24=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E25" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F25" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E25=0 and $F25=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E26" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F26" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E26=1 and $F26=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E27" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F27" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E27=0 and $F27=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E28" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F28" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E28=1 and $F28=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E29" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F29" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E29=1 and $F29=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E30" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F30" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E30=1 and $F30=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput width="30px" name="E31" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F31" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E31=1 and $E31=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput width="30px" name="E32" />
+            </cell>
+            <cell>
+                <textInput width="30px" name="F32" />
+            </cell>
+            <cell>
+                <answer>
+                    <award>
+                        <when>$E32=1 and $F32=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+
+    </tabular>
+
+    <p>Which input bits are used to compute <m>E</m>? Select all.</p>
+
+    <answer name="E_inputs">
+        <choiceInput selectMultiple>
+            <choice credit="1">
+                <m>A</m>
+            </choice>
+            <choice>
+                <m>B</m>
+            </choice>
+            <choice credit="1">
+                <m>C</m>
+            </choice>
+            <choice>
+                <m>D</m>
+            </choice>
+            <choice credit="1">
+                <m>S</m>
+            </choice>
+        </choiceInput>
+    </answer>
+
+    <p>Now find a formula for <m>E</m>.</p>
+    <conditionalContent>
+        <case condition="$E_inputs.creditAchieved=1">
+            <p>Your formula will be in terms of <m>A</m>, <m>C</m>, and <m>S</m>, using basic boolean functions (AND,
+                OR, NOT, NAND, NOR, XOR). Hint: remember your formula for the two-way 1-bit multiplexer.</p>
+
+            <p>
+                <m>E(A,C,S)=(S</m>
+                <choiceInput name="two_way_two_bit_op1" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>A)</m>
+                <choiceInput name="two_way_two_bit_op2" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>((</m>
+                <choiceInput name="two_way_two_bit_op3" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>S)</m>
+                <choiceInput name="two_way_two_bit_op4" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>C)</m>
+            </p>
+        </case>
+    </conditionalContent>
+    <p>
+        <answer>
+            <award>
+                <when>$two_way_two_bit_op1.selectedIndices=1 and $two_way_two_bit_op2.selectedIndices>=5 and
+                    $two_way_two_bit_op3.selectedIndices=4 and $two_way_two_bit_op4.selectedIndices=1 </when>
+            </award>
+        </answer>
+    </p>
+
+
+    <p>Which input bits are used to compute <m>F</m>? Select all.</p>
+
+    <answer name="F_inputs">
+        <choiceInput selectMultiple>
+            <choice>
+                <m>A</m>
+            </choice>
+            <choice credit="1">
+                <m>B</m>
+            </choice>
+            <choice>
+                <m>C</m>
+            </choice>
+            <choice credit="1">
+                <m>D</m>
+            </choice>
+            <choice credit="1">
+                <m>S</m>
+            </choice>
+        </choiceInput>
+    </answer>
+
+    <p>Now find a formula for <m>F</m>.</p>
+    <conditionalContent>
+        <case condition="$F_inputs.creditAchieved=1">
+
+            <p>Your formula will be in terms of <m>B</m>, <m>D</m>, and <m>S</m>, using basic boolean functions (AND,
+                OR, NOT, NAND, NOR, XOR).</p>
+
+            <p>
+                <m>F(B,D,S)=(S</m>
+                <choiceInput name="two_way_two_bit_op1b" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>B)</m>
+                <choiceInput name="two_way_two_bit_op2b" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>((</m>
+                <choiceInput name="two_way_two_bit_op3b" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>S)</m>
+                <choiceInput name="two_way_two_bit_op4b" inline>
+                    <choice>AND</choice>
+                    <choice>NAND</choice>
+                    <choice>NOR</choice>
+                    <choice>NOT</choice>
+                    <choice>OR</choice>
+                    <choice>XOR</choice>
+                </choiceInput>
+                <m>D)</m>
+            </p>
+        </case>
+    </conditionalContent>
+    <p>
+        <answer>
+            <award>
+                <when>$two_way_two_bit_op1b.selectedIndices=1 and $two_way_two_bit_op2b.selectedIndices>=5 and
+                    $two_way_two_bit_op3b.selectedIndices=4 and $two_way_two_bit_op4b.selectedIndices=1 </when>
+            </award>
+        </answer>
+    </p>
+
+</section>
