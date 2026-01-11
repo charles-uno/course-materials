@@ -9,7 +9,7 @@
 	\includegraphics[width=\columnwidth]{images/von-neumann-architecture.png}
 \end{frame}
 
-\Subsection{Parts of a Computer}
+\Subsection{Hardware Components}
 
 \begin{frame}{CPU}
 
@@ -66,6 +66,39 @@
 	The output unit(s) store or receive program results.
 
 \end{frame}
+
+
+
+
+\Subsection{Memory Hierarchy}
+
+\begin{frame}{The Memory Hierarchy}
+	\includegraphics[width=\columnwidth]{images/memory-hierarchy-books.png}
+\end{frame}
+
+\begin{frame}{The Memory Hierarchy}
+	\includegraphics[width=\columnwidth]{images/memory-hierarchy.png}
+\end{frame}
+
+\begin{frame}{What is a cache?}
+	\begin{itemize}
+		\item Cache holds data that you are likely to want soon. Recent and/or adjacent.
+		\item spatial locality
+		\item temporal locality
+		\item A CPU generally has a few layers of cache
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Important terms}
+	\begin{itemize}
+		\item Primary storage
+		\item Secondary storage
+		\item Latency
+		\item Capacity
+		\item Transfer rate (aka throughput)
+	\end{itemize}
+\end{frame}
+
 
 
 \Subsection{Executing Instructions}
@@ -159,42 +192,11 @@
 	\end{itemize}
 \end{frame}
 
-\Subsection{Von Neumann Bottleneck}
 
 \begin{frame}{Von Neumann Bottleneck}
 	Suppose you have an array of a billion integers in memory. You want to add 1 to each of them. How do you do it?
 \end{frame}
 
-\Subsection{Memory Hierarchy}
-
-\begin{frame}{The Memory Hierarchy}
-	\includegraphics[width=\columnwidth]{images/memory-hierarchy-books.png}
-\end{frame}
-
-\begin{frame}{The Memory Hierarchy}
-	\includegraphics[width=\columnwidth]{images/memory-hierarchy.png}
-\end{frame}
-
-\begin{frame}{What is a cache?}
-	\begin{itemize}
-		\item Cache holds data that you are likely to want soon. Recent and/or adjacent.
-		\item spatial locality
-		\item temporal locality
-		\item A CPU generally has a few layers of cache
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Important terms}
-	\begin{itemize}
-		\item Primary storage
-		\item Secondary storage
-		\item Latency
-		\item Capacity
-		\item Transfer rate (aka throughput)
-	\end{itemize}
-\end{frame}
-
-\Subsection{Instruction Walkthrough}
 
 \begin{frame}{foo bar}
 	\includegraphics[width=\columnwidth]{images/instruction-breakdown}
@@ -238,9 +240,7 @@
 \end{frame}
 
 
-\Subsection{Pipelining}
-
-\Subsection{Hazards}
+\Subsection{Pipelining & Hazards}
 
 
 \begin{frame}{Eager Execution Gone Wrong}
