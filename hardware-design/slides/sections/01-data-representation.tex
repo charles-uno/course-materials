@@ -138,19 +138,77 @@
 
 \end{frame}
 
-\begin{frame}{Exercises}
-    Make sure to show your work.
-    \vfill
-    \begin{enumerate}
-        \item Convert 0b1011 from binary to decimal. \vfill
-        \item Convert 47 from decimal to binary. \vfill
-        \item Add 0b1001 + 0b1011 in binary. Convert to decimal to check your work. \vfill
-        \item Multiply 0b1101 $\times$ 0b110 in binary. Convert to decimal to verify your
-              work. \vfill
-    \end{enumerate}
+
+
+\Subsection{Hexadecimal}
+
+\begin{frame}{What? Why?}
+
+    Binary is how machines store data. But writing out binary by hand is a chore.
+    In practice, it's often convenient to use hexadecimal (base 16) instead.
+
+    \begin{itemize}
+        \item Decimal uses ten digits, 0-9
+        \item Binary uses two digits, 0 and 1
+        \item Hexadecimal uses sixteen digits: 0-9 along with A-F
+    \end{itemize}
+    Hexadecimal values are always prefixed with ``0x'' to avoid ambiguity.
 \end{frame}
 
-\Subsection{Negative Numbers}
+\begin{frame}{Converting Between Binary and Hexadecimal}
+
+    Converting back and forth between binary and hexadecimal does not require any
+    math! Every four bits become one hex digit.
+    \begin{align*}
+        0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
+        0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
+        0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
+        0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
+        0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
+        0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
+        0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
+        0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
+    \end{align*}
+\end{frame}
+
+\begin{frame}{Converting Hexadecimal to Decimal}
+
+    Hexadecimal is base 16. So each place corresponds to a power of 16.
+
+    \begin{align*}
+        0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
+              & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
+              & = 768 + 160 + 11                                  \\
+              & = 954                                             \\
+    \end{align*}
+
+    Hexadecimal is very compact! These numbers get big fast
+
+\end{frame}
+
+\begin{frame}{Arithmetic in Hexadecimal}
+
+    Addition and multiplication work in hexadecimal just like they do in binary and
+    decimal. Just be careful about carrying.
+
+    \[
+        \begin{array}{ccccc}
+            1 &   &   & 1 &   \\
+              & 4 & 1 & 7 & B \\
+            + & C & 2 & 0 & F \\
+            \hline
+            1 & 0 & 3 & 8 & A \\
+        \end{array}
+    \]
+
+\end{frame}
+
+
+
+
+
+
+\Subsection{Negatives in Binary}
 
 \begin{frame}{First Attempt: Signed Magnitude}
 
@@ -279,87 +337,6 @@
 
 \end{frame}
 
-\begin{frame}{Exercises}
-    Make sure to show your work.
-    \begin{enumerate}
-        \item Convert 0b10010111 from two's complement binary to decimal.
-        \item Convert -47 from decimal to two's complement binary.
-        \item Subtract 0b01101001 - 0b10001100. These are two's complement binary numbers.
-              Convert to decimal to check your result.
-        \item Add 0b01101001 + 0b10001100. These are two's complement binary numbers. Convert
-              to decimal to check your result.
-    \end{enumerate}
-\end{frame}
-
-\Subsection{Hexadecimal}
-
-\begin{frame}{What? Why?}
-
-    Binary is how machines store data. But writing out binary by hand is a chore.
-    In practice, it's often convenient to use hexadecimal (base 16) instead.
-
-    \begin{itemize}
-        \item Decimal uses ten digits, 0-9
-        \item Binary uses two digits, 0 and 1
-        \item Hexadecimal uses sixteen digits: 0-9 along with A-F
-    \end{itemize}
-    Hexadecimal values are always prefixed with ``0x'' to avoid ambiguity.
-\end{frame}
-
-\begin{frame}{Converting Between Binary and Hexadecimal}
-
-    Converting back and forth between binary and hexadecimal does not require any
-    math! Every four bits become one hex digit.
-    \begin{align*}
-        0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
-        0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
-        0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
-        0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
-        0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
-        0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
-        0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
-        0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
-    \end{align*}
-\end{frame}
-
-\begin{frame}{Converting Hexadecimal to Decimal}
-
-    Hexadecimal is base 16. So each place corresponds to a power of 16.
-
-    \begin{align*}
-        0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
-              & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
-              & = 768 + 160 + 11                                  \\
-              & = 954                                             \\
-    \end{align*}
-
-    Hexadecimal is very compact! These numbers get big fast
-
-\end{frame}
-
-\begin{frame}{Arithmetic in Hexadecimal}
-
-    Addition and multiplication work in hexadecimal just like they do in binary and
-    decimal. Just be careful about carrying.
-
-    \[
-        \begin{array}{ccccc}
-            1 &   &   & 1 &   \\
-              & 4 & 1 & 7 & B \\
-            + & C & 2 & 0 & F \\
-            \hline
-            1 & 0 & 3 & 8 & A \\
-        \end{array}
-    \]
-
-\end{frame}
-
-\begin{frame}{Exercises}
-    Make sure to show your work.
-    \begin{enumerate}
-        \item TODO
-    \end{enumerate}
-\end{frame}
 
 \Subsection{Fractions and Decimals}
 
@@ -492,21 +469,15 @@
 
 \end{frame}
 
-\begin{frame}{Exercises}
-    Make sure to show your work.
-    \begin{enumerate}
-        \item Convert 0b100110.10 from fixed-point binary to decimal.
-        \item Convert 23.75 from decimal to fixed-point binary.
-        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to
-              confirm your result.
-        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is
-              equal to -3.5 in decimal.
-    \end{enumerate}
-\end{frame}
+%        \item Convert 0b100110.10 from fixed-point binary to decimal.
+%        \item Convert 23.75 from decimal to fixed-point binary.
+%        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
+%        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
 \Subsection{Structured Data}
 
 \begin{frame}{placeholder}
+    ASCII
     strings
     audio
     images
