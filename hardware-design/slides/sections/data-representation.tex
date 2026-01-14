@@ -2,139 +2,139 @@
 \Section{Data Representation}
 
 \begin{frame}{How do computers store information?}
-    Computers work using electrical signals which can be on or off. If we let:
-    \begin{itemize}
-        \item On means 1
-        \item Off means 0
-    \end{itemize}
-    We can use sequences of 0s and 1s to represent information
+	Computers work using electrical signals which can be on or off. If we let:
+	\begin{itemize}
+		\item On means 1
+		\item Off means 0
+	\end{itemize}
+	We can use sequences of 0s and 1s to represent information
 \end{frame}
 
 \Subsection{Positive Integers in Binary}
 
 \begin{frame}{Numbers in Base Ten (aka Decimal)}
-    Let's start by talking about how we write numbers normally.
+	Let's start by talking about how we write numbers normally.
 
-    For example, let's look at the number 109:
-    \begin{align*}
-        109 & = 100 \;+\; 0 \;+\; 9                                   \\
-            & = 1 \Times 10^2 \;+\; 0 \Times 10^1 \;+\; 9 \Times 10^0
-    \end{align*}
-    This way of writing numbers is called base ten.
-    We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
+	For example, let's look at the number 109:
+	\begin{align*}
+		109 & = 100 \;+\; 0 \;+\; 9                                   \\
+		    & = 1 \Times 10^2 \;+\; 0 \Times 10^1 \;+\; 9 \Times 10^0
+	\end{align*}
+	This way of writing numbers is called base ten.
+	We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
 
-    In terms of math, there is nothing special about base ten. We probably use it
-    because we have ten fingers. Some ancient civilizations used sompletely
-    different systems for counting!
+	In terms of math, there is nothing special about base ten. We probably use it
+	because we have ten fingers. Some ancient civilizations used sompletely
+	different systems for counting!
 \end{frame}
 
 \begin{frame}{Numbers in Base Two (aka Binary)}
-    Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
+	Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
 
-    \begin{align*}
-        0b1101101 & =
-        1 \Times 2^6 +
-        1 \Times 2^5 +
-        0 \Times 2^4 +
-        1 \Times 2^3 +
-        1 \Times 2^2 +
-        0 \Times 2^1 +
-        1 \Times 2^0                              \\
-                  & = 64 + 32 + 0 + 8 + 4 + 0 + 1 \\
-                  & = 109                         \\
-    \end{align*}
-    Importantly: we always use the prefix ``0b'' to avoid confusion when writing numbers in binary.
+	\begin{align*}
+		0b1101101 & =
+		1 \Times 2^6 +
+		1 \Times 2^5 +
+		0 \Times 2^4 +
+		1 \Times 2^3 +
+		1 \Times 2^2 +
+		0 \Times 2^1 +
+		1 \Times 2^0                              \\
+		          & = 64 + 32 + 0 + 8 + 4 + 0 + 1 \\
+		          & = 109                         \\
+	\end{align*}
+	Importantly: we always use the prefix ``0b'' to avoid confusion when writing numbers in binary.
 
-    1101 is one thousand one hundred and one
+	1101 is one thousand one hundred and one
 
-    0b1101 is thirteen
+	0b1101 is thirteen
 \end{frame}
 
 \begin{frame}{Converting from Decimal to Binary}
 
-    If the number is odd, append a 1 on the left. Otherwise, append a 0. Then
-    divide your decimal number by two and ignore any remainder. Repeat until your
-    decimal number is zero. \\
+	If the number is odd, append a 1 on the left. Otherwise, append a 0. Then
+	divide your decimal number by two and ignore any remainder. Repeat until your
+	decimal number is zero. \\
 
-    For example, starting with 58:
+	For example, starting with 58:
 
-    \begin{itemize}
-        \item 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
-        \item 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14.
-        \item 14 is even, so append \Highlight{0}10. Divide by two, leaving 7.
-        \item 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
-        \item 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
-        \item 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
-    \end{itemize}
+	\begin{itemize}
+		\item 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
+		\item 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14.
+		\item 14 is even, so append \Highlight{0}10. Divide by two, leaving 7.
+		\item 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
+		\item 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
+		\item 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
+	\end{itemize}
 
-    So 58 in binary is 0b111010.
+	So 58 in binary is 0b111010.
 
 \end{frame}
 
 \begin{frame}{Converting from Binary to Decimal}
 
-    We can confirm by converting back. The rightmost bit is worth 1, then 2, then
-    4, and so on:
+	We can confirm by converting back. The rightmost bit is worth 1, then 2, then
+	4, and so on:
 
-    \begin{align*}
-        0b111010 & =
-        1 \Times 2^5 +
-        1 \Times 2^4 +
-        1 \Times 2^3 +
-        0 \Times 2^2 +
-        1 \Times 2^1 +
-        0 \Times 2^0                          \\
-                 & = 32 + 16  + 8 + 0 + 2 + 0 \\
-                 & = 58
-    \end{align*}
+	\begin{align*}
+		0b111010 & =
+		1 \Times 2^5 +
+		1 \Times 2^4 +
+		1 \Times 2^3 +
+		0 \Times 2^2 +
+		1 \Times 2^1 +
+		0 \Times 2^0                          \\
+		         & = 32 + 16  + 8 + 0 + 2 + 0 \\
+		         & = 58
+	\end{align*}
 
 \end{frame}
 
 \begin{frame}{Addition in Binary}
-    Binary addition works just like decimal addition.
-    Start from the right, add straight down, and carry when you run out of digits.
+	Binary addition works just like decimal addition.
+	Start from the right, add straight down, and carry when you run out of digits.
 
-    For example:
-    \[
-        \begin{array}{ccccccccc}
-            1 & 1 & 1 & 1 & 1 &   &   &   &   \\
-              & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
-            + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
-            \hline
-            1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
-        \end{array}
-    \]
+	For example:
+	\[
+		\begin{array}{ccccccccc}
+			1 & 1 & 1 & 1 & 1 &   &   &   &   \\
+			  & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
+			+ & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+			\hline
+			1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+		\end{array}
+	\]
 
-    What happens if we try to perform this operation but we only have 8 bits to
-    store the answer?
+	What happens if we try to perform this operation but we only have 8 bits to
+	store the answer?
 \end{frame}
 
 \begin{frame}{Multiplication in Binary}
-    Binary multiplication works just like decimal multiplication.
-    Multiply the top number by the rightmost digit of the bottom number.
-    Then move to the next line, add a zero, and repeat for the next digit.
-    Finally, add up the lines. For example:
-    \[
-        \begin{array}{cccccc}
-              &   &        & 1 & 1 & 0 \\
-              &   & \times & 1 & 0 & 1 \\
-            \hline
-              &   &        & 1 & 1 & 0 \\
-              &   & 0      & 0 & 0 & 0 \\
-            + & 1 & 1      & 0 & 0 & 0 \\
-            \hline
-              & 1 & 1      & 1 & 1 & 0 \\
-        \end{array}
-    \]
+	Binary multiplication works just like decimal multiplication.
+	Multiply the top number by the rightmost digit of the bottom number.
+	Then move to the next line, add a zero, and repeat for the next digit.
+	Finally, add up the lines. For example:
+	\[
+		\begin{array}{cccccc}
+			  &   &        & 1 & 1 & 0 \\
+			  &   & \times & 1 & 0 & 1 \\
+			\hline
+			  &   &        & 1 & 1 & 0 \\
+			  &   & 0      & 0 & 0 & 0 \\
+			+ & 1 & 1      & 0 & 0 & 0 \\
+			\hline
+			  & 1 & 1      & 1 & 1 & 0 \\
+		\end{array}
+	\]
 \end{frame}
 
 \begin{frame}{Division in Binary}
-    To divide by 2, shift the bits one place to the right. \\
+	To divide by 2, shift the bits one place to the right. \\
 
-    To divide by 4, shift the bits two places to the right. \\
+	To divide by 4, shift the bits two places to the right. \\
 
-    That's about as deep as we go in this class. If you're curious to learn more,
-    see the textbook.
+	That's about as deep as we go in this class. If you're curious to learn more,
+	see the textbook.
 
 \end{frame}
 
@@ -144,62 +144,62 @@
 
 \begin{frame}{What? Why?}
 
-    Binary is how machines store data. But writing out binary by hand is a chore.
-    In practice, it's often convenient to use hexadecimal (base 16) instead.
+	Binary is how machines store data. But writing out binary by hand is a chore.
+	In practice, it's often convenient to use hexadecimal (base 16) instead.
 
-    \begin{itemize}
-        \item Decimal uses ten digits, 0-9
-        \item Binary uses two digits, 0 and 1
-        \item Hexadecimal uses sixteen digits: 0-9 along with A-F
-    \end{itemize}
-    Hexadecimal values are always prefixed with ``0x'' to avoid ambiguity.
+	\begin{itemize}
+		\item Decimal uses ten digits, 0-9
+		\item Binary uses two digits, 0 and 1
+		\item Hexadecimal uses sixteen digits: 0-9 along with A-F
+	\end{itemize}
+	Hexadecimal values are always prefixed with ``0x'' to avoid ambiguity.
 \end{frame}
 
 \begin{frame}{Converting Between Binary and Hexadecimal}
 
-    Converting back and forth between binary and hexadecimal does not require any
-    math! Every four bits become one hex digit.
-    \begin{align*}
-        0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
-        0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
-        0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
-        0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
-        0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
-        0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
-        0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
-        0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
-    \end{align*}
+	Converting back and forth between binary and hexadecimal does not require any
+	math! Every four bits become one hex digit.
+	\begin{align*}
+		0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
+		0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
+		0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
+		0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
+		0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
+		0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
+		0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
+		0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
+	\end{align*}
 \end{frame}
 
 \begin{frame}{Converting Hexadecimal to Decimal}
 
-    Hexadecimal is base 16. So each place corresponds to a power of 16.
+	Hexadecimal is base 16. So each place corresponds to a power of 16.
 
-    \begin{align*}
-        0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
-              & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
-              & = 768 + 160 + 11                                  \\
-              & = 954                                             \\
-    \end{align*}
+	\begin{align*}
+		0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
+		      & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
+		      & = 768 + 160 + 11                                  \\
+		      & = 954                                             \\
+	\end{align*}
 
-    Hexadecimal is very compact! These numbers get big fast
+	Hexadecimal is very compact! These numbers get big fast
 
 \end{frame}
 
 \begin{frame}{Arithmetic in Hexadecimal}
 
-    Addition and multiplication work in hexadecimal just like they do in binary and
-    decimal. Just be careful about carrying.
+	Addition and multiplication work in hexadecimal just like they do in binary and
+	decimal. Just be careful about carrying.
 
-    \[
-        \begin{array}{ccccc}
-            1 &   &   & 1 &   \\
-              & 4 & 1 & 7 & B \\
-            + & C & 2 & 0 & F \\
-            \hline
-            1 & 0 & 3 & 8 & A \\
-        \end{array}
-    \]
+	\[
+		\begin{array}{ccccc}
+			1 &   &   & 1 &   \\
+			  & 4 & 1 & 7 & B \\
+			+ & C & 2 & 0 & F \\
+			\hline
+			1 & 0 & 3 & 8 & A \\
+		\end{array}
+	\]
 
 \end{frame}
 
@@ -212,128 +212,128 @@
 
 \begin{frame}{First Attempt: Signed Magnitude}
 
-    We can use the first digit to hold the sign, then the rest of the digits to
-    hold magnitue:
+	We can use the first digit to hold the sign, then the rest of the digits to
+	hold magnitue:
 
-    \begin{itemize}
-        \item 0b\Highlight{0}1011001 is positive 10110001, so 89
-        \item 0b\Highlight{1}1011001 is negative 1011001, so -89
-    \end{itemize}
+	\begin{itemize}
+		\item 0b\Highlight{0}1011001 is positive 10110001, so 89
+		\item 0b\Highlight{1}1011001 is negative 1011001, so -89
+	\end{itemize}
 
-    This is nice and straightforward!
+	This is nice and straightforward!
 
 \end{frame}
 
 \begin{frame}{Addition and Subtraction with Signed Magnitude}
-    Adding positive numbers works just the same. But what happens if we throw a minus sign in there?
+	Adding positive numbers works just the same. But what happens if we throw a minus sign in there?
 
-    For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then:
+	For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then:
 
-    \[
-        \begin{array}{ccccccccc}
-              & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
-            + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
-            \hline
-              & ? & ? & ? & ? & ? & ? & ? & ? \\
-        \end{array}
-    \]
+	\[
+		\begin{array}{ccccccccc}
+			  & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
+			+ & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+			\hline
+			  & ? & ? & ? & ? & ? & ? & ? & ? \\
+		\end{array}
+	\]
 
-    We know the result should be 7 (0b00000111). But our regular rules for addition
-    do not get us there.
+	We know the result should be 7 (0b00000111). But our regular rules for addition
+	do not get us there.
 \end{frame}
 
 \begin{frame}{Zero with Signed Magnitude}
 
-    Using signed magnitude, 0b00000000 is zero.
+	Using signed magnitude, 0b00000000 is zero.
 
-    And 0b10000000 is negative zero (which is also zero).
+	And 0b10000000 is negative zero (which is also zero).
 
-    Using this convention, we have to worry about the difference between numerical
-    equality and bitwise equality. That seems pretty messy.
+	Using this convention, we have to worry about the difference between numerical
+	equality and bitwise equality. That seems pretty messy.
 \end{frame}
 
 \begin{frame}{Can We Do Better?}
-    Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
-    \begin{itemize}
-        \item We want positive numbers to work like we expect
-        \item We want 0b00000000 to be zero, with no ambiguity
-        \item We want addition and subtraction to work the same for positive and negative
-    \end{itemize}
+	Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
+	\begin{itemize}
+		\item We want positive numbers to work like we expect
+		\item We want 0b00000000 to be zero, with no ambiguity
+		\item We want addition and subtraction to work the same for positive and negative
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Another Idea: Two's Complement}
-    We know 1 - 1 = 0. Put another way, 1 + (-1) = 0. Can we work backwards from there to figure out how to write -1?
-    \[
-        \begin{array}{ccccccccc}
-              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-            + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
-            \hline
-              & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-        \end{array}
-    \]
+	We know 1 - 1 = 0. Put another way, 1 + (-1) = 0. Can we work backwards from there to figure out how to write -1?
+	\[
+		\begin{array}{ccccccccc}
+			  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+			+ & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			  & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		\end{array}
+	\]
 
-    Remember: on a computer, our numbers have to fit in a set number of bits.
-    Anything past that gets thrown away. This is called overflow. In this case,
-    overflow works in our favor!
+	Remember: on a computer, our numbers have to fit in a set number of bits.
+	Anything past that gets thrown away. This is called overflow. In this case,
+	overflow works in our favor!
 \end{frame}
 
 \begin{frame}{Working Backwards from Zero}
-    We can use the same trick to identify the rest of the negative numbers:
-    \begin{itemize}
-        \item 0b00000000 is 0
-        \item 0b11111111 is -1
-        \item 0b11111110 is -2
-        \item 0b11111101 is -3
-        \item 0b11111100 is -4
-        \item etc
-    \end{itemize}
+	We can use the same trick to identify the rest of the negative numbers:
+	\begin{itemize}
+		\item 0b00000000 is 0
+		\item 0b11111111 is -1
+		\item 0b11111110 is -2
+		\item 0b11111101 is -3
+		\item 0b11111100 is -4
+		\item etc
+	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{The Sign Bit (Again)}
-    We only have 256 possible integers. How do we decide where the positives end and the negatives begin?
+	We only have 256 possible integers. How do we decide where the positives end and the negatives begin?
 
-    Unsigned int: bits are worth 1, 2, 4, 8, 16, 32, 64, 128
+	Unsigned int: bits are worth 1, 2, 4, 8, 16, 32, 64, 128
 
-    Signed magnitude: bits are worth $\pm1, \pm2, \pm4, \pm8, \pm16, \pm32, \pm64$,
-    and the last bit tells us whether to use positive or negative (yikes)
+	Signed magnitude: bits are worth $\pm1, \pm2, \pm4, \pm8, \pm16, \pm32, \pm64$,
+	and the last bit tells us whether to use positive or negative (yikes)
 
-    Two's complement: bits are worth 1, 2, 4, 8, 16, 32, 64, \Highlight{-128}
+	Two's complement: bits are worth 1, 2, 4, 8, 16, 32, 64, \Highlight{-128}
 
-    Range of possible values is -128 to 127.
+	Range of possible values is -128 to 127.
 \end{frame}
 
 \begin{frame}{Flipping Signs in Two's Complement}
-    To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers.
+	To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers.
 
-    For example:
-    \begin{itemize}
-        \item 55 is 0b01010111
-        \item Flip the bits: 0b10101000, then add 1: 0b10101001
-        \item So -55 is 0b10101001
-        \item Flip the bits again: 0b01010110, add 1: 0b01010111
-        \item So -(-55) = 55 = 0b01010111
-    \end{itemize}
+	For example:
+	\begin{itemize}
+		\item 55 is 0b01010111
+		\item Flip the bits: 0b10101000, then add 1: 0b10101001
+		\item So -55 is 0b10101001
+		\item Flip the bits again: 0b01010110, add 1: 0b01010111
+		\item So -(-55) = 55 = 0b01010111
+	\end{itemize}
 
-    What happens if we negate zero?
+	What happens if we negate zero?
 \end{frame}
 
 \begin{frame}{Overflow}
-    Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
+	Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
 
-    Try adding 0b01101001 + 0b01011010:
-    \[
-        \begin{array}{ccccccccc}
-              &   & 1 & 1 & 1 &   &   &   &   \\
-              & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
-            + & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
-            \hline
-              & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
-        \end{array}
-    \]
+	Try adding 0b01101001 + 0b01011010:
+	\[
+		\begin{array}{ccccccccc}
+			  &   & 1 & 1 & 1 &   &   &   &   \\
+			  & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+			+ & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+			\hline
+			  & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+		\end{array}
+	\]
 
-    These are two's complement numbers. Convert them to decimal. What just
-    happened?
+	These are two's complement numbers. Convert them to decimal. What just
+	happened?
 
 \end{frame}
 
@@ -342,70 +342,70 @@
 
 \begin{frame}{The Decimal Point}
 
-    Sometimes we need to store numbers that aren't integers. \\
+	Sometimes we need to store numbers that aren't integers. \\
 
-    Before we worry about binary, what does 21.867 mean? \\
+	Before we worry about binary, what does 21.867 mean? \\
 
-    \begin{align*}
-        21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times ?? + 6 \Times ?? + 7 \Times ??
-    \end{align*}
+	\begin{align*}
+		21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times ?? + 6 \Times ?? + 7 \Times ??
+	\end{align*}
 
 \end{frame}
 
 \begin{frame}{The Decimal Point}
 
-    In decimal:
-    \begin{align*}
-        21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
-               & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
-    \end{align*}
+	In decimal:
+	\begin{align*}
+		21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
+		       & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
+	\end{align*}
 
-    In binary, we can use the same idea:
-    \begin{align*}
-        0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
-                  & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
-                  & = 5.25                                                                                             \\
-    \end{align*}
+	In binary, we can use the same idea:
+	\begin{align*}
+		0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
+		          & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
+		          & = 5.25                                                                                             \\
+	\end{align*}
 
 \end{frame}
 
 \begin{frame}{Fixed Point Representation}
 
-    The computer just stores 1s and 0s, not decimal points. How do we distinguish
-    these values?
-    \begin{itemize}
-        \item 0b0101110.1 = 46.5
-        \item 0b010111.01 = 23.25
-        \item 0b01011.101 = 11.625
-    \end{itemize}
+	The computer just stores 1s and 0s, not decimal points. How do we distinguish
+	these values?
+	\begin{itemize}
+		\item 0b0101110.1 = 46.5
+		\item 0b010111.01 = 23.25
+		\item 0b01011.101 = 11.625
+	\end{itemize}
 
-    One option is to specify the location of the decimal point ahead of time. For
-    example, we could say that our eight-bit binary decimal always has two decimal
-    bits. \\
+	One option is to specify the location of the decimal point ahead of time. For
+	example, we could say that our eight-bit binary decimal always has two decimal
+	bits. \\
 
-    What is an upside of this approach? What is a downside?
+	What is an upside of this approach? What is a downside?
 
 \end{frame}
 
 \begin{frame}{Floating Point Representation}
 
-    Floating point numbers are a bit more complicated, but much more flexible. For
-    a 16-bit floating point number we get:
+	Floating point numbers are a bit more complicated, but much more flexible. For
+	a 16-bit floating point number we get:
 
-    \begin{itemize}
-        \item 1 bit for the sign
-        \item 5 bits for the exponent (value -14 to 15)
-        \item 10 bits for the significand (value 0 to 1023)
-    \end{itemize}
+	\begin{itemize}
+		\item 1 bit for the sign
+		\item 5 bits for the exponent (value -14 to 15)
+		\item 10 bits for the significand (value 0 to 1023)
+	\end{itemize}
 
-    To turn those components into a value we use:
-    \begin{align*}
-        \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
-    \end{align*}
+	To turn those components into a value we use:
+	\begin{align*}
+		\text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
+	\end{align*}
 
-    Why offset the exponent?
+	Why offset the exponent?
 
-    Why add 1 to the significand fraction?
+	Why add 1 to the significand fraction?
 
 \end{frame}
 
@@ -413,59 +413,59 @@
 
 \begin{frame}{Floating Point Examples}
 
-    \begin{align*}
-        \underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
-                                                                                                                       & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
-                                                                                                                       & = 1                                                                  \\
-    \end{align*}
-    \begin{align*}
-        0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
-                                 & \approx 0.33325195                                                     \\
-    \end{align*}
-    \begin{align*}
-        1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
-                                 & = -65504                                                                \\
-    \end{align*}
+	\begin{align*}
+		\underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
+		                                                                                                               & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
+		                                                                                                               & = 1                                                                  \\
+	\end{align*}
+	\begin{align*}
+		0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
+		                         & \approx 0.33325195                                                     \\
+	\end{align*}
+	\begin{align*}
+		1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
+		                         & = -65504                                                                \\
+	\end{align*}
 
-    Why
+	Why
 \end{frame}
 
 \begin{frame}{Floating Point Special Cases}
 
-    \[
-        \begin{array}{ccccr}
-            0 & 00000 & 0000000000     & = 0          \\
-            1 & 00000 & 0000000000     & = -0         \\
-            0 & 11111 & 0000000000     & = \infty     \\
-            1 & 11111 & 0000000000     & = -\infty    \\
-            0 & 11111 & \text{nonzero} & = \text{NaN} \\
-        \end{array}
-    \]
+	\[
+		\begin{array}{ccccr}
+			0 & 00000 & 0000000000     & = 0          \\
+			1 & 00000 & 0000000000     & = -0         \\
+			0 & 11111 & 0000000000     & = \infty     \\
+			1 & 11111 & 0000000000     & = -\infty    \\
+			0 & 11111 & \text{nonzero} & = \text{NaN} \\
+		\end{array}
+	\]
 
-    There's more to it than this. If you're curious, read up on subnormal numbers
-    \href{https://en.wikipedia.org/wiki/Half-precision_floating-point_format}{here}
+	There's more to it than this. If you're curious, read up on subnormal numbers
+	\href{https://en.wikipedia.org/wiki/Half-precision_floating-point_format}{here}
 
 \end{frame}
 
 \begin{frame}{Floating Point for Big Integers}
 
-    If we're dealing with big numbers, floating point often works better than fixed
-    point. This is true even if both formats use the same number of bits.
+	If we're dealing with big numbers, floating point often works better than fixed
+	point. This is true even if both formats use the same number of bits.
 
-    \begin{itemize}
-        \item 8-bit unsigned integer: max value 255
-        \item 16-bit unsigned integer: max value 65,535
-        \item 32-bit unsigned integer: max value 4.2 billion % 4,294,967,295
-        \item 16-bit floating point: max value 65,504 (also handles negatives, fractions)
-        \item 32-bit floating point: max value 340 billion billion billion billion (also handles negatives, fractions)
-          % 340,282,346,638,528,859,811,704,183,484,516,925,440 
-    \end{itemize}
+	\begin{itemize}
+		\item 8-bit unsigned integer: max value 255
+		\item 16-bit unsigned integer: max value 65,535
+		\item 32-bit unsigned integer: max value 4.2 billion % 4,294,967,295
+		\item 16-bit floating point: max value 65,504 (also handles negatives, fractions)
+		\item 32-bit floating point: max value 340 billion billion billion billion (also handles negatives, fractions)
+		      % 340,282,346,638,528,859,811,704,183,484,516,925,440 
+	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{Floating Point Limitations}
 
-    So what's the catch?
+	So what's the catch?
 
 \end{frame}
 
@@ -476,11 +476,15 @@
 
 \Subsection{Structured Data}
 
-\begin{frame}{placeholder}
-    ASCII
-    strings
-    audio
-    images
-    JSON
+\begin{frame}{Structured Data}
+
+	\begin{itemize}
+		\item characters (ASCII, unicode)
+		\item null-terminated strings
+		\item audio
+		\item colors
+		\item images
+		\item JSON
+	\end{itemize}
 \end{frame}
 

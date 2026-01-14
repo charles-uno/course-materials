@@ -62,11 +62,11 @@
 \newcommand{\Times}{\!\times\!}
 
 \newcommand{\LogicNot}[1]{{\ensuremath{\overline{#1}}}}
-\newcommand{\LogicAnd}[2]{{\ensuremath{{#1 \cdot #2}}}}
+\newcommand{\LogicAnd}[2]{{\ensuremath{{#1 \& #2}}}}
 \newcommand{\LogicNand}[2]{\LogicNot{\LogicAnd{#1}{#2}}}
-\newcommand{\LogicOr}[2]{{\ensuremath{{#1 \lor #2}}}}
+\newcommand{\LogicOr}[2]{{\ensuremath{{#1 | #2}}}}
 \newcommand{\LogicNor}[2]{\LogicNot{\LogicOr{#1}{#2}}}
-\newcommand{\LogicXor}[2]{{\ensuremath{{#1 \oplus #2}}}}
+\newcommand{\LogicXor}[2]{{\ensuremath{{#1 \wedge #2}}}}
 \newcommand{\LogicXnor}[2]{\LogicNot{\LogicXor{#1}{#2}}}
 
 \newcommand{\Arm}[1]{\mintinline{tasm}{#1}}

@@ -1,55 +1,150 @@
 
 \Section{Boolean Logic}
 
+\begin{frame}{What does boolean mean?}
+	\begin{itemize}
+		\item Boolean logic uses two values: true and false
+		\item This is convenient for computers that can only store 1 (on) and 0 (off).
+		\item Complex logic becomes possible when multiple boolean values are used togather.
+	\end{itemize}
+\end{frame}
 
 \Subsection{Boolean Functions}
 
 
-\Subsection{Boolean Expressions}
-
-
-\Subsection{Logic Gates}
-
-
-
-\Subsection{Logic Circuits}
-
-
-
-
-
-
-
-
-
-
-\begin{frame}{What does boolean mean?}
-	\begin{itemize}
-		\item Boolean logic uses two values: true and false
-		\item On a computer, true is 1 and false is 0.
-		\item When we put multiple boolean values together, complex logic becomes possible.
-	\end{itemize}
-\end{frame}
-
 \begin{frame}{Truth Tables}
 
-	A boolean operator takes boolean input(s) and produces a boolean output. For example,
+	A boolean function takes boolean input(s) and produces a boolean output. In order to see all the inputs and outputs, we can write a truth table. For example:
 
-	\begin{tabular}{c c c}
-		A & B & A and B \\
+	\begin{tabular}{c c}
+		A & not A \\
 		\hline
-		1 & 1 & 1       \\
-		1 & 0 & 0       \\
-		0 & 1 & 0       \\
-		0 & 0 & 0
+		1 & 0     \\
+		0 & 1
 	\end{tabular}
 \end{frame}
 
 
-\begin{frame}{Boolean Operators: NOT}
-	NOT takes a boolean value and flips it. We write NOT as an overline.
-	\bigskip
+\begin{frame}{Boolean Functions}
 
+	Fundamental boolean functions include AND, OR, and XOR:
+
+	\begin{tabular}{c c c c c}
+		A & B & A and B & A or B & A xor B \\
+		\hline
+		1 & 1 & 1       & 1      & 0       \\
+		1 & 0 & 0       & 1      & 1       \\
+		0 & 1 & 0       & 1      & 1       \\
+		0 & 0 & 0       & 0      & 0
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{Boolean Functions}
+
+	We also have opposite functions NAND, NOR, and XNOR. These are just the previous gates but flipped:
+
+	\begin{tabular}{c c c c c}
+		A & B & A nand B & A nor B & A xnor B \\
+		\hline
+		1 & 1 & 0        & 0       & 1        \\
+		1 & 0 & 1        & 0       & 0        \\
+		0 & 1 & 1        & 0       & 0        \\
+		0 & 0 & 1        & 1       & 1
+	\end{tabular}
+
+
+
+\end{frame}
+
+\begin{frame}{Boolean Function Shorthand}
+
+	We are going to be writing these over and over. To save some ink:
+
+	\begin{itemize}
+		\item Not A is written \LogicNot{A}
+		\item A and B is written \LogicAnd{A}{B}
+		\item A or B is written \LogicOr{A}{B}
+		\item A xor B is \LogicXor{A}{B}
+		\item A nand B is written \LogicNand{A}{B}
+		\item A nor B is written \LogicNor{A}{B}
+		\item A xor B is written \LogicXnor{A}{B}
+	\end{itemize}
+
+	Heads up: you may see different symbols elsewhere!
+
+\end{frame}
+
+\Subsection{Boolean Expressions}
+
+\begin{frame}{Putting Boolean Functions Together}
+	We can chain multiple boolean functions together. This is called a boolean expression.
+
+
+	For example, let's define the function $f$ with two inputs:
+	\begin{align*}
+		f(A, B) & = \text{(A or B) and not (A and B)}               \\
+		        & = \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
+	\end{align*}
+\end{frame}
+
+
+\begin{frame}{Parsing Boolean Expressions}
+
+	At face value, it's hard to understand. Let's break out some helper functions:
+
+	\begin{align*}
+		f(A, B) & = \LogicAnd{\underbrace{(\LogicOr{A}{B})}}{(\underbrace{\LogicNand{A}{B})}} \\
+	\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Parsing Boolean Expressions}
+
+	\begin{align*}
+		f(A, B) & = \LogicAnd{\underbrace{(\LogicOr{A}{B})}}{(\underbrace{\LogicNand{A}{B})}} \\
+	\end{align*}
+
+	Then we can write out a truth table for those helper functions:
+
+	\begin{tabular}{c c c c}
+		A & B & \LogicOr{A}{B} & \LogicNand{A}{B} \\
+		\hline
+		1 & 1 & 1              & 0                \\
+		1 & 0 & 1              & 1                \\
+		0 & 1 & 1              & 1                \\
+		0 & 0 & 0              & 1
+	\end{tabular}
+\end{frame}
+
+
+
+
+\begin{frame}{Putting Boolean Functions Together}
+
+	\begin{align*}
+		f(A, B) & = \LogicAnd{\underbrace{(\LogicOr{A}{B})}}{(\underbrace{\LogicNand{A}{B})}} \\
+	\end{align*}
+
+	Then finally we can write the truth table for the whole expression:
+
+	\begin{tabular}{c c c c c}
+		A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & f(A, B) \\
+		\hline
+		1 & 1 & 1              & 0                & 0       \\
+		1 & 0 & 1              & 1                & 1       \\
+		0 & 1 & 1              & 1                & 1       \\
+		0 & 0 & 0              & 1                & 0
+	\end{tabular}
+\end{frame}
+
+\Subsection{Logic Gates}
+
+\begin{frame}{Logic Gates}
+Logic gates are the same thing as boolean functions. But instead of writing them as a word or symbol, we draw them like a flow chart.
+\end{frame}
+
+\begin{frame}{Boolean Operators: NOT}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			The NOT gate looks like this:
@@ -76,16 +171,10 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-
-	You may also see $\overline{A}$ written as $\neg A$ or $\sim A$
 \end{frame}
 
 
 \begin{frame}{Boolean Operators: AND, NAND}
-	We use a dot to indicate AND. So \LogicAnd{A}{B} means "A and B". This is pretty easy to remember since the dot is also used for multiplication
-
-	NAND is its opposite. "A nand B" is the same as "not (A and B)"
-
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{tikzpicture}
@@ -113,16 +202,10 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-
-	AND can also be indicated by $A \land B$ or $A \& B$
 \end{frame}
 
 
 \begin{frame}{Boolean Operators: OR, NOR}
-	We use \LogicOr{A}{B} to mean "A or B".
-
-	NOR is its opposite
-
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{tikzpicture}
@@ -150,15 +233,10 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-
-	You may also see $A | B$. Some standards also use $A+B$, but that's confusing when we're also talking about arithmetic!
 \end{frame}
 
 
 \begin{frame}{Boolean Operators: XOR, XNOR}
-	XOR (pronounced "exor" or "zor") means exclusive OR. So A is true or B is true, but not both. It's indicated by \LogicXor{A}{B}
-
-	XNOR (pronounced like "exnor" or "snore")
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{tikzpicture}
@@ -186,24 +264,30 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-
-	You may also see $A \veebar B$ or $A \not\equiv B$
 \end{frame}
 
 
-\begin{frame}{Exercises}
-	\begin{enumerate}
-		\item TODO
-	\end{enumerate}
-\end{frame}
 
 
-\begin{frame}{Multiple Operators Together}
-	We can chain multiple operators together to perform complex operations.
 
-	Multiple gates is called a circuit
+\Subsection{Logic Circuits}
 
-	Multiple operators written down is called an expression
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Multiple Gates Together}
+
+When we chain multiple boolean functions together, we get a boolean expression. 
+
+Similarly, when we chain multiple logic gates together, we get a logic circuit. 
 
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
@@ -274,7 +358,7 @@
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 	\end{tikzpicture}
 \end{frame}
 
@@ -300,12 +384,12 @@
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 	\end{tikzpicture}
 
 	\begin{center}
 		\begin{tabular}{c c c c c}
-			A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & $(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$ \\
+			A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
 			\hline
 			1 & 1 & 1              & 0                & 0                                            \\
 			1 & 0 & 1              & 1                & 1                                            \\
@@ -325,7 +409,7 @@
 		\node[ieeestd and port] at (7.205, 5.286){};
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (5.598, 5.741){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (4.857, 6.054){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.5, 4.884){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.857, 5.196){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 	\end{tikzpicture}
 \end{frame}
 
@@ -340,7 +424,7 @@
 		\draw (6, 6.143) -- (6, 5.571) -- (6.143, 5.571);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (5.357, 4.857){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (4.714, 5.17){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 	\end{tikzpicture}
 \end{frame}
 
@@ -357,7 +441,7 @@
 		\draw (6, 4.429) -- (6, 5) -- (6.123, 5.006);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.402, 3.973){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.089, 4.286){B};
 		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (3.375, 4.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (3.062, 5.054){A};
 	\end{tikzpicture}
@@ -382,7 +466,7 @@
 		\draw (3.838, 6.423) -- (2.857, 6.429) -- (2.857, 4.714);
 		\node[shape=rectangle, minimum width=1.447cm, minimum height=0.59cm] at (6, 6.714){} node[anchor=north west, align=left, text width=1.059cm, inner sep=6pt] at (5.259, 7.027){\LogicOr{A}{B}};
 		\node[shape=rectangle, minimum width=1.25cm, minimum height=0.59cm] at (6.357, 4.143){} node[anchor=north west, align=left, text width=0.862cm, inner sep=6pt] at (5.714, 4.455){\LogicNand{A}{B}};
-		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){$(\LogicOr{A}{B}) \cdot  (\LogicNand{A}{B})$};
+		\node[shape=rectangle, minimum width=3.108cm, minimum height=0.59cm] at (9.714, 5.402){} node[anchor=north west, align=left, text width=2.72cm, inner sep=6pt] at (8.143, 5.714){\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}};
 	\end{tikzpicture}
 \end{frame}
 
@@ -391,6 +475,7 @@
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
+				\item Logic gates are not independent!
 				\item There are many ways to build gates from other gates.
 				\item It's even possible to build all gates using only NAND. This is called functional completeness.
 				\item Why might functional completeness be useful?
@@ -633,7 +718,7 @@
 
 \begin{frame}{Voltage only drops if it has somewhere to go}
 
-Voltage drop only happens if electricity is flowing. Otherwise the voltage is the same everywhere
+	Voltage drop only happens if electricity is flowing. Otherwise the voltage is the same everywhere
 
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
@@ -807,9 +892,9 @@ Voltage drop only happens if electricity is flowing. Otherwise the voltage is th
 
 \begin{frame}{Why two resistors?}
 
-In many cases, we can get away with just one resistor. The previous example had two. Why?
+	In many cases, we can get away with just one resistor. The previous example had two. Why?
 
-Always need a resistor between a voltage source and ground. Transistors have internal resistance but it's very small. Easy to burn them out
+	Always need a resistor between a voltage source and ground. Transistors have internal resistance but it's very small. Easy to burn them out
 
 \end{frame}
 
