@@ -1388,9 +1388,9 @@ this might belong with hardware components?
 
     <pre>
     if x == 1: 
-        print(“that number is 1”)
+        print("that number is 1”)
     else:
-        print(“that number is not 1”)
+        print("that number is not 1”)
       </pre>
 
     <p>In this lab, you'll figure out how this works at the level of logic circuits.</p>
@@ -1402,7 +1402,7 @@ this might belong with hardware components?
             0, we want to use the value <m>B</m>. Call the value used <c>result</c>.</p>
         <p>Note: Think of <m>S</m> as the true/false value of a condition in an <c>if</c> statement, such as <c>x == 1
             </c> above.</p>
-        <p>Complete the table the values of “result” for all combinations of values for A, B, and S.</p>
+        <p>Complete the table the values of "result” for all combinations of values for A, B, and S.</p>
         <tabular top="minor" bottom="minor" left="minor" right="minor">
             <row header>
                 <cell>
@@ -3576,31 +3576,159 @@ this might belong with hardware components?
         <p>Note: you will later build a logic circuit in Circuitverse to negate 4-bit two's complement
             integers.</p>
     </exercise>
-
-
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <section>
-    <title>Pencil and Paper</title>
+    <title>Moodle Work</title>
 
-    Work through the following exercies on paper, then upload them to Moodle as a PDF. Be sure to show your work for
-    every exercise <alert>in detail</alert> in order to demonstrate that you understand the process.
+    <p>The following exercises use the online circuit simulator: https://circuitverse.org/simulator</p>
+    <p>To turn in your work, take screenshots as directed and submit a PDF on Moodle.</p>
 
-    <ol>
 
-    </ol>
+
+    <exercise>
+        <p>Work through this on paper. Include a photo in the PDF you submit to Moodle.</p>
+        <p>Create a truth table for the boolean function. Use two helper columns that make sense.</p>
+        <me>
+            f(A, B, C) = (A \textrm{ xor } B) \textrm{ or } (B \textrm{ and } C)
+        </me>
+    </exercise>
+    <exercise>
+        <p>Work through this on paper. Include a photo in the PDF you submit to Moodle.</p>
+        <p>Use truth tables to show that the two boolean expressions below are equal:</p>
+        <me>
+            A \textrm{ and } (B \textrm{ or } C) = (A \textrm{ and } B) \textrm{ or } (A \textrm{ and } C)
+        </me>
+        using truth tables.
+    </exercise>
+    <exercise>
+        <p>Work through this on paper. Include a photo in the PDF you submit to Moodle.</p>
+        <p>Use truth tables to determine whether the following is true for all A, B, C:</p>
+        <me>
+            (A \textrm{ nand } B) \textrm{ nand } C = A \textrm{ nand } (B \textrm{ nand } C)
+        </me>
+    </exercise>
+    <exercise>
+        <p>Create a new project on Circuitverse. Build a logic circuit for the following expression. It's the same one
+            from above. Take a screenshot of your circuit and include it in the PDF you submit via Moodle.</p>
+        <me>
+            f(A, B, C) = (A \mathrm{ xor } B ) \mathrm{ or } (B \mathrm{ and } C)
+        </me>
+        <p> Hints:</p>
+        <ul>
+            <li>There will be three inputs and one output.</li>
+            <li>You will need to use two AND gates, and one OR gate.</li>
+        </ul>
+        <p>Using your truth table from above, create tests for your circuit. Cover all possible combinations of A, B,
+            and C. Run your tests and view the detailed test results. Submit a screenshot.</p>
+    </exercise>
+
+
+    <exercise>
+        <p>Create a new project on Circuitverse. Create a logic circuit which checks if two values are equal. It should metch the following truth table:</p>
+        <tabular>
+            <row header>
+                <cell>
+                    <m>A</m>
+                </cell>
+                <cell>
+                    <m>B</m>
+                </cell>
+                <cell>
+                    <m>A == B</m>
+                </cell>
+            </row>
+            <row header>
+                <cell>
+                    <m>1</m>
+                </cell>
+                <cell>
+                    <m>1</m>
+                </cell>
+                <cell>
+                    <m>1</m>
+                </cell>
+            </row>
+            <row header>
+                <cell>
+                    <m>1</m>
+                </cell>
+                <cell>
+                    <m>0</m>
+                </cell>
+                <cell>
+                    <m>0</m>
+                </cell>
+            </row>
+            <row header>
+                <cell>
+                    <m>0</m>
+                </cell>
+                <cell>
+                    <m>1</m>
+                </cell>
+                <cell>
+                    <m>0</m>
+                </cell>
+            </row>
+            <row header>
+                <cell>
+                    <m>0</m>
+                </cell>
+                <cell>
+                    <m>0</m>
+                </cell>
+                <cell>
+                    <m>1</m>
+                </cell>
+            </row>
+        </tabular>
+<p>Hint: there are several different ways to do this! How few gates can you use?</p>
+<p>Using the truth table provided above, create tests for all possible combinations of A and B. Run your tests. Submit a screenshot of the entire window, including the detailed test results.</p>
+</exercise>
+
+<exercise>
+
+
+
+    Click "Project -> New Project” to create a new circuit.
+
+    Next, you will set up a logic circuit to test the equation
+    A OR (A OR B) = (A OR B).
+
+    Create a logic circuit to test this equation.
+
+    Hints:
+    This can be done with two inputs (A and B), two or three OR gates, and two outputs. The two outputs correspond to
+    the result of each side of the equation. Label the result of the left side of the equation as "left”, and label the
+    result of the right side of the equation as "right”.
+    When you toggle the values for A and B, you should see that "left” and "right” always have the same value.
+
+    Take a screenshot of your logic circuit, and submit the image as your solution for this part of the exercise.
+
+    Create tests for all possible combinations of values for A and B, and the corresponding result that you would expect
+    for "left” and "right”. This will require two outputs in your tests, though they will be identical. Run your tests,
+    and view the detailed test results. Take a screenshot of the entire window, and submit the image as your solution
+    for this part of the exercise.
+
+    Next, you will modify your circuit to include the equality testing for
+    A OR (A OR B) = (A OR B).
+    Remove the outputs in your logic circuit. Then, use your approach from Exercise 5 above to modify the circuit to
+    compute one output, which is the result of the boolean function
+    f(A, B) = (A OR (A OR B) = (A OR B)).
+    Take a screenshot of your logic circuit, and submit the image as your solution for this part of the exercise.
+
+    Modify your tests for all possible combinations of values for A and B, to have a single output for the boolean
+    function.
+
+    Hint: If the equation holds, what will the output of f always be?
+
+    Run your tests, and view the detailed test results. Take a screenshot of the entire window, and submit the image as
+    your solution for this part of the exercise.
+
+
+
+</exercise>
 
 </section>
