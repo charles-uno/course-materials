@@ -1375,1225 +1375,8 @@ this might belong with hardware components?
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section>
-    <title>1-bit Addition</title>
-
-    <p>The possible results of adding two 1-bit integers (in binary) are:
-        <me>0 + 0 = 0</me>
-        <me>1 + 0 = 1</me>
-        <me>0 + 1 = 1</me>
-        <me>1 + 1 = 10</me>
-        In the last case, we require two digits (to avoid an overflow error). So, addition of two single digit binary
-        numbers will have two outputs: one output for the resulting one’s digit (call this output <m>sum(A,B)</m>), and
-        one output for the resulting carry digit (call this output <m>carry(A,B)</m>). Fill in the truth table below for
-        these operations.
-    </p>
-
-    <tabular top="minor" bottom="minor" left="minor" right="minor">
-        <row header>
-            <cell>
-                <m>A</m>
-            </cell>
-            <cell>
-                <m>B</m>
-            </cell>
-            <cell>
-                <m>sum(A,B)</m>
-            </cell>
-            <cell>
-                <m>carry(A,B)</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>
-                <textInput name="sum1" />
-            </cell>
-            <cell>
-                <textInput name="carry1" />
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>
-                <textInput name="sum2" />
-            </cell>
-            <cell>
-                <textInput name="carry2" />
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>
-                <textInput name="sum3" />
-            </cell>
-            <cell>
-                <textInput name="carry3" />
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>
-                <textInput name="sum4" />
-            </cell>
-            <cell>
-                <textInput name="carry4" />
-            </cell>
-        </row>
-    </tabular>
-
-    <answer>
-        <award>
-            <when>
-                $sum1=0 and $sum2=1 and $sum3=1 and $sum4=0 and $carry1=0 and $carry2=0 and $carry3=0 and $carry4=1
-            </when>
-        </award>
-    </answer>
-
-    <p>Each of these is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
-
-    <p>Which operation matches <m>sum(A,B)</m>? <answer>
-            <choiceInput inline>
-                <choice>A AND B</choice>
-                <choice>A NAND B</choice>
-                <choice>A NOR B</choice>
-                <choice>NOT A</choice>
-                <choice>A OR B</choice>
-                <choice credit="1">A XOR B</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-    <p>Which operation matches <m>carry(A,B)</m>? <answer>
-            <choiceInput inline>
-                <choice credit="1">A AND B</choice>
-                <choice>A NAND B</choice>
-                <choice>A NOR B</choice>
-                <choice>NOT A</choice>
-                <choice>A OR B</choice>
-                <choice>A XOR B</choice>
-            </choiceInput>
-        </answer>
-    </p>
-</section>
-
-<section>
-    <title>2-bit Addition</title>
-
-    <p>Next, we’ll build a logic circuit that can perform 2-bit addition. Let’s remember our algorithm for addition. To
-        add <c>0b11</c> and <c>0b01</c>,</p>
-
-    <image source='doenet:cid=bafkreieksdv6tqti4srxghhmb25hkdfqdgghbxnviynmdj6zd7so676dby'
-        description='Example showing how to add binary numbers 11 and 01 to get 100' asfilename='two_bit_sum.jpg'
-        width='200' mimeType='image/jpeg' />
-
-    <p>Starting from the right, we add 1 and 1 to get 0 with a 1 to carry. Then, we add the carried digit to 1 and 0 to
-        get 0 with another 1 to carry. This last carry gives us the leading 1.</p>
-
-    <p>We need three bits to represent the sum (with no overflow error). From left to right, we’ll call them four_digit
-        (this is the 1 above), two_digit, and one_digit, describing the meaning of the digit in binary. We’ll refer to
-        the carry digits as carry_one (rightmost) and carry_two (leftmost, would be overflow if we were limited to two
-        bits).</p>
-
-    <p>Label the bits of the numbers we are adding as AB and CD. In the example above, A would be 1 (blue), B would be 1
-        (red), C would be 0, and D would be 1 (green). Complete the truth table below with the results for one_digit,
-        carry_one, two_digit, carry_two, and four_digit. You may find it helpful to write out the computations by hand
-        before filling in the table.</p>
-
-    <tabular top="minor" bottom="minor" left="minor" right="minor">
-        <row header>
-            <cell>
-                <m>A</m>
-            </cell>
-            <cell>
-                <m>B</m>
-            </cell>
-            <cell>
-                <m>C</m>
-            </cell>
-            <cell>
-                <m>D</m>
-            </cell>
-            <cell colSpan="2">one_digit</cell>
-            <cell colSpan="2">carry_one</cell>
-            <cell colSpan="2">two_digit</cell>
-            <cell colSpan="2">carry_two</cell>
-            <cell colSpan="2">four_digit</cell>
-            <cell colSpan="2"></cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit1" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one1" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit1" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two1" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit1" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit1=0 and $carry_one1=0 and $two_digit1=0 and $carry_two1=0 and $four_digit1=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit2" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one2" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit2" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two2" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit2" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit2=1 and $carry_one2=0 and $two_digit2=0 and $carry_two2=0 and $four_digit2=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit3" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one3" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit3" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two3" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit3" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit3=0 and $carry_one3=0 and $two_digit3=1 and $carry_two3=0 and $four_digit3=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit4" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one4" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit4" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two4" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit4" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit4=1 and $carry_one4=0 and $two_digit4=1 and $carry_two4=0 and $four_digit4=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit5" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one5" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit5" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two5" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit5" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit5=1 and $carry_one5=0 and $two_digit5=0 and $carry_two5=0 and $four_digit5=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit6" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one6" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit6" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two6" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit6" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit6=0 and $carry_one6=1 and $two_digit6=1 and $carry_two6=0 and $four_digit6=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit7" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one7" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit7" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two7" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit7" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit7=1 and $carry_one7=0 and $two_digit7=1 and $carry_two7=0 and $four_digit7=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit8" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one8" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit8" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two8" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit8" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit8=0 and $carry_one8=1 and $two_digit8=0 and $carry_two8=1 and $four_digit8=1
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit9" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one9" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit9" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two9" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit9" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit9=0 and $carry_one9=0 and $two_digit9=1 and $carry_two9=0 and $four_digit9=0
-                        </when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit10" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one10" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit10" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two10" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit10" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit10=1 and $carry_one10=0 and $two_digit10=1 and $carry_two10=0 and
-                            $four_digit10=0</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit11" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one11" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit11" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two11" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit11" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit11=0 and $carry_one11=0 and $two_digit11=0 and $carry_two11=1 and
-                            $four_digit11=1</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit12" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one12" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit12" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two12" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit12" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit12=1 and $carry_one12=0 and $two_digit12=0 and $carry_two12=1 and
-                            $four_digit12=1</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit13" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one13" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit13" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two13" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit13" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit13=1 and $carry_one13=0 and $two_digit13=1 and $carry_two13=0 and
-                            $four_digit13=0</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit14" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one14" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit14" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two14" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit14" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit14=0 and $carry_one14=1 and $two_digit14=0 and $carry_two14=1 and
-                            $four_digit14=1</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit15" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one15" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit15" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two15" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit15" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit15=1 and $carry_one15=0 and $two_digit15=0 and $carry_two15=1 and
-                            $four_digit15=1</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell colSpan="2">
-                <textInput name="one_digit16" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_one16" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="two_digit16" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="carry_two16" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <textInput name="four_digit16" width="30px" />
-            </cell>
-            <cell colSpan="2">
-                <answer>
-                    <award>
-                        <when>$one_digit16=0 and $carry_one16=1 and $two_digit16=1 and $carry_two16=1 and
-                            $four_digit16=1</when>
-                    </award>
-                </answer>
-            </cell>
-        </row>
-    </tabular>
-
-    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
-        computation?</p>
-
-    <p>one_digit<m>(B,D)=B</m>
-        <choiceInput name="one_digit_op" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$one_digit_op.selectedIndices=6</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output carry_one can be computed from the input bits B and D. Which basic boolean function is used for this
-        computation?</p>
-
-    <p>carry_one<m>(B,D)=B</m>
-        <choiceInput name="carry_one_op" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$carry_one_op.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>two_digit<m>(A,B,C,D)=(A</m>
-        <choiceInput name="two_digit_op1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C)</m>
-        <choiceInput name="two_digit_op2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m>
-        <choiceInput name="two_digit_op3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <answer>
-            <award>
-                <when>$two_digit_op1.selectedIndices=6 and $two_digit_op2.selectedIndices=6 and
-                    $two_digit_op3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output carry_two can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>carry_two<m>(A,B,C,D)=(A</m>
-        <choiceInput name="carry_two_op1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
-        <choiceInput name="carry_two_op2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m>
-        <choiceInput name="carry_two_op3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <answer>
-            <award>
-                <when>$carry_two_op1.selectedIndices=1 and $carry_two_op2.selectedIndices=1 and
-                    $carry_two_op3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>four_digit<m>(A,B,C,D)=(A</m>
-        <choiceInput name="four_digit_op1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
-        <choiceInput name="four_digit_op2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m>
-        <choiceInput name="four_digit_op3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <answer>
-            <award>
-                <when>$four_digit_op1.selectedIndices=1 and $four_digit_op2.selectedIndices=1 and
-                    $four_digit_op3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>Note: As part of Homework 3, you will build a logic circuit in Circuitverse to perform the 2-bit addition
-        computation, and use the truth table produced above to test your circuit.</p>
-
-</section>
-
-<section>
-    <title>1-bit Multiplication</title>
-
-    <p>When we multiply two 1-bit binary numbers, the result will always be 1-bit, which we’ll call <m>mul(A,B)</m>.
-        Complete the table below for all combinations of <m>A</m> and <m>B</m>.</p>
-
-    <tabular top="minor" bottom="minor" left="minor" right="minor">
-        <row header>
-            <cell>
-                <m>A</m>
-            </cell>
-            <cell>
-                <m>B</m>
-            </cell>
-            <cell>
-                <m>mul(A,B)</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>
-                <textInput name="mul1" />
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>1</cell>
-            <cell>
-                <textInput name="mul2" />
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>0</cell>
-            <cell>
-                <textInput name="mul3" />
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>1</cell>
-            <cell>
-                <textInput name="mul4" />
-            </cell>
-        </row>
-    </tabular>
-
-    <answer>
-        <award>
-            <when>
-                $mul1=0 and $mul2=0 and $mul3=0 and $mul4=1
-            </when>
-        </award>
-    </answer>
-
-    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
-
-    <p>Which operation matches <m>mul(A,B)</m>? <answer>
-            <choiceInput inline>
-                <choice credit="1">A AND B</choice>
-                <choice>A NAND B</choice>
-                <choice>A NOR B</choice>
-                <choice>NOT A</choice>
-                <choice>A OR B</choice>
-                <choice>A XOR B</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-
-</section>
-
-<section>
-    <title>2-bit Multiplication</title>
-
-    <p>Next, let’s remember how 2-bit multiplication works. We’ll multiply <c>0b11</c> and <c>0b11</c>.</p>
-
-    <image source='doenet:cid=bafkreib55oulnqeu2lezw6hspsr2jr5byqjimvv4rrc3aeeqzvdo4oilue'
-        description='Example showing how to multiply binary numbers 11 and 11'
-        asfilename='Screenshot 2024-09-17 at 8.53.46 PM.png' width='196' mimeType='image/png' />
-
-    <p>We will need four bits to express the result of multiplying two 2-bit integers. We’ll call these bits (from left
-        to right) eight_digit, four_digit, two_digit, one_digit.</p>
-
-    <p>Label the bits of the numbers we are multiplying as <m>AB</m> and <m>CD</m>. In the example above, <m>A</m> would
-        be 1 (blue), <m>B</m> would be 1 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).</p>
-
-    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
-        computation?</p>
-
-    <p>one_digit<m>(B,D)=B</m>
-        <choiceInput name="one_digit_mul" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$one_digit_mul.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>two_digit<m>(A,B,C,D)=(A</m>
-        <choiceInput name="two_digit_mul1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <choiceInput name="two_digit_mul2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m>
-        <choiceInput name="two_digit_mul3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C)</m>
-        <answer>
-            <award>
-                <when>$two_digit_mul1.selectedIndices=1 and $two_digit_mul2.selectedIndices=6 and
-                    $two_digit_mul3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>four_digit<m>(A,B,C,D)=((A</m> AND <m>D)</m>
-        <choiceInput name="four_digit_mul1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m> AND <m>C))</m>
-        <choiceInput name="four_digit_mul2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(A</m>
-        <choiceInput name="four_digit_mul3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C)</m>
-        <answer>
-            <award>
-                <when>$four_digit_mul1.selectedIndices=1 and $four_digit_mul2.selectedIndices=6 and
-                    $four_digit_mul3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output eight_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
-        for this computation?</p>
-
-    <p>eight_digit<m>(A,B,C,D)=A</m>
-        <choiceInput name="eight_digit_mul1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>B</m>
-        <choiceInput name="eight_digit_mul2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C</m>
-        <choiceInput name="eight_digit_mul3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$eight_digit_mul1.selectedIndices=1 and $eight_digit_mul2.selectedIndices=1 and
-                    $eight_digit_mul3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-</section>
-
-<section>
-    <title>4-bit Two's Complement Negation</title>
-
-
-    <p>Read Section 5.4.2 from the course textbook, Dive Into Systems. Take notes as
-        you read through these sections. After completing the reading, write a summary below. This summary will be
-        graded manually. Note: this
-        part may be done before, after, and/or during your work on the exercises below.</p>
-
-    <answer handGraded>
-        <textInput expanded />
-    </answer>
-
-
-
-    <p>Finally, let's build a circuit to perform negation for two's complement binary integers. Recall that we can
-        negate a two's complement binary integer by flipping the bits, and adding 1. This is what our circuit will do.
-    </p>
-
-    <p>First, let's figure out how we can flip a single bit <m>A</m>, calling the result <m>flip(A)</m>. Complete the
-        table below for all values of <m>A</m>.</p>
-
-    <tabular top="minor" bottom="minor" left="minor" right="minor">
-        <row header>
-            <cell>
-                <m>A</m>
-            </cell>
-            <cell>
-                <m>flip(A)</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>
-                <textInput name="flip1" />
-            </cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>
-                <textInput name="flip2" />
-            </cell>
-        </row>
-    </tabular>
-
-    <answer>
-        <award>
-            <when>
-                $flip1=1 and $flip2=0
-            </when>
-        </award>
-    </answer>
-
-    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
-
-    <p>Which operation matches <m>flip(A)</m>? <answer>
-            <choiceInput inline>
-                <choice>A AND B</choice>
-                <choice>A NAND B</choice>
-                <choice>A NOR B</choice>
-                <choice credit="1">NOT A</choice>
-                <choice>A OR B</choice>
-                <choice>A XOR B</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-    <p>Next, let’s remember how we can add 1 to a 4-bit binary integer. We’ll add 1 to <c>0b1011</c>.</p>
-
-    <image source='doenet:cid=bafkreihs52jrd2zgusubavj7h5mbnhyzbuouuwv6ngytgx7v4pvjnro72e'
-        description='Example showing how to add 1 to binary number 1011'
-        asfilename='Screenshot 2024-09-17 at 9.35.59 PM.png' width='248' mimeType='image/png' />
-
-    <p>We will need four bits to express the result of adding 1 to a 4-bit integer (remember that we'll ignore any final
-        carry digit). We’ll call these bits (from left to right) eight_digit, four_digit, two_digit, one_digit.</p>
-
-    <p>Label the bits of the number we are adding 1 to as <m>ABCD</m>. In the example above, <m>A</m> would be 1 (blue),
-        <m>B</m> would be 0 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).
-    </p>
-
-    <p>The output one_digit can be computed from the input bit <m>D</m>. Which basic boolean function is used for this
-        computation?</p>
-
-    <p>one_digit<m>(D)=</m>
-        <choiceInput name="one_digit_add" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$one_digit_add.selectedIndices=4</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output two_digit can be computed from the input bits <m>C</m> and <m>D</m>. Which basic boolean function is
-        used for this computation?</p>
-
-    <p>two_digit<m>(C,D)=C</m>
-        <choiceInput name="two_digit_add" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D</m>
-        <answer>
-            <award>
-                <when>$two_digit_add.selectedIndices=6</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output four_digit can be computed from the input bits <m>B</m>, <m>C</m>, and <m>D</m>. Which basic boolean
-        functions are used for this computation?</p>
-
-    <p>four_digit<m>(B,C,D)=B</m>
-        <choiceInput name="four_digit_add1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(C</m>
-        <choiceInput name="four_digit_add2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <answer>
-            <award>
-                <when>$four_digit_add1.selectedIndices=6 and $four_digit_add2.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The output eight_digit can be computed from the input bits <m>A</m>, <m>B</m>, <m>C</m>, and <m>D</m>. Which
-        basic boolean functions are used for this computation?</p>
-
-    <p>eight_digit<m>(A,B,C,D)=A</m>
-        <choiceInput name="eight_digit_add1" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>(B</m>
-        <choiceInput name="eight_digit_add2" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>C</m>
-        <choiceInput name="eight_digit_add3" inline>
-            <choice>AND</choice>
-            <choice>NAND</choice>
-            <choice>NOR</choice>
-            <choice>NOT</choice>
-            <choice>OR</choice>
-            <choice>XOR</choice>
-        </choiceInput>
-        <m>D)</m>
-        <answer>
-            <award>
-                <when>$eight_digit_add1.selectedIndices=6 and $eight_digit_add2.selectedIndices=1 and
-                    $eight_digit_add3.selectedIndices=1</when>
-            </award>
-        </answer>
-    </p>
-
-    <p>Note: As part of the homework, you will build a logic circuit in Circuitverse to negate 4-bit two's complement
-        integers.</p>
-
-
-</section>
-
-<section>
-    <title>Two-Way 1-Bit Multiplexer</title>
+    <title>Control Circuits</title>
 
     <p>When programming, we often want to write a program that does one thing under certain conditions, and a different
         thing under different conditions. For example, in Python:</p>
@@ -2605,9 +1388,9 @@ this might belong with hardware components?
         print(“that number is not 1”)
       </pre>
 
-    <p>In this lab, you’ll figure out how this works at the level of logic circuits.</p>
+    <p>In this lab, you'll figure out how this works at the level of logic circuits.</p>
 
-    <p>We’ll start with the simplest case: suppose we have two 1-bit binary integers <m>A</m> and <m>B</m>. Suppose we
+    <p>We'll start with the simplest case: suppose we have two 1-bit binary integers <m>A</m> and <m>B</m>. Suppose we
         have another 1-bit number, <m>S</m>. When <m>S</m> is 1, we want to use the value <m>A</m>. When <m>S</m> is 0,
         we want to use the value <m>B</m>. Call the value used <c>result</c>.</p>
 
@@ -2747,11 +1530,6 @@ this might belong with hardware components?
             </award>
         </answer>
     </p>
-
-</section>
-
-<section>
-    <title>Two-Way 2-bit Multiplexer</title>
 
     <p>Next, suppose we have two 2-bit binary integers, <m>AB</m> and <m>CD</m> (where <m>A</m>, <m>B</m>, <m>C</m>, and
         <m>D</m> are the individual bits. Suppose we also have a 1-bit number, <m>S</m>. When <m>S</m> is 1, we want to
@@ -3589,6 +2367,1227 @@ this might belong with hardware components?
 
 </section>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section>
+    <title>1-bit Addition</title>
+
+    <p>The possible results of adding two 1-bit integers (in binary) are:
+        <me>0 + 0 = 0</me>
+        <me>1 + 0 = 1</me>
+        <me>0 + 1 = 1</me>
+        <me>1 + 1 = 10</me>
+        In the last case, we require two digits (to avoid an overflow error). So, addition of two single digit binary
+        numbers will have two outputs: one output for the resulting one’s digit (call this output <m>sum(A,B)</m>), and
+        one output for the resulting carry digit (call this output <m>carry(A,B)</m>). Fill in the truth table below for
+        these operations.
+    </p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>sum(A,B)</m>
+            </cell>
+            <cell>
+                <m>carry(A,B)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="sum1" />
+            </cell>
+            <cell>
+                <textInput name="carry1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="sum2" />
+            </cell>
+            <cell>
+                <textInput name="carry2" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="sum3" />
+            </cell>
+            <cell>
+                <textInput name="carry3" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="sum4" />
+            </cell>
+            <cell>
+                <textInput name="carry4" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $sum1=0 and $sum2=1 and $sum3=1 and $sum4=0 and $carry1=0 and $carry2=0 and $carry3=0 and $carry4=1
+            </when>
+        </award>
+    </answer>
+
+    <p>Each of these is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>sum(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice>A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice credit="1">A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Which operation matches <m>carry(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice credit="1">A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+</section>
+
+<section>
+    <title>2-bit Addition</title>
+
+    <p>Next, we’ll build a logic circuit that can perform 2-bit addition. Let’s remember our algorithm for addition. To
+        add <c>0b11</c> and <c>0b01</c>,</p>
+
+    <image source='doenet:cid=bafkreieksdv6tqti4srxghhmb25hkdfqdgghbxnviynmdj6zd7so676dby'
+        description='Example showing how to add binary numbers 11 and 01 to get 100' asfilename='two_bit_sum.jpg'
+        width='200' mimeType='image/jpeg' />
+
+    <p>Starting from the right, we add 1 and 1 to get 0 with a 1 to carry. Then, we add the carried digit to 1 and 0 to
+        get 0 with another 1 to carry. This last carry gives us the leading 1.</p>
+
+    <p>We need three bits to represent the sum (with no overflow error). From left to right, we’ll call them four_digit
+        (this is the 1 above), two_digit, and one_digit, describing the meaning of the digit in binary. We’ll refer to
+        the carry digits as carry_one (rightmost) and carry_two (leftmost, would be overflow if we were limited to two
+        bits).</p>
+
+    <p>Label the bits of the numbers we are adding as AB and CD. In the example above, A would be 1 (blue), B would be 1
+        (red), C would be 0, and D would be 1 (green). Complete the truth table below with the results for one_digit,
+        carry_one, two_digit, carry_two, and four_digit. You may find it helpful to write out the computations by hand
+        before filling in the table.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>C</m>
+            </cell>
+            <cell>
+                <m>D</m>
+            </cell>
+            <cell colSpan="2">one_digit</cell>
+            <cell colSpan="2">carry_one</cell>
+            <cell colSpan="2">two_digit</cell>
+            <cell colSpan="2">carry_two</cell>
+            <cell colSpan="2">four_digit</cell>
+            <cell colSpan="2"></cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit1" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit1=0 and $carry_one1=0 and $two_digit1=0 and $carry_two1=0 and $four_digit1=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit2" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit2=1 and $carry_one2=0 and $two_digit2=0 and $carry_two2=0 and $four_digit2=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit3" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit3=0 and $carry_one3=0 and $two_digit3=1 and $carry_two3=0 and $four_digit3=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit4" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit4=1 and $carry_one4=0 and $two_digit4=1 and $carry_two4=0 and $four_digit4=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit5" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit5=1 and $carry_one5=0 and $two_digit5=0 and $carry_two5=0 and $four_digit5=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit6" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit6=0 and $carry_one6=1 and $two_digit6=1 and $carry_two6=0 and $four_digit6=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit7" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit7=1 and $carry_one7=0 and $two_digit7=1 and $carry_two7=0 and $four_digit7=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit8" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit8=0 and $carry_one8=1 and $two_digit8=0 and $carry_two8=1 and $four_digit8=1
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit9" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit9=0 and $carry_one9=0 and $two_digit9=1 and $carry_two9=0 and $four_digit9=0
+                        </when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit10" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit10=1 and $carry_one10=0 and $two_digit10=1 and $carry_two10=0 and
+                            $four_digit10=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit11" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit11=0 and $carry_one11=0 and $two_digit11=0 and $carry_two11=1 and
+                            $four_digit11=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit12" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit12=1 and $carry_one12=0 and $two_digit12=0 and $carry_two12=1 and
+                            $four_digit12=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit13" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit13=1 and $carry_one13=0 and $two_digit13=1 and $carry_two13=0 and
+                            $four_digit13=0</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit14" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit14=0 and $carry_one14=1 and $two_digit14=0 and $carry_two14=1 and
+                            $four_digit14=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit15" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit15=1 and $carry_one15=0 and $two_digit15=0 and $carry_two15=1 and
+                            $four_digit15=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell colSpan="2">
+                <textInput name="one_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_one16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="two_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="carry_two16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <textInput name="four_digit16" width="30px" />
+            </cell>
+            <cell colSpan="2">
+                <answer>
+                    <award>
+                        <when>$one_digit16=0 and $carry_one16=1 and $two_digit16=1 and $carry_two16=1 and
+                            $four_digit16=1</when>
+                    </award>
+                </answer>
+            </cell>
+        </row>
+    </tabular>
+
+    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(B,D)=B</m>
+        <choiceInput name="one_digit_op" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_op.selectedIndices=6</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output carry_one can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>carry_one<m>(B,D)=B</m>
+        <choiceInput name="carry_one_op" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$carry_one_op.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>two_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="two_digit_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <choiceInput name="two_digit_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="two_digit_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$two_digit_op1.selectedIndices=6 and $two_digit_op2.selectedIndices=6 and
+                    $two_digit_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output carry_two can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>carry_two<m>(A,B,C,D)=(A</m>
+        <choiceInput name="carry_two_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
+        <choiceInput name="carry_two_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="carry_two_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$carry_two_op1.selectedIndices=1 and $carry_two_op2.selectedIndices=1 and
+                    $carry_two_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>four_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="four_digit_op1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m> OR <m>((A</m> OR <m>C)</m>
+        <choiceInput name="four_digit_op2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="four_digit_op3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$four_digit_op1.selectedIndices=1 and $four_digit_op2.selectedIndices=1 and
+                    $four_digit_op3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Note: you will later build a logic circuit in Circuitverse to perform the 2-bit addition
+        computation, and use the truth table produced above to test your circuit.</p>
+
+</section>
+
+<section>
+    <title>1-bit Multiplication</title>
+
+    <p>When we multiply two 1-bit binary numbers, the result will always be 1-bit, which we’ll call <m>mul(A,B)</m>.
+        Complete the table below for all combinations of <m>A</m> and <m>B</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>B</m>
+            </cell>
+            <cell>
+                <m>mul(A,B)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="mul1" />
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="mul2" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>0</cell>
+            <cell>
+                <textInput name="mul3" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>1</cell>
+            <cell>
+                <textInput name="mul4" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $mul1=0 and $mul2=0 and $mul3=0 and $mul4=1
+            </when>
+        </award>
+    </answer>
+
+    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>mul(A,B)</m>? <answer>
+            <choiceInput inline>
+                <choice credit="1">A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice>NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+
+</section>
+
+<section>
+    <title>2-bit Multiplication</title>
+
+    <p>Next, let’s remember how 2-bit multiplication works. We’ll multiply <c>0b11</c> and <c>0b11</c>.</p>
+
+    <image source='doenet:cid=bafkreib55oulnqeu2lezw6hspsr2jr5byqjimvv4rrc3aeeqzvdo4oilue'
+        description='Example showing how to multiply binary numbers 11 and 11'
+        asfilename='Screenshot 2024-09-17 at 8.53.46 PM.png' width='196' mimeType='image/png' />
+
+    <p>We will need four bits to express the result of multiplying two 2-bit integers. We’ll call these bits (from left
+        to right) eight_digit, four_digit, two_digit, one_digit.</p>
+
+    <p>Label the bits of the numbers we are multiplying as <m>AB</m> and <m>CD</m>. In the example above, <m>A</m> would
+        be 1 (blue), <m>B</m> would be 1 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).</p>
+
+    <p>The output one_digit can be computed from the input bits B and D. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(B,D)=B</m>
+        <choiceInput name="one_digit_mul" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_mul.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>two_digit<m>(A,B,C,D)=(A</m>
+        <choiceInput name="two_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <choiceInput name="two_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="two_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <answer>
+            <award>
+                <when>$two_digit_mul1.selectedIndices=1 and $two_digit_mul2.selectedIndices=6 and
+                    $two_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>four_digit<m>(A,B,C,D)=((A</m> AND <m>D)</m>
+        <choiceInput name="four_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m> AND <m>C))</m>
+        <choiceInput name="four_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(A</m>
+        <choiceInput name="four_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C)</m>
+        <answer>
+            <award>
+                <when>$four_digit_mul1.selectedIndices=1 and $four_digit_mul2.selectedIndices=6 and
+                    $four_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output eight_digit can be computed from the input bits A, B, C, and D. Which basic boolean functions are used
+        for this computation?</p>
+
+    <p>eight_digit<m>(A,B,C,D)=A</m>
+        <choiceInput name="eight_digit_mul1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>B</m>
+        <choiceInput name="eight_digit_mul2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C</m>
+        <choiceInput name="eight_digit_mul3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$eight_digit_mul1.selectedIndices=1 and $eight_digit_mul2.selectedIndices=1 and
+                    $eight_digit_mul3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>4-bit Two's Complement Negation</title>
+
+
+    <p>Read Section 5.4.2 from the course textbook, Dive Into Systems. Take notes as
+        you read through these sections. After completing the reading, write a summary below. This summary will be
+        graded manually. Note: this
+        part may be done before, after, and/or during your work on the exercises below.</p>
+
+    <answer handGraded>
+        <textInput expanded />
+    </answer>
+
+
+
+    <p>Finally, let's build a circuit to perform negation for two's complement binary integers. Recall that we can
+        negate a two's complement binary integer by flipping the bits, and adding 1. This is what our circuit will do.
+    </p>
+
+    <p>First, let's figure out how we can flip a single bit <m>A</m>, calling the result <m>flip(A)</m>. Complete the
+        table below for all values of <m>A</m>.</p>
+
+    <tabular top="minor" bottom="minor" left="minor" right="minor">
+        <row header>
+            <cell>
+                <m>A</m>
+            </cell>
+            <cell>
+                <m>flip(A)</m>
+            </cell>
+        </row>
+        <row>
+            <cell>0</cell>
+            <cell>
+                <textInput name="flip1" />
+            </cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell>
+                <textInput name="flip2" />
+            </cell>
+        </row>
+    </tabular>
+
+    <answer>
+        <award>
+            <when>
+                $flip1=1 and $flip2=0
+            </when>
+        </award>
+    </answer>
+
+    <p>This is the same as a boolean operation you’ve seen before (AND, OR, NOT, NAND, NOR, or XOR).</p>
+
+    <p>Which operation matches <m>flip(A)</m>? <answer>
+            <choiceInput inline>
+                <choice>A AND B</choice>
+                <choice>A NAND B</choice>
+                <choice>A NOR B</choice>
+                <choice credit="1">NOT A</choice>
+                <choice>A OR B</choice>
+                <choice>A XOR B</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Next, let’s remember how we can add 1 to a 4-bit binary integer. We’ll add 1 to <c>0b1011</c>.</p>
+
+    <image source='doenet:cid=bafkreihs52jrd2zgusubavj7h5mbnhyzbuouuwv6ngytgx7v4pvjnro72e'
+        description='Example showing how to add 1 to binary number 1011'
+        asfilename='Screenshot 2024-09-17 at 9.35.59 PM.png' width='248' mimeType='image/png' />
+
+    <p>We will need four bits to express the result of adding 1 to a 4-bit integer (remember that we'll ignore any final
+        carry digit). We’ll call these bits (from left to right) eight_digit, four_digit, two_digit, one_digit.</p>
+
+    <p>Label the bits of the number we are adding 1 to as <m>ABCD</m>. In the example above, <m>A</m> would be 1 (blue),
+        <m>B</m> would be 0 (red), <m>C</m> would be 1 (orange), and <m>D</m> would be 1 (green).
+    </p>
+
+    <p>The output one_digit can be computed from the input bit <m>D</m>. Which basic boolean function is used for this
+        computation?</p>
+
+    <p>one_digit<m>(D)=</m>
+        <choiceInput name="one_digit_add" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$one_digit_add.selectedIndices=4</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output two_digit can be computed from the input bits <m>C</m> and <m>D</m>. Which basic boolean function is
+        used for this computation?</p>
+
+    <p>two_digit<m>(C,D)=C</m>
+        <choiceInput name="two_digit_add" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D</m>
+        <answer>
+            <award>
+                <when>$two_digit_add.selectedIndices=6</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output four_digit can be computed from the input bits <m>B</m>, <m>C</m>, and <m>D</m>. Which basic boolean
+        functions are used for this computation?</p>
+
+    <p>four_digit<m>(B,C,D)=B</m>
+        <choiceInput name="four_digit_add1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(C</m>
+        <choiceInput name="four_digit_add2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$four_digit_add1.selectedIndices=6 and $four_digit_add2.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The output eight_digit can be computed from the input bits <m>A</m>, <m>B</m>, <m>C</m>, and <m>D</m>. Which
+        basic boolean functions are used for this computation?</p>
+
+    <p>eight_digit<m>(A,B,C,D)=A</m>
+        <choiceInput name="eight_digit_add1" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>(B</m>
+        <choiceInput name="eight_digit_add2" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>C</m>
+        <choiceInput name="eight_digit_add3" inline>
+            <choice>AND</choice>
+            <choice>NAND</choice>
+            <choice>NOR</choice>
+            <choice>NOT</choice>
+            <choice>OR</choice>
+            <choice>XOR</choice>
+        </choiceInput>
+        <m>D)</m>
+        <answer>
+            <award>
+                <when>$eight_digit_add1.selectedIndices=6 and $eight_digit_add2.selectedIndices=1 and
+                    $eight_digit_add3.selectedIndices=1</when>
+            </award>
+        </answer>
+    </p>
+
+    <p>Note: you will later build a logic circuit in Circuitverse to negate 4-bit two's complement
+        integers.</p>
+
+
+</section>
 
 
 

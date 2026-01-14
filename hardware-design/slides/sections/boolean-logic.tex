@@ -141,7 +141,7 @@
 \Subsection{Logic Gates}
 
 \begin{frame}{Logic Gates}
-Logic gates are the same thing as boolean functions. But instead of writing them as a word or symbol, we draw them like a flow chart.
+	Logic gates are the same thing as boolean functions. But instead of writing them as a word or symbol, we draw them like a flow chart.
 \end{frame}
 
 \begin{frame}{Boolean Operators: NOT}
@@ -285,9 +285,9 @@ Logic gates are the same thing as boolean functions. But instead of writing them
 
 \begin{frame}{Multiple Gates Together}
 
-When we chain multiple boolean functions together, we get a boolean expression. 
+	When we chain multiple boolean functions together, we get a boolean expression.
 
-Similarly, when we chain multiple logic gates together, we get a logic circuit. 
+	Similarly, when we chain multiple logic gates together, we get a logic circuit.
 
 	\begin{tikzpicture}
 		% Paths, nodes and wires:
@@ -391,9 +391,9 @@ Similarly, when we chain multiple logic gates together, we get a logic circuit.
 		\begin{tabular}{c c c c c}
 			A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
 			\hline
-			1 & 1 & 1              & 0                & 0                                            \\
-			1 & 0 & 1              & 1                & 1                                            \\
-			0 & 1 & 1              & 1                & 1                                            \\
+			1 & 1 & 1              & 0                & 0                                               \\
+			1 & 0 & 1              & 1                & 1                                               \\
+			0 & 1 & 1              & 1                & 1                                               \\
 			0 & 0 & 0              & 1                & 0
 		\end{tabular}
 	\end{center}
@@ -486,6 +486,20 @@ Similarly, when we chain multiple logic gates together, we get a logic circuit.
 		\end{column}
 	\end{columns}
 \end{frame}
+
+
+
+\Subsection{Control Circuits}
+
+
+\begin{frame}{Control Circuits}
+	OK, so we have circuits that can do logic. Now what?
+\end{frame}
+
+\begin{frame}{Multiplexers}
+	\includegraphics[width=\columnwidth]{images/multiplexer}
+\end{frame}
+
 
 
 \Subsection{Arithmetic with Circuits}
