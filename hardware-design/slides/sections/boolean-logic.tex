@@ -491,6 +491,18 @@ Similarly, when we chain multiple logic gates together, we get a logic circuit.
 \Subsection{Arithmetic with Circuits}
 
 
+
+
+\begin{frame}{Why bother with logic circuits?}
+
+	Multiple outputs
+
+\end{frame}
+
+
+
+
+
 \begin{frame}{Arithmetic with Circuits}
 	\begin{itemize}
 		\item Let's say A and B are a pair of one-bit binary numbers
@@ -607,19 +619,6 @@ Similarly, when we chain multiple logic gates together, we get a logic circuit.
 		\node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.402, 3.402){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.089, 3.714){F};
 	\end{tikzpicture}
 \end{frame}
-
-
-\begin{frame}{Exercises}
-	\begin{enumerate}
-		\item Draw a logic circuit for the boolean function
-		      $f(A, B) = (\LogicXor{A}{B}) + (\LogicAnd{A}{B})$
-		\item Draw a logic circuit for the boolean function
-		      $f(A, B) = (A xor B) nor (A and B)$
-		\item Write out the truth table for the boolean function
-		      $f(A, B) = (\LogicOr{A}{B}) \cdot (\LogicNand{A}{B})$. Do you recognize it?
-	\end{enumerate}
-\end{frame}
-
 
 
 \begin{frame}{Control Circuits}
