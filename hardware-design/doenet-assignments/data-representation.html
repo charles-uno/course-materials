@@ -13,841 +13,844 @@
 <section>
     <title>Positive Integers in Binary</title>
 
-    <p>Read Sections 4.1, 4.2, and 4.3 from the course textbook, Dive Into Systems. Take notes as
-        you read through these sections. After completing the reading, write a summary below. This summary will be
-        graded manually. Note: this
-        part may be done before, after, and/or during your work on the exercises below. </p>
-    <answer handGraded>
-        <textInput expanded />
-    </answer>
+    <exercise>
+        <p>Read Sections 4.1, 4.2, and 4.3 from the course textbook, Dive Into Systems. Take notes as
+            you read through these sections. After completing the reading, write a summary below. This summary will be
+            graded manually. Note: this
+            part may be done before, after, and/or during your work on the exercises below. </p>
+        <answer handGraded>
+            <textInput expanded />
+        </answer>
+    </exercise>
 
-    <ol>
-        <li>
-            <p>Convert 0b10001001 from binary to decimal by filling in the blanks, and performing the
-                computation:</p>
-            <textInput name="pib_a_128" width="20px"></textInput>
-            <m>\times 128+</m>
-            <textInput name="pib_a_64" width="20px"></textInput>
-            <m>\times 64+</m>
-            <textInput name="apib_a_32" width="20px"></textInput>
-            <m>\times 32+</m>
-            <textInput name="pib_a_16" width="20px"></textInput>
-            <m>\times 16+</m>
-            <textInput name="pib_a_8" width="20px"></textInput>
-            <m>\times 8+</m>
-            <textInput name="pib_a_4" width="20px"></textInput>
-            <m>\times 4+</m>
-            <textInput name="pib_a_2" width="20px"></textInput>
-            <m>\times 2+</m>
-            <textInput name="pib_a_1" width="20px"></textInput>
-            <m>\times 1</m>
-            <answer>
-                <award>
-                    <when>
-                        $pib_a_128 = 1 and
-                        $pib_a_64 = 0 and
-                        $pib_a_32 = 0 and
-                        $pib_a_16 = 0 and
-                        $pib_a_8 = 1 and
-                        $pib_a_4 = 0 and
-                        $pib_a_2 = 0 and
-                        $pib_a_1 = 1
-                    </when>
-                </award>
-            </answer>
-            <p>Total: <answer>137</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b01111001 to decimal by filling in the blanks, and performing the computation:</p>
-            <textInput name="pib_b_128" width="20px"></textInput>
-            <m>\times 128+</m>
-            <textInput name="pib_b_64" width="20px"></textInput>
-            <m>\times 64+</m>
-            <textInput name="pib_b_32" width="20px"></textInput>
-            <m>\times 32+</m>
-            <textInput name="pib_b_16" width="20px"></textInput>
-            <m>\times 16+</m>
-            <textInput name="pib_b_8" width="20px"></textInput>
-            <m>\times 8+</m>
-            <textInput name="pib_b_4" width="20px"></textInput>
-            <m>\times 4+</m>
-            <textInput name="pib_b_2" width="20px"></textInput>
-            <m>\times 2+</m>
-            <textInput name="pib_b_1" width="20px"></textInput>
-            <m>\times 1</m>
-            <answer>
-                <award>
-                    <when>
-                        $pib_b_128 = 0 and
-                        $pib_b_64 = 1 and
-                        $pib_b_32 = 1 and
-                        $pib_b_16 = 1 and
-                        $pib_b_8 = 1 and
-                        $pib_b_4 = 0 and
-                        $pib_b_2 = 0 and
-                        $pib_b_1 = 1
-                    </when>
-                </award>
-            </answer>
-            <p>Total: <answer>121</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b00000000 to decimal. Answer: <answer>0</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b11111111 to decimal. Answer: <answer>255</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b00110011 to decimal. Answer: <answer>51</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 79 from decimal to binary by filling in the blanks. </p>
-            <tabular>
-                <row header>
-                    <cell></cell>
-                    <cell>Quotient</cell>
-                    <cell>Remainder</cell>
-                    <cell></cell>
-                </row>
-                <row>
-                    <cell>
-                        <m>79\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q1a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r1" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1a=39 and $r1=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q1b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q2a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1b=39 and $q2a=19 and $r2=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q2b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q3a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r3" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q2b=19 and $q3a=9 and $r3=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q3b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q4a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r4" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q3b=9 and $q4a=4 and $r4=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q4b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q5a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r5" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q4b=4 and $q5a=2 and $r5=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q5b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q6a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r6" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q5b=2 and $q6a=1 and $r6=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q6b" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q7a" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r7" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q6b=1 and $q7a=0 and $r7=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-            </tabular>
-            <p>Result: <answer type="text">0b01001111</answer> Make sure to enter it as an 8-bit binary number with the
-                appropriate prefix
-                including the appropriate prefix</p>
-        </li>
-        <li>
-            <p>Convert 36 from decimal to binary by filling in the blanks.</p>
-            <tabular>
-                <row header>
-                    <cell></cell>
-                    <cell>Quotient</cell>
-                    <cell>Remainder</cell>
-                    <cell></cell>
-                </row>
-                <row>
-                    <cell>
-                        <m>36\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q1a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r12" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1a2=18 and $r12=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q1b2" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q2a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r22" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1b2=18 and $q2a2=9 and $r22=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q2b2" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q3a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r32" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q2b2=9 and $q3a2=4 and $r32=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q3b2" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q4a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r42" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q3b2=4 and $q4a2=2 and $r42=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q4b2" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q5a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r52" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q4b2=2 and $q5a2=1 and $r52=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q5b2" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q6a2" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r62" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q5b2=1 and $q6a2=0 and $r62=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-            </tabular>
-            <p>Result: <answer type="text">0b00100100</answer>. Make sure to enter it as an 8-bit binary number with the
-                appropriate prefix
-            </p>
-        </li>
-        <li>
-            <p>Convert 64 from decimal to 8-bit binary. Answer: <answer type="text">0b01000000</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 7 from decimal to 8-bit binary. Answer: <answer type="text">0b00000111</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 55 from decimal to 8-bit binary. Answer: <answer type="text">0b00110111</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary addition 0b01110011 + 0b00001001. You may convert to decimal to check your answer, but
-                please perform the operation in binary. Answer: <answer type="text">0b01111100</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary addition 0b00110011 + 0b10011001. Answer: <answer type="text">0b11001100</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary multiplication 0b00011101 * 0b00000011. Answer: <answer type="text">0b01010111</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary multiplication 0b00000111 * 0b00001001. Answer: <answer type="text">0b00111111</answer>
-            </p>
-        </li>
-    </ol>
+    <exercise>
+        <p>Convert 0b10001001 from binary to decimal by filling in the blanks, and performing the
+            computation:</p>
+        <textInput name="pib_a_128" width="20px"></textInput>
+        <m>\times 128+</m>
+        <textInput name="pib_a_64" width="20px"></textInput>
+        <m>\times 64+</m>
+        <textInput name="apib_a_32" width="20px"></textInput>
+        <m>\times 32+</m>
+        <textInput name="pib_a_16" width="20px"></textInput>
+        <m>\times 16+</m>
+        <textInput name="pib_a_8" width="20px"></textInput>
+        <m>\times 8+</m>
+        <textInput name="pib_a_4" width="20px"></textInput>
+        <m>\times 4+</m>
+        <textInput name="pib_a_2" width="20px"></textInput>
+        <m>\times 2+</m>
+        <textInput name="pib_a_1" width="20px"></textInput>
+        <m>\times 1</m>
+        <answer>
+            <award>
+                <when>
+                    $pib_a_128 = 1 and
+                    $pib_a_64 = 0 and
+                    $pib_a_32 = 0 and
+                    $pib_a_16 = 0 and
+                    $pib_a_8 = 1 and
+                    $pib_a_4 = 0 and
+                    $pib_a_2 = 0 and
+                    $pib_a_1 = 1
+                </when>
+            </award>
+        </answer>
+        <p>Total: <answer>137</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b01111001 to decimal by filling in the blanks, and performing the computation:</p>
+        <textInput name="pib_b_128" width="20px"></textInput>
+        <m>\times 128+</m>
+        <textInput name="pib_b_64" width="20px"></textInput>
+        <m>\times 64+</m>
+        <textInput name="pib_b_32" width="20px"></textInput>
+        <m>\times 32+</m>
+        <textInput name="pib_b_16" width="20px"></textInput>
+        <m>\times 16+</m>
+        <textInput name="pib_b_8" width="20px"></textInput>
+        <m>\times 8+</m>
+        <textInput name="pib_b_4" width="20px"></textInput>
+        <m>\times 4+</m>
+        <textInput name="pib_b_2" width="20px"></textInput>
+        <m>\times 2+</m>
+        <textInput name="pib_b_1" width="20px"></textInput>
+        <m>\times 1</m>
+        <answer>
+            <award>
+                <when>
+                    $pib_b_128 = 0 and
+                    $pib_b_64 = 1 and
+                    $pib_b_32 = 1 and
+                    $pib_b_16 = 1 and
+                    $pib_b_8 = 1 and
+                    $pib_b_4 = 0 and
+                    $pib_b_2 = 0 and
+                    $pib_b_1 = 1
+                </when>
+            </award>
+        </answer>
+        <p>Total: <answer>121</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b00000000 to decimal. Answer: <answer>0</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b11111111 to decimal. Answer: <answer>255</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b00110011 to decimal. Answer: <answer>51</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 79 from decimal to binary by filling in the blanks. </p>
+        <tabular>
+            <row header>
+                <cell></cell>
+                <cell>Quotient</cell>
+                <cell>Remainder</cell>
+                <cell></cell>
+            </row>
+            <row>
+                <cell>
+                    <m>79\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q1a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r1" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1a=39 and $r1=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q1b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q2a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1b=39 and $q2a=19 and $r2=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q2b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q3a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r3" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q2b=19 and $q3a=9 and $r3=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q3b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q4a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r4" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q3b=9 and $q4a=4 and $r4=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q4b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q5a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r5" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q4b=4 and $q5a=2 and $r5=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q5b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q6a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r6" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q5b=2 and $q6a=1 and $r6=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q6b" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q7a" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r7" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q6b=1 and $q7a=0 and $r7=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+        </tabular>
+        <p>Result: <answer type="text">0b01001111</answer> Make sure to enter it as an 8-bit binary number with the
+            appropriate prefix
+            including the appropriate prefix</p>
+    </exercise>
+    <exercise>
+        <p>Convert 36 from decimal to binary by filling in the blanks.</p>
+        <tabular>
+            <row header>
+                <cell></cell>
+                <cell>Quotient</cell>
+                <cell>Remainder</cell>
+                <cell></cell>
+            </row>
+            <row>
+                <cell>
+                    <m>36\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q1a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r12" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1a2=18 and $r12=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q1b2" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q2a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r22" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1b2=18 and $q2a2=9 and $r22=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q2b2" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q3a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r32" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q2b2=9 and $q3a2=4 and $r32=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q3b2" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q4a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r42" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q3b2=4 and $q4a2=2 and $r42=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q4b2" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q5a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r52" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q4b2=2 and $q5a2=1 and $r52=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q5b2" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q6a2" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r62" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q5b2=1 and $q6a2=0 and $r62=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+        </tabular>
+        <p>Result: <answer type="text">0b00100100</answer>. Make sure to enter it as an 8-bit binary number with the
+            appropriate prefix
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 64 from decimal to 8-bit binary. Answer: <answer type="text">0b01000000</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 7 from decimal to 8-bit binary. Answer: <answer type="text">0b00000111</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 55 from decimal to 8-bit binary. Answer: <answer type="text">0b00110111</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary addition 0b01110011 + 0b00001001. You may convert to decimal to check your answer, but
+            please perform the operation in binary. Answer: <answer type="text">0b01111100</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary addition 0b00110011 + 0b10011001. Answer: <answer type="text">0b11001100</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary multiplication 0b00011101 * 0b00000011. Answer: <answer type="text">0b01010111</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary multiplication 0b00000111 * 0b00001001. Answer: <answer type="text">0b00111111</answer>
+        </p>
+    </exercise>
+
 </section>
 
 <section>
     <title>Hexadecimal</title>
-    <ol>
-        <li>
-            <p>Convert 0xE7 to binary. Answer: <answer type="text">0b11100111</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0x9B to binary. Answer: <answer type="text">0b10011011</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b00011100 to hexadecimal. Answer: <answer type="text">0x1C</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b01011001 to hexadecimal. Answer: <answer type="text">0x59</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0xE7 to decimal by filling in the blanks and performing the computation:</p>
-            <textInput name="a16_hex" width="20px"></textInput>
-            <m>\times 16+</m>
-            <textInput name="a1_hex" width="20px"></textInput>
-            <m>\times 1</m>
-            <answer>
-                <award>
-                    <when>
-                        $a16_hex = 14 and
-                        $a1_hex = 7
-                    </when>
-                </award>
-            </answer>
-            <p>Result: <answer>231</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0x9B to decimal. Answer: <answer>155</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0x75 to decimal. Answer: <answer>117</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 1677 to hexadecimal by filling in the blanks.</p>
-            <tabular>
-                <row header>
-                    <cell></cell>
-                    <cell>Quotient</cell>
-                    <cell>Remainder</cell>
-                    <cell></cell>
-                </row>
-                <row>
-                    <cell>
-                        <m>1677\div 16</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q1a_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r1_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1a_hex=104 and $r1_hex=13</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q1b_hex" width="20px"></textInput>
-                        <m>\div 16</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q2a_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1b_hex=104 and $q2a_hex=6 and $r2_hex=8</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q2b_hex" width="20px"></textInput>
-                        <m>\div 16</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q3a_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r3_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q2b_hex=6 and $q3a_hex=0 and $r3_hex=6</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-            </tabular>
-            <p>Answer (a three digit hexadecimal number): <answer>0x68D</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 250 to hexadecimal. Answer: <answer type="text">0xFA</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 172 to hexadecimal. Answer: <answer type="text">0xAC</answer>
-            </p>
-        </li>
-    </ol>
+
+    <exercise>
+        <p>Convert 0xE7 to binary. Answer: <answer type="text">0b11100111</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0x9B to binary. Answer: <answer type="text">0b10011011</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b00011100 to hexadecimal. Answer: <answer type="text">0x1C</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b01011001 to hexadecimal. Answer: <answer type="text">0x59</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0xE7 to decimal by filling in the blanks and performing the computation:</p>
+        <textInput name="a16_hex" width="20px"></textInput>
+        <m>\times 16+</m>
+        <textInput name="a1_hex" width="20px"></textInput>
+        <m>\times 1</m>
+        <answer>
+            <award>
+                <when>
+                    $a16_hex = 14 and
+                    $a1_hex = 7
+                </when>
+            </award>
+        </answer>
+        <p>Result: <answer>231</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0x9B to decimal. Answer: <answer>155</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0x75 to decimal. Answer: <answer>117</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 1677 to hexadecimal by filling in the blanks.</p>
+        <tabular>
+            <row header>
+                <cell></cell>
+                <cell>Quotient</cell>
+                <cell>Remainder</cell>
+                <cell></cell>
+            </row>
+            <row>
+                <cell>
+                    <m>1677\div 16</m>
+                </cell>
+                <cell>
+                    <textInput name="q1a_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r1_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1a_hex=104 and $r1_hex=13</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q1b_hex" width="20px"></textInput>
+                    <m>\div 16</m>
+                </cell>
+                <cell>
+                    <textInput name="q2a_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1b_hex=104 and $q2a_hex=6 and $r2_hex=8</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q2b_hex" width="20px"></textInput>
+                    <m>\div 16</m>
+                </cell>
+                <cell>
+                    <textInput name="q3a_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r3_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q2b_hex=6 and $q3a_hex=0 and $r3_hex=6</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+        </tabular>
+        <p>Answer (a three digit hexadecimal number): <answer>0x68D</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 250 to hexadecimal. Answer: <answer type="text">0xFA</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 172 to hexadecimal. Answer: <answer type="text">0xAC</answer>
+        </p>
+    </exercise>
+
 </section>
 
 
 <section>
     <title>Negatives in Binary</title>
 
-    <p>Read Sections 4.4, 4.5, and 4.8 from the course textbook, Dive Into Systems (see slides for link). Take notes as
-        you read through these
-        sections. After completing the reading, write a summary below. This summary will be graded manually. Note: this
-        part may be done before, after, and/or during your work on the exercises below. </p>
-    <answer handGraded>
-        <textInput expanded />
-    </answer>
+    <exercise>
+        <p>Read Sections 4.4, 4.5, and 4.8 from the course textbook, Dive Into Systems (see slides for link). Take notes
+            as
+            you read through these
+            sections. After completing the reading, write a summary below. This summary will be graded manually. Note:
+            this
+            part may be done before, after, and/or during your work on the exercises below. </p>
+        <answer handGraded>
+            <textInput expanded />
+        </answer>
+    </exercise>
 
-    <ol>
-        <li>
-            <p>Convert -123 to signed magnitude binary by filling in the blanks.</p>
-            <p>Converting 123 to binary:</p>
-            <tabular>
-                <row header>
-                    <cell></cell>
-                    <cell>Quotient</cell>
-                    <cell>Remainder</cell>
-                    <cell></cell>
-                </row>
-                <row>
-                    <cell>
-                        <m>123\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q1a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r12_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1a2_hex=61 and $r12_hex=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q1b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q2a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r22_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q1b2_hex=61 and $q2a2_hex=30 and $r22_hex=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q2b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q3a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r32_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q2b2_hex=30 and $q3a2_hex=15 and $r32_hex=0</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q3b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q4a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r42_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q3b2=15 and $q4a2=7 and $r42=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q4b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q5a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r52_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q4b2_hex=7 and $q5a2_hex=3 and $r52_hex=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q5b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q6a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r62_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q5b2_hex=3 and $q6a2_hex=1 and $r62_hex=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <textInput name="q6b2_hex" width="20px"></textInput>
-                        <m>\div 2</m>
-                    </cell>
-                    <cell>
-                        <textInput name="q7a2_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <textInput name="r72_hex" width="20px"></textInput>
-                    </cell>
-                    <cell>
-                        <answer>
-                            <award>
-                                <when>$q6b2_hex=1 and $q7a2_hex=0 and $r72_hex=1</when>
-                            </award>
-                        </answer>
-                    </cell>
-                </row>
-            </tabular>
-            <p>The integer 123 in binary is: <answer type="text">0b01111011</answer>
-            </p>
-            <p>By flipping the sign bit, we have that -123 in signed magnitude binary is: <answer type="text">0b11111011
-                </answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert -98 to signed magnitude binary. Answer: <answer type="text">0b11100010</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert -56 to signed magnitude binary. Answer: <answer type="text">0b10111000</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert -123 to two's complement binary, by filling in the blanks.</p>
-            <p>From work in the previous section, 123 in binary is <answer type="text">0b01111011</answer>
-            </p>
-            <p>Flipping the bits of the binary representation of 123, we get <answer type="text">0b10000100</answer>
-            </p>
-            <p>Adding one to this, we get the two's complement binary representation of -123, which is <answer
-                    type="text">
-                    0b10000101</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert -98 to two's complement binary. Answer: <answer type="text">0b10011110</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert -56 to two's complement binary. Answer: <answer type="text">0b11001000</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary subtraction 0b00001001 - 0b01110011. You may convert to decimal to check your answer, but
-                please perform the operation in binary. Answer: <answer type="text">0b10010110</answer>
-            </p>
-        </li>
-        <li>
-            <p>Compute binary subtraction 0b00000011 - 0b10011001. Answer: <answer type="text">0b01101010</answer>
-            </p>
-        </li>
-        <li>
-            <p>When adding the two's complement binary numbers 0b01101110 and 0b01000100, does an overflow error occur?
-            </p>
-            <answer>
-                <choiceInput>
-                    <choice credit="1">Yes</choice>
-                    <choice>No</choice>
-                </choiceInput>
+    <exercise>
+        <p>Convert -123 to signed magnitude binary by filling in the blanks.</p>
+        <p>Converting 123 to binary:</p>
+        <tabular>
+            <row header>
+                <cell></cell>
+                <cell>Quotient</cell>
+                <cell>Remainder</cell>
+                <cell></cell>
+            </row>
+            <row>
+                <cell>
+                    <m>123\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q1a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r12_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1a2_hex=61 and $r12_hex=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q1b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q2a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r22_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q1b2_hex=61 and $q2a2_hex=30 and $r22_hex=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q2b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q3a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r32_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q2b2_hex=30 and $q3a2_hex=15 and $r32_hex=0</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q3b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q4a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r42_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q3b2=15 and $q4a2=7 and $r42=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q4b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q5a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r52_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q4b2_hex=7 and $q5a2_hex=3 and $r52_hex=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q5b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q6a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r62_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q5b2_hex=3 and $q6a2_hex=1 and $r62_hex=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+            <row>
+                <cell>
+                    <textInput name="q6b2_hex" width="20px"></textInput>
+                    <m>\div 2</m>
+                </cell>
+                <cell>
+                    <textInput name="q7a2_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <textInput name="r72_hex" width="20px"></textInput>
+                </cell>
+                <cell>
+                    <answer>
+                        <award>
+                            <when>$q6b2_hex=1 and $q7a2_hex=0 and $r72_hex=1</when>
+                        </award>
+                    </answer>
+                </cell>
+            </row>
+        </tabular>
+        <p>The integer 123 in binary is: <answer type="text">0b01111011</answer>
+        </p>
+        <p>By flipping the sign bit, we have that -123 in signed magnitude binary is: <answer type="text">0b11111011
             </answer>
-        </li>
-        <li>
-            <p>When adding the two's complement binary numbers 0b01101110 and 0b11111111, does an overflow error occur?
-            </p>
-            <answer>
-                <choiceInput>
-                    <choice>Yes</choice>
-                    <choice credit="1">No</choice>
-                </choiceInput>
-            </answer>
-        </li>
-        <li>
-            <p>When adding the two's complement binary numbers 0b10001110 and 0b11111111, does an overflow error occur?
-            </p>
-            <answer>
-                <choiceInput>
-                    <choice>Yes</choice>
-                    <choice credit="1">No</choice>
-                </choiceInput>
-            </answer>
-        </li>
-        <li>
-            <p>When adding the two's complement binary numbers 0b10001110 and 0b10000001, does an overflow error occur?
-            </p>
-            <answer>
-                <choiceInput>
-                    <choice credit="1">Yes</choice>
-                    <choice>No</choice>
-                </choiceInput>
-            </answer>
-        </li>
-        <li>
-            <p>What is the maximum integer that can be represented as an 8-bit unsigned binary integer? In binary:
-                <answer type="text">0b11111111</answer> In decimal: <answer>255</answer>
-            </p>
-        </li>
-        <li>
-            <p>What is the minimum integer that can be represented as an 8-bit unsigned binary integer? In binary:
-                <answer type="text">0b00000000</answer> In decimal: <answer>0</answer>
-            </p>
-        </li>
-        <li>
-            <p>What is the maximum integer that can be represented as an 8-bit two's complement binary integer? In
-                binary:
-                <answer type="text">0b01111111</answer> In decimal: <answer>127</answer>
-            </p>
-        </li>
-        <li>
-            <p>What is the minimum integer that can be represented as an 8-bit two's complement binary integer? In
-                binary:
-                <answer type="text">0b10000000</answer> In decimal: <answer>-128</answer>
-            </p>
-        </li>
-    </ol>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert -98 to signed magnitude binary. Answer: <answer type="text">0b11100010</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert -56 to signed magnitude binary. Answer: <answer type="text">0b10111000</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert -123 to two's complement binary, by filling in the blanks.</p>
+        <p>From work in the previous section, 123 in binary is <answer type="text">0b01111011</answer>
+        </p>
+        <p>Flipping the bits of the binary representation of 123, we get <answer type="text">0b10000100</answer>
+        </p>
+        <p>Adding one to this, we get the two's complement binary representation of -123, which is <answer type="text">
+                0b10000101</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert -98 to two's complement binary. Answer: <answer type="text">0b10011110</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert -56 to two's complement binary. Answer: <answer type="text">0b11001000</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary subtraction 0b00001001 - 0b01110011. You may convert to decimal to check your answer, but
+            please perform the operation in binary. Answer: <answer type="text">0b10010110</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Compute binary subtraction 0b00000011 - 0b10011001. Answer: <answer type="text">0b01101010</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>When adding the two's complement binary numbers 0b01101110 and 0b01000100, does an overflow error occur?
+        </p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">Yes</choice>
+                <choice>No</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>When adding the two's complement binary numbers 0b01101110 and 0b11111111, does an overflow error occur?
+        </p>
+        <answer>
+            <choiceInput>
+                <choice>Yes</choice>
+                <choice credit="1">No</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>When adding the two's complement binary numbers 0b10001110 and 0b11111111, does an overflow error occur?
+        </p>
+        <answer>
+            <choiceInput>
+                <choice>Yes</choice>
+                <choice credit="1">No</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>When adding the two's complement binary numbers 0b10001110 and 0b10000001, does an overflow error occur?
+        </p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">Yes</choice>
+                <choice>No</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>What is the maximum integer that can be represented as an 8-bit unsigned binary integer? In binary:
+            <answer type="text">0b11111111</answer> In decimal: <answer>255</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>What is the minimum integer that can be represented as an 8-bit unsigned binary integer? In binary:
+            <answer type="text">0b00000000</answer> In decimal: <answer>0</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>What is the maximum integer that can be represented as an 8-bit two's complement binary integer? In
+            binary:
+            <answer type="text">0b01111111</answer> In decimal: <answer>127</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>What is the minimum integer that can be represented as an 8-bit two's complement binary integer? In
+            binary:
+            <answer type="text">0b10000000</answer> In decimal: <answer>-128</answer>
+        </p>
+    </exercise>
+
 </section>
 
 <section>
     <title>Fractions & Decimals</title>
 
-    <ol>
-        <li>
-            <p>Convert 0b0101.1010 to decimal. Answer: <answer>5.625</answer>
-            </p>
-        </li>
-        <li>
-            <p>Convert 0b110010.11 to decimal. Answer: <answer>50.75</answer>
-            </p>
-        </li>
 
-        <li>
-            <p>This exercise walks you through converting the following IEEE 754 standard floating point binary number
-                to
-                decimal. You are <alert>not</alert> expected to memorize this process.</p>
-            <me>10111010100110000010000000000000</me>
-            <p>The first (left-most) bit is the sign bit. What is the sign bit? <answer name="sign">1</answer>
-            </p>
-            <p>Is the number above positive or negative?</p>
-            <answer>
-                <choiceInput>
-                    <choice>Positive</choice>
-                    <choice credit="1">Negative</choice>
-                </choiceInput>
-            </answer>
-            <p>After the sign bit, then next eight bits are the exponent bits, representing an unsigned binary integer.
-                What are
-                these eight bits? <answer type="text">01110101</answer> What is this integer in decimal? <answer
-                    name="exponent">117</answer>
-            </p>
-            <p>The remaining bits are the significand bits. What are these bits? <answer type="text">
-                    00110000010000000000000
-                </answer> Imagine there is a binary point before the start of these bits, and convert the resulting
-                binary fixed
-                point number into decimal. Your answer should be between 0 and 1. Answer: <answer name="significand"
-                    displayDigitsForResponses="15" allowedErrorInNumbers="0">0.1884765625</answer>
-            </p>
-            <p>To put these pieces together, we use:</p>
-            <me>(-1)^{\textrm{[sign bit]}}\times 2^{\textrm{[converted exponent bits]}} \times 1.\textrm{[converted
-                significand bits]}</me>
-            <p>Filling in the blanks using your answers above, the computation is (this will not be correct until your
-                answers
-                above are correct):</p>
-            <me>(-1)^{$sign}\times 2^{$exponent-127} \times <math simplify displayDigits="16">1+$significand</math></me>
-            <p>Performing this computation, we get the decimal number: <answer allowedErrorInNumbers="0.00001"
-                    allowedErrorIsAbsolute>-0.001160621643</answer>
-            </p>
-        </li>
-    </ol>
+    <exercise>
+        <p>Convert 0b0101.1010 to decimal. Answer: <answer>5.625</answer>
+        </p>
+    </exercise>
+    <exercise>
+        <p>Convert 0b110010.11 to decimal. Answer: <answer>50.75</answer>
+        </p>
+    </exercise>
+
+    <exercise>
+        <p>This exercise walks you through converting the following IEEE 754 standard floating point binary number
+            to
+            decimal. You are <alert>not</alert> expected to memorize this process.</p>
+        <me>10111010100110000010000000000000</me>
+        <p>The first (left-most) bit is the sign bit. What is the sign bit? <answer name="sign">1</answer>
+        </p>
+        <p>Is the number above positive or negative?</p>
+        <answer>
+            <choiceInput>
+                <choice>Positive</choice>
+                <choice credit="1">Negative</choice>
+            </choiceInput>
+        </answer>
+        <p>After the sign bit, then next eight bits are the exponent bits, representing an unsigned binary integer.
+            What are
+            these eight bits? <answer type="text">01110101</answer> What is this integer in decimal? <answer
+                name="exponent">117</answer>
+        </p>
+        <p>The remaining bits are the significand bits. What are these bits? <answer type="text">
+                00110000010000000000000
+            </answer> Imagine there is a binary point before the start of these bits, and convert the resulting
+            binary fixed
+            point number into decimal. Your answer should be between 0 and 1. Answer: <answer name="significand"
+                displayDigitsForResponses="15" allowedErrorInNumbers="0">0.1884765625</answer>
+        </p>
+        <p>To put these pieces together, we use:</p>
+        <me>(-1)^{\textrm{[sign bit]}}\times 2^{\textrm{[converted exponent bits]}} \times 1.\textrm{[converted
+            significand bits]}</me>
+        <p>Filling in the blanks using your answers above, the computation is (this will not be correct until your
+            answers
+            above are correct):</p>
+        <me>(-1)^{$sign}\times 2^{$exponent-127} \times <math simplify displayDigits="16">1+$significand</math></me>
+        <p>Performing this computation, we get the decimal number: <answer allowedErrorInNumbers="0.00001"
+                allowedErrorIsAbsolute>-0.001160621643</answer>
+        </p>
+    </exercise>
+
 </section>
 
 <section>
@@ -1029,42 +1032,42 @@
     Work through the following exercies on paper, then upload them to Moodle as a PDF. Be sure to show your work for
     every exercise <alert>in detail</alert> in order to demonstrate that you understand the process.
 
-    <ol>
-        <li>Convert 0b01011001 from binary to decimal.</li>
-        <li>Convert 243 from decimal to binary.</li>
-        <li>Convert 0x13 from hexadecimal to binary (do not convert to decimal in between).</li>
-        <li>Convert 0b11110110 from binary to hexadecimal (do not convert to decimal in between).</li>
-        <li>Convert 0x13 from hex to decimal.</li>
-        <li>Convert 10957 from decimal to hex.</li>
-        <li>Convert -17 to 8-bit signed magnitude binary.</li>
-        <li>Convert -17 to 8-bit two's complement binary.</li>
-        <li>Compute the sum 0b11010111 + 0b01001001 of two's complement binary integers. Verify your computation by
-            converting the summands and result to decimal.</li>
-        <li>Compute the difference 0b10000111 - 0b01001001 of two's complement binary integers. Convert all three
-            integers to decimal to verify your answer.</li>
-        <li>Compute the product 0b00000110 * 0b00001111 of two's complement binary integers. Convert all three integers
-            to decimal to verify your answer.</li>
-        <li>Convert the unsigned fixed point binary number 0b01.100010 into decimal.</li>
-        <li>
-            Find each character in the table below, and fill in its ASCII value (in decimal).
-            <tabular>
-                <row>
-                    <cell>M</cell>
-                    <cell>A</cell>
-                    <cell>Z</cell>
-                    <cell>a</cell>
-                    <cell>z</cell>
-                    <cell>5</cell>
-                    <cell>0</cell>
-                    <cell>(</cell>
-                    <cell>~</cell>
-                    <cell>=</cell>
-                    <cell>@</cell>
-                </row>
-            </tabular>
-        </li>
-        <li>Write the string "Hardware Design" as a sequence of ASCII values, by matching up each character with its
-            ASCII value. Don't forget the null character!</li>
-    </ol>
+
+    <exercise>Convert 0b01011001 from binary to decimal.</exercise>
+    <exercise>Convert 243 from decimal to binary.</exercise>
+    <exercise>Convert 0x13 from hexadecimal to binary (do not convert to decimal in between).</exercise>
+    <exercise>Convert 0b11110110 from binary to hexadecimal (do not convert to decimal in between).</exercise>
+    <exercise>Convert 0x13 from hex to decimal.</exercise>
+    <exercise>Convert 10957 from decimal to hex.</exercise>
+    <exercise>Convert -17 to 8-bit signed magnitude binary.</exercise>
+    <exercise>Convert -17 to 8-bit two's complement binary.</exercise>
+    <exercise>Compute the sum 0b11010111 + 0b01001001 of two's complement binary integers. Verify your computation by
+        converting the summands and result to decimal.</exercise>
+    <exercise>Compute the difference 0b10000111 - 0b01001001 of two's complement binary integers. Convert all three
+        integers to decimal to verify your answer.</exercise>
+    <exercise>Compute the product 0b00000110 * 0b00001111 of two's complement binary integers. Convert all three
+        integers
+        to decimal to verify your answer.</exercise>
+    <exercise>Convert the unsigned fixed point binary number 0b01.100010 into decimal.</exercise>
+    <exercise>
+        Find each character in the table below, and fill in its ASCII value (in decimal).
+        <tabular>
+            <row>
+                <cell>M</cell>
+                <cell>A</cell>
+                <cell>Z</cell>
+                <cell>a</cell>
+                <cell>z</cell>
+                <cell>5</cell>
+                <cell>0</cell>
+                <cell>(</cell>
+                <cell>~</cell>
+                <cell>=</cell>
+                <cell>@</cell>
+            </row>
+        </tabular>
+    </exercise>
+    <exercise>Write the string "Hardware Design" as a sequence of ASCII values, by matching up each character with its
+        ASCII value. Don't forget the null character!</exercise>
 
 </section>
