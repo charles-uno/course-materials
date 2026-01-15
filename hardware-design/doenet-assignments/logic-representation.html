@@ -3583,9 +3583,7 @@ this might belong with hardware components?
     <title>Moodle Work</title>
 
     <p>The following exercises use the online circuit simulator: https://circuitverse.org/simulator</p>
-    <p>To turn in your work, take screenshots as directed and submit a PDF on Moodle.</p>
-
-
+    <p><alert>Turn this part in as a PDF on Moodle. Include scans and screenshots as noted below.</alert></p>
 
     <exercise>
         <p>Work through this on paper. Include a photo in the PDF you submit to Moodle.</p>
@@ -3626,7 +3624,8 @@ this might belong with hardware components?
 
 
     <exercise>
-        <p>Create a new project on Circuitverse. Create a logic circuit which checks if two values are equal. It should metch the following truth table:</p>
+        <p>Create a new project on Circuitverse. Create a logic circuit which checks if two values are equal. It should
+            match the following truth table:</p>
         <tabular>
             <row header>
                 <cell>
@@ -3684,51 +3683,30 @@ this might belong with hardware components?
                 </cell>
             </row>
         </tabular>
-<p>Hint: there are several different ways to do this! How few gates can you use?</p>
-<p>Using the truth table provided above, create tests for all possible combinations of A and B. Run your tests. Submit a screenshot of the entire window, including the detailed test results.</p>
-</exercise>
+        <p>Hint: there are several different ways to do this! How few gates can you use?</p>
+        <p>Using the truth table provided above, create tests for all possible combinations of A and B. Run your tests.
+            Submit a screenshot of the entire window, including the detailed test results.</p>
+    </exercise>
 
-<exercise>
-
-
-
-    Click "Project -> New Project” to create a new circuit.
-
-    Next, you will set up a logic circuit to test the equation
-    A OR (A OR B) = (A OR B).
-
-    Create a logic circuit to test this equation.
-
-    Hints:
-    This can be done with two inputs (A and B), two or three OR gates, and two outputs. The two outputs correspond to
-    the result of each side of the equation. Label the result of the left side of the equation as "left”, and label the
-    result of the right side of the equation as "right”.
-    When you toggle the values for A and B, you should see that "left” and "right” always have the same value.
-
-    Take a screenshot of your logic circuit, and submit the image as your solution for this part of the exercise.
-
-    Create tests for all possible combinations of values for A and B, and the corresponding result that you would expect
-    for "left” and "right”. This will require two outputs in your tests, though they will be identical. Run your tests,
-    and view the detailed test results. Take a screenshot of the entire window, and submit the image as your solution
-    for this part of the exercise.
-
-    Next, you will modify your circuit to include the equality testing for
-    A OR (A OR B) = (A OR B).
-    Remove the outputs in your logic circuit. Then, use your approach from Exercise 5 above to modify the circuit to
-    compute one output, which is the result of the boolean function
-    f(A, B) = (A OR (A OR B) = (A OR B)).
-    Take a screenshot of your logic circuit, and submit the image as your solution for this part of the exercise.
-
-    Modify your tests for all possible combinations of values for A and B, to have a single output for the boolean
-    function.
-
-    Hint: If the equation holds, what will the output of f always be?
-
-    Run your tests, and view the detailed test results. Take a screenshot of the entire window, and submit the image as
-    your solution for this part of the exercise.
-
-
-
-</exercise>
+    <exercise>
+        <p>Create a new project in Circuitverse. Create logic circuits for these two expressions:</p>
+        <me>
+            f(A, B) = A \textrm{ or } (A \textrm{ or } B)
+        </me>
+        <me>
+            g(A, B) = (A \textrm{ or } B)
+        </me>
+        <p>You will be testing the equality of these two expressions. When you toggle the values of A and B, you should
+            see that f(A, B) and g(A, B) always have the same value.</p>
+        <p>Create tests for all possible combinations of A and B, and the corresponding results for f(A, B) and g(A, B).
+            Run your tests and submit a screenshot of your circuit along with the detailed test results.</p>
+        <p>Next, modify your circuit to use the equality test you developed above (Exercise 5). Instead of two outputs,
+            you should now have a single output: </p>
+        <me>
+            h(A, B) = f(A, B) == G(A, B)
+        </me>
+        <p>Update your tests to cover h(A, B) instead of f(A, B) and g(A, B). Run the tests. Submit a screenshot of your
+            circuit along with the detailed test results.</p>
+    </exercise>
 
 </section>
