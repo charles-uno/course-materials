@@ -502,6 +502,42 @@
 
 
 
+
+\begin{frame}{Latches (aka Flip-Flops)}
+
+
+	\resizebox{\columnwidth}{!}{
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[ieeestd nand port] at (7.081, 6.709){};
+		\node[ieeestd nand port] at (7.081, 4.28){};
+		\node[jump crossing] at (5.997, 5.857){};
+		\draw (8.162, 6.709) -- (9, 6.714);
+		\draw (8.162, 4.28) -- (9, 4.286);
+		\draw (6, 4) -- (5, 4);
+		\draw (6, 6.989) -- (5, 7);
+		\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
+		\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
+		\draw (6, 6) -- (6, 6.429);
+		\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){S};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){R};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){Q};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){$\overline{Q}$};
+	\end{tikzpicture}
+}
+
+
+
+
+
+\end{frame}
+
+
+
+
+
+
 \Subsection{Arithmetic with Circuits}
 
 
