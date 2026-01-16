@@ -206,3 +206,702 @@
 
 
 </section>
+
+
+<setup>
+    <module name="memSlots" newNamespace>
+        <setup>
+            <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
+            <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
+            <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
+            <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
+        </setup>
+        <conditionalContent>
+            <case condition="not $inGraph">
+                [$items]
+            </case>
+            <case condition="$inGraph">
+                <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
+                <map>
+                    <template>
+                        <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px"
+                            positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
+                        <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
+                            draggable="false">$labels.texts[$i+1]</text>
+                    </template>
+                    <sources alias="i">
+                        <sequence from="0" to="$size-1" step="1" />
+                    </sources>
+                </map>
+                <text anchor="($anchor.x, $anchor.y-$size-.5)">
+                    <ellipsis />
+                </text>
+            </case>
+        </conditionalContent>
+    </module>
+</setup>
+
+<p>The ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref> will be helpful as
+    you work through this lab. Sections 1.1, 1.2, 1.3, 1.7, 1.8, 2.1, 2.2, 2.3, and 2.5 are relevant to this lab.</p>
+
+<section>
+    <title>Executing a Program</title>
+
+    <p>What is the role of the CPU in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice credit="1">Interpret and process instructions</choice>
+            <choice credit="1">Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of main memory in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Store data and program instructions for the CPU</choice>
+            <choice credit="1">Store operating system software</choice>
+            <choice>Interpret and process instructions</choice>
+            <choice>Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of the control unit in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice credit="1">Interpret and process instructions</choice>
+            <choice>Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where is the control unit located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of the processing unit in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice>Interpret and process instructions</choice>
+            <choice credit="1">Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where is the processing unit located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where are the registers in a computer located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+
+<p>You may find it helpful to review sections 5.1 and 5.2 (read in Lab 11) of the textbook <ref
+        uri="https://diveintosystems.org/book/">Dive into Systems</ref> while working through this lab. This lab also
+    covers the contents from sections 5.5 and 5.6.</p>
+
+<section>
+    <title>Von Neumann Architecture Review</title>
+
+    <p>What is the role of the CPU in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice credit="1">Interpret and process instructions</choice>
+            <choice credit="1">Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of main memory in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Store data and program instructions for the CPU</choice>
+            <choice credit="1">Store operating system software</choice>
+            <choice>Interpret and process instructions</choice>
+            <choice>Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of the control unit in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice credit="1">Interpret and process instructions</choice>
+            <choice>Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where is the control unit located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of the processing unit in a computer? Select all.</p>
+
+    <answer>
+        <choiceInput selectMultiple>
+            <choice>Store data and program instructions for the CPU</choice>
+            <choice>Store operating system software</choice>
+            <choice>Interpret and process instructions</choice>
+            <choice credit="1">Perform arithmetic and logic operations</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where is the processing unit located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where are the registers in a computer located?</p>
+
+    <answer>
+        <choiceInput>
+            <choice credit="1">The CPU</choice>
+            <choice>Main Memory</choice>
+            <choice>Secondary Storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>More specifically, where are the general purpose registers in a computer located?</p>
+    <answer>
+        <choiceInput>
+            <choice>The Arithmetic and Logic Unit</choice>
+            <choice>The Control Unit</choice>
+            <choice credit="1">The Processing Unit</choice>
+            <choice>The Memory Unit</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Where are the special registers registers <c>pc</c> and <c>ir</c> in a computer located?</p>
+    <answer>
+        <choiceInput>
+            <choice>The Arithmetic and Logic Unit</choice>
+            <choice credit="1">The Control Unit</choice>
+            <choice>The Processing Unit</choice>
+            <choice>The Memory Unit</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+<section>
+    <title>von Neumann Architecture: Executing an Instruction</title>
+
+    <p>What happens in the <alert>fetch</alert> stage of executing an instruction? Select all.</p>
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice credit="1">The address of the next instruction is sent on the address bus from the control unit to
+                the memory unit.</choice>
+            <choice credit="1">The READ command is sent on the control bus from the control unit to the memory unit.
+            </choice>
+            <choice credit="1">The next instruction is sent on the data bus from the memory unit to the control unit.
+            </choice>
+            <choice credit="1">The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+            <choice>The control unit determines the operation and the location of the operands from the instruction.
+            </choice>
+            <choice>The control unit tells the processing unit what operation to perform.</choice>
+            <choice>The control unit sends the operands to the processing unit.</choice>
+            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+            </choice>
+            <choice>The result is sent on the data bus from the control unit to memory.</choice>
+            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
+            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The memory unit writes the result value to memory at the given address.</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What happens in the <alert>decode</alert> stage of executing an instruction? Select all.</p>
+
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
+                unit.</choice>
+            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+            <choice credit="1">The control unit determines the operation and the location of the operands from the
+                instruction.</choice>
+            <choice credit="1">The control unit tells the processing unit what operation to perform.</choice>
+            <choice credit="1">The control unit sends the operands to the processing unit.</choice>
+            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+            </choice>
+            <choice>The result is sent on the data bus from the control unit to memory.</choice>
+            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
+            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The memory unit writes the result value to memory at the given address.</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What happens in the <alert>execute</alert> stage of executing an instruction? Select all.</p>
+
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
+                unit.</choice>
+            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+            <choice>The control unit determines the operation and the location of the operands from the instruction.
+            </choice>
+            <choice>The control unit tells the processing unit what operation to perform.</choice>
+            <choice>The control unit sends the operands to the processing unit.</choice>
+            <choice credit="1">The arithmetic logic unit performs the instruction operation on the instruction data
+                operands.</choice>
+            <choice>The result is sent on the data bus from the control unit to memory.</choice>
+            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
+            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The memory unit writes the result value to memory at the given address.</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What happens in the <alert>store</alert> stage of executing an instruction? Select all.</p>
+
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
+                unit.</choice>
+            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+            <choice>The control unit determines the operation and the location of the operands from the instruction.
+            </choice>
+            <choice>The control unit tells the processing unit what operation to perform.</choice>
+            <choice>The control unit sends the operands to the processing unit.</choice>
+            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+            </choice>
+            <choice credit="1">The result is sent on the data bus from the control unit to memory.</choice>
+            <choice credit="1">The address to store the result is sent on the address bus from the control unit to
+                memory.</choice>
+            <choice credit="1">The WRITE command is sent on the control bus from the control unit to the memory unit.
+            </choice>
+            <choice credit="1">The memory unit writes the result value to memory at the given address.</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+<section>
+    <title>The CPU</title>
+
+    <p>What is the role of the ALU in the CPU?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">Perform arithmetic and logic operations</choice>
+            <choice>Store program data</choice>
+            <choice>Manage Instruction execution</choice>
+            <choice>Drive circuitry to execute instructions</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of general purpose registers in the CPU?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>Perform arithmetic and logic operations</choice>
+            <choice credit="1">Store program data</choice>
+            <choice>Manage Instruction execution</choice>
+            <choice>Drive circuitry to execute instructions</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of control circuitry in the CPU?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>Perform arithmetic and logic operations</choice>
+            <choice>Store program data</choice>
+            <choice credit="1">Manage Instruction execution</choice>
+            <choice>Drive circuitry to execute instructions</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is the role of the clock in the CPU?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>Perform arithmetic and logic operations</choice>
+            <choice>Store program data</choice>
+            <choice>Manage Instruction execution</choice>
+            <choice credit="1">Drive circuitry to execute instructions</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+<section>
+    <title>The CPU Clock</title>
+
+    <p>What is the relationship between the clock cycle time and the clock rate?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">
+                <m>\textrm{clock cycle time} = \frac{1}{\textrm{clock rate}}</m>
+            </choice>
+            <choice>
+                <m>\textrm{clock cycle time} = \textrm{clock rate}</m>
+            </choice>
+            <choice>
+                <m>\textrm{clock cycle time} = - \textrm{clock rate}</m>
+            </choice>
+            <choice>
+                <m>\textrm{clock cycle time} = (\textrm{clock rate})^2</m>
+            </choice>
+        </choiceInput>
+    </answer>
+
+    <p>If the clock speed is 2 GHz, how many clock ticks occur per second?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">2,000,000,000</choice>
+            <choice>1,000,000,000</choice>
+            <choice>500,000,000</choice>
+            <choice>2,000,000</choice>
+        </choiceInput>
+    </answer>
+
+    <p>If the clock cycle time is 2 nanoseconds, what is the clock rate?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>2,000,000,000</choice>
+            <choice>1,000,000,000</choice>
+            <choice credit="1">500,000,000</choice>
+            <choice>1,000,000</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Assuming a four-stage instruction and a 2 nanosecond clock cycle time, how long does it take for an instruction
+        to complete?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>2 nanoseconds</choice>
+            <choice credit="1">8 nanoseconds</choice>
+            <choice>0.5 nanosecond</choice>
+            <choice>4 nanoseconds</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+<section>
+    <title>Raspberry Pi: CPU and Clock Cycles</title>
+
+    <p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
+    <p>In the terminal on your Raspberry Pi, enter the following command.</p>
+    <pre>  lscpu</pre>
+    <p>You should see information on the architecture of your Raspberry Pi. Use this information to answer the following
+        questions.</p>
+
+    <p>What is listed as the Architecture?</p>
+
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">armv7l</choice>
+            <choice>x86_64</choice>
+            <choice>arm64</choice>
+            <choice>amd64</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Later in the semester we'll cover cores and threads. What is listed for Thread(s) per core? <answer>1</answer>
+    </p>
+
+    <p>What is listed for Core(s) per socket? <answer>4</answer>
+    </p>
+
+    <p>What is listed for Socket(s)? <answer>1</answer>
+    </p>
+
+    <p>What is listed for CPU max MHz? <answer>1500</answer>
+    </p>
+
+    <p>What is listed for CPU min MHz? <answer>600</answer>
+    </p>
+
+    <p>Convert the CPU max MHz to GHz. <answer>1.5</answer>
+    </p>
+
+    <p>Using the CPU max MHz, how many ticks per second does your Raspberry Pi’s CPU clock have? <answer>1500000000
+        </answer>
+    </p>
+
+    <p>Using the CPU max MHz, how long does one clock cycle take on your Raspberry Pi? Give your answer in nanoseconds.
+        <answer allowedErrorInNumbers=".001" allowedErrorIsAbsolute>2/3</answer>
+    </p>
+
+    <p>Using the CPU max MHz, how long would it take your Raspberry Pi to execute one instruction? Give your answer in
+        nanoseconds. <answer allowedErrorInNumbers=".001" allowedErrorIsAbsolute>8/3</answer>
+    </p>
+
+</section>
+
+<setup>
+    <module name="memSlots" newNamespace>
+        <setup>
+            <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
+            <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
+            <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
+            <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
+        </setup>
+        <conditionalContent>
+            <case condition="not $inGraph">
+                [$items]
+            </case>
+            <case condition="$inGraph">
+                <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
+                <map>
+                    <template>
+                        <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px"
+                            positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
+                        <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
+                            draggable="false">$labels.texts[$i+1]</text>
+                    </template>
+                    <sources alias="i">
+                        <sequence from="0" to="$size-1" step="1" />
+                    </sources>
+                </map>
+                <text anchor="($anchor.x, $anchor.y-$size-.5)">
+                    <ellipsis />
+                </text>
+            </case>
+        </conditionalContent>
+    </module>
+</setup>
+
+<p>This lab covers content from Sections 5.7 and 5.8 of the textbook <ref uri="https://diveintosystems.org/book/">Dive
+        into Systems</ref>. You may find it helpful to reference these sections as you work through this lab.</p>
+
+<p>For the assembly portion of this lab, you may find it helpful to reference Sections 6.1, 6.9, 6.10, and 6.11 of the
+    ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref>.</p>
+
+<section>
+    <title>Pipelining</title>
+
+    <p>Assume a standard four-stage instruction in this instruction.</p>
+
+    <p>Give a one word description of the first stage of an instruction. <answer type="text">fetch</answer>
+    </p>
+    <p>Give a one word description of the second stage of an instruction. <answer type="text">decode</answer>
+    </p>
+    <p>Give a one word description of the third stage of an instruction. <answer type="text">execute</answer>
+    </p>
+    <p>Give a one word description of the fourth stage of an instruction.
+        <textInput name="store" />
+        <answer>
+            <award>
+                <when>$store =<text>store</text> or $store=<text>write</text></when>
+            </award>
+        </answer>
+    </p>
+
+    <p>How many clock cycles does it take to execute one instruction? <answer>4</answer>
+    </p>
+
+    <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute two
+        instructions? <answer>8</answer>
+    </p>
+
+    <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute 100
+        instructions? <answer>400</answer>
+    </p>
+
+    <p>Using pipelining, how many clock cycles does it take to execute two instructions? <answer>5</answer>
+    </p>
+
+    <p>Using pipelining, how many clock cycles does it take to execute three instructions? <answer>6</answer>
+    </p>
+
+    <p>Using pipelining, how many clock cycles does it take to execute four instructions? <answer>7</answer>
+    </p>
+
+    <p>Using pipelining, how many clock cycles does it take to execute 100 instructions? <answer>103</answer>
+    </p>
+
+    <p>Using pipelining, how many clock cycles does it take to execute <m>N</m> instructions? Write your answer in terms
+        of <m>N</m>. <answer>N+3</answer>
+    </p>
+
+</section>
+
+<section>
+    <title>More on Pipelining</title>
+
+    <p>Refer to Section 5.8 of the textbook <ref uri="https://diveintosystems.org/book/">Dive into Systems</ref> as you
+        complete this section.</p>
+
+    <p>Select what happens in each of the five stage instruction example in this section.</p>
+
+    <p>Fetch:
+        <answer>
+            <choiceInput inline shuffleOrder>
+                <choice credit="1">reads an instruction from memory</choice>
+                <choice>reads source registers and sets control logic.</choice>
+                <choice>executes the instruction</choice>
+                <choice>reads from or writes to data memory</choice>
+                <choice>stores a result in a destination register</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Decode:
+        <answer>
+            <choiceInput inline shuffleOrder>
+                <choice>reads an instruction from memory</choice>
+                <choice credit="1">reads source registers and sets control logic.</choice>
+                <choice>executes the instruction</choice>
+                <choice>reads from or writes to data memory</choice>
+                <choice>stores a result in a destination register</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Execute:
+        <answer>
+            <choiceInput inline shuffleOrder>
+                <choice>reads an instruction from memory</choice>
+                <choice>reads source registers and sets control logic.</choice>
+                <choice credit="1">executes the instruction</choice>
+                <choice>reads from or writes to data memory</choice>
+                <choice>stores a result in a destination register</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Memory:
+        <answer>
+            <choiceInput inline shuffleOrder>
+                <choice>reads an instruction from memory</choice>
+                <choice>reads source registers and sets control logic.</choice>
+                <choice>executes the instruction</choice>
+                <choice credit="1">reads from or writes to data memory</choice>
+                <choice>stores a result in a destination register</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Writeback:
+        <answer>
+            <choiceInput inline shuffleOrder>
+                <choice>reads an instruction from memory</choice>
+                <choice>reads source registers and sets control logic.</choice>
+                <choice>executes the instruction</choice>
+                <choice>reads from or writes to data memory</choice>
+                <choice credit="1">stores a result in a destination register</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>How many stages would the instruction <c>add r0, r1, r2</c> require? <answer>4</answer>
+    </p>
+
+    <p>How many stages would the instruction <c>ldr r0, [r1]</c> require? <answer>5</answer>
+    </p>
+
+    <p>What is a pipeline stall?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">When an instruction needs to wait for another to finish before it can proceed</choice>
+            <choice>When two instructions are started simultaneously</choice>
+            <choice>When two instructions complete simultaneously</choice>
+            <choice>When an instruction requires multiple clock cycles to complete a single stage</choice>
+            <choice>When an instruction is waiting for user input to proceed</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is a data hazard?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">When two instructions executing simultaneously use the same data</choice>
+            <choice>When an instruction corrupts data</choice>
+            <choice>When incorrect data is used in an instruction</choice>
+            <choice>When an instruction isn't clear about what data to use</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is a control hazard?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">When a program needs to wait for the result of a previous instruction to determine which
+                instruction to execute next</choice>
+            <choice>When AI seizes control of the execution of the program</choice>
+            <choice>When two control units are trying to execute instructions simultaneously</choice>
+            <choice>When the same block of memory is accessed by two different instructions at the same time.</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Which of the following strategies can help address data hazards? Select all.</p>
+
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice credit="1">A pipeline bubble</choice>
+            <choice credit="1">operand forwarding</choice>
+            <choice credit="1">pipeline stall</choice>
+            <choice>branch prediction</choice>
+            <choice>eager execution</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Which of the following strategies can help address control hazards? Select all.</p>
+
+    <answer>
+        <choiceInput shuffleOrder selectMultiple matchPartial>
+            <choice>A pipeline bubble</choice>
+            <choice>operand forwarding</choice>
+            <choice credit="1">pipeline stall</choice>
+            <choice credit="1">branch prediction</choice>
+            <choice credit="1">eager execution</choice>
+        </choiceInput>
+    </answer>
+
+</section>
