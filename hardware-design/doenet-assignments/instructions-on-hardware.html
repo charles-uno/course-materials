@@ -204,10 +204,6 @@
 </section>
 
 
-
-</section>
-
-
 <setup>
     <module name="memSlots" newNamespace>
         <setup>
@@ -683,41 +679,6 @@
     </p>
 
 </section>
-
-<setup>
-    <module name="memSlots" newNamespace>
-        <setup>
-            <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
-            <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
-            <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
-            <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
-            <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
-            <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
-        </setup>
-        <conditionalContent>
-            <case condition="not $inGraph">
-                [$items]
-            </case>
-            <case condition="$inGraph">
-                <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
-                <map>
-                    <template>
-                        <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px"
-                            positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
-                        <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
-                            draggable="false">$labels.texts[$i+1]</text>
-                    </template>
-                    <sources alias="i">
-                        <sequence from="0" to="$size-1" step="1" />
-                    </sources>
-                </map>
-                <text anchor="($anchor.x, $anchor.y-$size-.5)">
-                    <ellipsis />
-                </text>
-            </case>
-        </conditionalContent>
-    </module>
-</setup>
 
 <p>This lab covers content from Sections 5.7 and 5.8 of the textbook <ref uri="https://diveintosystems.org/book/">Dive
         into Systems</ref>. You may find it helpful to reference these sections as you work through this lab.</p>

@@ -3583,7 +3583,9 @@ this might belong with hardware components?
     <title>Moodle Work</title>
 
     <p>The following exercises use the online circuit simulator: https://circuitverse.org/simulator</p>
-    <p><alert>Turn this part in as a PDF on Moodle. Include scans and screenshots as noted below.</alert></p>
+    <p>
+        <alert>Turn this part in as a PDF on Moodle. Include scans and screenshots as noted below.</alert>
+    </p>
 
     <exercise>
         <p>Work through this on paper. Include a photo in the PDF you submit to Moodle.</p>
@@ -3708,5 +3710,42 @@ this might belong with hardware components?
         <p>Update your tests to cover h(A, B) instead of f(A, B) and g(A, B). Run the tests. Submit a screenshot of your
             circuit along with the detailed test results.</p>
     </exercise>
+
+    <exercise>
+        <p>
+            Create a new project in Circuitverse. Build a circuit that negates a four-bit two's compliment number. There
+            should be four input bits and four output bits.</p>
+        <ul>
+            <li>Start by creating a truth table to figure out the logical expression for each bit.</li>
+            <li>You may find it easier to start with two input bits and two output bits as you figure things out.</li>
+        </ul>
+    </exercise>
+
+    <exercise>
+        <alert>This is the big one.</alert>
+        <p>Create a new circuit in Circuitverse. This circuit will be a one-bit calculator with memory. The circuit will
+            have four input bits and a button. It will be quite complicated, so let's assemble it iteratively. Confirm
+            correct behavior at every step and take lots of screenshots!</p>
+        <ol>
+            <li>Create an latch with outputs Q and -Q. Confirm its behavior.</li>
+            <li>Add an input bit A. Connect it to the latch. When A=1, set Q=1. When A=0, set Q=0.</li>
+            <li>Add an input button (gray circle right next to the input bit). Update your circuit so that
+                the latch only changes when you press the button. That is: A does not change anything on its own.
+                Whenever you press the button, set Q=A.</li>
+            <li>Add a second input B. Compute P=A*B (one-bit multiplication). Instead of writing Q=A, write Q=P. Make
+                sure your button still works.</li>
+            <li>Compute S=A+B (one-bit addition, no carry). Then add another input bit, C, to choose which operation to
+                perform. If C=0, perform multiplication (set Q=P when you hit the button). If C=1, perform addition (set
+                Q=S when you hit the button)</li>
+            <li>Add another latch. Add a final input bit, D, to specify the destination. If D=0, write to Q when you hit
+                the button (no change to the new latch). If D=1, write to the new latch instead (no change to Q).</li>
+            <li>This is a lot of moving parts! Move things around to make sure the grader can easily see what's going
+                on. This part is important. If the grader is annoyed, scores go down.</li>
+        </ol>
+    </exercise>
+
+
+
+
 
 </section>
