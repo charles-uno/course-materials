@@ -1,101 +1,203 @@
-\documentclass[10pt, oneside]{article} 
-\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
+\documentclass{article} 
 
-\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+\usepackage{xcolor}
+\definecolor{AccentColor}{RGB}{124, 98, 177}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    % internal links
+    linkcolor=AccentColor,
+    filecolor=AccentColor,      
+    % external links
+    urlcolor=AccentColor,
+    }
 
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\Cdot}{\boldsymbol{\cdot}}
+\setlength\parindent{0pt}
+\usepackage{parskip} 
 
-\newtheorem{thm}{Theorem}
-\newtheorem{defn}{Definition}
-\newtheorem{conv}{Convention}
-\newtheorem{rem}{Remark}
-\newtheorem{lem}{Lemma}
-\newtheorem{cor}{Corollary}
-
-
-\title{Running Lecture Outline: [Course Code]}
-\author{[Full Name]}
-\date{Academic Year 2019-2020}
+\title{CS241: Hardware Design}
+\author{Professor Charles Fyfe}
+\date{St Olaf College $\cdot$ Spring 2026}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
 
+\newpage
+
 \vspace{.25in}
 
-\section{Fall 2019}
+\section{Specific to This Course}
 
-\subsection{Fri, Sept 6: Phenomenology of Microscopic Physics}
+\subsection{Course Description}
+
+
+
+\subsection{Office Hours}
+
+TBD. Probably an hour right after class.
+
+\subsection{Grading}
 
 \begin{itemize}
-
-\item Newtonian mechanics (i.e., ${\bf F} = m{\bf a}$) is an excellent theory; it applies to the vast majority of human-scale (and even interplanetary-scale) physics. 
-
-\item Apart from relativistic effects at very high velocities (special relativity) or in very strong gravitational fields (general relativity), Newtonian mechanics accurately describes a huge range of phenomena, but around the end of the Nineteenth Century people became aware of some physical effects for which there is no sensible Newtonian explanation.
-
-\item Examples include:
-\begin{itemize}
-\item the {\bf double slit experiment} (done with light by Thomas Young in 1801, and with electrons by Tonomura in 1986)
-\item the photoelectric effect (analyzed by Einstein in 1905 --- in fact his Nobel-winning work)
-\item the ``quantum Venn diagram'' puzzle, involving the overlaps of three polarizing filters
-\item the stability of the hydrogen atom (i.e., the fact that the electron doesn't lose energy and spiral inward toward the proton).
+	\item 45\% Tests
+	\item 45\% Assignments
+	\item 10\% Peer Reviews
 \end{itemize}
 
-\begin{rem}
-How now, brown cow?
-\end{rem}
+Tests are graded using standards-based grading.
 
-\begin{defn}
-The {\em Feynman kernel} is given by
-\[ K(x_b, t_b; x_a, t_a) = \int_{x(t_a) = x_a}^{x(t_b) = x_b} e^{(i/\hbar) S[x(t)]} \; \mathcal{D}x(t). \]
-\end{defn}
+The course is broken down into eight standards. All standards are weighted equally.
 
-\end{itemize}
+You will have two opportunities to demonstrate proficiency on each standard: the test and the final.
 
-\subsection{Mon, Sept 9: Review of Newtonian Mechanics}
+If you demonstrate proficiency on the test, you get to skip that part of the final.
+
+
+Assignments on Doenet. Some of them will be graded automatically. Some stuff you work out on paper, etc, and submit a PDF via Moodle.
+
+Peer reviews. Short. Less than one page.
+
+You can get full credit here without too much trouble. Show up. Work together. Make it easy for your peers to say nice things about you.
+
+I recommend keeping notes during the semester when someone is particularly helpful, insightful, etc. The strongest reviews include concrete examples.
+
+\subsection{Late Work Policy}
+
+Please try to get your work in on time. Otherwise you are likely to fall behind in the course.
+
+Late work is inconvenient for the TAs. They may be grumpy and vindictive when grading late work.
+
+No late work will be accepted for the last two weeks of the semester. The TAs have their own finals to worry about!
+
+When submitting late work, you must notify the grader(s) by email. Otherwise they will not know to look for it.
+
+
+
+\subsection{Important Links}
 
 \begin{itemize}
-
-\item  A {\em Newtonian trajectory} ${\bf x}(t)$ ($t \in \R$) is given by solutions of the second order ODE
-\[ m\, \ddot{{\bf x}}(t) = {\bf F}({\bf x}(t)), \]
-where $m > 0$ is a basic parameter associated with a given Newtonian particle, called its {\em mass}.
-
-\item The force field ${\bf F}({\bf x})$ --- which we take to be static (i.e., not intrinsically dependent on time) for simplicity --- is said to be {\em conservative} if there is a {\em potential function} $V({\bf x})$ such that
-\[ {\bf F}({\bf x}) = -\nabla V({\bf x}). \]
-Here, `$\nabla$' denotes the {\em gradient operator}, 
-\[ \nabla V = \bigg( \frac{\partial V}{\partial x}, \, \frac{\partial V}{\partial y}, \, \frac{\partial V}{\partial z} \bigg). \]
-
-\item For a conservative force field, we can find a {\em conserved quantity} along the Newtonian trajectories, namely the {\em total mechanical energy}.
-\[ E = H({\bf x}, {\bf p}) := \frac{1}{2m}\, {\bf p}^2 + V({\bf x}). \]
-Here, ${\bf p}^2 := {\bf p} \Cdot {\bf p} = \| {\bf p} \|^2$, and ${\bf p} := m {\bf v} := m \dot{{\bf x}}$ is the {\em momentum}.
-
-\end{itemize}
-
-\subsection{Tue, Sept 10: Alternative Formulations of Newtonian Mechanics}
-
-\begin{itemize}
-
-\item The {\bf Hamiltonian formulation}:
-\[ \dot{{\bf x}} = \frac{\partial H}{\partial {\bf p}}, \;\;\;\;\; \dot{{\bf p}} = - \frac{\partial H}{\partial {\bf x}}. \]
-
-\item The {\bf Lagrangian formulation}:
-\[ \delta S[{\bf x}(t)] = 0, \]
-where the {\em action} on the time interval $[t_a, t_b]$ is given by
-\[ S[{\bf x}(t)] := \int_{t_a}^{t_b} \bigg[ \frac{m}{2} \, \dot{{\bf x}}(t)^2 - V({\bf x}(t)) \bigg]  \; dt. \]
-
-\item Etc.
-
+	\item Dive Into Systems: \url{https://diveintosystems.org/book/index.html}
+	\item ARM Tutorial: \url{https://diveintosystems.org/book/C9-ARM64/index.html}
+	\item ARM Simulator: \url{http://163.238.35.161/~zhangs/arm64simulator/}
+	\item Circuitverse: \url{https://circuitverse.org/simulator}
 \end{itemize}
 
 
-\section{Spring 2020}
+\section{Bigger Picture}
 
+
+
+
+\subsection{Academic Integrity}
+
+Plagiarism is a serious academic offense. Hand in your own work. Give credit appropriately when you draw from the work of others. For more information please see:
+
+\begin{itemize}
+	\item St Olaf Honor Code: \url{https://wp.stolaf.edu/honorcouncil/}
+	\item Faculty Handbook on Academic Integrity: \url{https://wp.stolaf.edu/facultyhandbook/academic-integrity-faculty-handbook-category-2}
+	\item Roadmap to Academic Integrity: \url{https://wp.stolaf.edu/roadmap-to-academic-integrity}
+\end{itemize}
+
+Work that violates this policy will typically receive no credit. In especially serious cases the penalty can be an F in the course.
+
+
+\subsection{AI Usage Policy}
+
+Please not submit AI work as your own.
+
+You may use AI tools when studying, but be careful. These tools are good with mainstream languages like Python. They're much less reliable for Assembly.
+
+\subsection{Disability Accommodation}
+
+I am committed to supporting the learning of all students in my class. If you have already
+registered with Disability and Access (DAC) and have your letter of accommodations, please
+meet with me as soon as possible to discuss, plan, and implement your accommodations in the
+course. If you have or think you have a disability (learning, sensory, physical, chronic health,
+mental health or attentional), please contact Disability and Access staff at 507-786-3288 or by visiting the DAC website: \url{https://wp.stolaf.edu/academic-support/dac}.
+
+If you have an accommodation that allows you extra time or a low distraction environment for
+quizzes and exams, please email me at least three days before each quiz or exam, so that I can
+make sure to reserve a room.
+
+\subsection{Gender Pronouns}
+
+This course affirms people of all gender expressions and gender identities. If you go by a
+different name than what is on the class roster, please let me know.
+
+Using correct gender
+pronouns is important to me. You are encouraged to share your pronouns with me and
+correct me if I make a mistake. If you have any questions or concerns, please do not hesitate
+to contact me.
+
+\subsection{Land Acknowledgement}
+
+We stand on the homelands of the Wahpekute Band of the Dakota Nation. We honor with
+gratitude the people who have stewarded the land throughout the generations and their ongoing
+contributions to this region. We acknowledge the ongoing injustices that we have committed
+against the Dakota Nation, and we wish to interrupt this legacy, beginning with acts of healing
+and honest storytelling about this place.
+
+For more information about land acknowledgement statements at St Olaf, please see \url{https://wp.stolaf.edu/education/land-acknowledgement/}{here} and \href{https://wp.stolaf.edu/equity-inclusion/land-acknowledgement/}.
+
+\subsection{Mental Health}
+
+I greatly value your experience in this class, and it is my duty to facilitate a safe, caring, and
+productive learning environment.
+
+I recognize that you may experience a range of emotional, physical, and/or psychological
+issues, both in and out of the classroom, that may distract you from your learning.
+
+If you are experiencing such issues, please do not hesitate to come see me. I am here to listen.
+We can also discuss what further resources might be available to you.
+
+\subsection{Multilingual Support}
+
+I am committed to making course content accessible to all students. If English is not your first
+language and this causes you concern about the course, please speak with me. Students who
+would like extra support with writing or speaking in English can also contact the language support specialist (\href{mailto:berryag@stolaf.edu}{berryag@stolaf.edu}) in the Academic Success Center.
+
+\subsection{Religious Accommodation}
+
+As part of my commitment to make St Olaf an inclusive community, I will provide students with
+reasonable religious accommodations. If you will be missing class for a religious observance or
+require another religious accommodation, please meet with me to discuss these.
+
+\subsection{Required Referrals}
+
+You are welcome to talk to me about circumstances outside the course that
+affect your classroom experience or acadmic performance. However, please keep
+in mind that I am required to refer cases of discrimination, harassment,
+sexual misconduct, and violence.
+
+Here are some resources where you can share privately:
+
+\begin{itemize}
+	\item Boe House Counseling Center: \url{https://wp.stolaf.edu/counseling-center/}
+	\item College Pastors and Chaplains: \url{https://wp.stolaf.edu/ministry/}
+	\item Health Services: \url{https://wp.stolaf.edu/health/}
+	\item Sexual Assault Resource Network: \url{https://pages.stolaf.edu/sarn/}
+	\item TimelyCare: \url{https://wp.stolaf.edu/timelycare/}
+\end{itemize}
+
+\subsection{Statement of Inclusivity}
+
+In keeping with St. Olaf College's mission statement, this class strives to be an inclusive
+learning community, respecting those of differing backgrounds and beliefs. As a community, we
+aim to be respectful to all citizens in this class, regardless of race, ethnicity, religion, gender or
+sexual orientation.
+
+\subsection{St Olaf Pride Statement}
+
+As an Ole, I will practice:
+\begin{itemize}
+	\item Passion for learning and pursuit of vocation
+	\item Respect for the worth and dignity of all people
+	\item Integrity at all times, in all circumstances
+	\item Dedication to a life of service, and
+	\item Engagement with my community and the world.
+\end{itemize}
 
 
 \end{document}
