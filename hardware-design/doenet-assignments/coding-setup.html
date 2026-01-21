@@ -1,0 +1,1043 @@
+<!-- Windows instructions need update -->
+<!-- Next time: don't create HD directory in this lab, so won't need to backup in next lab -->
+
+<alert>Follow these instructions carefully. Getting this set up correctly is
+    crucial for your work in this course. If you get stuck at a step, or
+    encounter something confusing, please check with Prof Fyfe or the TA (in class, office hours, or email) before
+    proceeding.</alert>
+
+<alert>Be gentle when handling the Raspberry Pi board! It is easy to damage. That's why we have a case for it.</alert>
+
+<p>The check boxes are intended to help you track your progress through this lab, and for your instructor to verify that
+    all students have successfully completed the set up. Please do not check the box unless you have successfully
+    completed that step!</p>
+
+<section>
+    <title>Laptop Setup</title>
+
+    <exercise>
+
+        <p>Install VSCode on your laptop. Download link: https://code.visualstudio.com/download</p>
+
+        <p>Once downloaded, install the Remote SSH extension</p>
+
+        <image source='doenet:cid=bafkreidcqeygjvku65ry6qfe6tow6gznkhsasgm4egml27sgu6tah56omu'
+            description='VSCode Remote SSH Extension' asfilename='vscode-remote-ssh.png' width='964'
+            mimeType='image/png' />
+        <p>To open the terminal in VSCode, use Terminal > New Terminal or drag it up from the bottom margin</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+</section>
+
+<section>
+    <title>Raspberry Pi Assembly</title>
+
+    <exercise>
+
+        <p>Confirm that you have the following components:</p>
+        <ol>
+            <li>Black hard plastic case for the Pi board</li>
+            <li>Nonslip clear nubs (may be inside the case)</li>
+            <li>Raspberry Pi 4 board in box</li>
+            <li>Heat sinks in small bag</li>
+            <li>USB-C to wall power block</li>
+            <li>USB to Ethernet "dongle" adapter</li>
+            <li>Short Ethernet cable</li>
+            <li>USB-C to USB adapter</li>
+            <li>MicroSD card in small bag</li>
+            <li>Zippered soft-sided case for the kit</li>
+        </ol>
+        <image source='doenet:cid=bafkreifvzvrgivxu6azdn3pk4gar56w5p2g367gzgrxl5hlgntnh6iyifi'
+            description='Raspberry Pi Kit Contents' asfilename='Raspberry_Pi_Kit_Contents2.jpg' width='5479'
+            mimeType='image/jpeg' />
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <p>Attach heat sinks to your Pi.</p>
+        <ul>
+            <li>Remove the Pi from its box.</li>
+            <li>Remove the heat sinks from the plastic bag.</li>
+            <li>Remove the blue sticker from each heat sink and apply to the chips as shown.</li>
+        </ul>
+        <sideBySide>
+            <image source='doenet:cid=bafkreigo4zdxhjug6gdplprczy5ar2wqnpzth3jcoxm6oba63nser6z67a'
+                description='Heat sinks next to Raspberry Pi Board' asfilename='Heat Sinks and Board.jpeg' width='4032'
+                mimeType='image/jpeg' />
+            <image source='doenet:cid=bafkreicopouqh2vkkdne6dkulntu3ylgztr4ywe6c4yyfm2vsqmosei4ge'
+                description='Heat sinks on Raspberry Pi Board' asfilename='Heat Sinks on Board.jpeg' width='4032'
+                mimeType='image/jpeg' />
+        </sideBySide>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+
+    </exercise>
+
+    <exercise>
+        <p>Insert the MicroSD card into the slot on the Pi. It will stick out a bit.</p>
+        <sideBySide>
+            <image source='doenet:cid=bafkreigvgy2d6lv6uhaiasz3dsmazzvg4xytdpqcy7ezja2sso7vto2yvy'
+                description='MicroSD Card next to Raspberry Pi Board' asfilename='MicroSD and Board.jpg' width='4032'
+                mimeType='image/jpeg' />
+            <image source='doenet:cid=bafkreihgeopug7j6y5q7565sq2u7i2hii42xsrf7qa23dlb7reelzbffga'
+                description='MicroSD Card in Raspberry Pi Board' asfilename='MicroSD in Board.jpg' width='4032'
+                mimeType='image/jpeg' />
+        </sideBySide>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <p>Attach the clear nonstick nubs to the bottom of the black plastic case.</p>
+        <image source='doenet:cid=bafkreidju7c4lfbpn42pu7ditjeimwktxsylh2gjzbxbycrga55qroqd5y'
+            description='Case with feet' asfilename='Case with feet.jpeg' width='4032' mimeType='image/jpeg' />
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <p>Press the Pi board into the black plastic case. Do not force it! If it doesn't seem to fit, confirm that
+            everything is facing the right way.</p>
+        <image source='doenet:cid=bafkreicwosgy5jzfvqmkjk3pqs5fll2lhrxslujjhage4ycjud4nv6yxa4'
+            description='Pi Board next to Case' asfilename='Pi Board next to Case.jpeg' width='4032'
+            mimeType='image/jpeg' />
+        <image source='doenet:cid=bafkreib4xbnmaf5hxjfvqb6sejwev6umxj227iomzc6jzwwcn7btevdyky'
+            description='Pi Board in Case' asfilename='Pi Board in Case.jpeg' width='4032' mimeType='image/jpeg' />
+        <p>Attach the lid to the case. Again, do not force it. The lid is not symmetrical.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <p>Connect your Pi to power. Make sure to use the provided power block.</p>
+        <ol>
+            <li>A red light should appear, indicating that power is connected to the Pi.</li>
+            <li>A green light should flash, indicating that the Pi operating system is booting.</li>
+        </ol>
+        <p>Wait until the green light flashing stops, before proceeding to the next step.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+</section>
+
+<section>
+    <title>Connect to the Pi</title>
+
+    <exercise>
+        <image source='doenet:cid=bafkreiep2ok3zvg5xb3nn2i25vc66u62msqyczcqcyagg5eutshdeodcge'
+            description='Raspberry Pi Connection Cables' asfilename='Raspberry Pi Connection Cables.jpeg' width='3603'
+            mimeType='image/jpeg' />
+        <p>Connect one end of the ethernet cord (2 in the picture above) to the Pi and the other end to your laptop. If
+            your
+            laptop does not have an ethernet port, use the USB-to-ethernet dongle (3). Depending on your laptop, you may
+            also
+            need the USB-to-USB3 dongle (4). The photo below shows the setup using both dongles.</p>
+        <image source='doenet:cid=bafkreibtqgq32nvupeq7q3vmdnfv5exkscn5mrfdcaqrungu4cetsn2g7a'
+            description='Raspberry Pi Connected to Laptop' asfilename='Raspberry Pi Connected to Laptop.jpeg'
+            width='2763' mimeType='image/jpeg' />
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+
+    <exercise>
+
+
+    </exercise>
+    <p>Verify the connection</p>
+    <p>Windows:</p>
+    <ul>
+        <li>Start > Control Panel > Network and Internet</li>
+        <li>Once your laptop connects to the Pi (this may take a minute or so), you may see a popup window about
+            selecting a network location. You can select Home Network or choose the red X at the top right of the
+            window to exit that popup.</li>
+    </ul>
+
+    <p>Mac:</p>
+    <ul>
+        <li>System Settings > Network</li>
+        <li>If using an ethernet port on your Mac, the Ethernet port should move to the top and show that it is
+            connected.</li>
+        <li>If using the kit's USB-Ethernet dongle, “USB 10/100/1000 LAN” should move near the top of the list and
+            show a green connection status. The connection may take a minute or so to complete.</li>
+        <li>Note for dongle only: If “USB 10/100/1000 LAN” doesn't appear in the list, download the driver for “SKU
+            202023” from <ref uri="http://www.cablematters.com/cs-Downloads.aspx">
+                http://www.cablematters.com/cs-Downloads.aspx</ref>
+        </li>
+    </ul>
+
+    <p>Linux:</p>
+    <p>After a moment, a two-arrow icon should show in the upper right toolbar. This indicates a wired connection to the
+        Pi.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Log into the Pi using SSH</title>
+
+    <p>Windows: </p>
+    <ul>
+        <li>Open the PuTTY application (or other SSH client)</li>
+        <li>Enter the IP address <c>172.27.0.254</c>, then login with </li>
+        <p>User: <c>pi</c>
+        </p>
+        <p>Password: <c>raspberry</c>
+        </p>
+        <li>Note: If this is your first SSH session to this Pi, a popup will appear. Click on Yes to indicate that
+            you
+            trust the Pi.</li>
+    </ul>
+
+    <p>Mac and Linux:</p>
+    <ul>
+        <li>Open the Terminal application.</li>
+        <li>Enter the command:</li>
+        <p>
+            <c>ssh pi@172.27.0.254</c>
+        </p>
+        <p>Password: <c>raspberry</c>
+        </p>
+        <li>Note: If this is your first SSH session to this Pi, respond "yes" to indicate that you trust the Pi.
+        </li>
+    </ul>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Connect a VNC Viewer on your Laptop to the VNC Virtual Desktop</title>
+
+    <p>Open VNC Viewer, and create a new connection to the virtual desktop <c>172.27.0.254</c>
+    </p>
+
+    <p>Note: On your first connection to this VNC server, click Continue to indicate you trust the Pi.</p>
+
+    <p>Linux only: Command to start VNCViewer:
+        <c>./VNC-Viewer-6.20.529-Linux-x64</c>
+    </p>
+
+
+    <p>Enter username <c>pi</c> and password <c>raspberry</c>. You should see a Raspberry Pi desktop. </p>
+
+    <p>You can click OK on the popup warning about the default password for the 'pi' user. We will soon change that
+        password.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Setting Up Your Raspberry Pi</title>
+
+    <p>To open a terminal window in VNC Viewer, click on the "Terminal" icon near the top left of the Pi VNC viewer
+        window.</p>
+
+    <p>Try the following Linux commands in your terminal window:</p>
+
+    <tabular>
+        <row>
+            <cell>
+                <c>pwd</c>
+            </cell>
+            <cell>print name of current directory (a.k.a. folder, e.g., /home/pi )</cell>
+        </row>
+        <row>
+            <cell>
+                <c>ls</c>
+            </cell>
+            <cell>show files and directory in current directory</cell>
+        </row>
+        <row>
+            <cell>
+                <c>ls -l</c>
+            </cell>
+            <cell>show more information about the items listed</cell>
+        </row>
+    </tabular>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Then carry out this command, which records your name internally in your Pi (replacing <em>username</em> with
+        your
+        St. Olaf username (e.g., lynn5)):</p>
+    <p>
+        <c>echo </c><em>username</em>
+        <c> > /etc/owner</c>
+    </p>
+
+    <p>Next, run this command:</p>
+
+    <p>
+        <c>hd-image info</c>
+    </p>
+
+    <p>This should display some information about your Raspberry Pi, including listing your St. Olaf username as the
+        owner.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Change the password for the <c>pi</c> account to your St. Olaf account's password, using the command:</p>
+
+    <p>
+        <c>passwd</c>
+    </p>
+
+    <p>This command should prompt you for the <c>pi</c> account's old password <c>raspberry</c>, then prompt you
+        twice
+        for a new password. Be sure to enter your personal St. Olaf password. It will appear as though you are not
+        typing anything, but your keystrokes are being recorded.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Creating a Personal Account on Your Raspberry Pi</title>
+
+    <p>Use the following commands to create a personal account using your St. Olaf username (e.g., jones1, not
+        jones1@stolaf.edu)</p>
+
+    <p>
+        <c>sudo useradd -m -s /bin/bash </c><em>username</em>
+    </p>
+    <p>
+        <c>sudo passwd </c><em>username</em>
+    </p>
+
+    <p>Enter your St. Olaf password for this account, too. Then enter the following command:</p>
+
+    <p>
+        <c>sudo usermod -G sudo -a </c><em>username</em>
+    </p>
+
+    <p>This usermod command enables the sudo capability for your personal account.</p>
+
+    <p>Note: Use this new personal account for all your work in this course. We will refer to this personal account
+        throughout all the labs and homework.</p>
+
+    <p>Note: If you change your St. Olaf password, you'll also have to change the passwords for both your pi account
+        and
+        your personal account on your Pi. To do this, log in (e.g., via ssh to the Pi) using the account whose
+        password
+        you want to change and enter the command: <c>passwd</c>
+    </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+
+    <p>To verify that you are in your personal account, enter the command:</p>
+    <p>
+        <c>echo &dollar;USER</c>
+    </p>
+
+    <p>The output should be your St. Olaf username (e.g., jones1 , not jones1@stolaf.edu). If you see the word <c>pi
+        </c>
+        or some other account name, switch to your personal account using the command:</p>
+    <p>
+        <c>su </c><em>username</em>
+    </p>
+    <p>where <em>username</em> is your St. Olaf username, and try the <c>echo &dollar;USER</c> command again.
+    </p>
+
+    <p>Now enter the following command, except replace <em>username</em> with your St. Olaf username (e.g., jones1 ,
+        not
+        jones1@stolaf.edu):</p>
+    <p>
+        <c>sudo hd-image change-boot-user </c><em>username</em>
+    </p>
+
+    <p>This command changes your Pi's VNC server to use your personal account instead of the <c>pi</c> account.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Shutting Down Your Raspberry Pi</title>
+
+    <p>Close VNC Viewer by clicking the red X in the upper right corner (Windows) or the red dot in the upper left
+        corner (Mac and Linux) of the VNC Viewer. <alert>The Raspberry Pi will still be running.</alert>
+    </p>
+
+    <p>To shut down the Pi operating system, in an SSH session from your laptop to the pi, enter the command:</p>
+    <p>
+        <c>sudo shutdown -h now</c>
+    </p>
+    <p>The <c>-h</c> flag halts the Pi hardware. (You could restart by using <c>-r</c> instead of <c>-h</c>.)</p>
+
+    <p>
+        <alert>Wait about 10 seconds for the Pi's operating system to shut down.</alert> After the Pi has shut down,
+        you
+        can disconnect the power supply and other cables.
+    </p>
+
+    <p>
+        <alert>Always use this method to shut down the Pi. DO NOT simply unplug the Pi from power, as doing so will
+            corrupt the MicroSD card, losing all of your work.</alert>
+    </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Starting Up Your Raspberry Pi</title>
+
+    <p>Now that you've done the initial set up for your Raspberry Pi, you can use the following steps to log into
+        your
+        Raspberry Pi every time you're going to do work for Hardware Design.</p>
+
+    <ul>
+        <li>Connect power block to Pi, then to a power outlet. Wait for the Pi to boot (~30s)</li>
+        <li>Connect Pi to your laptop, check the network connection to make sure it's connected.</li>
+        <li>Windows: Open PuTTY, use SSH to connect to IP address <c>172.27.0.254</c>
+        </li>
+        <li>Mac: Open a terminal, enter the command (replacing <em>username</em> with your username):
+            <c>ssh </c><em>username</em>
+            <c>@172.27.0.254</c>
+        </li>
+        <li>Open the VNC viewer, and connect to 172.27.0.254</li>
+        <li>Log in to your personal Raspberry Pi account with your St. Olaf username and password.</li>
+    </ul>
+
+    <p>If this doesn't work, you may need to repeat the previous step to set up your personal account.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Verifying Personal Account Setup</title>
+
+    <p>After logging in following the steps in the previous section, verify that you are in your personal account,
+        by
+        opening a terminal window on your Pi, and enter the command:</p>
+    <p>
+        <c>echo &dollar;USER</c>
+    </p>
+
+    <p>The output should be your St. Olaf username.</p>
+    <p>In the same terminal window, perform a <c>pwd</c> command.
+        This should display the name of your personal account's home directory (e.g. <c>/home/lynn</c>), not the <c>
+            pi
+        </c> account.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Now, let's test that your personal account has the sudo capability. Try the following commands:</p>
+
+    <tabular>
+        <row>
+            <cell>
+                <c>cat /etc/sudoers</c>
+            </cell>
+            <cell>This command should fail with the error message
+                <c>/etc/sudoers: Permission denied</c>
+            </cell>
+        </row>
+        <row>
+            <cell>
+                <c>sudo cat /etc/sudoers</c>
+            </cell>
+            <cell>This command should prompt for your (new) password, then succeed and print the contents of a file.
+            </cell>
+        </row>
+    </tabular>
+
+    <p>If this doesn't work, you may need to repeat a previous step to give your personal account sudo access.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+</section>
+
+
+<section>
+    <title>Launching a Remote Session in VSCode</title>
+
+    With the remote SSH extension in VSCode, you can log in once and have access to both a terminal and a text
+    editor.
+    This also gives you access to UI features such as a file explorer.
+
+    <image source='doenet:cid=bafkreidm7gmqqjrp2pyswwg6ai6s6ai5tb63ewmjv3bd2563yo426nvmwq'
+        description='Screenshot of remote SSH setup in VSCode' asfilename='remote-ssh-add-connection.png' width='397'
+        mimeType='image/png' />
+</section>
+
+
+
+
+<section>
+    <title>Setting up Passwordless SSH (Optional)</title>
+
+
+    <p>By default, you will be prompted for your password every time you use SSH. You can use <c>ssh-copy-id</c> to
+        tell
+        the Pi to remember your machine.</p>
+
+    <c>
+        ssh-copy-id username@172.27.0.254
+    </c>
+
+</section>
+
+
+<section>
+    <title>Using WiFi while connected to your Raspberry Pi</title>
+
+    <p>You may have noticed that your laptop can no longer access WiFi when you are connected to your Raspberry Pi.
+        This
+        happens because most devices default to the Ethernet connection, since it tends to be faster. Because of
+        this,
+        web traffic is sent to the Raspberry Pi, which isn't setup to forward it. The Pi then decides to just drop
+        the
+        traffic, meaning that your web data is never sent to the rest of the world. Since most laptops now use
+        mostly
+        Wi-Fi, it's a relatively good idea to make the wi-fi interface the priority.</p>
+
+    <p>Here are some possible solutions to this issue:</p>
+    <p>For macOS/OSX:</p>
+    <ol>
+        <li>Open <alert>System Settings</alert>, and go to <alert>Network</alert>;
+            You should see a list of connection interfaces/VPNs.</li>
+        <li>Click the "..." underneath the list and select "Set Service Order".</li>
+        <li>A small window should pop up. Click and Drag Wi-Fi to be above USB 10/100/1000 LAN. Click OK, and then
+            click
+            Apply.</li>
+    </ol>
+
+    <p>For Ubuntu:</p>
+    <ul>
+        <li>See this FAQ: <ref
+                uri="https://askubuntu.com/questions/263572/can-i-use-wi-fi-and-cable-ethernet-networking-at-same-time">
+                https://askubuntu.com/questions/263572/can-i-use-wi-fi-and-cable-ethernet-networking-at-same-time
+            </ref>;
+            Use the third answer down that concerns the Ubuntu Network Manager.</li>
+    </ul>
+
+    <p>For Windows:</p>
+    <ol>
+        <li>PLUG IN YOUR RASPBERRY PI;</li>
+        <li>Enter the Network and Sharing Center</li>
+        <li>Click Change Adapter Settings</li>
+        <li>Press the "Alt" Key;</li>
+        <li>Hover Over Advanced, then click Advanced Settings;</li>
+        <li>Now Click on the Wi-Fi Interface, and Use the Arrows to move its priority Above Ethernet;</li>
+    </ol>
+
+    <p>Windows Work-Around (Assuming the upper method doesn't work):</p>
+    <ol>
+        <li>PLUG IN YOUR RASPBERRY PI;</li>
+        <li>Enter the Network and Sharing Center</li>
+        <li>Click Change Adapter Settings</li>
+        <li>Click Your Wifi Adapter - click Properties</li>
+        <li>Select TCP/IPv4 - click Advanced</li>
+        <li>Uncheck Automatic Metric - put "1" Inside the box</li>
+        <li>Press Okay</li>
+        <li>Now go to your Ethernet Adapter - Properties</li>
+        <li>Select TCP/IPv4 - click Advanced</li>
+        <li>Uncheck Automatic Metric - put "2" inside the box</li>
+        <li>Press Okay</li>
+    </ol>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Hello, World! Program</title>
+
+    <p>Log in to your personal account on your Raspberry Pi, with your St. Olaf username. Create a subdirectory <c>
+            ~/HD/lab9</c> and change to that subdirectory, using the following commands:</p>
+    <p>
+        <c>mkdir ~/HD</c>
+    </p>
+    <p>
+        <c>mkdir ~/HD/lab9</c>
+    </p>
+    <p>
+        <c>cd ~/HD/lab9</c>
+    </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Now, start the emacs editor program with the command:</p>
+    <p>
+        <c>emacs hello.c</c>
+    </p>
+    <p>This prepares to create a new file <c>hello.c</c> in your personal account's current directory.</p>
+
+    <p>Enter the following six lines in the emacs window:</p>
+
+    <pre>#include &lt;stdio.h&gt;
+
+int main() {
+   printf("Hello, world!\n");
+   return 0;
+}
+</pre>
+
+
+    <p>Save the file by typing C-x C-s. For the emacs editor program, the notation C-x means to hold down the
+        control
+        key and press x; likewise for C- followed by any other character (e.g., C-s).</p>
+    <p>This sequence C-x C-s creates a new file <c>hello.c</c> for your personal account (unless that file already
+        exists), and writes the six lines as the content of that file. </p>
+    <p>Exit from emacs by typing C-x C-c.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Back in the terminal window, enter:</p>
+    <p>
+        <c>ls</c>
+    </p>
+    <p>and look for the filename <c>hello.c</c>.</p>
+
+    <p>As a further verification, print the contents of <c>hello.c</c> using the cat command:</p>
+    <p>
+        <c>cat hello.c</c>
+    </p>
+    <p>You should see the six lines you entered via emacs.</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+    <p>Also in the terminal, compile your program with the command:</p>
+    <p>
+        <c>gcc hello.c -o hello</c>
+    </p>
+    <p>This compiles (translates) your C code into a new program on your Pi, and names that program <c>hello</c>.
+    </p>
+    <p>After compiling, you can run your program with the command:</p>
+
+    <p>
+        <c>./hello</c>
+    </p>
+    <p>This runs (or executes) your new program <c>hello</c>. The output should be:</p>
+    <p>
+        <c>Hello, world!</c>
+    </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Shutting Down Your Raspberry Pi (Repeated)</title>
+
+    <p>Close VNC Viewer by clicking the red X in the upper right corner (Windows) or the red dot in the upper left
+        corner (Mac and Linux) of the VNC Viewer. <alert>The Raspberry Pi will still be running.</alert>
+    </p>
+
+    <p>To shut down the Pi operating system, in an SSH session from your laptop to the pi, enter the command:</p>
+    <p>
+        <c>sudo shutdown -h now</c>
+    </p>
+    <p>The <c>-h</c> flag halts the Pi hardware. (You could restart by using <c>-r</c> instead of <c>-h</c>.)</p>
+
+    <p>
+        <alert>Wait about 10 seconds for the Pi's operating system to shut down.</alert> After the Pi has shut down,
+        you
+        can disconnect the power supply and other cables.
+    </p>
+
+    <p>
+        <alert>Always use this method to shut down the Pi. DO NOT simply unplug the Pi from power, as doing so will
+            corrupt the MicroSD card, losing all of your work.</alert>
+    </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<!-- next time: cut reading to 1.1 and 1.2 -->
+
+<section>
+    <title>Creating your csgit repository</title>
+
+    <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
+    <ul>
+        <li>Check your email for an invitation to join your course “group.” This will be an automated email from
+            CSGit
+            but should mention that Professor Lynn gave you Maintainer access to the group.</li>
+        <li>If you cannot find that email or never received it, navigate to csgit.stolaf.edu. NOTE: to access this
+            site,
+            you need to be on the St. Olaf eduroam network or connected to the VPN. From here, make sure you are on
+            the
+            LDAP tab and then sign in with your St. Olaf username and password, NOT your St. Olaf email.</li>
+    </ul>
+
+    <image source='doenet:cid=bafkreifxnn5yaxqzzzmw3zpyzrruwfshjdnorld5fvxohgeicujzr6pnza'
+        description='Log in screen for csgit' asfilename='1_csgit_login.png' width='748' mimeType='image/png' />
+
+    <p>Once you have signed in, navigate to Groups -> HD-241 -> S25. From there, you should see a screen like this:
+    </p>
+
+    <image source='doenet:cid=bafkreiakh2lpgwr7aiaqvpsxnaay2jipjh5te7r2qs6x5za6uvyzr7x4a4'
+        description='CSGit group for Hardware Design' asfilename='2_csgit_group.png' width='1420'
+        mimeType='image/png' />
+
+    <p>Click the blue “New Project” button on the right side of the screen. Then click "Create blank project" on the
+        subsequent screen. You will arrive at a screen that looks like this:</p>
+
+    <image source='doenet:cid=bafkreifohyqyt3eoawyheuhp7sz6owmoea6txvjut4uggejrjw2rstxxru'
+        description='CSGit screen to create project' asfilename='3_create_project.png' width='1422'
+        mimeType='image/png' />
+
+    <p>On this screen, you only need to give your project a name. <alert>MAKE YOUR PROJECT NAME YOUR ST. OLAF
+            USERNAME,
+            so it would be something like smith1. DO NOT MAKE IT YOUR EMAIL ADDRESS OR NAME.</alert>
+    </p>
+
+    <p>Do not change any other settings and click "Create Project".</p>
+
+    <p>You will arrive on a screen that looks like this:</p>
+
+    <image source='doenet:cid=bafkreigxvxqmlysf5dssx7evfmnccalfl7f3kewsoblyuqwffa5webexki'
+        description='CSGit project screen' asfilename='4_csgit_project.png' width='1418' mimeType='image/png' />
+
+    <p>From here, there are a few more steps to take. On the left sidebar, go to Manage -> Members. You will arrive
+        at
+        this screen:</p>
+
+    <image source='doenet:cid=bafkreifk6tlfw72ckjtjibycp6bjixklvp4h7kzzficemofgm66wx2nx4i'
+        description='CSGit manage members screen' asfilename='5_manage_members.png' width='1424' mimeType='image/png' />
+
+    <p>Click "Invite Members" (the blue button in the top right). You will see the following screen:</p>
+
+    <image source='doenet:cid=bafkreifixn7s5iig4wh7g3sj46huclsr25jfajopytczqzpmejdy2gqqyu'
+        description='CSGit Invite members screen' asfilename='6_invite_members.png' width='1416' mimeType='image/png' />
+
+    <p>On this screen, there are a few action steps to take. <alert>PLEASE FOLLOW THESE EXACTLY, THEY ARE VERY
+            IMPORTANT
+            TO MAKE SURE YOU MAINTAIN ACCESS TO YOUR REPO AND YOUR WORK IS SUBMITTED CORRECTLY.</alert>
+    </p>
+    <ol>
+        <li>Add your St. Olaf username (even though it currently says you are the owner of the repo, when your
+            professor
+            removes your access to the course group this will ensure you maintain access to your course repository).
+        </li>
+        <li>Change role to Maintainer.</li>
+        <li>DO NOT add an Access expiration date.</li>
+        <li>Click Invite.</li>
+    </ol>
+
+    <p>That's it! You now have created your course repo! </p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Cloning your csgit repository onto your Raspberry Pi</title>
+
+    <p>In the terminal on your Raspberry Pi (through VNC Viewer), enter these git configuration commands (replacing
+        <em>username</em> with your St. Olaf user name, and <em>your full name</em> with your name):
+    </p>
+
+    <pre>git config --global user.email username@stolaf.edu
+git config --global user.name "your full name"</pre>
+
+    <p>Next, enter:</p>
+
+    <pre>ssh-keygen</pre>
+
+    <p>This command will print a series of prompts. Keep pressing ENTER (return key) as it prompts for input (DO NOT
+        INPUT ANYTHING).</p>
+
+    <p>Copy the output of the following command to your laptop's clipboard by executing the following command on the
+        Pi,
+        highlighting the output, then typing CTRL + SHIFT + C</p>
+
+    <pre>cat .ssh/id_rsa.pub</pre>
+
+    <p>The output should look somewhat like this (all on one line):</p>
+    <pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1eHUPVNztOF4awQFbDXXVfJ9fL5sU/ZHxX9SBDnBhE9Zrrbfts0/wEAy46xRPj1uxyIV09566KHQDTIP24XjpiRa7EkOLL/UQTfHOwN+OMsck2/mXcW7GFjChpskykuTkUE4O9F5RnU5IrNdyRvX1/kSiZlFquR4Itg1OUDXfZQxyVx7z+jVLay4rd8Zyirfhf93yfi36SOTx/y6SDCKOrcEHTzwADMyUAo6+U2RWPWYx0GsRVfo637p+EbR+o0ztBGMU32h75mqG87qGtgeJN+rvz9RpnGjMob2PeFp/IGs7+qE+9R55d0uyZzJp6EDjtnJ5W2Br2mq8wwvXzt9Z lynn5@raspberrypi</pre>
+
+    <p>Now start a browser on your laptop, visit csgit.stolaf.edu, and login with your St. Olaf username and
+        password.
+    </p>
+
+    <p>Click on the icon (or your picture) at the top right corner of the left menu sidebar. This should drop down a
+        menu; click "Preferences", then click on the SSH Keys.</p>
+
+    <p>In this section, click on "Add new key", then paste from your laptop's CLIPBOARD to the empty box under the
+        Key
+        section. Remove the expiration date that auto-filled. Finally, click "Add key".</p>
+
+    <p>Your new key should now be listed on the SSH Keys page.</p>
+
+    <p>Note: If you already have an SSH key set up in csgit from another course, you should be able to copy it from
+        csgit to the file .ssh/id_rsa.pub on your Raspberry Pi (instead of using a new key).</p>
+
+    <p>Back to the terminal on your Raspberry Pi, navigate to your .ssh directory with the command:</p>
+
+    <pre>cd ~/.ssh</pre>
+
+    <p>Next, enter the command:</p>
+
+    <pre>nano config</pre>
+
+    <p>An interface for editing the file should show up. Enter the following lines into the file (replacing
+        <em>username</em> with your St. Olaf username):
+    </p>
+
+    <pre>Host https://csgit.stolaf.edu
+Hostname csgit.stolaf.edu
+User username
+IdentityFile /home/username/.ssh/id_rsa</pre>
+
+    <p>Type ctrl+s to save the file, followed by ctrl+x to exit.</p>
+
+    <p>Enter the following command, and you should see what you just entered into the file.</p>
+
+    <pre>cat config </pre>
+
+    <p>Before setting up the repository on your Pi, we'll backup your files so they don't get accidentally
+        overwritten.
+        Do this with:</p>
+
+    <pre>cd ~
+mv HD HD.bu
+ls</pre>
+
+    <p>This changes the name of the directory <c>HD</c> to <c>HD.bu</c>, since we will be calling your repository
+        <c>HD
+        </c>.
+    </p>
+
+    <p>Note: "bu" stands for "backup". Don't perform this step if you don't have an HD subdirectory. The final <c>ls
+        </c>
+        command should show your <c>HD.bu</c> directory if the <c>mv</c> command succeeded.</p>
+
+    <p>Continuing on your Raspberry Pi, clone your csgit repository with the command (replacing <em>username</em>
+        with
+        your St. Olaf username):</p>
+
+    <pre>git clone git@csgit.stolaf.edu:hd-241/s25/username.git HD</pre>
+
+    <p>It may say that the authenticity of csgit.stolaf.edu can't be established. Type yes to continue.</p>
+
+    <p>This command makes a new local copy of your csgit repository, i.e., the files in csgit for your submissions
+        for
+        this HD course.</p>
+
+    <p>The subdirectory <c>HD</c> should now appear if you enter the command:</p>
+
+    <pre>ls</pre>
+
+    <p>Also enter the additional configuration command:</p>
+
+    <pre>git config --global receive.denyCurrentBranch warn</pre>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Testing csgit submission from your Pi</title>
+
+    <p>We will now test your setup for submission from your Pi to csgit.</p>
+
+    <p>On a Pi terminal (using your personal account).
+        enter the command:</p>
+    <pre>cd ~/HD
+echo testing >> test.txt</pre>
+
+    <p>This creates a file called test.txt containing only the text “testing”. You can check this by entering the
+        command:</p>
+    <pre>cat test.txt</pre>
+
+    <p>Now enter the following commands, one by one.</p>
+    <pre>git add test.txt
+git commit -m "first commit"
+git pull origin main
+git push origin main</pre>
+
+    <p>The first two commands create a git package containing your file <c>test.txt</c>; that package is called a
+        git
+        commit.</p>
+    <p>The last two commands transfer that commit from your Pi's <c>HD</c> working directory to your repository on
+        csgit.stolaf.edu.</p>
+    <p>To check that your csgit submission was completed,
+        use a web browser to open csgit.stolaf.edu (supply your St. Olaf username and password if necessary), then
+        locate your <c>HD</c> repository and open it.
+        You should see the <c>test.txt</c> file, and if you click on that filename you should see the contents
+        "testing".</p>
+
+    <p>Your csgit submission system should now be set up!</p>
+
+    <p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </p>
+
+</section>
+
+<section>
+    <title>Reading for Next Class</title>
+
+    <p>Read Sections 1.1 through 1.3 from the course textbook, Dive Into Systems. Take notes as you read through
+        these
+        sections. After completing the reading, write a summary below. This summary will be graded manually.</p>
+
+    <answer>
+        <textInput name="summary" expanded />
+        <award>
+            <when>
+                <text>$summary</text> != <text></text>
+            </when>
+        </award>
+    </answer>
+
+</section>
