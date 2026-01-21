@@ -324,16 +324,6 @@
         </answer>
     </exercise>
 
-<exercise>
-<p>Create SSH keys on your Pi. This will allow you to use csgit to submit your assignments.</p>
-
-
-</exercise>
-
-
-
-
-
     <!--
 echo username > /etc/owner
 sudo hd-image change-boot-user username
@@ -478,62 +468,122 @@ sudo hd-image change-boot-user username
     <title>Create your csgit repository</title>
 
     <exercise>
-    <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
-    <ul>
-        <li>Check your email for an invitation to join your course group</li>
-        <li>Otherwise, navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and sign
-            in with your St Olaf username (not email) and password.</li>
-    </ul>
-    <p>NOTE: Connecting to csgit requires you to be on the St Olaf network. If you're off campus, connect to the VPN
-        first.
-    </p>
-    <image source='doenet:cid=bafkreifxnn5yaxqzzzmw3zpyzrruwfshjdnorld5fvxohgeicujzr6pnza'
-        description='Log in screen for csgit' asfilename='1_csgit_login.png' width='748' mimeType='image/png' />
-    <p>Once you have signed in, navigate to Groups > HD-241 > S26. From there, you should see a screen like this:
-    </p>
-    <image source='doenet:cid=bafkreiakh2lpgwr7aiaqvpsxnaay2jipjh5te7r2qs6x5za6uvyzr7x4a4'
-        description='CSGit group for Hardware Design' asfilename='2_csgit_group.png' width='1420'
-        mimeType='image/png' />
-    <p>Click the blue "New Project" button on the right side of the screen. Then click "Create blank project" on the
-        subsequent screen. You will arrive at a screen that looks like this:</p>
-    <image source='doenet:cid=bafkreifohyqyt3eoawyheuhp7sz6owmoea6txvjut4uggejrjw2rstxxru'
-        description='CSGit screen to create project' asfilename='3_create_project.png' width='1422'
-        mimeType='image/png' />
-    <p>On this screen, you only need to give your project a name. Make your project name your St Olaf username, eg <c>
-            fyfe1</c>. <alert>DO NOT</alert> use your full name, email address, etc. Do not change any other settings.
-        Click "Create Project". You should then see a screen that looks like this:
-    </p>
-    <image source='doenet:cid=bafkreigxvxqmlysf5dssx7evfmnccalfl7f3kewsoblyuqwffa5webexki'
-        description='CSGit project screen' asfilename='4_csgit_project.png' width='1418' mimeType='image/png' />
-    <p>On the left sidebar, go to Manage > Members > Invite Members:</p>
-    <image source='doenet:cid=bafkreifixn7s5iig4wh7g3sj46huclsr25jfajopytczqzpmejdy2gqqyu'
-        description='CSGit Invite members screen' asfilename='6_invite_members.png' width='1416' mimeType='image/png' />
-    <ol>
-        <li>Add your St Olaf username</li>
-        <li>Change role to Maintainer</li>
-        <li>DO NOT add an Access expiration date</li>
-        <li>Click Invite</li>
-    </ol>
-    <p>That's it! You now have created your course repo! </p>
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-        </choiceInput>
-    </answer>
-</exercise>
+        <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
+        <ul>
+            <li>Check your email for an invitation to join your course group</li>
+            <li>Otherwise, navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and
+                sign
+                in with your St Olaf username (not email) and password.</li>
+        </ul>
+        <p>NOTE: Connecting to csgit requires you to be on the St Olaf network. If you're off campus, connect to the VPN
+            first.
+        </p>
+        <image source='doenet:cid=bafkreifxnn5yaxqzzzmw3zpyzrruwfshjdnorld5fvxohgeicujzr6pnza'
+            description='Log in screen for csgit' asfilename='1_csgit_login.png' width='748' mimeType='image/png' />
+        <p>Once you have signed in, navigate to Groups > HD-241 > S26. From there, you should see a screen like this:
+        </p>
+        <image source='doenet:cid=bafkreiakh2lpgwr7aiaqvpsxnaay2jipjh5te7r2qs6x5za6uvyzr7x4a4'
+            description='CSGit group for Hardware Design' asfilename='2_csgit_group.png' width='1420'
+            mimeType='image/png' />
+        <p>Click the blue "New Project" button on the right side of the screen. Then click "Create blank project" on the
+            subsequent screen. You will arrive at a screen that looks like this:</p>
+        <image source='doenet:cid=bafkreifohyqyt3eoawyheuhp7sz6owmoea6txvjut4uggejrjw2rstxxru'
+            description='CSGit screen to create project' asfilename='3_create_project.png' width='1422'
+            mimeType='image/png' />
+        <p>On this screen, you only need to give your project a name. Make your project name your St Olaf username, eg
+            <c>
+                fyfe1</c>. <alert>DO NOT</alert> use your full name, email address, etc. Do not change any other
+            settings.
+            Click "Create Project". You should then see a screen that looks like this:
+        </p>
+        <image source='doenet:cid=bafkreigxvxqmlysf5dssx7evfmnccalfl7f3kewsoblyuqwffa5webexki'
+            description='CSGit project screen' asfilename='4_csgit_project.png' width='1418' mimeType='image/png' />
+        <p>On the left sidebar, go to Manage > Members > Invite Members:</p>
+        <image source='doenet:cid=bafkreifixn7s5iig4wh7g3sj46huclsr25jfajopytczqzpmejdy2gqqyu'
+            description='CSGit Invite members screen' asfilename='6_invite_members.png' width='1416'
+            mimeType='image/png' />
+        <ol>
+            <li>Add your St Olaf username</li>
+            <li>Change role to Maintainer</li>
+            <li>DO NOT add an Access expiration date</li>
+            <li>Click Invite</li>
+        </ol>
+        <p>That's it! You now have created your course repo! </p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
-<exercise>
-<p>Before you can connect to csgit, you need to </p>
+    <exercise>
+        <title>Configure git on your Pi</title>
+        <p>Otherwise it'll yell at you when you try to connect to csgit.</p>
+        <pre>git config --global user.email username@stolaf.edu
+            git config --global user.name "your full name"</pre>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
+    <exercise>
+        <title>Create SSH keys on your Pi</title>
+        <p>This allows you to connect to csgit securely. This is similar to what VSCode is
+            doing under the hood when it connects from your laptop to your Pi.</p>
+        <pre>ssh-keygen</pre>
+        <p>This command will print a series of prompts. Keep pressing enter/return as it prompts for input. DO NOT ENTER
+            ANYTHING.</p>
+        <p>Confirm you now have a public key: </p>
+        <pre>cat .ssh/id_rsa.pub</pre>
+        <p>The output should look something like this:</p>
+        <pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1eHUPVNztOF4awQFbDXXVfJ9fL5sU/ZHxX9SBDnBhE9Zrrbfts0/wEAy46xRPj1uxyIV09566KHQDTIP24XjpiRa7EkOLL/UQTfHOwN+OMsck2/mXcW7GFjChpskykuTkUE4O9F5RnU5IrNdyRvX1/kSiZlFquR4Itg1OUDXfZQxyVx7z+jVLay4rd8Zyirfhf93yfi36SOTx/y6SDCKOrcEHTzwADMyUAo6+U2RWPWYx0GsRVfo637p+EbR+o0ztBGMU32h75mqG87qGtgeJN+rvz9RpnGjMob2PeFp/IGs7+qE+9R55d0uyZzJp6EDjtnJ5W2Br2mq8wwvXzt9Z lynn5@raspberrypi</pre>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
+    <exercise>
+        <title>Add your SSH key to your repo</title>
+        <ul>
+            <li>Navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref> and log in if necessary</li>
+            <li>Click the icon (or yourself) in the top right corner</li>
+            <li>Preferences > SSH Keys > Add new key</li>
+            <li>Copy-paste the contents of <c>.ssh/id_rsa.pub</c> into the box. You do not need an expiration date</li>
+            <li>Save the key</li>
+        </ul>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
-</exercise>
-
-
-
-
-
-
+    <exercise>
+        <title>Clone your repo to the Pi</title>
+        <ul>
+            <li>Ensure you are connected to your Pi as your personal user</li>
+            <li>Open the file <c>~/.ssh/config</c>
+            </li>
+            <li>Enter the following, using your username in place of <em>username</em>:
+                <pre>Host https://csgit.stolaf.edu
+Hostname csgit.stolaf.edu
+User username
+IdentityFile /home/username/.ssh/id_rsa</pre>
+            </li>
+            <li>Save the file</li>
+            <li>Confirm the contents of the file: <c>cat ~/.ssh/config</c>
+            </li>
+        </ul>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
 
 
@@ -560,47 +610,15 @@ sudo hd-image change-boot-user username
 
 
 
+
+
+
+
+
+
 <section>
     <p>Cloning your csgit repository onto your Raspberry Pi</p>
 
-    <p>In the terminal on your Raspberry Pi (through VNC Viewer), enter these git configuration commands (replacing
-        <em>username</em> with your St. Olaf user name, and <em>your full name</em> with your name):
-    </p>
-
-    <pre>git config --global user.email username@stolaf.edu
-git config --global user.name "your full name"</pre>
-
-    <p>Next, enter:</p>
-
-    <pre>ssh-keygen</pre>
-
-    <p>This command will print a series of prompts. Keep pressing ENTER (return key) as it prompts for input (DO NOT
-        INPUT ANYTHING).</p>
-
-    <p>Copy the output of the following command to your laptop's clipboard by executing the following command on the
-        Pi,
-        highlighting the output, then typing CTRL + SHIFT + C</p>
-
-    <pre>cat .ssh/id_rsa.pub</pre>
-
-    <p>The output should look somewhat like this (all on one line):</p>
-    <pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1eHUPVNztOF4awQFbDXXVfJ9fL5sU/ZHxX9SBDnBhE9Zrrbfts0/wEAy46xRPj1uxyIV09566KHQDTIP24XjpiRa7EkOLL/UQTfHOwN+OMsck2/mXcW7GFjChpskykuTkUE4O9F5RnU5IrNdyRvX1/kSiZlFquR4Itg1OUDXfZQxyVx7z+jVLay4rd8Zyirfhf93yfi36SOTx/y6SDCKOrcEHTzwADMyUAo6+U2RWPWYx0GsRVfo637p+EbR+o0ztBGMU32h75mqG87qGtgeJN+rvz9RpnGjMob2PeFp/IGs7+qE+9R55d0uyZzJp6EDjtnJ5W2Br2mq8wwvXzt9Z lynn5@raspberrypi</pre>
-
-    <p>Now start a browser on your laptop, visit csgit.stolaf.edu, and login with your St. Olaf username and
-        password.
-    </p>
-
-    <p>Click on the icon (or your picture) at the top right corner of the left menu sidebar. This should drop down a
-        menu; click "Preferences", then click on the SSH Keys.</p>
-
-    <p>In this section, click on "Add new key", then paste from your laptop's CLIPBOARD to the empty box under the
-        Key
-        section. Remove the expiration date that auto-filled. Finally, click "Add key".</p>
-
-    <p>Your new key should now be listed on the SSH Keys page.</p>
-
-    <p>Note: If you already have an SSH key set up in csgit from another course, you should be able to copy it from
-        csgit to the file .ssh/id_rsa.pub on your Raspberry Pi (instead of using a new key).</p>
 
     <p>Back to the terminal on your Raspberry Pi, navigate to your .ssh directory with the command:</p>
 
