@@ -256,8 +256,11 @@
 
     <exercise>
         <title>Install remote SSH extension</title>
-        <p>Your laptop may already come with a SSH client pre-installed. If not, you may first need to install one. More info: <ref uri="https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client">https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client</ref>
-            </p>
+        <p>Your laptop may already come with a SSH client pre-installed. If not, you may first need to install one. More
+            info: <ref
+                uri="https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client">
+                https://code.visualstudio.com/docs/remote/troubleshooting#_installing-a-supported-ssh-client</ref>
+        </p>
         <image source='doenet:cid=bafkreidcqeygjvku65ry6qfe6tow6gznkhsasgm4egml27sgu6tah56omu'
             description='VSCode Remote SSH Extension' asfilename='vscode-remote-ssh.png' width='964'
             mimeType='image/png' />
@@ -358,7 +361,7 @@ sudo hd-image change-boot-user username
     -->
 
     <exercise>
-        <title>Add account to VSCode</title>
+        <title>Add host to VSCode</title>
         <p>Configure VSCode to connect to the personal account on your Pi. This will save you the trouble of entering
             your password every time you connect. VSCode also provides a nice
             UI for editing files: text editor, terminal, file view, etc.</p>
@@ -371,9 +374,12 @@ sudo hd-image change-boot-user username
                 SSH: <em>username</em>
                 <c>@172.27.0.254</c>.
             </li>
-            <li>Create an empty file on the Pi: <c>touch /tmp/foobar</c>. </li>
+            <li>Connect. You might have to wait a minute the first time while VSCode gets set up</li>
+            <li>Create a new file on the Pi: <c>code /tmp/foobar</c>
+            </li>
+            <li>Save the new file</li>
             <li>Open a new VSCode window <em>without</em> the remote connection. Open a terminal. Confirm that you can
-                see the file on the Pi: <c>ssh </c><em>username</em>@172.27.0.254 ls -l /tmp/foobar</li>
+                see the file on the Pi: <c>ssh </c><em>username</em>@172.27.0.254 'ls -l /tmp/foobar'</li>
         </ul>
         <answer>
             <choiceInput selectMultiple>
@@ -431,7 +437,7 @@ sudo hd-image change-boot-user username
         <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
         <ul>
             <li>Check your email for an invitation to join your course group</li>
-            <li>Otherwise, navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and
+            <li>Otherwise, navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and
                 sign
                 in with your St Olaf username (not email) and password.</li>
         </ul>
@@ -510,7 +516,7 @@ git config --global receive.denyCurrentBranch warn</pre>
     <exercise>
         <title>Add your SSH key to your repo</title>
         <ul>
-            <li>Navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref> and log in if necessary</li>
+            <li>Navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref> and log in if necessary</li>
             <li>Click the icon (or yourself) in the top right corner</li>
             <li>Preferences > SSH Keys > Add new key</li>
             <li>Copy-paste the contents of <c>.ssh/id_rsa.pub</c> into the box. You do not need an expiration date</li>
@@ -523,11 +529,27 @@ git config --global receive.denyCurrentBranch warn</pre>
         </answer>
     </exercise>
 
+    <!--
+    <exercise>
+        <title>Install VSCode on your Pi</title>
+        <p>This adds the <c>code</c> command to your Pi. We'll use it in a moment</p>
+        <pre>sudo apt install code</pre>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    -->
+
+
+
+
     <exercise>
         <title>Clone your repo to the Pi</title>
         <ul>
             <li>Ensure you are connected to your Pi as your personal user</li>
-            <li>Open the file <c>~/.ssh/config</c>
+            <li>Open the file: <c>code ~/.ssh/config</c>
             </li>
             <li>Enter the following, using your username in place of <em>username</em>:
                 <pre>Host https://csgit.stolaf.edu
@@ -662,7 +684,7 @@ int main() {
             </li>
             <li>Push your committed code to the cloud: <c>git push</c>
             </li>
-            <li>Navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref> and confirm that your work shows up.</li>
+            <li>Navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref> and confirm that your work shows up.</li>
         </ul>
         <p>NOTE: Git allows multiple people to work on the same repo at the same time. Different people work on
             different branches to avoid stepping on each others' toes. We don't worry about that in this class since
@@ -673,37 +695,5 @@ int main() {
             </choiceInput>
         </answer>
     </exercise>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </section>
