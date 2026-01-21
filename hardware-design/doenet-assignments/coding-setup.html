@@ -13,31 +13,10 @@
     completed that step!</p>
 
 <section>
-    <title>Laptop Setup</title>
-
-    <exercise>
-
-        <p>Install VSCode on your laptop. Download link: https://code.visualstudio.com/download</p>
-
-        <p>Once downloaded, install the Remote SSH extension</p>
-
-        <image source='doenet:cid=bafkreidcqeygjvku65ry6qfe6tow6gznkhsasgm4egml27sgu6tah56omu'
-            description='VSCode Remote SSH Extension' asfilename='vscode-remote-ssh.png' width='964'
-            mimeType='image/png' />
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
-            </choiceInput>
-        </answer>
-    </exercise>
-
-</section>
-
-<section>
     <title>Raspberry Pi Assembly</title>
 
     <exercise>
-
+        <title>Confirm Kit Contents</title>
         <p>Confirm that you have the following components:</p>
         <ol>
             <li>Black hard plastic case for the Pi board</li>
@@ -62,7 +41,7 @@
     </exercise>
 
     <exercise>
-        <p>Attach heat sinks to your Pi.</p>
+        <title>Attach heat sinks to your Pi</title>
         <ul>
             <li>Remove the Pi from its box</li>
             <li>Remove the heat sinks from the plastic bag</li>
@@ -85,6 +64,7 @@
     </exercise>
 
     <exercise>
+        <title>Insert the SD card</title>
         <p>Insert the MicroSD card into the slot on the Pi. It will stick out a bit.</p>
         <sideBySide>
             <image source='doenet:cid=bafkreigvgy2d6lv6uhaiasz3dsmazzvg4xytdpqcy7ezja2sso7vto2yvy'
@@ -102,6 +82,7 @@
     </exercise>
 
     <exercise>
+        <title>Attach nonstick nubs</title>
         <p>Attach the clear nonstick nubs to the bottom of the black plastic case.</p>
         <image source='doenet:cid=bafkreidju7c4lfbpn42pu7ditjeimwktxsylh2gjzbxbycrga55qroqd5y'
             description='Case with feet' asfilename='Case with feet.jpeg' width='4032' mimeType='image/jpeg' />
@@ -113,6 +94,7 @@
     </exercise>
 
     <exercise>
+        <title>Put the Pi into its case</title>
         <p>Press the Pi board into the black plastic case. Do not force it! If it doesn't seem to fit, confirm that
             everything is facing the right way.</p>
         <image source='doenet:cid=bafkreicwosgy5jzfvqmkjk3pqs5fll2lhrxslujjhage4ycjud4nv6yxa4'
@@ -129,6 +111,7 @@
     </exercise>
 
     <exercise>
+        <title>Plug it in</title>
         <p>Connect your Pi to power. Make sure to use the provided power block.</p>
         <ol>
             <li>A red light should appear, indicating that power is connected to the Pi</li>
@@ -141,12 +124,9 @@
             </choiceInput>
         </answer>
     </exercise>
-</section>
-
-<section>
-    <title>Connect to the Pi</title>
 
     <exercise>
+        <title>Connect Ethernet Cord</title>
         <image source='doenet:cid=bafkreiep2ok3zvg5xb3nn2i25vc66u62msqyczcqcyagg5eutshdeodcge'
             description='Raspberry Pi Connection Cables' asfilename='Raspberry Pi Connection Cables.jpeg' width='3603'
             mimeType='image/jpeg' />
@@ -165,8 +145,27 @@
         </answer>
     </exercise>
 
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section>
+    <title>Laptop Setup</title>
+
     <exercise>
-        <p>Verify the connection</p>
+        <title>Verify the connection</title>
         <p>Windows:</p>
         <ul>
             <li>Start > Control Panel > Network and Internet</li>
@@ -197,7 +196,7 @@
     </exercise>
 
     <exercise>
-        <p>Fix your wifi!</p>
+        <title>Fix your wifi!</title>
         <p>You may have noticed that your laptop can no longer access WiFi when you are connected to your Raspberry Pi.
             This happens because most devices default to the ethernet connection if present. We want to default to Wifi
             instead. </p>
@@ -243,6 +242,22 @@
         </answer>
     </exercise>
 
+    <exercise>
+        <title>Install VSCode</title>
+        <p>Install VSCode on your laptop: <ref uri="https://code.visualstudio.com/download">
+                https://code.visualstudio.com/download</ref>
+        </p>
+        <p>Once downloaded, install the Remote SSH extension</p>
+        <image source='doenet:cid=bafkreidcqeygjvku65ry6qfe6tow6gznkhsasgm4egml27sgu6tah56omu'
+            description='VSCode Remote SSH Extension' asfilename='vscode-remote-ssh.png' width='964'
+            mimeType='image/png' />
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous step.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
     <!--
 <exercise>
 <p>Enable SSH access to the Pi.</p>
@@ -254,7 +269,7 @@
 -->
 
     <exercise>
-        <p>Confirm SSH access to your Pi.</p>
+        <title>Confirm SSH access</title>
         <p>Open VSCode. Open a terminal using Terminal > New Terminal (or drag it up from the bottom margin). Enter:</p>
         <c>ssh pi@172.27.0.254</c>
         <p>The default password is <c>raspberry</c>.</p>
@@ -275,7 +290,7 @@
     <title>Configure the Pi</title>
 
     <exercise>
-        <p>Update the password for the Pi root account.</p>
+        <title>Update the password for the Pi root account</title>
         <p>The <c>pi</c> user has permission to access any data and change any setting. We don't want to leave it
             sitting around with the default password.</p>
         <ul>
@@ -292,7 +307,8 @@
     </exercise>
 
     <exercise>
-        <p>Create a personal account on the Pi. The default <c>pi</c> user is for maintenance. Let's create a new user
+        <title>Create a personal account on the Pi</title>
+        <p>The default <c>pi</c> user is for maintenance. Let's create a new user
             for our coding exercises.</p>
         <ul>
             <li>Ensure you are connected to your Pi via SSH</li>
@@ -330,6 +346,7 @@ sudo hd-image change-boot-user username
     -->
 
     <exercise>
+        <title>Add account to VSCode</title>
         <p>Configure VSCode to connect to the personal account on your Pi. This will save you the trouble of entering
             your password every time you connect. VSCode also provides a nice
             UI for editing files: text editor, terminal, file view, etc.</p>
@@ -358,7 +375,7 @@ sudo hd-image change-boot-user username
     <title>Power Cycling the Pi</title>
 
     <exercise>
-        <p>Shut down the Pi. </p>
+        <title>Shut down the Pi. </title>
         <ul>
             <li>Ensure you are in a terminal connected to the Pi</li>
             <li>Run: <c>sudo shutdown -h now</c>
@@ -377,7 +394,7 @@ sudo hd-image change-boot-user username
     </exercise>
 
     <exercise>
-        <p>To turn on your Pi:</p>
+        <title>Power up the Pi</title>
         <ul>
             <li>Connect the power cord to your Pi</li>
             <li>Connect the Pi to your laptop via ethernet (if not already connected)</li>
@@ -392,80 +409,11 @@ sudo hd-image change-boot-user username
             </choiceInput>
         </answer>
     </exercise>
-
 </section>
 
 
 <section>
-    <title>Writing Code (Finally!)</title>
-
-    <ul>
-        <li>Ensure you are connected to your Pi</li>
-        <li>Confirm you are logged in as your personal user: <c>whoami</c>
-        </li>
-        <li>Create a directory for this class: <c>mkdir ~/hardware-design</c>
-        </li>
-        <li>Create a directory for this exercise: <c>mkdir ~/hardware-design/coding-setup</c>
-        </li>
-        <li>Navigate to that directory: <c>cd ~/hardware-design/coding-setup</c>
-        </li>
-        <li>Confirm you are in the expected directory: <c>pwd</c>
-        </li>
-    </ul>
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-        </choiceInput>
-    </answer>
-    <p>Create a new file <c>hello.c</c> in this directory. You may use the UI or <c>touch hello.c</c>
-    </p>
-    <p>Open the file. Copy-paste the following into it:</p>
-    <pre>#include &lt;stdio.h&gt;
-
-    int main() {
-       printf("Hello, world!\n");
-       return 0;
-    }
-    </pre>
-    <p>Save the file.</p>
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-        </choiceInput>
-    </answer>
-    <p>Back in the terminal.</p>
-    <ul>
-        <li>Confirm that you are in the correct directory: <c>pwd</c>
-        </li>
-        <li>Confirm that your new file exists: <c>ls</c>
-        </li>
-        <li>Confirm that your file contains the expected code: <c>cat hello.c</c>
-        </li>
-    </ul>
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-        </choiceInput>
-    </answer>
-    <p>Still in the terminal.</p>
-    <ul>
-        <li>Compile your C code into an executable: <c>gcc hello.c</c>
-        </li>
-        <li>Run your program: <c>./a.out</c>
-        </li>
-        <li>Confirm the output is as expected: <c>Hello, world!</c>
-        </li>
-    </ul>
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-        </choiceInput>
-    </answer>
-</section>
-
-
-<section>
-    <title>Create your csgit repository</title>
+    <title>Setting up your csgit repo</title>
 
     <exercise>
         <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
@@ -520,7 +468,8 @@ sudo hd-image change-boot-user username
         <title>Configure git on your Pi</title>
         <p>Otherwise it'll yell at you when you try to connect to csgit.</p>
         <pre>git config --global user.email username@stolaf.edu
-            git config --global user.name "your full name"</pre>
+git config --global user.name "your full name"
+git config --global receive.denyCurrentBranch warn</pre>
         <answer>
             <choiceInput selectMultiple>
                 <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
@@ -585,168 +534,165 @@ IdentityFile /home/username/.ssh/id_rsa</pre>
         </answer>
     </exercise>
 
+    <exercise>
+        <title>Clone the repo</title>
 
+        <ul>
+            <li>Ensure you are connected to your Pi as your personal user: <c>whoami</c>
+            </li>
+            <li>Navigate to your home directory:
+                <pre> cd ~</pre>
+            </li>
+            <li>Create a new empty directory:
+                <pre>mkdir HD</pre>
+            </li>
+            <li>Confirm the directory exists: <c>ls -l .</c>
+            </li>
+            <li>Clone your csgit repo into the new directory:
+                <pre>git clone git@csgit.stolaf.edu:hd-241/s26/username.git HD</pre>
+            </li>
+            <li>You may see a warning about authenticity. Say yes.</li>
+            <li>Confirm the clone worked: <c>ls -al HD/.git</c>. There is no code in the directory yet, so we are
+                checking to make sure the git config exists.</li>
+        </ul>
 
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section>
-    <p>Cloning your csgit repository onto your Raspberry Pi</p>
-
-
-    <p>Back to the terminal on your Raspberry Pi, navigate to your .ssh directory with the command:</p>
-
-    <pre>cd ~/.ssh</pre>
-
-    <p>Next, enter the command:</p>
-
-    <pre>nano config</pre>
-
-    <p>An interface for editing the file should show up. Enter the following lines into the file (replacing
-        <em>username</em> with your St. Olaf username):
-    </p>
-
-    <pre>Host https://csgit.stolaf.edu
-Hostname csgit.stolaf.edu
-User username
-IdentityFile /home/username/.ssh/id_rsa</pre>
-
-    <p>Type ctrl+s to save the file, followed by ctrl+x to exit.</p>
-
-    <p>Enter the following command, and you should see what you just entered into the file.</p>
-
-    <pre>cat config </pre>
-
-    <p>Before setting up the repository on your Pi, we'll backup your files so they don't get accidentally
-        overwritten.
-        Do this with:</p>
-
-    <pre>cd ~
-mv HD HD.bu
-ls</pre>
-
-    <p>This changes the name of the directory <c>HD</c> to <c>HD.bu</c>, since we will be calling your repository
-        <c>HD
-        </c>.
-    </p>
-
-    <p>Note: "bu" stands for "backup". Don't perform this step if you don't have an HD subdirectory. The final <c>ls
-        </c>
-        command should show your <c>HD.bu</c> directory if the <c>mv</c> command succeeded.</p>
-
-    <p>Continuing on your Raspberry Pi, clone your csgit repository with the command (replacing <em>username</em>
-        with
-        your St. Olaf username):</p>
-
-    <pre>git clone git@csgit.stolaf.edu:hd-241/s25/username.git HD</pre>
-
-    <p>It may say that the authenticity of csgit.stolaf.edu can't be established. Type yes to continue.</p>
-
-    <p>This command makes a new local copy of your csgit repository, i.e., the files in csgit for your submissions
-        for
-        this HD course.</p>
-
-    <p>The subdirectory <c>HD</c> should now appear if you enter the command:</p>
-
-    <pre>ls</pre>
-
-    <p>Also enter the additional configuration command:</p>
-
-    <pre>git config --global receive.denyCurrentBranch warn</pre>
-
-    <p>
+        <p>NOTE: This new directory on your Pi is now linked to your csgit repo in the cloud. This is how
+            you will submit coding assignments to be graded. If something happens to your Pi, this also serves as a
+            backup so you don't lose your work.</p>
         <answer>
             <choiceInput selectMultiple>
                 <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
             </choiceInput>
         </answer>
-    </p>
+    </exercise>
 
 </section>
 
+
+
 <section>
-    <title>Testing csgit submission from your Pi</title>
+    <title>Writing Code (Finally!)</title>
 
-    <p>We will now test your setup for submission from your Pi to csgit.</p>
-
-    <p>On a Pi terminal (using your personal account).
-        enter the command:</p>
-    <pre>cd ~/HD
-echo testing >> test.txt</pre>
-
-    <p>This creates a file called test.txt containing only the text "testing". You can check this by entering the
-        command:</p>
-    <pre>cat test.txt</pre>
-
-    <p>Now enter the following commands, one by one.</p>
-    <pre>git add test.txt
-git commit -m "first commit"
-git pull origin main
-git push origin main</pre>
-
-    <p>The first two commands create a git package containing your file <c>test.txt</c>; that package is called a
-        git
-        commit.</p>
-    <p>The last two commands transfer that commit from your Pi's <c>HD</c> working directory to your repository on
-        csgit.stolaf.edu.</p>
-    <p>To check that your csgit submission was completed,
-        use a web browser to open csgit.stolaf.edu (supply your St. Olaf username and password if necessary), then
-        locate your <c>HD</c> repository and open it.
-        You should see the <c>test.txt</c> file, and if you click on that filename you should see the contents
-        "testing".</p>
-
-    <p>Your csgit submission system should now be set up!</p>
-
-    <p>
+    <exercise>
+        <title>Create a Directory</title>
+        <ul>
+            <li>Ensure you are connected to your Pi as your personal user: <c>whoami</c>
+            </li>
+            <li>Navigate to your repo for this class: <c>cd ~/HD</c>
+            </li>
+            <li>Create a directory for this exercise: <c>mkdir coding-setup</c>
+            </li>
+            <li>Navigate to that directory: <c>cd coding-setup</c>
+            </li>
+            <li>Confirm you are in the expected directory: <c>pwd</c>
+            </li>
+        </ul>
         <answer>
             <choiceInput selectMultiple>
                 <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
             </choiceInput>
         </answer>
-    </p>
+    </exercise>
+    <exercise>
+        <title>Create Source Code</title>
+
+        <ul>
+            <li>Create a new file <c>hello.c</c> in this directory. You may use the UI or <c>touch hello.c</c>
+            </li>
+            <li>Open the file. Copy-paste the following into it:
+                <pre>#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}</pre>
+            </li>
+            <li>Save the file.</li>
+            <li>Back in the terminal, confirm that you are in the correct directory: <c>pwd</c>
+            </li>
+            <li>Confirm that your new file exists: <c>ls</c>
+            </li>
+            <li>Confirm that your file contains the expected code: <c>cat hello.c</c>
+            </li>
+        </ul>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <title>Compile and Run</title>
+        <p>Still in the terminal.</p>
+        <ul>
+            <li>Compile your C code into an executable: <c>gcc hello.c</c>
+            </li>
+            <li>Run your program: <c>./a.out</c>
+            </li>
+            <li>Confirm the output is as expected: <c>Hello, world!</c>
+            </li>
+        </ul>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <title>Submit Your Work</title>
+
+        <ul>
+            <li>Stage your new code for commit: <c>git add hello.c</c>
+            </li>
+            <li>Commit your code: <c>git commit -m "hello world"</c>
+            </li>
+            <li>Pull any changes from the cloud to your local repo: <c>git pull</c>
+            </li>
+            <li>Push your committed code to the cloud: <c>git push</c>
+            </li>
+            <li>Navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref> and confirm that your work shows up.</li>
+        </ul>
+        <p>NOTE: Git allows multiple people to work on the same repo at the same time. Different people work on
+            different branches to avoid stepping on each others' toes. We don't worry about that in this class since
+            each person has their own repo.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
 </section>
 
-<section>
-    <title>Reading for Next Class</title>
 
-    <p>Read Sections 1.1 through 1.3 from the course textbook, Dive Into Systems. Take notes as you read through
-        these
-        sections. After completing the reading, write a summary below. This summary will be graded manually.</p>
 
-    <answer>
-        <textInput name="summary" expanded />
-        <award>
-            <when>
-                <text>$summary</text> != <text></text>
-            </when>
-        </award>
-    </answer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </section>
+
