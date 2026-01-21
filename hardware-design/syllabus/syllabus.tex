@@ -1,5 +1,8 @@
 \documentclass{article} 
 
+\usepackage[percent]{overpic}
+
+\usepackage{graphicx}
 \usepackage{xcolor}
 \definecolor{AccentColor}{RGB}{124, 98, 177}
 \usepackage{hyperref}
@@ -31,6 +34,24 @@
 
 \subsection{Course Description}
 
+\begin{overpic}[width=\textwidth]{dune-robot-hbo}
+	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}
+	\put (70, 3) {\textcolor{white}{Dune, Frank Herbert}}
+\end{overpic}
+
+Computers sometimes feel like magic! You write code (or maybe even a sentence)
+and it figures out complex tasks. But it's not magic. It's not alive. It's just
+a few layers of physics and logic.
+
+This course is about breaking down the fundamental components and processes
+that power computers. In particular:
+\begin{itemize}
+	\item The basic components of a computer
+	\item How data is stored using ones and zeroes
+	\item Building electrical circuits to perform math and logic
+	\item Coding exercises in Assembly (a very low-level language)
+\end{itemize}
+
 
 \subsection{Course Schedule}
 
@@ -48,48 +69,50 @@ TBD. Probably an hour right after class.
 	\item 10\% Peer Reviews
 \end{itemize}
 
-Tests are graded using standards-based grading.
+\textbf{Tests.} This class has four tests, each covering two standards. All eight standards are covered again on the final. Each standard is graded as follows:
+\begin{itemize}
+	\item You have demonstrated proficiency. Full credit. Well done!
+	\item You are close! Half credit. Revise within a week for full credit
+	\item Partial proficiency. Half credit. Please try again on the final
+	\item You have not yet demonstrated proficiency. Please try again on the final
+\end{itemize}
 
-The course is broken down into eight standards. All standards are weighted equally.
+You only have to demonstrate proficiency once per standard! If you get it on the test, you get to skip that part of the final. If you demonstrate proficiency on the final, you get full credit for that standard regardless of what your score was on the test.
 
-You will have two opportunities to demonstrate proficiency on each standard: the test and the final.
+Tests are take-home. No book, no notes, no computer, no nothing. Just paper and pencil. See the calendar on Moodle for dates.
 
-If you demonstrate proficiency on the test, you get to skip that part of the final.
+\textbf{Assignments.} There is one assignment per standard. Assignments are found on Doenet. There will be a few different types of work. A single assignment will often include a mix of the following:
+\begin{itemize}
+	\item Worksheets graded automatically via Doenet
+	\item Work submitted as a PDF via Moodle. This may include pencil-and-paper work, screenshots of circuit simulations, etc
+	\item Code exercises submitted via CSGit. We will set this up in class
+\end{itemize}
 
+The prompt on Doenet should make clear how each part of the assignment is to be submitted. Please contact me if you encounter ambiguity!
 
-Assignments on Doenet. Some of them will be graded automatically. Some stuff you work out on paper, etc, and submit a PDF via Moodle.
+\textbf{Peer reviews.} At the end of the course, you will each write reviews for a few of your peers. These reviews will be short. Less than one page. You will provide \emph{specific examples} of ways your peers helped you succeed.
 
-Peer reviews. Short. Less than one page.
+Show up. Work together. Make it easy for your peers to write nice things about you. I recommend also keeping some light notes over the course of the semester. Write down whenever one of your peers is particularly helpful or insightful.
 
-You can get full credit here without too much trouble. Show up. Work together. Make it easy for your peers to say nice things about you.
+\subsection{Final Exam}
 
-I recommend keeping notes during the semester when someone is particularly helpful, insightful, etc. The strongest reviews include concrete examples.
-
-
-
-
-\subsection{Assignments}
-
-There is one assignment per standard. They are found on Doenet. Some parts of the assignment will be graded automatically by Doenet. Other parts will be submitted as a PDF via Moodle.
-
-You will have time each day to work on these assignments in class. Please take advantage of this time to work together and ask questions. 
-
-You are encouraged to work together with your peers, both in class and independently. Please ensure that the work you turn in reflects your own understanding.
+May 15th at 9am
 
 \subsection{Late Work Policy}
 
 Please try to get your work in on time. Otherwise you are likely to fall behind in the course.
 
-Late work is inconvenient for the TAs. They may be grumpy and vindictive when grading late work.
+Late work is inconvenient for the graders. They may be grumpy and vindictive when grading late work.
 
-No late work will be accepted for the last two weeks of the semester. The TAs have their own finals to worry about!
+No late work will be accepted for the last two weeks of the semester. The graders have their own finals to worry about!
 
-When submitting late work, you must notify the grader(s) by email. Otherwise they will not know to look for it.
+When submitting late work, you must notify the graders by email. Otherwise they will not know to look for it.
 
 \subsection{Important Links}
 
 \begin{itemize}
 	\item Dive Into Systems: \url{https://diveintosystems.org/book/index.html}
+	\item Doenet: \url{https://www.doenet.org/course?tool=dashboard&courseId=_GnqAk2zB64CHKPeZY9Ren}
 	\item ARM Tutorial: \url{https://diveintosystems.org/book/C9-ARM64/index.html}
 	\item ARM Simulator: \url{http://163.238.35.161/~zhangs/arm64simulator/}
 	\item Circuitverse: \url{https://circuitverse.org/simulator}
@@ -113,7 +136,7 @@ Work that violates this policy will typically receive no credit. In especially s
 
 \subsection{AI Usage Policy}
 
-You are welcome to use AI tools when studying. 
+You are welcome to use AI tools when studying.
 
 Please not submit AI work as your own.
 
