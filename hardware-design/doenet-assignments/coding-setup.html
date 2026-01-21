@@ -179,10 +179,10 @@
             <li>System Settings > Network</li>
             <li>If using an ethernet port on your Mac, the Ethernet port should move to the top and show that it is
                 connected</li>
-            <li>If using the kit's USB-Ethernet dongle, “USB 10/100/1000 LAN” should move near the top of the list and
+            <li>If using the kit's USB-Ethernet dongle, "USB 10/100/1000 LAN" should move near the top of the list and
                 show a green connection status. The connection may take a minute or so to complete</li>
-            <li>Note for dongle only: If “USB 10/100/1000 LAN” doesn't appear in the list, download the driver for “SKU
-                202023” from <ref uri="http://www.cablematters.com/cs-Downloads.aspx">
+            <li>Note for dongle only: If "USB 10/100/1000 LAN" doesn't appear in the list, download the driver for "SKU
+                202023" from <ref uri="http://www.cablematters.com/cs-Downloads.aspx">
                     http://www.cablematters.com/cs-Downloads.aspx</ref>
             </li>
         </ul>
@@ -324,6 +324,16 @@
         </answer>
     </exercise>
 
+<exercise>
+<p>Create SSH keys on your Pi. This will allow you to use csgit to submit your assignments.</p>
+
+
+</exercise>
+
+
+
+
+
     <!--
 echo username > /etc/owner
 sudo hd-image change-boot-user username
@@ -396,208 +406,162 @@ sudo hd-image change-boot-user username
 </section>
 
 
-
-
 <section>
     <title>Writing Code (Finally!)</title>
 
-    <p>Log in to your personal account on your Raspberry Pi, with your St. Olaf username. Create a subdirectory <c>
-            ~/HD/lab9</c> and change to that subdirectory, using the following commands:</p>
-    <p>
-        <c>mkdir ~/HD</c>
+    <ul>
+        <li>Ensure you are connected to your Pi</li>
+        <li>Confirm you are logged in as your personal user: <c>whoami</c>
+        </li>
+        <li>Create a directory for this class: <c>mkdir ~/hardware-design</c>
+        </li>
+        <li>Create a directory for this exercise: <c>mkdir ~/hardware-design/coding-setup</c>
+        </li>
+        <li>Navigate to that directory: <c>cd ~/hardware-design/coding-setup</c>
+        </li>
+        <li>Confirm you are in the expected directory: <c>pwd</c>
+        </li>
+    </ul>
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+        </choiceInput>
+    </answer>
+    <p>Create a new file <c>hello.c</c> in this directory. You may use the UI or <c>touch hello.c</c>
     </p>
-    <p>
-        <c>mkdir ~/HD/lab9</c>
-    </p>
-    <p>
-        <c>cd ~/HD/lab9</c>
-    </p>
-
-    <p>
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-    <p>Now, start the emacs editor program with the command:</p>
-    <p>
-        <c>emacs hello.c</c>
-    </p>
-    <p>This prepares to create a new file <c>hello.c</c> in your personal account's current directory.</p>
-
-    <p>Enter the following six lines in the emacs window:</p>
-
+    <p>Open the file. Copy-paste the following into it:</p>
     <pre>#include &lt;stdio.h&gt;
 
-int main() {
-   printf("Hello, world!\n");
-   return 0;
-}
-</pre>
-
-
-    <p>Save the file by typing C-x C-s. For the emacs editor program, the notation C-x means to hold down the
-        control
-        key and press x; likewise for C- followed by any other character (e.g., C-s).</p>
-    <p>This sequence C-x C-s creates a new file <c>hello.c</c> for your personal account (unless that file already
-        exists), and writes the six lines as the content of that file. </p>
-    <p>Exit from emacs by typing C-x C-c.</p>
-
-    <p>
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-    <p>Back in the terminal window, enter:</p>
-    <p>
-        <c>ls</c>
-    </p>
-    <p>and look for the filename <c>hello.c</c>.</p>
-
-    <p>As a further verification, print the contents of <c>hello.c</c> using the cat command:</p>
-    <p>
-        <c>cat hello.c</c>
-    </p>
-    <p>You should see the six lines you entered via emacs.</p>
-
-    <p>
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
-    <p>Also in the terminal, compile your program with the command:</p>
-    <p>
-        <c>gcc hello.c -o hello</c>
-    </p>
-    <p>This compiles (translates) your C code into a new program on your Pi, and names that program <c>hello</c>.
-    </p>
-    <p>After compiling, you can run your program with the command:</p>
-
-    <p>
-        <c>./hello</c>
-    </p>
-    <p>This runs (or executes) your new program <c>hello</c>. The output should be:</p>
-    <p>
-        <c>Hello, world!</c>
-    </p>
-
-    <p>
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-            </choiceInput>
-        </answer>
-    </p>
-
+    int main() {
+       printf("Hello, world!\n");
+       return 0;
+    }
+    </pre>
+    <p>Save the file.</p>
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+        </choiceInput>
+    </answer>
+    <p>Back in the terminal.</p>
+    <ul>
+        <li>Confirm that you are in the correct directory: <c>pwd</c>
+        </li>
+        <li>Confirm that your new file exists: <c>ls</c>
+        </li>
+        <li>Confirm that your file contains the expected code: <c>cat hello.c</c>
+        </li>
+    </ul>
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+        </choiceInput>
+    </answer>
+    <p>Still in the terminal.</p>
+    <ul>
+        <li>Compile your C code into an executable: <c>gcc hello.c</c>
+        </li>
+        <li>Run your program: <c>./a.out</c>
+        </li>
+        <li>Confirm the output is as expected: <c>Hello, world!</c>
+        </li>
+    </ul>
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+        </choiceInput>
+    </answer>
 </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- next time: cut reading to 1.1 and 1.2 -->
-
 <section>
-    <title>Creating your csgit repository</title>
+    <title>Create your csgit repository</title>
 
+    <exercise>
     <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
     <ul>
-        <li>Check your email for an invitation to join your course “group.” This will be an automated email from
-            CSGit
-            but should mention that Professor Lynn gave you Maintainer access to the group</li>
-        <li>If you cannot find that email or never received it, navigate to csgit.stolaf.edu. NOTE: to access this
-            site,
-            you need to be on the St. Olaf eduroam network or connected to the VPN. From here, make sure you are on
-            the
-            LDAP tab and then sign in with your St. Olaf username and password, NOT your St. Olaf email</li>
+        <li>Check your email for an invitation to join your course group</li>
+        <li>Otherwise, navigate to <ref uri="csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and sign
+            in with your St Olaf username (not email) and password.</li>
     </ul>
-
+    <p>NOTE: Connecting to csgit requires you to be on the St Olaf network. If you're off campus, connect to the VPN
+        first.
+    </p>
     <image source='doenet:cid=bafkreifxnn5yaxqzzzmw3zpyzrruwfshjdnorld5fvxohgeicujzr6pnza'
         description='Log in screen for csgit' asfilename='1_csgit_login.png' width='748' mimeType='image/png' />
-
-    <p>Once you have signed in, navigate to Groups -> HD-241 -> S25. From there, you should see a screen like this:
+    <p>Once you have signed in, navigate to Groups > HD-241 > S26. From there, you should see a screen like this:
     </p>
-
     <image source='doenet:cid=bafkreiakh2lpgwr7aiaqvpsxnaay2jipjh5te7r2qs6x5za6uvyzr7x4a4'
         description='CSGit group for Hardware Design' asfilename='2_csgit_group.png' width='1420'
         mimeType='image/png' />
-
-    <p>Click the blue “New Project” button on the right side of the screen. Then click "Create blank project" on the
+    <p>Click the blue "New Project" button on the right side of the screen. Then click "Create blank project" on the
         subsequent screen. You will arrive at a screen that looks like this:</p>
-
     <image source='doenet:cid=bafkreifohyqyt3eoawyheuhp7sz6owmoea6txvjut4uggejrjw2rstxxru'
         description='CSGit screen to create project' asfilename='3_create_project.png' width='1422'
         mimeType='image/png' />
-
-    <p>On this screen, you only need to give your project a name. <alert>MAKE YOUR PROJECT NAME YOUR ST. OLAF
-            USERNAME,
-            so it would be something like smith1. DO NOT MAKE IT YOUR EMAIL ADDRESS OR NAME.</alert>
+    <p>On this screen, you only need to give your project a name. Make your project name your St Olaf username, eg <c>
+            fyfe1</c>. <alert>DO NOT</alert> use your full name, email address, etc. Do not change any other settings.
+        Click "Create Project". You should then see a screen that looks like this:
     </p>
-
-    <p>Do not change any other settings and click "Create Project".</p>
-
-    <p>You will arrive on a screen that looks like this:</p>
-
     <image source='doenet:cid=bafkreigxvxqmlysf5dssx7evfmnccalfl7f3kewsoblyuqwffa5webexki'
         description='CSGit project screen' asfilename='4_csgit_project.png' width='1418' mimeType='image/png' />
-
-    <p>From here, there are a few more steps to take. On the left sidebar, go to Manage -> Members. You will arrive
-        at
-        this screen:</p>
-
-    <image source='doenet:cid=bafkreifk6tlfw72ckjtjibycp6bjixklvp4h7kzzficemofgm66wx2nx4i'
-        description='CSGit manage members screen' asfilename='5_manage_members.png' width='1424' mimeType='image/png' />
-
-    <p>Click "Invite Members" (the blue button in the top right). You will see the following screen:</p>
-
+    <p>On the left sidebar, go to Manage > Members > Invite Members:</p>
     <image source='doenet:cid=bafkreifixn7s5iig4wh7g3sj46huclsr25jfajopytczqzpmejdy2gqqyu'
         description='CSGit Invite members screen' asfilename='6_invite_members.png' width='1416' mimeType='image/png' />
-
-    <p>On this screen, there are a few action steps to take. <alert>PLEASE FOLLOW THESE EXACTLY, THEY ARE VERY
-            IMPORTANT
-            TO MAKE SURE YOU MAINTAIN ACCESS TO YOUR REPO AND YOUR WORK IS SUBMITTED CORRECTLY.</alert>
-    </p>
     <ol>
-        <li>Add your St. Olaf username (even though it currently says you are the owner of the repo, when your
-            professor
-            removes your access to the course group this will ensure you maintain access to your course repository).
-        </li>
+        <li>Add your St Olaf username</li>
         <li>Change role to Maintainer</li>
         <li>DO NOT add an Access expiration date</li>
         <li>Click Invite</li>
     </ol>
-
     <p>That's it! You now have created your course repo! </p>
+    <answer>
+        <choiceInput selectMultiple>
+            <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
+        </choiceInput>
+    </answer>
+</exercise>
 
-    <p>
-        <answer>
-            <choiceInput selectMultiple>
-                <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
-            </choiceInput>
-        </answer>
-    </p>
+<exercise>
+<p>Before you can connect to csgit, you need to </p>
+
+
+
+</exercise>
+
+
+
+
+
+
+
+
+
 
 </section>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section>
-    <title>Cloning your csgit repository onto your Raspberry Pi</title>
+    <p>Cloning your csgit repository onto your Raspberry Pi</p>
 
     <p>In the terminal on your Raspberry Pi (through VNC Viewer), enter these git configuration commands (replacing
         <em>username</em> with your St. Olaf user name, and <em>your full name</em> with your name):
@@ -718,7 +682,7 @@ ls</pre>
     <pre>cd ~/HD
 echo testing >> test.txt</pre>
 
-    <p>This creates a file called test.txt containing only the text “testing”. You can check this by entering the
+    <p>This creates a file called test.txt containing only the text "testing". You can check this by entering the
         command:</p>
     <pre>cat test.txt</pre>
 
