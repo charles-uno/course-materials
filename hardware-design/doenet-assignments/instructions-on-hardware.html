@@ -2,7 +2,9 @@
     <title>Hardware Components</title>
 
     <exercise>
-        <p>Read Sections 5.1 and 5.2 from <ref uri="https://diveintosystems.org/book/index.html">Dive Into Systems</ref>. Take notes as
+        <title>Reading</title>
+        <p>Read Sections 5.1 and 5.2 from <ref uri="https://diveintosystems.org/book/index.html">Dive Into Systems</ref>
+            . Take notes as
             you read through these sections. After completing the reading, write a summary below. This summary will be
             graded manually. Note: this
             part may be done before, after, and/or during your work on the exercises below.</p>
@@ -11,35 +13,30 @@
         </answer>
     </exercise>
 
-    <p>This section of the lab is an exploration of the Raspberry Pi hardware.</p>
-
-    <p>Open the black case to look at your Raspberry Pi. It should look similar to the picture below.</p>
-
-    <image source='doenet:cid=bafkreib4xbnmaf5hxjfvqb6sejwev6umxj227iomzc6jzwwcn7btevdyky'
-        description='Raspberry Pi board in case' asfilename='Pi Board in Case.jpeg' width='4032'
-        mimeType='image/jpeg' />
-
-    <p>Note that heat sinks have been attached to the CPU, RAM and USB controller. The CPU has millions of transistors
-        being driven at billions of operations per second, and funneling sufficient electrical power into such a small
-        package generates significant heat. The heat sinks passively dissipate this heat, keeping the CPU chip from
-        getting too hot and damaging its circuitry or losing efficiency. </p>
-
-    <p>Before the heat sinks were attached, your Raspberry Pi looked like the next image.</p>
-
-    <image source='doenet:cid=bafkreiehryglxhatidiyiszgdm7f75of4ekdurm6xsi53n4pqjsc66vdky'
-        description='Raspberry Pi Board without heat sinks' asfilename='Pi Board.jpeg' width='2916'
-        mimeType='image/jpeg' />
-
-    <p>In the diagram below, several Raspberry Pi components are labeled for you to identify. As you identify these
-        components, you are welcome to use Google to search for information on your Raspberry Pi. Searching “Raspberry
-        Pi 4 Components” should give you a good start.</p>
-
-    <image source='doenet:cid=bafkreidopiktjz63pbb6h6lhskd2kyfiqlwajv4rfka6z5vnqkm5wjezl4'
-        description='Raspberry Pi board schematic diagram with labeled components'
-        asfilename='Labeled Pi Board Diagram.png' width='960' mimeType='image/png' />
-
-    <p>What is component A?
-
+    <exercise>
+        <title>Identifying Raspberry Pi Components</title>
+        <p>Open the black case to look at your Raspberry Pi. It should look similar to the picture below.</p>
+        <image source='doenet:cid=bafkreib4xbnmaf5hxjfvqb6sejwev6umxj227iomzc6jzwwcn7btevdyky'
+            description='Raspberry Pi board in case' asfilename='Pi Board in Case.jpeg' width='4032'
+            mimeType='image/jpeg' />
+        <p>Note that heat sinks have been attached to the CPU, RAM and USB controller. The CPU has millions of
+            transistors
+            being driven at billions of operations per second, and funneling sufficient electrical power into such a
+            small
+            package generates significant heat. The heat sinks passively dissipate this heat, keeping the CPU chip from
+            getting too hot and damaging its circuitry or losing efficiency. </p>
+        <p>Before the heat sinks were attached, your Raspberry Pi looked like the next image.</p>
+        <image source='doenet:cid=bafkreiehryglxhatidiyiszgdm7f75of4ekdurm6xsi53n4pqjsc66vdky'
+            description='Raspberry Pi Board without heat sinks' asfilename='Pi Board.jpeg' width='2916'
+            mimeType='image/jpeg' />
+        <p>In the diagram below, several Raspberry Pi components are labeled for you to identify. As you identify these
+            components, you are welcome to use Google to search for information on your Raspberry Pi. Searching
+            “Raspberry
+            Pi 4 Components” should give you a good start.</p>
+        <image source='doenet:cid=bafkreidopiktjz63pbb6h6lhskd2kyfiqlwajv4rfka6z5vnqkm5wjezl4'
+            description='Raspberry Pi board schematic diagram with labeled components'
+            asfilename='Labeled Pi Board Diagram.png' width='960' mimeType='image/png' />
+        <p>What is component A?</p>
         <answer>
             <choiceInput inline>
                 <choice>Central processing unit</choice>
@@ -50,24 +47,19 @@
                 <choice>Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component A in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice>Executes program instructions</choice>
-            <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice credit="1">Can send and receive electrical signals for many different uses (e.g., custom
-                electronics)</choice>
-            <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice>Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is component B?
-
+        <p>What is the role of component A in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice>Executes program instructions</choice>
+                <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice credit="1">Can send and receive electrical signals for many different uses (e.g., custom
+                    electronics)</choice>
+                <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice>Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+        <p>What is component B?</p>
         <answer>
             <choiceInput inline>
                 <choice>Central processing unit</choice>
@@ -78,23 +70,19 @@
                 <choice credit="1">Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component B in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice>Executes program instructions</choice>
-            <choice credit="1">Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)</choice>
-            <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice>Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is component C?
-
+        <p>What is the role of component B in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice>Executes program instructions</choice>
+                <choice credit="1">Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)
+                </choice>
+                <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice>Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+        <p>What is component C?</p>
         <answer>
             <choiceInput inline>
                 <choice credit="1">Central processing unit</choice>
@@ -105,23 +93,19 @@
                 <choice>Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component C in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice credit="1">Executes program instructions</choice>
-            <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)</choice>
-            <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice>Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is component D?
-
+        <p>What is the role of component C in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice credit="1">Executes program instructions</choice>
+                <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)
+                </choice>
+                <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice>Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+        <p>What is component D?</p>
         <answer>
             <choiceInput inline>
                 <choice>Central processing unit</choice>
@@ -132,23 +116,19 @@
                 <choice>Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component D in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice>Executes program instructions</choice>
-            <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)</choice>
-            <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice>Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is component E?
-
+        <p>What is the role of component D in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice>Executes program instructions</choice>
+                <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)
+                </choice>
+                <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice>Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+        <p>What is component E?</p>
         <answer>
             <choiceInput inline>
                 <choice>Central processing unit</choice>
@@ -159,23 +139,19 @@
                 <choice>Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component E in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice>Executes program instructions</choice>
-            <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)</choice>
-            <choice credit="1">Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice>Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is component F?
-
+        <p>What is the role of component E in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice>Executes program instructions</choice>
+                <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)
+                </choice>
+                <choice credit="1">Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice>Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+        <p>What is component F?</p>
         <answer>
             <choiceInput inline>
                 <choice>Central processing unit</choice>
@@ -186,379 +162,238 @@
                 <choice>Wireless card</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>What is the role of component F in the Raspberry Pi?</p>
-
-    <answer>
-        <choiceInput>
-            <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
-            <choice>Executes program instructions</choice>
-            <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
-            <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)</choice>
-            <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
-            <choice credit="1">Providing the Raspberry Pi with power</choice>
-        </choiceInput>
-    </answer>
-
+        <p>What is the role of component F in the Raspberry Pi?</p>
+        <answer>
+            <choiceInput>
+                <choice>Temporary storage for data that can be accessed directly by the CPU</choice>
+                <choice>Executes program instructions</choice>
+                <choice>Connects the Raspberry Pi to WiFi and/or Bluetooth</choice>
+                <choice>Can send and receive electrical signals for many different uses (e.g., custom electronics)
+                </choice>
+                <choice>Connecting Raspberry Pi to another device using an ethernet cable</choice>
+                <choice credit="1">Providing the Raspberry Pi with power</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 </section>
 
 
-<setup>
-    <module name="memSlots" newNamespace>
-        <setup>
-            <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
-            <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
-            <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
-            <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
-            <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
-            <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
-        </setup>
-        <conditionalContent>
-            <case condition="not $inGraph">
-                [$items]
-            </case>
-            <case condition="$inGraph">
-                <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
-                <map>
-                    <template>
-                        <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px"
-                            positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
-                        <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
-                            draggable="false">$labels.texts[$i+1]</text>
-                    </template>
-                    <sources alias="i">
-                        <sequence from="0" to="$size-1" step="1" />
-                    </sources>
-                </map>
-                <text anchor="($anchor.x, $anchor.y-$size-.5)">
-                    <ellipsis />
-                </text>
-            </case>
-        </conditionalContent>
-    </module>
-</setup>
-
-<p>The ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref> will be helpful as
-    you work through this lab. Sections 1.1, 1.2, 1.3, 1.7, 1.8, 2.1, 2.2, 2.3, and 2.5 are relevant to this lab.</p>
 
 <section>
     <title>Executing a Program</title>
 
-    <p>What is the role of the CPU in a computer? Select all.</p>
+    <exercise>
+        <title>Von Neumann Architecture Review</title>
+        <p>What is the role of the CPU in a computer? Select all.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice>Store data and program instructions for the CPU</choice>
+                <choice>Store operating system software</choice>
+                <choice credit="1">Interpret and process instructions</choice>
+                <choice credit="1">Perform arithmetic and logic operations</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of main memory in a computer? Select all.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice credit="1">Store data and program instructions for the CPU</choice>
+                <choice credit="1">Store operating system software</choice>
+                <choice>Interpret and process instructions</choice>
+                <choice>Perform arithmetic and logic operations</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of the control unit in a computer? Select all.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice>Store data and program instructions for the CPU</choice>
+                <choice>Store operating system software</choice>
+                <choice credit="1">Interpret and process instructions</choice>
+                <choice>Perform arithmetic and logic operations</choice>
+            </choiceInput>
+        </answer>
+        <p>Where is the control unit located?</p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">The CPU</choice>
+                <choice>Main Memory</choice>
+                <choice>Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of the processing unit in a computer? Select all.</p>
+        <answer>
+            <choiceInput selectMultiple>
+                <choice>Store data and program instructions for the CPU</choice>
+                <choice>Store operating system software</choice>
+                <choice>Interpret and process instructions</choice>
+                <choice credit="1">Perform arithmetic and logic operations</choice>
+            </choiceInput>
+        </answer>
+        <p>Where is the processing unit located?</p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">The CPU</choice>
+                <choice>Main Memory</choice>
+                <choice>Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Where are the registers in a computer located?</p>
+        <answer>
+            <choiceInput>
+                <choice credit="1">The CPU</choice>
+                <choice>Main Memory</choice>
+                <choice>Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>More specifically, where are the general purpose registers in a computer located?</p>
+        <answer>
+            <choiceInput>
+                <choice>The Arithmetic and Logic Unit</choice>
+                <choice>The Control Unit</choice>
+                <choice credit="1">The Processing Unit</choice>
+                <choice>The Memory Unit</choice>
+            </choiceInput>
+        </answer>
+        <p>Where are the special registers registers <c>pc</c> and <c>ir</c> in a computer located?</p>
+        <answer>
+            <choiceInput>
+                <choice>The Arithmetic and Logic Unit</choice>
+                <choice credit="1">The Control Unit</choice>
+                <choice>The Processing Unit</choice>
+                <choice>The Memory Unit</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of the ALU in the CPU?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Perform arithmetic and logic operations</choice>
+                <choice>Store program data</choice>
+                <choice>Manage Instruction execution</choice>
+                <choice>Drive circuitry to execute instructions</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of general purpose registers in the CPU?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Perform arithmetic and logic operations</choice>
+                <choice credit="1">Store program data</choice>
+                <choice>Manage Instruction execution</choice>
+                <choice>Drive circuitry to execute instructions</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the role of control circuitry in the CPU?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Perform arithmetic and logic operations</choice>
+                <choice>Store program data</choice>
+                <choice credit="1">Manage Instruction execution</choice>
+                <choice>Drive circuitry to execute instructions</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice credit="1">Interpret and process instructions</choice>
-            <choice credit="1">Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
+    <exercise>
+        <title>Executing an Instruction</title>
+        <p>What happens in the <alert>fetch</alert> stage of executing an instruction? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice credit="1">The address of the next instruction is sent on the address bus from the control unit
+                    to
+                    the memory unit.</choice>
+                <choice credit="1">The READ command is sent on the control bus from the control unit to the memory unit.
+                </choice>
+                <choice credit="1">The next instruction is sent on the data bus from the memory unit to the control
+                    unit.
+                </choice>
+                <choice credit="1">The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+                <choice>The control unit determines the operation and the location of the operands from the instruction.
+                </choice>
+                <choice>The control unit tells the processing unit what operation to perform.</choice>
+                <choice>The control unit sends the operands to the processing unit.</choice>
+                <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+                </choice>
+                <choice>The result is sent on the data bus from the control unit to memory.</choice>
+                <choice>The address to store the result is sent on the address bus from the control unit to memory.
+                </choice>
+                <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The memory unit writes the result value to memory at the given address.</choice>
+            </choiceInput>
+        </answer>
+        <p>What happens in the <alert>decode</alert> stage of executing an instruction? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice>The address of the next instruction is sent on the address bus from the control unit to the
+                    memory
+                    unit.</choice>
+                <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+                <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+                <choice credit="1">The control unit determines the operation and the location of the operands from the
+                    instruction.</choice>
+                <choice credit="1">The control unit tells the processing unit what operation to perform.</choice>
+                <choice credit="1">The control unit sends the operands to the processing unit.</choice>
+                <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+                </choice>
+                <choice>The result is sent on the data bus from the control unit to memory.</choice>
+                <choice>The address to store the result is sent on the address bus from the control unit to memory.
+                </choice>
+                <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The memory unit writes the result value to memory at the given address.</choice>
+            </choiceInput>
+        </answer>
 
-    <p>What is the role of main memory in a computer? Select all.</p>
+        <p>What happens in the <alert>execute</alert> stage of executing an instruction? Select all.</p>
 
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Store data and program instructions for the CPU</choice>
-            <choice credit="1">Store operating system software</choice>
-            <choice>Interpret and process instructions</choice>
-            <choice>Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice>The address of the next instruction is sent on the address bus from the control unit to the
+                    memory
+                    unit.</choice>
+                <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+                <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+                <choice>The control unit determines the operation and the location of the operands from the instruction.
+                </choice>
+                <choice>The control unit tells the processing unit what operation to perform.</choice>
+                <choice>The control unit sends the operands to the processing unit.</choice>
+                <choice credit="1">The arithmetic logic unit performs the instruction operation on the instruction data
+                    operands.</choice>
+                <choice>The result is sent on the data bus from the control unit to memory.</choice>
+                <choice>The address to store the result is sent on the address bus from the control unit to memory.
+                </choice>
+                <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The memory unit writes the result value to memory at the given address.</choice>
+            </choiceInput>
+        </answer>
 
-    <p>What is the role of the control unit in a computer? Select all.</p>
+        <p>What happens in the <alert>store</alert> stage of executing an instruction? Select all.</p>
 
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice credit="1">Interpret and process instructions</choice>
-            <choice>Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice>The address of the next instruction is sent on the address bus from the control unit to the
+                    memory
+                    unit.</choice>
+                <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
+                <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
+                <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
+                <choice>The control unit determines the operation and the location of the operands from the instruction.
+                </choice>
+                <choice>The control unit tells the processing unit what operation to perform.</choice>
+                <choice>The control unit sends the operands to the processing unit.</choice>
+                <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
+                </choice>
+                <choice credit="1">The result is sent on the data bus from the control unit to memory.</choice>
+                <choice credit="1">The address to store the result is sent on the address bus from the control unit to
+                    memory.</choice>
+                <choice credit="1">The WRITE command is sent on the control bus from the control unit to the memory
+                    unit.
+                </choice>
+                <choice credit="1">The memory unit writes the result value to memory at the given address.</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
-    <p>Where is the control unit located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of the processing unit in a computer? Select all.</p>
-
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice>Interpret and process instructions</choice>
-            <choice credit="1">Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where is the processing unit located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where are the registers in a computer located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-</section>
-
-
-<p>You may find it helpful to review sections 5.1 and 5.2 of the textbook <ref
-        uri="https://diveintosystems.org/book/">Dive into Systems</ref> while working through this lab. This lab also
-    covers the contents from sections 5.5 and 5.6.</p>
-
-<section>
-    <title>Von Neumann Architecture Review</title>
-
-    <p>What is the role of the CPU in a computer? Select all.</p>
-
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice credit="1">Interpret and process instructions</choice>
-            <choice credit="1">Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of main memory in a computer? Select all.</p>
-
-    <answer>
-        <choiceInput selectMultiple>
-            <choice credit="1">Store data and program instructions for the CPU</choice>
-            <choice credit="1">Store operating system software</choice>
-            <choice>Interpret and process instructions</choice>
-            <choice>Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of the control unit in a computer? Select all.</p>
-
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice credit="1">Interpret and process instructions</choice>
-            <choice>Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where is the control unit located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of the processing unit in a computer? Select all.</p>
-
-    <answer>
-        <choiceInput selectMultiple>
-            <choice>Store data and program instructions for the CPU</choice>
-            <choice>Store operating system software</choice>
-            <choice>Interpret and process instructions</choice>
-            <choice credit="1">Perform arithmetic and logic operations</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where is the processing unit located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where are the registers in a computer located?</p>
-
-    <answer>
-        <choiceInput>
-            <choice credit="1">The CPU</choice>
-            <choice>Main Memory</choice>
-            <choice>Secondary Storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>More specifically, where are the general purpose registers in a computer located?</p>
-    <answer>
-        <choiceInput>
-            <choice>The Arithmetic and Logic Unit</choice>
-            <choice>The Control Unit</choice>
-            <choice credit="1">The Processing Unit</choice>
-            <choice>The Memory Unit</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Where are the special registers registers <c>pc</c> and <c>ir</c> in a computer located?</p>
-    <answer>
-        <choiceInput>
-            <choice>The Arithmetic and Logic Unit</choice>
-            <choice credit="1">The Control Unit</choice>
-            <choice>The Processing Unit</choice>
-            <choice>The Memory Unit</choice>
-        </choiceInput>
-    </answer>
-
-</section>
-
-<section>
-    <title>von Neumann Architecture: Executing an Instruction</title>
-
-    <p>What happens in the <alert>fetch</alert> stage of executing an instruction? Select all.</p>
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice credit="1">The address of the next instruction is sent on the address bus from the control unit to
-                the memory unit.</choice>
-            <choice credit="1">The READ command is sent on the control bus from the control unit to the memory unit.
-            </choice>
-            <choice credit="1">The next instruction is sent on the data bus from the memory unit to the control unit.
-            </choice>
-            <choice credit="1">The address in <c>pc</c> is incremented to point to the next instruction.</choice>
-            <choice>The control unit determines the operation and the location of the operands from the instruction.
-            </choice>
-            <choice>The control unit tells the processing unit what operation to perform.</choice>
-            <choice>The control unit sends the operands to the processing unit.</choice>
-            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
-            </choice>
-            <choice>The result is sent on the data bus from the control unit to memory.</choice>
-            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
-            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The memory unit writes the result value to memory at the given address.</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What happens in the <alert>decode</alert> stage of executing an instruction? Select all.</p>
-
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
-                unit.</choice>
-            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
-            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
-            <choice credit="1">The control unit determines the operation and the location of the operands from the
-                instruction.</choice>
-            <choice credit="1">The control unit tells the processing unit what operation to perform.</choice>
-            <choice credit="1">The control unit sends the operands to the processing unit.</choice>
-            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
-            </choice>
-            <choice>The result is sent on the data bus from the control unit to memory.</choice>
-            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
-            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The memory unit writes the result value to memory at the given address.</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What happens in the <alert>execute</alert> stage of executing an instruction? Select all.</p>
-
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
-                unit.</choice>
-            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
-            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
-            <choice>The control unit determines the operation and the location of the operands from the instruction.
-            </choice>
-            <choice>The control unit tells the processing unit what operation to perform.</choice>
-            <choice>The control unit sends the operands to the processing unit.</choice>
-            <choice credit="1">The arithmetic logic unit performs the instruction operation on the instruction data
-                operands.</choice>
-            <choice>The result is sent on the data bus from the control unit to memory.</choice>
-            <choice>The address to store the result is sent on the address bus from the control unit to memory.</choice>
-            <choice>The WRITE command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The memory unit writes the result value to memory at the given address.</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What happens in the <alert>store</alert> stage of executing an instruction? Select all.</p>
-
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice>The address of the next instruction is sent on the address bus from the control unit to the memory
-                unit.</choice>
-            <choice>The READ command is sent on the control bus from the control unit to the memory unit.</choice>
-            <choice>The next instruction is sent on the data bus from the memory unit to the control unit.</choice>
-            <choice>The address in <c>pc</c> is incremented to point to the next instruction.</choice>
-            <choice>The control unit determines the operation and the location of the operands from the instruction.
-            </choice>
-            <choice>The control unit tells the processing unit what operation to perform.</choice>
-            <choice>The control unit sends the operands to the processing unit.</choice>
-            <choice>The arithmetic logic unit performs the instruction operation on the instruction data operands.
-            </choice>
-            <choice credit="1">The result is sent on the data bus from the control unit to memory.</choice>
-            <choice credit="1">The address to store the result is sent on the address bus from the control unit to
-                memory.</choice>
-            <choice credit="1">The WRITE command is sent on the control bus from the control unit to the memory unit.
-            </choice>
-            <choice credit="1">The memory unit writes the result value to memory at the given address.</choice>
-        </choiceInput>
-    </answer>
-
-</section>
-
-<section>
-    <title>The CPU</title>
-
-    <p>What is the role of the ALU in the CPU?</p>
-
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">Perform arithmetic and logic operations</choice>
-            <choice>Store program data</choice>
-            <choice>Manage Instruction execution</choice>
-            <choice>Drive circuitry to execute instructions</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of general purpose registers in the CPU?</p>
-
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>Perform arithmetic and logic operations</choice>
-            <choice credit="1">Store program data</choice>
-            <choice>Manage Instruction execution</choice>
-            <choice>Drive circuitry to execute instructions</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is the role of control circuitry in the CPU?</p>
-
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>Perform arithmetic and logic operations</choice>
-            <choice>Store program data</choice>
-            <choice credit="1">Manage Instruction execution</choice>
-            <choice>Drive circuitry to execute instructions</choice>
-        </choiceInput>
-    </answer>
-
+    <title>Clock-Driven Execution</title>
     <p>What is the role of the clock in the CPU?</p>
-
     <answer>
         <choiceInput shuffleOrder>
             <choice>Perform arithmetic and logic operations</choice>
@@ -567,14 +402,7 @@
             <choice credit="1">Drive circuitry to execute instructions</choice>
         </choiceInput>
     </answer>
-
-</section>
-
-<section>
-    <title>The CPU Clock</title>
-
     <p>What is the relationship between the clock cycle time and the clock rate?</p>
-
     <answer>
         <choiceInput shuffleOrder>
             <choice credit="1">
@@ -591,9 +419,7 @@
             </choice>
         </choiceInput>
     </answer>
-
     <p>If the clock speed is 2 GHz, how many clock ticks occur per second?</p>
-
     <answer>
         <choiceInput shuffleOrder>
             <choice credit="1">2,000,000,000</choice>
@@ -602,9 +428,7 @@
             <choice>2,000,000</choice>
         </choiceInput>
     </answer>
-
     <p>If the clock cycle time is 2 nanoseconds, what is the clock rate?</p>
-
     <answer>
         <choiceInput shuffleOrder>
             <choice>2,000,000,000</choice>
@@ -613,10 +437,8 @@
             <choice>1,000,000</choice>
         </choiceInput>
     </answer>
-
     <p>Assuming a four-stage instruction and a 2 nanosecond clock cycle time, how long does it take for an instruction
         to complete?</p>
-
     <answer>
         <choiceInput shuffleOrder>
             <choice>2 nanoseconds</choice>
@@ -625,7 +447,6 @@
             <choice>4 nanoseconds</choice>
         </choiceInput>
     </answer>
-
 </section>
 
 <section>
@@ -641,10 +462,10 @@
 
     <answer>
         <choiceInput shuffleOrder>
-            <choice credit="1">armv7l</choice>
+            <choice>armv7l</choice>
             <choice>x86_64</choice>
-            <choice>arm64</choice>
             <choice>amd64</choice>
+            <choice  credit="1">aarch64</choice>
         </choiceInput>
     </answer>
 
@@ -862,6 +683,281 @@
             <choice credit="1">pipeline stall</choice>
             <choice credit="1">branch prediction</choice>
             <choice credit="1">eager execution</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+
+
+
+<setup>
+
+    <module name="memSlots" newNamespace>
+        <setup>
+            <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
+            <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
+            <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
+            <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
+            <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
+        </setup>
+        <conditionalContent>
+            <case condition="not $inGraph">
+                [$items]
+            </case>
+            <case condition="$inGraph">
+                <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
+                <map>
+                    <template>
+                        <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px"
+                            positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
+                        <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
+                            draggable="false">$labels.texts[$i+1]</text>
+                    </template>
+                    <sources alias="i">
+                        <sequence from="0" to="$size-1" step="1" />
+                    </sources>
+                </map>
+                <text anchor="($anchor.x, $anchor.y-$size-.5)">
+                    <ellipsis />
+                </text>
+            </case>
+        </conditionalContent>
+    </module>
+</setup>
+
+<section>
+    <title>Textbook Reading</title>
+
+    <p>Read Sections 11.3 and 11.4 of the textbook <ref uri="https://diveintosystems.org">Dive Into Systems</ref>,
+        before continuing to the next section. I strongly recommend that you take notes, though you are not required to
+        submit them.</p>
+
+</section>
+
+<section>
+    <title>Locality</title>
+
+    <p>How does locality improve a system's performance?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">Move data that a program is using into storage closer to the CPU (in the memory
+                hierarchy)</choice>
+            <choice>Organize similar types of data to be close to each other</choice>
+            <choice>Move all program data into CPU registers for fast computation</choice>
+            <choice>Use addresses in main memory that are closest to the CPU</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is meant by temporal locality?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">Programs tend to access the same data repeatedly</choice>
+            <choice>Programs tend to access data near other accessed data</choice>
+            <choice>Programs tend to iterate through all data in a storage device</choice>
+            <choice>Programs tend to access data closest to the CPU</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is meant by spacial locality?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>Programs tend to access the same data repeatedly</choice>
+            <choice credit="1">Programs tend to access data near other accessed data</choice>
+            <choice>Programs tend to iterate through all data in a storage device</choice>
+            <choice>Programs tend to access data closest to the CPU</choice>
+        </choiceInput>
+    </answer>
+
+    <p>The textbook gives two example C functions for iterating through a matrix. Here, we've modified them to print
+        each entry of the matrix instead of averaging them.</p>
+
+    <pre>void printMat_v1(int **mat, int n) {
+        int i, j, total = 0;
+    
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                // Note indexing: [i][j]
+                printf("%d ", mat[i][j]);
+            }
+        }
+    
+        return;
+    }</pre>
+
+    <pre>void printMat_v2(int **mat, int n) {
+        int i, j, total = 0;
+    
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                // Note indexing: [j][i]
+                printf("%d ", mat[j][i]);
+            }
+        }
+    
+        return;
+    }</pre>
+
+    <p>Consider the following matrix:</p>
+    <matrix>
+        <row>1 2 3</row>
+        <row>4 5 6</row>
+        <row>7 8 9</row>
+    </matrix>
+    <p>In what order are the matrix entries printed by <c>printMat_v1</c>? List them in order, separated by commas.
+        <mathInput name="entries1"></mathInput>
+        <answer>
+            <award>
+                <when>
+                    <mathList>$entries1</mathList> = <mathList>1,2,3,4,5,6,7,8,9</mathList>
+                </when>
+            </award>
+        </answer>
+    </p>
+
+    <p>In what order are the matrix entries printed by <c>printMat_v2</c>? List them in order, separated by commas.
+        <mathInput name="entries2"></mathInput>
+        <answer>
+            <award>
+                <when>
+                    <mathList>$entries2</mathList> = <mathList>1,4,7,2,5,8,3,6,9</mathList>
+                </when>
+            </award>
+        </answer>
+    </p>
+
+    <p>The matrix above with three rows and three columns would be stored in consecutive memory with the first row,
+        followed by the second row, followed by the third row, as below.</p>
+
+    <p>In memory:</p>
+    <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1"
+        size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+        <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="1 2 3 4 5 6 7 8 9"
+            labels="001c 0020 0024 0028 002c 0030 0034 0038 003c" inGraph="true" anchor="(3,9.2)" />
+        <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed />
+    </graph>
+
+    <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v1</c>? List the
+        addresses in order, separated by commas. <textInput name="addresses1"></textInput>
+        <answer>
+            <award>
+                <when>
+                    <textList>$addresses1</textList> = <textList>001c,0020,0024,0028,002c,0030,0034,0038,003c</textList>
+                </when>
+            </award>
+        </answer>
+    </p>
+
+    <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v2</c>? List the
+        addresses in order, separated by commas. <textInput name="addresses2"></textInput>
+        <answer>
+            <award>
+                <when>
+                    <textList>$addresses2</textList> = <textList>001c,0028,0034,0020,002c,0038,0024,0030,003c</textList>
+                </when>
+            </award>
+        </answer>
+    </p>
+
+    <p>This demonstrates why the function <c>printMat_v1</c> will execute more quickly than <c>printMat_v2</c>; <c>
+            printMat_v1</c> accesses consecutive memory locations, while <c>printMat_v2</c> skips around between memory
+        locations. How is this difference best described?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">A difference in spatial locality</choice>
+            <choice>A difference in temporal locality</choice>
+        </choiceInput>
+    </answer>
+
+</section>
+
+<section>
+    <title>Caching</title>
+
+    <p>Where is a cache located?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">In the CPU</choice>
+            <choice>In the ALU</choice>
+            <choice>In main memory</choice>
+            <choice>In secondary storage</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Which of the following are true about accessing data in a cache? Select all.</p>
+    <answer>
+        <choiceInput shuffleOrder selectMultiple>
+            <choice credit="1">Accessing data in a cache is faster than accessing data in main memory</choice>
+            <choice>Accessing data in a cache is slower than accessing data in main memory</choice>
+            <choice credit="1">Accessing data in a cache is faster than accessing data in secondary storage</choice>
+            <choice>Accessing data in a cache is slower than accessing data in secondary storage</choice>
+            <choice>Accessing data in a cache is faster than accessing data in a register</choice>
+            <choice credit="1">Accessing data in a cache is slower than accessing data in a register</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is a cache hit?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">When the CPU accesses data that is already in the cache</choice>
+            <choice>When the CPU accesses data that is not in the cache</choice>
+            <choice>When the CPU attempts to access data in the cache, but different data is in its location</choice>
+            <choice>When the CPU accesses data in a register that matches data in the cache</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is a cache miss?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice>When the CPU accesses data that is already in the cache</choice>
+            <choice credit="1">When the CPU accesses data that is not in the cache</choice>
+            <choice>When the CPU attempts to access data in the cache, but different data is in its location</choice>
+            <choice>When the CPU accesses data in a register that does not match any data in the cache</choice>
+        </choiceInput>
+    </answer>
+
+    <p>What is a cache eviction?</p>
+    <answer>
+        <choiceInput shuffleOrder>
+            <choice credit="1">When data is removed from the cache to make room for new data being loaded in</choice>
+            <choice>When data from the cache is copied into registers</choice>
+            <choice>When data from the cache is copied into main memory</choice>
+            <choice>When data from the cache is deleted as the computer is powered off</choice>
+        </choiceInput>
+    </answer>
+
+    <p>The next three questions refer to direct-mapped caches.</p>
+
+    <p>Which of the following are included in a cache line? Select all.</p>
+    <answer>
+        <choiceInput shuffleOrder selectMultiple>
+            <choice credit="1">A cache block</choice>
+            <choice credit="1">Metadata</choice>
+            <choice>A cache register</choice>
+            <choice>Local variable names</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Which of the following are true about cache blocks? Select all.</p>
+    <answer>
+        <choiceInput shuffleOrder selectMultiple>
+            <choice credit="1">Store chunks of program data</choice>
+            <choice credit="1">Typical block size ranges from 16 to 64 bytes</choice>
+            <choice credit="1">Store data from a single memory address</choice>
+            <choice>Larger block sizes always result in better performance</choice>
+            <choice>Smaller block sizes always result in better performance</choice>
+        </choiceInput>
+    </answer>
+
+    <p>Which of the following are true about metadata in a cache line? Select all.</p>
+    <answer>
+        <choiceInput shuffleOrder selectMultiple>
+            <choice credit="1">Store information about the cache block</choice>
+            <choice credit="1">Identifies where in memory the cache block's data came from</choice>
+            <choice>Contains program data</choice>
+            <choice>Includes the size of the cache block</choice>
         </choiceInput>
     </answer>
 
