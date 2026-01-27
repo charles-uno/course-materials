@@ -12,6 +12,17 @@
 \Subsection{Hardware Components}
 
 
+
+\begin{frame}{What's Where?}
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
+	\end{center}
+\end{frame}
+
+
+
+
+
 \begin{frame}{CPU}
 
 	Processing unit executes program instructions. Registers for storing the very specific pieces of data you're currently using. ALU which does the actual math. For example, if you're adding two numbers. Load into r0 and r1. Send them through the ALU. Store the result in r2.
@@ -242,8 +253,8 @@
 \begin{frame}{foo bar}
 	\includegraphics[width=\columnwidth]{images/fdew-add-fetch}
 	\begin{itemize}
-		\item Memory address of the next instruction is stored in the special register pc (program counter). 
-		\item The CPU fetches the that instruction from memory into the special purpose register ir (instruction register). 
+		\item Memory address of the next instruction is stored in the special register pc (program counter).
+		\item The CPU fetches the that instruction from memory into the special purpose register ir (instruction register).
 		\item The address in pc is incremented, to hold the address of the next instruction.
 	\end{itemize}
 \end{frame}
@@ -276,5 +287,5 @@
 
 
 \begin{frame}{Eager Execution Gone Wrong}
-    \includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped.png}
+	\includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped.png}
 \end{frame}

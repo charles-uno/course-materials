@@ -99,6 +99,18 @@
 \end{tikzpicture}
 }
 
+\newcommand{\TOC}[0]{
+  % just sections up top
+  \setcounter{tocdepth}{1}
+  \begin{frame}{Outline}
+  %	\begin{multicols*}{2}
+      \tableofcontents
+  %	\end{multicols*}
+  \end{frame}
+  % show subsections elsewhere
+  \setcounter{tocdepth}{2}
+  }
+
 % section page
 \newcommand{\Section}[1]{
 \section{#1}
@@ -115,9 +127,9 @@
 
 \begin{frame}{Outline}
 
-    \begin{multicols*}{2}
+%    \begin{multicols*}{2}
         \tableofcontents[currentsection,sectionstyle=hide,subsectionstyle=show/show/hide]
-	\end{multicols*}
+%	\end{multicols*}
 \end{frame}
 }
 
