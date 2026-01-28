@@ -180,7 +180,7 @@
 
 
 <section>
-    <title>Executing a Program</title>
+    <title>Executing an Instruction</title>
 
     <exercise>
         <title>Von Neumann Architecture Review</title>
@@ -292,7 +292,7 @@
     </exercise>
 
     <exercise>
-        <title>Executing an Instruction</title>
+        <title>Execution Steps</title>
         <p>What happens in the <alert>fetch</alert> stage of executing an instruction? Select all.</p>
         <answer>
             <choiceInput shuffleOrder selectMultiple matchPartial>
@@ -340,9 +340,7 @@
                 <choice>The memory unit writes the result value to memory at the given address.</choice>
             </choiceInput>
         </answer>
-
         <p>What happens in the <alert>execute</alert> stage of executing an instruction? Select all.</p>
-
         <answer>
             <choiceInput shuffleOrder selectMultiple matchPartial>
                 <choice>The address of the next instruction is sent on the address bus from the control unit to the
@@ -364,9 +362,7 @@
                 <choice>The memory unit writes the result value to memory at the given address.</choice>
             </choiceInput>
         </answer>
-
         <p>What happens in the <alert>store</alert> stage of executing an instruction? Select all.</p>
-
         <answer>
             <choiceInput shuffleOrder selectMultiple matchPartial>
                 <choice>The address of the next instruction is sent on the address bus from the control unit to the
@@ -391,305 +387,751 @@
             </choiceInput>
         </answer>
     </exercise>
+</section>
 
+
+<section>
     <title>Clock-Driven Execution</title>
-    <p>What is the role of the clock in the CPU?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>Perform arithmetic and logic operations</choice>
-            <choice>Store program data</choice>
-            <choice>Manage Instruction execution</choice>
-            <choice credit="1">Drive circuitry to execute instructions</choice>
-        </choiceInput>
-    </answer>
-    <p>What is the relationship between the clock cycle time and the clock rate?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">
-                <m>\textrm{clock cycle time} = \frac{1}{\textrm{clock rate}}</m>
-            </choice>
-            <choice>
-                <m>\textrm{clock cycle time} = \textrm{clock rate}</m>
-            </choice>
-            <choice>
-                <m>\textrm{clock cycle time} = - \textrm{clock rate}</m>
-            </choice>
-            <choice>
-                <m>\textrm{clock cycle time} = (\textrm{clock rate})^2</m>
-            </choice>
-        </choiceInput>
-    </answer>
-    <p>If the clock speed is 2 GHz, how many clock ticks occur per second?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">2,000,000,000</choice>
-            <choice>1,000,000,000</choice>
-            <choice>500,000,000</choice>
-            <choice>2,000,000</choice>
-        </choiceInput>
-    </answer>
-    <p>If the clock cycle time is 2 nanoseconds, what is the clock rate?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>2,000,000,000</choice>
-            <choice>1,000,000,000</choice>
-            <choice credit="1">500,000,000</choice>
-            <choice>1,000,000</choice>
-        </choiceInput>
-    </answer>
-    <p>Assuming a four-stage instruction and a 2 nanosecond clock cycle time, how long does it take for an instruction
-        to complete?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>2 nanoseconds</choice>
-            <choice credit="1">8 nanoseconds</choice>
-            <choice>0.5 nanosecond</choice>
-            <choice>4 nanoseconds</choice>
-        </choiceInput>
-    </answer>
+    <exercise>
+        <p>What is the role of the clock in the CPU?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Perform arithmetic and logic operations</choice>
+                <choice>Store program data</choice>
+                <choice>Manage Instruction execution</choice>
+                <choice credit="1">Drive circuitry to execute instructions</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>What is the relationship between the clock cycle time (in nanoseconds) and the clock rate (in GHz)?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">
+                    <m>\textrm{clock cycle time} = \frac{1}{\textrm{clock rate}}</m>
+                </choice>
+                <choice>
+                    <m>\textrm{clock cycle time} = \textrm{clock rate}</m>
+                </choice>
+                <choice>
+                    <m>\textrm{clock cycle time} = - \textrm{clock rate}</m>
+                </choice>
+                <choice>
+                    <m>\textrm{clock cycle time} = (\textrm{clock rate})^2</m>
+                </choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>If the clock speed is 2 GHz, how many clock ticks occur per second?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">2,000,000,000</choice>
+                <choice>1,000,000,000</choice>
+                <choice>500,000,000</choice>
+                <choice>2,000,000</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>If the clock cycle time is 2 nanoseconds, what is the clock rate?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>2,000,000,000</choice>
+                <choice>1,000,000,000</choice>
+                <choice credit="1">500,000,000</choice>
+                <choice>1,000,000</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <p>Assuming a four-stage instruction and a 2 nanosecond clock cycle time, how long does it take for an
+            instruction
+            to complete?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>2 nanoseconds</choice>
+                <choice credit="1">8 nanoseconds</choice>
+                <choice>0.5 nanosecond</choice>
+                <choice>4 nanoseconds</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+
+    <exercise>
+        <title>Raspberry Pi CPU and Clock</title>
+        <p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
+        <p>In the terminal on your Raspberry Pi, enter the following command.</p>
+        <pre>  lscpu</pre>
+        <p>You should see information on the architecture of your Raspberry Pi. Use this information to answer the
+            following
+            questions.</p>
+        <p>What is listed as the Architecture?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>armv7l</choice>
+                <choice>x86_64</choice>
+                <choice>amd64</choice>
+                <choice credit="1">aarch64</choice>
+            </choiceInput>
+        </answer>
+        <p>Later in the semester we'll cover cores and threads. What is listed for thread(s) per core? <answer>1
+            </answer>
+        </p>
+        <p>What is listed for cores per socket? (Note: sometimes called clusters)<answer>4</answer>
+        </p>
+        <p>What is listed for sockets? <answer>1</answer>
+        </p>
+        <p>What is listed for CPU max MHz? <answer>1800</answer>
+        </p>
+        <p>What is listed for CPU min MHz? <answer>600</answer>
+        </p>
+        <p>Convert the CPU max MHz to GHz. <answer>1.8</answer>
+        </p>
+        <p>Using the CPU max MHz, how many ticks per second does your Raspberry Pi's CPU clock have? <answer>1800000000
+            </answer>
+        </p>
+        <p>How long does one clock cycle take on your Raspberry Pi? Give your answer in nanoseconds.
+            <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>0.555</answer>
+        </p>
+        <p>Using the CPU max MHz, how long would it take your Raspberry Pi to execute one instruction? Give your answer
+            in
+            nanoseconds. <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>2.222</answer>
+        </p>
+    </exercise>
 </section>
+
+
 
 <section>
-    <title>Raspberry Pi: CPU and Clock Cycles</title>
-
-    <p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
-    <p>In the terminal on your Raspberry Pi, enter the following command.</p>
-    <pre>  lscpu</pre>
-    <p>You should see information on the architecture of your Raspberry Pi. Use this information to answer the following
-        questions.</p>
-
-    <p>What is listed as the Architecture?</p>
-
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>armv7l</choice>
-            <choice>x86_64</choice>
-            <choice>amd64</choice>
-            <choice credit="1">aarch64</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Later in the semester we'll cover cores and threads. What is listed for Thread(s) per core? <answer>1</answer>
-    </p>
-
-    <p>What is listed for Core(s) per socket? <answer>4</answer>
-    </p>
-
-    <p>What is listed for Socket(s)? <answer>1</answer>
-    </p>
-
-    <p>What is listed for CPU max MHz? <answer>1500</answer>
-    </p>
-
-    <p>What is listed for CPU min MHz? <answer>600</answer>
-    </p>
-
-    <p>Convert the CPU max MHz to GHz. <answer>1.5</answer>
-    </p>
-
-    <p>Using the CPU max MHz, how many ticks per second does your Raspberry Pi's CPU clock have? <answer>1500000000
+    <title>Memory Hierarchy</title>
+    <exercise>
+        <title>Textbook Reading</title>
+        <p>Read Sections 11.1 through 11.4 from <ref uri="https://diveintosystems.org/book/index.html">Dive Into Systems
+            </ref>
+            . Take notes as
+            you read through these sections. After completing the reading, write a summary below. This summary will be
+            graded manually. Note: this
+            part may be done before, after, and/or during your work on the exercises below.</p>
+        <answer handGraded>
+            <textInput expanded />
         </answer>
-    </p>
+    </exercise>
+    <exercise>
+        <title>Vocabulary Review</title>
+        <p>What is a register?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice>Temporary storage in the CPU for frequently accessed data</choice>
+                <choice>Temporary storage for data and instructions for the CPU </choice>
+                <choice>Storage in the computer that retains data when the computer is off, without relying on moving
+                    parts
+                </choice>
+                <choice>Storage in the computer that retains data when the computer is off, using spinning magnetic
+                    disks
+                </choice>
+                <choice>Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>What is a cache?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice credit="1">Temporary storage in the CPU for frequently accessed data</choice>
+                <choice>Temporary storage for data and instructions for the CPU </choice>
+                <choice>Storage in the computer that retains data when the computer is off, without relying on moving
+                    parts
+                </choice>
+                <choice>Storage in the computer that retains data when the computer is off, using spinning magnetic
+                    disks
+                </choice>
+                <choice>Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>What is main memory?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice>Temporary storage in the CPU for frequently accessed data</choice>
+                <choice credit="1">Temporary storage for data and instructions for the CPU </choice>
+                <choice>Storage in the computer that retains data when the computer is off, without relying on moving
+                    parts
+                </choice>
+                <choice>Storage in the computer that retains data when the computer is off, using spinning magnetic
+                    disks
+                </choice>
+                <choice>Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>What is flash disk (or SSD)?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice>Temporary storage in the CPU for frequently accessed data</choice>
+                <choice>Temporary storage for data and instructions for the CPU </choice>
+                <choice credit="1">Storage in the computer that retains data when the computer is off, without relying
+                    on
+                    moving parts</choice>
+                <choice>Storage in the computer that retains data when the computer is off, using spinning magnetic
+                    disks
+                </choice>
+                <choice>Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>What is traditional disk (or HDD)?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice>Temporary storage in the CPU for frequently accessed data</choice>
+                <choice>Temporary storage for data and instructions for the CPU </choice>
+                <choice>Storage in the computer that retains data when the computer is off, without relying on moving
+                    parts
+                </choice>
+                <choice credit="1">Storage in the computer that retains data when the computer is off, using spinning
+                    magnetic disks</choice>
+                <choice>Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>What is remote secondary storage?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Small, fast storage in the CPU for data and instructions being processed</choice>
+                <choice>Temporary storage in the CPU for frequently accessed data</choice>
+                <choice>Temporary storage for data and instructions for the CPU </choice>
+                <choice>Storage in the computer that retains data when the computer is off, without relying on moving
+                    parts
+                </choice>
+                <choice>Storage in the computer that retains data when the computer is off, using spinning magnetic
+                    disks
+                </choice>
+                <choice credit="1">Storage that is accessed through a network connection</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which are considered primary storage?</p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice credit="1">Registers</choice>
+                <choice credit="1">Caches</choice>
+                <choice credit="1">Main Memory</choice>
+                <choice>Flash Disk</choice>
+                <choice>Traditional Disk</choice>
+                <choice>Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which are considered secondary storage?</p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice>Registers</choice>
+                <choice>Caches</choice>
+                <choice>Main Memory</choice>
+                <choice credit="1">Flash Disk</choice>
+                <choice credit="1">Traditional Disk</choice>
+                <choice credit="1">Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>What are the differences between primary and secondary storage?</p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice credit="1">Primary storage has faster access than secondary storage</choice>
+                <choice>Secondary storage has faster access than primary storage</choice>
+                <choice credit="1">Primary storage has higher cost than secondary storage</choice>
+                <choice>Secondary storage has higher cost than primary storage</choice>
+                <choice>Primary storage typically has larger capacity than secondary storage</choice>
+                <choice credit="1">Secondary storage typically has larger capacity than primary storage</choice>
+                <choice credit="1">Primary storage can be directly accessed by the CPU, while secondary storage cannot.
+                </choice>
+                <choice>Secondary storage can be directly accessed by the CPU, while primary storage cannot.</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which are located in the CPU?</p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice credit="1">Registers</choice>
+                <choice credit="1">Caches</choice>
+                <choice>Main Memory</choice>
+                <choice>Flash Disk</choice>
+                <choice>Traditional Disk</choice>
+                <choice>Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which are located in the computer (for example, think of your laptop)?</p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice credit="1">Registers</choice>
+                <choice credit="1">Caches</choice>
+                <choice credit="1">Main Memory</choice>
+                <choice credit="1">Flash Disk</choice>
+                <choice credit="1">Traditional Disk</choice>
+                <choice>Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which is fastest to access?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Registers</choice>
+                <choice>Caches</choice>
+                <choice>Main Memory</choice>
+                <choice>Flash Disk</choice>
+                <choice>Traditional Disk</choice>
+                <choice>Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Of the six types of memory listed, which is slowest to access?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Registers</choice>
+                <choice>Caches</choice>
+                <choice>Main Memory</choice>
+                <choice>Flash Disk</choice>
+                <choice>Traditional Disk</choice>
+                <choice credit="1">Remote Secondary Storage</choice>
+            </choiceInput>
+        </answer>
+        <p>In what way is random access memory (RAM) "random"?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">The time to access data is independent of the data's location</choice>
+                <choice>Data is distributed at random across the device, ensuring a uniform distribution</choice>
+                <choice>A pseudo-random number generator is used to ensure efficient access to data</choice>
+                <choice>RAM is able to generate pseudo-random numbers as needed by a program</choice>
+            </choiceInput>
+        </answer>
+        <p>The next two questions assume the following approximate relationships between the number of clock cycles
+            required
+            to access data stored in each type of memory:</p>
+        <tabular>
+            <row>
+                <cell>Type of Memory</cell>
+                <cell>Registers</cell>
+                <cell>Caches</cell>
+                <cell>Main Memory</cell>
+                <cell>Flash Disk</cell>
+                <cell>Traditional Disk</cell>
+            </row>
+            <row>
+                <cell>Number of cycles to access data</cell>
+                <cell>1</cell>
+                <cell>~10</cell>
+                <cell>~100</cell>
+                <cell>~1,000,000</cell>
+                <cell>~10,000,000</cell>
+            </row>
+        </tabular>
+        <p>Suppose we have a program whose runtime is primarily determined by the time taken accessing and modifying
+            stored
+            data. If the program takes 1 minute to run using only caches for storage, how long would it take to run if
+            it
+            was modified to only use main memory for storage? <answer>10</answer> minutes</p>
+        <p>Suppose we have a program whose runtime is primarily determined by the time taken accessing and modifying
+            stored
+            data. If the program takes 2 minute to run using only main memory for storage, how long would it take to run
+            if
+            it was modified to only use traditional disk for storage? <answer>200000</answer> minutes</p>
+        <p>What is the capacity of a storage device?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">The amount of data a device can store</choice>
+                <choice>The amount of time it takes a device to perform a data retrieval operation</choice>
+                <choice>The amount of data that can be moved between the device and main memory over some time interval
+                </choice>
+            </choiceInput>
+        </answer>
+        <p>What are typical units for capacity?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Bytes</choice>
+                <choice>Milliseconds</choice>
+                <choice>Bytes per second</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the latency of a storage device?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>The amount of data a device can store</choice>
+                <choice credit="1">The amount of time it takes a device to perform a data retrieval operation</choice>
+                <choice>The amount of data that can be moved between the device and main memory over some time interval
+                </choice>
+            </choiceInput>
+        </answer>
+        <p>What are typical units for latency?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Bytes</choice>
+                <choice credit="1">Milliseconds</choice>
+                <choice>Bytes per second</choice>
+            </choiceInput>
+        </answer>
+        <p>What is the transfer rate of a storage device?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>The amount of data a device can store</choice>
+                <choice>The amount of time it takes a device to perform a data retrieval operation</choice>
+                <choice credit="1">The amount of data that can be moved between the device and main memory over some
+                    time
+                    interval</choice>
+            </choiceInput>
+        </answer>
+        <p>What are typical units for transfer rate?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Bytes</choice>
+                <choice>Milliseconds</choice>
+                <choice credit="1">Bytes per second</choice>
+            </choiceInput>
+        </answer>
+        <p>Which of the following are true about static RAM (SRAM)? </p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice credit="1">Data is stored in small electrical circuits</choice>
+                <choice credit="1">Used to build registers</choice>
+                <choice credit="1">Used to build caches</choice>
+                <choice credit="1">Fastest type of memory</choice>
+                <choice credit="1">Located in the CPU</choice>
+                <choice credit="1">Most expensive type of memory in terms of cost to build, power consumption, and space
+                    requirements</choice>
+                <choice>Data is stored in capacitors</choice>
+                <choice>Used to implement main memory</choice>
+                <choice>Connected to CPU via the memory bus</choice>
+                <choice>Latency and transfer rates are affected by the von Neumann bottleneck</choice>
+            </choiceInput>
+        </answer>
+        <p>Which of the following are true about dynamic RAM (DRAM)? </p>
+        <answer>
+            <choiceInput selectMultiple shuffleOrder>
+                <choice>Data is stored in small electrical circuits</choice>
+                <choice>Used to build registers</choice>
+                <choice>Used to build caches</choice>
+                <choice>Fastest type of memory</choice>
+                <choice>Located in the CPU</choice>
+                <choice>Most expensive type of memory in terms of cost to build, power consumption, and space
+                    requirements
+                </choice>
+                <choice credit="1">Data is stored in capacitors</choice>
+                <choice credit="1">Used to implement main memory</choice>
+                <choice credit="1">Connected to CPU via the memory bus</choice>
+                <choice credit="1">Latency and transfer rates are affected by the von Neumann bottleneck</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 
-    <p>Using the CPU max MHz, how long does one clock cycle take on your Raspberry Pi? Give your answer in nanoseconds.
-        <answer allowedErrorInNumbers=".001" allowedErrorIsAbsolute>2/3</answer>
-    </p>
-
-    <p>Using the CPU max MHz, how long would it take your Raspberry Pi to execute one instruction? Give your answer in
-        nanoseconds. <answer allowedErrorInNumbers=".001" allowedErrorIsAbsolute>8/3</answer>
-    </p>
-
+    <exercise>
+        <title>Caching</title>
+        <p>Where is a cache located?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">In the CPU</choice>
+                <choice>In the ALU</choice>
+                <choice>In main memory</choice>
+                <choice>In secondary storage</choice>
+            </choiceInput>
+        </answer>
+        <p>Which of the following are true about accessing data in a cache? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple>
+                <choice credit="1">Accessing data in a cache is faster than accessing data in main memory</choice>
+                <choice>Accessing data in a cache is slower than accessing data in main memory</choice>
+                <choice credit="1">Accessing data in a cache is faster than accessing data in secondary storage</choice>
+                <choice>Accessing data in a cache is slower than accessing data in secondary storage</choice>
+                <choice>Accessing data in a cache is faster than accessing data in a register</choice>
+                <choice credit="1">Accessing data in a cache is slower than accessing data in a register</choice>
+            </choiceInput>
+        </answer>
+        <p>What is a cache hit?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">When the CPU accesses data that is already in the cache</choice>
+                <choice>When the CPU accesses data that is not in the cache</choice>
+                <choice>When the CPU attempts to access data in the cache, but different data is in its location
+                </choice>
+                <choice>When the CPU accesses data in a register that matches data in the cache</choice>
+            </choiceInput>
+        </answer>
+        <p>What is a cache miss?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>When the CPU accesses data that is already in the cache</choice>
+                <choice credit="1">When the CPU accesses data that is not in the cache</choice>
+                <choice>When the CPU attempts to access data in the cache, but different data is in its location
+                </choice>
+                <choice>When the CPU accesses data in a register that does not match any data in the cache</choice>
+            </choiceInput>
+        </answer>
+        <p>What is a cache eviction?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">When data is removed from the cache to make room for new data being loaded in
+                </choice>
+                <choice>When data from the cache is copied into registers</choice>
+                <choice>When data from the cache is copied into main memory</choice>
+                <choice>When data from the cache is deleted as the computer is powered off</choice>
+            </choiceInput>
+        </answer>
+        <p>The next three questions refer to direct-mapped caches.</p>
+        <p>Which of the following are included in a cache line? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple>
+                <choice credit="1">A cache block</choice>
+                <choice credit="1">Metadata</choice>
+                <choice>A cache register</choice>
+                <choice>Local variable names</choice>
+            </choiceInput>
+        </answer>
+        <p>Which of the following are true about cache blocks? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple>
+                <choice credit="1">Store chunks of program data</choice>
+                <choice credit="1">Typical block size ranges from 16 to 64 bytes</choice>
+                <choice credit="1">Store data from a single memory address</choice>
+                <choice>Larger block sizes always result in better performance</choice>
+                <choice>Smaller block sizes always result in better performance</choice>
+            </choiceInput>
+        </answer>
+        <p>Which of the following are true about metadata in a cache line? Select all.</p>
+        <answer>
+            <choiceInput shuffleOrder selectMultiple>
+                <choice credit="1">Store information about the cache block</choice>
+                <choice credit="1">Identifies where in memory the cache block's data came from</choice>
+                <choice>Contains program data</choice>
+                <choice>Includes the size of the cache block</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
+    <exercise>
+        <title>Locality</title>
+        <p>How does locality improve a system's performance?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Move data that a program is using into storage closer to the CPU (in the memory
+                    hierarchy)</choice>
+                <choice>Organize similar types of data to be close to each other</choice>
+                <choice>Move all program data into CPU registers for fast computation</choice>
+                <choice>Use addresses in main memory that are closest to the CPU</choice>
+            </choiceInput>
+        </answer>
+        <p>What is meant by temporal locality?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">Programs tend to access the same data repeatedly</choice>
+                <choice>Programs tend to access data near other accessed data</choice>
+                <choice>Programs tend to iterate through all data in a storage device</choice>
+                <choice>Programs tend to access data closest to the CPU</choice>
+            </choiceInput>
+        </answer>
+        <p>What is meant by spacial locality?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>Programs tend to access the same data repeatedly</choice>
+                <choice credit="1">Programs tend to access data near other accessed data</choice>
+                <choice>Programs tend to iterate through all data in a storage device</choice>
+                <choice>Programs tend to access data closest to the CPU</choice>
+            </choiceInput>
+        </answer>
+        <p>The textbook gives two example C functions for iterating through a matrix. Here, we've modified them to print
+            each entry of the matrix instead of averaging them.</p>
+        <pre>void printMat_v1(int **mat, int n) {
+        int i, j, total = 0;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                // Note indexing: [i][j]
+                printf("%d ", mat[i][j]);
+            }
+        }
+        return;
+    }</pre>
+        <p>and</p>
+        <pre>void printMat_v2(int **mat, int n) {
+        int i, j, total = 0;
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < n; j++) {
+                // Note indexing: [j][i]
+                printf("%d ", mat[j][i]);
+            }
+        }
+        return;
+    }</pre>
+        <p>Consider the following matrix:</p>
+        <matrix>
+            <row>1 2 3</row>
+            <row>4 5 6</row>
+            <row>7 8 9</row>
+        </matrix>
+        <p>In what order are the matrix entries printed by <c>printMat_v1</c>? List them in order, separated by commas.
+            <mathInput name="entries1"></mathInput>
+            <answer>
+                <award>
+                    <when>
+                        <mathList>$entries1</mathList> = <mathList>1,2,3,4,5,6,7,8,9</mathList>
+                    </when>
+                </award>
+            </answer>
+        </p>
+        <p>In what order are the matrix entries printed by <c>printMat_v2</c>? List them in order, separated by commas.
+            <mathInput name="entries2"></mathInput>
+            <answer>
+                <award>
+                    <when>
+                        <mathList>$entries2</mathList> = <mathList>1,4,7,2,5,8,3,6,9</mathList>
+                    </when>
+                </award>
+            </answer>
+        </p>
+        <p>The matrix above with three rows and three columns would be stored in consecutive memory with the first row,
+            followed by the second row, followed by the third row, as below.</p>
+        <p>In memory:</p>
+        <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1"
+            size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+            <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="1 2 3 4 5 6 7 8 9"
+                labels="001c 0020 0024 0028 002c 0030 0034 0038 003c" inGraph="true" anchor="(3,9.2)" />
+            <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed />
+        </graph>
+        <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v1</c>? List the
+            addresses in order, separated by commas. <textInput name="addresses1"></textInput>
+            <answer>
+                <award>
+                    <when>
+                        <textList>$addresses1</textList> = <textList>001c,0020,0024,0028,002c,0030,0034,0038,003c
+                        </textList>
+                    </when>
+                </award>
+            </answer>
+        </p>
+        <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v2</c>? List the
+            addresses in order, separated by commas. <textInput name="addresses2"></textInput>
+            <answer>
+                <award>
+                    <when>
+                        <textList>$addresses2</textList> = <textList>001c,0028,0034,0020,002c,0038,0024,0030,003c
+                        </textList>
+                    </when>
+                </award>
+            </answer>
+        </p>
+        <p>This demonstrates why the function <c>printMat_v1</c> will execute more quickly than <c>printMat_v2</c>; <c>
+                printMat_v1</c> accesses consecutive memory locations, while <c>printMat_v2</c> skips around between
+            memory
+            locations. How is this difference best described?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice credit="1">A difference in spatial locality</choice>
+                <choice>A difference in temporal locality</choice>
+            </choiceInput>
+        </answer>
+    </exercise>
 </section>
 
-<p>This lab covers content from Sections 5.7 and 5.8 of the textbook <ref uri="https://diveintosystems.org/book/">Dive
-        into Systems</ref>. You may find it helpful to reference these sections as you work through this lab.</p>
-
-<p>For the assembly portion of this lab, you may find it helpful to reference Sections 6.1, 6.9, 6.10, and 6.11 of the
-    ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref>.</p>
 
 <section>
-    <title>Pipelining</title>
+    <title>Pipelining & Hazards</title>
 
-    <p>Assume a standard four-stage instruction in this instruction.</p>
+    <exercise>
+        <title>Pipelining</title>
+        <p>How many clock cycles does it take to execute one instruction? <answer>4</answer>
+        </p>
+        <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute two
+            instructions? <answer>8</answer>
+        </p>
+        <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute 100
+            instructions? <answer>400</answer>
+        </p>
+        <p>Using pipelining, how many clock cycles does it take to execute two instructions? <answer>5</answer>
+        </p>
 
-    <p>Give a one word description of the first stage of an instruction. <answer type="text">fetch</answer>
-    </p>
-    <p>Give a one word description of the second stage of an instruction. <answer type="text">decode</answer>
-    </p>
-    <p>Give a one word description of the third stage of an instruction. <answer type="text">execute</answer>
-    </p>
-    <p>Give a one word description of the fourth stage of an instruction.
-        <textInput name="store" />
-        <answer>
-            <award>
-                <when>$store =<text>store</text> or $store=<text>write</text></when>
-            </award>
+        <p>Using pipelining, how many clock cycles does it take to execute three instructions? <answer>6</answer>
+        </p>
+
+        <p>Using pipelining, how many clock cycles does it take to execute four instructions? <answer>7</answer>
+        </p>
+
+        <p>Using pipelining, how many clock cycles does it take to execute 100 instructions? <answer>103</answer>
+        </p>
+
+        <p>Using pipelining, how many clock cycles does it take to execute <m>N</m> instructions? Write your answer in
+            terms
+            of <m>N</m>. <answer>N+3</answer>
+        </p>
+
+
+
+
+    </exercise>
+
+    <exercise>
+        <title>Hazards</title>
+
+        <p>Read Section 5.8 from the course textbook, <ref uri="https://diveintosystems.org/book/index.html">Dive Into
+                Systems</ref>. Take notes as
+            you read through these sections. After completing the reading, write a summary below. This summary will be
+            graded manually. Note: this
+            part may be done before, after, and/or during your work on the exercises below. <alert>Don't worry about the
+                fifth execution stage (M)! FDEW is good enough for
+                our purposes.</alert>
+        </p>
+        <answer handGraded>
+            <textInput expanded />
         </answer>
-    </p>
-
-    <p>How many clock cycles does it take to execute one instruction? <answer>4</answer>
-    </p>
-
-    <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute two
-        instructions? <answer>8</answer>
-    </p>
-
-    <p>If one instruction completes before the next one starts, how many clock cycles does it take to execute 100
-        instructions? <answer>400</answer>
-    </p>
-
-    <p>Using pipelining, how many clock cycles does it take to execute two instructions? <answer>5</answer>
-    </p>
-
-    <p>Using pipelining, how many clock cycles does it take to execute three instructions? <answer>6</answer>
-    </p>
-
-    <p>Using pipelining, how many clock cycles does it take to execute four instructions? <answer>7</answer>
-    </p>
-
-    <p>Using pipelining, how many clock cycles does it take to execute 100 instructions? <answer>103</answer>
-    </p>
-
-    <p>Using pipelining, how many clock cycles does it take to execute <m>N</m> instructions? Write your answer in terms
-        of <m>N</m>. <answer>N+3</answer>
-    </p>
-
-</section>
-
-<section>
-    <title>More on Pipelining</title>
-
-    <p>Refer to Section 5.8 of the textbook <ref uri="https://diveintosystems.org/book/">Dive into Systems</ref> as you
-        complete this section.</p>
-
-    <p>Select what happens in each of the five stage instruction example in this section.</p>
-
-    <p>Fetch:
+        <p>What is a pipeline stall?</p>
         <answer>
-            <choiceInput inline shuffleOrder>
-                <choice credit="1">reads an instruction from memory</choice>
-                <choice>reads source registers and sets control logic.</choice>
-                <choice>executes the instruction</choice>
-                <choice>reads from or writes to data memory</choice>
-                <choice>stores a result in a destination register</choice>
+            <choiceInput shuffleOrder>
+                <choice credit="1">When an instruction needs to wait for another to finish before it can proceed
+                </choice>
+                <choice>When two instructions are started simultaneously</choice>
+                <choice>When two instructions complete simultaneously</choice>
+                <choice>When an instruction requires multiple clock cycles to complete a single stage</choice>
+                <choice>When an instruction is waiting for user input to proceed</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>Decode:
+        <p>What is a data hazard?</p>
         <answer>
-            <choiceInput inline shuffleOrder>
-                <choice>reads an instruction from memory</choice>
-                <choice credit="1">reads source registers and sets control logic.</choice>
-                <choice>executes the instruction</choice>
-                <choice>reads from or writes to data memory</choice>
-                <choice>stores a result in a destination register</choice>
+            <choiceInput shuffleOrder>
+                <choice credit="1">When two instructions executing simultaneously use the same data</choice>
+                <choice>When an instruction corrupts data</choice>
+                <choice>When incorrect data is used in an instruction</choice>
+                <choice>When an instruction isn't clear about what data to use</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>Execute:
+        <p>What is a control hazard?</p>
         <answer>
-            <choiceInput inline shuffleOrder>
-                <choice>reads an instruction from memory</choice>
-                <choice>reads source registers and sets control logic.</choice>
-                <choice credit="1">executes the instruction</choice>
-                <choice>reads from or writes to data memory</choice>
-                <choice>stores a result in a destination register</choice>
+            <choiceInput shuffleOrder>
+                <choice credit="1">When a program needs to wait for the result of a previous instruction to determine
+                    which
+                    instruction to execute next</choice>
+                <choice>When AI seizes control of the execution of the program</choice>
+                <choice>When two control units are trying to execute instructions simultaneously</choice>
+                <choice>When the same block of memory is accessed by two different instructions at the same time.
+                </choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>Memory:
+        <p>Which of the following strategies can help address data hazards? Select all.</p>
         <answer>
-            <choiceInput inline shuffleOrder>
-                <choice>reads an instruction from memory</choice>
-                <choice>reads source registers and sets control logic.</choice>
-                <choice>executes the instruction</choice>
-                <choice credit="1">reads from or writes to data memory</choice>
-                <choice>stores a result in a destination register</choice>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice credit="1">A pipeline bubble</choice>
+                <choice credit="1">operand forwarding</choice>
+                <choice credit="1">pipeline stall</choice>
+                <choice>branch prediction</choice>
+                <choice>eager execution</choice>
             </choiceInput>
         </answer>
-    </p>
-
-    <p>Writeback:
+        <p>Which of the following strategies can help address control hazards? Select all.</p>
         <answer>
-            <choiceInput inline shuffleOrder>
-                <choice>reads an instruction from memory</choice>
-                <choice>reads source registers and sets control logic.</choice>
-                <choice>executes the instruction</choice>
-                <choice>reads from or writes to data memory</choice>
-                <choice credit="1">stores a result in a destination register</choice>
+            <choiceInput shuffleOrder selectMultiple matchPartial>
+                <choice>A pipeline bubble</choice>
+                <choice>operand forwarding</choice>
+                <choice credit="1">pipeline stall</choice>
+                <choice credit="1">branch prediction</choice>
+                <choice credit="1">eager execution</choice>
             </choiceInput>
         </answer>
-    </p>
 
-    <p>How many stages would the instruction <c>add r0, r1, r2</c> require? <answer>4</answer>
-    </p>
 
-    <p>How many stages would the instruction <c>ldr r0, [r1]</c> require? <answer>5</answer>
-    </p>
 
-    <p>What is a pipeline stall?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">When an instruction needs to wait for another to finish before it can proceed</choice>
-            <choice>When two instructions are started simultaneously</choice>
-            <choice>When two instructions complete simultaneously</choice>
-            <choice>When an instruction requires multiple clock cycles to complete a single stage</choice>
-            <choice>When an instruction is waiting for user input to proceed</choice>
-        </choiceInput>
-    </answer>
+    </exercise>
 
-    <p>What is a data hazard?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">When two instructions executing simultaneously use the same data</choice>
-            <choice>When an instruction corrupts data</choice>
-            <choice>When incorrect data is used in an instruction</choice>
-            <choice>When an instruction isn't clear about what data to use</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is a control hazard?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">When a program needs to wait for the result of a previous instruction to determine which
-                instruction to execute next</choice>
-            <choice>When AI seizes control of the execution of the program</choice>
-            <choice>When two control units are trying to execute instructions simultaneously</choice>
-            <choice>When the same block of memory is accessed by two different instructions at the same time.</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Which of the following strategies can help address data hazards? Select all.</p>
-
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice credit="1">A pipeline bubble</choice>
-            <choice credit="1">operand forwarding</choice>
-            <choice credit="1">pipeline stall</choice>
-            <choice>branch prediction</choice>
-            <choice>eager execution</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Which of the following strategies can help address control hazards? Select all.</p>
-
-    <answer>
-        <choiceInput shuffleOrder selectMultiple matchPartial>
-            <choice>A pipeline bubble</choice>
-            <choice>operand forwarding</choice>
-            <choice credit="1">pipeline stall</choice>
-            <choice credit="1">branch prediction</choice>
-            <choice credit="1">eager execution</choice>
-        </choiceInput>
-    </answer>
 
 </section>
 
 
-
+<!-- this stuff is important to make sure the memory diagram displays properly -->
 
 <setup>
 
@@ -726,239 +1168,3 @@
         </conditionalContent>
     </module>
 </setup>
-
-<section>
-    <title>Textbook Reading</title>
-
-    <p>Read Sections 11.3 and 11.4 of the textbook <ref uri="https://diveintosystems.org">Dive Into Systems</ref>,
-        before continuing to the next section. I strongly recommend that you take notes, though you are not required to
-        submit them.</p>
-
-</section>
-
-<section>
-    <title>Locality</title>
-
-    <p>How does locality improve a system's performance?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">Move data that a program is using into storage closer to the CPU (in the memory
-                hierarchy)</choice>
-            <choice>Organize similar types of data to be close to each other</choice>
-            <choice>Move all program data into CPU registers for fast computation</choice>
-            <choice>Use addresses in main memory that are closest to the CPU</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is meant by temporal locality?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">Programs tend to access the same data repeatedly</choice>
-            <choice>Programs tend to access data near other accessed data</choice>
-            <choice>Programs tend to iterate through all data in a storage device</choice>
-            <choice>Programs tend to access data closest to the CPU</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is meant by spacial locality?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>Programs tend to access the same data repeatedly</choice>
-            <choice credit="1">Programs tend to access data near other accessed data</choice>
-            <choice>Programs tend to iterate through all data in a storage device</choice>
-            <choice>Programs tend to access data closest to the CPU</choice>
-        </choiceInput>
-    </answer>
-
-    <p>The textbook gives two example C functions for iterating through a matrix. Here, we've modified them to print
-        each entry of the matrix instead of averaging them.</p>
-
-    <pre>void printMat_v1(int **mat, int n) {
-        int i, j, total = 0;
-    
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                // Note indexing: [i][j]
-                printf("%d ", mat[i][j]);
-            }
-        }
-    
-        return;
-    }</pre>
-
-    <pre>void printMat_v2(int **mat, int n) {
-        int i, j, total = 0;
-    
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < n; j++) {
-                // Note indexing: [j][i]
-                printf("%d ", mat[j][i]);
-            }
-        }
-    
-        return;
-    }</pre>
-
-    <p>Consider the following matrix:</p>
-    <matrix>
-        <row>1 2 3</row>
-        <row>4 5 6</row>
-        <row>7 8 9</row>
-    </matrix>
-    <p>In what order are the matrix entries printed by <c>printMat_v1</c>? List them in order, separated by commas.
-        <mathInput name="entries1"></mathInput>
-        <answer>
-            <award>
-                <when>
-                    <mathList>$entries1</mathList> = <mathList>1,2,3,4,5,6,7,8,9</mathList>
-                </when>
-            </award>
-        </answer>
-    </p>
-
-    <p>In what order are the matrix entries printed by <c>printMat_v2</c>? List them in order, separated by commas.
-        <mathInput name="entries2"></mathInput>
-        <answer>
-            <award>
-                <when>
-                    <mathList>$entries2</mathList> = <mathList>1,4,7,2,5,8,3,6,9</mathList>
-                </when>
-            </award>
-        </answer>
-    </p>
-
-    <p>The matrix above with three rows and three columns would be stored in consecutive memory with the first row,
-        followed by the second row, followed by the third row, as below.</p>
-
-    <p>In memory:</p>
-    <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1"
-        size="full" xmin="0" xmax="10" ymin="0" ymax="10">
-
-        <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="1 2 3 4 5 6 7 8 9"
-            labels="001c 0020 0024 0028 002c 0030 0034 0038 003c" inGraph="true" anchor="(3,9.2)" />
-        <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed />
-    </graph>
-
-    <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v1</c>? List the
-        addresses in order, separated by commas. <textInput name="addresses1"></textInput>
-        <answer>
-            <award>
-                <when>
-                    <textList>$addresses1</textList> = <textList>001c,0020,0024,0028,002c,0030,0034,0038,003c</textList>
-                </when>
-            </award>
-        </answer>
-    </p>
-
-    <p>In what order are the <alert>addresses</alert> for matrix entries visited by <c>printMat_v2</c>? List the
-        addresses in order, separated by commas. <textInput name="addresses2"></textInput>
-        <answer>
-            <award>
-                <when>
-                    <textList>$addresses2</textList> = <textList>001c,0028,0034,0020,002c,0038,0024,0030,003c</textList>
-                </when>
-            </award>
-        </answer>
-    </p>
-
-    <p>This demonstrates why the function <c>printMat_v1</c> will execute more quickly than <c>printMat_v2</c>; <c>
-            printMat_v1</c> accesses consecutive memory locations, while <c>printMat_v2</c> skips around between memory
-        locations. How is this difference best described?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">A difference in spatial locality</choice>
-            <choice>A difference in temporal locality</choice>
-        </choiceInput>
-    </answer>
-
-</section>
-
-<section>
-    <title>Caching</title>
-
-    <p>Where is a cache located?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">In the CPU</choice>
-            <choice>In the ALU</choice>
-            <choice>In main memory</choice>
-            <choice>In secondary storage</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Which of the following are true about accessing data in a cache? Select all.</p>
-    <answer>
-        <choiceInput shuffleOrder selectMultiple>
-            <choice credit="1">Accessing data in a cache is faster than accessing data in main memory</choice>
-            <choice>Accessing data in a cache is slower than accessing data in main memory</choice>
-            <choice credit="1">Accessing data in a cache is faster than accessing data in secondary storage</choice>
-            <choice>Accessing data in a cache is slower than accessing data in secondary storage</choice>
-            <choice>Accessing data in a cache is faster than accessing data in a register</choice>
-            <choice credit="1">Accessing data in a cache is slower than accessing data in a register</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is a cache hit?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">When the CPU accesses data that is already in the cache</choice>
-            <choice>When the CPU accesses data that is not in the cache</choice>
-            <choice>When the CPU attempts to access data in the cache, but different data is in its location</choice>
-            <choice>When the CPU accesses data in a register that matches data in the cache</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is a cache miss?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice>When the CPU accesses data that is already in the cache</choice>
-            <choice credit="1">When the CPU accesses data that is not in the cache</choice>
-            <choice>When the CPU attempts to access data in the cache, but different data is in its location</choice>
-            <choice>When the CPU accesses data in a register that does not match any data in the cache</choice>
-        </choiceInput>
-    </answer>
-
-    <p>What is a cache eviction?</p>
-    <answer>
-        <choiceInput shuffleOrder>
-            <choice credit="1">When data is removed from the cache to make room for new data being loaded in</choice>
-            <choice>When data from the cache is copied into registers</choice>
-            <choice>When data from the cache is copied into main memory</choice>
-            <choice>When data from the cache is deleted as the computer is powered off</choice>
-        </choiceInput>
-    </answer>
-
-    <p>The next three questions refer to direct-mapped caches.</p>
-
-    <p>Which of the following are included in a cache line? Select all.</p>
-    <answer>
-        <choiceInput shuffleOrder selectMultiple>
-            <choice credit="1">A cache block</choice>
-            <choice credit="1">Metadata</choice>
-            <choice>A cache register</choice>
-            <choice>Local variable names</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Which of the following are true about cache blocks? Select all.</p>
-    <answer>
-        <choiceInput shuffleOrder selectMultiple>
-            <choice credit="1">Store chunks of program data</choice>
-            <choice credit="1">Typical block size ranges from 16 to 64 bytes</choice>
-            <choice credit="1">Store data from a single memory address</choice>
-            <choice>Larger block sizes always result in better performance</choice>
-            <choice>Smaller block sizes always result in better performance</choice>
-        </choiceInput>
-    </answer>
-
-    <p>Which of the following are true about metadata in a cache line? Select all.</p>
-    <answer>
-        <choiceInput shuffleOrder selectMultiple>
-            <choice credit="1">Store information about the cache block</choice>
-            <choice credit="1">Identifies where in memory the cache block's data came from</choice>
-            <choice>Contains program data</choice>
-            <choice>Includes the size of the cache block</choice>
-        </choiceInput>
-    </answer>
-
-</section>
