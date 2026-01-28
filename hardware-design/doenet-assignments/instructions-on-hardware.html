@@ -1232,7 +1232,8 @@
             <li>Navigate into the new valgrind directory (hint: use <c>ls</c> to figure out the name)</li>
             <li>Configure valgrind: <c>./configure</c>
             </li>
-            <li>Compile valgrind: <c>make</c> Note: this may take 10+ minutes! Take a break. Move your body. Drink some water.
+            <li>Compile valgrind: <c>make</c> Note: this may take 10+ minutes! Take a break. Move your body. Drink some
+                water.
             </li>
             <li>Install valgrind: <c>sudo make install</c>
             </li>
@@ -1247,30 +1248,20 @@
     </exercise>
 
     <exercise>
-<title>Cache Analysis with Valgrind</title>
-<p>Now, you'll use valgrind to simulate the cache for each version of your matrix functions from above.</p>
-<ul>
-<li>Perform a cache analysis on v1. Put it in your discussion. Make sure to label it clearly.
-    <pre>valgrind --tool=cachegrind --cache-sim=yes ./cache_test_v1 1000</pre>
-</li>
-<li>Do the same for v2</li>
-<li>How many data cache reads are performed by v1? By v2? How do they compare? Add this to your discussion. Hint: check textbook section 11.5.2 for help interpreting the output</li>
-<li>How many D1 cache read misses occur for v1 and v2? How do they compare?</li>
-<li>How many LL cache misses?</li>
-<li>How do cache misses relate to the runtime of each? Does this match your explanations? Discuss</li>
-</ul>
-
-
-
-
-
+        <title>Cache Analysis with Valgrind</title>
+        <p>Now, you'll use valgrind to simulate the cache for each version of your matrix functions from above.</p>
+        <ul>
+            <li>Perform a cache analysis on v1. Put it in your discussion. Make sure to label it clearly.
+                <pre>valgrind --tool=cachegrind --cache-sim=yes ./cache_test_v1 1000</pre>
+            </li>
+            <li>Do the same for v2</li>
+            <li>How many data cache reads are performed by v1? By v2? How do they compare? Add this to your discussion.
+                Hint: check textbook section 11.5.2 for help interpreting the output</li>
+            <li>How many D1 cache read misses occur for v1 and v2? How do they compare?</li>
+            <li>How many LL cache misses?</li>
+            <li>How do cache misses relate to the runtime of each? Does this match your explanations? Discuss</li>
+        </ul>
 
     </exercise>
-
-
-
-
-
-
 
 </section>
