@@ -20,6 +20,10 @@
 
 \begin{frame}{CPU}
 
+\begin{itemize}
+\item Processing unit that executes instructions
+\end{itemize}
+
 	Processing unit executes program instructions. Registers for storing the very specific pieces of data you're currently using. ALU which does the actual math. For example, if you're adding two numbers. Load into r0 and r1. Send them through the ALU. Store the result in r2.
 
 	Control unit drives execution. IR: instruction register. Holds the instruction currently being executed. PC: program counter. Holds the address of the next instruction.
@@ -86,6 +90,7 @@
 		\item Decode. Set up the processing unit to perform the instruction. Send the instruction to the ALU, open gates to send appropriate registers to ALU inputs
 		\item Execute. Send the inputs and the instruction into the ALU, which computes the result
 		\item Write. Store the results from the ALU
+		\item Execute does work. The rest is overhead!
 	\end{itemize}
 
 \end{frame}
