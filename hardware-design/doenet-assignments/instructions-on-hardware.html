@@ -1168,3 +1168,109 @@
         </conditionalContent>
     </module>
 </setup>
+
+
+<section>
+    <title>Coding Work</title>
+
+    <p>
+        <alert>HEADS UP!</alert> Submit this assignment via csgit
+    </p>
+
+    <exercise>
+        <title>Setup</title>
+        <ul>
+            <li>Download files <c>cache_test_v1.c</c> and <c>cache_test_v2.c</c> from Moodle onto your laptop</li>
+            <li>Log into your Pi as your personal user (not the root user <c>pi</c>)</li>
+            <li>Create a directory for this assignment within the class repo: <c>mkdir ~/HD/instructions-on-hardware</c>
+            </li>
+            <li>Navigate to the new directory: <c>cd ~/HD/instructions-on-hardware</c>
+            </li>
+            <li>Copy those files from your laptop to your new directory. You should be able to drag and drop into the
+                file explorer pane</li>
+            <li>Create a markdown file to hold your results and commentary: <c>code discussion.md</c>
+            </li>
+        </ul>
+    </exercise>
+
+    <exercise>
+        <title>Textbook Cache Test</title>
+
+        <p>In this exercise we'll be comparing two programs performing math on 2D arrays. These are very similar to the
+            example code in textbook chapter 11.</p>
+        <ul>
+            <li>Look at the code for v1 and v2. Based on what you've learned about caching, which do you expect to run
+                faster? Why? Put your response in <c>discussion.md</c>
+            </li>
+            <li>Compile v1: <c>gcc cache_test_v1.c -o cache_test_v1</c>
+            </li>
+            <li>Run it using a matrix with size 10k x 10k: <c>./cache_test_v1 10000</c>
+            </li>
+            <li>Add the output to <c>discussion.md</c>. Make sure to label it clearly</li>
+            <li>Do the same for v2</li>
+            <li>Do your results match your expectation? Discuss</li>
+            <li>Add, commit, and push your work to csgit. See coding setup for syntax</li>
+        </ul>
+    </exercise>
+
+
+    <exercise>
+        <title>Install Valgrind</title>
+
+        <p>
+            <ref uri="https://valgrind.org/docs/manual/quick-start.html">Valgrind</ref> is a tool for cache and memory
+            analysis. Developers use it to find inefficiencies in their code
+        </p>
+        <ul>
+            <li>Log into your Pi and navigate to the directory for this assignment</li>
+            <li>Check your internet connection: <c>ping google.com</c> (then ctrl-C to kill it)</li>
+            <li>Move to your home directory: <c>cd ~</c> (we don't want to upload valgrind to csgit)</li>
+            <li>Download the source: <c>wget https://sourceware.org/pub/valgrind/valgrind-3.24.0.tar.bz2</c>
+            </li>
+            <li>Decompress the source files: <c>tar xvf valgrind-3.24.0.tar.bz2</c>
+            </li>
+            <li>Navigate into the new valgrind directory (hint: use <c>ls</c> to figure out the name)</li>
+            <li>Configure valgrind: <c>./configure</c>
+            </li>
+            <li>Compile valgrind: <c>make</c> Note: this may take 10+ minutes! Take a break. Move your body. Drink some water.
+            </li>
+            <li>Install valgrind: <c>sudo make install</c>
+            </li>
+            <li>Navigate back to your assignment directory</li>
+            <li>Confirm that valgrind is installed: <c>valgrind --version</c>
+            </li>
+            <li>Copy-paste the response into <c>discussion.md</c>
+            </li>
+        </ul>
+
+
+    </exercise>
+
+    <exercise>
+<title>Cache Analysis with Valgrind</title>
+<p>Now, you'll use valgrind to simulate the cache for each version of your matrix functions from above.</p>
+<ul>
+<li>Perform a cache analysis on v1. Put it in your discussion. Make sure to label it clearly.
+    <pre>valgrind --tool=cachegrind --cache-sim=yes ./cache_test_v1 1000</pre>
+</li>
+<li>Do the same for v2</li>
+<li>How many data cache reads are performed by v1? By v2? How do they compare? Add this to your discussion. Hint: check textbook section 11.5.2 for help interpreting the output</li>
+<li>How many D1 cache read misses occur for v1 and v2? How do they compare?</li>
+<li>How many LL cache misses?</li>
+<li>How do cache misses relate to the runtime of each? Does this match your explanations? Discuss</li>
+</ul>
+
+
+
+
+
+
+    </exercise>
+
+
+
+
+
+
+
+</section>

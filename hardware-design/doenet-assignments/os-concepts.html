@@ -1,0 +1,236 @@
+
+
+For this exercise, you will investigate how the number of threads impacts the run time of a process. Review Sections 13.2, 14.1, and 14.2 of the textbook, Dive Into Systems, before starting this exercise.
+
+Download the file pthreads1.c from Moodle, and copy it to your HW9 subdirectory. Compile the program using this gcc command:
+	gcc pthreads1.c -o pthreads1 -lpthread -lm
+
+
+Run the program using
+	./pthreads1 1
+
+
+Here, we are specifying that one thread should be used (this is also the default if no command-line argument is provided). Copy and paste the output in the box below.
+
+
+
+
+We can use the time command to determine the running time of a process. For example, enter the command
+	time ./pthreads1 1
+and copy and paste the output in the box below. Here,
+real indicates the elapsed time for the entire computation (wall-clock time). 
+user indicates how much time is spent executing the program code (user-CPU-time).
+sys indicates how much time was spent executing operating system code (system-CPU-time).
+	The CPU time of the process is the sum of the user-CPU-time and the system-CPU-time.
+Use the time command to get timing information for 
+./pthreads1 1
+	./pthreads1 2
+./pthreads1 3
+	./pthreads1 4
+./pthreads1 6
+	./pthreads1 8
+Use these values to fill in the table below. For each number of threads, time the execution three times, and compute the averages. This will produce more consistent results.
+
+number of threads
+time component
+
+first run
+
+second run
+
+third run
+
+average
+1
+real
+
+
+
+
+
+
+
+
+1
+user
+
+
+
+
+
+
+
+
+1
+sys
+
+
+
+
+
+
+
+
+2
+real
+
+
+
+
+
+
+
+
+2
+user
+
+
+
+
+
+
+
+
+2
+sys
+
+
+
+
+
+
+
+
+3
+real
+
+
+
+
+
+
+
+
+3
+user
+
+
+
+
+
+
+
+
+3
+sys
+
+
+
+
+
+
+
+
+4
+real
+
+
+
+
+
+
+
+
+4
+user
+
+
+
+
+
+
+
+
+4
+sys
+
+
+
+
+
+
+
+
+6
+real
+
+
+
+
+
+
+
+
+6
+user
+
+
+
+
+
+
+
+
+6
+sys
+
+
+
+
+
+
+
+
+8
+real
+
+
+
+
+
+
+
+
+8
+user
+
+
+
+
+
+
+
+
+8
+sys
+
+
+
+
+
+
+
+
+
+
+ 	Examining your table of values above, answer these questions:
+What happens to the wall-clock time as we increase the number of threads? Why does this happen?
+
+
+
+
+
+
+What happens to the CPU time as we increase the number of threads? Why does this happen?
+
+
