@@ -20,9 +20,9 @@
 
 \begin{frame}{CPU}
 
-\begin{itemize}
-\item Processing unit that executes instructions
-\end{itemize}
+	\begin{itemize}
+		\item Processing unit that executes instructions
+	\end{itemize}
 
 	Processing unit executes program instructions. Registers for storing the very specific pieces of data you're currently using. ALU which does the actual math. For example, if you're adding two numbers. Load into r0 and r1. Send them through the ALU. Store the result in r2.
 
@@ -77,108 +77,42 @@
 
 \end{frame}
 
-
-
-
 \Subsection{Executing an Instruction}
 
-
-\begin{frame}{FDEW}
-
+\begin{frame}{Execution Steps}
+	There are four steps to executing an instruction:
 	\begin{itemize}
-		\item Fetch. Read the instruction from memory into IR (in the control unit of the CPU)
-		\item Decode. Set up the processing unit to perform the instruction. Send the instruction to the ALU, open gates to send appropriate registers to ALU inputs
-		\item Execute. Send the inputs and the instruction into the ALU, which computes the result
-		\item Write. Store the results from the ALU
-		\item Execute does work. The rest is overhead!
+		\item Fetch
+		\item Decode
+		\item Execute
+		\item Write
 	\end{itemize}
-
 \end{frame}
 
 \begin{frame}{Fetch}
-	\includegraphics[width=\columnwidth]{images/fdew-fetch}
-Fetch the instruction we are about to execute and bring it to the CPU
+	\includegraphics[width=\columnwidth]{images/fdew-add-fetch}
 	\begin{itemize}
-		\item Special register pc (program counter) stores the address of the instruction we will execute this cycle
-		\item Read that instruction from memory. Uses address bus, control bus
-		\item Store the instruction to special register ir (instruction register). Uses data bus
-		\item Increment pc to point to the next instruction
+		\item Special register PC holds the address of the instruction
+		\item Read instruction from memory, store to IR
+		\item Increment PC to point to the next instruction
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Decode}
-	\includegraphics[width=\columnwidth]{images/fdew-decode}
-Decode the instruction so we can execute it
-	\begin{itemize}
-		\item Special register pc (program counter) stores the address of the instruction we will execute this cycle
-		\item Read that instruction from memory. Uses address bus, control bus
-		\item Store the instruction to special register ir (instruction register). Uses data bus
-		\item Increment pc to point to the next instruction
-	\end{itemize}
-
-
-	The control unit decodes the instruction.
-	After the fetch phase, the instruction is in the special register ir (instruction register) of the control unit.
-	The control unit decodes the operation to perform and the location of the operands from the instruction.
-	The control unit tells the processing unit what operation to perform.
-	The control unit fetches data operand values from their locations (CPU registers, memory, or instruction bits), sends as inputs to the processing unit.
-	(Often) no information sent over buses (between CPU and Memory).
-
-\end{frame}
-
-\begin{frame}{Execute}
-	\includegraphics[width=\columnwidth]{images/fdew-execute}
-
-	The processing unit executes the instruction.
-	In the processing unit, the ALU (arithmetic logic unit) performs the instruction operation on the instruction data operands (now stored in registers).
-	No information sent over buses (between CPU and Memory).
-
-	NOTE: this is the only part of the cycle that actually does any "real" work! The rest is overhead and bookkeeping
-\end{frame}
-
-\begin{frame}{Write}
-	\includegraphics[width=\columnwidth]{images/fdew-write}
-
-	The control unit stores the result of the executed instruction to memory.
-	The resulting value is sent on the data bus, from the control unit to memory.
-	The address of the storage location is sent on the address bus, from the control unit to memory.
-	The WRITE command is sent on the control bus, from the control unit to memory.
-	When the memory unit receives this information, it writes the value to memory at the specified address.
-
-	NOTE: write to memory vs writeback to registers. these both happen as necessary after execute. don't worry too much about it. we'll talk a bit more in memory hierarchy
-\end{frame}
-
-\begin{frame}{Von Neumann Bottleneck}
-	Suppose you have an array of a billion integers in memory. You want to add 1 to each of them. How do you do it?
-\end{frame}
-
-
-
-
-
-
-
-
-\begin{frame}{foo bar}
-	\includegraphics[width=\columnwidth]{images/fdew-add-fetch}
-	\begin{itemize}
-		\item Memory address of the next instruction is stored in the special register pc (program counter).
-		\item The CPU fetches the that instruction from memory into the special purpose register ir (instruction register).
-		\item The address in pc is incremented, to hold the address of the next instruction.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Walkthrough: Decode}
-	\includegraphics[width=\columnwidth]{images/fdew-add-decode}
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{images/fdew-add-decode}
+	\end{center}
 	\begin{itemize}
 		\item The CPU breaks down the instruction bits from IR into its component parts
-		\item The opcode is sent to the ALU
-		\item Sources and destination are sent to the register file
+		\item Opcode is sent to the ALU, arguments to the registers
+		\item Basically a bunch of multiplexers
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Walkthrough: Execute}
-	\includegraphics[width=\columnwidth]{images/fdew-add-execute}
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{images/fdew-add-execute}
+	\end{center}
 	\begin{itemize}
 		\item ALU performs the operation on the operands
 		\item ALU outputs result and condition code values associated with the result value.
@@ -186,17 +120,28 @@ Decode the instruction so we can execute it
 \end{frame}
 
 \begin{frame}{Walkthrough: Write(back)}
-	\includegraphics[width=\columnwidth]{images/fdew-add-write}
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{images/fdew-add-write}
+	\end{center}
 	\begin{itemize}
 		\item Result from ALU is stored in destination register
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Von Neumann Bottleneck}
+	\begin{itemize}
+		\item Suppose you have an array of a billion integers in memory. You want to add 1 to each of them. How do you do it?
+	\end{itemize}
+\end{frame}
 
 
-
-
-
+\begin{frame}{Von Neumann Bottleneck}
+	\begin{itemize}
+		\item Suppose you have an array of a billion integers in memory. You want to add 1 to each of them. How do you do it?
+		\item You have to load each value from memory, store it in a register, run it through the CPU, and write it back to memory
+		\item This is a lot of work!
+	\end{itemize}
+\end{frame}
 
 \Subsection{Clock-Driven Execution}
 
@@ -204,38 +149,31 @@ Decode the instruction so we can execute it
 	\begin{itemize}
 		\item Electrical signals move within the CPU, between CPU and memory, etc
 		\item Different paths, different lengths, different amounts of time for signals to get where they're going
-		\item CPU speed in GHz keeps everything coordinated
-		\item Why not just make the clock run faster? Speed of light
+		\item How do we keep everything coordinated?
 	\end{itemize}
 \end{frame}
 
-
-
-
-
-
-\begin{frame}{Clock-Driven Execution}
+\begin{frame}{What does a clock mean?}
 	\begin{itemize}
-		\item Each step takes one CPU cycle
-		\item CPU speed is measured in GHz
-		\item 1 MHz = 1 million cycles per second
-		\item 1 GHz = 1 billion cycles per second
+		\item The CPU has a clock
+		\item Clock signal flips true/false at a very consistent rate
+		\item Execution advances one step every tick of the clock
+		\item System status in between ticks does not matter
+		\item Physical mechanism: quartz. Electricity causes consistent predictable vibration
 	\end{itemize}
-
-	In the CPU, the clock drives the execution of instructions.
-	Used to determine when circuits from each stage become available.
-	Used to determine when outputs are ready to be inputs for next stage.
-	Time is discrete, not continuous. There is time 0, 1, 2, … but no time 1.5.
-	The processor's clock cycle time is the time between each clock tick. Units: seconds, nanoseconds, etc.
-	The processor's clock speed (or clock rate) is 1/(clock cycle time); the number of clock ticks per second. Units: megahertz, gigahertz, etc.
-	1 MHz = one million clock ticks per second
-	1 GHz = one billion clock ticks per second
-
 \end{frame}
 
+\begin{frame}{Clock Speed}
+	\begin{itemize}
+		\item 1 Hz (Hertz) = 1 cycle per second
+		\item 1 kHz = 1,000 Hz = 1,000 cycles per second
+		\item 1 MHz = 1,000,000 Hz = 1,000,000 cycles per second
+		\item 1 GHz = 1,000,000 Hz = 1,000,000,000 cycles per second
+		\item $10^9$ cycles per second means each cycle lasts $\frac{1}{10^9}$ seconds
+	\end{itemize}
+\end{frame}
 
 \begin{frame}{Why not just make the clock run faster?}
-
 	\begin{itemize}
 		\item Electricity moves at approximately the speed of light
 		\item Speed of light is about one foot per nanosecond
@@ -244,49 +182,171 @@ Decode the instruction so we can execute it
 	\end{itemize}
 \end{frame}
 
-
-
-
-
-
-
 \Subsection{Memory Hierarchy}
 
+\begin{frame}{Size vs Speed}
+	\begin{itemize}
+		\item How many books can you have in your hands at a time?
+		\item How many books can you store on your bookshelf?
+		\item How many books are there in the library?
+		\item For each case, how accessible are those books?
+	\end{itemize}
+\end{frame}
 
-
-\begin{frame}{The Memory Hierarchy}
+\begin{frame}{Book Storage Hierarchy}
 	\includegraphics[width=\columnwidth]{images/memory-hierarchy-books.png}
 \end{frame}
 
-\begin{frame}{The Memory Hierarchy}
+\begin{frame}{Books and Bytes}
+	\begin{itemize}
+		\item Data works the same way
+		\item Registers are super close to the CPU, but can only hold a few bytes of data
+		\item Memory holds more, but you have to load it before you can use it
+		\item Remote storage is even bigger and even slower
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Storage Hierarchy}
 	\includegraphics[width=\columnwidth]{images/memory-hierarchy.png}
 \end{frame}
 
-\begin{frame}{What is a cache?}
+\begin{frame}{Primary Storage}
 	\begin{itemize}
-		\item Cache holds data that you are likely to want soon. Recent and/or adjacent.
-		\item spatial locality
-		\item temporal locality
-		\item A CPU generally has a few layers of cache
+		\item Primary storage can be accessed directly by the CPU
+		\item Registers, cache, main memory
+		\item Physical mechanism: SRAM (static RAM). Data is stored in electric circuits, such as latches. Fastest type of storage. Used for registers
+		\item Another physical mechanism: DRAM (dynamic RAM). Data is stored in capacitors holding electric charge. Slower, cheaper, denser. Used for main memory
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Important terms}
+\begin{frame}{Secondary Storage}
 	\begin{itemize}
-		\item Primary storage
-		\item Secondary storage
-		\item Latency
-		\item Capacity
-		\item Transfer rate (aka throughput)
+		\item Secondary storage must be copied into primary storage before it can be accessed
+		\item HDD (hard disk drives). Magnetic storage on a spinning circular platter. Read/write arm hovers just a few atoms away from the disk surface. Moving pieces. Ask your parents if you want to make them feel old.
+		\item SSD (solid state drives). No moving parts. Thousands of transistors chained together.
+		\item Remote storage. Physical mechanism doesn't matter much since latency and transfer rate are due to the network
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Quantifying Storage}
+	\begin{itemize}
+		\item Latency: how long to get data (measured in nanoseconds)
+		\item Capacity: how much data (measured in bytes)
+		\item Transfer rate (aka throughput): how fast we can read or write (measured in bytes/second)
+	\end{itemize}
+\end{frame}
+
+\Subsection{Locality \& Cache}
+
+\begin{frame}{Wait -- what's a cache?}
+	\begin{itemize}
+		\item Cache is in between registers and main memory (in every way)
+		\item Physically closer to the ALU than memory, but not as close as the registers
+		\item Stores more data than the registers, but not as much as memory
+		\item Why might this be useful?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Temporal Locality}
+	\begin{itemize}
+		\item When you load a value from memory, there's a decent chance you'll use that same value again soon
+		\item The computer stores that value in the cache
+		\item When you try to load the value next time, the cache intercepts your request and returns the data much faster
+		\item This is called temporal locality (similar in time)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Spatial Locality}
+	\begin{itemize}
+		\item When you load one value from an array, there's a decent chance you'll be back for the rest soon
+		\item The computer stores "nearby" data in the cache
+		\item When you try to load that data from memory, the cache intercepts your request and returns the data much faster
+		\item This is called spatial locality (similar in space)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hits and Misses}
+	\begin{itemize}
+		\item Cache hit: you try to load data from memory. It's already in the cache! You get your data faster that you expected
+		\item Cache miss: you try to load data from memory. It's not in the cache. You have to wait for the data to be loaded from memory (about 10x slower)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Cache Eviction}
+	\begin{itemize}
+		\item Caches hold only a small amount of data compared to memory
+		\item If the computer wants to store something in the cache, but the cache is full, existing data has to be deleted to make room
+		\item This is called a cache eviction
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Caching Applications}
+	\begin{itemize}
+		\item The cache is a hardware component in between the CPU and main memory
+		\item Caches can also be implemented in software!
+		\item For example: your browser caches images from websites you visit. If you visit the same site later, the browser can find the image locally. This is much faster than pulling it across the network
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Caching in Software}
+	You can even use the idea of a cache within your code!
+
+	What happens here if you call \mintedinline{python}{fibonacci(1000)}?
+	\begin{minted}{python}
+def fibonacci(n):
+	if n < 2:
+		return n
+	return fibonacci(n-1) + fibonacci(n-2)
+\end{minted}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Caching in Software}
+	How about now?
+	\begin{minted}{python}
+CACHE = {}
+
+def fibonacci(n):
+	if n not in CACHE:
+		if n < 2:
+			CACHE[n] = n
+		else:
+			CACHE[n] = fibonacci(n-1) + fibonacci(n-2)
+	return CACHE[n]
+\end{minted}
+
+\end{frame}
 
 
 \Subsection{Pipelining and Hazards}
 
+\begin{frame}{Remember Execution Steps}
+	\begin{itemize}
+		\item Fetch
+		\item Decode
+		\item Execute
+		\item Write
+	\end{itemize}
+	Which of these stages do actual work? Which are overhead?
+\end{frame}
 
+\begin{frame}{Time is Money}
+	\includegraphics[width=\columnwidth]{images/fdew-before-pipelining}
+	\begin{itemize}
+		\item The execute step is the only step that uses the CPU. The rest are just moving values around
+		\item That means the CPU is sitting idle 75\% of the time at least!
+		\item Is there any way to be more efficient?
+	\end{itemize}
+\end{frame}
 
+\begin{frame}{Pipelining}
+	\begin{itemize}
+		\item The execute step is the only step that uses the CPU. The rest are just moving values around
+		\item That means the CPU is sitting idle 75\% of the time at least!
+		\item Is there any way to be more efficient?
+	\end{itemize}
+\end{frame}
 
 
 
