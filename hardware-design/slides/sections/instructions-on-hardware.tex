@@ -342,26 +342,120 @@ def fibonacci(n):
 
 \begin{frame}{Pipelining}
 	\begin{itemize}
-		\item The execute step is the only step that uses the CPU. The rest are just moving values around
-		\item That means the CPU is sitting idle 75\% of the time at least!
-		\item Is there any way to be more efficient?
+		\item After the fetch stage is done for an instruction, its circuitry doesn't do anything until the next instruction starts
+		\item Same for decode
+		\item What if we start the next instruction as soon as the circuitry is available?
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Behold the Pipeline}
+	\begin{center}
+		%	\includegraphics[\columnwidth]{images/pipelining}
+		\includegraphics[width=0.6\columnwidth]{images/pipelining-wiki}
+	\end{center}
+\end{frame}
 
+\begin{frame}{Please explain that busy diagram}
+	\begin{enumerate}
+		\item Fetch instruction 1
+		\item Decode instruction 1, fetch instruction 2
+		\item Execute instruction 1, decode instruction 2, fetch instruction 3
+		\item Write instruction 1, execute instruction 2, decode instruction 3, fetch instruction 4
+		\item Done with instruction 1, write instruction 2, execute instruction 3, decode instruction 4, fetch instruction 5
+		\item Etc
+	\end{enumerate}
+\end{frame}
 
-
-
-
-\begin{frame}{foo bar}
-	\includegraphics[width=\columnwidth]{images/instruction-breakdown}
+\begin{frame}{Pipelining Upsides}
 	\begin{itemize}
-		\item fizz
-		\item buzz
+		\item Code runs faster
+		\item One instruction takes 4 cycles (same as before)
+		\item Two pipelined instructions take 5 cycles (previously: 8)
+		\item Three pipelined instructions take 6 cycles (previously: 12)
+		\item This is a pretty big improvement
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Pipelining Downsides}
+	Can you think of any downsides of pipelining?
+
+
+	Hint: we will be using the terms "data hazard" and "control hazard"
+\end{frame}
+
+
+
+\begin{frame}{Hazards}
+	\begin{itemize}
+		\item Data hazard: we want to do two steps simultaneously, but we can't because they want to touch the same register
+		\item Control hazard: we don't know what to do next because it depends on the result of the result of an instruction that's still running
 	\end{itemize}
 \end{frame}
 
 
+
+
+\begin{frame}[fragile]{Data Hazards}
+
+	\begin{minted}[linenos]{tasm}
+	add r2, r1, r0
+	add r4, r2, r3
+\end{minted}
+
+	%	\begin{minted}[linenos]{python}
+	%r2 = r0 + r1
+	%r4 = r2 + r3
+	%\end{minted}
+
+	Do you see the problem?
+\end{frame}
+
+
+\begin{frame}[fragile]{Data Hazards}
+	\begin{minted}[linenos]{tasm}
+		add r2, r1, r0
+		add r4, r2, r3
+	\end{minted}
+	\begin{itemize}
+		\item Instruction 1 is writing data to r2 (write stage)
+		\item Instruction 2 is reading data from r2 (execute stage)
+		\item Those stages are supposed to happen at the same time
+		\item Race condition. Different outcome based on which happens first
+		\item Not good
+		\item What can we do?
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Mitigating Data Hazards}
+	\begin{itemize}
+		\item Compiler shenanigans. Sometimes \texttt{gcc} can figure out a way to reorder the instructions to avoid the hazard
+		\item Operand forwarding. Pass the value right back into the CPU to avoid the dangerous register read
+		\item Pipeling stall. Add a "bubble" to the pipeline. Wait until the operation is safe
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Pipelining with a Bubble}
+	\includegraphics[width=0.66\columnwidth]{images/pipelining-wiki-with-bubble}
+\end{frame}
+
+\begin{frame}[fragile]{Control Hazards}
+	\begin{minted}[linenos]{python}
+	if r1 == 0:
+		...
+	else:
+		...
+	\end{minted}
+Which instruction should we load into the pipeline after 1?
+\end{frame}
+
+\begin{frame}{Mitigating Control Hazards}
+	\begin{itemize}
+\item Pipeling stall. Add a "bubble" to the pipeline. Wait until we know the result of the conditional
+		\item Branch prediction. Guess. If we guess wrong, go back and do it right
+		\item Eager execution. Try them both. Once we get the result, throw away the moot one
+	\end{itemize}
+\end{frame}
 
 \begin{frame}{Eager Execution Gone Wrong}
 	\includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped.png}
