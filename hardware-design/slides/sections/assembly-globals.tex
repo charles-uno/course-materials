@@ -2,18 +2,15 @@
 
 \begin{frame}{Coding in Assembly}
 	\begin{itemize}
-		\item We'll be doing some coding exercises in assembly on emulators and on a Raspberry Pi
+		\item We'll be doing some coding exercises in Assembly (specifically aarch64) on emulators and on a Raspberry Pi
 		\item Assembly code can be super efficient. Ours won't be. That's not why we're here
 		\item We are not studying to become assembly developers. We are here for the core concepts
 	\end{itemize}
 \end{frame}
 
-\Subsection{Why study assembly?}
-
 \begin{frame}[fragile]{Hello World in C}
 	\begin{minted}{C}
 		#include <stdio.h>
-
 		int main() {
 			printf("Hello world!\n");
 			return 0;
@@ -80,11 +77,11 @@
 
 \begin{frame}{What makes assembly special?}
 	\begin{itemize}
-		\item Every computer architecture is a little bit different. An Intel CPU and an AMD CPU can both run the same logic, but they will do things in slightly different ways.
-		\item When coding in C, you (mostly) don't have to worry about it. The compiler figures out how to make your logic work on the current hardware.
-		\item Same for Python. The interpreter (written in C and compiled) figures out how to make your logic work on the current hardware.
+		\item An Intel CPU and an AMD CPU can both run the same logic, but they will do things in slightly different ways.
+		\item When coding in C, you (mostly) don't have to worry about it. The compiler makes your logic work on the current hardware.
+		\item Same for Python. The interpreter (itself compiled) figures it out.
 		\item Assembly is not like that. Intel assembly is tied to the hardware specifics of the Intel CPU. ARM assembly is a different language.
-		\item We study assembly because we want to talk about what is happening on hardware.
+		\item We study Assembly because we want to talk about what is happening on hardware.
 	\end{itemize}
 
 	%	The following command compiles a program in C:
@@ -99,23 +96,116 @@
 % per wikipedia:
 % Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
 
+%\Subsection{Registers and Memory}
 
-\Subsection{Registers and Memory}
+%\begin{frame}{Registers and Memory}
+%We'll dig deeper into the hardware later. For now, let's just look at three new terms:
+%	\begin{itemize}
+%		\item The \textbf{CPU} is where computations actually happen.
+%		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \textbf{registers}.
+%		\item All other data is stored in \textbf{memory} (aka RAM). This includes data as well as the program instructions themselves.
+%		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out.
+%		\item When coding in Assembly, we manually move data back and forth between memory and registers.
+%	\end{itemize}
+%\end{frame}
 
-\begin{frame}{Registers and Memory}
-	\includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
-\end{frame}
+\Subsection{Assembly Commands}
 
-\begin{frame}{Registers and Memory}
-We'll dig deeper into the hardware later. For now, let's just look at three new terms:
+\begin{frame}{Register Names}
 	\begin{itemize}
-		\item The \textbf{CPU} is where computations actually happen.
-		\item The CPU includes tiny bits of storage for the values it's using right now. These are called \textbf{registers}.
-		\item All other data is stored in \textbf{memory} (aka RAM). This includes data as well as the program instructions themselves.
-		\item When coding in C or Python, you do not need to worry about registers. You declare variables and the computer figures it out.
-		\item When coding in Assembly, we manually move data back and forth between memory and registers.
+		\item The 64-bit registers in aarch64 are named \Arm{x0}, \Arm{x1}, etc
+		\item If you see \Arm{w0}, that's the lower 32 bits of \Arm{x0}
+		\item If you see \Arm{r0}, it's probably a typo left over from the previous version of this class
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Don't Worry!}
+	\begin{itemize}
+		\item We are just looking at these to get a feel for them
+		\item You will have plenty of time to practice
+		\item You do not need to worry about memorizing anything right now
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Basic Commands in Assembly}
+	\begin{itemize}
+		\item \Arm{... // double slash for inline comments}
+		\item \Arm{add x0, x1, 5 // add x1 + 5, store in x0}
+		\item \Arm{add x0, x1, x7 // add x1 + x7, store in x0}
+		\item \Arm{mov x4, 5 // set x4 = 5 (literal number)}
+		\item \Arm{mov x4, x5 // set x4 = x5}
+		\item \Arm{mul x2, x8, x3 // multiply x8 * x3, store in x2}
+		\item \Arm{mul x2, x8, 12 // multiply x8 * 12, store in x2}
+		\item \Arm{sub x5, x4, 3 // subtract x4 - 3, store in x5}
+		\item \Arm{sub x5, x4, x3 // subtract x4 - x3, store in x5}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Reading from Memory}
+
+	Load the \emph{address} of global variable \Arm{fizz} to \Arm{x3}:
+	\begin{minted}{tasm}
+		ldr x3, =fizz
+	\end{minted}
+
+	Register \Arm{x2} holds an \emph{address}. Load the \emph{value} to \Arm{x3}:
+	\begin{minted}{tasm}
+		ldr x3, [x2]
+	\end{minted}
+
+	Register \Arm{x2} holds an \emph{address}. Load the \emph{value} from \Arm{x2-0x20} to \Arm{x3}:
+	\begin{minted}{tasm}
+		ldr x3, [x2, -0x20]
+	\end{minted}
+
+	Global variable \Arm{fizz} holds a number. Load the address, then load the value from that address:
+	\begin{minted}{tasm}
+		ldr x3, =fizz
+		ldr x3, [x3] // yes it can be the same register
+	\end{minted}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Writing to Memory}
+
+	Register \Arm{x5} holds an \emph{address}. Store the \emph{value} from \Arm{x7} to that address:
+	\begin{minted}{tasm}
+		str x7, [x5]
+	\end{minted}
+
+	\vspace{0.5cm}
+
+	Register \Arm{x5} holds an \emph{address}. Store the \emph{value} from \Arm{x8} to \Arm{x5+0x10}
+	\begin{minted}{tasm}
+		str x7, [x5, 0x10]
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{We'll talk more about these ones later}
+	Call function \Arm{printf} ("branch and link"):
+	\begin{minted}{tasm}
+		bl printf
+	\end{minted}
+
+	\vspace{0.5cm}
+
+	Return from the function or program:
+	\begin{minted}{tasm}
+		ret
+	\end{minted}
+\end{frame}
+
+
+
+
+
+
+
+
+
+
 
 \Subsection{Global Constants}
 
@@ -127,6 +217,30 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 		\item We can use the name to load the \textbf{address} of that value
 	\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]{Hello World in Assembly (again)}
+	\begin{minted}{tasm}
+		.section .rodata
+			greeting: .ascii "Hello world!\n\0"
+
+		.section .text
+		.global main
+		main:
+			ldr x0, =greeting
+			bl printf
+			mov x0, 0
+			ret
+	\end{minted}
+
+	\begin{itemize}
+		\item \Arm{greeting} is a local variable
+		\item We use \arm{ldr} to load the address of \Arm{greeting} into \Arm{x0}
+	\end{itemize}
+\end{frame}
+
+
+
+
 
 \Subsection{Printf}
 
@@ -227,7 +341,7 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 		\item \Arm{bl printf} is how we call it
 		\item \Arm{printf} looks at \Arm{x0} for its first argument (the output string)
 		\item if the output string includes a format identifier, it grabs the value from \Arm{x1}
-		\item if the output string includes another formst identifier, it grabs the value from \Arm{x2}, etc
+		\item if the output string includes another format identifier, it grabs the value from \Arm{x2}, etc
 	\end{itemize}
 \end{frame}
 
@@ -448,26 +562,6 @@ We'll dig deeper into the hardware later. For now, let's just look at three new 
 \end{frame}
 
 
-
-
-\Subsection{Assembly Commands}
-
-\begin{frame}{commands in assembly}
-
-	leave local variable handling for later. str, ldr with brackets
-
-	\begin{itemize}
-		\item add rd, rn, \# ... add rd, rn1, rn2
-		\item sub rd, rn, \# ... sub rd, rn1, rn2
-		\item mov rd, rn ... mov rd, \#
-		\item mul rd, rn1, rn2
-		\item ldr rd, =label
-		\item ldr, rd, [rn]
-		\item ldr, rd, [rn, \#]
-		\item str rs, rn
-	\end{itemize}
-
-\end{frame}
 
 
 
