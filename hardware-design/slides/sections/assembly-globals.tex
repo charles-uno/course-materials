@@ -184,69 +184,30 @@
 \end{frame}
 
 \begin{frame}[fragile]{We'll talk more about these ones later}
-	Call function \Arm{printf} ("branch and link"):
+	Call function \Arm{printf}:
 	\begin{minted}{tasm}
 		bl printf
 	\end{minted}
 
-	\vspace{0.5cm}
+	\vspace{0.3cm}
 
-	Return from the function or program:
+	Call the function \Arm{exit}, which exits the program
 	\begin{minted}{tasm}
 		ret
 	\end{minted}
+
+	\vspace{0.3cm}
+
+	\Arm{bl} stands for "branch and link". More on that later
+
 \end{frame}
-
-
-
-
-
-
-
-
-
-
-
-\Subsection{Global Constants}
-
-\begin{frame}{Global Constants}
-	\begin{itemize}
-		\item A global constant is defined in the code
-		\item Its value does not change during runtime
-		\item It has a name
-		\item We can use the name to load the \textbf{address} of that value
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Hello World in Assembly (again)}
-	\begin{minted}{tasm}
-		.section .rodata
-			greeting: .ascii "Hello world!\n\0"
-
-		.section .text
-		.global main
-		main:
-			ldr x0, =greeting
-			bl printf
-			mov x0, 0
-			ret
-	\end{minted}
-
-	\begin{itemize}
-		\item \Arm{greeting} is a local variable
-		\item We use \arm{ldr} to load the address of \Arm{greeting} into \Arm{x0}
-	\end{itemize}
-\end{frame}
-
-
-
 
 
 \Subsection{Printf}
 
 \begin{frame}[fragile]{Printf in C}
 	\begin{itemize}
-		\item We use \texttt{printf} to print output to the terminal in assembly
+		\item We use \texttt{printf} to print output to the terminal in Assembly
 		\item Let's look at C first. The functionality is the same and C is more legible
 	\end{itemize}
 
@@ -256,26 +217,35 @@
 	\end{minted}
 
 	\begin{minted}{C}
-	const int year = 2026;
-	printf("the current year is %d\n", year);
+		const int m = 2, n = 3;
+		int s = m + n;
+		printf("%d + %d = %d\n", m, n, s);
 	\end{minted}
+\end{frame}
+
+\begin{frame}{What does it do?}
+	\begin{itemize}
+		\item The first argument to \texttt{printf} must be a string
+		\item The string can include format specifiers like \texttt{\%d}
+		\item Subsequent arguments are inserted into the string (in order) in place of the format specifiers
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Format Specifiers}
 	\begin{itemize}
 		\item \texttt{\%d} - interpret the value as an integer
-		\item \texttt{\%c} - interpret the value as a character
-		\item \texttt{\%s} - interpret the value as a pointer to a null-terminated string
-		\item Values are just ones and zeroes! You can use whatever format specifier you want. But you might not like the results
+		\item \texttt{\%c} - interpret the value as an ASCII character
+		\item \texttt{\%s} - interpret the value as a \emph{pointer} to a null-terminated string
+		\item These values are just ones and zeroes! You can use whichever format speficier you want. But you might not like the results
 		\item Why do we use a pointer to the string instead of the string itself?
-		      % because it might not fit in the register
 	\end{itemize}
 \end{frame}
 
 % more about format specifiers: https://www.geeksforgeeks.org/c/format-specifiers-in-c/
 
 \begin{frame}[fragile]{Printf in Assembly}
+	The idea is exactly the same in Assembly. The syntax is just a bit more rustic:
 
 	\begin{minted}{tasm}
 		.section .rodata
@@ -289,7 +259,7 @@
 			ldr x1, =name
 			bl printf
 			mov x0, 0
-			ret
+			b exit
 	\end{minted}
 \end{frame}
 
@@ -307,7 +277,7 @@
 			ldr x1, [x1]
 			bl printf
 			mov x0, 0
-			ret
+			b exit
 	\end{minted}
 \end{frame}
 
@@ -316,20 +286,18 @@
 \begin{frame}[fragile]{Printf in Assembly}
 	\begin{minted}{tasm}
 		.section .rodata
-			output: .ascii "who has %d thumbs and wrote this? %s\n\0"
-			name: .ascii "charles\0"
-			n_thumbs: .word 2
-		
-		.section .text
-		.global main
-		main:
-			ldr x0, =output
-			ldr x3, =n_thumbs
-			ldr x3, [x1]
-			ldr x2, =name
-			bl printf
-			mov x0, 0
-			ret
+		output_str: .ascii "%d + %d = %d\n\0"
+	
+	.section .text
+	.global main
+	main:
+		ldr x0, =output_str
+		mov x1, 2
+		mov x2, 3
+		add x3, x1, x2
+		bl printf
+		mov x0, 0
+		b exit
 	\end{minted}
 \end{frame}
 
@@ -370,6 +338,53 @@
 
 
 
+
+
+
+
+
+
+
+
+\Subsection{Global Constants}
+
+\begin{frame}{Global Constants}
+	\begin{itemize}
+		\item A global constant is defined in the code
+		\item Its value does not change during runtime
+		\item It has a name
+		\item We can use the name to load the \textbf{address} of that value
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Hello World in Assembly (again)}
+	\begin{minted}{tasm}
+		.section .rodata
+			greeting: .ascii "Hello world!\n\0"
+
+		.section .text
+		.global main
+		main:
+			ldr x0, =greeting
+			bl printf
+			mov x0, 0
+			b exit
+	\end{minted}
+
+	\begin{itemize}
+		\item \Arm{greeting} is a local variable
+		\item We use \arm{ldr} to load the address of \Arm{greeting} into \Arm{x0}
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+
+
 \Subsection{Global Variables}
 
 \Subsection{Scanf}
@@ -389,7 +404,7 @@
 			ldr x0, =greeting
 			bl printf
 			mov x0, 0
-			ret
+			b exit
 	\end{minted}
 
 	Let's walk through what's happening on each line
@@ -415,7 +430,7 @@
 		bl printf
 		\Highlight{@ return 0 (normal exit status)}
 		mov r0, \#0
-		bl exit
+		b exit
 	\end{alltt}
 \end{frame}
 
@@ -446,7 +461,7 @@
 			0x4fe4 & \quad bl printf                                                   \\
 			-      & \quad \Highlight{@ return 0 (normal exit status)}                 \\
 			0x4fe8 & \quad mov r0, \#0                                                 \\
-			0x4fec & \quad bl exit                                                     \\
+			0x4fec & \quad b exit                                                     \\
 		\end{tabular}
 	\end{alltt}
 \end{frame}
@@ -458,7 +473,7 @@
 			r0                            & ?      &                            & 0x4fe0 & ldr r0, =greeting \\
 			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
 			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & bl exit           \\
+			r3                            & ?      &                            & 0x4fec & b exit           \\
 			r4                            & ?      &                            & 0x4ff0 & Hell              \\
 			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
 			fp                            & ?      &                            & 0x4ff8 & rld!              \\
@@ -478,7 +493,7 @@
 			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
 			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
 			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & bl exit           \\
+			r3                            & ?      &                            & 0x4fec & b exit           \\
 			r4                            & ?      &                            & 0x4ff0 & Hell              \\
 			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
 			fp                            & ?      &                            & 0x4ff8 & rld!              \\
@@ -500,7 +515,7 @@
 			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
 			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
 			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & bl exit           \\
+			r3                            & ?      &                            & 0x4fec & b exit           \\
 			r4                            & ?      &                            & 0x4ff0 & Hell              \\
 			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
 			fp                            & ?      &                            & 0x4ff8 & rld!              \\
@@ -523,7 +538,7 @@
 			r0                            & 0      &                            & 0x4fe0 & ldr r0, =greeting \\
 			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
 			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & bl exit           \\
+			r3                            & ?      &                            & 0x4fec & b exit           \\
 			r4                            & ?      &                            & 0x4ff0 & Hell              \\
 			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
 			fp                            & ?      &                            & 0x4ff8 & rld!              \\
@@ -546,7 +561,7 @@
 			r0                            & 0 &                            & 0x4fe0 & ldr r0, =greeting \\
 			r1                            & ? &                            & 0x4fe4 & bl printf         \\
 			r2                            & ? &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ? &                            & 0x4fec & bl exit           \\
+			r3                            & ? &                            & 0x4fec & b exit           \\
 			r4                            & ? &                            & 0x4ff0 & Hell              \\
 			sp                            & ? &                            & 0x4ff4 & o Wo              \\
 			fp                            & ? &                            & 0x4ff8 & rld!              \\
