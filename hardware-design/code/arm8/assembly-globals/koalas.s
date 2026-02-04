@@ -1,5 +1,5 @@
 // global constants
-.section .rodata
+.SECTION .rodata
 prompt: .ascii "how many koalas do you have? \0"
 input_fmt: .ascii "%d\0"
 report: .ascii "that's %d thumbs!\n\0"
@@ -12,7 +12,7 @@ num_koalas: .word 0
 .section .text
 .global main
 main:
-ldr x0, =prompt
+LDR x0, =prompt
 bl printf
 
 ldr x0, =input_fmt
