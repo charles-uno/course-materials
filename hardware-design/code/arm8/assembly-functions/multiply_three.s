@@ -62,5 +62,5 @@ main:
     ldr lr, [sp, 8]
     ldr fp, [sp]
     add sp, sp, 48
-    ret
+    b exit
 

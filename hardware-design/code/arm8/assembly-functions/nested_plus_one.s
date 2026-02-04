@@ -71,5 +71,5 @@ main:
     add sp, sp, 16
     // return 0
     mov x0, 0
-    ret 
+    b exit
     

@@ -35,5 +35,5 @@ main:
     ldr lr, [fp]
     ldr fp, [fp, -8]
     add sp, sp, 32
-    ret
+    b exit
 

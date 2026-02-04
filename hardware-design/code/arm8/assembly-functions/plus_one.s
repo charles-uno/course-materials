@@ -40,5 +40,5 @@ main:
     ldr lr, [sp, 0x10]
     ldr fp, [sp]
     add sp, sp, 0x20
-    ret
+    b exit
     

@@ -38,5 +38,5 @@ main:
     bl printf
     ldr fp, [sp], 0x10
     ldr lr, [sp], 0x10
-    ret
+    b exit
     

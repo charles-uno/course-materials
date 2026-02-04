@@ -31,5 +31,5 @@ begin_loop:
     ldr lr, [sp, 8]
     ldr fp, [sp]
     add sp, sp, 16
-    ret
+    b exit
 
