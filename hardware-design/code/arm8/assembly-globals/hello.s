@@ -11,5 +11,5 @@ main:
     b exit
 
 .section .rodata
-    message: .ascii "Hello World\n"
+    message: .ascii "Hello World\n\0"
 

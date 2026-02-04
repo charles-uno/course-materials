@@ -3,4 +3,3 @@
 main:
     mov x0, 0
     b exit
-
