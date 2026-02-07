@@ -474,17 +474,72 @@
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
-\Subsection{Structured Data}
+\Subsection{Beyond Numbers}
 
-\begin{frame}{Structured Data}
-
+\begin{frame}{What else do computers store?}
+	There are many cases where we want a computer to store non-numerical data:
 	\begin{itemize}
-		\item characters (ASCII, unicode)
-		\item null-terminated strings
-		\item audio
-		\item colors
-		\item images
-		\item JSON
+		\item Text
+		\item Colors
+		\item Sounds
+		\item Images
+		\item Videos
+		\item Websites
+		\item Multiple things at once
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Characters and Strings}
+	\begin{itemize}
+		\item Each character is represented by a number
+		\item The most straightforward encoding is ASCII
+		\item Modern use cases typically use Unicode (much bigger)
+		\item To make a string, put a bunch of characters in a row
+		\item Question: how do we identify the end of a string?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{ASCII Table}
+	\includegraphics[width=\columnwidth]{images/ascii-table}
+\end{frame}
+
+\begin{frame}{Colors and Images}
+	\begin{itemize}
+		\item A color can be described by three numbers (R, G, B)
+		\item We can represent an image as a grid of colored pixels
+		\item Question: do we need a null byte at the end of a pixel/row/image? Why or why not?
+	\end{itemize}
+	\includegraphics[width=\columnwidth]{images/mario-pixels}
+\end{frame}
+
+\begin{frame}{Sound}
+	\begin{itemize}
+		\item Sound is pressure vibrations in the air
+		\item We can create sound by moving a speaker cone rapidly
+		\item To store sound, store the movement of the speaker cone
+	\end{itemize}
+	\includegraphics[width=0.5\columnwidth]{images/speakers}
+\end{frame}
+
+\begin{frame}{Structured Data}
+	\begin{itemize}
+		\item When you go to a website, how does your browser know what to display?
+		\item When you add an item to your online cart, what data is sent?
+	\end{itemize}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\columnwidth]{images/html-example}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\columnwidth]{images/json-example}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+
+
+
+
+
 
