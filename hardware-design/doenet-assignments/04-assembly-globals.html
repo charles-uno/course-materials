@@ -1,126 +1,183 @@
-
 <section>
-    <title>Reading for Next Class</title>
+  <title>Reading for Next Class</title>
 
-    <p>Read Sections 1.1 through 1.3 from <ref uri="https://diveintosystems.org/book/index.html">Dive Into Systems</ref>. Take notes as you read through
-        these
-        sections. After completing the reading, write a summary below. This summary will be graded manually.</p>
+  <p>Read Sections 1.1 through 1.3 from <ref uri="https://diveintosystems.org/book/index.html">Dive Into Systems</ref>.
+    Take notes as you read through
+    these
+    sections. After completing the reading, write a summary below. This summary will be graded manually.</p>
 
-    <answer>
-        <textInput name="summary" expanded />
-        <award>
-            <when>
-                <text>$summary</text> != <text></text>
-            </when>
-        </award>
-    </answer>
+  <answer>
+    <textInput name="summary" expanded />
+    <award>
+      <when>
+        <text>$summary</text> != <text></text>
+      </when>
+    </award>
+  </answer>
 </section>
 
 <setup>
-    <module name="memSlots" newNamespace>
-        <setup>
-          <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue=""/>
-          <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue=""/>
-          <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue=""/>
-          <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue=""/>
-          <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false"/>
-          <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)"/>
-        </setup>
-        <conditionalContent>
-          <case condition="not $inGraph">
-            [$items]
-          </case>
-          <case condition="$inGraph">
-            <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false" >$arrayName</text>
-            <map>
-              <template>
-                <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px" positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
-                <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left" draggable="false">$labels.texts[$i+1]</text>
-              </template>
-              <sources alias="i">
-                <sequence from="0" to="$size-1" step="1"/>
-              </sources>
-            </map>
-            <text anchor="($anchor.x, $anchor.y-$size-.5)"><ellipsis/></text>
-          </case>
-        </conditionalContent>
-      </module>
+  <module name="memSlots" newNamespace>
+    <setup>
+      <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue="" />
+      <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue="" />
+      <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue="" />
+      <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue="" />
+      <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false" />
+      <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)" />
     </setup>
-    
-    <section newNamespace><title>Assembly Commands</title>
-    
-      <p>From the options below, select the correct syntax for storing the value 1 in register 0.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>mov 1, x0</c></choice>
-            <choice><c>mv x0, 1</c></choice>
-            <choice><c>mv 1, x0</c></choice>
-            <choice credit="1"><c>mov x0, 1</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for copying the value from register 2 to register 1</p>
-    
-      <answer>
-          <choiceInput>
-            <choice credit="1"><c>mov x1, x2</c></choice>
-            <choice><c>mov x2, x1</c></choice>
-            <choice><c>cp x1, x2</c></choice>
-            <choice><c>cp x2, x1</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for adding the values in registers 0 and 1, and storing the result in register 2</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>mov x2, x0+x1</c></choice>
-            <choice><c>add x0, x1, x2</c></choice>
-            <choice credit="1"><c>add x2, x1, x0</c></choice>
-            <choice><c>str x0+x1, x2</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for incrementing the value in register 0 by 1</p>
-    
-      <answer>
-          <choiceInput>
-            <choice credit="1"><c>add x0, x0, 1</c></choice>
-            <choice><c>inc x0</c></choice>
-            <choice><c>x0++</c></choice>
-            <choice><c>str x0++</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for subtracting the value in register 2 from the value in register 1, and storing the result in register 1.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>sub x1, x2</c></choice>
-            <choice credit="1"><c>sub x1, x2, x1</c></choice>
-            <choice><c>str x2, x2-x1</c></choice>
-            <choice><c>str x2-x1, x2</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for multiplying the value in register 0 by itself, and storing the result in register 1.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>sqr x1, x0</c></choice>
-            <choice credit="1"><c>mul x1, x0, x0</c></choice>
-            <choice><c>str x1, x0*x0</c></choice>
-            <choice><c>str x1, x0^2</c></choice>
-          </choiceInput>
-      </answer>
-    </section>
-    
-    <section newNamespace><title>Basic Assembly Program</title>
-    
-      <p>Consider the following assembly program (with line numbers).</p>
-    
-      <pre>1:    .global _start
+    <conditionalContent>
+      <case condition="not $inGraph">
+        [$items]
+      </case>
+      <case condition="$inGraph">
+        <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false">$arrayName</text>
+        <map>
+          <template>
+            <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px" positionFromAnchor="right"
+              draggable="false">$items.texts[$i+1]</textInput>
+            <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left"
+              draggable="false">$labels.texts[$i+1]</text>
+          </template>
+          <sources alias="i">
+            <sequence from="0" to="$size-1" step="1" />
+          </sources>
+        </map>
+        <text anchor="($anchor.x, $anchor.y-$size-.5)">
+          <ellipsis />
+        </text>
+      </case>
+    </conditionalContent>
+  </module>
+</setup>
+
+<section newNamespace>
+  <title>Assembly Commands</title>
+
+  <p>From the options below, select the correct syntax for storing the value 1 in register 0.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>mov 1, x0</c>
+      </choice>
+      <choice>
+        <c>mv x0, 1</c>
+      </choice>
+      <choice>
+        <c>mv 1, x0</c>
+      </choice>
+      <choice credit="1">
+        <c>mov x0, 1</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for copying the value from register 2 to register 1</p>
+
+  <answer>
+    <choiceInput>
+      <choice credit="1">
+        <c>mov x1, x2</c>
+      </choice>
+      <choice>
+        <c>mov x2, x1</c>
+      </choice>
+      <choice>
+        <c>cp x1, x2</c>
+      </choice>
+      <choice>
+        <c>cp x2, x1</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for adding the values in registers 0 and 1, and storing the
+    result in register 2</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>mov x2, x0+x1</c>
+      </choice>
+      <choice>
+        <c>add x0, x1, x2</c>
+      </choice>
+      <choice credit="1">
+        <c>add x2, x1, x0</c>
+      </choice>
+      <choice>
+        <c>str x0+x1, x2</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for incrementing the value in register 0 by 1</p>
+
+  <answer>
+    <choiceInput>
+      <choice credit="1">
+        <c>add x0, x0, 1</c>
+      </choice>
+      <choice>
+        <c>inc x0</c>
+      </choice>
+      <choice>
+        <c>x0++</c>
+      </choice>
+      <choice>
+        <c>str x0++</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for subtracting the value in register 2 from the value in
+    register 1, and storing the result in register 1.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>sub x1, x2</c>
+      </choice>
+      <choice credit="1">
+        <c>sub x1, x2, x1</c>
+      </choice>
+      <choice>
+        <c>str x2, x2-x1</c>
+      </choice>
+      <choice>
+        <c>str x2-x1, x2</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for multiplying the value in register 0 by itself, and storing
+    the result in register 1.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>sqr x1, x0</c>
+      </choice>
+      <choice credit="1">
+        <c>mul x1, x0, x0</c>
+      </choice>
+      <choice>
+        <c>str x1, x0*x0</c>
+      </choice>
+      <choice>
+        <c>str x1, x0^2</c>
+      </choice>
+    </choiceInput>
+  </answer>
+</section>
+
+<section newNamespace>
+  <title>Basic Assembly Program</title>
+
+  <p>Consider the following assembly program (with line numbers).</p>
+
+  <pre>1:    .global _start
     2:    _start:
     3:        mov  x0, 4
     4:        mov  x1, 8
@@ -134,125 +191,189 @@
     12:       mov  x1, 2
     13:       mul  x2, x0, x1
     14:       mul  x2, x2, x2</pre>
-    
-      <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
-    
-        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)"/>
-    
-        <rectangle vertices="(1,9) (4,2)" filled fixed/>
-        <text anchor="(1.5,8.5)" fixed>CPU</text>
-        
-      </graph>
-    
-      <p><alert>Note: the data in registers should always be represented as an 8-digit (32 bit) hexadecimal number (without the prefix <c>0x</c>).</alert> Feel free to use an online converter calculator as needed.</p>
-    
-      <p>Update the diagram above to show the state of the registers after running the program <alert>through line 5</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>00000004 00000008 00000004 00000000</textList> 
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers after running the program <alert>through line 8</alert>. <answer disableAfterCorrect>
-      <award><when caseInsensitiveMatch>
-        $(registers/items) = <textList>00000006 0000000c 00000012 00000000</textList> 
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers after running the program <alert>through line 10</alert>. <answer disableAfterCorrect>
-      <award><when caseInsensitiveMatch>
-        $(registers/items) = <textList>0000000b 0000000c 00000011 00000000</textList> 
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers after running the program <alert>through line 12</alert>. <answer disableAfterCorrect>
-      <award><when caseInsensitiveMatch>
-        $(registers/items) = <textList>00000003 00000002 00000011 00000000</textList> 
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers after running the program <alert>through line 14</alert>. <answer disableAfterCorrect>
-      <award><when caseInsensitiveMatch>
-        $(registers/items) = <textList>00000003 00000002 00000024 00000000</textList> 
-      </when></award>
-    </answer></p>
-    
-    </section>
-      
-    <section newNamespace><title>More Assembly Commands</title>
-    
-      <p>From the options below, select the correct syntax for declaring a global variable called <c>a</c>, and assigning it value 1.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>int a, 1</c></choice>
-            <choice credit="1"><c>a: .word 1</c></choice>
-            <choice><c>a: .number 1</c></choice>
-            <choice><c>a: .int 1</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct meaning of the line <c>.section data</c></p>
-    
-      <answer>
-          <choiceInput>
-            <choice credit="1">Marking the section of global variables</choice>
-            <choice>Marking the section of global constants</choice>
-            <choice>Marking the section of local variables</choice>
-            <choice>Marking the section of local constants</choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct meaning of the line <c>.section rodata</c></p>
-    
-      <answer>
-          <choiceInput>
-            <choice>Marking the section of global variables</choice>
-            <choice credit="1">Marking the section of global constants</choice>
-            <choice>Marking the section of local variables</choice>
-            <choice>Marking the section of local constants</choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for copying address of the variable <c>a</c> into register 0.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>str x0, a</c></choice>
-            <choice><c>str x0, =a</c></choice>
-            <choice><c>ldr x0, &a</c></choice>
-            <choice credit="1"><c>ldr x0, =a</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for finding the value in the address held by register 1, and copying that value into register 0.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>ldr x0, x1</c></choice>
-            <choice credit="1"><c>ldr x0, [x1]</c></choice>
-            <choice><c>ldr x0, &x1</c></choice>
-            <choice><c>ldr x0, =x1</c></choice>
-          </choiceInput>
-      </answer>
-    
-      <p>From the options below, select the correct syntax for taking the value in register 1, and storing that value at the address held by register 0.</p>
-    
-      <answer>
-          <choiceInput>
-            <choice><c>str x0, &x1</c></choice>
-            <choice><c>str x1, &x0</c></choice>
-            <choice credit="1"><c>str x1, [x0]</c></choice>
-            <choice><c>str [x1], x0</c></choice>
-          </choiceInput>
-      </answer>
-      
-    </section>
-    
-    <section newNamespace><title>Global Constants and Variables in Assembly</title>
-    
-      <p>Consider the following assembly program (with line numbers).</p>
-    
-      <pre>1:    .section	.data
+
+  <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1"
+    size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="registers" copysource="../memSlots" arrayName="Registers" size="4"
+      items="00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)" />
+
+    <rectangle vertices="(1,9) (4,2)" filled fixed />
+    <text anchor="(1.5,8.5)" fixed>CPU</text>
+
+  </graph>
+
+  <p>
+    <alert>Note: the data in registers should always be represented as an 8-digit (32 bit) hexadecimal number (without
+      the prefix <c>0x</c>).</alert> Feel free to use an online converter calculator as needed.
+  </p>
+
+  <p>Update the diagram above to show the state of the registers after running the program <alert>through line 5</alert>
+    . <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>00000004 00000008 00000004 00000000</textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers after running the program <alert>through line 8</alert>
+    . <answer disableAfterCorrect>
+      <award>
+        <when caseInsensitiveMatch>
+          $(registers/items) = <textList>00000006 0000000c 00000012 00000000</textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers after running the program <alert>through line 10
+    </alert>. <answer disableAfterCorrect>
+      <award>
+        <when caseInsensitiveMatch>
+          $(registers/items) = <textList>0000000b 0000000c 00000011 00000000</textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers after running the program <alert>through line 12
+    </alert>. <answer disableAfterCorrect>
+      <award>
+        <when caseInsensitiveMatch>
+          $(registers/items) = <textList>00000003 00000002 00000011 00000000</textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers after running the program <alert>through line 14
+    </alert>. <answer disableAfterCorrect>
+      <award>
+        <when caseInsensitiveMatch>
+          $(registers/items) = <textList>00000003 00000002 00000024 00000000</textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+</section>
+
+<section newNamespace>
+  <title>More Assembly Commands</title>
+
+  <p>From the options below, select the correct syntax for declaring a global variable called <c>a</c>, and assigning it
+    value 1.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>int a, 1</c>
+      </choice>
+      <choice credit="1">
+        <c>a: .word 1</c>
+      </choice>
+      <choice>
+        <c>a: .number 1</c>
+      </choice>
+      <choice>
+        <c>a: .int 1</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct meaning of the line <c>.section data</c>
+  </p>
+
+  <answer>
+    <choiceInput>
+      <choice credit="1">Marking the section of global variables</choice>
+      <choice>Marking the section of global constants</choice>
+      <choice>Marking the section of local variables</choice>
+      <choice>Marking the section of local constants</choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct meaning of the line <c>.section rodata</c>
+  </p>
+
+  <answer>
+    <choiceInput>
+      <choice>Marking the section of global variables</choice>
+      <choice credit="1">Marking the section of global constants</choice>
+      <choice>Marking the section of local variables</choice>
+      <choice>Marking the section of local constants</choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for copying address of the variable <c>a</c> into register 0.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>str x0, a</c>
+      </choice>
+      <choice>
+        <c>str x0, =a</c>
+      </choice>
+      <choice>
+        <c>ldr x0, &a</c>
+      </choice>
+      <choice credit="1">
+        <c>ldr x0, =a</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for finding the value in the address held by register 1, and
+    copying that value into register 0.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>ldr x0, x1</c>
+      </choice>
+      <choice credit="1">
+        <c>ldr x0, [x1]</c>
+      </choice>
+      <choice>
+        <c>ldr x0, &x1</c>
+      </choice>
+      <choice>
+        <c>ldr x0, =x1</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+  <p>From the options below, select the correct syntax for taking the value in register 1, and storing that value at the
+    address held by register 0.</p>
+
+  <answer>
+    <choiceInput>
+      <choice>
+        <c>str x0, &x1</c>
+      </choice>
+      <choice>
+        <c>str x1, &x0</c>
+      </choice>
+      <choice credit="1">
+        <c>str x1, [x0]</c>
+      </choice>
+      <choice>
+        <c>str [x1], x0</c>
+      </choice>
+    </choiceInput>
+  </answer>
+
+</section>
+
+<section newNamespace>
+  <title>Global Constants and Variables in Assembly</title>
+
+  <p>Consider the following assembly program (with line numbers).</p>
+
+  <pre>1:    .section	.data
     2:    x:	.word	5
     3:    y:	.word	3
     4:
@@ -270,171 +391,142 @@
     16:       str	x1, [x0]
     17:       ldr	x0, =one
     18:       ldr	x1, [x0]</pre>
-    
-      <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
-    
-        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)"/>
-        <rectangle vertices="(1,9) (4,2)" filled fixed/>
-        <text anchor="(1.5,8.5)" fixed>CPU</text>
-    
-        <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="8" items="00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000" labels="00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(7,9)"/>
-        <rectangle vertices="(5.8,9.9) (9,.1)" filled fixed/>
-        
-      </graph>
-    
-      <p><alert>Note: the data in registers and memory, as well as addresses, will be represented as an 8-digit (32 bit) hexadecimal number (without the prefix 0x).</alert> Feel free to use an online converter calculator as needed.</p>
-    
-      <p>The diagram above shows the state of the registers and memory after the program has been compiled, and <alert>before line 11 has executed</alert>.</p> 
-      
-      <p>Based on the diagram, what is the address of the global variable <c>x</c>? <answer type="text">0000002c</answer></p>
-      <p>Based on the diagram, what is the address of the global variable <c>y</c>? <answer type="text">00000030</answer></p>
-      <p>Based on the diagram, what is the address of the global constant <c>one</c>? <answer type="text">00000028</answer></p>
-    
-      <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 12</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>0000002c 00000005 00000000 00000000</textList> 
-        and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000</textList>
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 14</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>00000030 00000005 00000003 00000000</textList> 
-        and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000</textList>
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 15</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>00000030 00000008 00000003 00000000</textList> 
-        and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000</textList>
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 16</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>00000030 00000008 00000003 00000000</textList> 
-        and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000008 00000000 00000000 00000000</textList>
-      </when></award>
-    </answer></p>
-    
-      <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 18</alert>. <answer disableAfterCorrect>
-      <award><when>
-        $(registers/items) = <textList>00000028 00000001 00000003 00000000</textList> 
-        and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000008 00000000 00000000 00000000</textList>
-      </when></award>
-    </answer></p>
-    
-    </section>
-    
-    <p>The ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref> will be helpful as you work through this lab. Sections 5.5, 6.3, 6.4, and 6.5 are relevant to this lab. Because we are jumping around to different sections in the tutorial, you probably won't understand everything, and that's fine.</p>
-    
-    <section><title>Setup</title>
-    
-    <p>Log into your personal account on your Raspberry Pi, and create a subdirectory for this lab:</p>
-    <pre>  cd HD
+
+  <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1"
+    size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="registers" copysource="../memSlots" arrayName="Registers" size="4"
+      items="00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)" />
+    <rectangle vertices="(1,9) (4,2)" filled fixed />
+    <text anchor="(1.5,8.5)" fixed>CPU</text>
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="8"
+      items="00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000"
+      labels="00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(7,9)" />
+    <rectangle vertices="(5.8,9.9) (9,.1)" filled fixed />
+
+  </graph>
+
+  <p>
+    <alert>Note: the data in registers and memory, as well as addresses, will be represented as an 8-digit (32 bit)
+      hexadecimal number (without the prefix 0x).</alert> Feel free to use an online converter calculator as needed.
+  </p>
+
+  <p>The diagram above shows the state of the registers and memory after the program has been compiled, and <alert>
+      before line 11 has executed</alert>.</p>
+
+  <p>Based on the diagram, what is the address of the global variable <c>x</c>? <answer type="text">0000002c</answer>
+  </p>
+  <p>Based on the diagram, what is the address of the global variable <c>y</c>? <answer type="text">00000030</answer>
+  </p>
+  <p>Based on the diagram, what is the address of the global constant <c>one</c>? <answer type="text">00000028</answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through
+      line 12</alert>. <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>0000002c 00000005 00000000 00000000</textList>
+          and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000
+          </textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through
+      line 14</alert>. <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>00000030 00000005 00000003 00000000</textList>
+          and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000
+          </textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through
+      line 15</alert>. <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>00000030 00000008 00000003 00000000</textList>
+          and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000003 00000000 00000000 00000000
+          </textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through
+      line 16</alert>. <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>00000030 00000008 00000003 00000000</textList>
+          and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000008 00000000 00000000 00000000
+          </textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through
+      line 18</alert>. <answer disableAfterCorrect>
+      <award>
+        <when>
+          $(registers/items) = <textList>00000028 00000001 00000003 00000000</textList>
+          and $(memory/items) = <textList>00000000 00000000 00000001 00000005 00000008 00000000 00000000 00000000
+          </textList>
+        </when>
+      </award>
+    </answer>
+  </p>
+
+</section>
+
+<p>The ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref> will be helpful as
+  you work through this lab. Sections 5.5, 6.3, 6.4, and 6.5 are relevant to this lab. Because we are jumping around to
+  different sections in the tutorial, you probably won't understand everything, and that's fine.</p>
+
+<section>
+  <title>Setup</title>
+
+  <p>Log into your personal account on your Raspberry Pi, and create a subdirectory for this lab:</p>
+  <pre>  cd HD
       mkdir lab13
       cd lab13</pre>
-      
-    </section>
-    
-    <section><title>Writing an Assembly-Only Program</title>
-    
-      <p>Note: this section will be graded as part of Homework 4. If you are short of time for completing this lab, you can skip ahead to the next section and come back to this later.</p>
-    
-      <p>Move back to your <c>HD</c> directory, and create a subdirectory for Homework 4 with the following commands.</p>
-    <pre>  cd ~/HD
-      mkdir HW4
-      cd HW4</pre>
-    
-      <p>Create a new assembly program, using the following command.</p>
-    <pre>  code hello.s</pre>
-    <p>Now, write an assembly program that prints the string “Hello, world!”. The program shouldn't do anything else.</p>
-    
-    <p>To test your assembly program, compile and run it with the following commands.</p>
-    <pre>  gcc hello.s -o hello
-      ./hello</pre>
-    
-    <p>Hints:</p>
-      <ul>
-    <li>Use the program from the end of the previous section to help you get started.</li>
-    <li>This program will not have any global variables or constants, other than what is needed for the string to be printed.</li>
-    <li>At the beginning of the function <c>main</c>, you need the lines:
-    <pre>  push	{fp, lr}
-      add	fp, sp, 4</pre>
-    We'll cover what these do in a later lab.</li>
-    <li>At the end of the function <c>main</c>, you need the lines:
-    <pre>  mov	x0, 0
-      pop	{fp, pc}</pre>
-    The first of these sets up <c>main</c> to return 0. We'll cover what the other line does in a later lab.</li>
-    <li>When you call printf, think about how many arguments you need, and set up the register(s) appropriately.</li>
-      </ul>
-    
-    <p>To submit your work in this part: carry these steps out on your Pi.</p>
-    <pre>  cd ~/HD/HW4
-      git add hello.s
-      git commit -m "HW4: Exercise 1 complete"
-      git pull origin main
-      git push origin main</pre>
-    
-    </section>
-    
-    <section><title>Writing an Assembly Program with <c>scanf</c></title>
-    
-      <p>Note: this section will be graded as part of Homework 4.</p>
-    
-      <p>Move back to your <c>HW4</c> directory.</p>
-    <pre>  cd ~HD/HW4</pre>
-    
-      <p>Create a new assembly program, using the following command.</p>
-    <pre>  code age_this_year.s</pre>
-      <p>Write an assembly program that does the following. You'll find it helpful to reference the assembly code at the end of the previous section. Remember to modify your program incrementally. That is, implement one step at a time, and compile and run your program to verify that it's working as expected, before moving on to the next step.</p>
-      <ul>
-    <li>There will be two global variables, <c>current_year</c> and <c>birth_year</c>. Initialize the values of both to be 0.</li>
-    <li>At the beginning of <c>main</c>, print the prompt <c>“Enter the current year: “</c>, instructing the user to enter input.</li>
-    <li>Using <c>scanf</c>, store the year entered by the user in the variable <c>current_year</c>. Note that you can pass the address of the variable <c>current_year</c> to <c>scanf</c> by loading it into register 1 using the line
-    <pre>  ldr	x1, =current_year</pre>
-    Although the C program in the previous section used <c>__isoc99_scanf</c>, you can simply use <c>scanf</c>.</li>
-    <li>Then, print the prompt <c>“Enter your birth year: “</c>, instructing the user to enter input.</li>
-    <li>Using <c>scanf</c>, store the year entered by the user in the variable <c>birth_year</c>.</li>
-    <li>Then, proceed with the program as it worked previously:
-    The program should print <c>“The current year is &lt;current year&gt;.”</c>, where &lt;current year&gt; is replaced with the value stored in the variable <c>current_year</c>. The string that you use should include a newline character.</li>
-    <li>Next, the program should compute the age you will turn this year, temporarily storing the result in some register. You can compute this by subtracting the value of <c>birth_year</c> from the value of <c>current_year</c>.</li>
-    <li>The program should then print <c>“This year I turn &lt;age&gt; years old.”</c>, where &lt;age&gt; is the age you computed in the previous step. The string that you use should include a newline character.</li>
-    <li>Then, the program should add 1 to the value stored in the variable <c>current_year</c>, changing the value of this variable.</li>
-    <li>Repeat the computation of the age you will turn in <c>current_year</c>, by subtracting <c>birth_year</c> from the updated <c>current_year</c>.</li>
-    <li>Finally, the program should print <c>“In &lt;current year&gt;, I will turn &lt;age&gt; years old.”</c>, where &lt;current year&gt; and &lt;age&gt; are filled in with the value of the variable <c>current_year</c> and the age computed in the previous step. The string that you use should include a newline character.</li>
-      </ul>
-    
-    <p>Verify that your program works correctly by testing it for at least five different combinations of user input for the current year and birth year.</p>
-    
-      <p>To submit your work in this part: carry these steps out on your Pi.</p>
-    <pre>  cd ~/HD/HW4
-      git add age_this_year.s
-      git commit -m "HW4: Exercise 2 complete"
-      git pull origin main
-      git push origin main</pre>
-    
-    
-    </section>
+
+</section>
 
 
 
 
+<section>
 
-    <section>
-<title>Pencil & Paper</title>
 
-<p>This part to be turned in as a PDF via Moodle. The text will be small. Make sure you get a good scan! We do not want to make life unnecessarily difficult for the TAs.</p>
 
-<exercise>
-  <title>From C to Assembly</title>
+  <title>Coding Exercises</title>
 
-<p>Log onto your Pi as yourself (not the root user). Create a directory for this assignment and navigate to it:</p>
-  <pre>mkdir ~/HD/assembly-globals; cd ~/HD/assembly-globals</pre>
+  <p>You will turn in some parts of this work via csgit, other parts as a PDF via Moodle.</p>
 
-<p>Create a new file <c>example.c</c> with the following contents:</p>
-<pre>
+  <p>When working on the Pi, make sure you are logged in as the appropriate user</p>
+
+  <p>Create a new directory to hold all your work for this assignment:</p>
+  <pre>
+    mkdir ~/HD/assembly-globals
+    cd ~/HD/assembly-globals
+  </pre>
+
+  <p>Create a Markdown file. Include relevant discussion and output there:</p>
+  <pre>
+    code discussion.md
+  </pre>
+
+  <exercise>
+    <title>From C to Assembly</title>
+
+    <p>Create a new file <c>example.c</c> with the following contents:</p>
+    <pre>
   #include &lt;stdio.h&gt;
     
     int a = 4;
@@ -451,35 +543,118 @@
   </pre>
 
 
-  <p>Compile the code to an executable. Run it. Make sure it works.</p>
-<pre>
+    <p>Compile the code to an executable. Run it. Make sure it works.</p>
+    <pre>
   gcc example1.s
   ./a.out
 </pre>
 
-<p>Compile the code again. This time, stop halfway. We want to see the Assembly code:</p>
-<pre>gcc -c -S example.c</pre>
+    <p>Compile the code again. This time, stop halfway. We want to see the Assembly code:</p>
+    <pre>gcc -c -S example.c</pre>
 
-<p>This should produce a file <c>example.s</c></p>
+    <p>This should produce a file <c>example.s</c>
+    </p>
 
-<p>Print the C code and the Assembly code <alert>side by side on the same piece of paper</alert>. See screenshot below for one way to do so:</p>
+    <p>Print the C code and the Assembly code <alert>side by side on the same piece of paper</alert>. See screenshot
+      below for one way to do so:</p>
 
-<image source='doenet:cid=bafkreifj7ulsnle5wfv45m44ms7h67k5o4fv4fe7krj556hmpxrsetvlmq' description='screenshot of printing two pages side by side on the same piece of paper' asfilename='side-by-side.png' width='2108' mimeType='image/png' />
+    <image source='doenet:cid=bafkreifj7ulsnle5wfv45m44ms7h67k5o4fv4fe7krj556hmpxrsetvlmq'
+      description='screenshot of printing two pages side by side on the same piece of paper'
+      asfilename='side-by-side.png' width='2108' mimeType='image/png' />
 
-<p>Now draw a line connecting each of the following elements from the C code to the corresponding element in the Assembly code. Make sure you label each clearly!</p>
+    <p>Now draw a line connecting each of the following elements from the C code to the corresponding element in the
+      Assembly code. Make sure you label each clearly!</p>
 
-<ul>
-  <li>Global constants</li>
-  <li>Global variables</li>
-  <li>Start of execution</li>
-  <li>Function calls</li>
-  <li>End of execution</li>
-</ul>
+    <ul>
+      <li>Global constants</li>
+      <li>Global variables</li>
+      <li>Start of execution</li>
+      <li>Function calls</li>
+      <li>End of execution</li>
+    </ul>
 
-<p>NOTE: keep in mind that we in class are using a small subset of the Aarch64 vocabulary in this class. The compiler doesn't know that. It will probably use instructions that you are not familiar with. Look things up online as necessary.</p>
+    <p>NOTE: keep in mind that we in class are using a small subset of the Aarch64 vocabulary in this class. The
+      compiler doesn't know that. It will probably use instructions that you are not familiar with. Look things up
+      online as necessary.</p>
 
-</exercise>
+    <p>Scan your work and submit it as a PDF via Moodle. Make sure you get a good scan! The text is small. We do not
+      want to make things unnecessarily difficult for the TAs.</p>
 
+    <p>Add, commit, and push your code to csgit for good measure:</p>
+    <pre>
+        git add example1.c example1.s discussion.md
+        git commit -m "done with example code"
+        git push
+        git status # double check for uncommitted changes
+      </pre>
 
+  </exercise>
 
-    </section>
+  <exercise>
+    <title>Hello World</title>
+    <ul>
+      <li>Ensure you are logged into your Pi as the appropriate user, and working in the appropriate directory.</li>
+      <li>Create a new Assembly program called <c>hello.s</c>. This program should print <c>Hello World!</c> and do
+        nothing else</li>
+      <li>Do your best to write the program without looking at the slides</li>
+      <li>Compile and run the code manually to make sure it works</li>
+      <li>Add, commit, and push your code to csgit</li>
+    </ul>
+  </exercise>
+
+  <exercise>
+    <title>Hello World Test</title>
+    <ul>
+      <li>Create a test <c>test_hello.sh</c>
+      </li>
+      <li>Make the test executable so we can run the script: <c>chmod +x test_hello.sh</c>
+      </li>
+      <li>Optional: download the example test <c>add_two_test.sh</c> from Moodle. Feel free to use this code as a
+        template</li>
+      <li>Add logic to <c>test_hello.sh</c> to make sure your Assembly code compiles</li>
+      <li>Add logic to <c>test_hello.sh</c>to make sure your Assembly code has the expected output</li>
+      <li>Run your test. Put the output in <c>discussion.md</c>, clearly labeled</li>
+      <li>When working on "real" code, it almost never works right on the first try. In fact, if the code seems to work
+        on the first try, you should be suspicious. Did your code work on the first try? If not, what was wrong, and how
+        did you fix it?</li>
+      <li>Add, commit, and push your updates to csgit</li>
+    </ul>
+  </exercise>
+
+  <exercise>
+    <title>Your First Assembly Program</title>
+
+    <p>Create a new Assembly program <c>age_this_year.s</c>. It should do the following:</p>
+    <ul>
+      <li>Prompt the user for the year they were born</li>
+      <li>Read that value into a global variable</li>
+      <li>Prompt the user for the current year</li>
+      <li>Read that value into another global variable</li>
+      <li>Compute what the user's age will be after their birthday this year</li>
+      <li>Report the result</li>
+    </ul>
+
+    <p>NOTE: this may take more lines of code than you expect! Please work incrementally. For example, you could do:</p>
+    <ol>
+      <li>Start with your Hello World program. Update the name to <c>age_this_year.s</c>
+      </li>
+      <li>Update the output to an appropriate prompt</li>
+      <li>Update it to accept a number from the user</li>
+      <li>Update it to print the number it just accepted (no math)</li>
+      <li>Etc</li>
+    </ol>
+
+    <p>You will not be graded on the exact path you take. Experiment and find what works for you.</p>
+
+    <p>I would further encounrage you to <alert>push to git any time you make progress</alert>! Then if something goes
+      wrong, you can easily go back to your last saved state:</p>
+    <pre>git reset --hard # careful not to mindlessly copy-paste this</pre>
+
+    <p>Make sure you have a test to exercise this code. Some people prefer to write the test early as a development
+      tool. Others may prefer to write it at the end, right before turning in the work. Either is allowed.</p>
+
+    <p>Add, commit, and push your code to csgit</p>
+
+  </exercise>
+
+</section>
