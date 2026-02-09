@@ -14,10 +14,7 @@
             </when>
         </award>
     </answer>
-
 </section>
-
-
 
 <setup>
     <module name="memSlots" newNamespace>
@@ -56,10 +53,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>mov 1, r0</c></choice>
-            <choice><c>mv r0, 1</c></choice>
-            <choice><c>mv 1, r0</c></choice>
-            <choice credit="1"><c>mov r0, #1</c></choice>
+            <choice><c>mov 1, x0</c></choice>
+            <choice><c>mv x0, 1</c></choice>
+            <choice><c>mv 1, x0</c></choice>
+            <choice credit="1"><c>mov x0, 1</c></choice>
           </choiceInput>
       </answer>
     
@@ -67,10 +64,10 @@
     
       <answer>
           <choiceInput>
-            <choice credit="1"><c>mov r1, r2</c></choice>
-            <choice><c>mov r2, r1</c></choice>
-            <choice><c>cp r1, r2</c></choice>
-            <choice><c>cp r2, r1</c></choice>
+            <choice credit="1"><c>mov x1, x2</c></choice>
+            <choice><c>mov x2, x1</c></choice>
+            <choice><c>cp x1, x2</c></choice>
+            <choice><c>cp x2, x1</c></choice>
           </choiceInput>
       </answer>
     
@@ -78,10 +75,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>mov r2, r0+r1</c></choice>
-            <choice><c>add r0, r1, r2</c></choice>
-            <choice credit="1"><c>add r2, r1, r0</c></choice>
-            <choice><c>str r0+r1, r2</c></choice>
+            <choice><c>mov x2, x0+x1</c></choice>
+            <choice><c>add x0, x1, x2</c></choice>
+            <choice credit="1"><c>add x2, x1, x0</c></choice>
+            <choice><c>str x0+x1, x2</c></choice>
           </choiceInput>
       </answer>
     
@@ -89,10 +86,10 @@
     
       <answer>
           <choiceInput>
-            <choice credit="1"><c>add r0, r0, #1</c></choice>
-            <choice><c>inc r0</c></choice>
-            <choice><c>r0++</c></choice>
-            <choice><c>str r0++</c></choice>
+            <choice credit="1"><c>add x0, x0, #1</c></choice>
+            <choice><c>inc x0</c></choice>
+            <choice><c>x0++</c></choice>
+            <choice><c>str x0++</c></choice>
           </choiceInput>
       </answer>
     
@@ -100,10 +97,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>sub r1, r2</c></choice>
-            <choice credit="1"><c>sub r1, r2, r1</c></choice>
-            <choice><c>str r2, r2-r1</c></choice>
-            <choice><c>str r2-r1, r2</c></choice>
+            <choice><c>sub x1, x2</c></choice>
+            <choice credit="1"><c>sub x1, x2, x1</c></choice>
+            <choice><c>str x2, x2-x1</c></choice>
+            <choice><c>str x2-x1, x2</c></choice>
           </choiceInput>
       </answer>
     
@@ -111,10 +108,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>sqr r1, r0</c></choice>
-            <choice credit="1"><c>mul r1, r0, r0</c></choice>
-            <choice><c>str r1, r0*r0</c></choice>
-            <choice><c>str r1, r0^2</c></choice>
+            <choice><c>sqr x1, x0</c></choice>
+            <choice credit="1"><c>mul x1, x0, x0</c></choice>
+            <choice><c>str x1, x0*x0</c></choice>
+            <choice><c>str x1, x0^2</c></choice>
           </choiceInput>
       </answer>
     </section>
@@ -125,22 +122,22 @@
     
       <pre>1:    .global _start
     2:    _start:
-    3:        mov  r0, #4
-    4:        mov  r1, #8
-    5:        mov  r2, r0
-    6:        add  r0, r0, #2
-    7:        add  r1, r0, r0
-    8:        add  r2, r0, r1
-    9:        sub  r2, r2, #1
-    10:       sub  r0, r2, r0
-    11:       mov  r0, #3
-    12:       mov  r1, #2
-    13:       mul  r2, r0, r1
-    14:       mul  r2, r2, r2</pre>
+    3:        mov  x0, #4
+    4:        mov  x1, #8
+    5:        mov  x2, x0
+    6:        add  x0, x0, #2
+    7:        add  x1, x0, x0
+    8:        add  x2, x0, x1
+    9:        sub  x2, x2, #1
+    10:       sub  x0, x2, x0
+    11:       mov  x0, #3
+    12:       mov  x1, #2
+    13:       mul  x2, x0, x1
+    14:       mul  x2, x2, x2</pre>
     
       <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
     
-        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="r0 r1 r2 r3" inGraph="true" anchor="(2,7)"/>
+        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)"/>
     
         <rectangle vertices="(1,9) (4,2)" filled fixed/>
         <text anchor="(1.5,8.5)" fixed>CPU</text>
@@ -220,10 +217,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>str r0, a</c></choice>
-            <choice><c>str r0, =a</c></choice>
-            <choice><c>ldr r0, &a</c></choice>
-            <choice credit="1"><c>ldr r0, =a</c></choice>
+            <choice><c>str x0, a</c></choice>
+            <choice><c>str x0, =a</c></choice>
+            <choice><c>ldr x0, &a</c></choice>
+            <choice credit="1"><c>ldr x0, =a</c></choice>
           </choiceInput>
       </answer>
     
@@ -231,10 +228,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>ldr r0, r1</c></choice>
-            <choice credit="1"><c>ldr r0, [r1]</c></choice>
-            <choice><c>ldr r0, &r1</c></choice>
-            <choice><c>ldr r0, =r1</c></choice>
+            <choice><c>ldr x0, x1</c></choice>
+            <choice credit="1"><c>ldr x0, [x1]</c></choice>
+            <choice><c>ldr x0, &x1</c></choice>
+            <choice><c>ldr x0, =x1</c></choice>
           </choiceInput>
       </answer>
     
@@ -242,10 +239,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>str r0, &r1</c></choice>
-            <choice><c>str r1, &r0</c></choice>
-            <choice credit="1"><c>str r1, [r0]</c></choice>
-            <choice><c>str [r1], r0</c></choice>
+            <choice><c>str x0, &x1</c></choice>
+            <choice><c>str x1, &x0</c></choice>
+            <choice credit="1"><c>str x1, [x0]</c></choice>
+            <choice><c>str [x1], x0</c></choice>
           </choiceInput>
       </answer>
       
@@ -265,18 +262,18 @@
     8:    .text
     9:    .global _start
     10:   _start:
-    11:       ldr	r0, =x
-    12:       ldr	r1, [r0]
-    13:       ldr	r0, =y
-    14:       ldr	r2, [r0]
-    15:       add	r1, r1, r2
-    16:       str	r1, [r0]
-    17:       ldr	r0, =one
-    18:       ldr	r1, [r0]</pre>
+    11:       ldr	x0, =x
+    12:       ldr	x1, [x0]
+    13:       ldr	x0, =y
+    14:       ldr	x2, [x0]
+    15:       add	x1, x1, x2
+    16:       str	x1, [x0]
+    17:       ldr	x0, =one
+    18:       ldr	x1, [x0]</pre>
     
       <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
     
-        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="r0 r1 r2 r3" inGraph="true" anchor="(2,7)"/>
+        <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="x0 x1 x2 x3" inGraph="true" anchor="(2,7)"/>
         <rectangle vertices="(1,9) (4,2)" filled fixed/>
         <text anchor="(1.5,8.5)" fixed>CPU</text>
     
@@ -432,22 +429,22 @@
     53:  	@ frame_needed = 1, uses_anonymous_args = 0
     54:  	push	{fp, lr}
     55:  	add	fp, sp, #4
-    56:  	ldr	r3, .L3
-    57:  	ldr	r3, [r3]
-    58:  	mov	r1, r3
-    59:  	ldr	r0, .L3+4
+    56:  	ldr	x3, .L3
+    57:  	ldr	x3, [x3]
+    58:  	mov	x1, x3
+    59:  	ldr	x0, .L3+4
     60:  	bl	printf
-    61:  	ldr	r3, .L3+8
-    62:  	ldr	r3, [r3]
-    63:  	mov	r1, r3
-    64:  	ldr	r0, .L3+12
+    61:  	ldr	x3, .L3+8
+    62:  	ldr	x3, [x3]
+    63:  	mov	x1, x3
+    64:  	ldr	x0, .L3+12
     65:  	bl	printf
-    66:  	mov	r3, #12
-    67:  	mov	r1, r3
-    68:  	ldr	r0, .L3+16
+    66:  	mov	x3, #12
+    67:  	mov	x1, x3
+    68:  	ldr	x0, .L3+16
     69:  	bl	printf
-    70:  	mov	r3, #0
-    71:  	mov	r0, r3
+    70:  	mov	x3, #0
+    71:  	mov	x0, x3
     72:  	pop	{fp, pc}
     73:  .L4:
     74:  	.align	2
@@ -476,24 +473,24 @@
       <p>In the assembly program, find the code that labels the section of global constants. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">28</answer></p>
     
       <p>Next, we'll focus on the following lines of assembly code under main.</p>
-    <pre>  ldr	r3, .L3
-      ldr	r3, [r3]
-      mov	r1, r3
-      ldr	r0, .L3+4
+    <pre>  ldr	x3, .L3
+      ldr	x3, [x3]
+      mov	x1, x3
+      ldr	x0, .L3+4
       bl	printf</pre>
     <p>These lines set up and make the function call to <c>printf()</c>, which produces the output we see when we execute the program. Note that the function <c>printf()</c> is not included in the assembly code in your program; it comes from the library we included.</p>
     
     <p>Let's start with the line:</p>
-    <pre>	ldr	r3, .L3</pre>
+    <pre>	ldr	x3, .L3</pre>
     <p>Find the identifier <c>.L3</c> in the assembly program. Similar to <c>a</c> and <c>b</c>, it is used to store a value. Here, it stores the address of <c>a</c>. Enter the line in the assembly program that tells us what <c>.L3</c> stores. <answer type="text">76</answer></p>
     
       <p>The identifier <c>.L3</c> stores the address of the variables <c>a</c>. After the lines</p>
-    <pre>  ldr	r3, [r3]
-      mov	r1, r3</pre>
-        <p>what value is stored in <c>r1</c>? <answer>4</answer></p>
+    <pre>  ldr	x3, [x3]
+      mov	x1, x3</pre>
+        <p>what value is stored in <c>x1</c>? <answer>4</answer></p>
     
       <p>The next line of the assembly program is:</p>
-    <pre>  ldr	r0, .L3+4</pre>
+    <pre>  ldr	x0, .L3+4</pre>
     <p>Find the identifier <c>.L3</c> in the assembly program. Then, find the second <c>.word</c> after this identifier, which stores <c>.LC0</c>. The code <c>.L3+4</c> tells us to look at <c>.L3</c>, then offset by 4 bytes. Since a <c>.word</c> is 4 bytes, this means we are accessing the second <c>.word</c> after the identifier <c>.L3</c>.</p>
     
     <p>Next, find the identifier .LC0. Enter the line in the assembly program that tells us what <c>.LC0</c> stores. <answer type="text">36</answer> What is its type (instead of <c>.word</c>)? <answer type="text">.ascii</answer></p>
@@ -502,7 +499,7 @@
     
       <p>Finally, we consider the line:</p>
     <pre>  bl	printf</pre>
-      <p>This line makes the actual call to the function <c>printf</c>. Which registers are used for the arguments of this function? Enter the registers (e.g., <c>r0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">r0,r1</answer></p>
+      <p>This line makes the actual call to the function <c>printf</c>. Which registers are used for the arguments of this function? Enter the registers (e.g., <c>x0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">x0,x1</answer></p>
     
       <p>If we were going to write this program directly in assembly (rather than generating it from a C program), we would simplify the code and use more meaningful names for our strings and pointers. It would look like the following:</p>
     
@@ -531,22 +528,22 @@
         push	{fp, lr}
         add	fp, sp, #4
         
-        ldr	r3, =a
-        ldr	r1, [r3]
-        ldr	r0, a_str_ptr
+        ldr	x3, =a
+        ldr	x1, [x3]
+        ldr	x0, a_str_ptr
         bl	printf
     
-        ldr	r3, =b
-        ldr	r1, [r3]
-        ldr	r0, b_str_ptr
+        ldr	x3, =b
+        ldr	x1, [x3]
+        ldr	x0, b_str_ptr
         bl	printf
     
-        ldr	r3, =c
-        ldr	r1, [r3]
-        ldr	r0, c_str_ptr
+        ldr	x3, =c
+        ldr	x1, [x3]
+        ldr	x0, c_str_ptr
         bl	printf
         
-        mov	r0, #0
+        mov	x0, #0
         pop	{fp, pc}
         
       a_str_ptr:
@@ -584,7 +581,7 @@
       add	fp, sp, #4</pre>
     We'll cover what these do in a later lab.</li>
     <li>At the end of the function <c>main</c>, you need the lines:
-    <pre>  mov	r0, #0
+    <pre>  mov	x0, #0
       pop	{fp, pc}</pre>
     The first of these sets up <c>main</c> to return 0. We'll cover what the other line does in a later lab.</li>
     <li>When you call printf, think about how many arguments you need, and set up the register(s) appropriately.</li>
@@ -674,25 +671,25 @@
     40:  	@ frame_needed = 1, uses_anonymous_args = 0
     41:  	push	{fp, lr}
     42:  	add	fp, sp, #4
-    43:  	ldr	r0, .L3
+    43:  	ldr	x0, .L3
     44:  	bl	printf
-    45:  	ldr	r1, .L3+4
-    46:  	ldr	r0, .L3+8
+    45:  	ldr	x1, .L3+4
+    46:  	ldr	x0, .L3+8
     47:  	bl	__isoc99_scanf
-    48:  	ldr	r0, .L3+12
+    48:  	ldr	x0, .L3+12
     49:  	bl	printf
-    50:  	ldr	r1, .L3+16
-    51:  	ldr	r0, .L3+8
+    50:  	ldr	x1, .L3+16
+    51:  	ldr	x0, .L3+8
     52:  	bl	__isoc99_scanf
-    53:  	ldr	r3, .L3+4
-    54:  	ldr	r1, [r3]
-    55:  	ldr	r3, .L3+16
-    56:  	ldr	r3, [r3]
-    57:  	mov	r2, r3
-    58:  	ldr	r0, .L3+20
+    53:  	ldr	x3, .L3+4
+    54:  	ldr	x1, [x3]
+    55:  	ldr	x3, .L3+16
+    56:  	ldr	x3, [x3]
+    57:  	mov	x2, x3
+    58:  	ldr	x0, .L3+20
     59:  	bl	printf
-    60:  	mov	r3, #0
-    61:  	mov	r0, r3
+    60:  	mov	x3, #0
+    61:  	mov	x0, x3
     62:  	pop	{fp, pc}
     63:  .L4:
     64:  	.align	2
@@ -713,8 +710,8 @@
     <p>Note that this is different from how we've allocated space for variables previously.</p>
     
       <p>Now, let's look at the assembly code for the function call to <c>scanf</c>, which is done in the following lines.</p>
-    <pre>  ldr	r1, .L3+4
-      ldr	r0, .L3+8
+    <pre>  ldr	x1, .L3+4
+      ldr	x0, .L3+8
       bl	__isoc99_scanf</pre>
     <p>Enter the line number of assembly code corresponding to .L3+4. <answer>67</answer></p>
     
@@ -724,7 +721,7 @@
     
       <p>Finally, we consider the line</p>
     <pre>  bl	__isoc99_scanf</pre>
-      <p>This line makes the actual call to the function <c>scanf()</c>. Which registers are used for the arguments of this function?  Enter the registers (e.g., <c>r0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">r0,r1</answer></p>
+      <p>This line makes the actual call to the function <c>scanf()</c>. Which registers are used for the arguments of this function?  Enter the registers (e.g., <c>x0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">x0,x1</answer></p>
     
         <p>If we were going to write this program directly in assembly (rather than generating it from a C program), we would simplify the code and use more meaningful names for our strings and pointers. It would look like the following:</p>
     
@@ -754,28 +751,28 @@
         push	{fp, lr}
         add	fp, sp, #4
       
-        ldr	r0, a_prompt_ptr
+        ldr	x0, a_prompt_ptr
         bl	printf
       
-        ldr	r1, =a
-        ldr	r0, input_ptr
+        ldr	x1, =a
+        ldr	x0, input_ptr
         bl	scanf
       
-        ldr	r0, b_prompt_ptr
+        ldr	x0, b_prompt_ptr
         bl	printf
       
-        ldr	r1, =b
-        ldr	r0, input_ptr
+        ldr	x1, =b
+        ldr	x0, input_ptr
         bl	scanf
       
-        ldr	r1, =a
-        ldr r1, [r1]
-        ldr	r2, =b
-        ldr r2, [r2]
-        ldr	r0, report_values_ptr
+        ldr	x1, =a
+        ldr x1, [x1]
+        ldr	x2, =b
+        ldr x2, [x2]
+        ldr	x0, report_values_ptr
         bl	printf
       
-        mov	r0, #0
+        mov	x0, #0
         pop	{fp, pc}
     
         .align 2
@@ -805,7 +802,7 @@
     <li>There will be two global variables, <c>current_year</c> and <c>birth_year</c>. Initialize the values of both to be 0.</li>
     <li>At the beginning of <c>main</c>, print the prompt <c>“Enter the current year: “</c>, instructing the user to enter input.</li>
     <li>Using <c>scanf</c>, store the year entered by the user in the variable <c>current_year</c>. Note that you can pass the address of the variable <c>current_year</c> to <c>scanf</c> by loading it into register 1 using the line
-    <pre>  ldr	r1, =current_year</pre>
+    <pre>  ldr	x1, =current_year</pre>
     Although the C program in the previous section used <c>__isoc99_scanf</c>, you can simply use <c>scanf</c>.</li>
     <li>Then, print the prompt <c>“Enter your birth year: “</c>, instructing the user to enter input.</li>
     <li>Using <c>scanf</c>, store the year entered by the user in the variable <c>birth_year</c>.</li>
