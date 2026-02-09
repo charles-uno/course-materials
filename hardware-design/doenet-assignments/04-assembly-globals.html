@@ -338,223 +338,6 @@
       
     </section>
     
-    <section><title>Assembling a C Program</title>
-    
-    <p>In your <c>lab13</c> subdirectory on your Raspberry Pi, create a C program with the following command.</p>
-        <pre>  code example.c</pre>
-    <p>Copy the following C code into <c>example.c</c>.</p>
-    
-    <pre>#include &lt;stdio.h&gt;
-    
-    int a = 4;
-    int b = 7;
-    
-    const int c = 12;
-    
-    int main() {
-        printf("a is %d.\n", a);
-        printf("b is %d.\n", b);
-        printf("c is %d.\n", c);
-        return 0;
-    }</pre>
-    
-    <p>Save the file.</p>
-    
-      <p>Compile and run example.c with the following commands.</p>
-        <pre>  gcc example.c -o example
-      ./example</pre>
-    
-      <p>To produce the assembly language version of this program, enter the command:</p>
-        <pre>  gcc -c -S example.c</pre>
-    
-    
-    <p>This should produce a file <c>example.s</c> that contains assembly code for the program <c>example.c</c>. Check that it's there by entering the <c>ls</c> command.</p>
-    
-      <p>Open your assembly program in VSCode using the command:</p>
-    <pre>  code example.s</pre>
-         <p>Your assembly program should match the code below (except for the line numbers and some added indentation).</p>
-    
-      <pre>1:  	.arch armv6
-    2:  	.eabi_attribute 28, 1
-    3:  	.eabi_attribute 20, 1
-    4:  	.eabi_attribute 21, 1
-    5:  	.eabi_attribute 23, 3
-    6:  	.eabi_attribute 24, 1
-    7:  	.eabi_attribute 25, 1
-    8:  	.eabi_attribute 26, 2
-    9:  	.eabi_attribute 30, 6
-    10:  	.eabi_attribute 34, 1
-    11:  	.eabi_attribute 18, 4
-    12:  	.file	"example.c"
-    13:  	.text
-    14:  	.global	a
-    15:  	.data
-    16:  	.align	2
-    17:  	.type		a, %object
-    18:  	.size		a, 4
-    19:  a:
-    20:  	.word		4
-    21:  	.global	b
-    22:  	.align	2
-    23:  	.type		b, %object
-    24:  	.size		b, 4
-    25:  b:
-    26:  	.word		7
-    27:  	.global	c
-    28:  	.section	.rodata
-    29:  	.align	2
-    30:  	.type		c, %object
-    31:  	.size		c, 4
-    32:  c:
-    33:  	.word		12
-    34:  	.align	2
-    35:  .LC0:
-    36:  	.ascii	"a is %d.\012\000"
-    37:  	.align	2
-    38:  .LC1:
-    39:  	.ascii	"b is %d.\012\000"
-    40:  	.align	2
-    41:  .LC2:
-    42:  	.ascii	"c is %d.\012\000"
-    43:  	.text
-    44:  	.align	2
-    45:  	.global	main
-    46:  	.arch armv6
-    47:  	.syntax unified
-    48:  	.arm
-    49:  	.fpu vfp
-    50:  	.type	main, %function
-    51:  main:
-    52:  	@ args = 0, pretend = 0, frame = 0
-    53:  	@ frame_needed = 1, uses_anonymous_args = 0
-    54:  	push	{fp, lr}
-    55:  	add	fp, sp, 4
-    56:  	ldr	x3, .L3
-    57:  	ldr	x3, [x3]
-    58:  	mov	x1, x3
-    59:  	ldr	x0, .L3+4
-    60:  	bl	printf
-    61:  	ldr	x3, .L3+8
-    62:  	ldr	x3, [x3]
-    63:  	mov	x1, x3
-    64:  	ldr	x0, .L3+12
-    65:  	bl	printf
-    66:  	mov	x3, 12
-    67:  	mov	x1, x3
-    68:  	ldr	x0, .L3+16
-    69:  	bl	printf
-    70:  	mov	x3, 0
-    71:  	mov	x0, x3
-    72:  	pop	{fp, pc}
-    73:  .L4:
-    74:  	.align	2
-    75:  .L3:
-    76:  	.word		a
-    77:  	.word		.LC0
-    78:  	.word		b
-    79:  	.word		.LC1
-    80:  	.word		.LC2
-    81:  	.size		main, .-main
-    82:  	.ident	"GCC: (Raspbian 8.3.0-6+rpi1) 8.3.0"
-    83:  	.section	.note.GNU-stack,"",%progbits</pre>
-    
-    <p>The C program <c>example.c</c> contained the line <c>int a = 4;</c>, which declared a global int variable named <c>a</c>, and assigned it the value 4.</p>
-    
-    <p>In the assembly program, find the code that stores the number 4 with the identifier <c>a</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">19,20</answer></p>
-    
-      <p>The C program <c>example.c</c> contained the line <c>int b = 7;</c>, which declared a global int variable named <c>b</c>, and assigned it the value 7.</p>
-    
-    <p>In the assembly program, find the code that stores the number 7 with the identifier <c>b</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">25,26</answer></p>
-    
-      <p>The C program <c>example.c</c> contained the line <c>const int c = 12;</c>, which declared a global int constant named <c>c</c>, and assigned it the value 12.</p>
-    
-    <p>In the assembly program, find the code that stores the number 12 with the identifier <c>c</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">32,33</answer></p>
-    
-      <p>In the assembly program, find the code that labels the section of global constants. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">28</answer></p>
-    
-      <p>Next, we'll focus on the following lines of assembly code under main.</p>
-    <pre>  ldr	x3, .L3
-      ldr	x3, [x3]
-      mov	x1, x3
-      ldr	x0, .L3+4
-      bl	printf</pre>
-    <p>These lines set up and make the function call to <c>printf()</c>, which produces the output we see when we execute the program. Note that the function <c>printf()</c> is not included in the assembly code in your program; it comes from the library we included.</p>
-    
-    <p>Let's start with the line:</p>
-    <pre>	ldr	x3, .L3</pre>
-    <p>Find the identifier <c>.L3</c> in the assembly program. Similar to <c>a</c> and <c>b</c>, it is used to store a value. Here, it stores the address of <c>a</c>. Enter the line in the assembly program that tells us what <c>.L3</c> stores. <answer type="text">76</answer></p>
-    
-      <p>The identifier <c>.L3</c> stores the address of the variables <c>a</c>. After the lines</p>
-    <pre>  ldr	x3, [x3]
-      mov	x1, x3</pre>
-        <p>what value is stored in <c>x1</c>? <answer>4</answer></p>
-    
-      <p>The next line of the assembly program is:</p>
-    <pre>  ldr	x0, .L3+4</pre>
-    <p>Find the identifier <c>.L3</c> in the assembly program. Then, find the second <c>.word</c> after this identifier, which stores <c>.LC0</c>. The code <c>.L3+4</c> tells us to look at <c>.L3</c>, then offset by 4 bytes. Since a <c>.word</c> is 4 bytes, this means we are accessing the second <c>.word</c> after the identifier <c>.L3</c>.</p>
-    
-    <p>Next, find the identifier .LC0. Enter the line in the assembly program that tells us what <c>.LC0</c> stores. <answer type="text">36</answer> What is its type (instead of <c>.word</c>)? <answer type="text">.ascii</answer></p>
-    
-      <p>Because strings can have a wide range of lengths, we can't store them in a <c>.word</c>, which is limited to 4 bytes. We also can't load a string directly into a register for the same reason. Instead, we need to use a pointer to the string. This means that we store the address of the string, and then we can load that address into a register to call a function on that string. The language C hides this extra work from us, but in assembly, we need to manage this ourselves!</p>
-    
-      <p>Finally, we consider the line:</p>
-    <pre>  bl	printf</pre>
-      <p>This line makes the actual call to the function <c>printf</c>. Which registers are used for the arguments of this function? Enter the registers (e.g., <c>x0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">x0,x1</answer></p>
-    
-      <p>If we were going to write this program directly in assembly (rather than generating it from a C program), we would simplify the code and use more meaningful names for our strings and pointers. It would look like the following:</p>
-    
-    <pre>    .section .data
-      a:	
-        .word 4
-      b:
-        .word 7
-    
-        .section .rodata
-      c:	
-        .word 12
-      a_str:	
-        .ascii "a is %d.\012\000"
-        .align 2
-      b_str:	
-        .ascii "b is %d.\012\000"
-        .align 2
-      c_str:	
-        .ascii "c is %d.\012\000"
-        .align 2
-        
-        .text
-        .global main
-      main:
-        push	{fp, lr}
-        add	fp, sp, 4
-        
-        ldr	x3, =a
-        ldr	x1, [x3]
-        ldr	x0, a_str_ptr
-        bl	printf
-    
-        ldr	x3, =b
-        ldr	x1, [x3]
-        ldr	x0, b_str_ptr
-        bl	printf
-    
-        ldr	x3, =c
-        ldr	x1, [x3]
-        ldr	x0, c_str_ptr
-        bl	printf
-        
-        mov	x0, 0
-        pop	{fp, pc}
-        
-      a_str_ptr:
-        .word		a_str
-      b_str_ptr:
-        .word		b_str
-      c_str_ptr:
-        .word		c_str</pre>
-    
-    </section>
-    
     <section><title>Writing an Assembly-Only Program</title>
     
       <p>Note: this section will be graded as part of Homework 4. If you are short of time for completing this lab, you can skip ahead to the next section and come back to this later.</p>
@@ -596,198 +379,6 @@
     
     </section>
     
-    <section><title>Assembling a C Program with <c>scanf</c></title>
-    
-    <p>Now, we will start to figure out how to get user input in assembly, by generating an assembly program from a C program that uses the function <c>scanf()</c>.</p>
-    
-    <p>In your <c>lab13</c> subdirectory on your Raspberry pi, create a C program with the following command.</p>
-    <pre>  code input_example.c</pre>
-    <p>Copy the following C code into <c>input_example.c</c>.</p>
-    <pre>  #include &lt;stdio.h&gt;
-    
-      int a;
-      int b;
-    
-      int main() {
-      printf("Value for a: ");
-      scanf("%d", &a);
-      printf("Value for b: ");
-      scanf("%d", &b);
-      printf("a is %d and b is %d.\n", a, b);
-      return 0;
-    }</pre>
-    
-    <p>Save the file.</p>
-    
-    <p>Compile and run <c>input_example.c</c> with the following commands.</p>
-    <pre>  gcc input_example.c -o input_example
-      ./input_example</pre>
-      <p>To produce the assembly language version of this program, enter the command</p>
-    <pre>  gcc -c -S input_example.c</pre>
-    
-    <p>This should produce a file <c>input_example.s</c> that contains assembly code for the program <c>input_example.c</c>. Check that it's there by entering the <c>ls</c> command.</p>
-    
-      <p>Open your assembly program in VSCode using the command</p>
-    <pre>  code input_example.s</pre>
-         <p>Your assembly program should match the code below (except for the line numbers and some added indentation).</p>
-    <pre>1:      .arch armv6
-    2:  	.eabi_attribute 28, 1
-    3:  	.eabi_attribute 20, 1
-    4:  	.eabi_attribute 21, 1
-    5:  	.eabi_attribute 23, 3
-    6:  	.eabi_attribute 24, 1
-    7:  	.eabi_attribute 25, 1
-    8:  	.eabi_attribute 26, 2
-    9:  	.eabi_attribute 30, 6
-    10:  	.eabi_attribute 34, 1
-    11:  	.eabi_attribute 18, 4
-    12:  	.file		"input_example.c"
-    13:  	.text
-    14:  	.comm		a,4,4
-    15:  	.comm		b,4,4
-    16:  	.section	.rodata
-    17:  	.align	2
-    18:  .LC0:
-    19:  	.ascii	"Value for a: \000"
-    20:  	.align	2
-    21:  .LC1:
-    22:  	.ascii	"%d\000"
-    23:  	.align	2
-    24:  .LC2:
-    25:  	.ascii	"Value for b: \000"
-    26:  	.align	2
-    27:  .LC3:
-    28:  	.ascii	"a is %d and b is %d.\012\000"
-    29:  	.text
-    30:  	.align	2
-    31:  	.global	main
-    32:  	.arch armv6
-    34:  	.syntax unified
-    35:  	.arm
-    36:  	.fpu vfp
-    37:  	.type	main, %function
-    38:  main:
-    39:  	@ args = 0, pretend = 0, frame = 0
-    40:  	@ frame_needed = 1, uses_anonymous_args = 0
-    41:  	push	{fp, lr}
-    42:  	add	fp, sp, 4
-    43:  	ldr	x0, .L3
-    44:  	bl	printf
-    45:  	ldr	x1, .L3+4
-    46:  	ldr	x0, .L3+8
-    47:  	bl	__isoc99_scanf
-    48:  	ldr	x0, .L3+12
-    49:  	bl	printf
-    50:  	ldr	x1, .L3+16
-    51:  	ldr	x0, .L3+8
-    52:  	bl	__isoc99_scanf
-    53:  	ldr	x3, .L3+4
-    54:  	ldr	x1, [x3]
-    55:  	ldr	x3, .L3+16
-    56:  	ldr	x3, [x3]
-    57:  	mov	x2, x3
-    58:  	ldr	x0, .L3+20
-    59:  	bl	printf
-    60:  	mov	x3, 0
-    61:  	mov	x0, x3
-    62:  	pop	{fp, pc}
-    63:  .L4:
-    64:  	.align	2
-    65:  .L3:
-    66:  	.word		.LC0
-    67:  	.word		a
-    68:  	.word		.LC1
-    69:  	.word		.LC2
-    70:  	.word		b
-    71:  	.word		.LC3
-    72:  	.size		main, .-main
-    73:  	.ident	"GCC: (Raspbian 8.3.0-6+rpi1) 8.3.0"
-    74:  	.section	.note.GNU-stack,"",%progbits</pre>
-    
-    <p>In this assembly program, the space for variables <c>a</c> and <c>b</c> is allocated with the following lines.</p>
-    <pre>  .comm		a,4,4
-      .comm		b,4,4</pre>
-    <p>Note that this is different from how we've allocated space for variables previously.</p>
-    
-      <p>Now, let's look at the assembly code for the function call to <c>scanf</c>, which is done in the following lines.</p>
-    <pre>  ldr	x1, .L3+4
-      ldr	x0, .L3+8
-      bl	__isoc99_scanf</pre>
-    <p>Enter the line number of assembly code corresponding to .L3+4. <answer>67</answer></p>
-    
-      <p>Enter the line number of assembly code corresponding to .L3+8. <answer>68</answer></p>
-    
-      <p>Note that we are passing a <alert>pointer</alert> to the string "%d" and a <alert>pointer</alert> to the variable <c>a</c> to the function <c>scanf</c>.</p>
-    
-      <p>Finally, we consider the line</p>
-    <pre>  bl	__isoc99_scanf</pre>
-      <p>This line makes the actual call to the function <c>scanf()</c>. Which registers are used for the arguments of this function?  Enter the registers (e.g., <c>x0</c>) in ascending order, separated by commas, with no spaces. <answer type="text">x0,x1</answer></p>
-    
-        <p>If we were going to write this program directly in assembly (rather than generating it from a C program), we would simplify the code and use more meaningful names for our strings and pointers. It would look like the following:</p>
-    
-    <pre>    .section .data
-      a:
-        .word 0
-      b:
-        .word 0
-      
-        .section .rodata
-      a_prompt:
-        .ascii "Value for a: \000"
-        .align 2
-      b_prompt:
-        .ascii "Value for b: \000"
-        .align 2
-      report_values:
-        .ascii "a is %d and b is %d.\012\000"
-        .align 2
-      input:
-        .ascii "%d\000"
-        .align 2
-    
-        .text
-        .global main
-      main:
-        push	{fp, lr}
-        add	fp, sp, 4
-      
-        ldr	x0, a_prompt_ptr
-        bl	printf
-      
-        ldr	x1, =a
-        ldr	x0, input_ptr
-        bl	scanf
-      
-        ldr	x0, b_prompt_ptr
-        bl	printf
-      
-        ldr	x1, =b
-        ldr	x0, input_ptr
-        bl	scanf
-      
-        ldr	x1, =a
-        ldr x1, [x1]
-        ldr	x2, =b
-        ldr x2, [x2]
-        ldr	x0, report_values_ptr
-        bl	printf
-      
-        mov	x0, 0
-        pop	{fp, pc}
-    
-        .align 2
-      
-      a_prompt_ptr:
-        .word a_prompt
-      b_prompt_ptr:
-        .word b_prompt
-      report_values_ptr:
-        .word report_values
-      input_ptr:
-        .word input</pre>
-      
-    </section>
-    
     <section><title>Writing an Assembly Program with <c>scanf</c></title>
     
       <p>Note: this section will be graded as part of Homework 4.</p>
@@ -825,4 +416,70 @@
       git push origin main</pre>
     
     
+    </section>
+
+
+
+
+
+    <section>
+<title>Pencil & Paper</title>
+
+<p>This part to be turned in as a PDF via Moodle. The text will be small. Make sure you get a good scan! We do not want to make life unnecessarily difficult for the TAs.</p>
+
+<exercise>
+  <title>Disassembling a Program</title>
+
+<p>Log onto your Pi as yourself (not the root user). Create a directory for this assignment and navigate to it:</p>
+  <pre>mkdir ~/HD/assembly-globals; cd ~/HD/assembly-globals</pre>
+
+<p>Create a new file <c>example.c</c> with the following contents:</p>
+<pre>
+  #include &lt;stdio.h&gt;
+    
+    int a = 4;
+    int b = 7;
+    
+    const int c = 12;
+    
+    int main() {
+        printf("a is %d.\n", a);
+        printf("b is %d.\n", b);
+        printf("c is %d.\n", c);
+        return 0;
+    }
+  </pre>
+
+
+  <p>Compile the code to an executable. Run it. Make sure it works.</p>
+<pre>
+  gcc example1.s
+  ./a.out
+</pre>
+
+<p>Compile the code again. This time, stop halfway. We want to see the Assembly code:</p>
+<pre>gcc -c -S example.c</pre>
+
+<p>This should produce a file <c>example.s</c></p>
+
+<p>Print the C code and the Assembly code <alert>side by side on the same piece of paper</alert>. See screenshot below for one way to do so:</p>
+
+<image source='doenet:cid=bafkreifj7ulsnle5wfv45m44ms7h67k5o4fv4fe7krj556hmpxrsetvlmq' description='screenshot of printing two pages side by side on the same piece of paper' asfilename='side-by-side.png' width='2108' mimeType='image/png' />
+
+<p>Now draw a line connecting each of the following elements from the C code to the corresponding element in the Assembly code. Make sure you label each clearly!</p>
+
+<ul>
+  <li>Global constants</li>
+  <li>Global variables</li>
+  <li>Start of execution</li>
+  <li>Function calls</li>
+  <li>End of execution</li>
+</ul>
+
+<p>NOTE: keep in mind that we in class are using a small subset of the Aarch64 vocabulary in this class. The compiler doesn't know that. It will probably use instructions that you are not familiar with. Look things up online as necessary.</p>
+
+</exercise>
+
+
+
     </section>
