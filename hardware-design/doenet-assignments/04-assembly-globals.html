@@ -371,7 +371,7 @@
         <pre>  gcc -c -S example.c</pre>
     
     
-    <p>This should produce a file <c>example.s</c> that contains assembly code for the program <c>example.c</c>. Check that it’s there by entering the <c>ls</c> command.</p>
+    <p>This should produce a file <c>example.s</c> that contains assembly code for the program <c>example.c</c>. Check that it's there by entering the <c>ls</c> command.</p>
     
       <p>Open your assembly program in VSCode using the command:</p>
     <pre>  code example.s</pre>
@@ -475,7 +475,7 @@
     
       <p>In the assembly program, find the code that labels the section of global constants. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">28</answer></p>
     
-      <p>Next, we’ll focus on the following lines of assembly code under main.</p>
+      <p>Next, we'll focus on the following lines of assembly code under main.</p>
     <pre>  ldr	r3, .L3
       ldr	r3, [r3]
       mov	r1, r3
@@ -483,7 +483,7 @@
       bl	printf</pre>
     <p>These lines set up and make the function call to <c>printf()</c>, which produces the output we see when we execute the program. Note that the function <c>printf()</c> is not included in the assembly code in your program; it comes from the library we included.</p>
     
-    <p>Let’s start with the line:</p>
+    <p>Let's start with the line:</p>
     <pre>	ldr	r3, .L3</pre>
     <p>Find the identifier <c>.L3</c> in the assembly program. Similar to <c>a</c> and <c>b</c>, it is used to store a value. Here, it stores the address of <c>a</c>. Enter the line in the assembly program that tells us what <c>.L3</c> stores. <answer type="text">76</answer></p>
     
@@ -498,7 +498,7 @@
     
     <p>Next, find the identifier .LC0. Enter the line in the assembly program that tells us what <c>.LC0</c> stores. <answer type="text">36</answer> What is its type (instead of <c>.word</c>)? <answer type="text">.ascii</answer></p>
     
-      <p>Because strings can have a wide range of lengths, we can’t store them in a <c>.word</c>, which is limited to 4 bytes. We also can’t load a string directly into a register for the same reason. Instead, we need to use a pointer to the string. This means that we store the address of the string, and then we can load that address into a register to call a function on that string. The language C hides this extra work from us, but in assembly, we need to manage this ourselves!</p>
+      <p>Because strings can have a wide range of lengths, we can't store them in a <c>.word</c>, which is limited to 4 bytes. We also can't load a string directly into a register for the same reason. Instead, we need to use a pointer to the string. This means that we store the address of the string, and then we can load that address into a register to call a function on that string. The language C hides this extra work from us, but in assembly, we need to manage this ourselves!</p>
     
       <p>Finally, we consider the line:</p>
     <pre>  bl	printf</pre>
@@ -569,7 +569,7 @@
     
       <p>Create a new assembly program, using the following command.</p>
     <pre>  code hello.s</pre>
-    <p>Now, write an assembly program that prints the string “Hello, world!”. The program shouldn’t do anything else.</p>
+    <p>Now, write an assembly program that prints the string “Hello, world!”. The program shouldn't do anything else.</p>
     
     <p>To test your assembly program, compile and run it with the following commands.</p>
     <pre>  gcc hello.s -o hello
@@ -582,11 +582,11 @@
     <li>At the beginning of the function <c>main</c>, you need the lines:
     <pre>  push	{fp, lr}
       add	fp, sp, #4</pre>
-    We’ll cover what these do in a later lab.</li>
+    We'll cover what these do in a later lab.</li>
     <li>At the end of the function <c>main</c>, you need the lines:
     <pre>  mov	r0, #0
       pop	{fp, pc}</pre>
-    The first of these sets up <c>main</c> to return 0. We’ll cover what the other line does in a later lab.</li>
+    The first of these sets up <c>main</c> to return 0. We'll cover what the other line does in a later lab.</li>
     <li>When you call printf, think about how many arguments you need, and set up the register(s) appropriately.</li>
       </ul>
     
@@ -628,7 +628,7 @@
       <p>To produce the assembly language version of this program, enter the command</p>
     <pre>  gcc -c -S input_example.c</pre>
     
-    <p>This should produce a file <c>input_example.s</c> that contains assembly code for the program <c>input_example.c</c>. Check that it’s there by entering the <c>ls</c> command.</p>
+    <p>This should produce a file <c>input_example.s</c> that contains assembly code for the program <c>input_example.c</c>. Check that it's there by entering the <c>ls</c> command.</p>
     
       <p>Open your assembly program in VSCode using the command</p>
     <pre>  code input_example.s</pre>
@@ -712,7 +712,7 @@
       .comm		b,4,4</pre>
     <p>Note that this is different from how we've allocated space for variables previously.</p>
     
-      <p>Now, let’s look at the assembly code for the function call to <c>scanf</c>, which is done in the following lines.</p>
+      <p>Now, let's look at the assembly code for the function call to <c>scanf</c>, which is done in the following lines.</p>
     <pre>  ldr	r1, .L3+4
       ldr	r0, .L3+8
       bl	__isoc99_scanf</pre>
@@ -800,7 +800,7 @@
     
       <p>Create a new assembly program, using the following command.</p>
     <pre>  code age_this_year.s</pre>
-      <p>Write an assembly program that does the following. You'll find it helpful to reference the assembly code at the end of the previous section. Remember to modify your program incrementally. That is, implement one step at a time, and compile and run your program to verify that it’s working as expected, before moving on to the next step.</p>
+      <p>Write an assembly program that does the following. You'll find it helpful to reference the assembly code at the end of the previous section. Remember to modify your program incrementally. That is, implement one step at a time, and compile and run your program to verify that it's working as expected, before moving on to the next step.</p>
       <ul>
     <li>There will be two global variables, <c>current_year</c> and <c>birth_year</c>. Initialize the values of both to be 0.</li>
     <li>At the beginning of <c>main</c>, print the prompt <c>“Enter the current year: “</c>, instructing the user to enter input.</li>
