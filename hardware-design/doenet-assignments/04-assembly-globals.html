@@ -86,7 +86,7 @@
     
       <answer>
           <choiceInput>
-            <choice credit="1"><c>add x0, x0, #1</c></choice>
+            <choice credit="1"><c>add x0, x0, 1</c></choice>
             <choice><c>inc x0</c></choice>
             <choice><c>x0++</c></choice>
             <choice><c>str x0++</c></choice>
@@ -122,16 +122,16 @@
     
       <pre>1:    .global _start
     2:    _start:
-    3:        mov  x0, #4
-    4:        mov  x1, #8
+    3:        mov  x0, 4
+    4:        mov  x1, 8
     5:        mov  x2, x0
-    6:        add  x0, x0, #2
+    6:        add  x0, x0, 2
     7:        add  x1, x0, x0
     8:        add  x2, x0, x1
-    9:        sub  x2, x2, #1
+    9:        sub  x2, x2, 1
     10:       sub  x0, x2, x0
-    11:       mov  x0, #3
-    12:       mov  x1, #2
+    11:       mov  x0, 3
+    12:       mov  x1, 2
     13:       mul  x2, x0, x1
     14:       mul  x2, x2, x2</pre>
     
@@ -184,10 +184,10 @@
     
       <answer>
           <choiceInput>
-            <choice><c>int a, #1</c></choice>
+            <choice><c>int a, 1</c></choice>
             <choice credit="1"><c>a: .word 1</c></choice>
             <choice><c>a: .number 1</c></choice>
-            <choice><c>a: .int #1</c></choice>
+            <choice><c>a: .int 1</c></choice>
           </choiceInput>
       </answer>
     
@@ -428,7 +428,7 @@
     52:  	@ args = 0, pretend = 0, frame = 0
     53:  	@ frame_needed = 1, uses_anonymous_args = 0
     54:  	push	{fp, lr}
-    55:  	add	fp, sp, #4
+    55:  	add	fp, sp, 4
     56:  	ldr	x3, .L3
     57:  	ldr	x3, [x3]
     58:  	mov	x1, x3
@@ -439,11 +439,11 @@
     63:  	mov	x1, x3
     64:  	ldr	x0, .L3+12
     65:  	bl	printf
-    66:  	mov	x3, #12
+    66:  	mov	x3, 12
     67:  	mov	x1, x3
     68:  	ldr	x0, .L3+16
     69:  	bl	printf
-    70:  	mov	x3, #0
+    70:  	mov	x3, 0
     71:  	mov	x0, x3
     72:  	pop	{fp, pc}
     73:  .L4:
@@ -526,7 +526,7 @@
         .global main
       main:
         push	{fp, lr}
-        add	fp, sp, #4
+        add	fp, sp, 4
         
         ldr	x3, =a
         ldr	x1, [x3]
@@ -543,7 +543,7 @@
         ldr	x0, c_str_ptr
         bl	printf
         
-        mov	x0, #0
+        mov	x0, 0
         pop	{fp, pc}
         
       a_str_ptr:
@@ -578,10 +578,10 @@
     <li>This program will not have any global variables or constants, other than what is needed for the string to be printed.</li>
     <li>At the beginning of the function <c>main</c>, you need the lines:
     <pre>  push	{fp, lr}
-      add	fp, sp, #4</pre>
+      add	fp, sp, 4</pre>
     We'll cover what these do in a later lab.</li>
     <li>At the end of the function <c>main</c>, you need the lines:
-    <pre>  mov	x0, #0
+    <pre>  mov	x0, 0
       pop	{fp, pc}</pre>
     The first of these sets up <c>main</c> to return 0. We'll cover what the other line does in a later lab.</li>
     <li>When you call printf, think about how many arguments you need, and set up the register(s) appropriately.</li>
@@ -670,7 +670,7 @@
     39:  	@ args = 0, pretend = 0, frame = 0
     40:  	@ frame_needed = 1, uses_anonymous_args = 0
     41:  	push	{fp, lr}
-    42:  	add	fp, sp, #4
+    42:  	add	fp, sp, 4
     43:  	ldr	x0, .L3
     44:  	bl	printf
     45:  	ldr	x1, .L3+4
@@ -688,7 +688,7 @@
     57:  	mov	x2, x3
     58:  	ldr	x0, .L3+20
     59:  	bl	printf
-    60:  	mov	x3, #0
+    60:  	mov	x3, 0
     61:  	mov	x0, x3
     62:  	pop	{fp, pc}
     63:  .L4:
@@ -749,7 +749,7 @@
         .global main
       main:
         push	{fp, lr}
-        add	fp, sp, #4
+        add	fp, sp, 4
       
         ldr	x0, a_prompt_ptr
         bl	printf
@@ -772,7 +772,7 @@
         ldr	x0, report_values_ptr
         bl	printf
       
-        mov	x0, #0
+        mov	x0, 0
         pop	{fp, pc}
     
         .align 2
