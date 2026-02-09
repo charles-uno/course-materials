@@ -20,7 +20,7 @@ function run_and_check {
 CASE_NAME="compile"
 rm a.out ||:
 gcc add_two.s 
-if [[ "$?" != "0" || -f a.out ]]; then 
+if [[ "$?" == "0" || -f a.out ]]; then 
     echo "$CASE_NAME - ok"
 else
     echo "$CASE_NAME - build failed"

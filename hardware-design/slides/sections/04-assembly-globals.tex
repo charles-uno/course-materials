@@ -116,99 +116,65 @@
 	Specifically Aarch64, sometimes called ARM v8
 \end{frame}
 
-\begin{frame}{Comments}
+\begin{frame}[fragile]{Assembly Boilerplate}
+	The Assembly programs we write in this course will look like this:
+	\begin{minted}{arm}
+		.section .rodata
+			// global constants
+		
+		.section .data
+			// global variables
+		
+		.section .text
+		.global main
+		main:
+			// execution starts here
+
+			// return 0 (normal exit status)
+			mov x0, 0
+			b exit
+	\end{minted}
+\end{frame}
+
+\begin{frame}{Formatting your Code}
 	\begin{itemize}
+		\item Work in lowercase by convention, but uppercase mostly works too
+		\item Indentation and line breaks can help with legibility
 		\item Any line that starts with \Arm{//} is a comment
-		\item Comments are ignored by the compiler/linker/assembler
-		\item They are there to help humans understand the code
+		\item Question: how many comments should your code include?
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Assembly Boilerplate}
-	The Assembly programs we write in this course will look like this:
+\begin{frame}[fragile]{Global Constants}
 	\begin{minted}{arm}
 		.section .rodata
-			// global constants
-		
-		.section .data
-			// global variables
-		
+			prompt: .ascii "how many koalas do you have? \0"
+			digits_per_hand: .word 5
+		\end{minted}
+	\begin{itemize}
+		\item Value is allocated at the start of the program
+		\item Use the variable name to load the \emph{address}
+		\item Value does not change
+		\item Types we will use: \Arm{word} and \Arm{ascii}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Main}
+	\begin{minted}{arm}
 		.section .text
 		.global main
 		main:
-			// execution starts here
-
-			// return 0 (normal exit status)
+			ldr x0, =message
+			bl printf
 			mov x0, 0
 			b exit
-	\end{minted}
+		\end{minted}
+	\begin{itemize}
+		\item If using a different compiler, you may need to swap \Arm{main} to \Arm{_start} or similar
+		\item We'll talk about instructions (\Arm{ldr}, \Arm{bl}, etc) next
+		\item Return 0 unless you are trying to indicate a failure
+	\end{itemize}
 \end{frame}
-
-% caps sensitivity. some things are not caps sensitive, but easier to just work in lowercase
-
-% indentation. you do you
-
-
-\begin{frame}[fragile]{Global Contants and Variables}
-
-	\begin{minted}{arm}
-		.section .rodata
-			// global constants
-			name: .ascii "charles\0"
-			n_thumbs: .word 2
-
-		.section .data
-			// global variables
-			num_koalas: .word 0
-		
-		.section .text
-		.global main
-		main:
-			// execution starts here
-
-			// return 0 (normal exit status)
-			mov x0, 0
-			b exit
-	\end{minted}
-\end{frame}
-
-
-
-
-
-
-\begin{frame}[fragile]{Assembly Boilerplate}
-	The Assembly programs we write in this course will look like this:
-
-	\begin{minted}{arm}
-		.section .rodata
-			// global constants
-		
-		.section .data
-			// global variables
-		
-		// execution starts here
-		.section .text
-		.global main
-		main:
-			// execution starts here
-
-			// return 0 (normal exit status)
-			mov x0, 0
-			b exit
-	\end{minted}
-\end{frame}
-
-
-
-
-
-
-
-
-
-
-
 
 \Subsection{Assembly Commands}
 
@@ -219,6 +185,13 @@
 		\item If you see \Arm{r0}, it's probably a typo left over from the previous version of this class
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Memory Diagrams}
+Just the registers for now
+
+These will get more interesting when we start talking about local variables
+\end{frame}
+
 
 \begin{frame}{Don't Worry!}
 	\begin{itemize}
@@ -244,7 +217,6 @@
 
 
 \begin{frame}[fragile]{Reading from Memory}
-
 	Load the \emph{address} of global variable \Arm{fizz} to \Arm{x3}:
 	\begin{minted}{arm}
 		ldr x3, =fizz
@@ -298,11 +270,8 @@
 	\end{minted}
 
 	\vspace{0.3cm}
-
-	\Arm{b} is "branch", \Arm{bl} is "branch and link". More on those later
-
+	\Arm{b} is "branch". \Arm{bl} is "branch and link". We'll get into these later
 \end{frame}
-
 
 \Subsection{Printf}
 
@@ -409,260 +378,185 @@
 	\end{minted}
 \end{frame}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\Subsection{Global Constants}
-
-\begin{frame}{Global Constants}
-	\begin{itemize}
-		\item A global constant is defined in the code
-		\item Its value does not change during runtime
-		\item It has a name
-		\item We can use the name to load the \textbf{address} of that value
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Hello World in Assembly (again)}
-	\begin{minted}{arm}
-		.section .rodata
-			greeting: .ascii "Hello world!\n\0"
-
-		.section .text
-		.global main
-		main:
-			ldr x0, =greeting
-			bl printf
-			mov x0, 0
-			b exit
-	\end{minted}
-
-	\begin{itemize}
-		\item \Arm{greeting} is a local variable
-		\item We use \arm{ldr} to load the address of \Arm{greeting} into \Arm{x0}
-	\end{itemize}
-\end{frame}
-
-
-
-
-
-
-
-
-
-\Subsection{Global Variables}
-
 \Subsection{Scanf}
 
-
-
-
-
-\begin{frame}[fragile]{Hello World in Assembly (again)}
+\begin{frame}[fragile]{Minimal Read}
 	\begin{minted}{arm}
 		.section .rodata
-			greeting: .ascii "Hello world!\n\0"
-
+			input_fmt: .ascii "%d\0"
+		.section .data
+			input_val: .word 0
 		.section .text
 		.global main
 		main:
-			ldr x0, =greeting
+			ldr x0, =input_fmt
+			ldr x1, =input_val
+			bl scanf
+			mov x0, 0
+			b exit
+	\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{More Useful Read}
+	\begin{small}
+		\begin{minted}{arm}
+		.section .rodata
+			prompt: .ascii "Please enter a number: \0"
+			report: .ascii "You entered %d\n\0"
+			input_fmt: .ascii "%d\0"
+		.section .data
+			input_val: .word 0
+		.section .text
+		.global main
+		main:
+			ldr x0, =prompt
+			bl printf
+			ldr x0, =input_fmt
+			ldr x1, =input_val
+			bl scanf
+			ldr x1, =input_val
+			ldr x1, [x1]
+			ldr x0, =report
 			bl printf
 			mov x0, 0
 			b exit
 	\end{minted}
-
-	Let's walk through what's happening on each line
+	\end{small}
 \end{frame}
-
-
-
-
-
-\begin{frame}[fragile]{Hello World in Assembly}
-	\begin{alltt}
-		\Highlight{@ global read-only data (aka constants)}
-		.section .rodata
-		greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0"
-
-		\Highlight{@ execution starts here}
-		.section .text
-		.global main
-		main:
-		\Highlight{@ load the string address to r0}
-		ldr r0, =greeting
-		\Highlight{@ print the string from r0}
-		bl printf
-		\Highlight{@ return 0 (normal exit status)}
-		mov r0, \#0
-		b exit
-	\end{alltt}
-\end{frame}
-
-
-
-\begin{frame}{Hello World in Assembly}
-
-	{\Huge
-		TODO: don't worry about PC yet? they haven't done the von neumann arch section yet}
-
-\end{frame}
-
-
-
-\begin{frame}{Hello World with Instruction Addresses}
-	\begin{alltt}
-		\begin{tabular}{ r | l }
-			-      & \Highlight{@ global read-only data (aka constants)}               \\
-			-      & .section .rodata                                                  \\
-			-      & greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0" \\
-			-      & \Highlight{@ execution starts here}                               \\
-			-      & .section .text                                                    \\
-			-      & .global main                                                      \\
-			-      & main:                                                             \\
-			-      & \quad \Highlight{@ load the string address to r0}                 \\
-			0x4fe0 & \quad ldr r0, =greeting                                           \\
-			-      & \quad \Highlight{@ print the string from r0}                      \\
-			0x4fe4 & \quad bl printf                                                   \\
-			-      & \quad \Highlight{@ return 0 (normal exit status)}                 \\
-			0x4fe8 & \quad mov r0, \#0                                                 \\
-			0x4fec & \quad b exit                                                      \\
-		\end{tabular}
-	\end{alltt}
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (0)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & ?      &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe0 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	The operating system loads instructions and global constants into memory. The program counter \texttt{pc} points to the start of execution.
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (1)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe4 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{ldr} to load the address of global constant \texttt{greeting} to \texttt{r0}
-
-	Also increment \texttt{pc} to point to the next instruction
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (2)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe8 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{bl} to call the built-in function \texttt{printf}, which looks at the address from \texttt{r0} and prints the data as a null-terminated string
-
-	Also increment \texttt{pc} to point to the next instruction
-
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (3)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0      &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fec &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Move the value zero to \texttt{r0}
-
-	Also increment \texttt{pc} to point to the next instruction
-
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (4)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &   & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ? &                            & 0x4fe4 & bl printf         \\
-			r2                            & ? &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ? &                            & 0x4fec & b exit            \\
-			r4                            & ? &                            & 0x4ff0 & Hell              \\
-			sp                            & ? &                            & 0x4ff4 & o Wo              \\
-			fp                            & ? &                            & 0x4ff8 & rld!              \\
-			pc                            & ? &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ? &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{bl} to call the built-in \texttt{exit} function, which exits from the program. The value in \texttt{r0} is the returncode.
-
-	The value of \texttt{pc} is restored for the upstream caller (we'll worry more about this in later chapters)
-
-\end{frame}
-
-
-
-
-
-
-\Subsection{Memory Diagrams}
-
 
 \Subsection{Automated Testing}
+
+\begin{frame}{Expectations on Assignments}
+	\begin{itemize}
+		\item Every piece of code you turn in should come with a test
+		\item Make sure it compiles
+		\item Provide example input, check the output
+		\item Tests will be shell scripts
+		\item I will provide a template
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Test?}
+	\begin{itemize}
+		\item Code is often modified by someone other than the original author
+		\item Code is often modified long after the original context is forgotten
+		\item Non-obvious program behavior may be (or become) important
+		\item Documentation can easily be outdated and/or ignored
+		\item Automated tests make noise before breaking changes are committed
+		\item They also act as live documentation
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why Shell?}
+	\begin{itemize}
+		\item Many languages have built-in test frameworks. Assembly doesn't. We're improvising
+		\item Shell scripting uses familiar syntax (ls, gcc)
+		\item You are welcome to copy-paste from my example
+		\item I tried Python last time. It was more work. You are welcome to try it again!
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Why Bash?}
+	\begin{minted}{bash}
+		#!/usr/bin/bash
+		set -e
+
+		function run_and_check {
+			local TEST_CASE_NAME="$1"
+			local INPUT="$2"
+			local EXPECTED_OUTPUT="$3"
+			ACTUAL_OUTPUT=$(echo "$INPUT" | ./a.out) ||:
+			if [[ "$EXPECTED_OUTPUT" != "$ACTUAL_OUTPUT" ]]; then
+				echo "$TEST_CASE_NAME - expected \"$EXPECTED_OUTPUT\" but got \"$ACTUAL_OUTPUT\""
+			else
+				echo "$TEST_CASE_NAME - ok"
+			fi
+		}
+		
+		
+		# Case 0: compile the code
+		CASE_NAME="compile"
+		rm a.out ||:
+		gcc add_two.s 
+		if [[ "$?" == "0" || -f a.out ]]; then 
+			echo "$CASE_NAME - ok"
+		else
+			echo "$CASE_NAME - build failed"
+		fi
+		
+		# Case 1: small positive ints
+		CASE_NAME="positive"
+		INPUT="3
+		4"
+		EXPECTED_OUTPUT="Enter a number: Enter a number: Sum: 7"
+		run_and_check "$CASE_NAME" "$INPUT" "$EXPECTED_OUTPUT"
+		
+		# Case 2: sum to zero
+		CASE_NAME="opposite"
+		INPUT="-3
+		3"
+		EXPECTED_OUTPUT="Enter a number: Enter a number: Sum: 0"
+		run_and_check "$CASE_NAME" "$INPUT" "$EXPECTED_OUTPUT"
+		
+		# Case 3: negatives
+		CASE_NAME="negative"
+		INPUT="-3
+		-106"
+		EXPECTED_OUTPUT="Enter a number: Enter a number: Sum: -109"
+		run_and_check "$CASE_NAME" "$INPUT" "$EXPECTED_OUTPUT"
+		
+		
+		
+	\end{minted}
+\end{frame}
+
+
+
+
+
+
+
+
+
+%\begin{frame}{Before DevOps}
+%	Software engineering 30 years ago:
+%	\begin{itemize}
+%		\item Developers write code then pass it to the test team
+%		\item Testers make sure it works then pass it to the deployment team
+%		\item A different team owns metrics and alerting for live code
+%		\item What are some possible problems with this approach?
+%	\end{itemize}
+%\end{frame}
+
+%\begin{frame}{DevOps Paradigm}
+%	Software engineering now:
+%	\begin{itemize}
+%		\item You own your product end-to-end
+%		\item Development, testing, deployment, monitoring, etc
+%		\item What new problems might arise? How might we address them?
+%	\end{itemize}
+%\end{frame}
+
+%\begin{frame}{DevOps and Automation}
+%	\begin{itemize}
+%		\item Many different hats for the same person
+%		\item We now have tooling to automate much of it
+%		\item Dedicated engineers to make sure the tools fit together
+%	\end{itemize}
+%	\includegraphics[width=0.6\columnwidth]{images/Devops1}
+%\end{frame}
+
+
+
+
+
+
+
+
+
 
 
 

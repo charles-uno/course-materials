@@ -7,7 +7,7 @@
 main:
     ldr x0, =message
     bl printf
-    mov x0, #0
+    mov x0, 0
     b exit
 
 .section .rodata
