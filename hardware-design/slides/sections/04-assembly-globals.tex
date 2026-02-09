@@ -3,7 +3,7 @@
 \begin{frame}{Coding in Assembly}
 	\begin{itemize}
 		\item We'll be doing some coding exercises in Assembly (specifically aarch64) on emulators and on a Raspberry Pi
-		\item Assembly code can be super efficient. Ours won't be. That's not why we're here
+		\item Assembly code can be super efficient. Ours won't be.
 		\item We are not studying to become assembly developers. We are here for the core concepts
 	\end{itemize}
 \end{frame}
@@ -46,7 +46,8 @@
 	% nasm - does not like // or =
 	% ca65 - comments and a lot of commands all black
 	% llvm, dasm16, hsail - nope
-	\begin{minted}{tasm}
+	% C, actionscript, ada, asn1, r, ...
+	\begin{minted}{arm}
 		.section .rodata
 			greeting: .ascii "Hello world!\n\0"
 
@@ -111,9 +112,21 @@
 
 \Subsection{Assembly Program Structure}
 
+\begin{frame}{Assembly Program Structure}
+	Specifically Aarch64, sometimes called ARM v8
+\end{frame}
+
+\begin{frame}{Comments}
+	\begin{itemize}
+		\item Any line that starts with \Arm{//} is a comment
+		\item Comments are ignored by the compiler/linker/assembler
+		\item They are there to help humans understand the code
+	\end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]{Assembly Boilerplate}
 	The Assembly programs we write in this course will look like this:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			// global constants
 		
@@ -138,7 +151,7 @@
 
 \begin{frame}[fragile]{Global Contants and Variables}
 
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			// global constants
 			name: .ascii "charles\0"
@@ -167,7 +180,7 @@
 \begin{frame}[fragile]{Assembly Boilerplate}
 	The Assembly programs we write in this course will look like this:
 
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			// global constants
 		
@@ -233,22 +246,22 @@
 \begin{frame}[fragile]{Reading from Memory}
 
 	Load the \emph{address} of global variable \Arm{fizz} to \Arm{x3}:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		ldr x3, =fizz
 	\end{minted}
 
 	Register \Arm{x2} holds an \emph{address}. Load the \emph{value} to \Arm{x3}:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		ldr x3, [x2]
 	\end{minted}
 
 	Register \Arm{x2} holds an \emph{address}. Load the \emph{value} from \Arm{x2-0x20} to \Arm{x3}:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		ldr x3, [x2, -0x20]
 	\end{minted}
 
 	Global variable \Arm{fizz} holds a number. Load the address, then load the value from that address:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		ldr x3, =fizz
 		ldr x3, [x3] // yes it can be the same register
 	\end{minted}
@@ -259,28 +272,28 @@
 \begin{frame}[fragile]{Writing to Memory}
 
 	Register \Arm{x5} holds an \emph{address}. Store the \emph{value} from \Arm{x7} to that address:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		str x7, [x5]
 	\end{minted}
 
 	\vspace{0.5cm}
 
 	Register \Arm{x5} holds an \emph{address}. Store the \emph{value} from \Arm{x8} to \Arm{x5+0x10}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		str x7, [x5, 0x10]
 	\end{minted}
 \end{frame}
 
 \begin{frame}[fragile]{We'll talk more about these ones later}
 	Call the function \Arm{printf}, which prints output to the terminal:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		bl printf
 	\end{minted}
 
 	\vspace{0.3cm}
 
 	Call the function \Arm{exit}, which exits the program:
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		b exit
 	\end{minted}
 
@@ -344,7 +357,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Assembly Printf Example 1}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			output: .ascii "hello my name is %s\n\0"
 			name: .ascii "charles\0"
@@ -361,7 +374,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Assembly Printf Example 2}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			output_str: .ascii "the current year is %d\n\0"
 			current_year: .word 2026
@@ -379,7 +392,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Assembly Printf Example 3}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 	.section .rodata
 		output_str: .ascii "%d + %d = %d\n\0"
 	
@@ -423,7 +436,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Hello World in Assembly (again)}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			greeting: .ascii "Hello world!\n\0"
 
@@ -459,7 +472,7 @@
 
 
 \begin{frame}[fragile]{Hello World in Assembly (again)}
-	\begin{minted}{tasm}
+	\begin{minted}{arm}
 		.section .rodata
 			greeting: .ascii "Hello world!\n\0"
 

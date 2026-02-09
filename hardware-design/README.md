@@ -6,7 +6,7 @@
 > TODO: add ability to build the syllabus outside the slide deck? maybe each section is its own tex file. then we can just import in both places
 > or maybe the course intro in the slides doesn't need to cover the whole syllabus... that's probably a better solution
 
-
+syntax highlighting: `pip install pygments-arm`
 
 
 
