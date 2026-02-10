@@ -1,0 +1,218 @@
+\RequirePackage{tikz, xcolor, textpos}
+\usetikzlibrary{shapes.geometric}
+\definecolor{TextColor}{RGB}{0, 0, 0}
+\definecolor{AccentColor}{RGB}{124, 98, 177}
+\definecolor{PaperColor}{RGB}{255, 255, 255}
+
+\setbeamerfont{title}{size=\LARGE, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamerfont{normal text}{size=\large}
+
+\usepackage{mathastext}
+\usepackage{hyperref}
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{circuitikz}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{multicol}
+\usepackage{graphicx}
+% make \oplus look nice
+\usepackage{amssymb}
+
+% HEADS UP!
+% minted is a pain in the ass, but the quality is much better than the next best option. specifically:
+% must build with -shall-escape
+% must have python installed with latexminted
+% the latexminted package seems to have been bundled with something, as I did not have to install it manually on 2025 Mac OS
+% 
+% original minted is broken with python 3.14 so use minted 2 as a workaround until the fix is deployed https://github.com/gpoore/minted/issues/463
+\usepackage{minted2}
+\usemintedstyle{manni}
+\setminted{autogobble=true, tabsize=4}
+
+\hypersetup{
+    colorlinks=true,
+    % internal links
+    linkcolor=AccentColor,
+    filecolor=AccentColor,      
+    % external links
+    urlcolor=AccentColor,
+    }
+
+\setbeamercolor{title}{fg=PaperColor}
+\setbeamercolor{frametitle}{fg=PaperColor}
+\setbeamercolor{author}{fg=TextColor}
+\setbeamercolor{institute}{fg=PaperColor}
+\setbeamercolor{date}{fg=TextColor}
+\setbeamercolor{normal text}{fg=TextColor}
+\setbeamercolor{item}{fg=TextColor}
+\setbeamercolor{section in toc}{fg=TextColor}
+\setbeamercolor{section page}{fg=PaperColor}
+\setbeamercolor{section title}{fg=PaperColor}
+\setbeamercolor{section name}{fg=PaperColor}
+\setbeamercolor{section in head/foot}{fg=TextColor}
+\setbeamercolor{block title}{fg=TextColor}
+\setbeamercolor{block title}{fg=TextColor}
+\setbeamercolor{part title}{fg=red}
+\setbeamercolor{subtitle}{fg=red}
+
+\setbeamertemplate{items}[circle]
+
+% omit navigation panel from the bottom of each slide
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\Highlight}[1]{\textbf{\textcolor{AccentColor}{#1}}}
+
+\newcommand{\Times}{\!\times\!}
+
+\newcommand{\LogicNot}[1]{{\ensuremath{\overline{#1}}}}
+\newcommand{\LogicAnd}[2]{{\ensuremath{{#1 \& #2}}}}
+\newcommand{\LogicNand}[2]{\LogicNot{\LogicAnd{#1}{#2}}}
+\newcommand{\LogicOr}[2]{{\ensuremath{{#1 | #2}}}}
+\newcommand{\LogicNor}[2]{\LogicNot{\LogicOr{#1}{#2}}}
+\newcommand{\LogicXor}[2]{{\ensuremath{{#1 \wedge #2}}}}
+\newcommand{\LogicXnor}[2]{\LogicNot{\LogicXor{#1}{#2}}}
+
+\newcommand{\Arm}[1]{\mintinline{arm}{#1}}
+
+% default slide background
+\setbeamertemplate{background}{
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+    \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+    \draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.1);
+\end{scope}
+\end{tikzpicture}
+}
+
+% title page background and layout
+\setbeamertemplate{title page}{
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.5);
+\draw[draw=PaperColor, fill=PaperColor] (0, 0.5) rectangle (1, 1);
+\node at (0.5, 0.25) {\usebeamertemplate{institute}};
+\node at (0.5, 0.4) {\usebeamertemplate{title}};
+\node at (0.5, 0.6) {\usebeamertemplate{author}};
+\node at (0.5, 0.9) {\usebeamertemplate{date}};
+\end{scope}
+\end{tikzpicture}
+}
+
+\newcommand{\TOC}[0]{
+  % just sections up top
+  \setcounter{tocdepth}{1}
+  \begin{frame}{Outline}
+  %	\begin{multicols*}{2}
+      \tableofcontents
+  %	\end{multicols*}
+  \end{frame}
+  % show subsections elsewhere
+  \setcounter{tocdepth}{2}
+  }
+
+% section page
+\newcommand{\Section}[1]{
+\section{#1}
+\begin{frame}{#1}
+% do not use \sectionpage because it makes the section name into a link and the color gets lost
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+    \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+    \draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
+    \draw[draw=AccentColor, fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
+    \node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
+    \end{scope}
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Outline}
+
+%    \begin{multicols*}{2}
+        \tableofcontents[currentsection,sectionstyle=hide,subsectionstyle=show/show/hide]
+%	\end{multicols*}
+\end{frame}
+}
+
+% subsection
+\newcommand{\Subsection}[1]{
+% TODO: figure out how to accept an optional short title for the TOC. See:
+% https://tex.stackexchange.com/questions/537219/conditionals-inside-newcommand-with-empty-argument
+% https://tex.stackexchange.com/questions/6862/how-can-i-display-a-short-chapter-name-in-the-header-and-a-long-chapter-name-in
+\subsection{#1}
+\begin{frame}
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
+\draw[draw=AccentColor, fill=AccentColor] (0, 0.3) rectangle (1, 0.7);
+\node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
+\end{scope}
+\end{tikzpicture}
+\end{frame}
+}
+
+% add page numbers to beamer template per https://tex.stackexchange.com/questions/66164/beamer-tableofcontents-with-page-numbers/66230#66230
+
+\long\def\beamer@section[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture
+    \refstepcounter{section}%
+    \beamer@ifempty{#2}%
+    {\long\def\secname{#1}\long\def\lastsection{#1}}%
+    {\global\advance\beamer@tocsectionnumber by 1\relax%
+      \long\def\secname{#2}%
+      \long\def\lastsection{#1}%
+      \addtocontents{toc}{\protect\beamer@sectionintoc{\the\c@section}{#2\hfill\the\c@page}{\the\c@page}{\the\c@part}%
+        {\the\beamer@tocsectionnumber}}}%
+    {\let\\=\relax\xdef\sectionlink{{Navigation\the\c@page}{\noexpand\secname}}}%
+    \beamer@tempcount=\c@page\advance\beamer@tempcount by -1%
+    \beamer@ifempty{#1}{}{%
+      \addtocontents{nav}{\protect\headcommand{\protect\sectionentry{\the\c@section}{#1}{\the\c@page}{\secname}{\the\c@part}}}%
+      \addtocontents{nav}{\protect\headcommand{\protect\beamer@sectionpages{\the\beamer@sectionstartpage}{\the\beamer@tempcount}}}%
+      \addtocontents{nav}{\protect\headcommand{\protect\beamer@subsectionpages{\the\beamer@subsectionstartpage}{\the\beamer@tempcount}}}%
+    }%
+    \beamer@sectionstartpage=\c@page%
+    \beamer@subsectionstartpage=\c@page%
+    \def\insertsection{\expandafter\hyperlink\sectionlink}%
+    \def\insertsubsection{}%
+    \def\insertsubsubsection{}%
+    \def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}%
+    \def\insertsubsectionhead{}%
+    \def\insertsubsubsectionhead{}%
+    \def\lastsubsection{}%
+    \Hy@writebookmark{\the\c@section}{\secname}{Outline\the\c@part.\the\c@section}{2}{toc}%
+    \hyper@anchorstart{Outline\the\c@part.\the\c@section}\hyper@anchorend%
+    \beamer@ifempty{#2}{\beamer@atbeginsections}{\beamer@atbeginsection}%
+  \fi%
+  \beamer@resumemode}%
+
+\def\beamer@subsection[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture%
+    \refstepcounter{subsection}%
+    \beamer@ifempty{#2}{\long\def\subsecname{#1}\long\def\lastsubsection{#1}}
+    {%
+      \long\def\subsecname{#2}%
+      \long\def\lastsubsection{#1}%
+      \addtocontents{toc}{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{#2\hfill\the\c@page}{\the\c@page}{\the\c@part}{\the\beamer@tocsectionnumber}}%
+    }%
+    \beamer@tempcount=\c@page\advance\beamer@tempcount by -1%
+    \addtocontents{nav}{%
+      \protect\headcommand{\protect\beamer@subsectionentry{\the\c@part}{\the\c@section}{\the\c@subsection}{\the\c@page}{\lastsubsection}}%
+      \protect\headcommand{\protect\beamer@subsectionpages{\the\beamer@subsectionstartpage}{\the\beamer@tempcount}}%
+    }%
+    \beamer@subsectionstartpage=\c@page%
+    \edef\subsectionlink{{Navigation\the\c@page}{\noexpand\subsecname}}%
+    \def\insertsubsection{\expandafter\hyperlink\subsectionlink}%
+    \def\insertsubsubsection{}%
+    \def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}%
+    \def\insertsubsubsectionhead{}%
+    \Hy@writebookmark{\the\c@subsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}{3}{toc}%
+    \hyper@anchorstart{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}\hyper@anchorend%
+    \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
+  \fi%
+  \beamer@resumemode}
+
