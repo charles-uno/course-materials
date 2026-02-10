@@ -12,6 +12,15 @@
 \usepackage{mathastext}
 \usepackage{hyperref}
 \usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{circuitikz}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{multicol}
+\usepackage{graphicx}
+% make \oplus look nice
+\usepackage{amssymb}
 
 % HEADS UP!
 % minted is a pain in the ass, but the quality is much better than the next best option. specifically:
@@ -23,8 +32,6 @@
 \usepackage{minted2}
 \usemintedstyle{manni}
 \setminted{autogobble=true, tabsize=4}
-
-
 
 \hypersetup{
     colorlinks=true,
@@ -144,9 +151,6 @@
 \end{tikzpicture}
 \end{frame}
 }
-
-
-
 
 % add page numbers to beamer template per https://tex.stackexchange.com/questions/66164/beamer-tableofcontents-with-page-numbers/66230#66230
 
