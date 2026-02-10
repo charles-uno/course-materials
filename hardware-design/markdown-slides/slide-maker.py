@@ -81,7 +81,8 @@ def get_tex_from_md_within_frame(md_text: str) -> str:
         r"\documentclass",
         r"\begin{document}", 
         r"\end{document}", 
-        r"\usepackage"
+        r"\usepackage",
+        r"lstlisting"
     ]
     tex_lines = []
     for line in tex_document.splitlines():
