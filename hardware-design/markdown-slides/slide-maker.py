@@ -115,20 +115,27 @@ def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool
     n_end_frames = tex.count(r"\end{frame}")
     if n_begin_frames == n_end_frames:
         return False
-    need_frame_closed = [r"\section{", r"\Section", r"\subsection", r"\Subsection", r"\begin{frame}", r"\end{document}"]
+    need_frame_closed = [
+        r"\section{", 
+        r"\Section{",
+        r"\subsection{",
+        r"\Subsection{",
+        r"\begin{frame}",
+        r"\end{document}",
+    ]
     return any(tex_chunk.startswith(x) for x in need_frame_closed)
 
 
 def get_section(chunk: str) -> str:
     assert chunk.startswith("# ")
     section_title = chunk[2:].splitlines()[0]
-    return "\n" + r"\Section{" + section_title + "}"
+    return r"\Section{" + section_title + "}"
 
 
 def get_subsection(chunk: str) -> str:
     assert chunk.startswith("## ")
     section_title = chunk[3:].splitlines()[0]
-    return "\n" + r"\Subsection{" + section_title + "}"
+    return r"\Subsection{" + section_title + "}"
 
 
 def get_code_block(chunk: str) -> str:
@@ -141,7 +148,7 @@ def get_code_block(chunk: str) -> str:
 def get_begin_frame(chunk: str) -> str:
     assert chunk.startswith("### ")
     frame_title = chunk[4:].splitlines()[0]
-    return r"\begin{frame}{" + frame_title + "}"
+    return r"\begin{frame}[fragile]{" + frame_title + "}"
 
 
 def get_end_frame() -> str:

@@ -2,6 +2,15 @@
 
 ### Course Overview 
 
+
+\begin{overpic}[width=\textwidth]{dune-robot-hbo}
+	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}
+	\put (70, 3) {\textcolor{white}{Dune, Frank Herbert}}
+\end{overpic}
+
+
+
+
 ![dune robot hbo](images/dune-robot-hbo)
 
 Thou shalt not make a machine in the likeness of a human mind
@@ -44,5 +53,54 @@ int main() {
     f(A, B) & = \text{(A or B) and not (A and B)}               \\
             & = \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
 \end{align*}
+
+
+
+
+
+### Tabular Example
+
+	Fundamental boolean functions include AND, OR, and XOR:
+
+	\begin{tabular}{c c c c c}
+		A & B & A and B & A or B & A xor B \\
+		\hline
+		1 & 1 & 1       & 1      & 0       \\
+		1 & 0 & 0       & 1      & 1       \\
+		0 & 1 & 0       & 1      & 1       \\
+		0 & 0 & 0       & 0      & 0
+	\end{tabular}
+
+
+
+
+### Columns and Tikz
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			The NOT gate looks like this:
+			\bigskip
+
+			\begin{tikzpicture}
+				% Paths, nodes and wires:
+				\node[ieeestd not port] at (12.877, 10.375){};
+				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
+				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){\LogicNot{A}};
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Truth table:
+			\bigskip
+
+			\begin{center}
+				\begin{tabular}{c c}
+					A & \LogicNot{A} \\
+					\hline
+					1 & 0            \\
+					0 & 1
+				\end{tabular}
+			\end{center}
+		\end{column}
+	\end{columns}
 
 
