@@ -16,13 +16,9 @@ def main():
     if os.path.isfile(BUILD_FILENAME):
         os.remove(BUILD_FILENAME)
 
-    template = get_template()
-    before, after = template.split("% BUILD_HERE", 1)
-    write_tex(before)
-
+    write_tex(get_head())
     write_tex_from_md()
-
-    write_tex(after)
+    write_tex(get_tail())
 
 
 def write_tex_from_md():
@@ -91,9 +87,15 @@ def get_tex_from_md_within_frame(md_text: str) -> str:
     return "\n".join(tex_lines)
 
 
-def get_template() -> str:
-    with open(f"{SOURCE_DIR}/template.tex", "r") as handle:
+def get_head() -> str:
+    with open(f"{SOURCE_DIR}/head.tex", "r") as handle:
         return "".join(handle.readlines())
+
+
+def get_tail() -> str:
+    with open(f"{SOURCE_DIR}/tail.tex", "r") as handle:
+        return "".join(handle.readlines())
+
 
 
 def get_paths() -> list[str]:
@@ -117,9 +119,13 @@ def build() -> None:
     subprocess.run(["pdflatex", "-interaction=nonstopmode", "-shell-escape", BUILD_FILENAME]) 
 
 
+def read_file(path: str) -> str:
+    with open(path, "r") as handle:
+        return "".join(handle.readlines())
+
+
 class ParseFailure(Exception):
     pass
-
 
 
 if __name__ == "__main__":
