@@ -24,3 +24,25 @@ Thou shalt not make a machine in the likeness of a human mind
 - ARM Tutorial: https://diveintosystems.org/book/C9-ARM64/index.html
 - ARM Simulator: http://163.238.35.161/~zhangs/arm64simulator/
 - Circuitverse: https://circuitverse.org/simulator
+
+
+### Hello World
+
+```C
+#include <stdio.h>
+
+int main() {
+    printf("Hello world!\n");
+    return 0;
+}
+```
+
+
+### Align Example
+
+\begin{align*}
+    f(A, B) & = \text{(A or B) and not (A and B)}               \\
+            & = \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
+\end{align*}
+
+
