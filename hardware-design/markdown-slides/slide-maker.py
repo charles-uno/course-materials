@@ -15,17 +15,27 @@ def main():
     if os.path.isfile(BUILD_FILENAME):
         os.remove(BUILD_FILENAME)
 
-    chunks = [get_head()]
+    raw_chunks = [get_head()]
     paths = get_paths()
     for p in paths:
-        chunks += get_chunks(p)
-    chunks.append(get_tail())
+        raw_chunks += get_raw_chunks(p)
+    raw_chunks.append(get_tail())
 
-    for chunk in chunks:
-        if not chunk.strip():
+    tex_chunks = []
+    for raw_chunk in raw_chunks:
+        if not raw_chunk.strip():
             continue
+        tex_chunk = to_tex(raw_chunk)
+        if should_end_frame_before_chunk(tex_chunks, tex_chunk):
+            tex_chunks.append(get_end_frame())
+        tex_chunks.append(tex_chunk)
+
+    for tex_chunk in tex_chunks:
         print("% --------------------")
-        print(to_tex(chunk))
+        print(tex_chunk)
+
+
+    write_tex("\n\n".join(tex_chunks))
 
 
         # section header
@@ -34,10 +44,6 @@ def main():
         # markdown content (need to process)
         # LaTeX content (pass through)
         # close existing frame before starting a new section/subsection/frame
-
-
-
-
 
 
     return
@@ -50,7 +56,7 @@ def main():
 
 
 
-def get_chunks(filename: str) -> list[str]:
+def get_raw_chunks(filename: str) -> list[str]:
     lines = read_file(filename).splitlines()
     chunks = [""]
     tex_depth = 0
@@ -86,6 +92,7 @@ def get_chunks(filename: str) -> list[str]:
 
 
 def to_tex(chunk: str) -> str:
+    tex_markers = [r"\begin{", r"\end{", r"\documentclass{"]
     if chunk.startswith("# "):
         return get_section(chunk)
     elif chunk.startswith("## "):
@@ -95,12 +102,21 @@ def to_tex(chunk: str) -> str:
     elif chunk.startswith("```"):
         # mistletoe doesn't handle code blocks nicely
         return get_code_block(chunk)
-    elif chunk.lstrip().startswith(r"\begin"):
-        # Tolerate LaTeX blocks within the Markdown 
+    elif any(chunk.lstrip().startswith(m) for m in tex_markers):
+        # LaTeX just gets passed along
         return chunk
-
     else:
         return md_to_tex(chunk)
+
+
+def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool:
+    tex = "\n\n".join(tex_chunks)
+    n_begin_frames = tex.count(r"\begin{frame}")
+    n_end_frames = tex.count(r"\end{frame}")
+    if n_begin_frames == n_end_frames:
+        return False
+    need_frame_closed = [r"\section{", r"\Section", r"\subsection", r"\Subsection", r"\begin{frame}", r"\end{document}"]
+    return any(tex_chunk.startswith(x) for x in need_frame_closed)
 
 
 def get_section(chunk: str) -> str:
@@ -132,9 +148,6 @@ def get_end_frame() -> str:
     return r"\end{frame}"
 
 
-
-
-
 def md_to_tex(md_text: str) -> str:
     with LaTeXRenderer() as renderer:
         tex_document = renderer.render(mistletoe.Document(md_text))
@@ -153,75 +166,10 @@ def md_to_tex(md_text: str) -> str:
     return "\n".join(tex_lines)    
 
 
-
-
-
-
-
-
-
-
-def write_tex_from_md():
-    md_paths = get_paths()
-    for p in md_paths:
-        write_tex(get_tex_from_md_file(p))
-
-
-def get_tex_from_md_file(filename: str) -> str:
-    chunks = get_chunks(filename)
-
-
-    tex_chunks = []
-    for md_chunk in chunks:
-        tex_chunks.append(get_tex_chunk_from_md_chunk(md_chunk))
-    return "\n\n".join(tex_chunks)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def get_tex_chunk_from_md_chunk(md_chunk: str) -> str:
-    if md_chunk.startswith("# "):
-        return get_section(md_chunk)
-    elif md_chunk.startswith("## "):
-        return get_subsection(md_chunk)
-    elif md_chunk.startswith("### "):
-        frame_title = md_chunk[4:].splitlines()[0].strip()
-        frame_content = md_chunk.split("\n", 1)[-1].strip()
-        return (
-            r"\begin{frame}{" + frame_title + "}\n" + get_tex_from_md_within_frame(frame_content) + "\n" + r"\end{frame}" + "\n"
-        )
-    elif not md_chunk.strip():
-        return ""
-    else:
-        raise ParseFailure("not sure how to handle:" + repr(md_chunk))
-
-
-def get_tex_from_md_within_frame(md_text: str) -> str:
-    with LaTeXRenderer() as renderer:
-        tex_document = renderer.render(mistletoe.Document(md_text))
-    # these are chunks in an existing document. remove packages, doc boundaries
-    to_skip = [
-        r"\documentclass",
-        r"\begin{document}", 
-        r"\end{document}", 
-        r"\usepackage",
-        r"lstlisting"
-    ]
-    tex_lines = []
-    for line in tex_document.splitlines():
-        if not any(x in line for x in to_skip):
-            tex_lines.append(line)
-    return "\n".join(tex_lines)
+def write_tex(text: str) -> None:
+    os.makedirs(BUILD_DIR, exist_ok=True)
+    with open(BUILD_FILENAME, "a") as handle:
+        handle.write(text)
 
 
 def get_head() -> str:
@@ -234,26 +182,12 @@ def get_tail() -> str:
         return "".join(handle.readlines())
 
 
-
 def get_paths() -> list[str]:
     paths = []
     for filename in os.listdir(SOURCE_DIR):
         if filename.endswith(".md"):
             paths.append(f"{SOURCE_DIR}/{filename}")
     return paths
-
-
-def write_tex(text: str) -> None:
-
-    print(text)
-
-    os.makedirs(BUILD_DIR, exist_ok=True)
-    with open(BUILD_FILENAME, "a") as handle:
-        handle.write(text)
-
-
-def build() -> None:
-    subprocess.run(["pdflatex", "-interaction=nonstopmode", "-shell-escape", BUILD_FILENAME]) 
 
 
 def read_file(path: str) -> str:
