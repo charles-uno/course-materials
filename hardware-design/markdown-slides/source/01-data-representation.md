@@ -1,5 +1,5 @@
 
-# Data Representation}
+# Data Representation
 
 ### How do computers store information?
 

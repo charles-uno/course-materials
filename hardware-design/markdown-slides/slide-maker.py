@@ -224,7 +224,7 @@ def get_paths() -> list[str]:
     for filename in os.listdir(SOURCE_DIR):
         if filename.endswith(".md"):
             paths.append(f"{SOURCE_DIR}/{filename}")
-    return paths
+    return sorted(paths)
 
 
 def read_file(path: str) -> str:
