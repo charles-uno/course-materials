@@ -1,4 +1,281 @@
+<setup>
+	<styleDefinitions>
+	  <styleDefinition styleNumber="11" fillColor="white" fillOpacity="1"/>
+	</styleDefinitions>
+  
+  <module name="edge" newNamespace>
+	<setup>
+	  <customAttribute componentType="point" assignNames="parent" attribute="parent" defaultValue="(0,0)"/>
+	  <customAttribute componentType="point" assignNames="child" attribute="child" defaultValue="(0,0)"/>
+	</setup>
+	<lineSegment endpoints="$parent $child" layer="1" draggable="false"/>
+  </module>
+	
+  <module name="node" newNamespace>
+	<setup>
+	<number name="node_radius">0.5</number>
+	<customAttribute componentType="text" assignNames="data" attribute="data" defaultValue="0"/>
+	<customAttribute componentType="point" assignNames="center" attribute="center" defaultValue="(0,0)"/>
+	<customAttribute componentType="boolean" assignNames="editableValue" attribute="editableValue" defaultValue="false"/>
+	</setup>
+	<circle name="nodeCircle" center="$center" radius="$node_radius" styleNumber="11" filled layer="2" draggable="false"/>
+	<conditionalContent>
+	  <case condition="$editableValue = true">
+		<textInput anchor="$center" width="15px" draggable="false">$data</textInput>
+	  </case>
+	  <case condition="$editableValue = false">
+		<text anchor="$center" draggable="false">$data</text>
+	  </case>
+	</conditionalContent>
+  </module>
+  </setup>
+  
+  <section><title>Textbook Reading</title>
+  
+  <p>Read the Introduction to Chapter 13, and Sections 13.1 and 13.2 of the textbook <ref uri="https://diveintosystems.org">Dive Into Systems</ref>, before continuing to the next section. I strongly recommend that you take notes, though you are not required to submit them.</p>
+  
+  </section>
+  
+  <section><title>The Operating System</title>
+  
+	<p>Which of the following are true about the operating system? Select all.</p>
+	<answer>
+	<choiceInput shuffleOrder selectMultiple>
+	  <choice credit="1">The operating system is software</choice>
+	  <choice>The operating system is hardware</choice>
+	  <choice credit="1">The operating system manages hardware components to run programs</choice>
+	  <choice credit="1">The operating system is available whenever the computer is on</choice>
+	  <choice credit="1">The operating system can start programs in response to user interaction</choice>
+	</choiceInput>
+	</answer>
+  
+	<p>Which of the following are true about multiprogramming? Select all.</p>
+	<answer>
+	<choiceInput shuffleOrder selectMultiple>
+	  <choice credit="1">Multiprogramming allows more than one program to run at a time</choice>
+	  <choice>In multiprogramming, all programs are simultaneous running on CPU cores</choice>
+	  <choice>We can never have more programs running than our computer has CPU cores</choice>
+	  <choice>Programs cannot share hardware resources</choice>
+	</choiceInput>
+	</answer>
+  
+	<p>Which of the following are true about the operating system kernel? Select all.</p>
+	<answer>
+	<choiceInput shuffleOrder selectMultiple>
+	  <choice credit="1">The kernel manages the hardware layer to run programs</choice>
+	  <choice credit="1">The kernel implements the interfaces to the user applications layer</choice>
+	  <choice credit="1">The kernel implements policies for which process runs next on the CPU</choice>
+	  <choice credit="1">The kernel implements the system call interface and the device interface</choice>
+	</choiceInput>
+	</answer>
+  
+  </section>
+	
+  <section><title>Booting and Running</title>
+  
+  <p>Number the following steps 1 through 4, giving the order in which the operating system performs the tasks to start running a program.</p>
+	<ul>
+	  <li><answer>2</answer>Load the program's binary executable from disk to RAM</li>
+	  <li><answer>1</answer>Allocate a portion of RAM</li>
+	  <li><answer>4</answer>Initializes the CPU to start running the program</li>
+	  <li><answer>3</answer>Create and initialize process for running the program</li>   
+	</ul>
+  
+	<p>What is booting?</p>
+	<answer>
+	<choiceInput shuffleOrder>
+	  <choice credit="1">The process of the operating system loading and initializing itself on the computer</choice>
+	  <choice>The process of removing stale data from the cache</choice>
+	  <choice>The processes between pressing the power button on a computer and when the CPU is provided with power</choice>
+	</choiceInput>
+	</answer>
+  
+	<p>What is an interrupt-driven system?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">The OS sleeps until it receives a request.</choice>
+		<choice>The latest program to start interrupts previously run programs to use the CPU</choice>
+		<choice>The OS interrupts other processes to access the resources that it needs</choice>
+		<choice>After booting and initializing, the OS runs until it is interrupted by and input/output device</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What is a system call?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">A request from a program to the OS to access protected resources</choice>
+		<choice>A command executed by the CPU</choice>
+		<choice>An instruction from the operating system</choice>
+		<choice>Data retrieval from secondary storage</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What is a trap?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">An interrupt coming from the software layer</choice>
+		<choice>An interrupt coming from the hardware layer</choice>
+		<choice>An interrupt from a malicious program</choice>
+		<choice>An interrupt from a network interface card (NIC)</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>Number the following steps 1 through 4, giving the order of steps in a system call.</p>
+	<ul>
+	  <li><answer>3</answer>The trap handler reads the identification number.</li>
+	  <li><answer>1</answer>The identification number of the system call is placed and a trap instruction is issued to the OS.</li>
+	  <li><answer>4</answer>The trap handler executes the system call.</li> 
+	  <li><answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.</li>
+	</ul>
+	
+	<p>Number the following steps 1 through 3, giving the order of steps in a hardware interrupt.</p>
+	<ul>
+	  <li><answer>1</answer>The interrupting device puts a signal on the CPU's interrupt bus.</li>
+	  <li><answer>3</answer>The OS interrupt handler executes the instructions.</li>
+	  <li><answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.</li>
+	</ul>
+  
+	<p>What is user mode?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">An execution mode where only user-level instructions are executed, and the CPU is prevented from accessing OS instructions and data, as well as some hardware components.</choice>
+		<choice>An execution mode where the CPU can execute any instructions, access any memory location, and directly access hardware components.</choice>
+		<choice>An execution mode where all instructions are issued by the current user.</choice>
+		<choice>An executing mode where the user specifies which hardware components and memory locations the CPU can access.</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What is kernel mode?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice>An execution mode where only the OS software is running.</choice>
+		<choice credit="1">An execution mode where the CPU can execute any instructions, access any memory location, and directly access hardware components.</choice>
+		<choice>An execution mode where the CPU debugs issues in the OS.</choice>
+		<choice>An executing mode where the computer has booted in safe mode, so that malicious software and data leaks can be resolved.</choice>
+	  </choiceInput>
+	</answer>
+	
+  </section>
+  
+  <section><title>Processes</title>
+  
+	<p>What is a process?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">An instance of a program running in the system.</choice>
+		<choice>A sequence of instructions executed by the CPU.</choice>
+		<choice>The steps that the CPU follows in order to execute an instruction.</choice>
+		<choice>A sequence of instructions initiated by the OS.</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>In multiprogramming, what handles switching between multiple processes running on the CPU?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">The OS</choice>
+		<choice>The control unit</choice>
+		<choice>The CPU</choice>
+		<choice>The load balancer</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What is timesharing?</p>
+	<answer>
+	  <choiceInput shuffleOrder>
+		<choice credit="1">The OS schedules processes to execute for short time intervals, taking turns</choice>
+		<choice>The CPU alternates between executing instructions from different processes</choice>
+		<choice>While a process is accessing memory, it pauses to allow another process to execute</choice>
+		<choice>Memory accesses from multiple processes are grouped together for efficiency</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What does the OS save from the current process when context switching? Select all.</p>
+	<answer>
+	  <choiceInput shuffleOrder selectMultiple>
+		<choice credit="1">Register values</choice>
+		<choice credit="1">Memory state</choice>
+		<choice>Values in secondary storage</choice>
+		<choice>The time needed to finish the process</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What information does the OS maintain for each process? Select all.</p>
+	<answer>
+	  <choiceInput shuffleOrder selectMultiple>
+		<choice credit="1">A unique identifier for the process</choice>
+		<choice credit="1">Address space information</choice>
+		<choice credit="1">Execution state</choice>
+		<choice credit="1">Register values</choice>
+		<choice credit="1">Stack location</choice>
+		<choice credit="1">Resources allocated to the process</choice>
+		<choice credit="1">Current process state</choice>
+	  </choiceInput>
+	</answer>
+  
+	<p>What are possible process execution states? Select all.</p>
+	<answer><choiceInput shuffleOrder selectMultiple>
+	<choice credit="1">Ready</choice>
+	<choice credit="1">Running</choice>
+	<choice credit="1">Blocked</choice>
+	<choice credit="1">Exited</choice>
+	<choice>Paused</choice>
+	<choice>Idle</choice>
+	<choice>Stalled</choice>
+	<choice>Active</choice>
+	</choiceInput></answer>
+  
+	<p>In Unix, what system call create a new process?</p>
+	<answer><choiceInput shuffleOrder>
+	  <choice credit="1">fork</choice>
+	  <choice>new</choice>
+	  <choice>branch</choice>
+	  <choice>execute</choice>
+	</choiceInput>
+	</answer>
+  
+	<p>In the diagram below, what are the relationships between the processes? Select all true statements.</p>
+  
+	<graph displayXAxis="false" displayYAxis="false" xmin="-9" xmax="9" ymin="-10" ymax="1" aspectRatio="2/1" showBorder="false" showNavigation="false">
+	<module name="root" copysource="node" data="A" center="(0,0)"/>
+	
+	<module name="node0" copysource="node" data="B" center="(-4,-4)"/>
+	<module copysource="edge" parent="$(root/center)" child="$(node0/center)"/>
+	<module name="node1" copysource="node" data="C" center="(4,-4)"/>
+	<module copysource="edge" parent="$(root/center)" child="$(node1/center)"/>
+  
+	<module name="node00" copysource="node" data="D" center="(-6,-8)"/>
+	<module copysource="edge" parent="$(node0/center)" child="$(node00/center)"/>
+	<module name="node01" copysource="node" data="E" center="(-2,-8)"/>
+	<module copysource="edge" parent="$(node0/center)" child="$(node01/center)"/>
+  
+	<module name="node10" copysource="node" data="F" center="(2,-8)"/>
+	<module copysource="edge" parent="$(node1/center)" child="$(node10/center)"/>
+  
+  </graph>
+  
+	<answer>
+	  <choiceInput shuffleOrder selectMultiple>
+		<choice credit="1">A is the parent of B</choice>
+		<choice credit="1">B is the parent of E</choice>
+		<choice credit="1">C is a child of A</choice>
+		<choice credit="1">D and E are siblings</choice>
+		<choice credit="1">B has made two calls to fork</choice>
+		<choice>E is the parent of B</choice>
+		<choice>A is the parent of E</choice>
+		<choice>D and C are siblings</choice>
+		<choice>B is a child of E</choice>
+		<choice>F is a child of B</choice>
+		<choice>E has made one call to fork</choice>
+	  </choiceInput>
+	</answer>
+	
+  
+	
+	
+  
+  </section>
 
+  
 
 For this exercise, you will investigate how the number of threads impacts the run time of a process. Review Sections 13.2, 14.1, and 14.2 of the textbook, Dive Into Systems, before starting this exercise.
 

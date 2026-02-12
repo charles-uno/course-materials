@@ -45,23 +45,7 @@ def main():
 
     write_tex("\n\n".join(frames))
 
-
-        # section header
-        # subsection header
-        # begin frame
-        # markdown content (need to process)
-        # LaTeX content (pass through)
-        # close existing frame before starting a new section/subsection/frame
-
-
     return
-
-
-    write_tex(get_head())
-    write_tex_from_md()
-    write_tex(get_tail())
-
-
 
 
 def get_chunks(filename: str) -> list[str]:
