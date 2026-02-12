@@ -195,8 +195,8 @@ decimal. Just be careful about carrying.
 We can use the first digit to hold the sign, then the rest of the digits to
 hold magnitue:
 
-- 0b\Highlight{0}1011001 is positive 0b10110001, so 89
-- 0b\Highlight{1}1011001 is negative 0b1011001, so -89
+- 0b*0*1011001 is positive 0b10110001, so 89
+- 0b*1*1011001 is negative 0b1011001, so -89
 
 This is nice and straightforward!
 
@@ -225,7 +225,6 @@ And 0b10000000 is negative zero (which is also zero).
 
 Using this convention, we have to worry about the difference between numerical
 equality and bitwise equality. That seems pretty messy.
-
 
 ### Can We Do Better?
 
@@ -275,7 +274,6 @@ and the last bit tells us whether to use positive or negative (yikes)
 Two's complement: bits are worth 1, 2, 4, 8, 16, 32, 64, \Highlight{-128}
 
 Range of possible values is -128 to 127.
-
 
 ### Flipping Signs in Two's Complement
 
@@ -372,8 +370,6 @@ Why offset the exponent?
 
 Why add 1 to the significand fraction?
 
-% Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
-
 ### Floating Point Examples
 
 \begin{align*}
@@ -381,16 +377,16 @@ Why add 1 to the significand fraction?
                                                                                                                     & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
                                                                                                                     & = 1                                                                  \\
 \end{align*}
+
 \begin{align*}
     0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
                                 & \approx 0.33325195                                                     \\
 \end{align*}
+
 \begin{align*}
     1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
                                 & = -65504                                                                \\
 \end{align*}
-
-	Why
 
 
 ### Floating Point Special Cases
@@ -406,7 +402,7 @@ Why add 1 to the significand fraction?
 \end{equation*}
 
 There's more to it than this. If you're curious, read up on subnormal numbers
-\href{https://en.wikipedia.org/wiki/Half-precision_floating-point_format}{here}
+[here](https://en.wikipedia.org/wiki/Half-precision_floating-point_format)
 
 ### Floating Point for Big Integers
 
@@ -415,19 +411,13 @@ point. This is true even if both formats use the same number of bits.
 
 - 8-bit unsigned integer: max value 255
 - 16-bit unsigned integer: max value 65,535
-- 32-bit unsigned integer: max value 4.2 billion % 4,294,967,295
+- 32-bit unsigned integer: max value 4.2 billion 
 - 16-bit floating point: max value 65,504 (also handles negatives, fractions)
 - 32-bit floating point: max value 340 billion billion billion billion (also handles negatives, fractions)
-        % 340,282,346,638,528,859,811,704,183,484,516,925,440 
 
 ### Floating Point Limitations
 
 So what's the catch?
-
-%        - Convert 0b100110.10 from fixed-point binary to decimal.
-%        - Convert 23.75 from decimal to fixed-point binary.
-%        - Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
-%        - Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
 ## Beyond Numbers
 
@@ -450,9 +440,9 @@ There are many cases where we want a computer to store non-numerical data:
 - To make a string, put a bunch of characters in a row
 - Question: how do we identify the end of a string?
 
-### ASCII Table}
+### ASCII Table
 
-![ascii table](images/ascii-table)
+\includegraphics[width=\columnwidth]{images/ascii-table}
 
 ### Colors and Images
 	
@@ -460,7 +450,7 @@ There are many cases where we want a computer to store non-numerical data:
 - We can represent an image as a grid of colored pixels
 - Question: do we need a null byte at the end of a pixel/row/image? Why or why not?
 
-![mario pixels](images/mario-pixels)
+\includegraphics[width=\columnwidth]{images/mario-pixels}
 
 ### Sound
 
@@ -468,7 +458,7 @@ There are many cases where we want a computer to store non-numerical data:
 - We can create sound by moving a speaker cone rapidly
 - To store sound, store the movement of the speaker cone
 
-![speaker](images/speakers)
+\includegraphics[width=0.5\columnwidth]{images/speakers}
 
 ### Structured Data
 

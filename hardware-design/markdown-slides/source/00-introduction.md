@@ -3,7 +3,7 @@
 
 ### Course Overview
 
-![dune robot hbo](images/dune-robot-hbo)
+\includegraphics[width=\columnwidth]{images/dune-robot-hbo}
 
 \begin{center}
 Thou shalt not make a machine in the likeness of a human mind
