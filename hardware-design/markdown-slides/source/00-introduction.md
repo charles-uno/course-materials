@@ -2,20 +2,14 @@
 
 ### Course Overview 
 
-
-\begin{overpic}[width=\textwidth]{dune-robot-hbo}
-	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}
-	\put (70, 3) {\textcolor{white}{Dune, Frank Herbert}}
-\end{overpic}
-
-
-
-
 ![dune robot hbo](images/dune-robot-hbo)
 
+\begin{center}
 Thou shalt not make a machine in the likeness of a human mind
-
-- Dune, Frank Herbert
+\end{center}
+\begin{flushright}
+Dune, Frank Herbert
+\end{flushright}
 
 ## Grading
 

@@ -15,27 +15,35 @@ def main():
     if os.path.isfile(BUILD_FILENAME):
         os.remove(BUILD_FILENAME)
 
-    raw_chunks = [get_head()]
+    chunks = [get_head()]
     paths = get_paths()
     for p in paths:
-        raw_chunks += get_raw_chunks(p)
-    raw_chunks.append(get_tail())
+        chunks += get_chunks(p)
+    chunks.append(get_tail())
 
-    tex_chunks = []
-    for raw_chunk in raw_chunks:
-        if not raw_chunk.strip():
-            continue
-        tex_chunk = to_tex(raw_chunk)
-        if should_end_frame_before_chunk(tex_chunks, tex_chunk):
-            tex_chunks.append(get_end_frame())
-        tex_chunks.append(tex_chunk)
+    frame_markers = [
+        r"\begin{frame}",
+        r"\end{document}",
+        r"\section{", 
+        r"\Section{",
+        r"\subsection{",
+        r"\Subsection{",
+    ]
+    frames = [""]
+    for c in chunks:
+        if any(c.startswith(m) for m in frame_markers):
+            frames.append(c)
+        else:
+            frames[-1] += "\n\n" + c
 
-    for tex_chunk in tex_chunks:
-        print("% --------------------")
-        print(tex_chunk)
+    # Add \end{frame} and [fragile] as appropriate
+    frames = [fix_frame(f) for f in frames]
 
+    for f in frames:
+        print("% ---------- frame ----------")
+        print(f)
 
-    write_tex("\n\n".join(tex_chunks))
+    write_tex("\n\n".join(frames))
 
 
         # section header
@@ -56,7 +64,7 @@ def main():
 
 
 
-def get_raw_chunks(filename: str) -> list[str]:
+def get_chunks(filename: str) -> list[str]:
     lines = read_file(filename).splitlines()
     chunks = [""]
     tex_depth = 0
@@ -88,7 +96,7 @@ def get_raw_chunks(filename: str) -> list[str]:
             chunks += [line, ""]
         else:
             chunks[-1] += line
-    return [c.rstrip() for c in chunks]
+    return [to_tex(c.rstrip()) for c in chunks]
 
 
 def to_tex(chunk: str) -> str:
@@ -107,6 +115,14 @@ def to_tex(chunk: str) -> str:
         return chunk
     else:
         return md_to_tex(chunk)
+
+
+def fix_frame(frame: str) -> str:
+    if not frame.strip().startswith(r"\begin{frame}"):
+        return frame
+    if r"\begin{minted}" in frame:
+        frame = frame.replace(r"\begin{frame}", r"\begin{frame}[fragile]")
+    return frame + "\n\n" + r"\end{frame}"
 
 
 def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool:
@@ -148,7 +164,7 @@ def get_code_block(chunk: str) -> str:
 def get_begin_frame(chunk: str) -> str:
     assert chunk.startswith("### ")
     frame_title = chunk[4:].splitlines()[0]
-    return r"\begin{frame}[fragile]{" + frame_title + "}"
+    return r"\begin{frame}{" + frame_title + "}"
 
 
 def get_end_frame() -> str:
