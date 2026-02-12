@@ -637,7 +637,7 @@ Let's draw the expression
 
 ### The Half Adder
 
-Full adders can be chained together. Carry in as well as carry out.
+Why might this be called a *half* adder?
 
 \begin{tikzpicture}
     % Paths, nodes and wires:
@@ -656,35 +656,46 @@ Full adders can be chained together. Carry in as well as carry out.
     \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (6.688, 3.286){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (6.375, 3.598){D};
 \end{tikzpicture}
 
-### Bigger Adder with Carry
+### Full Adder
+
+What's special about the *full* adder?
 
 \begin{tikzpicture}
     % Paths, nodes and wires:
-    \node[ieeestd and port] at (5.205, 5){};
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (2.571, 3.688){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.259, 4){B};
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.465cm] at (2.598, 2.964){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.286, 3.214){C};
-    \node[ieeestd xor port] at (5.205, 3.286){};
-    \node[jump crossing] at (3.854, 3.571){};
-    \draw (3.994, 3.571) -- (4.123, 3.566);
-    \draw (4.123, 3.006) -- (3, 3);
-    \draw (3.714, 3.571) -- (3, 3.571);
-    \draw (4.123, 4.72) -- (3.857, 4.714) -- (3.854, 3.711);
-    \draw (3.857, 3.429) -- (3.857, 3);
-    \draw (4.123, 5.28) -- (3.429, 5.286) -- (3.429, 3.571);
-    \node[ieeestd xor port] at (7.776, 6){};
-    \node[ieeestd and port] at (7.776, 7.714){};
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (2.598, 6.402){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (2.286, 6.714){A};
-    \node[jump crossing] at (6.429, 6.283){};
-    \draw (6.571, 6.286) -- (6.714, 6.286);
-    \draw (6.695, 7.434) -- (6.429, 7.429) -- (6.429, 6.429);
-    \draw (6.695, 5.72) -- (6.429, 5.714);
-    \draw (6.429, 6.143) -- (6.429, 5.714) -- (6.429, 5) -- (6.286, 5);
-    \draw (6.695, 7.994) -- (6, 8) -- (6, 6.286) -- (6.286, 6.286);
-    \draw (6, 6.286) -- (3, 6.286);
-    \draw (6.286, 3.286) -- (8.857, 3.286);
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.402, 7.741){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.089, 8.054){D};
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.429, 6.027){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.116, 6.339){E};
-    \node[shape=rectangle, minimum width=0.59cm, minimum height=0.59cm] at (9.402, 3.402){} node[anchor=north west, align=left, text width=0.202cm, inner sep=6pt] at (9.089, 3.714){F};
+    \node[american xor port] at (6, 5.571){};
+    \node[american xor port] at (7.815, 5.006){};
+    \node[american and port] at (7.714, 3.571){};
+    \node[jump crossing] at (4.286, 4.711){};
+    \node[jump crossing] at (3.717, 4.714){};
+    \node[jump crossing] at (3.711, 5.286){};
+    \draw (4.614, 5.851) -- (3, 5.857);
+    \draw (4.614, 5.291) -- (3.857, 5.286);
+    \draw (3.571, 5.286) -- (3, 5.286);
+    \draw (3.714, 5.429) -- (3.714, 5.857);
+    \draw (3.714, 5.143) -- (3.714, 4.857);
+    \draw (3.571, 4.714) -- (3, 4.714);
+    \draw (3.857, 4.714) -- (4.143, 4.714);
+    \node[jump crossing] at (6.143, 4.717){};
+    \draw (6.143, 5.571) -- (6.143, 4.857);
+    \draw (6.429, 5.286) -- (6.143, 5.286);
+    \draw (6.283, 4.717) -- (6.429, 4.726);
+    \draw (4.429, 4.714) -- (6.003, 4.717);
+    \draw (4.286, 4.857) -- (4.286, 5.286);
+    \node[american and port] at (7.714, 2.286){};
+    \draw (6.143, 4.571) -- (6.143, 3.857) -- (6.328, 3.851);
+    \draw (5.571, 4.714) -- (5.571, 3.286) -- (6.328, 3.291);
+    \draw (6.328, 2.006) -- (3.714, 2) -- (3.714, 4.571);
+    \draw (4.286, 4.571) -- (4.286, 2.571) -- (6.328, 2.566);
+    \node[american or port] at (9.417, 3){};
+    \draw (7.868, 3.571) -- (7.857, 3.286) -- (8.031, 3.28);
+    \draw (7.868, 2.286) -- (7.857, 2.714) -- (8.031, 2.72);
+    \draw (7.969, 5.006) -- (10, 5);
+    \draw (9.571, 3) -- (10, 3);
+    \node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.571, 6){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (2.286, 6.286){A};
+    \node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.571, 5.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (2.286, 5.714){B};
+    \node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.571, 4.714){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (2.286, 5){$\text{C}_{\text{in}}$};
+    \node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (10.429, 3){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (10.143, 3.286){$\text{C}_{\text{out}}$};
+    \node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (10.429, 5){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (10.143, 5.286){S};
 \end{tikzpicture}
 
 ## Electrical Circuits
