@@ -1,5 +1,5 @@
 
-### Introduction
+# Introduction
 
 ### Course Overview
 
@@ -63,11 +63,11 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 
 ### Important Links
 
-- Dive Into Systems: \url{https://diveintosystems.org/book/index.html}
-- Doenet: \url{https://www.doenet.org/course?tool=dashboard&courseId=_GnqAk2zB64CHKPeZY9Ren}
-- ARM Tutorial: \url{https://diveintosystems.org/book/C9-ARM64/index.html}
-- ARM Simulator: \url{http://163.238.35.161/~zhangs/arm64simulator/}
-- Circuitverse: \url{https://circuitverse.org/simulator}
+- Dive Into Systems: https://diveintosystems.org/book/index.html
+- Doenet: https://www.doenet.org/course?tool=dashboard&courseId=_GnqAk2zB64CHKPeZY9Ren
+- ARM Tutorial: https://diveintosystems.org/book/C9-ARM64/index.html
+- ARM Simulator: http://163.238.35.161/~zhangs/arm64simulator/
+- Circuitverse: https://circuitverse.org/simulator
 
 ## Everything Else
 

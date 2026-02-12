@@ -69,22 +69,18 @@ def get_chunks(filename: str) -> list[str]:
     chunks = [""]
     tex_depth = 0
     code_block = False
-
-    tex_begin_markers = [r"\begin{", r"\["]
-    tex_end_markers = [r"\end{", r"\]"]
-
     while lines:
         line = lines.pop(0) + "\n"
         if chunks[-1] == "" and not line.strip():
             continue
 
-        elif any(line.strip().startswith(m) for m in tex_begin_markers):
+        elif line.strip().startswith(r"\begin{"):
             if tex_depth > 0:
                 chunks[-1] += line
             else:
                 chunks.append(line)
             tex_depth += 1
-        elif any(line.strip().startswith(m) for m in tex_end_markers):
+        elif line.strip().startswith(r"\end{"):
             chunks[-1] += line
             tex_depth -= 1
             if tex_depth == 0:
@@ -104,7 +100,7 @@ def get_chunks(filename: str) -> list[str]:
 
 
 def to_tex(chunk: str) -> str:
-    tex_markers = [r"\[", r"\begin{", r"\end{", r"\documentclass{"]
+    tex_markers = [r"\begin{", r"\end{", r"\documentclass{"]
     if chunk.startswith("# "):
         return get_section(chunk)
     elif chunk.startswith("## "):

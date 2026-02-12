@@ -58,12 +58,12 @@ decimal number is zero. \\
 
 For example, starting with 58:
 
-- 58 is even, so append \Highlight{0}. Divide by two, leaving 29.
-- 29 is odd, so append \Highlight{1}0. Divide by two, leaving 14.
-- 14 is even, so append \Highlight{0}10. Divide by two, leaving 7.
-- 7 is odd, so append \Highlight{1}010. Divide by two, leaving 3.
-- 3 is odd, so append \Highlight{1}1010. Divide by two, leaving 1.
-- 1 is odd, so append \Highlight{1}11010. Divide by two, leaving 0.
+- 58 is even, so append *0*. Divide by two, leaving 29.
+- 29 is odd, so append *1*0. Divide by two, leaving 14.
+- 14 is even, so append *0*10. Divide by two, leaving 7.
+- 7 is odd, so append *1*010. Divide by two, leaving 3.
+- 3 is odd, so append *1*1010. Divide by two, leaving 1.
+- 1 is odd, so append *1*11010. Divide by two, leaving 0.
 
 So 58 in binary is 0b111010.
 
@@ -89,7 +89,7 @@ Binary addition works just like decimal addition. Start from the right, add stra
 
 For example:
 
-\[
+\begin{equation*}
     \begin{array}{ccccccccc}
         1 & 1 & 1 & 1 & 1 &   &   &   &   \\
             & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
@@ -97,7 +97,7 @@ For example:
         \hline
         1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
     \end{array}
-\]
+\end{equation*}
 
 What happens if we try to perform this operation but we only have 8 bits to store the answer?
 
@@ -109,7 +109,7 @@ Multiply the top number by the rightmost digit of the bottom number.
 Then move to the next line, add a zero, and repeat for the next digit.
 Finally, add up the lines. For example:
 
-\[
+\begin{equation*}
     \begin{array}{cccccc}
             &   &        & 1 & 1 & 0 \\
             &   & \times & 1 & 0 & 1 \\
@@ -120,7 +120,7 @@ Finally, add up the lines. For example:
         \hline
             & 1 & 1      & 1 & 1 & 0 \\
     \end{array}
-\]
+\end{equation*}
 
 ### Division in Binary
 
@@ -178,7 +178,7 @@ Hexadecimal is very compact! These numbers get big fast
 Addition and multiplication work in hexadecimal just like they do in binary and
 decimal. Just be careful about carrying.
 
-\[
+\begin{equation*}
     \begin{array}{ccccc}
         1 &   &   & 1 &   \\
             & 4 & 1 & 7 & B \\
@@ -186,7 +186,7 @@ decimal. Just be careful about carrying.
         \hline
         1 & 0 & 3 & 8 & A \\
     \end{array}
-\]
+\end{equation*}
 
 ## Negatives in Binary
 
@@ -206,14 +206,14 @@ Adding positive numbers works just the same. But what happens if we throw a minu
 
 For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then:
 
-\[
+\begin{equation*}
     \begin{array}{ccccccccc}
             & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
         + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
         \hline
             & ? & ? & ? & ? & ? & ? & ? & ? \\
     \end{array}
-\]
+\end{equation*}
 
 We know the result should be 7 (0b00000111). But our regular rules for addition do not get us there.
 
@@ -239,14 +239,14 @@ Signed magnitude was a swing and a miss. What do we want when we talk about nega
 
 We know 1 - 1 = 0. Put another way, 1 + (-1) = 0. Can we work backwards from there to figure out how to write -1?
 
-\[
+\begin{equation*}
     \begin{array}{ccccccccc}
             & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
         + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
         \hline
             & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
     \end{array}
-\]
+\end{equation*}
 
 Remember: on a computer, our numbers have to fit in a set number of bits.
 Anything past that gets thrown away. This is called overflow. In this case,
@@ -297,7 +297,7 @@ Overflow is important for two's complement. It ensures that positive zero and ne
 
 Try adding 0b01101001 + 0b01011010:
 
-\[
+\begin{equation*}
     \begin{array}{ccccccccc}
             &   & 1 & 1 & 1 &   &   &   &   \\
             & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
@@ -305,7 +305,7 @@ Try adding 0b01101001 + 0b01011010:
         \hline
             & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
     \end{array}
-\]
+\end{equation*}
 
 These are two's complement numbers. Convert them to decimal. What just happened?
 
@@ -395,7 +395,7 @@ Why add 1 to the significand fraction?
 
 ### Floating Point Special Cases
 
-\[
+\begin{equation*}
     \begin{array}{ccccr}
         0 & 00000 & 0000000000     & = 0          \\
         1 & 00000 & 0000000000     & = -0         \\
@@ -403,7 +403,7 @@ Why add 1 to the significand fraction?
         1 & 11111 & 0000000000     & = -\infty    \\
         0 & 11111 & \text{nonzero} & = \text{NaN} \\
     \end{array}
-\]
+\end{equation*}
 
 There's more to it than this. If you're curious, read up on subnormal numbers
 \href{https://en.wikipedia.org/wiki/Half-precision_floating-point_format}{here}
