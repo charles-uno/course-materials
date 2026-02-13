@@ -84,6 +84,8 @@ def get_chunks(filename: str) -> list[str]:
             else:
                 chunks.append(line)                
             code_block = not code_block
+        elif code_block:
+            chunks[-1] += line
         elif any(line.startswith(m) for m in standalone_line_markers):
             chunks += [line, ""]
         else:
