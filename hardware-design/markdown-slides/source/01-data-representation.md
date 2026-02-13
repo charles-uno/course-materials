@@ -131,6 +131,15 @@ To divide by 4, shift the bits two places to the right.
 That's about as deep as we go in this class. If you're curious to learn more,
 see the textbook.
 
+### Exercises
+
+- Add 0b00110100 + 0b10111010. These are eight-bit binary numbers
+
+
+
+
+
+
 ## Hexadecimal
 
 ### What? Why?
@@ -187,6 +196,10 @@ decimal. Just be careful about carrying.
         1 & 0 & 3 & 8 & A \\
     \end{array}
 \end{equation*}
+
+### Exercises
+
+
 
 ## Negatives in Binary
 
@@ -307,6 +320,9 @@ Try adding 0b01101001 + 0b01011010:
 
 These are two's complement numbers. Convert them to decimal. What just happened?
 
+### Exercises
+
+
 ## Fractions and Decimals
 
 ### The Decimal Point
@@ -419,6 +435,13 @@ point. This is true even if both formats use the same number of bits.
 
 So what's the catch?
 
+### Exercises
+
+- Convert 0b100110.10 from fixed-point binary to decimal.
+- Convert 23.75 from decimal to fixed-point binary.
+- Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
+- Convert the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ to decimal. You can look back a few slides to get the equation
+
 ## Beyond Numbers
 
 ### What else do computers store?
@@ -474,8 +497,7 @@ There are many cases where we want a computer to store non-numerical data:
     \end{column}
 \end{columns}
 
-
-
+### Exercises
 
 
 
