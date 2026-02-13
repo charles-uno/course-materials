@@ -120,7 +120,7 @@ def to_tex(chunk: str) -> str:
 def fix_frame(frame: str) -> str:
     if not frame.strip().startswith(r"\begin{frame}"):
         return frame
-    if r"\begin{minted}" in frame:
+    if r"\begin{minted}" in frame or r"\verb" in frame:
         frame = frame.replace(r"\begin{frame}", r"\begin{frame}[fragile]")
     return frame + "\n\n" + r"\end{frame}"
 

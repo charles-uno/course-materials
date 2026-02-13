@@ -241,9 +241,9 @@ printf("%d + %d = %d\n", m, n, s);
 
 ### Format Specifiers
 
-- `%d` - interpret the value as an integer
-- `%c` - interpret the value as an ASCII character
-- `%s` - interpret the value as a *pointer* to a null-terminated string
+- `%d`: interpret the value as an integer
+- `%c`: interpret the value as an ASCII character
+- `%s`: interpret the value as a *pointer* to a null-terminated string
 - These values are just ones and zeroes! You can use whichever format speficier you want. But you might not like the results
 - Why do we use a pointer to the string instead of the string itself?
 
