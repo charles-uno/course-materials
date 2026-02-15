@@ -355,6 +355,7 @@ def fibonacci(n):
 	\end{center}
 \end{frame}
 
+
 \begin{frame}{Please explain that busy diagram}
 	\begin{enumerate}
 		\item Fetch instruction 1
@@ -366,6 +367,7 @@ def fibonacci(n):
 	\end{enumerate}
 \end{frame}
 
+
 \begin{frame}{Pipelining Upsides}
 	\begin{itemize}
 		\item Code runs faster
@@ -376,6 +378,23 @@ def fibonacci(n):
 	\end{itemize}
 \end{frame}
 
+
+\begin{frame}{Wait a second}
+	\begin{itemize}
+		\item Instructions live in memory
+		\item It takes many CPU cycles to fetch data from memory
+		\item We are fetching a new instruction for each instruction
+		\item How can we capture pipelining wins if we spend so much time waiting for the instruction fetch?
+	\end{itemize}
+\end{frame}
+
+
+% Instructions are cached. Often a bunch of them are pre-loaded into the cache as the program starts
+% Typical numbers:
+% L1 cache access is 1-4 CPU cycles
+% L1 cache can hold thousands of instructions
+
+
 \begin{frame}{Pipelining Downsides}
 	Can you think of any downsides of pipelining?
 
@@ -384,15 +403,12 @@ def fibonacci(n):
 \end{frame}
 
 
-
 \begin{frame}{Hazards}
 	\begin{itemize}
 		\item Data hazard: we want to do two steps simultaneously, but we can't because they want to touch the same register
 		\item Control hazard: we don't know what to do next because it depends on the result of the result of an instruction that's still running
 	\end{itemize}
 \end{frame}
-
-
 
 
 \begin{frame}[fragile]{Data Hazards}
