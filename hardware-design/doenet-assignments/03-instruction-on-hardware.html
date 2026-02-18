@@ -475,13 +475,6 @@
                 <choice credit="1">aarch64</choice>
             </choiceInput>
         </answer>
-        <p>Later in the semester we'll cover cores and threads. What is listed for thread(s) per core? <answer>1
-            </answer>
-        </p>
-        <p>What is listed for cores per socket? (Note: sometimes called clusters)<answer>4</answer>
-        </p>
-        <p>What is listed for sockets? <answer>1</answer>
-        </p>
         <p>What is listed for CPU max MHz? <answer>1800</answer>
         </p>
         <p>What is listed for CPU min MHz? <answer>600</answer>
@@ -1064,7 +1057,7 @@
             you read through these sections. After completing the reading, write a summary below. This summary will be
             graded manually. Note: this
             part may be done before, after, and/or during your work on the exercises below. <alert>Don't worry about the
-                fifth execution stage (M)! FDEW is good enough for
+                fifth execution stage (M). FDEW is good enough for
                 our purposes.</alert>
         </p>
         <answer handGraded>
@@ -1182,13 +1175,13 @@
         <ul>
             <li>Download files <c>cache_test_v1.c</c> and <c>cache_test_v2.c</c> from Moodle onto your laptop</li>
             <li>Log into your Pi as your personal user (not the root user <c>pi</c>)</li>
-            <li>Create a directory for this assignment within the class repo: <c>mkdir ~/HD/instructions-on-hardware</c>
+            <li>Create a directory for this assignment within the class repo: <pre>mkdir ~/HD/instructions-on-hardware</pre>
             </li>
-            <li>Navigate to the new directory: <c>cd ~/HD/instructions-on-hardware</c>
+            <li>Navigate to the new directory: <pre>cd ~/HD/instructions-on-hardware</pre>
             </li>
             <li>Copy those files from your laptop to your new directory. You should be able to drag and drop into the
                 file explorer pane</li>
-            <li>Create a markdown file to hold your results and commentary: <c>code discussion.md</c>
+            <li>Create a markdown file to hold your results and commentary: <pre>code discussion.md</pre>
             </li>
         </ul>
     </exercise>
@@ -1202,9 +1195,9 @@
             <li>Look at the code for v1 and v2. Based on what you've learned about caching, which do you expect to run
                 faster? Why? Put your response in <c>discussion.md</c>
             </li>
-            <li>Compile v1: <c>gcc cache_test_v1.c -o cache_test_v1</c>
+            <li>Compile v1: <pre>gcc cache_test_v1.c -o cache_test_v1</pre>
             </li>
-            <li>Run it using a matrix with size 10k x 10k: <c>./cache_test_v1 10000</c>
+            <li>Run it using a matrix with size 10k x 10k: <pre>./cache_test_v1 10000</pre>
             </li>
             <li>Add the output to <c>discussion.md</c>. Make sure to label it clearly</li>
             <li>Do the same for v2</li>
@@ -1223,22 +1216,22 @@
         </p>
         <ul>
             <li>Log into your Pi and navigate to the directory for this assignment</li>
-            <li>Check your internet connection: <c>ping google.com</c> (then ctrl-C to kill it)</li>
-            <li>Move to your home directory: <c>cd ~</c> (we don't want to upload valgrind to csgit)</li>
-            <li>Download the source: <c>wget https://sourceware.org/pub/valgrind/valgrind-3.24.0.tar.bz2</c>
+            <li>Check your internet connection: <pre>ping google.com</pre> (then ctrl-C to kill it)</li>
+            <li>Move to your home directory: <pre>cd ~</pre> (we don't want to upload valgrind to csgit)</li>
+            <li>Download the source: <pre>wget https://sourceware.org/pub/valgrind/valgrind-3.24.0.tar.bz2</pre>
             </li>
-            <li>Decompress the source files: <c>tar xvf valgrind-3.24.0.tar.bz2</c>
+            <li>Decompress the source files: <pre>tar xvf valgrind-3.24.0.tar.bz2</pre>
             </li>
             <li>Navigate into the new valgrind directory (hint: use <c>ls</c> to figure out the name)</li>
-            <li>Configure valgrind: <c>./configure</c>
+            <li>Configure valgrind: <pre>./configure</pre>
             </li>
-            <li>Compile valgrind: <c>make</c> Note: this may take 10+ minutes! Take a break. Move your body. Drink some
+            <li>Compile valgrind: <pre>make</pre> Note: this may take 10+ minutes! Take a break. Move your body. Drink some
                 water.
             </li>
-            <li>Install valgrind: <c>sudo make install</c>
+            <li>Install valgrind: <pre>sudo make install</pre>
             </li>
             <li>Navigate back to your assignment directory</li>
-            <li>Confirm that valgrind is installed: <c>valgrind --version</c>
+            <li>Confirm that valgrind is installed: <pre>valgrind --version</pre>
             </li>
             <li>Copy-paste the response into <c>discussion.md</c>
             </li>

@@ -275,6 +275,59 @@
   
   </section>
 
+
+
+
+
+
+  <section>
+    <exercise>
+        <title>Raspberry Pi CPU and Clock</title>
+        <p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
+        <p>In the terminal on your Raspberry Pi, enter the following command.</p>
+        <pre>  lscpu</pre>
+        <p>You should see information on the architecture of your Raspberry Pi. Use this information to answer the
+            following
+            questions.</p>
+        <p>What is listed as the Architecture?</p>
+        <answer>
+            <choiceInput shuffleOrder>
+                <choice>armv7l</choice>
+                <choice>x86_64</choice>
+                <choice>amd64</choice>
+                <choice credit="1">aarch64</choice>
+            </choiceInput>
+        </answer>
+        <p>Later in the semester we'll cover cores and threads. What is listed for thread(s) per core? <answer>1
+            </answer>
+        </p>
+        <p>What is listed for cores per socket? (Note: sometimes called clusters)<answer>4</answer>
+        </p>
+        <p>What is listed for sockets? <answer>1</answer>
+        </p>
+        <p>What is listed for CPU max MHz? <answer>1800</answer>
+        </p>
+        <p>What is listed for CPU min MHz? <answer>600</answer>
+        </p>
+        <p>Convert the CPU max MHz to GHz. <answer>1.8</answer>
+        </p>
+        <p>Using the CPU max MHz, how many ticks per second does your Raspberry Pi's CPU clock have? <answer>1800000000
+            </answer>
+        </p>
+        <p>How long does one clock cycle take on your Raspberry Pi? Give your answer in nanoseconds.
+            <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>0.555</answer>
+        </p>
+        <p>Using the CPU max MHz, how long would it take your Raspberry Pi to execute one instruction? Give your answer
+            in
+            nanoseconds. <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>2.222</answer>
+        </p>
+    </exercise>
+
+
+
+
+
+  </section>
   
 
 For this exercise, you will investigate how the number of threads impacts the run time of a process. Review Sections 13.2, 14.1, and 14.2 of the textbook, Dive Into Systems, before starting this exercise.
