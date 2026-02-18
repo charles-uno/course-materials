@@ -77,6 +77,11 @@
 
 \end{frame}
 
+\begin{frame}{Group Exercises}
+	TODO: this
+\end{frame}
+
+
 \Subsection{Executing an Instruction}
 
 \begin{frame}{Execution Steps}
@@ -143,6 +148,10 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Group Exercises}
+	TODO: this
+\end{frame}
+
 \Subsection{Clock-Driven Execution}
 
 \begin{frame}{Clock-Driven Execution}
@@ -180,6 +189,10 @@
 		\item If the computer runs at 1 GHz, that's one cycle every nanosecond
 		\item Wires in the CPU are twisted and packed very tightly. How long do you suppose they would be if straightened?
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Group Exercises}
+	TODO: this
 \end{frame}
 
 \Subsection{Memory Hierarchy}
@@ -234,6 +247,10 @@
 		\item Capacity: how much data (measured in bytes)
 		\item Transfer rate (aka throughput): how fast we can read or write (measured in bytes/second)
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Group Exercises}
+	TODO: this
 \end{frame}
 
 \Subsection{Locality \& Cache}
@@ -316,6 +333,10 @@ def fibonacci(n):
 	return CACHE[n]
 \end{minted}
 
+\end{frame}
+
+\begin{frame}{Group Exercises}
+	TODO: this
 \end{frame}
 
 
@@ -462,12 +483,12 @@ def fibonacci(n):
 	else:
 		...
 	\end{minted}
-Which instruction should we load into the pipeline after 1?
+	Which instruction should we load into the pipeline after 1?
 \end{frame}
 
 \begin{frame}{Mitigating Control Hazards}
 	\begin{itemize}
-\item Pipeling stall. Add a "bubble" to the pipeline. Wait until we know the result of the conditional
+		\item Pipeling stall. Add a "bubble" to the pipeline. Wait until we know the result of the conditional
 		\item Branch prediction. Guess. If we guess wrong, go back and do it right
 		\item Eager execution. Try them both. Once we get the result, throw away the moot one
 	\end{itemize}
