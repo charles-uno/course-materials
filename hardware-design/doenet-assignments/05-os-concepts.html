@@ -1,566 +1,433 @@
 <setup>
 	<styleDefinitions>
-	  <styleDefinition styleNumber="11" fillColor="white" fillOpacity="1"/>
+		<styleDefinition styleNumber="11" fillColor="white" fillOpacity="1" />
 	</styleDefinitions>
-  
-  <module name="edge" newNamespace>
-	<setup>
-	  <customAttribute componentType="point" assignNames="parent" attribute="parent" defaultValue="(0,0)"/>
-	  <customAttribute componentType="point" assignNames="child" attribute="child" defaultValue="(0,0)"/>
-	</setup>
-	<lineSegment endpoints="$parent $child" layer="1" draggable="false"/>
-  </module>
-	
-  <module name="node" newNamespace>
-	<setup>
-	<number name="node_radius">0.5</number>
-	<customAttribute componentType="text" assignNames="data" attribute="data" defaultValue="0"/>
-	<customAttribute componentType="point" assignNames="center" attribute="center" defaultValue="(0,0)"/>
-	<customAttribute componentType="boolean" assignNames="editableValue" attribute="editableValue" defaultValue="false"/>
-	</setup>
-	<circle name="nodeCircle" center="$center" radius="$node_radius" styleNumber="11" filled layer="2" draggable="false"/>
-	<conditionalContent>
-	  <case condition="$editableValue = true">
-		<textInput anchor="$center" width="15px" draggable="false">$data</textInput>
-	  </case>
-	  <case condition="$editableValue = false">
-		<text anchor="$center" draggable="false">$data</text>
-	  </case>
-	</conditionalContent>
-  </module>
-  </setup>
-  
-  <section><title>Textbook Reading</title>
-  
-  <p>Read the Introduction to Chapter 13, and Sections 13.1 and 13.2 of the textbook <ref uri="https://diveintosystems.org">Dive Into Systems</ref>, before continuing to the next section. I strongly recommend that you take notes, though you are not required to submit them.</p>
-  
-  </section>
-  
-  <section><title>The Operating System</title>
-  
+
+	<module name="edge" newNamespace>
+		<setup>
+			<customAttribute componentType="point" assignNames="parent" attribute="parent" defaultValue="(0,0)" />
+			<customAttribute componentType="point" assignNames="child" attribute="child" defaultValue="(0,0)" />
+		</setup>
+		<lineSegment endpoints="$parent $child" layer="1" draggable="false" />
+	</module>
+
+	<module name="node" newNamespace>
+		<setup>
+			<number name="node_radius">0.5</number>
+			<customAttribute componentType="text" assignNames="data" attribute="data" defaultValue="0" />
+			<customAttribute componentType="point" assignNames="center" attribute="center" defaultValue="(0,0)" />
+			<customAttribute componentType="boolean" assignNames="editableValue" attribute="editableValue"
+				defaultValue="false" />
+		</setup>
+		<circle name="nodeCircle" center="$center" radius="$node_radius" styleNumber="11" filled layer="2"
+			draggable="false" />
+		<conditionalContent>
+			<case condition="$editableValue = true">
+				<textInput anchor="$center" width="15px" draggable="false">$data</textInput>
+			</case>
+			<case condition="$editableValue = false">
+				<text anchor="$center" draggable="false">$data</text>
+			</case>
+		</conditionalContent>
+	</module>
+</setup>
+
+<section>
+	<title>Textbook Reading</title>
+
+	<p>Read the Introduction to Chapter 13, and Sections 13.1 and 13.2 of the textbook <ref
+			uri="https://diveintosystems.org">Dive Into Systems</ref>, before continuing to the next section. I strongly
+		recommend that you take notes, though you are not required to submit them.</p>
+
+</section>
+
+<section>
+	<title>The Operating System</title>
+
 	<p>Which of the following are true about the operating system? Select all.</p>
 	<answer>
-	<choiceInput shuffleOrder selectMultiple>
-	  <choice credit="1">The operating system is software</choice>
-	  <choice>The operating system is hardware</choice>
-	  <choice credit="1">The operating system manages hardware components to run programs</choice>
-	  <choice credit="1">The operating system is available whenever the computer is on</choice>
-	  <choice credit="1">The operating system can start programs in response to user interaction</choice>
-	</choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">The operating system is software</choice>
+			<choice>The operating system is hardware</choice>
+			<choice credit="1">The operating system manages hardware components to run programs</choice>
+			<choice credit="1">The operating system is available whenever the computer is on</choice>
+			<choice credit="1">The operating system can start programs in response to user interaction</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>Which of the following are true about multiprogramming? Select all.</p>
 	<answer>
-	<choiceInput shuffleOrder selectMultiple>
-	  <choice credit="1">Multiprogramming allows more than one program to run at a time</choice>
-	  <choice>In multiprogramming, all programs are simultaneous running on CPU cores</choice>
-	  <choice>We can never have more programs running than our computer has CPU cores</choice>
-	  <choice>Programs cannot share hardware resources</choice>
-	</choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">Multiprogramming allows more than one program to run at a time</choice>
+			<choice>In multiprogramming, all programs are simultaneous running on CPU cores</choice>
+			<choice>We can never have more programs running than our computer has CPU cores</choice>
+			<choice>Programs cannot share hardware resources</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>Which of the following are true about the operating system kernel? Select all.</p>
 	<answer>
-	<choiceInput shuffleOrder selectMultiple>
-	  <choice credit="1">The kernel manages the hardware layer to run programs</choice>
-	  <choice credit="1">The kernel implements the interfaces to the user applications layer</choice>
-	  <choice credit="1">The kernel implements policies for which process runs next on the CPU</choice>
-	  <choice credit="1">The kernel implements the system call interface and the device interface</choice>
-	</choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">The kernel manages the hardware layer to run programs</choice>
+			<choice credit="1">The kernel implements the interfaces to the user applications layer</choice>
+			<choice credit="1">The kernel implements policies for which process runs next on the CPU</choice>
+			<choice credit="1">The kernel implements the system call interface and the device interface</choice>
+		</choiceInput>
 	</answer>
-  
-  </section>
-	
-  <section><title>Booting and Running</title>
-  
-  <p>Number the following steps 1 through 4, giving the order in which the operating system performs the tasks to start running a program.</p>
+
+</section>
+
+<section>
+	<title>Booting and Running</title>
+
+	<p>Number the following steps 1 through 4, giving the order in which the operating system performs the tasks to
+		start running a program.</p>
 	<ul>
-	  <li><answer>2</answer>Load the program's binary executable from disk to RAM</li>
-	  <li><answer>1</answer>Allocate a portion of RAM</li>
-	  <li><answer>4</answer>Initializes the CPU to start running the program</li>
-	  <li><answer>3</answer>Create and initialize process for running the program</li>   
+		<li>
+			<answer>2</answer>Load the program's binary executable from disk to RAM
+		</li>
+		<li>
+			<answer>1</answer>Allocate a portion of RAM
+		</li>
+		<li>
+			<answer>4</answer>Initializes the CPU to start running the program
+		</li>
+		<li>
+			<answer>3</answer>Create and initialize process for running the program
+		</li>
 	</ul>
-  
+
 	<p>What is booting?</p>
 	<answer>
-	<choiceInput shuffleOrder>
-	  <choice credit="1">The process of the operating system loading and initializing itself on the computer</choice>
-	  <choice>The process of removing stale data from the cache</choice>
-	  <choice>The processes between pressing the power button on a computer and when the CPU is provided with power</choice>
-	</choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">The process of the operating system loading and initializing itself on the computer
+			</choice>
+			<choice>The process of removing stale data from the cache</choice>
+			<choice>The processes between pressing the power button on a computer and when the CPU is provided with
+				power</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What is an interrupt-driven system?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">The OS sleeps until it receives a request.</choice>
-		<choice>The latest program to start interrupts previously run programs to use the CPU</choice>
-		<choice>The OS interrupts other processes to access the resources that it needs</choice>
-		<choice>After booting and initializing, the OS runs until it is interrupted by and input/output device</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">The OS sleeps until it receives a request.</choice>
+			<choice>The latest program to start interrupts previously run programs to use the CPU</choice>
+			<choice>The OS interrupts other processes to access the resources that it needs</choice>
+			<choice>After booting and initializing, the OS runs until it is interrupted by and input/output device
+			</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What is a system call?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">A request from a program to the OS to access protected resources</choice>
-		<choice>A command executed by the CPU</choice>
-		<choice>An instruction from the operating system</choice>
-		<choice>Data retrieval from secondary storage</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">A request from a program to the OS to access protected resources</choice>
+			<choice>A command executed by the CPU</choice>
+			<choice>An instruction from the operating system</choice>
+			<choice>Data retrieval from secondary storage</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What is a trap?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">An interrupt coming from the software layer</choice>
-		<choice>An interrupt coming from the hardware layer</choice>
-		<choice>An interrupt from a malicious program</choice>
-		<choice>An interrupt from a network interface card (NIC)</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">An interrupt coming from the software layer</choice>
+			<choice>An interrupt coming from the hardware layer</choice>
+			<choice>An interrupt from a malicious program</choice>
+			<choice>An interrupt from a network interface card (NIC)</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>Number the following steps 1 through 4, giving the order of steps in a system call.</p>
 	<ul>
-	  <li><answer>3</answer>The trap handler reads the identification number.</li>
-	  <li><answer>1</answer>The identification number of the system call is placed and a trap instruction is issued to the OS.</li>
-	  <li><answer>4</answer>The trap handler executes the system call.</li> 
-	  <li><answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.</li>
+		<li>
+			<answer>3</answer>The trap handler reads the identification number.
+		</li>
+		<li>
+			<answer>1</answer>The identification number of the system call is placed and a trap instruction is issued to
+			the OS.
+		</li>
+		<li>
+			<answer>4</answer>The trap handler executes the system call.
+		</li>
+		<li>
+			<answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.
+		</li>
 	</ul>
-	
+
 	<p>Number the following steps 1 through 3, giving the order of steps in a hardware interrupt.</p>
 	<ul>
-	  <li><answer>1</answer>The interrupting device puts a signal on the CPU's interrupt bus.</li>
-	  <li><answer>3</answer>The OS interrupt handler executes the instructions.</li>
-	  <li><answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.</li>
+		<li>
+			<answer>1</answer>The interrupting device puts a signal on the CPU's interrupt bus.
+		</li>
+		<li>
+			<answer>3</answer>The OS interrupt handler executes the instructions.
+		</li>
+		<li>
+			<answer>2</answer>The CPU stops executing program instructions, and starts executing OS instructions.
+		</li>
 	</ul>
-  
+
 	<p>What is user mode?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">An execution mode where only user-level instructions are executed, and the CPU is prevented from accessing OS instructions and data, as well as some hardware components.</choice>
-		<choice>An execution mode where the CPU can execute any instructions, access any memory location, and directly access hardware components.</choice>
-		<choice>An execution mode where all instructions are issued by the current user.</choice>
-		<choice>An executing mode where the user specifies which hardware components and memory locations the CPU can access.</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">An execution mode where only user-level instructions are executed, and the CPU is
+				prevented from accessing OS instructions and data, as well as some hardware components.</choice>
+			<choice>An execution mode where the CPU can execute any instructions, access any memory location, and
+				directly access hardware components.</choice>
+			<choice>An execution mode where all instructions are issued by the current user.</choice>
+			<choice>An executing mode where the user specifies which hardware components and memory locations the CPU
+				can access.</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What is kernel mode?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice>An execution mode where only the OS software is running.</choice>
-		<choice credit="1">An execution mode where the CPU can execute any instructions, access any memory location, and directly access hardware components.</choice>
-		<choice>An execution mode where the CPU debugs issues in the OS.</choice>
-		<choice>An executing mode where the computer has booted in safe mode, so that malicious software and data leaks can be resolved.</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice>An execution mode where only the OS software is running.</choice>
+			<choice credit="1">An execution mode where the CPU can execute any instructions, access any memory location,
+				and directly access hardware components.</choice>
+			<choice>An execution mode where the CPU debugs issues in the OS.</choice>
+			<choice>An executing mode where the computer has booted in safe mode, so that malicious software and data
+				leaks can be resolved.</choice>
+		</choiceInput>
 	</answer>
-	
-  </section>
-  
-  <section><title>Processes</title>
-  
+
+</section>
+
+<section>
+	<title>Processes</title>
+
 	<p>What is a process?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">An instance of a program running in the system.</choice>
-		<choice>A sequence of instructions executed by the CPU.</choice>
-		<choice>The steps that the CPU follows in order to execute an instruction.</choice>
-		<choice>A sequence of instructions initiated by the OS.</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">An instance of a program running in the system.</choice>
+			<choice>A sequence of instructions executed by the CPU.</choice>
+			<choice>The steps that the CPU follows in order to execute an instruction.</choice>
+			<choice>A sequence of instructions initiated by the OS.</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>In multiprogramming, what handles switching between multiple processes running on the CPU?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">The OS</choice>
-		<choice>The control unit</choice>
-		<choice>The CPU</choice>
-		<choice>The load balancer</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">The OS</choice>
+			<choice>The control unit</choice>
+			<choice>The CPU</choice>
+			<choice>The load balancer</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What is timesharing?</p>
 	<answer>
-	  <choiceInput shuffleOrder>
-		<choice credit="1">The OS schedules processes to execute for short time intervals, taking turns</choice>
-		<choice>The CPU alternates between executing instructions from different processes</choice>
-		<choice>While a process is accessing memory, it pauses to allow another process to execute</choice>
-		<choice>Memory accesses from multiple processes are grouped together for efficiency</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder>
+			<choice credit="1">The OS schedules processes to execute for short time intervals, taking turns</choice>
+			<choice>The CPU alternates between executing instructions from different processes</choice>
+			<choice>While a process is accessing memory, it pauses to allow another process to execute</choice>
+			<choice>Memory accesses from multiple processes are grouped together for efficiency</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What does the OS save from the current process when context switching? Select all.</p>
 	<answer>
-	  <choiceInput shuffleOrder selectMultiple>
-		<choice credit="1">Register values</choice>
-		<choice credit="1">Memory state</choice>
-		<choice>Values in secondary storage</choice>
-		<choice>The time needed to finish the process</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">Register values</choice>
+			<choice credit="1">Memory state</choice>
+			<choice>Values in secondary storage</choice>
+			<choice>The time needed to finish the process</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What information does the OS maintain for each process? Select all.</p>
 	<answer>
-	  <choiceInput shuffleOrder selectMultiple>
-		<choice credit="1">A unique identifier for the process</choice>
-		<choice credit="1">Address space information</choice>
-		<choice credit="1">Execution state</choice>
-		<choice credit="1">Register values</choice>
-		<choice credit="1">Stack location</choice>
-		<choice credit="1">Resources allocated to the process</choice>
-		<choice credit="1">Current process state</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">A unique identifier for the process</choice>
+			<choice credit="1">Address space information</choice>
+			<choice credit="1">Execution state</choice>
+			<choice credit="1">Register values</choice>
+			<choice credit="1">Stack location</choice>
+			<choice credit="1">Resources allocated to the process</choice>
+			<choice credit="1">Current process state</choice>
+		</choiceInput>
 	</answer>
-  
+
 	<p>What are possible process execution states? Select all.</p>
-	<answer><choiceInput shuffleOrder selectMultiple>
-	<choice credit="1">Ready</choice>
-	<choice credit="1">Running</choice>
-	<choice credit="1">Blocked</choice>
-	<choice credit="1">Exited</choice>
-	<choice>Paused</choice>
-	<choice>Idle</choice>
-	<choice>Stalled</choice>
-	<choice>Active</choice>
-	</choiceInput></answer>
-  
-	<p>In Unix, what system call create a new process?</p>
-	<answer><choiceInput shuffleOrder>
-	  <choice credit="1">fork</choice>
-	  <choice>new</choice>
-	  <choice>branch</choice>
-	  <choice>execute</choice>
-	</choiceInput>
-	</answer>
-  
-	<p>In the diagram below, what are the relationships between the processes? Select all true statements.</p>
-  
-	<graph displayXAxis="false" displayYAxis="false" xmin="-9" xmax="9" ymin="-10" ymax="1" aspectRatio="2/1" showBorder="false" showNavigation="false">
-	<module name="root" copysource="node" data="A" center="(0,0)"/>
-	
-	<module name="node0" copysource="node" data="B" center="(-4,-4)"/>
-	<module copysource="edge" parent="$(root/center)" child="$(node0/center)"/>
-	<module name="node1" copysource="node" data="C" center="(4,-4)"/>
-	<module copysource="edge" parent="$(root/center)" child="$(node1/center)"/>
-  
-	<module name="node00" copysource="node" data="D" center="(-6,-8)"/>
-	<module copysource="edge" parent="$(node0/center)" child="$(node00/center)"/>
-	<module name="node01" copysource="node" data="E" center="(-2,-8)"/>
-	<module copysource="edge" parent="$(node0/center)" child="$(node01/center)"/>
-  
-	<module name="node10" copysource="node" data="F" center="(2,-8)"/>
-	<module copysource="edge" parent="$(node1/center)" child="$(node10/center)"/>
-  
-  </graph>
-  
 	<answer>
-	  <choiceInput shuffleOrder selectMultiple>
-		<choice credit="1">A is the parent of B</choice>
-		<choice credit="1">B is the parent of E</choice>
-		<choice credit="1">C is a child of A</choice>
-		<choice credit="1">D and E are siblings</choice>
-		<choice credit="1">B has made two calls to fork</choice>
-		<choice>E is the parent of B</choice>
-		<choice>A is the parent of E</choice>
-		<choice>D and C are siblings</choice>
-		<choice>B is a child of E</choice>
-		<choice>F is a child of B</choice>
-		<choice>E has made one call to fork</choice>
-	  </choiceInput>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">Ready</choice>
+			<choice credit="1">Running</choice>
+			<choice credit="1">Blocked</choice>
+			<choice credit="1">Exited</choice>
+			<choice>Paused</choice>
+			<choice>Idle</choice>
+			<choice>Stalled</choice>
+			<choice>Active</choice>
+		</choiceInput>
 	</answer>
-	
-  
-	
-	
-  
-  </section>
 
-
-
-
-
-
-  <section>
-    <exercise>
-        <title>Raspberry Pi CPU and Clock</title>
-        <p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
-        <p>In the terminal on your Raspberry Pi, enter the following command.</p>
-        <pre>  lscpu</pre>
-        <p>You should see information on the architecture of your Raspberry Pi. Use this information to answer the
-            following
-            questions.</p>
-        <p>What is listed as the Architecture?</p>
-        <answer>
-            <choiceInput shuffleOrder>
-                <choice>armv7l</choice>
-                <choice>x86_64</choice>
-                <choice>amd64</choice>
-                <choice credit="1">aarch64</choice>
-            </choiceInput>
-        </answer>
-        <p>Later in the semester we'll cover cores and threads. What is listed for thread(s) per core? <answer>1
-            </answer>
-        </p>
-        <p>What is listed for cores per socket? (Note: sometimes called clusters)<answer>4</answer>
-        </p>
-        <p>What is listed for sockets? <answer>1</answer>
-        </p>
-        <p>What is listed for CPU max MHz? <answer>1800</answer>
-        </p>
-        <p>What is listed for CPU min MHz? <answer>600</answer>
-        </p>
-        <p>Convert the CPU max MHz to GHz. <answer>1.8</answer>
-        </p>
-        <p>Using the CPU max MHz, how many ticks per second does your Raspberry Pi's CPU clock have? <answer>1800000000
-            </answer>
-        </p>
-        <p>How long does one clock cycle take on your Raspberry Pi? Give your answer in nanoseconds.
-            <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>0.555</answer>
-        </p>
-        <p>Using the CPU max MHz, how long would it take your Raspberry Pi to execute one instruction? Give your answer
-            in
-            nanoseconds. <answer allowedErrorInNumbers=".01" allowedErrorIsAbsolute>2.222</answer>
-        </p>
-    </exercise>
-
-
-
-
-
-  </section>
-  
-
-For this exercise, you will investigate how the number of threads impacts the run time of a process. Review Sections 13.2, 14.1, and 14.2 of the textbook, Dive Into Systems, before starting this exercise.
-
-Download the file pthreads1.c from Moodle, and copy it to your HW9 subdirectory. Compile the program using this gcc command:
-	gcc pthreads1.c -o pthreads1 -lpthread -lm
-
-
-Run the program using
-	./pthreads1 1
-
-
-Here, we are specifying that one thread should be used (this is also the default if no command-line argument is provided). Copy and paste the output in the box below.
-
-
-
-
-We can use the time command to determine the running time of a process. For example, enter the command
-	time ./pthreads1 1
-and copy and paste the output in the box below. Here,
-real indicates the elapsed time for the entire computation (wall-clock time). 
-user indicates how much time is spent executing the program code (user-CPU-time).
-sys indicates how much time was spent executing operating system code (system-CPU-time).
-	The CPU time of the process is the sum of the user-CPU-time and the system-CPU-time.
-Use the time command to get timing information for 
-./pthreads1 1
-	./pthreads1 2
-./pthreads1 3
-	./pthreads1 4
-./pthreads1 6
-	./pthreads1 8
-Use these values to fill in the table below. For each number of threads, time the execution three times, and compute the averages. This will produce more consistent results.
-
-number of threads
-time component
-
-first run
-
-second run
-
-third run
-
-average
-1
-real
-
-
-
-
-
-
-
-
-1
-user
-
-
-
-
-
-
-
-
-1
-sys
-
-
-
-
-
-
-
-
-2
-real
-
-
-
-
-
-
-
-
-2
-user
-
-
-
-
-
-
-
-
-2
-sys
-
-
-
-
-
-
-
-
-3
-real
-
-
-
-
-
-
-
-
-3
-user
-
-
-
-
-
-
-
-
-3
-sys
-
-
-
-
-
-
-
-
-4
-real
-
-
-
-
-
-
-
-
-4
-user
-
-
-
-
-
-
-
-
-4
-sys
-
-
-
-
-
-
-
-
-6
-real
-
-
-
-
-
-
-
-
-6
-user
-
-
-
-
-
-
-
-
-6
-sys
-
-
-
-
-
-
-
-
-8
-real
-
-
-
-
-
-
-
-
-8
-user
-
-
-
-
-
-
-
-
-8
-sys
-
-
-
-
-
-
-
-
-
-
- 	Examining your table of values above, answer these questions:
-What happens to the wall-clock time as we increase the number of threads? Why does this happen?
-
-
-
-
-
-
-What happens to the CPU time as we increase the number of threads? Why does this happen?
-
-
+	<p>In Unix, what system call create a new process?</p>
+	<answer>
+		<choiceInput shuffleOrder>
+			<choice credit="1">fork</choice>
+			<choice>new</choice>
+			<choice>branch</choice>
+			<choice>execute</choice>
+		</choiceInput>
+	</answer>
+
+	<p>In the diagram below, what are the relationships between the processes? Select all true statements.</p>
+
+	<graph displayXAxis="false" displayYAxis="false" xmin="-9" xmax="9" ymin="-10" ymax="1" aspectRatio="2/1"
+		showBorder="false" showNavigation="false">
+		<module name="root" copysource="node" data="A" center="(0,0)" />
+
+		<module name="node0" copysource="node" data="B" center="(-4,-4)" />
+		<module copysource="edge" parent="$(root/center)" child="$(node0/center)" />
+		<module name="node1" copysource="node" data="C" center="(4,-4)" />
+		<module copysource="edge" parent="$(root/center)" child="$(node1/center)" />
+
+		<module name="node00" copysource="node" data="D" center="(-6,-8)" />
+		<module copysource="edge" parent="$(node0/center)" child="$(node00/center)" />
+		<module name="node01" copysource="node" data="E" center="(-2,-8)" />
+		<module copysource="edge" parent="$(node0/center)" child="$(node01/center)" />
+
+		<module name="node10" copysource="node" data="F" center="(2,-8)" />
+		<module copysource="edge" parent="$(node1/center)" child="$(node10/center)" />
+
+	</graph>
+
+	<answer>
+		<choiceInput shuffleOrder selectMultiple>
+			<choice credit="1">A is the parent of B</choice>
+			<choice credit="1">B is the parent of E</choice>
+			<choice credit="1">C is a child of A</choice>
+			<choice credit="1">D and E are siblings</choice>
+			<choice credit="1">B has made two calls to fork</choice>
+			<choice>E is the parent of B</choice>
+			<choice>A is the parent of E</choice>
+			<choice>D and C are siblings</choice>
+			<choice>B is a child of E</choice>
+			<choice>F is a child of B</choice>
+			<choice>E has made one call to fork</choice>
+		</choiceInput>
+	</answer>
+
+</section>
+
+
+<section>
+	<title>Raspberry Pi Cores</title>
+	<exercise>
+		<title>Raspberry Pi CPU and Clock</title>
+		<p>In this section, you will investigate the CPU of your Raspberry Pi.</p>
+		<p>In the terminal on your Raspberry Pi, enter the following command.</p>
+		<pre>  lscpu</pre>
+		<p>You should see information on the architecture of your Raspberry Pi.</p>
+		<p>What is listed for thread(s) per core? <answer>1
+			</answer>
+		</p>
+		<p>What is listed for cores per socket? (Note: sometimes called clusters)<answer>4</answer>
+		</p>
+		<p>What is listed for sockets? <answer>1</answer>
+		</p>
+	</exercise>
+</section>
+
+<section>
+	<exercise>
+</section>
+
+<section>
+	<title>Raspberry Pi Multithreading</title>
+
+	<exercise>
+		For this exercise, you will investigate how the number of threads impacts the run time of a process. Review
+		sections
+		13.2, 14.1, and 14.2 of <ref uri="https://diveintosystems.org">Dive Into Systems</ref>.
+	</exercise>
+
+	<exercise>
+		<ul>
+			<li>Login to your Pi as the appropriate user</li>
+			<li>Create a directory for this assignment called <c>instructions-on-hardware</c>
+			<li>Create a new Google Doc for your discussion and screenshots. Make sure to give it a clear title and put
+				your name on it.</li>
+			</li>
+		</ul>
+	</exercise>
+
+	<exercise>
+		<ul>
+			<li>Download the file <c>pthreads1.c</c> from Moodle and copy it into your new directory</li>
+			<li>Compile the code:
+				<pre>gcc pthreads1.c -o pthreads1 -lpthread -lm</pre>
+			</li>
+			<li>Run it:
+				<pre>./pthreads1 1</pre>
+			</li>
+			<li>Copy-paste the output into your doc. Make sure to label it clearly</li>
+		</ul>
+		<li>Now run it again with the <c>time</c> command:
+			<pre>time ./pthreads1 1</pre>
+		</li>
+		<li>Paste the output in your doc. What did <c>time</c> do? Why might that be useful?</li>
+	</exercise>
+
+	<exercise>
+
+		<p>The CPU time of the process is the sum of the user-CPU-time and the system-CPU-time:</p>
+		<ul>
+			<li>"real" indicates the elapsed time for the entire computation (wall-clock time).</li>
+			<li>"user" indicates how much time is spent executing the program code (user-CPU-time).</li>
+			<li>sys indicates how much time was spent executing operating system code (system-CPU-time).</li>
+		</ul>
+		<p>Real time is not always exactly the same as user time plus system time. Why not? Put some thoughts in <c>
+				discussion.md</c>
+		</p>
+
+		<p>Find at least three other people to work with. Each person should run the following:</p>
+
+		<pre>
+time ./pthreads1 1
+time ./pthreads1 2
+time ./pthreads1 3
+time ./pthreads1 4
+time ./pthreads1 5
+time ./pthreads1 6
+time ./pthreads1 7
+time ./pthreads1 8
+time ./pthreads1 9
+time ./pthreads1 10
+time ./pthreads1 11
+time ./pthreads1 12
+</pre>
+
+		<p>Use a spreadsheet to record user, system, and real time for each run. You can all share the same spreadsheet.
+			Just be careful not to accidentally overwrite each others' data.</p>
+
+		<p>Make three graphs:</p>
+		<ol>
+			<li>User time vs number of cores</li>
+			<li>CPU time vs number of cores</li>
+			<li>Real time vs number of cores</li>
+		</ol>
+
+		<p>For the time values, use the average of your data points. Also compute the standard deviation for each data
+			point. Add that to the graph as error bars.</p>
+
+		<p>
+			<alert>Add a screenshot of each graph to your doc.</alert>
+		</p>
+
+		<p>Based on your graphs, answer the following questions in your doc:</p>
+
+		<ul>
+			<li>What happens to the wall-clock time as we increase the number of threads? Why does this happen?</li>
+			<li>What happens to the CPU time? Why?</li>
+			<li>How about the system time?</li>
+		</ul>
+
+	</exercise>
+
+</section>
