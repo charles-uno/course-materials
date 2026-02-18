@@ -1,5 +1,3 @@
-// NOTE: does not work yet
-
 .section .rodata
     prompt: .ascii "Enter a number: \0"
     format: .ascii "%d\0"
@@ -36,4 +34,4 @@ main:
     ldr fp, [fp, -8]
     add sp, sp, 32
     b exit
-
+    
