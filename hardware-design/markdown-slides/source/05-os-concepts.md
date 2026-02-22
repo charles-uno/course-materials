@@ -1,4 +1,10 @@
-\Section{OS Concepts}
+# OS Concepts
+
+
+
+## The Operating System
+
+
 
 % what is the OS?
 
@@ -44,3 +50,13 @@
 % power wall - can't dissipate heat fast enough
 % threads. running on different cores, same memory
 % wall time vs CPU time
+
+
+% multithreading - one program using multiple cores. shared memory
+% multiprocessing - different processes. possible to split one program into multiple processes (eg supercomputer weather models) but generally not. communication between processes is a lot of work
+
+
+
+### Group Exercises
+
+TODO: this
