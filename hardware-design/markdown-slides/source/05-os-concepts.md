@@ -1,9 +1,34 @@
 # OS Concepts
 
+We've talked about running instructions within a program
+
+But how do we get to that point?
+
+Before we can run the program, we need to boot the computer
+
+We generally also want to fire up an operating system
+
+The OS handles:
+- memory allocation
+- CPU time allocation
+- device interfaces
+- context switching (computer can juggle multiple tasks)
+
+
+## Booting
+
+### Starting the Boot
+
+- As soon as we start executing an instruction, we are already fetching the next one
+- But how do we know where to start?
+- The location of the "boot block" is hard-coded. Often 0x00000000
+- This is firmware. Non-volatile memory (aka users are not allowed to modify it)
+
+
+
 
 
 ## The Operating System
-
 
 
 % what is the OS?
@@ -16,9 +41,6 @@
 
 % running a program
 
-% Booting
-% boot block. often address 0x00000000
-% firmware. non-volatile memory
 
 % interrupts
 % computer is idle until an interrupt wakes it up
@@ -38,11 +60,22 @@
 
 % meltdown attack
 
+
+% process hierarchy. fork, child, parent
+
+
+
+## Multiprogramming
+
+
+
+
+
+
 % multiprogramming. switching back and forth fast
 % processes
 % context switching
 
-% process hierarchy. fork, child, parent
 
 % multicore processors
 % GPUs - fewer transistors, simpler instruction set
