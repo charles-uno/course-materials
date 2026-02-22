@@ -1,5 +1,74 @@
 \Section{OS Concepts}
 
+
+\begin{frame}{OS Concepts}
+
+	We've talked about running instructions within a program
+
+	But how do we get to that point?
+
+	Before we can run the program, we need to boot the computer
+
+	We generally also want to fire up an operating system
+
+	The OS handles:
+
+	\begin{itemize}
+		\item memory allocation
+		\item CPU time allocation
+		\item device interfaces
+		\item context switching (computer can juggle multiple tasks)
+	\end{itemize}
+\end{frame}
+
+\Subsection{Booting}
+
+\begin{frame}{Starting the Boot}
+	\begin{itemize}
+		\item As soon as we start executing an instruction, we are already fetching the next one
+		\item But how do we know where to start?
+		\item The location of the "boot block" is hard-coded. Often 0x00000000
+		\item This is firmware. Non-volatile memory (aka users are not allowed to modify it)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/device-drivers}
+\end{frame}
+
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/call-to-os}
+\end{frame}
+
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/os-location}
+\end{frame}
+
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/process-states}
+\end{frame}
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/starting-a-program}
+\end{frame}
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/xkcd-meltdown}
+\end{frame}
+
+\begin{frame}{Placeholder}
+\includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped}
+\end{frame}
+
+
+
+
+\Subsection{The Operating System}
+
+
 % what is the OS?
 
 % OS kernel
@@ -10,9 +79,6 @@
 
 % running a program
 
-% Booting
-% boot block. often address 0x00000000
-% firmware. non-volatile memory
 
 % interrupts
 % computer is idle until an interrupt wakes it up
@@ -32,11 +98,21 @@
 
 % meltdown attack
 
+
+% process hierarchy. fork, child, parent
+
+
+\Subsection{Threads, Processes, and Cores}
+
+
+
+
+
+
 % multiprogramming. switching back and forth fast
 % processes
 % context switching
 
-% process hierarchy. fork, child, parent
 
 % multicore processors
 % GPUs - fewer transistors, simpler instruction set
@@ -44,3 +120,12 @@
 % power wall - can't dissipate heat fast enough
 % threads. running on different cores, same memory
 % wall time vs CPU time
+
+
+% multithreading - one program using multiple cores. shared memory
+% multiprocessing - different processes. possible to split one program into multiple processes (eg supercomputer weather models) but generally not. communication between processes is a lot of work
+
+
+
+
+

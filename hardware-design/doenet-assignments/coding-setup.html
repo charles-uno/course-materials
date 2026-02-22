@@ -1,12 +1,12 @@
 <!-- Windows instructions need update -->
 <!-- Next time: don't create HD directory in this lab, so won't need to backup in next lab -->
 
-<alert>Follow these instructions carefully. Getting this set up correctly is
+<p><alert>Follow these instructions carefully. Getting this set up correctly is
     crucial for your work in this course. If you get stuck at a step, or
     encounter something confusing, please check with Prof Fyfe or the TA (in class, office hours, or email) before
-    proceeding.</alert>
+    proceeding.</alert></p>
 
-<alert>Be gentle when handling the Raspberry Pi board! It is easy to damage. That's why we have a case for it.</alert>
+<p><alert>Be gentle when handling the Raspberry Pi board! It is easy to damage. That's why we have a case for it.</alert></p>
 
 <p>The check boxes are intended to help you track your progress through this lab, and for your instructor to verify that
     all students have successfully completed the set up. Please do not check the box unless you have successfully
@@ -179,7 +179,7 @@
             <li>If using an ethernet port on your Mac, the Ethernet port should move to the top and show that it is
                 connected</li>
             <li>If using the kit's USB-Ethernet dongle, "USB 10/100/1000 LAN" should move near the top of the list and
-                show a green connection status. The connection may take a minute or so to complete</li>
+                show a green connection status. Yellow may be ok too. The connection may take a minute or so to complete</li>
             <li>Note for dongle only: If "USB 10/100/1000 LAN" doesn't appear in the list, download the driver for "SKU
                 202023" from <ref uri="http://www.cablematters.com/cs-Downloads.aspx">
                     http://www.cablematters.com/cs-Downloads.aspx</ref>
@@ -286,11 +286,22 @@
     <exercise>
         <title>Confirm SSH access</title>
         <p>Open VSCode. Open a terminal using Terminal > New Terminal (or drag it up from the bottom margin). Enter:</p>
-        <c>ssh pi@172.27.0.254</c>
+        <pre>ssh pi@raspberrypi.local</pre>
         <p>The default password is <c>raspberry</c>.</p>
         <p>If this is your first time connecting to the Pi, a warning will appear. It may warn you about
             man-in-the-middle
             attacks. Dismiss that. You trust the Pi.</p>
+
+        <p>Troubleshooting resources:</p>
+        <ul>
+            <li>Try username <c>kiwi</c>, password <c>blueberry</c>
+            </li>
+            <li>Instead of <c>raspberrypi.local</c>, try to connect to <c>172.27.0.254</c></li>
+            <li>
+                On a Mac, you may need to configure internet sharing. See <ref
+                    uri="https://raspberrypi-guide.github.io/networking/create-direct-ethernet-connection">here</ref>
+            </li>
+        </ul>
         <answer>
             <choiceInput selectMultiple>
                 <choice credit="1">Check this box when you have successfully completed the previous steps.</choice>
@@ -336,7 +347,7 @@
             <li>Give your personal account sudo permissions: <c>sudo usermod -G sudo -a </c><em>username</em></li>
             <li>Log out of the Pi: <c>logout</c>. </li>
             <li>Log in as your personal account: <c>ssh </c><em>username</em>
-                <c>@172.27.0.254</c>
+                <c>@raspberrypi.local</c>
             </li>
             <li>Confirm who you are logged in as: <c>whoami</c>
             </li>
@@ -372,14 +383,14 @@ sudo hd-image change-boot-user username
         <ul>
             <li>Click the button as shown to add a new connection. The connection address is the same as when you use
                 SSH: <em>username</em>
-                <c>@172.27.0.254</c>.
+                <c>@raspberrypi.local</c>.
             </li>
             <li>Connect. You might have to wait a minute the first time while VSCode gets set up</li>
             <li>Create a new file on the Pi: <c>code /tmp/foobar</c>
             </li>
             <li>Save the new file</li>
             <li>Open a new VSCode window <em>without</em> the remote connection. Open a terminal. Confirm that you can
-                see the file on the Pi: <c>ssh </c><em>username</em>@172.27.0.254 'ls -l /tmp/foobar'</li>
+                see the file on the Pi: <c>ssh </c><em>username</em>@raspberrypi.local 'ls -l /tmp/foobar'</li>
         </ul>
         <answer>
             <choiceInput selectMultiple>
@@ -437,7 +448,8 @@ sudo hd-image change-boot-user username
         <p>To create your CSGit repo, you need to access your course group. There are two ways to achieve this: </p>
         <ul>
             <li>Check your email for an invitation to join your course group</li>
-            <li>Otherwise, navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP tab and
+            <li>Otherwise, navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref>. Navigate to the LDAP
+                tab and
                 sign
                 in with your St Olaf username (not email) and password.</li>
         </ul>
@@ -684,7 +696,8 @@ int main() {
             </li>
             <li>Push your committed code to the cloud: <c>git push</c>
             </li>
-            <li>Navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref> and confirm that your work shows up.</li>
+            <li>Navigate to <ref uri="http://csgit.stolaf.edu">csgit.stolaf.edu</ref> and confirm that your work shows
+                up.</li>
         </ul>
         <p>NOTE: Git allows multiple people to work on the same repo at the same time. Different people work on
             different branches to avoid stepping on each others' toes. We don't worry about that in this class since

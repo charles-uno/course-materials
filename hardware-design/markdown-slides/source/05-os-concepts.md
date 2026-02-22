@@ -26,6 +26,31 @@ The OS handles:
 
 
 
+### placeholder
+
+![foo](images/device-drivers)
+
+### placeholder
+
+![foo](images/call-to-os)
+
+
+### placeholder
+
+![foo](images/address-space)
+
+
+### placeholder
+
+![foo](images/address-space)
+
+
+### placeholder
+
+![foo](images/address-space)
+
+\includegraphics[width=\columnwidth]{images/ascii-table}
+
 
 
 ## The Operating System
