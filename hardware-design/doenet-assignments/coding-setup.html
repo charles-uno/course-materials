@@ -1,12 +1,17 @@
 <!-- Windows instructions need update -->
 <!-- Next time: don't create HD directory in this lab, so won't need to backup in next lab -->
 
-<p><alert>Follow these instructions carefully. Getting this set up correctly is
-    crucial for your work in this course. If you get stuck at a step, or
-    encounter something confusing, please check with Prof Fyfe or the TA (in class, office hours, or email) before
-    proceeding.</alert></p>
+<p>
+    <alert>Follow these instructions carefully. Getting this set up correctly is
+        crucial for your work in this course. If you get stuck at a step, or
+        encounter something confusing, please check with Prof Fyfe or the TA (in class, office hours, or email) before
+        proceeding.</alert>
+</p>
 
-<p><alert>Be gentle when handling the Raspberry Pi board! It is easy to damage. That's why we have a case for it.</alert></p>
+<p>
+    <alert>Be gentle when handling the Raspberry Pi board! It is easy to damage. That's why we have a case for it.
+    </alert>
+</p>
 
 <p>The check boxes are intended to help you track your progress through this lab, and for your instructor to verify that
     all students have successfully completed the set up. Please do not check the box unless you have successfully
@@ -179,7 +184,8 @@
             <li>If using an ethernet port on your Mac, the Ethernet port should move to the top and show that it is
                 connected</li>
             <li>If using the kit's USB-Ethernet dongle, "USB 10/100/1000 LAN" should move near the top of the list and
-                show a green connection status. Yellow may be ok too. The connection may take a minute or so to complete</li>
+                show a green connection status. Yellow may be ok too. The connection may take a minute or so to complete
+            </li>
             <li>Note for dongle only: If "USB 10/100/1000 LAN" doesn't appear in the list, download the driver for "SKU
                 202023" from <ref uri="http://www.cablematters.com/cs-Downloads.aspx">
                     http://www.cablematters.com/cs-Downloads.aspx</ref>
@@ -296,7 +302,8 @@
         <ul>
             <li>Try username <c>kiwi</c>, password <c>blueberry</c>
             </li>
-            <li>Instead of <c>raspberrypi.local</c>, try to connect to <c>172.27.0.254</c></li>
+            <li>Instead of <c>raspberrypi.local</c>, try to connect to <c>172.27.0.254</c>
+            </li>
             <li>
                 On a Mac, you may need to configure internet sharing. See <ref
                     uri="https://raspberrypi-guide.github.io/networking/create-direct-ethernet-connection">here</ref>
@@ -321,9 +328,12 @@
             sitting around with the default password.</p>
         <ul>
             <li>Ensure you are connected to your Pi via SSH</li>
-            <li>Run <c>passwd</c>. Enter the current password (probably <c>raspberry</c>). Enter a new password. It's
+            <li>Run <c>passwd</c>. Enter the current password. Enter a new password. It's
                 fine to use your St Olaf password if you want one less thing to remember</li>
-            <li>Logout (<c>logout</c>) then log back in using the new password to make sure it works</li>
+            <li>Logout:
+                <pre>logout</pre>
+            </li>
+            <li>Log back in using the new password to make sure it works</li>
         </ul>
         <answer>
             <choiceInput selectMultiple>
@@ -338,20 +348,30 @@
             for our coding exercises.</p>
         <ul>
             <li>Ensure you are connected to your Pi via SSH</li>
-            <li>Create a new account: <c>sudo useradd -m -s /bin/bash </c><em>username</em>. Use your St Olaf
+            <li>Create a new account:
+                <pre>sudo useradd -m -s /bin/bash username</pre>
+                Use your St Olaf
                 username, eg <c>fyfe1</c>
             </li>
-            <li>Set the password for your new account: <c>sudo passwd </c><em>username</em>. Use your St Olaf
+            <li>Set the password for your new account:
+                <pre>sudo passwd username</pre>
+                Use your St Olaf
                 password. It's ok if this is the same password as the <c>pi</c> account.
             </li>
-            <li>Give your personal account sudo permissions: <c>sudo usermod -G sudo -a </c><em>username</em></li>
-            <li>Log out of the Pi: <c>logout</c>. </li>
-            <li>Log in as your personal account: <c>ssh </c><em>username</em>
-                <c>@raspberrypi.local</c>
+            <li>Give your personal account sudo permissions:
+                <pre>sudo usermod -G sudo -a username</pre>
             </li>
-            <li>Confirm who you are logged in as: <c>whoami</c>
+            <li>Log out of the Pi:
+                <pre>logout</pre>
             </li>
-            <li>Confirm it again: <c>echo &dollar;USER</c>
+            <li>Log in as your personal account:
+                <pre>ssh username@raspberrypi.local</pre>
+            </li>
+            <li>Confirm who you are logged in as:
+                <pre>whoami</pre>
+            </li>
+            <li>Confirm it again:
+                <pre>echo &dollar;USER</pre>
             </li>
         </ul>
         <p>NOTE: you will be using your personal account for all the work in this course. It's important that the
@@ -382,15 +402,15 @@ sudo hd-image change-boot-user username
 
         <ul>
             <li>Click the button as shown to add a new connection. The connection address is the same as when you use
-                SSH: <em>username</em>
-                <c>@raspberrypi.local</c>.
+                SSH: <c>username@raspberrypi.local</c>.
             </li>
             <li>Connect. You might have to wait a minute the first time while VSCode gets set up</li>
-            <li>Create a new file on the Pi: <c>code /tmp/foobar</c>
+            <li>Create a new file on the Pi:
+                <pre>code /tmp/foobar</pre>
             </li>
             <li>Save the new file</li>
             <li>Open a new VSCode window <em>without</em> the remote connection. Open a terminal. Confirm that you can
-                see the file on the Pi: <c>ssh </c><em>username</em>@raspberrypi.local 'ls -l /tmp/foobar'</li>
+                see the file on the Pi: <pre>ssh username@raspberrypi.local 'ls -l /tmp/foobar'</pre></li>
         </ul>
         <answer>
             <choiceInput selectMultiple>
@@ -407,7 +427,7 @@ sudo hd-image change-boot-user username
         <title>Shut down the Pi. </title>
         <ul>
             <li>Ensure you are in a terminal connected to the Pi</li>
-            <li>Run: <c>sudo shutdown -h now</c>
+            <li>Run: <pre>sudo shutdown -h now</pre>
             </li>
             <li>Wait about 10 seconds for the OS to shut down before unplugging</li>
         </ul>
@@ -561,7 +581,8 @@ git config --global receive.denyCurrentBranch warn</pre>
         <title>Clone your repo to the Pi</title>
         <ul>
             <li>Ensure you are connected to your Pi as your personal user</li>
-            <li>Open the file: <c>code ~/.ssh/config</c>
+            <li>Open the file:
+                <pre>code ~/.ssh/config</pre>
             </li>
             <li>Enter the following, using your username in place of <em>username</em>:
                 <pre>Host https://csgit.stolaf.edu
@@ -570,7 +591,8 @@ User username
 IdentityFile /home/username/.ssh/id_rsa</pre>
             </li>
             <li>Save the file</li>
-            <li>Confirm the contents of the file: <c>cat ~/.ssh/config</c>
+            <li>Confirm the contents of the file:
+                <pre>cat ~/.ssh/config</pre>
             </li>
         </ul>
         <answer>
@@ -584,7 +606,8 @@ IdentityFile /home/username/.ssh/id_rsa</pre>
         <title>Clone the repo</title>
 
         <ul>
-            <li>Ensure you are connected to your Pi as your personal user: <c>whoami</c>
+            <li>Ensure you are connected to your Pi as your personal user:
+                <pre>whoami</pre>
             </li>
             <li>Navigate to your home directory:
                 <pre> cd ~</pre>
@@ -592,14 +615,18 @@ IdentityFile /home/username/.ssh/id_rsa</pre>
             <li>Create a new empty directory:
                 <pre>mkdir HD</pre>
             </li>
-            <li>Confirm the directory exists: <c>ls -l .</c>
+            <li>Confirm the directory exists:
+                <pre>ls -l .</pre>
             </li>
             <li>Clone your csgit repo into the new directory:
                 <pre>git clone git@csgit.stolaf.edu:hd-241/s26/username.git HD</pre>
             </li>
             <li>You may see a warning about authenticity. Say yes.</li>
-            <li>Confirm the clone worked: <c>ls -al HD/.git</c>. There is no code in the directory yet, so we are
-                checking to make sure the git config exists.</li>
+            <li>Confirm the clone worked:
+                <pre>ls -al HD/.git</pre>
+                There is no code in the directory yet, so we are
+                checking to make sure the git config exists.
+            </li>
         </ul>
 
         <p>NOTE: This new directory on your Pi is now linked to your csgit repo in the cloud. This is how
@@ -622,15 +649,20 @@ IdentityFile /home/username/.ssh/id_rsa</pre>
     <exercise>
         <title>Create a Directory</title>
         <ul>
-            <li>Ensure you are connected to your Pi as your personal user: <c>whoami</c>
+            <li>Ensure you are connected to your Pi as your personal user:
+                <pre>whoami</pre>
             </li>
-            <li>Navigate to your repo for this class: <c>cd ~/HD</c>
+            <li>Navigate to your repo for this class:
+                <pre>cd ~/HD</pre>
             </li>
-            <li>Create a directory for this exercise: <c>mkdir coding-setup</c>
+            <li>Create a directory for this exercise:
+                <pre>mkdir coding-setup</pre>
             </li>
-            <li>Navigate to that directory: <c>cd coding-setup</c>
+            <li>Navigate to that directory:
+                <pre>cd coding-setup</pre>
             </li>
-            <li>Confirm you are in the expected directory: <c>pwd</c>
+            <li>Confirm you are in the expected directory:
+                <pre>pwd</pre>
             </li>
         </ul>
         <answer>
@@ -653,11 +685,14 @@ int main() {
 }</pre>
             </li>
             <li>Save the file.</li>
-            <li>Back in the terminal, confirm that you are in the correct directory: <c>pwd</c>
+            <li>Back in the terminal, confirm that you are in the correct directory:
+                <pre>pwd</pre>
             </li>
-            <li>Confirm that your new file exists: <c>ls</c>
+            <li>Confirm that your new file exists:
+                <pre>ls</pre>
             </li>
-            <li>Confirm that your file contains the expected code: <c>cat hello.c</c>
+            <li>Confirm that your file contains the expected code:
+                <pre>cat hello.c</pre>
             </li>
         </ul>
         <answer>
@@ -670,9 +705,11 @@ int main() {
         <title>Compile and Run</title>
         <p>Still in the terminal.</p>
         <ul>
-            <li>Compile your C code into an executable: <c>gcc hello.c</c>
+            <li>Compile your C code into an executable:
+                <pre>gcc hello.c</pre>
             </li>
-            <li>Run your program: <c>./a.out</c>
+            <li>Run your program:
+                <pre>./a.out</pre>
             </li>
             <li>Confirm the output is as expected: <c>Hello, world!</c>
             </li>
@@ -689,16 +726,19 @@ int main() {
     <exercise>
         <title>Ensure Pi Internet Access</title>
 
-<p>In many cases, your computer will automatically share internet access with the Pi via the ethernet connection. To check if this is the case, run:</p>
-<pre>ping yahoo.com</pre>
+        <p>In many cases, your computer will automatically share internet access with the Pi via the ethernet
+            connection. To check if this is the case, run:</p>
+        <pre>ping yahoo.com</pre>
 
-<p>If this does not work you can try:</p>
+        <p>If this does not work you can try:</p>
 
         <ul>
             <li>Configure internet sharing (Mac). See <ref
-                    uri="https://raspberrypi-guide.github.io/networking/create-direct-ethernet-connection">here</ref></li>
-<li>Connect the Pi to wifi:<pre>sudo raspi-config</pre> then <c>system</c> -> <c>wifi</c></li>
-
+                    uri="https://raspberrypi-guide.github.io/networking/create-direct-ethernet-connection">here</ref>
+            </li>
+            <li>Connect the Pi to wifi:
+                <pre>sudo raspi-config</pre> then <c>system</c> -> <c>wifi</c>
+            </li>
         </ul>
 
         <answer>
