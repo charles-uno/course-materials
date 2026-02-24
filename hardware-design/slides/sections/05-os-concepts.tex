@@ -80,6 +80,41 @@
 % running a program
 
 
+
+
+% vectored events - interrupts and exceptions (fault, trap, abort) - intel x86 terminology
+
+% Per April 2016 version of the Intel Software Developer Manual
+
+% vectored events cause the processor jump to an interrupt handler
+% it saves as much context as it can, so execution can later resume
+
+% exceptions/interrupts have an ID (called a vector) that determines which handler
+
+% interrupts are from hardware signals. external devices
+
+% exceptions are from the execution of a program. divide by zero, illegal memory access, page fault
+
+% example: page fault
+% try to access something in memory, but it's been swapped out. suspend execution to load it
+
+% trap - program can resume after the instruction that triggered it. example: divide by zero
+% fault - program can reattempt the instruction that triggered it. example: page fault. try to access something from memory, but it's been swapped. suspend execution, load it, then try again
+% abort - unable to pinpoint the failure. not recoverable. example: hardware failures, corrupted data
+
+% trap is like a precursor to try/catch
+
+% you can also do intentional traps to pass control to the kernel mode. example: file io
+% program makes a system call, which the processor turns into a trap
+
+% https://stackoverflow.com/questions/3149175/what-is-the-difference-between-trap-and-interrupt
+
+
+
+
+
+
+
 % interrupts
 % computer is idle until an interrupt wakes it up
 % example system calls
