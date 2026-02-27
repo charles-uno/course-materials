@@ -30,7 +30,7 @@
 \end{frame}
 
 
-
+% firmware initializes hardware, finds the boot loader (eg GRUB, Windows Boot Manager)
 
 
 
@@ -44,6 +44,7 @@
 		\item But how do we know where to start?
 		\item The location of the "boot block" is hard-coded. Often 0x00000000
 		\item This is firmware. Non-volatile memory (aka users are not allowed to modify it)
+        \item Technically not part of the OS, but same ballpark
 	\end{itemize}
 \end{frame}
 

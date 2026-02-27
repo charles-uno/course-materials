@@ -20,43 +20,46 @@
 
 \begin{frame}{CPU}
 
+	Control unit drives execution.
 	\begin{itemize}
-		\item Processing unit that executes instructions
+		\item Instruction register (IR) holds the current instruction
+		\item Program counter (PC) holds the address of the next instruction
+		\item Clock management happens here too (more on this later)
 	\end{itemize}
 
-	Processing unit executes program instructions. Registers for storing the very specific pieces of data you're currently using. ALU which does the actual math. For example, if you're adding two numbers. Load into r0 and r1. Send them through the ALU. Store the result in r2.
+	Processing unit performs execution.
+	\begin{itemize}
+		\item ALU (arithmetic logic unit) does work
+		\item General purpose registers store program data.
+	\end{itemize}
 
-	Control unit drives execution. IR: instruction register. Holds the instruction currently being executed. PC: program counter. Holds the address of the next instruction.
-
-
-	Implements the processing unit and control unit of the von Neumann architecture
-	Functional units:
-	The arithmetic logic unit (ALU) performs arithmetic and logic operations
-	General purpose registers for storing program data
-	Control circuitry and special purpose registers for instruction execution
-	The clock drives the circuitry of the CPU to execute program instructions
 \end{frame}
 
+\begin{frame}{CPU}
+	It's all boolean logic!
+	\includegraphics[width=\columnwidth]{images/example-alu}
+\end{frame}
 
 \begin{frame}{CPU}
-
 	It's all boolean logic!
-
-	\includegraphics[width=\columnwidth]{images/example-alu}
 	\includegraphics[width=\columnwidth]{images/register-file}
-	\includegraphics[width=\columnwidth]{images/full-cpu}
+\end{frame}
 
+\begin{frame}{CPU}
+	It's all boolean logic!
+	\includegraphics[width=\columnwidth]{images/full-cpu}
 \end{frame}
 
 
 \begin{frame}{Main Memory}
+
 	Stores program data and instructions
 
-	historically: tiny bits of magnetic field on a spinning disk
+	Physical mechanism: little tiny capacitors holding electric charges
 
-	modern SSD: basically a bunch of NAND gates plugged into each other
+	We'll talk more about storage later
 
-	https://en.wikipedia.org/wiki/Flash_memory#NAND_flash
+	%	https://en.wikipedia.org/wiki/Flash_memory#NAND_flash
 \end{frame}
 
 
@@ -71,9 +74,11 @@
 
 \begin{frame}{Input and Output}
 
-	The input unit(s) load program data and instructions on the computer and initiate program execution.
-
-	The output unit(s) store or receive program results.
+	\begin{itemize}
+		\item Input unit(s) load program data and instructions on the computer and initiate program execution.
+		\item Output unit(s) store or receive program results.
+		\item What are some examples of input/output hardware?
+	\end{itemize}
 
 \end{frame}
 
