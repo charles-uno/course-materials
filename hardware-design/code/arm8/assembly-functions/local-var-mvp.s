@@ -1,7 +1,7 @@
 .section .rodata
 prompt: .ascii "int plz: \0"
 input_fmt: .ascii "%d\0"
-output: .ascii "%d + 1 = %d\n\0"
+output: .ascii "%d+1=%d\n\0"
 .align 2
 
 .global main

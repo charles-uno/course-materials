@@ -1,57 +1,130 @@
 \Section{Assembly Functions}
 
+% SIMD!
+% similar to having .align all over the place
+
 
 \Subsection{The Stack}
 
-% doing our best to not worry about SIMD or alignment... but we do still have to worry about it with ascii constants
-
-
-\begin{frame}[fragile]{stack frame proof of concept}
+\begin{frame}[fragile]{stack frame mvp}
 	\begin{multicols}{2}
 		{\small
 			\begin{minted}{arm}
 .section .rodata
-    prompt: .ascii "int plz: \0"
-    input_fmt: .ascii "%d\0"
-    output: .ascii "%d + 1 = %d\n\0"
+output: .ascii "%d+1=%d\n\0"
+.align 2
 
 .text
-add_one:
-    sub sp, sp, 0x20
-    str fp, [sp]
-    str lr, [sp, 0x10]
-    add fp, sp, 0x10
-    add x0, x0, 1
-    ldr lr, [sp, 0x10]
-    ldr fp, [sp]
-    add sp, sp, 0x20
-    ret
-
 .global main
 main: 
-    sub sp, sp, 0x30
-    str lr, [sp, 0x20]
-    str fp, [sp, 0x10]
-    add fp, sp, 0x20
-    ldr x0, =prompt
-    bl printf
-    ldr x0, =input_fmt
-    mov x1, sp
-    bl scanf
-    ldr x0, [sp]
-    bl add_one
-    mov x2, x0
-    ldr x0, =output
-    ldr x1, [sp]
-    bl printf
-    ldr lr, [sp, 0x10]
-    ldr fp, [sp, 0x20]
-    add sp, sp, 0x30
-    b exit
+sub sp, sp, 0x20
+str lr, [sp, 0x10]
+str fp, [sp]
+add fp, sp, 0x20
+ldr x0, [sp]
+ldr x0, =output
+mov x1, 5
+add x2, x1, 1
+bl printf
+ldr lr, [sp, 0x10]
+ldr fp, [sp]
+add sp, sp, 0x20
+b exit
 \end{minted}
 		}
 	\end{multicols}
 \end{frame}
+
+
+
+\begin{frame}[fragile]{local variable mvp}
+	\begin{multicols}{2}
+		{\small
+			\begin{minted}{arm}
+.section .rodata
+prompt: .ascii "int plz: \0"
+input_fmt: .ascii "%d\0"
+output: .ascii "%d+1=%d\n\0"
+.align 2
+
+.global main
+main: 
+sub sp, sp, 0x30
+str lr, [sp, 0x20]
+str fp, [sp, 0x10]
+add fp, sp, 0x20
+ldr x0, =prompt
+bl printf
+ldr x0, =input_fmt
+mov x1, sp
+bl scanf
+ldr x0, =output
+ldr x1, [sp]
+add x2, x1, 1
+bl printf
+ldr lr, [sp, 0x10]
+ldr fp, [sp, 0x20]
+add sp, sp, 0x30
+b exit
+\end{minted}
+		}
+	\end{multicols}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{function mvp}
+	\begin{multicols}{2}
+		{\small
+			\begin{minted}{arm}
+.section .rodata
+prompt: .ascii "int plz: \0"
+input_fmt: .ascii "%d\0"
+output: .ascii "%d+1=%d\n\0"
+.align 2
+
+.text
+add_one:
+sub sp, sp, 0x20
+str fp, [sp]
+str lr, [sp, 0x10]
+add fp, sp, 0x10
+add x0, x0, 1
+ldr lr, [sp, 0x10]
+ldr fp, [sp]
+add sp, sp, 0x20
+ret
+
+.global main
+main: 
+sub sp, sp, 0x30
+str lr, [sp, 0x20]
+str fp, [sp, 0x10]
+add fp, sp, 0x20
+ldr x0, =prompt
+bl printf
+ldr x0, =input_fmt
+mov x1, sp
+bl scanf
+ldr x0, [sp]
+bl add_one
+mov x2, x0
+ldr x0, =output
+ldr x1, [sp]
+bl printf
+ldr lr, [sp, 0x10]
+ldr fp, [sp, 0x20]
+add sp, sp, 0x30
+b exit
+\end{minted}
+		}
+	\end{multicols}
+\end{frame}
+
+
+
+
+
 
 
 
@@ -83,12 +156,12 @@ main:
 		\begin{column}{0.5\textwidth}
 			\begin{alltt}
 				\begin{tabular}{ r | l }
-					0x4ff8 & \vdots           \\
-					0x4ffc & available        \\
+					0x4fe0 & \vdots           \\
+					0x4ff0 & available        \\
 					0x5000 & available        \\
-					0x5004 & in use by parent \\
-					0x5008 & in use by parent \\
-					0x500c & \vdots           \\
+					0x5010 & in use by parent \\
+					0x5020 & in use by parent \\
+					0x5030 & \vdots           \\
 				\end{tabular}
 			\end{alltt}
 		\end{column}
@@ -224,136 +297,4 @@ main:
 
 \end{frame}
 
-
-
-\begin{frame}{Hello World with Instruction Addresses}
-	\begin{alltt}
-		\begin{tabular}{ r | l }
-			-      & \Highlight{@ global read-only data (aka constants)}               \\
-			-      & .section .rodata                                                  \\
-			-      & greeting: .ascii "Hello World!{\textbackslash}n{\textbackslash}0" \\
-			-      & \Highlight{@ execution starts here}                               \\
-			-      & .section .text                                                    \\
-			-      & .global main                                                      \\
-			-      & main:                                                             \\
-			-      & \quad \Highlight{@ load the string address to r0}                 \\
-			0x4fe0 & \quad ldr r0, =greeting                                           \\
-			-      & \quad \Highlight{@ print the string from r0}                      \\
-			0x4fe4 & \quad bl printf                                                   \\
-			-      & \quad \Highlight{@ return 0 (normal exit status)}                 \\
-			0x4fe8 & \quad mov r0, \#0                                                 \\
-			0x4fec & \quad b exit                                                      \\
-		\end{tabular}
-	\end{alltt}
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (0)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & ?      &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe0 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	The operating system loads instructions and global constants into memory. The program counter \texttt{pc} points to the start of execution.
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (1)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe4 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{ldr} to load the address of global constant \texttt{greeting} to \texttt{r0}
-
-	Also increment \texttt{pc} to point to the next instruction
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (2)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0x4ff0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fe8 &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{bl} to call the built-in function \texttt{printf}, which looks at the address from \texttt{r0} and prints the data as a null-terminated string
-
-	Also increment \texttt{pc} to point to the next instruction
-
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (3)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &        & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0      &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ?      &                            & 0x4fe4 & bl printf         \\
-			r2                            & ?      &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ?      &                            & 0x4fec & b exit            \\
-			r4                            & ?      &                            & 0x4ff0 & Hell              \\
-			sp                            & ?      &                            & 0x4ff4 & o Wo              \\
-			fp                            & ?      &                            & 0x4ff8 & rld!              \\
-			pc                            & 0x4fec &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ?      &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Move the value zero to \texttt{r0}
-
-	Also increment \texttt{pc} to point to the next instruction
-
-
-\end{frame}
-
-\begin{frame}{Hello World Walkthrough (4)}
-	\begin{alltt}
-		\begin{tabular}{ r | l p{5mm} r | l }
-			\multicolumn{2}{c}{Registers} &   & \multicolumn{2}{c}{Memory}                              \\
-			r0                            & 0 &                            & 0x4fe0 & ldr r0, =greeting \\
-			r1                            & ? &                            & 0x4fe4 & bl printf         \\
-			r2                            & ? &                            & 0x4fe8 & mov r0, \#0       \\
-			r3                            & ? &                            & 0x4fec & b exit            \\
-			r4                            & ? &                            & 0x4ff0 & Hell              \\
-			sp                            & ? &                            & 0x4ff4 & o Wo              \\
-			fp                            & ? &                            & 0x4ff8 & rld!              \\
-			pc                            & ? &                            & 0x4ffc & {\textbackslash}0 \\
-			lr                            & ? &                            & 0x5000 & ?                 \\
-		\end{tabular}
-	\end{alltt}
-
-	Use \texttt{bl} to call the built-in \texttt{exit} function, which exits from the program. The value in \texttt{r0} is the returncode.
-
-	The value of \texttt{pc} is restored for the upstream caller (we'll worry more about this in later chapters)
-
-\end{frame}
 
