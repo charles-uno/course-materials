@@ -3,6 +3,7 @@
 prompt: .ascii "how many koalas do you have? \0"
 input_fmt: .ascii "%d\0"
 report: .ascii "that's %d thumbs!\n\0"
+.align 2
 
 // global variables
 .section .data

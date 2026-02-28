@@ -5,11 +5,11 @@
 .section .text
 
 main:
-    ldr x0, =message
-    bl printf
-    mov x0, 0
-    b exit
+ldr x0, =message
+bl printf
+mov x0, 0
+b exit
 
 .section .rodata
-    message: .ascii "Hello World\n\0"
-
+message: .ascii "Hello World\n\0"
+.align 2

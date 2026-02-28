@@ -40,24 +40,18 @@
 \end{frame}
 
 \begin{frame}[fragile]{Hello World in Assembly}
-	% haven't yet found a perfect highlighter match
-	% tasm - pretty good, does not like //
-	% gas - does not like = for globals
-	% nasm - does not like // or =
-	% ca65 - comments and a lot of commands all black
-	% llvm, dasm16, hsail - nope
-	% C, actionscript, ada, asn1, r, ...
 	\begin{minted}{arm}
 		.section .rodata
-			greeting: .ascii "Hello world!\n\0"
+		greeting: .ascii "Hello world!\n\0"
+		.align 2
 
 		.section .text
 		.global main
 		main:
-			ldr x0, =greeting
-			bl printf
-			mov x0, 0
-			b exit
+		ldr x0, =greeting
+		bl printf
+		mov x0, 0
+		b exit
 	\end{minted}
 
 	You can assemble this into an executable and run it on your Raspberry Pi:
@@ -146,14 +140,27 @@ TODO: this
 \begin{frame}[fragile]{Global Constants}
 	\begin{minted}{arm}
 		.section .rodata
-			prompt: .ascii "how many koalas do you have? \0"
-			digits_per_hand: .word 5
+		prompt: .ascii "how many koalas do you have? \0"
+		digits_per_hand: .word 5
+		.align 2
 		\end{minted}
 	\begin{itemize}
 		\item Value is allocated at the start of the program
-		\item Use the variable name to load the \emph{address}
+		\item Use the name to load the \emph{address}
 		\item Value does not change
 		\item Types we will use: \Arm{word} and \Arm{ascii}
+		\item Use \Arm{.align 2} after \Arm{ascii} literals
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Global Variables}
+	\begin{minted}{arm}
+		.section .data
+		num_koalas: .word 0
+		\end{minted}
+	\begin{itemize}
+		\item Not constant (it can change)
+		\item Otherwise just like a global constant
 	\end{itemize}
 \end{frame}
 
@@ -162,10 +169,10 @@ TODO: this
 		.section .text
 		.global main
 		main:
-			ldr x0, =message
-			bl printf
-			mov x0, 0
-			b exit
+		ldr x0, =message
+		bl printf
+		mov x0, 0
+		b exit
 		\end{minted}
 	\begin{itemize}
 		\item If using a different compiler, you may need to swap \Arm{main} to \Arm{_start} or similar
@@ -193,7 +200,6 @@ Just the registers for now
 
 These will get more interesting when we start talking about local variables
 \end{frame}
-
 
 \begin{frame}{Don't Worry!}
 	\begin{itemize}
@@ -336,6 +342,7 @@ TODO: this
 		.section .rodata
 			output: .ascii "hello my name is %s\n\0"
 			name: .ascii "charles\0"
+			.align 2
 
 		.section .text
 		.global main
@@ -353,6 +360,7 @@ TODO: this
 		.section .rodata
 			output_str: .ascii "the current year is %d\n\0"
 			current_year: .word 2026
+			.align 2
 		
 		.section .text
 		.global main
@@ -370,6 +378,7 @@ TODO: this
 	\begin{minted}{arm}
 	.section .rodata
 		output_str: .ascii "%d + %d = %d\n\0"
+		.align 2
 	
 	.section .text
 	.global main
@@ -395,6 +404,7 @@ TODO: this
 	\begin{minted}{arm}
 		.section .rodata
 			input_fmt: .ascii "%d\0"
+			.align 2
 		.section .data
 			input_val: .word 0
 		.section .text
@@ -415,6 +425,7 @@ TODO: this
 			prompt: .ascii "Please enter a number: \0"
 			report: .ascii "You entered %d\n\0"
 			input_fmt: .ascii "%d\0"
+			.align 2
 		.section .data
 			input_val: .word 0
 		.section .text
