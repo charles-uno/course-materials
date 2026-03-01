@@ -6,10 +6,7 @@ output: .ascii "%d+1=%d\n\0"
 
 .global main
 main: 
-sub sp, sp, 0x30
-str lr, [sp, 0x20]
-str fp, [sp, 0x10]
-add fp, sp, 0x20
+sub sp, sp, 0x10
 ldr x0, =prompt
 bl printf
 ldr x0, =input_fmt
@@ -19,8 +16,6 @@ ldr x0, =output
 ldr x1, [sp]
 add x2, x1, 1
 bl printf
-ldr lr, [sp, 0x10]
-ldr fp, [sp, 0x20]
-add sp, sp, 0x30
+add sp, sp, 0x10
 b exit
     

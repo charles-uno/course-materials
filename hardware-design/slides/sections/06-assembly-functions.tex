@@ -6,6 +6,65 @@
 
 \Subsection{The Stack}
 
+
+% we have talked about global constants and global variables
+% those ones have to be declared at implementation time
+% what if you want to declare variables on the fly?
+
+% the stack is a region of memory that the OS has set aside for your program
+% we use special register sp to keep track of our location in that memory
+
+% sp always points to the top of the stack
+% if we need more memory, we can move sp up
+% when we're done with that memory, we can move sp back down
+
+% "down" is higher numbered addresses
+% for exercises we put the bottom of the stack at 0x5000 by convention
+% above 0x5000 is 0x4ff0, then 0x4fe0, etc
+
+% SIMD
+% an ascii char is 1 byte
+% we store numbers as words (4 bytes)
+% when updating the stack pointer sp, we work in increments of 0x10 bytes (16 bytes)
+% in practice, we are just wasting a bunch of memory in order to worry about less stuff
+
+
+
+
+\begin{frame}[fragile]{local variable mvp}
+	\begin{multicols}{1}
+		{\small
+			\begin{minted}{arm}
+.section .rodata
+prompt: .ascii "int plz: \0"
+input_fmt: .ascii "%d\0"
+output: .ascii "%d+1=%d\n\0"
+.align 2
+
+.global main
+main: 
+sub sp, sp, 0x10
+ldr x0, =prompt
+bl printf
+ldr x0, =input_fmt
+mov x1, sp
+bl scanf
+ldr x0, =output
+ldr x1, [sp]
+add x2, x1, 1
+bl printf
+add sp, sp, 0x10
+b exit
+\end{minted}
+		}
+	\end{multicols}
+\end{frame}
+
+
+
+
+
+
 \begin{frame}[fragile]{stack frame mvp}
 	\begin{multicols}{2}
 		{\small
@@ -36,40 +95,6 @@ b exit
 \end{frame}
 
 
-
-\begin{frame}[fragile]{local variable mvp}
-	\begin{multicols}{2}
-		{\small
-			\begin{minted}{arm}
-.section .rodata
-prompt: .ascii "int plz: \0"
-input_fmt: .ascii "%d\0"
-output: .ascii "%d+1=%d\n\0"
-.align 2
-
-.global main
-main: 
-sub sp, sp, 0x30
-str lr, [sp, 0x20]
-str fp, [sp, 0x10]
-add fp, sp, 0x20
-ldr x0, =prompt
-bl printf
-ldr x0, =input_fmt
-mov x1, sp
-bl scanf
-ldr x0, =output
-ldr x1, [sp]
-add x2, x1, 1
-bl printf
-ldr lr, [sp, 0x10]
-ldr fp, [sp, 0x20]
-add sp, sp, 0x30
-b exit
-\end{minted}
-		}
-	\end{multicols}
-\end{frame}
 
 
 
