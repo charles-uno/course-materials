@@ -1,6 +1,8 @@
 beamer: false
 ---
 
+# header
+
 This is a paragraph which includes *italics*, **bold**, and `inline code`
 
 $$$

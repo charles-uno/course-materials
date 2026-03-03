@@ -62,13 +62,17 @@ def get_chunks(lines: list[str]) -> list[str]:
     chunks = []
     while lines:
         chunk, lines = get_next_chunk(lines)
+
+        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+        print(chunk)
+
         if chunk:
             chunks.append(chunk)
     return [to_tex(c.rstrip()) for c in chunks]
 
 
 def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
-    standalone_line_markers = [
+    standalone_markers = [
         "# ",
         "## ",
         "### ",
@@ -81,26 +85,30 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
 
     # always process at least one line per call
     line = lines.pop(0)
+
+    print("starting new chunk with:", line)
+
     # empty lines
     if not line.strip():
         return "", lines
     # section headers, comments
-    if any(line.startswith(m) for m in standalone_line_markers):
+    if any(line.startswith(m) for m in standalone_markers):
         return line, lines
     # fenced code blocks or tex blocks
     for m in fence_markers:
         if line.startswith(m):
             chunk = line
             while lines:
-                line = lines.pop(0)
-                chunk += "\n" + line
-                if line.startswith(m):
+                next_line = lines.pop(0)
+                chunk += "\n" + next_line
+                if next_line.startswith(m):
                     return chunk, lines
     # Everything else just gets clumped and sent to the md parser
     chunk = line
-    markers = standalone_line_markers + fence_markers
-    while lines and not any(lines[0].startswith(m) for m in markers):
-        line = lines.pop(0)
+    markers = standalone_markers + fence_markers
+    while lines:
+        if any(lines[0].startswith(m) for m in markers):
+            break
         chunk += lines.pop(0)
     return chunk, lines
 
