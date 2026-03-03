@@ -23,13 +23,13 @@ def main():
 
 
 def get_tex(filename: str) -> list[str]:
-
-
     header, lines = get_header_and_lines(filename)
-
-
-
     chunks = get_chunks(lines)
+    frames = chunks_to_frames(chunks)
+    return join_pretty(frames)
+
+
+def chunks_to_frames(chunks: list[str]) -> list[str]:
     frame_markers = [
         r"\begin{frame}",
         r"\end{document}",
@@ -44,15 +44,12 @@ def get_tex(filename: str) -> list[str]:
             frames.append(c)
         else:
             frames[-1] += "\n\n" + c
-
     # Add \end{frame} and [fragile] as appropriate
-    frames = [fix_frame(f) for f in frames]
-    return join_frames(frames)
+    return [fix_frame(f) for f in frames]
 
 
-
-def join_frames(frames: list[str]) -> str:
-    ret = "\n\n".join(frames).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
+def join_pretty(chunks: list[str]) -> str:
+    ret = "\n\n".join(chunks).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
     while "\n\n\n" in ret:
         ret = ret.replace("\n\n\n", "\n\n")
     return ret
@@ -63,8 +60,8 @@ def get_chunks(lines: list[str]) -> list[str]:
     while lines:
         chunk, lines = get_next_chunk(lines)
 
-        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-        print(chunk)
+#        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+#        print(chunk)
 
         if chunk:
             chunks.append(chunk)
@@ -105,18 +102,11 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
     while lines:
         if any(lines[0].startswith(m) for m in markers):
             break
-        chunk += lines.pop(0)
+        chunk += "\n" + lines.pop(0)
     return chunk, lines
 
 
 def to_tex(chunk: str) -> str:
-    tex_markers = [
-        "%",
-        r"\begin{",
-        r"\end{",
-        r"\documentclass{",
-        r"\includegraphics"
-    ]
     if chunk.startswith("# "):
         return get_section(chunk)
     elif chunk.startswith("## "):
@@ -127,10 +117,10 @@ def to_tex(chunk: str) -> str:
         # mistletoe doesn't handle code blocks nicely
         return get_code_block(chunk)
     elif chunk.startswith("$$$"):
-        # pass along verbatim
+        # pass along fenced tex block
         return get_tex_block(chunk)
-    elif any(chunk.lstrip().startswith(m) for m in tex_markers):
-        # LaTeX just gets passed along
+    elif chunk.startswith("%"):
+        # pass along comment
         return chunk
     else:
         return md_to_tex(chunk)
