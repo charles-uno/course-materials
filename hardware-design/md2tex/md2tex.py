@@ -200,7 +200,7 @@ def md_to_tex(md_text: str) -> str:
 
 def get_header_and_lines(filename: str) -> tuple[dict, list[str]]:
     with open(filename, "r") as handle:
-        lines = handle.readlines()
+        lines = [x.rstrip() for x in handle.readlines()]
     header_lines = []
     while lines:
         line = lines.pop(0)
@@ -209,7 +209,7 @@ def get_header_and_lines(filename: str) -> tuple[dict, list[str]]:
         header_lines.append(line)
     if not lines:
         raise ParseFailure("expected yaml header")
-    header = yaml.safe_load("".join(header_lines))
+    header = yaml.safe_load("\n".join(header_lines))
     return header, lines
 
 
