@@ -1,4 +1,3 @@
-
 # Introduction
 
 ### Course Overview
