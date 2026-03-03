@@ -4,11 +4,15 @@ import argparse
 import mistletoe
 from mistletoe.latex_renderer import LaTeXRenderer
 import os
+import sys
 
 
 def main():
     args = parse_args()
     output_filename = os.path.splitext(args.markdown_file)[0] + ".tex"
+
+    print(f"converting \033[96m{args.markdown_file}\033[0m -> \033[96m{output_filename}\033[0m ... ", end="")
+    sys.stdout.flush()
 
     chunks = get_chunks(args.markdown_file)
 
@@ -30,13 +34,23 @@ def main():
     # Add \end{frame} and [fragile] as appropriate
     frames = [fix_frame(f) for f in frames]
 
-    for f in frames:
-        print("% ---------- frame ----------")
-        print(f)
+#    for f in frames:
+#        print("% ---------- frame ----------")
+#        print(f)
 
-    write_tex(output_filename, "\n\n".join(frames))
+    write_tex(output_filename, join_frames(frames))
 
+    print("\033[92mdone\033[0m")
     return
+
+
+def join_frames(frames: list[str]) -> str:
+    ret = "\n\n".join(frames).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
+
+
+    while "\n\n\n" in ret:
+        ret = ret.replace("\n\n\n", "\n\n")
+    return ret
 
 
 def get_chunks(filename: str) -> list[str]:
