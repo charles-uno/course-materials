@@ -5,6 +5,7 @@ import mistletoe
 from mistletoe.latex_renderer import LaTeXRenderer
 import os
 import sys
+import yaml
 
 
 def main():
@@ -14,8 +15,21 @@ def main():
     print(f"converting \033[96m{args.markdown_file}\033[0m -> \033[96m{output_filename}\033[0m ... ", end="")
     sys.stdout.flush()
 
-    chunks = get_chunks(args.markdown_file)
+    with open(output_filename, "w") as handle:
+        handle.write(get_tex(args.markdown_file))
 
+    print("\033[92mdone\033[0m")
+    return
+
+
+def get_tex(filename: str) -> list[str]:
+
+
+    header, lines = get_header_and_lines(filename)
+
+
+
+    chunks = get_chunks(lines)
     frame_markers = [
         r"\begin{frame}",
         r"\end{document}",
@@ -33,15 +47,8 @@ def main():
 
     # Add \end{frame} and [fragile] as appropriate
     frames = [fix_frame(f) for f in frames]
+    return join_frames(frames)
 
-#    for f in frames:
-#        print("% ---------- frame ----------")
-#        print(f)
-
-    write_tex(output_filename, join_frames(frames))
-
-    print("\033[92mdone\033[0m")
-    return
 
 
 def join_frames(frames: list[str]) -> str:
@@ -51,8 +58,7 @@ def join_frames(frames: list[str]) -> str:
     return ret
 
 
-def get_chunks(filename: str) -> list[str]:
-    lines = read_file(filename).splitlines()
+def get_chunks(lines: list[str]) -> list[str]:
     chunks = [""]
     tex_depth = 0
     code_block = False
@@ -192,23 +198,28 @@ def md_to_tex(md_text: str) -> str:
     return "\n".join(tex_lines)    
 
 
-def write_tex(filename: str, text: str) -> None:
-    with open(filename, "w") as handle:
-        handle.write(text)
+def get_header_and_lines(filename: str) -> tuple[dict, list[str]]:
+    with open(filename, "r") as handle:
+        lines = handle.readlines()
+    header_lines = []
+    while lines:
+        line = lines.pop(0)
+        if line.startswith("---"):
+            break
+        header_lines.append(line)
+    if not lines:
+        raise ParseFailure("expected yaml header")
+    header = yaml.safe_load("".join(header_lines))
+    return header, lines
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="md2tex",
-        description="Converts a markdown file to a TeX file for beamer slides",
+        description="convert markdown to latex",
     )
     parser.add_argument("markdown_file", help="path to the input markdown file")
     return parser.parse_args()
-
-
-def read_file(path: str) -> str:
-    with open(path, "r") as handle:
-        return "".join(handle.readlines())
 
 
 class ParseFailure(Exception):

@@ -5,12 +5,14 @@
 
 \includegraphics[width=\columnwidth]{images/dune-robot-hbo}
 
+$$$
 \begin{center}
 Thou shalt not make a machine in the likeness of a human mind
 \end{center}
 \begin{flushright}
 Dune, Frank Herbert
 \end{flushright}
+$$$
 
 ### Course Overview
 

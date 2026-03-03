@@ -1,3 +1,5 @@
+beamer: true
+---
 
 ### Hello World in Assembly
 

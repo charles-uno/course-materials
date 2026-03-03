@@ -1,3 +1,6 @@
+beamer: true
+---
+
 # Introduction
 
 ### Course Overview
