@@ -82,12 +82,8 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
         "```",
         "$$$",
     ]
-
     # always process at least one line per call
     line = lines.pop(0)
-
-    print("starting new chunk with:", line)
-
     # empty lines
     if not line.strip():
         return "", lines
@@ -130,6 +126,9 @@ def to_tex(chunk: str) -> str:
     elif chunk.startswith("```"):
         # mistletoe doesn't handle code blocks nicely
         return get_code_block(chunk)
+    elif chunk.startswith("$$$"):
+        # pass along verbatim
+        return get_tex_block(chunk)
     elif any(chunk.lstrip().startswith(m) for m in tex_markers):
         # LaTeX just gets passed along
         return chunk
@@ -179,6 +178,10 @@ def get_code_block(chunk: str) -> str:
     language = lines.pop(0)[3:]
     content = "\n".join(lines)
     return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
+
+
+def get_tex_block(chunk: str) -> str:
+    return "\n".join(chunk.splitlines()[1:-1])
 
 
 def get_begin_frame(chunk: str) -> str:
