@@ -4,23 +4,13 @@ import argparse
 import mistletoe
 from mistletoe.latex_renderer import LaTeXRenderer
 import os
-import subprocess
-
-
-SOURCE_DIR = "source"
-BUILD_DIR = "build"
-BUILD_FILENAME = os.path.join(BUILD_DIR, "slides.tex")
 
 
 def main():
-    if os.path.isfile(BUILD_FILENAME):
-        os.remove(BUILD_FILENAME)
+    args = parse_args()
+    output_filename = os.path.splitext(args.markdown_file)[0] + ".tex"
 
-    chunks = [get_head()]
-    paths = get_paths()
-    for p in paths:
-        chunks += get_chunks(p)
-    chunks.append(get_tail())
+    chunks = get_chunks(args.markdown_file)
 
     frame_markers = [
         r"\begin{frame}",
@@ -44,7 +34,7 @@ def main():
         print("% ---------- frame ----------")
         print(f)
 
-    write_tex("\n\n".join(frames))
+    write_tex(output_filename, "\n\n".join(frames))
 
     return
 
@@ -190,28 +180,18 @@ def md_to_tex(md_text: str) -> str:
     return "\n".join(tex_lines)    
 
 
-def write_tex(text: str) -> None:
-    os.makedirs(BUILD_DIR, exist_ok=True)
-    with open(BUILD_FILENAME, "a") as handle:
+def write_tex(filename: str, text: str) -> None:
+    with open(filename, "w") as handle:
         handle.write(text)
 
 
-def get_head() -> str:
-    with open(f"{SOURCE_DIR}/head.tex", "r") as handle:
-        return "".join(handle.readlines())
-
-
-def get_tail() -> str:
-    with open(f"{SOURCE_DIR}/tail.tex", "r") as handle:
-        return "".join(handle.readlines())
-
-
-def get_paths() -> list[str]:
-    paths = []
-    for filename in os.listdir(SOURCE_DIR):
-        if filename.endswith(".md"):
-            paths.append(f"{SOURCE_DIR}/{filename}")
-    return sorted(paths)
+def parse_args():
+    parser = argparse.ArgumentParser(
+        prog="md2tex",
+        description="Converts a markdown file to a TeX file for beamer slides",
+    )
+    parser.add_argument("markdown_file", help="path to the input markdown file")
+    return parser.parse_args()
 
 
 def read_file(path: str) -> str:
