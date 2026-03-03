@@ -46,8 +46,6 @@ def main():
 
 def join_frames(frames: list[str]) -> str:
     ret = "\n\n".join(frames).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
-
-
     while "\n\n\n" in ret:
         ret = ret.replace("\n\n\n", "\n\n")
     return ret
