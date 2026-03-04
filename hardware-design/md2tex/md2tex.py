@@ -9,7 +9,6 @@ import sys
 import yaml
 
 
-
 def main():
     args = parse_args()
     output_path = args.md_path.replace(".md", ".gen.tex")
@@ -70,10 +69,6 @@ def get_chunks(lines: list[str], **kwargs) -> list[str]:
     chunks = []
     while lines:
         chunk, lines = get_next_chunk(lines)
-
-#        print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-#        print(chunk)
-
         if chunk:
             chunks.append(chunk)
     return [to_tex(c.rstrip(), **kwargs) for c in chunks]
