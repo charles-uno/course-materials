@@ -494,7 +494,7 @@ Another common use case: what if we want to do the same thing to multiple pieces
 
 ### Single Instruction, Multiple Data
 
-
+Modern systems generally do a combination of pipelining, VLIW, and SIMD under the hood
 
 
 
