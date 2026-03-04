@@ -488,32 +488,16 @@ Con: it takes a lot of logic to figure out which instructions can be run togethe
 
 Another common use case: what if we want to do the same thing to multiple pieces of data?
 
+- Load two adjacent values from memory
+- Store two registers to adjacent memory addresses
+- Addition on multiple values
+
+### Single Instruction, Multiple Data
 
 
 
 
 
 
-%
-% ILP hands-on examples
-%
-% for i in range(1000000):
-%     s = s + i
-%
-% note: cpu often has multiple adders. superscalar does not have to be different operations
-%
-% for i in range(500000):
-%     s1 = s1 + 2*i     # sum of evens
-%     s2 = s2 + 2*i + 1 # sum of odds
-% s = s1 + s2
-%
-%
-% floating point operations usually cannot be rearranged. floating point associativity
-% slower: ((a+b)+c)+d
-% faster: (a+b) + (c+d)
-%
-% loop unrolling. instead of one per loop, do 4 per loop. check the assembly for fewer B/JMP calls
-%
-%
-% SIMD. compile with -fno-tree-vectorize to prevent vectorization
-%
+% ### Group Exercises
+% TODO: this
