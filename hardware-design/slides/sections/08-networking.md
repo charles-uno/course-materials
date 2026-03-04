@@ -1,3 +1,5 @@
+beamer: true
+---
 
 # Networking
 

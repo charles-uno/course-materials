@@ -3,8 +3,7 @@ MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
 
 
 slides:
-	$(MD2TEX) sections/00-introduction.md
-	$(MD2TEX) sections/01-data-representation.md
+	$(MD2TEX) sections/*.md
 	pdflatex -interaction=nonstopmode -shell-escape slides.tex
 
 clean:
