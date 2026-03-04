@@ -35,9 +35,9 @@ beamer: true
 
 ### local variable mvp
 $$$
-	\begin{multicols}{2}
-		{\small
-			\begin{minted}{arm}
+\begin{multicols}{2}{\small
+$$$
+```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
 input_fmt: .ascii "%d\0"
@@ -58,17 +58,17 @@ add x2, x1, 1
 bl printf
 add sp, sp, 0x10
 b exit
-\end{minted}
-		}
-	\end{multicols}
+```
+$$$
+}\end{multicols}
 $$$
 
 
 ### stack frame mvp
 $$$
-	\begin{multicols}{2}
-		{\small
-			\begin{minted}{arm}
+\begin{multicols}{2}{\small
+$$$
+```arm
 .section .rodata
 output: .ascii "%d+1=%d\n\0"
 .align 2
@@ -89,17 +89,16 @@ ldr lr, [sp, 0x10]
 ldr fp, [sp]
 add sp, sp, 0x20
 b exit
-\end{minted}
-		}
-	\end{multicols}
-\end{frame}
+```
+$$$
+}\end{multicols}
 $$$
 
 ### function mvp
 $$$
-	\begin{multicols}{2}
-		{\small
-			\begin{minted}{arm}
+\begin{multicols}{2}{\small
+$$$
+```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
 input_fmt: .ascii "%d\0"
@@ -139,10 +138,9 @@ ldr lr, [sp, 0x10]
 ldr fp, [sp, 0x20]
 add sp, sp, 0x30
 b exit
-\end{minted}
-		}
-	\end{multicols}
-\end{frame}
+```
+$$$
+}\end{multicols}
 $$$
 
 ### Working Memory
@@ -187,7 +185,6 @@ It also allocates memory for the program to use during execution
 
 There is a special register called the stack pointer which provides the location of that memory
 
-
 ### Working Memory
 $$$
 	\begin{columns}
@@ -219,7 +216,6 @@ $$$
 
 ## Calling a Function
 
-
 ### Branch and Link
 
 New command: BL
@@ -230,9 +226,7 @@ Branch = modify PC. Recall: PC tells us what to do next. Usually we just do the 
 
 Link = set LR to the PC of the next line. Once we're done with the function, this is how we return to the parent context.
 
-
 ## Stack Frames
-
 
 ### Frame Pointer
 
@@ -263,7 +257,7 @@ Link = set LR to the PC of the next line. Once we're done with the function, thi
 
 ### Hello World in Assembly
 
-	{\Huge
-		TODO: don't worry about PC yet? they haven't done the von neumann arch section yet}
-
+$$$
+{\Huge TODO: don't worry about PC yet? they haven't done the von neumann arch section yet}
+$$$
 
