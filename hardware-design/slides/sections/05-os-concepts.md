@@ -1,89 +1,80 @@
-\Section{OS Concepts}
+beamer: true
+---
 
-\begin{frame}{OS Concepts}
-	\begin{itemize}
-		\item We have talked about executing instructions as part of a program
-        \item How do we boot the machine so we can run the program in the first place?
-        \item And how does the machine handle background stuff while the program runs?
-	\end{itemize}
-\end{frame}
+# OS Concepts
 
-\begin{frame}{OS Concepts}
+### OS Concepts
 
+- We have talked about executing instructions as part of a program
+- How do we boot the machine so we can run the program in the first place?
+- And how does the machine handle background stuff while the program runs?
 
-    We've talked about running instructions within a program
+### OS Concepts
 
-	But how do we get to that point?
+We've talked about running instructions within a program
 
-	Before we can run the program, we need to boot the computer
+But how do we get to that point?
 
-	We generally also want to fire up an operating system
+Before we can run the program, we need to boot the computer
 
-	The OS handles:
+We generally also want to fire up an operating system
 
-	\begin{itemize}
-		\item memory allocation
-		\item CPU time allocation
-		\item device interfaces
-		\item context switching (computer can juggle multiple tasks)
-	\end{itemize}
-\end{frame}
+The OS handles:
 
+- memory allocation
+- CPU time allocation
+- device interfaces
+- context switching (computer can juggle multiple tasks)
 
 % firmware initializes hardware, finds the boot loader (eg GRUB, Windows Boot Manager)
 
+## Booting
 
+### Starting the Boot
 
+- As soon as we start executing an instruction, we are already fetching the next one
+- But how do we know where to start?
+- The location of the "boot block" is hard-coded. Often 0x00000000
+- This is firmware. Non-volatile memory (aka users are not allowed to modify it)
+- Technically not part of the OS, but same ballpark
 
-
-\Subsection{Booting}
-
-\begin{frame}{Starting the Boot}
-	\begin{itemize}
-		\item As soon as we start executing an instruction, we are already fetching the next one
-		\item But how do we know where to start?
-		\item The location of the "boot block" is hard-coded. Often 0x00000000
-		\item This is firmware. Non-volatile memory (aka users are not allowed to modify it)
-        \item Technically not part of the OS, but same ballpark
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/device-drivers}
-\end{frame}
+$$$
 
-
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/call-to-os}
-\end{frame}
+$$$
 
-
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/os-location}
-\end{frame}
+$$$
 
-
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/process-states}
-\end{frame}
+$$$
 
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/starting-a-program}
-\end{frame}
+$$$
 
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/xkcd-meltdown}
-\end{frame}
+$$$
 
-\begin{frame}{Placeholder}
+### Placeholder
+$$$
 \includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped}
-\end{frame}
+$$$
 
 
-
-
-\Subsection{The Operating System}
-
+## The Operating System
 
 % what is the OS?
 
