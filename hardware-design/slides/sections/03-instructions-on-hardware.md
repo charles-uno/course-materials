@@ -421,9 +421,9 @@ $$$
 ### Control Hazards
 ```python
 if r1 == 0:
-    ...
+    fizz()
 else:
-    ...
+    buzz()
 ```
 Which instruction should we load into the pipeline after the `if`?
 
@@ -439,3 +439,58 @@ $$$
 $$$
 Source: xkcd
 
+### Additional ILP Strategies
+
+Pipelining is an important way to accomplish instruction-level parallelism
+
+There are other ways too
+
+### Superscalar Processing
+
+- The ALU can do addition, multiplication, etc, etc
+- Each operation happens on its own circuitry
+- If two consecutive instructions use different hardware, run them at the same time
+- The processor figures this out in real time!
+
+It's like flipping burgers with one hand and blending shakes with the other
+
+### Very Long Instruction Word
+
+This is the same thing! Difference is we do it in the code. So the parallelism is static and we don't have to figure it out on the fly.
+
+Bundles of execution
+
+
+### Single Instruction, Multiple Data
+
+
+
+
+
+
+
+
+
+%
+% ILP hands-on examples
+%
+% for i in range(1000000):
+%     s = s + i
+%
+% note: cpu often has multiple adders. superscalar does not have to be different operations
+%
+% for i in range(500000):
+%     s1 = s1 + 2*i     # sum of evens
+%     s2 = s2 + 2*i + 1 # sum of odds
+% s = s1 + s2
+%
+%
+% floating point operations usually cannot be rearranged. floating point associativity
+% slower: ((a+b)+c)+d
+% faster: (a+b) + (c+d)
+%
+% loop unrolling. instead of one per loop, do 4 per loop. check the assembly for fewer B/JMP calls
+%
+%
+% SIMD. compile with -fno-tree-vectorize to prevent vectorization
+%

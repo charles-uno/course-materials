@@ -191,6 +191,8 @@ def get_code_block(chunk: str) -> str:
     lines = chunk.splitlines()[:-1]
     language = lines.pop(0)[3:]
     content = "\n".join(lines)
+    if not language:
+        language = "text"
     return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
 
 
