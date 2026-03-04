@@ -449,7 +449,7 @@ $$$
 ### Why Shell?
 
 - Many languages have built-in test frameworks. Assembly doesn't. We're improvising
-- Shell scripting uses familiar syntax (ls, gcc)
+- Shell scripting uses familiar syntax (`ls`, `gcc`)
 - You are welcome to copy-paste from my example
 - I tried Python last time. It was more work. You are welcome to try it again!
 
