@@ -140,9 +140,8 @@ To divide by 4, shift the bits two places to the right. \\
 That's about as deep as we go in this class. If you're curious to learn more,
 see the textbook.
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Hexadecimal
 
@@ -204,9 +203,8 @@ $$$
 \]
 $$$
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Negatives in Binary
 
@@ -334,9 +332,8 @@ $$$
 These are two's complement numbers. Convert them to decimal. What just
 happened?
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Fractions and Decimals
 
@@ -455,9 +452,8 @@ point. This is true even if both formats use the same number of bits.
 
 So what's the catch?
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 %        \item Convert 0b100110.10 from fixed-point binary to decimal.
 %        \item Convert 23.75 from decimal to fixed-point binary.
@@ -525,9 +521,8 @@ $$$
 \end{columns}
 $$$
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 
 
