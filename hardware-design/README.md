@@ -19,14 +19,14 @@ Course listing [here](https://catalog.stolaf.edu/academic-programs/computer-scie
 
 ## Requirements
 
-The syllabus, slides, and exams are typeset using LaTeX. LaTeX source is pretty ugly, so some of the content is actually written in Markdown and converted to LaTeX. In order to build you'll need:
+The syllabus, slides, and exams are typeset using LaTeX. LaTeX source is pretty ugly, so much of the content is written in Markdown then converted at build time. In order to produce PDFs you'll need:
 
 - MikTex, MacTex, or similar. The big install
 - Python 3
 - Make
-- Pistletoe (`pip3 install mistletoe`)
+- Mistletoe (`pip3 install mistletoe`) - for converting Markdown to LaTeX
 - Pyyaml (`pip3 install pyyaml`)
-- Pygments (`pip3 install Pygments`)
+- Pygments (`pip3 install Pygments`) - for syntax highlighting via `minted`
 - ARM syntax highlighting (`pip3 install pygments-arm`)
 
 These requirements are for Mac OS. Linux is probably pretty much the same. If you need it to run on Windows, I'll bet an AI bot can figure it out

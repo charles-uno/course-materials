@@ -385,20 +385,20 @@ Hint: we will be using the terms "data hazard" and "control hazard"
 
 ### Data Hazards
 
-```arm
-add r2, r1, r0
-add r4, r2, r3
+```python
+x = y + 5
+z = x + 7
 ```
 Do you see the problem?
 
 ### Data Hazards
-```arm
-add r2, r1, r0
-add r4, r2, r3
+```python
+x = y + 5
+z = x + 7
 ```
 
-- Instruction 1 is writing data to r2 (write stage)
-- Instruction 2 is reading data from r2 (execute stage)
+- Instruction 1 is writing data to `x` (write stage)
+- Instruction 2 is reading data from `x` (execute stage)
 - Those stages are supposed to happen at the same time
 - Race condition. Different outcome based on which happens first
 - Not good
