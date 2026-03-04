@@ -168,7 +168,6 @@ def get_h1(chunk: str, is_beamer: bool) -> str:
         return r"\section{" + title + "}"
 
 
-
 def get_h2(chunk: str, is_beamer: bool) -> str:
     assert chunk.startswith("## ")
     title = chunk[3:].splitlines()[0]
@@ -186,6 +185,7 @@ def get_h3(chunk: str, is_beamer: bool) -> str:
     else:
         return r"\subsubsection{" + title + "}"
 
+
 def get_code_block(chunk: str) -> str:
     lines = chunk.splitlines()[:-1]
     language = lines.pop(0)[3:]
@@ -195,7 +195,6 @@ def get_code_block(chunk: str) -> str:
 
 def get_tex_block(chunk: str) -> str:
     return "\n".join(chunk.splitlines()[1:-1])
-
 
 
 def get_end_frame() -> str:
