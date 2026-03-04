@@ -438,29 +438,55 @@ Source: xkcd
 
 ### Additional ILP Strategies
 
-Pipelining is an important way to accomplish instruction-level parallelism
+Pipelining is an important way to accomplish instruction-level parallelism (aka executing more than one instruction at a time)
 
 There are other ways too
 
 ### Superscalar Processing
 
-- The ALU can do addition, multiplication, etc, etc
-- Each operation happens on its own circuitry
-- If two consecutive instructions use different hardware, run them at the same time
-- The processor figures this out in real time!
+The ALU contains circuitry to do a bunch of different operations. We use multiplexers to keep the results we want
 
-It's like flipping burgers with one hand and blending shakes with the other
+$$$
+\includegraphics[width=\columnwidth]{images/example-alu}
+$$$
+
+### Superscalar Processing
+
+What if, as we're running a program, we see that our next two instructions use all different circuitry?
+
+### Superscalar Processing
+
+If two consecutive instructions use all different circuitry, we can run them at the same time
+
+% in principle, we expect this to work for different instructions
+% in practice, ALUs contain duplicate logic for common operations
+
+It's like flipping burgers with one hand and slicing tomatoes with the other
+
+What are some upsides and downsides of this approach?
+
+### Superscalar Pros and Cons
+
+Pro: your code runs faster!
+
+Con: it takes a lot of logic to figure out which instructions can be run together. And this needs to happen at the hardware level. If you spend a CPU cycle figuring it out, you're not gaining anything
 
 ### Very Long Instruction Word
 
-This is the same thing! Difference is we do it in the code. So the parallelism is static and we don't have to figure it out on the fly.
+- Superscalar Processing seems pretty slick, but it's also a lot of work for the processor
+- You need extra circuitry to figure out when it's safe to run instructions together
+- What if we pushed that responsibility up to the compiler?
 
-Bundles of execution
+### Very Long Instruction Word
 
+- Programming language specifies bundles of instructions that are safe to run together
+- The compiler can guarantee correctness
+- No extra logic in the ALU
+- Just need to be able to fetch and store multiple instructions at a time
 
 ### Single Instruction, Multiple Data
 
-
+Another common use case: what if we want to do the same thing to multiple pieces of data?
 
 
 
