@@ -11,15 +11,16 @@ import yaml
 
 def main():
     args = parse_args()
-    output_path = args.md_path.replace(".md", ".gen.tex")
+    for md_path in args.md_paths:
+        output_path = md_path.replace(".md", ".gen.tex")
 
-    print(f"converting \033[96m{args.md_path}\033[0m -> \033[96m{output_path}\033[0m ... ", end="")
-    sys.stdout.flush()
+        print(f"converting \033[96m{md_path}\033[0m -> \033[96m{output_path}\033[0m ... ", end="")
+        sys.stdout.flush()
 
-    with open(output_path, "w") as handle:
-        handle.write(get_tex(args.md_path))
+        with open(output_path, "w") as handle:
+            handle.write(get_tex(md_path))
 
-    print("\033[92mdone\033[0m")
+        print("\033[92mdone\033[0m")
     return
 
 
@@ -247,7 +248,9 @@ def parse_args():
         prog="md2tex",
         description="convert markdown to latex",
     )
-    parser.add_argument("md_path", type=md_path, help="path to the input markdown file")
+    parser.add_argument(
+        "md_paths", nargs="+", type=md_path, help="path(s) to the input markdown file(s)"
+    )
     return parser.parse_args()
 
 
