@@ -10,13 +10,13 @@ import yaml
 
 def main():
     args = parse_args()
-    output_filename = os.path.splitext(args.markdown_file)[0] + ".tex"
+    output_path = args.md_path.replace(".md", ".gen.tex")
 
-    print(f"converting \033[96m{args.markdown_file}\033[0m -> \033[96m{output_filename}\033[0m ... ", end="")
+    print(f"converting \033[96m{args.md_path}\033[0m -> \033[96m{output_path}\033[0m ... ", end="")
     sys.stdout.flush()
 
-    with open(output_filename, "w") as handle:
-        handle.write(get_tex(args.markdown_file))
+    with open(output_path, "w") as handle:
+        handle.write(get_tex(args.md_path))
 
     print("\033[92mdone\033[0m")
     return
@@ -217,12 +217,20 @@ def get_header_and_lines(filename: str) -> tuple[dict, list[str]]:
     return header, lines
 
 
+def md_path(path):
+    if not os.path.exists(path):
+        raise argparse.ArgumentTypeError(f"input path '{path}' does not exist")
+    if not path.endswith('.md'):
+        raise argparse.ArgumentTypeError(f"input path '{path}' must end in .md")
+    return path
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="md2tex",
         description="convert markdown to latex",
     )
-    parser.add_argument("markdown_file", help="path to the input markdown file")
+    parser.add_argument("md_path", type=md_path, help="path to the input markdown file")
     return parser.parse_args()
 
 
