@@ -80,9 +80,8 @@ We'll talk more about storage later
 - What are some examples of input/output hardware?
 
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Executing an Instruction
 
@@ -142,8 +141,8 @@ $$$
 - You have to load each value from memory, store it in a register, run it through the CPU, and write it back to memory
 - This is a lot of work!
 
-### Group Exercises
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Clock-Driven Execution
 
@@ -176,8 +175,8 @@ TODO: this
 - If the computer runs at 1 GHz, that's one cycle every nanosecond
 - Wires in the CPU are twisted and packed very tightly. How long do you suppose they would be if straightened?
 
-### Group Exercises
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Memory Hierarchy
 
@@ -232,9 +231,8 @@ $$$
 - Capacity: how much data (measured in bytes)
 - Transfer rate (aka throughput): how fast we can read or write (measured in bytes/second)
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Locality \& Cache
 
@@ -303,9 +301,8 @@ def fibonacci(n):
 	return CACHE[n]
 ```
 
-### Group Exercises
-
-TODO: this
+% ### Group Exercises
+% TODO: this
 
 ## Instruction-Level Parallelism
 
