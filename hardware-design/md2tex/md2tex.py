@@ -11,10 +11,11 @@ import yaml
 
 def main():
     args = parse_args()
+    max_path_length = max(len(p) for p in args.md_paths)
     for md_path in args.md_paths:
         output_path = md_path.replace(".md", ".gen.tex")
 
-        print(f"converting \033[96m{md_path}\033[0m -> \033[96m{output_path}\033[0m ... ", end="")
+        print(f"\033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
         sys.stdout.flush()
 
         with open(output_path, "w") as handle:
