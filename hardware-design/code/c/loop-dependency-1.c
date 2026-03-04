@@ -11,12 +11,12 @@ int* init_array(int size, int max) {
     return arr;
 }
 
-float compute_average_v1(int* arr, int size) {
+double compute_average_v1(int* arr, int size) {
     int total = 0;
     for (int i = 0; i < size; i++) {
         total += arr[i];
     }
-    return (int)((float)total/size);
+    return (double)total/size;
 }
 
 int main(int argc, char** argv) {
@@ -27,18 +27,17 @@ int main(int argc, char** argv) {
        return 1;
    }
    int i;
-   float res;
-   double timer;
+   double avg, timer;
    int n = strtol(argv[1], NULL, 10);
    srand(time(NULL));
    struct timeval tstart, tend;
    int* arr = init_array(n, 100);
 
    gettimeofday(&tstart, NULL);
-   avg = compute_average_v1(arr, n)
+   avg = compute_average_v1(arr, n);
    gettimeofday(&tend, NULL);
    timer = tend.tv_sec - tstart.tv_sec + (tend.tv_usec - tstart.tv_usec)/1.e6;
-   printf("v1 average is: %.2f; time is %g\n", res, timer);
+   printf("v1 average is: %.2f; time is %g\n", avg, timer);
 
    free(arr);
    return 0;
