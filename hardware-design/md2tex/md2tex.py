@@ -24,7 +24,10 @@ def main():
 
 def get_tex(filename: str) -> list[str]:
     header, lines = get_header_and_lines(filename)
-    chunks = get_chunks(lines)
+
+    chunks = get_chunks(lines, **header)
+
+    # fix formatting for beamer builds
     frames = chunks_to_frames(chunks)
     return join_pretty(frames)
 
@@ -55,7 +58,8 @@ def join_pretty(chunks: list[str]) -> str:
     return ret
 
 
-def get_chunks(lines: list[str]) -> list[str]:
+def get_chunks(lines: list[str], **kwargs) -> list[str]:
+
     chunks = []
     while lines:
         chunk, lines = get_next_chunk(lines)
@@ -65,7 +69,7 @@ def get_chunks(lines: list[str]) -> list[str]:
 
         if chunk:
             chunks.append(chunk)
-    return [to_tex(c.rstrip()) for c in chunks]
+    return [to_tex(c.rstrip(), **kwargs) for c in chunks]
 
 
 def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
@@ -106,13 +110,15 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
     return chunk, lines
 
 
-def to_tex(chunk: str) -> str:
+def to_tex(chunk: str, **kwargs) -> str:
+    is_beamer = kwargs.get("beamer", False)
     if chunk.startswith("# "):
-        return get_section(chunk)
+        return get_h1(chunk, is_beamer)
     elif chunk.startswith("## "):
-        return get_subsection(chunk)
+        return get_h2(chunk, is_beamer)
     elif chunk.startswith("### "):
-        return get_begin_frame(chunk)
+        # for beamer builds, h3 is new frame
+        return get_h3(chunk, is_beamer)
     elif chunk.startswith("```"):
         # mistletoe doesn't handle code blocks nicely
         return get_code_block(chunk)
@@ -151,17 +157,32 @@ def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool
     return any(tex_chunk.startswith(x) for x in need_frame_closed)
 
 
-def get_section(chunk: str) -> str:
+def get_h1(chunk: str, is_beamer: bool) -> str:
     assert chunk.startswith("# ")
-    section_title = chunk[2:].splitlines()[0]
-    return r"\Section{" + section_title + "}"
+    title = chunk[2:].splitlines()[0]
+    if is_beamer:
+        return r"\Section{" + title + "}"
+    else:
+        return r"\section{" + title + "}"
 
 
-def get_subsection(chunk: str) -> str:
+
+def get_h2(chunk: str, is_beamer: bool) -> str:
     assert chunk.startswith("## ")
-    section_title = chunk[3:].splitlines()[0]
-    return r"\Subsection{" + section_title + "}"
+    title = chunk[3:].splitlines()[0]
+    if is_beamer:
+        return r"\Subsection{" + title + "}"
+    else:
+        return r"\subsection{" + title + "}"
 
+
+def get_h3(chunk: str, is_beamer: bool) -> str:
+    assert chunk.startswith("### ")
+    title = chunk[4:].splitlines()[0]
+    if is_beamer:
+        return r"\begin{frame}{" + title + "}"
+    else:
+        return r"\subsubsection{" + title + "}"
 
 def get_code_block(chunk: str) -> str:
     lines = chunk.splitlines()[:-1]
@@ -173,11 +194,6 @@ def get_code_block(chunk: str) -> str:
 def get_tex_block(chunk: str) -> str:
     return "\n".join(chunk.splitlines()[1:-1])
 
-
-def get_begin_frame(chunk: str) -> str:
-    assert chunk.startswith("### ")
-    frame_title = chunk[4:].splitlines()[0]
-    return r"\begin{frame}{" + frame_title + "}"
 
 
 def get_end_frame() -> str:
