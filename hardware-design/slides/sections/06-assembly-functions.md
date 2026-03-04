@@ -35,7 +35,7 @@ beamer: true
 
 ### local variable mvp
 $$$
-	\begin{multicols}{1}
+	\begin{multicols}{2}
 		{\small
 			\begin{minted}{arm}
 .section .rodata
