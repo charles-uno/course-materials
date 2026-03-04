@@ -59,7 +59,7 @@ def join_pretty(chunks: list[str]) -> str:
         ret = ret.replace("\n\n\n", "\n\n")
 
     # find urls starting with http(s), avoid those already in brackets or parens
-    url_pattern = r'(?<![\[\(])(https?://[^\s<>]+)(?![\]\)])'
+    url_pattern = r'(?<![\{\[\(])(https?:\/\/[^\s<>]+)(?![\}\]\)])'
     # wrap in \url for nicer formatting
     ret = re.sub(url_pattern, r'\\url{\1}', ret)
     return ret
