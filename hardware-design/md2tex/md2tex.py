@@ -4,8 +4,10 @@ import argparse
 import mistletoe
 from mistletoe.latex_renderer import LaTeXRenderer
 import os
+import re
 import sys
 import yaml
+
 
 
 def main():
@@ -55,6 +57,11 @@ def join_pretty(chunks: list[str]) -> str:
     ret = "\n\n".join(chunks).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
     while "\n\n\n" in ret:
         ret = ret.replace("\n\n\n", "\n\n")
+
+    # find urls starting with http(s), avoid those already in brackets or parens
+    url_pattern = r'(?<![\[\(])(https?://[^\s<>]+)(?![\]\)])'
+    # wrap in \url for nicer formatting
+    ret = re.sub(url_pattern, r'\\url{\1}', ret)
     return ret
 
 

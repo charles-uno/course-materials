@@ -15,3 +15,6 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 - How data is stored on a computer
 - Building electrical circuits to perform logic
 - Programming in Assembly (a very low-level language)
+
+
+We will be using the textbook ourse Dive Into Systems: https://diveintosystems.org/book/index.html
