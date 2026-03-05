@@ -15,43 +15,33 @@ beamer: true
 ### Truth Tables
 
 A boolean function takes boolean input(s) and produces a boolean output. In order to see all the inputs and outputs, we can write a truth table. For example:
-$$$
-\begin{tabular}{c c}
-	A & not A \\
-	\hline
-	1 & 0     \\
-	0 & 1
-\end{tabular}
-$$$
+
+| A | not A |
+|:-:|-------|
+| 1 | 0     |
+| 0 | 1     |
 
 ### Boolean Functions
 
 Fundamental boolean functions include AND, OR, and XOR:
 
-$$$
-\begin{tabular}{c c c c c}
-	A & B & A and B & A or B & A xor B \\
-	\hline
-	1 & 1 & 1       & 1      & 0       \\
-	1 & 0 & 0       & 1      & 1       \\
-	0 & 1 & 0       & 1      & 1       \\
-	0 & 0 & 0       & 0      & 0
-\end{tabular}
-$$$
+| A | B | A and B | A or B | A xor B |
+|:-:|:-:|:--------:|:------:|:-------:|
+| 1 | 1 | 1       | 1      | 0       |
+| 1 | 0 | 0       | 1      | 1       |
+| 0 | 1 | 0       | 1      | 1       |
+| 0 | 0 | 0       | 0      | 0       |
 
 ### Boolean Functions
 
 We also have opposite functions NAND, NOR, and XNOR. These are just the previous gates but flipped:
-$$$
-\begin{tabular}{c c c c c}
-	A & B & A nand B & A nor B & A xnor B \\
-	\hline
-	1 & 1 & 0        & 0       & 1        \\
-	1 & 0 & 1        & 0       & 0        \\
-	0 & 1 & 1        & 0       & 0        \\
-	0 & 0 & 1        & 1       & 1
-\end{tabular}
-$$$
+
+| A | B | A nand B | A nor B | A xnor B |
+|:-:|:-:|:--------:|:-------:|:--------:|
+| 1 | 1 | 0        | 0       | 1        |
+| 1 | 0 | 1        | 0       | 0        |
+| 0 | 1 | 1        | 0       | 0        |
+| 0 | 0 | 1        | 1       | 1        |
 
 ### Boolean Function Shorthand
 
@@ -100,16 +90,13 @@ $$$
 \end{align*}
 $$$
 Then we can write out a truth table for those helper functions:
-$$$
-\begin{tabular}{c c c c}
-	A & B & \LogicOr{A}{B} & \LogicNand{A}{B} \\
-	\hline
-	1 & 1 & 1              & 0                \\
-	1 & 0 & 1              & 1                \\
-	0 & 1 & 1              & 1                \\
-	0 & 0 & 0              & 1
-\end{tabular}
-$$$
+
+| A | B | $\LogicOr{A}{B}$ | $\LogicNand{A}{B}$ |
+|:-:|:-:|----------------:|------------------:|
+| 1 | 1 | 1               | 0                 |
+| 1 | 0 | 1               | 1                 |
+| 0 | 1 | 1               | 1                 |
+| 0 | 0 | 0               | 1 |
 
 ### Putting Boolean Functions Together
 $$$
@@ -119,16 +106,13 @@ $$$
 $$$
 
 Then finally we can write the truth table for the whole expression:
-$$$
-\begin{tabular}{c c c c c}
-	A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & f(A, B) \\
-	\hline
-	1 & 1 & 1              & 0                & 0       \\
-	1 & 0 & 1              & 1                & 1       \\
-	0 & 1 & 1              & 1                & 1       \\
-	0 & 0 & 0              & 1                & 0
-\end{tabular}
-$$$
+
+| A | B | $\LogicOr{A}{B}$ | $\LogicNand{A}{B}$ | $f(A, B)$ |
+|:-:|:-:|-----------------:|-------------------:|-----------|
+| 1 | 1 | 1               | 0                 | 0         |
+| 1 | 0 | 1               | 1                 | 1         |
+| 0 | 1 | 1               | 1                 | 1         |
+| 0 | 0 | 0               | 1                 | 0         |
 
 % ### Group Exercises
 % TODO: this
@@ -339,18 +323,12 @@ $$$
 	\end{tikzpicture}
 $$$
 
-$$$
-	\begin{center}
-		\begin{tabular}{c c c c c}
-			A & B & \LogicOr{A}{B} & \LogicNand{A}{B} & \LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})} \\
-			\hline
-			1 & 1 & 1              & 0                & 0                                               \\
-			1 & 0 & 1              & 1                & 1                                               \\
-			0 & 1 & 1              & 1                & 1                                               \\
-			0 & 0 & 0              & 1                & 0
-		\end{tabular}
-	\end{center}
-$$$
+| A | B | $\LogicOr{A}{B}$ | $\LogicNand{A}{B}$ | $\LogicAnd{(\LogicOr{A}{B})}{(\LogicNand{A}{B})}$ |
+|:-:|:-:|-----------------:|-------------------:|--------------------------------------------------:|
+| 1 | 1 | 1               | 0                 | 0                                                |
+| 1 | 0 | 1               | 1                 | 1                                                |
+| 0 | 1 | 1               | 1                 | 1                                                |
+| 0 | 0 | 0               | 1                 | 0 |
 
 ### Drawing a Logic Circuit
 Similarly, if we have a logical expression, we can draw it as a diagram from right to left.
@@ -598,18 +576,13 @@ The four possible cases are:
 - `0b1 + 0b1 = 0b10`
 	
 Which we can write as a truth table:
-$$$
-	\begin{center}
-		\begin{tabular}{c c c c}
-			A & B & C & D \\
-			\hline
-			1 & 1 & 0 & 0 \\
-			1 & 0 & 1 & 0 \\
-			0 & 1 & 1 & 0 \\
-			0 & 0 & 0 & 1
-		\end{tabular}
-	\end{center}
-$$$
+
+| A | B | C | D |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
 
 Where A and B are the input bits, C and D are the digits of the result
 
@@ -623,18 +596,13 @@ The four possible cases are:
 - `0b1 + 0b1 = 0b10`
 	
 Which we can write as a truth table:
-$$$
-\begin{center}
-	\begin{tabular}{c c c c}
-		A & B & C & D \\
-		\hline
-		1 & 1 & 0 & 0 \\
-		1 & 0 & 1 & 0 \\
-		0 & 1 & 1 & 0 \\
-		0 & 0 & 0 & 1
-	\end{tabular}
-\end{center}
-$$$
+
+| A | B | C | D |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
 
 What is the logical expression for C? How about D?
 
