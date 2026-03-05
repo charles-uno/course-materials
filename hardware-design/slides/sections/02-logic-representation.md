@@ -412,7 +412,7 @@ $$$
 	\end{itemize}		
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			\includegraphics[width=\columnwidth]{images/functional-completeness.png}
+			\includegraphics[width=\columnwidth]{images/logic-representation/functional-completeness.png}
 		\end{column}
 	\end{columns}
 $$$
@@ -430,7 +430,7 @@ OK, so we have circuits that can do logic. Now what?
 $$$
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
-			\includegraphics[width=\columnwidth]{images/multiplexer}
+			\includegraphics[width=\columnwidth]{images/logic-representation/multiplexer}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 $$$			
@@ -975,14 +975,14 @@ $$$
 Ok, but how do you build something with this behavior?
 
 $$$
-\includegraphics[width=0.5\columnwidth]{images/tube-transistor-wiki}
+\includegraphics[width=0.5\columnwidth]{images/logic-representation/tube-transistor-wiki}
 $$$
 
 ### Modern Transistors
 
 This will **not** be on the test
 $$$
-\includegraphics[width=\columnwidth]{images/semiconductor-transistor-overkill}
+\includegraphics[width=\columnwidth]{images/logic-representation/semiconductor-transistor-overkill}
 $$$
 
 ### Why do we have resistors on the inputs?

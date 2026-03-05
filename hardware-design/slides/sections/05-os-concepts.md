@@ -20,7 +20,7 @@ First things first:
 % The OS is special software sits between applications and hardware (and allows them to communicate with one another)
 
 $$$
-\includegraphics[width=\columnwidth]{images/os-location}
+\includegraphics[width=\columnwidth]{images/os-concepts/os-location}
 $$$
 
 ### What does the OS do?
@@ -86,37 +86,37 @@ The OS handles:
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/device-drivers}
+\includegraphics[width=\columnwidth]{images/os-concepts/device-drivers}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/call-to-os}
+\includegraphics[width=\columnwidth]{images/os-concepts/call-to-os}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/os-location}
+\includegraphics[width=\columnwidth]{images/os-concepts/os-location}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/process-states}
+\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/starting-a-program}
+\includegraphics[width=\columnwidth]{images/os-concepts/starting-a-program}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/xkcd-meltdown}
+\includegraphics[width=\columnwidth]{images/os-concepts/xkcd-meltdown}
 $$$
 
 ### Placeholder
 $$$
-\includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped}
+\includegraphics[width=\columnwidth]{images/os-concepts/xkcd-meltdown-cropped}
 $$$
 
 
