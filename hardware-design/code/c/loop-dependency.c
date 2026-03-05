@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <time.h>
 
 int* init_array(int array_size, int max_value) {
     int* arr = malloc(array_size * sizeof(int));
