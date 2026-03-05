@@ -7,14 +7,9 @@ beamer: true
 
 $$$
 \includegraphics[width=\columnwidth]{images/dune-robot-hbo}
+{\center Thou shalt not make a machine in the likeness of a human mind}
 
-{\center
-    Thou shalt not make a machine in the likeness of a human mind
-}
-
-{\small \hfill
-    Dune, Frank Herbert
-}
+{\small \hfill Dune, Frank Herbert}
 $$$
 
 ### Course Overview
