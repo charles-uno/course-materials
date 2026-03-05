@@ -494,10 +494,21 @@ Another common use case: what if we want to do the same thing to multiple pieces
 
 ### Single Instruction, Multiple Data
 
-Modern systems generally do a combination of pipelining, VLIW, and SIMD under the hood
+SIMD is a big part of what makes GPUs work!
 
+A very fancy CPU might be able to pass 512 bits through its ALU at a time (16 32-bit numbers)
 
+A GPU can have hundreds of ALU "lanes" which all execute instructions based on a single fetch and decode
 
+### Instruction-Level Parallelism Wrapup
+
+Modern systems generally use a combination of ILP strategies:
+
+- Pipelining: fetch the next instruction while this one is decoding
+- OoO Execution: reorder instructions to avoid stalling the pipeline
+- Superscalar processing: processor dynamically identifies instructions that are safe to run together (requires specific hardware)
+- VLIW: compiler identifies batches of instructions that are safe to run together
+- SIMD: one fetch+decode for multiple simultaneous execute+write
 
 % ### Group Exercises
 % TODO: this
