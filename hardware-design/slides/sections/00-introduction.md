@@ -60,7 +60,7 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 ### Peer Reviews
 
 - Participation score (10\% of your total grade) is mostly based on peer reviews
-- Reviews will be short. Less than one page. They should include \emph{specific examples} of ways your peers helped you succeed
+- Reviews will be short. Less than one page. They should include *specific examples* of ways your peers helped you succeed
 - You can get full credit here without too much trouble. Show up. Work together. Make it easy for your peers to write nice things about you
 - I recommend keeping notes over the course of the semester when someone is particularly helpful, insightful, etc
 
