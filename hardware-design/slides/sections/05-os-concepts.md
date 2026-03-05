@@ -35,9 +35,9 @@ In this course we are concerned with the OS **kernel** (not the GUI)
 
 ### The OS Kernel
 
-- The kernel implements **mechanisms** to enable hardware to run programs. Example: initializing the CPU to run instructions
-- It implements program abstractions as **processes**. This is how the OS keeps track of everything that runs on the CPU
-- It implements **policies** for managing the hardware and processes. Example: allocating CPU time between processes
+- The kernel implements mechanisms to enable hardware to run programs. Example: initializing the CPU to run instructions
+- It implements program abstractions as processes. This is how the OS keeps track of everything that runs on the CPU
+- It implements policies for managing the hardware and processes. Example: allocating CPU time between processes
 
 ### Kernel Responsibilities
 
