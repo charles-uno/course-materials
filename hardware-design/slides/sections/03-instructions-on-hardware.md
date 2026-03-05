@@ -500,6 +500,14 @@ A very fancy CPU might be able to pass 512 bits through its ALU at a time (16 32
 
 A GPU can have hundreds of ALU "lanes" which all execute instructions based on a single fetch and decode
 
+
+### Simultaneous Multi-Threading
+
+- AKA hyperthreading, the proprietary Intel term
+- Just tell the CPU to pretend that it is two CPUs
+- When one thread is idle (eg waiting for data from memory) it switches to the other one
+- When switching between threads, all register values are moved to the cache
+
 ### Instruction-Level Parallelism Wrapup
 
 Modern systems generally use a combination of ILP strategies:
@@ -509,6 +517,11 @@ Modern systems generally use a combination of ILP strategies:
 - Superscalar processing: processor dynamically identifies instructions that are safe to run together (requires specific hardware)
 - VLIW: compiler identifies batches of instructions that are safe to run together
 - SIMD: one fetch+decode for multiple simultaneous execute+write
+- SMT: the CPU runs two "hyperthreads". Switches between them when the active one is idle
 
 % ### Group Exercises
 % TODO: this
+
+
+
+% EPIC: explicitly parallel instruction computing. like the next level past VLIW?

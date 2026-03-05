@@ -35,6 +35,8 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO
 
+For tests: explicitly say to turn in a SCAN not a PHOTO
+
 Add a slide with example two's complement subtraction
 
 Rewrite Pi setup. A few enumerated debugging tools. Also encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything
@@ -54,3 +56,4 @@ Update standards and calendar. Three tests with three standards each (plus overh
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
 
+Build PDFs using GitHub actions? Then they can be readily accessed from the repo
