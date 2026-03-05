@@ -139,127 +139,95 @@ $$$
 Logic gates are the same thing as boolean functions. But instead of writing them as a word or symbol, we draw them like a flow chart.
 
 ### Boolean Operators: NOT
-$$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			The NOT gate looks like this:
-			\bigskip
 
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ieeestd not port] at (12.877, 10.375){};
-				\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){\LogicNot{A}};
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			Truth table:
-			\bigskip
-
-			\begin{center}
-				\begin{tabular}{c c}
-					A & \LogicNot{A} \\
-					\hline
-					1 & 0            \\
-					0 & 1
-				\end{tabular}
-			\end{center}
-		\end{column}
-	\end{columns}
+The NOT gate looks like this:
 $$$
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ieeestd not port] at (12.877, 10.375){};
+	\node[shape=rectangle, minimum width=0.354cm, minimum height=0.59cm] at (11.555, 10.437){} node[anchor=north west, align=left, text width=-0.034cm, inner sep=6pt] at (11.36, 10.75){A};
+	\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (14.36, 10.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (13.971, 10.875){\LogicNot{A}};
+\end{tikzpicture}
+$$$
+
+Truth table:
+
+| A | $\LogicNot{A}$ |
+|:-:|:--------------:|
+| 0 |  1             |
+| 1 |  0             |
 
 ### Boolean Operators: AND, NAND
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ieeestd and port] at (1.11, 10.22){};
-				\node[ieeestd nand port] at (1.081, 7.47){};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicAnd{A}{B}};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){\LogicNand{A}{B}};
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\begin{tabular}{c c c c}
-					A & B & \LogicAnd{A}{B} & \LogicNand{A}{B} \\
-					\hline
-					1 & 1 & 1               & 0                \\
-					1 & 0 & 0               & 1                \\
-					0 & 1 & 0               & 1                \\
-					0 & 0 & 0               & 1
-				\end{tabular}
-			\end{center}
-		\end{column}
-	\end{columns}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ieeestd and port] at (4.919, 6.5){};
+	\node[ieeestd nand port] at (9.419, 6.5){};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (6.25, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.875, 6.875){\LogicAnd{A}{B}};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (10.75, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.375, 6.875){\LogicNand{A}{B}};
+\end{tikzpicture}
 $$$
+
+Truth table:
+
+| A | B | $\LogicAnd{A}{B}$ | $\LogicNand{A}{B}$ |
+|:-:|:-:|-------------------:|--------------------:|
+| 0 | 0 |       0            |       1            |
+| 0 | 1 |       0            |       1            |
+| 1 | 0 |       0            |       1            |
+| 1 | 1 |       1            |       0            |
 
 ### Boolean Operators: OR, NOR
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ieeestd or port] at (1.11, 10.22){};
-				\node[ieeestd nor port] at (1.081, 7.47){};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicOr{A}{B}};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){\LogicNor{A}{B}};
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\begin{tabular}{c c c c}
-					A & B & \LogicOr{A}{B} & \LogicNor{A}{B} \\
-					\hline
-					1 & 1 & 1              & 0               \\
-					1 & 0 & 1              & 0               \\
-					0 & 1 & 1              & 0               \\
-					0 & 0 & 0              & 1
-				\end{tabular}
-			\end{center}
-		\end{column}
-	\end{columns}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ieeestd or port] at (4.919, 6.5){};
+	\node[ieeestd nor port] at (9.419, 6.5){};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (6.25, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.875, 6.875){\LogicOr{A}{B}};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (10.75, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.375, 6.875){\LogicNor{A}{B}};
+\end{tikzpicture}
 $$$
+
+Truth table:
+
+| A | B | $\LogicOr{A}{B}$ | $\LogicNor{A}{B}$  |
+|:-:|:-:|------------------:|-------------------:|
+| 0 | 0 |       0            |       1            |
+| 0 | 1 |       1            |       0            |
+| 1 | 0 |       1            |       0            |
+| 1 | 1 |       1            |       0            |
 
 ### Boolean Operators: XOR, XNOR
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ieeestd xor port] at (1.11, 10.22){};
-				\node[ieeestd xnor port] at (1.081, 7.47){};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.375, 10.563){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.875){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.375, 10){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.5, 10.25){B};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.59cm] at (-0.404, 7.813){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 8.125){A};
-				\node[shape=rectangle, minimum width=0.215cm, minimum height=0.465cm] at (-0.404, 7.25){} node[anchor=north west, align=left, text width=-0.173cm, inner sep=6pt] at (-0.529, 7.5){B};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.61, 10.25){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.221, 10.563){\LogicXor{A}{B}};
-				\node[shape=rectangle, minimum width=0.744cm, minimum height=0.59cm] at (2.581, 7.563){} node[anchor=north west, align=left, text width=0.356cm, inner sep=6pt] at (2.192, 7.875){\LogicXnor{A}{B}};
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{center}
-				\begin{tabular}{c c c c}
-					A & B & \LogicXor{A}{B} & \LogicXnor{A}{B} \\
-					\hline
-					1 & 1 & 0               & 1                \\
-					1 & 0 & 1               & 0                \\
-					0 & 1 & 1               & 0                \\
-					0 & 0 & 0               & 1
-				\end{tabular}
-			\end{center}
-		\end{column}
-	\end{columns}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ieeestd xor port] at (4.919, 6.5){};
+	\node[ieeestd xnor port] at (9.419, 6.5){};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.875){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 7.25){A};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (3.5, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (3.125, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (8, 6.125){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (7.625, 6.5){B};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (6.25, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (5.875, 6.875){\LogicOr{A}{B}};
+	\node[shape=rectangle, minimum width=0.715cm, minimum height=0.715cm] at (10.75, 6.5){} node[anchor=north west, align=left, text width=0.327cm, inner sep=6pt] at (10.375, 6.875){\LogicNor{A}{B}};
+\end{tikzpicture}
 $$$
+
+Truth table:
+
+| A | B | $\LogicXor{A}{B}$ | $\LogicXnor{A}{B}$ |
+|:-:|:-:|--------------------:|--------------------:|
+| 0 | 0 |       0            |       1            |
+| 0 | 1 |       1            |       0            |
+| 1 | 0 |       1            |       0            |
+| 1 | 1 |       0            |       1            |
 
 % ### Group Exercises
 % TODO: this
