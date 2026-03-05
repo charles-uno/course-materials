@@ -50,7 +50,7 @@ Update standards and calendar. Three tests with three standards each (plus overh
 2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations
 3. **Assembly IO.** Global variables, global constants, printf, scanf, automated testing
 4. **Electronic Circuits.** Resistors, transistors, breadboard labs
-5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy
+5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving
 6. **Control Flow.** Comparison, branching, if/else, loops
 7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization, booting(?)
 8. **Stack Frames.** Local variables, functions, context switching
