@@ -381,7 +381,7 @@ Hint: we will be using the terms "data hazard" and "control hazard"
 ### Hazards
 
 - Data hazard: we want to do two steps simultaneously, but we can't because they want to touch the same register
-- Control hazard: we don't know what to do next because it depends on the result of the result of an instruction that's still running
+- Control hazard: we don't know what instruction to fetch next because it depends on the result of the result of an instruction that's still running
 
 ### Data Hazards
 
