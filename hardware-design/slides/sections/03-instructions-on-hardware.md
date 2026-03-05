@@ -9,7 +9,7 @@ beamer: true
 - How do they work together to execute instructions?
 
 $$$
-\includegraphics[width=\columnwidth]{images/von-neumann-architecture.png}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/von-neumann-architecture.png}
 $$$
 
 ## Hardware Components
@@ -17,7 +17,7 @@ $$$
 ### What's Where?
 $$$
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/pi-part-labels}
+    \includegraphics[width=0.7\columnwidth]{images/instructions-on-hardware/pi-part-labels}
 \end{center}
 $$$
 
@@ -39,7 +39,7 @@ Processing unit performs execution.
 
 It's all boolean logic!
 $$$
-\includegraphics[width=\columnwidth]{images/example-alu}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/example-alu}
 $$$
 
 
@@ -47,14 +47,14 @@ $$$
 
 It's all boolean logic!
 $$$
-\includegraphics[width=\columnwidth]{images/register-file}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/register-file}
 $$$
 
 ### CPU
 
 It's all boolean logic!
 $$$
-\includegraphics[width=\columnwidth]{images/full-cpu}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/full-cpu}
 $$$
 
 ### Main Memory
@@ -95,7 +95,7 @@ There are four steps to executing an instruction:
 ### Fetch
 
 $$$
-\includegraphics[width=\columnwidth]{images/fdew-add-fetch}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/fdew-add-fetch}
 $$$
 - Special register PC holds the address of the instruction
 - Read instruction from memory, store to IR
@@ -105,7 +105,7 @@ $$$
 
 $$$
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/fdew-add-decode}
+    \includegraphics[width=0.7\columnwidth]{images/instructions-on-hardware/fdew-add-decode}
 \end{center}
 $$$
 - The CPU breaks down the instruction bits from IR into its component parts
@@ -115,7 +115,7 @@ $$$
 ### Walkthrough: Execute
 $$$
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/fdew-add-execute}
+    \includegraphics[width=0.7\columnwidth]{images/instructions-on-hardware/fdew-add-execute}
 \end{center}
 $$$
 
@@ -125,7 +125,7 @@ $$$
 ### Walkthrough: Write(back)
 $$$
 \begin{center}
-    \includegraphics[width=0.7\columnwidth]{images/fdew-add-write}
+    \includegraphics[width=0.7\columnwidth]{images/instructions-on-hardware/fdew-add-write}
 \end{center}
 $$$
 
@@ -189,7 +189,7 @@ $$$
 
 ### Book Storage Hierarchy
 $$$
-\includegraphics[width=\columnwidth]{images/memory-hierarchy-books.png}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/memory-hierarchy-books.png}
 $$$
 
 ### Books and Bytes
@@ -201,7 +201,7 @@ $$$
 
 ### Data Storage Hierarchy
 $$$
-\includegraphics[width=\columnwidth]{images/memory-hierarchy.png}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/memory-hierarchy.png}
 $$$
 
 ### Wait a Sec
@@ -327,7 +327,7 @@ Which of these stages do actual work? Which are overhead?
 
 ### Time is Money
 $$$
-\includegraphics[width=\columnwidth]{images/fdew-before-pipelining}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/fdew-before-pipelining}
 $$$
 
 - The execute step is the only step that uses the CPU. The rest are just moving values around
@@ -343,8 +343,8 @@ $$$
 ### Behold the Pipeline
 $$$
 \begin{center}
-    %	\includegraphics[\columnwidth]{images/pipelining}
-    \includegraphics[width=0.6\columnwidth]{images/pipelining-wiki}
+    %	\includegraphics[\columnwidth]{images/instructions-on-hardware/pipelining}
+    \includegraphics[width=0.6\columnwidth]{images/instructions-on-hardware/pipelining-wiki}
 \end{center}
 $$$
 
@@ -412,7 +412,7 @@ z = x + 7
 
 ### Pipelining with a Bubble
 $$$
-\includegraphics[width=0.66\columnwidth]{images/pipelining-wiki-with-bubble}
+\includegraphics[width=0.66\columnwidth]{images/instructions-on-hardware/pipelining-wiki-with-bubble}
 $$$
 
 ### Control Hazards
@@ -432,7 +432,7 @@ Which instruction should we load into the pipeline after the `if`?
 
 ### Eager Execution Gone Wrong
 $$$
-\includegraphics[width=\columnwidth]{images/xkcd-meltdown-cropped.png}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/xkcd-meltdown-cropped.png}
 $$$
 Source: xkcd
 
@@ -447,7 +447,7 @@ There are other ways too
 The ALU contains circuitry to do a bunch of different operations. We use multiplexers to keep the results we want
 
 $$$
-\includegraphics[width=\columnwidth]{images/example-alu}
+\includegraphics[width=\columnwidth]{images/instructions-on-hardware/example-alu}
 $$$
 
 ### Superscalar Processing

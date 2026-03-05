@@ -9,6 +9,52 @@ beamer: true
 - How do we boot the machine so we can run the program in the first place?
 - And how does the machine handle background stuff while the program runs?
 
+## The Operating System
+
+### The Operating System
+
+First things first:
+
+"OS" stands for "Operating System"
+
+% The OS is special software sits between applications and hardware (and allows them to communicate with one another)
+
+$$$
+\includegraphics[width=\columnwidth]{images/os-location}
+$$$
+
+### What does the OS do?
+
+The operating system manages the use of hardware components:
+
+- Manages workloads to run programs efficiently
+- Resource management
+- Makes the computer easy to use, from the perspective of the user
+- Easy-to-use abstractions of the underlying system 
+
+The core OS functionality is called the **kernel**
+
+### The OS Kernel
+
+- The kernel implements **mechanisms** to enable hardware to run programs. Example: initializing the CPU to run instructions
+- It implements program abstractions as **processes**. This is how the OS keeps track of everything that runs on the CPU
+- It implements **policies** for managing the hardware and processes. Example: allocating CPU time between processes
+
+### System Calls
+
+Programs use **system calls** to interface with the OS kernel. 
+
+Only the kernel is allowed to talk to hardware components outside the CPU and main memory. Each of these actions requires a system call to the kernel:
+
+- Reading data from the SSD (such as reading a file)
+- Writing data to the SSD (such as writing a file)
+- Getting updates from a keyboard or mouse
+- Interfacing with the wifi card to connect to the internet
+- Etc
+
+
+
+
 ### OS Concepts
 
 We've talked about running instructions within a program
@@ -147,7 +193,7 @@ $$$
 % process hierarchy. fork, child, parent
 
 
-\Subsection{Threads, Processes, and Cores}
+### Threads, Processes, and Cores
 
 
 
