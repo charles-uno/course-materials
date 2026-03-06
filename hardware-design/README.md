@@ -39,7 +39,19 @@ For tests: explicitly say to turn in a SCAN not a PHOTO
 
 Add a slide with example two's complement subtraction
 
-Rewrite Pi setup. A few enumerated debugging tools. Also encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything
+Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key
+
+Add image flashing to coding setup
+
+Doenet circuitverse - clarify that the button is a different type of input
+
+Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues:
+- SSH setting didn't stick when the card was flashed
+- Local network permissions (Mac)
+- Internet sharing (Mac) (may require St Olaf Guest network)
+- Get the IP address from network settings
+- Pi may not be allowed on wifi
+
 
 Update AI use policy in the syllabus
 
