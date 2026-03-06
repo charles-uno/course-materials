@@ -52,8 +52,9 @@ Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use c
 - Get the IP address from network settings
 - Pi may not be allowed on wifi
 
-
 Update AI use policy in the syllabus
+
+Get better ASCII table for tests (make sure null byte is visible)
 
 Split warmups (Doenet) from assignments (PDF)
 
@@ -62,7 +63,7 @@ Update standards and calendar. Three tests with three standards each (plus overh
 2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations
 3. **Assembly IO.** Global variables, global constants, printf, scanf, automated testing
 4. **Electronic Circuits.** Resistors, transistors, breadboard labs
-5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving
+5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving, RAID, virtual memory, erase before write, MMIO, 4kB storage alignment, write endurance, memory-mapped IO
 6. **Control Flow.** Comparison, branching, if/else, loops
 7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization, booting(?)
 8. **Stack Frames.** Local variables, functions, context switching
