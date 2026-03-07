@@ -9,33 +9,76 @@ beamer: true
 - How do we boot the machine so we can run the program in the first place?
 - And how does the machine handle background stuff while the program runs?
 
-## The OS Kernel
+### First Things First
 
-### The Operating System
-
-First things first:
-
-"OS" stands for "Operating System"
-
-The OS is special software sits between applications and hardware (and allows them to communicate with one another)
+The operating system is special software sits between applications and hardware (and allows them to communicate with one another)
 
 $$$
 \includegraphics[width=\columnwidth]{images/os-concepts/os-location}
 $$$
 
+
 ### What does the OS do?
 
 Big picture:
 
-- The OS provides abstractions for applications to access hardware
-- The OS manages hardware resources
+- The OS launches applications. Loads instructions, initializes CPU
+- The OS manages applications while they run. Scheduling, cleanup
+- The OS allows applications to access hardware. SSD, mouse, keyboard, network, etc
 - The OS also usually provides a GUI (graphical user interface)
 
-In this course we are concerned with the OS **kernel** (not the GUI)
+### Booting
 
-### The OS Kernel
+The operating system is responsible for launching programs. Loading instructions into memory, initializing the CPU
 
-Breaking it down a level further:
+But the OS is itself a program! How does it launch itself?
+
+## Put Another Way
+
+- After we run each instruction in a program, we fetch the next instruction from memory
+- Sometimes it's the next instruction
+- Sometimes we jump to another part of the program
+- When we turn on the computer, how do we know where to start?
+
+### Firmware and the Boot Loader
+
+The operating system loads and initializes itself through a process called booting. When a computer is turned on:
+
+- It starts running boot instructions from a hard-coded address (often 0x00000000)
+- This is firmware, stored in non-volatile memory
+- First stage boot loader: BIOS, UEFI, etc. Initializes CPU, memory, IO
+- Second stage boot loader: GRUB, BOOTMGR, etc. Loads the first chunk of the OS
+- From there the OS loads the rest of itself and initializes data structures and abstractions
+
+### Don't @ Me
+
+The boot loader is not technically part of the OS. But it's doing similar work:
+- Interfacing with hardware
+- Loading process instructions to memory
+- Initializing the CPU
+
+% ### Summary
+% TODO: this
+
+% ### Exercises
+% TODO: this
+
+
+
+
+
+
+
+
+
+
+
+## The OS Kernel
+
+### OS Responsibilities
+
+Wait, what does the OS do again?
+
 
 - When launching a program, the kernel loads the instructions into memory and initializes the CPU
 - The kernel balances CPU time between processes
@@ -92,34 +135,6 @@ This terminology is not universal! We are not going to be too strict about it
 % terminology is not consistent! 
 
 
-
-
-## Booting
-
-### Booting
-
-The operating system itself is software. 
-
-To run, it needs to be loaded into RAM and the CPU needs to be initialized to start running the operating system.
-
-How can this happen, if the operating system itself is responsible for this task?
-
-### Firmware and Boot Loader
-
-The operating system loads and initializes itself through a process called booting. When a computer is turned on:
-- Code stored in firmware (nonvolatile memory in hardware) runs
-- Examples: Basic Input/Output System (BIOS) and Unified Extensible Firmware Interface (UEFI)
-- This code loads first chunk of operating system software (called the boot block) from disk to RAM
-- It starts running boot block instructions on CPU
-Then, operating system software loads the rest of itself from disk, initializes hardware resources, and initializes data structures and abstractions.
-
-### Starting the Boot
-
-- As soon as we start executing an instruction, we are already fetching the next one
-- But how do we know where to start?
-- The location of the "boot block" is hard-coded. Often 0x00000000
-- This is firmware. Non-volatile memory (aka users are not allowed to modify it)
-- Technically not part of the OS, but same ballpark
 
 
 
