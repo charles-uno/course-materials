@@ -163,6 +163,16 @@ Then, operating system software loads the rest of itself from disk, initializes 
 
 
 
+For each process, the OS tracks:
+- Process ID (PID): unique identifier for a process.
+- Address space information
+- Execution state (register values, stack location)
+- Set of resources allocated to the process
+- Current process state:
+    - Ready: can run, but not currently scheduled
+    - Running: scheduled on CPU, actively executing instructions
+    - Blocked: waiting for event before can continue execution
+    - Exited: done, but needs to be removed from system
 
 
 
