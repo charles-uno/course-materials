@@ -17,7 +17,7 @@ First things first:
 
 "OS" stands for "Operating System"
 
-% The OS is special software sits between applications and hardware (and allows them to communicate with one another)
+The OS is special software sits between applications and hardware (and allows them to communicate with one another)
 
 $$$
 \includegraphics[width=\columnwidth]{images/os-concepts/os-location}
@@ -29,15 +29,19 @@ Big picture:
 
 - The OS provides abstractions for applications to access hardware
 - The OS manages hardware resources
-- The OS also usually has a GUI (graphical user interface)
+- The OS also usually provides a GUI (graphical user interface)
 
 In this course we are concerned with the OS **kernel** (not the GUI)
 
 ### The OS Kernel
 
-- The kernel implements mechanisms to enable hardware to run programs. Example: initializing the CPU to run instructions
-- It implements program abstractions as processes. This is how the OS keeps track of everything that runs on the CPU
-- It implements policies for managing the hardware and processes. Example: allocating CPU time between processes
+Breaking it down a level further:
+
+- When launching a program, the kernel loads the instructions into memory and initializes the CPU
+- The kernel balances CPU time between processes
+- It cleans up after processes that misbehave
+- The kernel provides interfaces for programs to access hardware (eg read files)
+- The kernel enforces policies for which processes are allowed to access what
 
 ### Kernel Responsibilities
 
@@ -89,13 +93,6 @@ This terminology is not universal! We are not going to be too strict about it
 
 
 
-## Resource Management
-
-
-
-
-
-
 
 ## Booting
 
@@ -123,6 +120,50 @@ Then, operating system software loads the rest of itself from disk, initializes 
 - The location of the "boot block" is hard-coded. Often 0x00000000
 - This is firmware. Non-volatile memory (aka users are not allowed to modify it)
 - Technically not part of the OS, but same ballpark
+
+
+
+
+
+
+
+
+
+
+% what is the OS?
+
+% ## the os kernel
+% kernel responsibilities
+% traps/interrupts
+% system calls
+
+% ## booting
+% os is software!
+% firmware
+% boot loader
+
+% ## multiprogramming
+% CPU time sharing
+% scheduling algorithms? (Round Robin, Priority, Multi-level Feedback Queues)
+% virtual memory
+% fork
+% memory-mapped IO
+
+% ## files and directories
+% metadata: name, size, type, timestamp
+% permissions
+% directories
+% journaling
+% allocation. contiguous, linked, indexed
+
+% ## parallelism
+% multithreading
+% multiprocessing
+% concurrency, deadlock, race condition
+
+
+
+
 
 
 
