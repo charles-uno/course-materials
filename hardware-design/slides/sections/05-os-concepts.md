@@ -178,18 +178,8 @@ $$$
 ### Process Life Cycle
 
 
-### What Gets Tracked
 
-For each process, the OS tracks:
-- Process ID (PID): unique identifier for a process.
-- Address space information
-- Execution state (register values, stack location)
-- Set of resources allocated to the process
-- Current process state:
-    - Ready: can run, but not currently scheduled
-    - Running: scheduled on CPU, actively executing instructions
-    - Blocked: waiting for event before can continue execution
-    - Exited: done, but needs to be removed from system
+
 
 ### Address Space
 
@@ -236,6 +226,28 @@ There are a few different scheduling strategies:
 - Priority-based scheduling
 - Multi-Level Feedback Queue (MLFQ). IO-limited vs CPU-limited applications
 
+### Context Switching
+
+What happens when we swap between processes?
+
+- Save context from the current process: registers (including instruction pointer), memory state
+- Loads context from the other state
+- Pretty much the same thing that happens when you make a system call and the kernel takes over
+
+
+
+### What Gets Tracked
+
+For each process, the OS tracks:
+- Process ID (PID): unique identifier for a process.
+- Address space information
+- Execution state (register values, stack location)
+- Set of resources allocated to the process
+- Current process state:
+    - Ready: can run, but not currently scheduled
+    - Running: scheduled on CPU, actively executing instructions
+    - Blocked: waiting for event before can continue execution
+    - Exited: done, but needs to be removed from system
 
 
 
@@ -279,6 +291,15 @@ There are a few different scheduling strategies:
 
 ## Parallelism
 
+### Multicore Processors
+
+Barriers to improvements of processor speed:
+- Memory wall: memory access speeds can't keep pace with CPU speed
+- Power wall: more transistors on a processor increases temperature and power use
+Instead adding more transistors to a single CPU increase speed of processor, add more compute cores to CPU (simpler, fewer transistors).
+
+
+
 ### Threads, Processes, and Cores
 
 ### Deadlock
@@ -299,16 +320,6 @@ $$$
 
 
 % meltdown attack
-
-
-
-
-
-
-
-
-
-
 
 
 % sleepy hello
