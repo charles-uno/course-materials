@@ -147,15 +147,32 @@ Importantly: different platforms sometimes use different words! We will mostly u
 - Handles scheduling of CPU resources
 - That's a bit abstract. Can we be more concrete?
 
-
-
 ### Launching a Process
 
+Initiating program execution:
+- OS allocates part of RAM for running the program
+- OS loads program from disk to RAM
+- OS creates and initializes state for process associated with the program
+- OS initializes CPU to start running program instructions
+
+Running more than one program at once (multiprogramming):
+- OS manages sharing of hardware resources
+- OS manages processes (instance of program running)
 
 
 
 ### Fork
 
+
+### Placeholder
+$$$
+\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
+$$$
+
+### Placeholder
+$$$
+\includegraphics[width=\columnwidth]{images/os-concepts/starting-a-program}
+$$$
 
 
 ### Process Life Cycle
@@ -184,7 +201,7 @@ $$$
 \includegraphics[width=0.7\columnwidth]{images/os-concepts/address-space}
 $$$
 
-### Why??
+### Address Spaces -- Why??
 
 - OS can move program data without causing problems
 - Program data does not need to be contiguous
@@ -198,7 +215,11 @@ $$$
 - The part of your OS that draws the GUI is an application
 - Whatever tracks mouse movement and draws the cursor too
 - Only one of these can run on the CPU at a time
-- Sure looks like all of them are running all the time
+- Sure *looks* like all of them are running all the time
+
+### Multiprogramming
+
+In fact, just run `top` (on Mac or Linux)
 
 ### Multiprogramming
 
@@ -218,19 +239,8 @@ There are a few different scheduling strategies:
 
 
 
+
 % memory-mapped IO
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -251,24 +261,29 @@ There are a few different scheduling strategies:
 
 
 
+% multicore processors
+% GPUs - fewer transistors, simpler instruction set
+% memory wall - can't keep up with CPU speed increases
+% power wall - can't dissipate heat fast enough
+% threads. running on different cores, same memory
+% wall time vs CPU time
+
+
+% multithreading - one program using multiple cores. shared memory
+% multiprocessing - different processes. possible to split one program into multiple processes (eg supercomputer weather models) but generally not. communication between processes is a lot of work
+% hyperthreading - two cores per core. superscalar processing, context switching during idle times
+
+
+
 
 
 ## Parallelism
 
+### Threads, Processes, and Cores
+
+### Deadlock
 
 
-
-
-
-### Placeholder
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
-$$$
-
-### Placeholder
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/starting-a-program}
-$$$
 
 ### Placeholder
 $$$
@@ -288,23 +303,8 @@ $$$
 
 
 
-### Threads, Processes, and Cores
 
 
-
-
-
-% multicore processors
-% GPUs - fewer transistors, simpler instruction set
-% memory wall - can't keep up with CPU speed increases
-% power wall - can't dissipate heat fast enough
-% threads. running on different cores, same memory
-% wall time vs CPU time
-
-
-% multithreading - one program using multiple cores. shared memory
-% multiprocessing - different processes. possible to split one program into multiple processes (eg supercomputer weather models) but generally not. communication between processes is a lot of work
-% hyperthreading - two cores per core. superscalar processing, context switching during idle times
 
 
 

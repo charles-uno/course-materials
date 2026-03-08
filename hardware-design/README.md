@@ -11,7 +11,7 @@ Course listing [here](https://catalog.stolaf.edu/academic-programs/computer-scie
 ## Repo Summary
 
 - **code.** Source code for assignments. This includes benchmarking tools (eg `pthreads`) for exploring caching and ILP, as well as example code for Aarch64 exercises. Aarch64 is meant to be compiled on a 64-bit Raspberry Pi
-- **doenet-assignments.**
+- **doenet-assignments.** Auto-graded warmups. Also includes prompts for circuitverse work, coding exercises, etc. Decent chance we should split the warmups from the "real" work
 - **exams.**
 - **md2tex.** Script for converting Markdown files to LaTeX source. This is purely for convenience. Markdown is quicker to write and easier on the eyes
 - **slides.**
