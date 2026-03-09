@@ -61,11 +61,11 @@ Split warmups (Doenet) from assignments (PDF)
 Update standards and calendar. Three tests with three standards each (plus overhead: pi setup, csgit setup)
 1. **Data Representation.** Integers, hex, arithmetic, two's complement, floating point, ASCII, structured data
 2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations
-3. **Assembly IO.** Global variables, global constants, printf, scanf, automated testing
+3. **Assembly Programming.** Global variables, global constants, printf, scanf, automated testing
 4. **Electronic Circuits.** Resistors, transistors, breadboard labs
 5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving, RAID, virtual memory, erase before write, MMIO, 4kB storage alignment, write endurance, memory-mapped IO
 6. **Control Flow.** Comparison, branching, if/else, loops
-7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization, booting(?)
+7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
 
