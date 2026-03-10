@@ -321,9 +321,5 @@ $$$
 
 % meltdown attack
 
-
 % sleepy hello
-
-
-
 

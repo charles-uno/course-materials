@@ -1,19 +1,26 @@
-.PHONY: slides sections clean tidy
+.PHONY: all sections clean tidy
+
+MD_SECTIONS := $(wildcard sections/*.md)
+TEX_SECTIONS := $(MD_SECTIONS:.md=.gen.tex)
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
 MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
 BUILD_SLIDES := pdflatex -interaction=nonstopmode -shell-escape slides.tex >/dev/null
 REPORT_SLIDES := if [[ -f slides.pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; cat slides.log; exit 1; fi
 
-# call pdflatex twice to make sure the TOC is populated correctly
-slides: sections
+all: slides.pdf
+
+slides.pdf: slides.tex sections
 	@ printf "\033[95mpreliminary build for toc ... \033[0m"
 	@ $(BUILD_SLIDES) ; $(REPORT_SLIDES)
 	@ printf "\033[95mfinal build ... \033[0m"
 	@ $(BUILD_SLIDES) ; $(REPORT_SLIDES)
 
-sections: clean
-	@ $(MD2TEX) sections/*.md
+# generate tex source then stop. in case the python and latex builds need to happen in different containers
+sections: $(TEX_SECTIONS)
+
+sections/%.gen.tex: sections/%.md
+	@ $(MD2TEX) $<
 
 # remove output and generated/intermediate files
 clean: tidy
