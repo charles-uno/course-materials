@@ -20,13 +20,14 @@ jobs:
         run: |
           python3 --version
           pip3 freeze
+          ls hardware-design/slides/
 
       - name: build slides
         uses: xu-cheng/latex-action@v3
         with:
-          working_directory: hardware-design/slides/
           root_file: slides.tex
-          args: -shell-escape
+          work_in_root_file_dir: true
+          latexmk_shell_escape: true # Required for minted
 
 
 #      - name: install requirements
@@ -41,7 +42,7 @@ jobs:
 #      - name: build
 #        run: cd hardware-design && make
 
-      - name: uopload artifacts
+      - name: upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: built-pdfs
