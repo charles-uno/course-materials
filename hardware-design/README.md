@@ -8,18 +8,22 @@ Adapted in part from materials by Prof Melissa Lynn (St Olaf College)
 
 Course listing [here](https://catalog.stolaf.edu/academic-programs/computer-science)
 
+## Just The PDFs Please!
+
+PDFs are built automatically using GitHub Actions. Check out the `Actions` tab up top. 
+
 ## Repo Summary
 
 - **code.** Source code for assignments. This includes benchmarking tools (eg `pthreads`) for exploring caching and ILP, as well as example code for Aarch64 exercises. Aarch64 is meant to be compiled on a 64-bit Raspberry Pi
-- **doenet-assignments.** Auto-graded warmups. Also includes prompts for circuitverse work, coding exercises, etc. Decent chance we should split the warmups from the "real" work
+- **doenet-assignments.** Auto-graded warmups. Also includes prompts for circuitverse work, coding exercises, etc. Decent chance we should split the warmups from the "real" work (see TODOs at the bottom)
 - **exams.**
 - **md2tex.** Script for converting Markdown files to LaTeX source. This is purely for convenience. Markdown is quicker to write and easier on the eyes
 - **slides.**
 - **syllabus.**
 
-## Requirements
+## Building Locally
 
-The syllabus, slides, and exams are typeset using LaTeX. LaTeX source is pretty ugly, so much of the content is written in Markdown then converted at build time. In order to produce PDFs you'll need:
+Typesetting is done via LaTeX. Source code for LaTeX is pretty ugly, so much of the content is written in Markdown and converted over at build time. If you want to run that process locally, you'll need:
 
 - MikTex, MacTex, or similar. The big install
 - Python 3, plus the packages in `requirements.txt`
