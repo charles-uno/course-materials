@@ -3,7 +3,7 @@
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
 MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
 BUILD_SLIDES := pdflatex -interaction=nonstopmode -shell-escape slides.tex >/dev/null
-REPORT_SLIDES := if [[ -f slides.pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; exit 1; fi
+REPORT_SLIDES := if [[ -f slides.pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; cat slides.log; exit 1; fi
 
 # call pdflatex twice to make sure the TOC is populated correctly
 slides: sections

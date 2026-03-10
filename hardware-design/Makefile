@@ -1,5 +1,4 @@
 
 
-all:
-	cd syllabus && make
+slides:
 	cd slides && make
