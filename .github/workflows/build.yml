@@ -4,27 +4,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: repo checkout
         uses: actions/checkout@v4
 
-      - name: python setup
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-          
-      - name: install latex
+      - name: apt installs
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended python3 python3-pip python3-pygments
 
-      - name: install requirements
+      - name: pip installs
         run: cd hardware-design && pip3 install -r requirements.txt
 
       - name: build
         run: cd hardware-design && make
 
-      - name: Upload PDFs as Artifacts
+      - name: uopload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: compiled-pdfs
+          name: built-pdfs
           path: "hardware-design/*/*.pdf"
