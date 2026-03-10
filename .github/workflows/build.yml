@@ -7,13 +7,18 @@ jobs:
       - name: repo checkout
         uses: actions/checkout@v4
 
-      - name: apt installs
+      - name: install requirements
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended python3 python3-pip python3-pygments
+          sudo texhash
+          pip3 install -r hardware-design/requirements.txt
+          echo "$HOME/.local/bin" >> $GITHUB_PATH # Ensure latexminted is in PATH
 
-      - name: pip installs
-        run: cd hardware-design && pip3 install -r requirements.txt
+      - name: sanity checks
+        run: |
+          python3 --version
+          pip3 freeze
 
       - name: build
         run: cd hardware-design && make
