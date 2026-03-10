@@ -24,7 +24,8 @@ jobs:
       - name: build slides
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: hardware-design/slides/slides.tex
+          working_directory: hardware-design/slides/
+          root_file: slides.tex
           args: -shell-escape
 
 
