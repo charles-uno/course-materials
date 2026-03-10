@@ -9,6 +9,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: sanity checks
+        run: which pip; which python3
+
       - name: install requirements
         run: cd hardware-design && pip3 install -r requirements.txt
 
