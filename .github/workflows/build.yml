@@ -2,15 +2,20 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: texlive/texlive:latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: sanity checks
-        run: which pip; which python3
+      - name: python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          
+      - name: install latex
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
 
       - name: install requirements
         run: cd hardware-design && pip3 install -r requirements.txt
