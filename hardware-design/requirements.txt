@@ -1,0 +1,4 @@
+mistletoe==1.5.1
+Pygments==2.19.2
+pygments-arm==0.7.5
+PyYAML==6.0.3

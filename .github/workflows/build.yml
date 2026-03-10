@@ -1,0 +1,22 @@
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: install requirements
+        run: cd hardware-design && pip3 install -r requirements.txt
+
+      - name: build
+        run: cd hardware-design && make
+
+      - name: Upload PDFs as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdfs
+          path: "hardware-design/*/*.pdf"
