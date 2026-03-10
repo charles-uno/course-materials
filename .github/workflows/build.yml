@@ -29,18 +29,15 @@ jobs:
           work_in_root_file_dir: true
           latexmk_shell_escape: true # Required for minted
 
-
-#      - name: install requirements
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended python3 python3-pip python3-pygments
-#          sudo texhash
-#          pip3 install -r hardware-design/requirements.txt
-#          echo "$HOME/.local/bin" >> $GITHUB_PATH # Ensure latexminted is in PATH
+      - name: build syllabus
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: hardware-design/syllabus/syllabus.tex
+          work_in_root_file_dir: true
+          latexmk_shell_escape: true # Required for minted
 
 
-#      - name: build
-#        run: cd hardware-design && make
+
 
       - name: upload artifacts
         uses: actions/upload-artifact@v4
