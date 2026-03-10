@@ -35,6 +35,8 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO
 
+Update syllabus to use markdown. Maybe exams too
+
 For tests: explicitly say to turn in a SCAN not a PHOTO
 
 Add a slide with example two's complement subtraction

@@ -7,6 +7,7 @@ jobs:
       - name: repo checkout
         uses: actions/checkout@v4
 
+      # a lot of work is done in markdown. we convert to tex via python scripts
       - name: install python requirements
         run: |
           sudo apt-get update
