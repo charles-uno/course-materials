@@ -37,6 +37,8 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 Update syllabus to use markdown. Maybe exams too
 
+Figure out how to create tagged PDFs for accessibility
+
 For tests: explicitly say to turn in a SCAN not a PHOTO
 
 Add a slide with example two's complement subtraction
@@ -58,7 +60,9 @@ Update AI use policy in the syllabus
 
 Get better ASCII table for tests (make sure null byte is visible)
 
-Split warmups (Doenet) from assignments (PDF)
+Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. 
+
+Add makefile check to confirm that sections line up in the slides and the assignments
 
 Update standards and calendar. Three tests with three standards each (plus overhead: pi setup, csgit setup)
 1. **Data Representation.** Integers, hex, arithmetic, two's complement, floating point, ASCII, structured data

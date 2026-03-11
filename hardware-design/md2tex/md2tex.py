@@ -234,7 +234,7 @@ def get_header_and_lines(filename: str) -> tuple[dict, list[str]]:
         header_lines.append(line)
     if not lines:
         raise ParseFailure("expected yaml header")
-    header = yaml.safe_load("\n".join(header_lines))
+    header = yaml.safe_load("\n".join(header_lines)) or {}
     return header, lines
 
 

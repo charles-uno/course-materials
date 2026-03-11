@@ -1,0 +1,39 @@
+\documentclass{article} 
+
+% TODO: figure out how to do a tagged PDF for accessibility
+% \DocumentMetadata{tagging=on}
+
+\usepackage[percent]{overpic}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{AccentColor}{RGB}{124, 98, 177}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    % internal links
+    linkcolor=AccentColor,
+    filecolor=AccentColor,      
+    % external links
+    urlcolor=AccentColor,
+    }
+
+\setlength\parindent{0pt}
+\usepackage{parskip} 
+
+\title{CS 241: Hardware Design}
+\author{Professor Charles Fyfe}
+\date{St Olaf College $\cdot$ Spring 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\input{sections/data-representation.gen.tex}
+
+\input{sections/coding-setup.gen.tex}
+
+\end{document}
