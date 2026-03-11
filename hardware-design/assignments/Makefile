@@ -6,12 +6,13 @@ TEX_SECTIONS := $(MD_SECTIONS:.md=.gen.tex)
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
 MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
 
-BUILD := pdflatex -interaction=nonstopmode -shell-escape assignments.tex >/dev/null
-REPORT := if [[ -f assignments.pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; cat slides.log; exit 1; fi
+TARGET := $(shell pwd | xargs basename)
+BUILD := pdflatex -interaction=nonstopmode -shell-escape $(TARGET).tex >/dev/null
+REPORT := if [[ -f $(TARGET).pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; cat slides.log; exit 1; fi
 
-all: assignments.pdf
+all: $(TARGET).pdf
 
-assignments.pdf: assignments.tex sections
+assignments.pdf: $(TARGET).tex sections
 	@ printf "\033[95mpreliminary build for toc ... \033[0m"
 	@ $(BUILD) ; $(REPORT)
 	@ printf "\033[95mfinal build ... \033[0m"
