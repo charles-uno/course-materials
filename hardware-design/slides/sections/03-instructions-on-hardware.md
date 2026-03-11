@@ -525,3 +525,6 @@ Modern systems generally use a combination of ILP strategies:
 
 
 % EPIC: explicitly parallel instruction computing. like the next level past VLIW?
+
+
+% memory-mapped IO

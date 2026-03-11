@@ -139,7 +139,7 @@ Importantly: different platforms sometimes use different words! We will mostly u
 % https://pages.cs.wisc.edu/~gerald/cs537/Summer17/handouts/traps.pdf
 % terminology is not consistent! 
 
-## Process Management
+## Managing a Process
 
 ### OS Responsibilities (Again)
 
@@ -147,43 +147,23 @@ Importantly: different platforms sometimes use different words! We will mostly u
 - Handles scheduling of CPU resources
 - That's a bit abstract. Can we be more concrete?
 
-### Launching a Process
+### Process Launch Process
 
 Initiating program execution:
+- OS assigns the process a PID (process ID)
 - OS allocates part of RAM for running the program
 - OS loads program from disk to RAM
-- OS creates and initializes state for process associated with the program
+- OS allocates an address space for the process
 - OS initializes CPU to start running program instructions
 
-Running more than one program at once (multiprogramming):
-- OS manages sharing of hardware resources
-- OS manages processes (instance of program running)
-
-
-
-### Fork
-
-
-### Placeholder
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
-$$$
-
-### Placeholder
+### Launching a Process
 $$$
 \includegraphics[width=\columnwidth]{images/os-concepts/starting-a-program}
 $$$
 
-
-### Process Life Cycle
-
-
-
-
-
 ### Address Space
 
-- The OS keeps track of an **address space** for each process
+- The OS keeps track of an address space for each process
 - The process sees available memory as a contiguous block from 0x00000000 to 0xffffffff
 - Physical location of that memory may be very different
 
@@ -198,7 +178,31 @@ $$$
 - One program cannot touch data belonging to another program
 - Virtual memory. OS can pretend to have more memory than is physically present
 
-### Multiprogramming
+### Forking
+
+Processes can create additional processes (called children)
+
+$$$
+\begin{center}
+\includegraphics[width=0.5\columnwidth]{images/os-concepts/forks}
+\end{center}
+$$$
+
+### Process Life Cycle
+
+$$$
+\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
+$$$
+
+### Process Life Cycle
+
+- OS keeps track of process status
+- Exited processes get cleaned up
+- Blocked processes get sidelined
+
+## Multiprogramming
+
+### Multiple Programs
 
 - Your web browser is an application
 - VSCode is an application
@@ -207,19 +211,27 @@ $$$
 - Only one of these can run on the CPU at a time
 - Sure *looks* like all of them are running all the time
 
-### Multiprogramming
+### Multiple Programs
 
 In fact, just run `top` (on Mac or Linux)
 
-### Multiprogramming
+### Multiple Programs
 
-$$$
-\includegraphics[width=0.7\columnwidth]{images/os-concepts/multicore1}
-$$$
+- The OS can put a process on hold to step in and handle interrupts
+- It can also put a process on hold to give another process time on the CPU
+- It does so constantly!
+
+### Taking Turns
+
+- OS decides how long the current process is allowed to run
+- OS decides which process gets the next turn
+- OS handles context switching
+- OS cleans up processes that finish/crash
 
 ### Taking Turns
 
 There are a few different scheduling strategies:
+
 - First In, First Out
 - Round robin
 - Shortest Job Next, Shortest Job Remaining. Sometimes with adjustments to prevent starvation
@@ -230,30 +242,40 @@ There are a few different scheduling strategies:
 
 What happens when we swap between processes?
 
-- Save context from the current process: registers (including instruction pointer), memory state
-- Loads context from the other state
+- Save context from the current process: registers (including special registers), memory state
+- Loads context from the other process
 - Pretty much the same thing that happens when you make a system call and the kernel takes over
 
+### AKA Concurrency
 
+- The OS switches back and forth between processes many times per second
+- To a human user, it looks like the CPU is doing many things at once
 
-### What Gets Tracked
+### AKA Concurrency
 
-For each process, the OS tracks:
-- Process ID (PID): unique identifier for a process.
-- Address space information
-- Execution state (register values, stack location)
-- Set of resources allocated to the process
-- Current process state:
-    - Ready: can run, but not currently scheduled
-    - Running: scheduled on CPU, actively executing instructions
-    - Blocked: waiting for event before can continue execution
-    - Exited: done, but needs to be removed from system
+$$$
+\includegraphics[width=0.7\columnwidth]{images/os-concepts/multicore1}
+$$$
 
+## Parallelism
 
+### Concurrent vs Parallel
 
+- Multiprogramming (aka concurrency) is when multiple processes take turns on the CPU. This gives the *appearance* that multiple things are happening simultaneously
+- Parallelism is when we actually *do* multiple things simultaneously
 
-% memory-mapped IO
+### Why Parallelism?
 
+We can do multiple things on a single CPU. Why add more?
+
+### Multicore Processors
+
+Barriers to improvements of processor speed:
+
+- Memory wall: memory access speeds can't keep pace with CPU speed
+- Power wall: more transistors on a processor increases temperature and power use
+
+Instead adding more transistors to a single CPU increase speed of processor, add more compute cores to CPU (simpler, fewer transistors).
 
 
 
@@ -264,19 +286,8 @@ For each process, the OS tracks:
 % journaling
 % allocation. contiguous, linked, indexed
 
-% ## parallelism
-% multithreading
-% multiprocessing
-% concurrency, deadlock, race condition
-
-
-
-
-
 % multicore processors
 % GPUs - fewer transistors, simpler instruction set
-% memory wall - can't keep up with CPU speed increases
-% power wall - can't dissipate heat fast enough
 % threads. running on different cores, same memory
 % wall time vs CPU time
 
@@ -284,19 +295,10 @@ For each process, the OS tracks:
 % multithreading - one program using multiple cores. shared memory
 % multiprocessing - different processes. possible to split one program into multiple processes (eg supercomputer weather models) but generally not. communication between processes is a lot of work
 % hyperthreading - two cores per core. superscalar processing, context switching during idle times
+% concurrency, deadlock, race condition
 
 
 
-
-
-## Parallelism
-
-### Multicore Processors
-
-Barriers to improvements of processor speed:
-- Memory wall: memory access speeds can't keep pace with CPU speed
-- Power wall: more transistors on a processor increases temperature and power use
-Instead adding more transistors to a single CPU increase speed of processor, add more compute cores to CPU (simpler, fewer transistors).
 
 
 
