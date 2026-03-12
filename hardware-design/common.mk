@@ -6,7 +6,7 @@ TEX_SECTIONS := $(MD_SECTIONS:.md=.gen.tex)
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
 MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
 
-TARGET := $(shell pwd | xargs basename)
+TARGET := $(notdir $(CURDIR))
 BUILD := pdflatex -interaction=nonstopmode -shell-escape $(TARGET).tex >/dev/null
 REPORT := if [[ -f $(TARGET).pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see slides.log)"; cat slides.log; exit 1; fi
 
