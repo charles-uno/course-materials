@@ -43,11 +43,11 @@ For tests: explicitly say to turn in a SCAN not a PHOTO
 
 Add a slide with example two's complement subtraction
 
-Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key
+Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
 
 Add image flashing to coding setup
 
-Doenet circuitverse - clarify that the button is a different type of input
+circuitverse - clarify that the button is a different type of input
 
 Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues:
 - SSH setting didn't stick when the card was flashed
@@ -60,7 +60,7 @@ Update AI use policy in the syllabus
 
 Get better ASCII table for tests (make sure null byte is visible)
 
-Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. 
+Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. Just have people check against their neighbors
 
 Add makefile check to confirm that sections line up in the slides and the assignments
 
