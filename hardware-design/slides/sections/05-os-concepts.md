@@ -188,7 +188,7 @@ $$$
 
 The heap is a disorganized pool of memory available to the entire program:
 - Lots of space!
-- You have to "find" space before using it
+- You have to "find" space before using it, and manually free it when done
 - Big files might be broken up, causing slower access
 
 The stack is structured:
@@ -354,8 +354,11 @@ Sometimes threads and processes can step on each others' toes:
 % journaling
 % allocation. contiguous, linked, indexed
 
-
 % meltdown attack
 
 % sleepy hello
 
+% stack management with multiple functions
+% - one function calls multiple others serially. stack goes down and back up, reusing the same space
+% - concurrent/async. stack frame gets chucked on the heap (double check this)
+% - multithreading. each thread gets its own stack
