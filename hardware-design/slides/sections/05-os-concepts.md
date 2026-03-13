@@ -184,6 +184,18 @@ $$$
 - One program cannot touch data belonging to another program
 - Virtual memory. OS can pretend to have more memory than is physically present
 
+### Heap and Stack
+
+The heap is a disorganized pool of memory available to the entire program:
+- Lots of space!
+- You have to "find" space before using it
+- Big files might be broken up, causing slower access
+
+The stack is structured:
+- Not as much space
+- Fast access (often cached)
+- Always build on top of the existing stack
+
 ### Forking
 
 Processes can create additional processes (called children). 

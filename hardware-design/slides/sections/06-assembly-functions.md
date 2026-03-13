@@ -3,6 +3,19 @@ beamer: true
 
 # Assembly Functions
 
+## The Heap
+
+### The Heap
+
+When the OS launches a process, it allocates space in memory for that process to use. 
+
+We will mostly talk about the stack
+
+There is also a heap
+
+
+
+
 ## The Stack
 
 ### Process Memory
@@ -72,6 +85,12 @@ $$$
 - Higher on the stack is *decreasing* memory address
 - Increment by 0x10 bytes (more on this later)
 
+### The Stack is a Convention!
+
+- We will be talking about how the stack is used in *principle*
+- There are lots of cases where the code may break these rules for better efficiency
+- We will talk about a few of those cases too
+
 ## Local Variables
 
 ### Variable Scope
@@ -103,6 +122,18 @@ Here's how we keep track of those variables:
 - Then we put the local variables for `fizz` on top of that
 - Etc
 - This is why it's called a stack. We're stacking
+
+### Stack Overflow
+
+- The OS allocates a certain amount of memory for the stack when it starts the process
+- What happens if the process tries to grow its stack larger than that?
+
+### Stack Overflow
+
+- If you try to read or write data past the top of your stack, your program will crash
+- Some languages limit call depth to reduce the risk of stack overflow (eg `RecursionError` in Python)
+- Some languages (eg Rust, Go) start with a small stack and grow it as needed. This adds overhead
+- When allocating a large variable, we usually store the *address* on the stack, but the data in the heap
 
 ### Example Local Variable in Assembly
 
@@ -390,12 +421,19 @@ Real code very often includes nested functions
 
 We have to be very careful to keep track of FP and LR for each frame in the stack!
 
+### Tail Call Optimization
+
+When the last thing a function does is call another function, the compiler can "reuse" the current stack frame instead of creating a new one
+
+Just call `b` to jump straight into the nested function, instead of `bl`
+
+At the end of the nested function, `ret` goes back to LR from the last time we called `bl` (parent function call)
+
 ### Example Nested Function
 
 $$$
 \begin{multicols}{2}{\tiny
 $$$
-
 
 ```arm
 .section .rodata
@@ -477,7 +515,11 @@ $$$
 
 Let's work through it together
 
+### Return-Oriented Programming Attacks
 
+- LR is stored on the stack
+- Local variables are stored on the stack too
+- What happens if user input overflows the local variable and overwrites LR?
 
 % we have talked about global constants and global variables
 % those ones have to be declared at implementation time

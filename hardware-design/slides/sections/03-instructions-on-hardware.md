@@ -522,9 +522,11 @@ Modern systems generally use a combination of ILP strategies:
 % ### Group Exercises
 % TODO: this
 
-
-
 % EPIC: explicitly parallel instruction computing. like the next level past VLIW?
 
-
 % memory-mapped IO
+
+
+% register spilling. ILP means we want to have as many registers active at a time as possible. more independent things to parallelize. but eventually we run out of registers. when that happens, we have to "spill" values to memory. we load those values back later when we need them. in many cases, the values will get cached and we never actually hit main memory. if we do have to go to memory we'll take a performance hit
+
+% stack and heap. both are ostensibly in memory. stack is generally small enough and contiguous enough that it lives in the cache
