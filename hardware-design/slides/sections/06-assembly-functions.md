@@ -3,19 +3,6 @@ beamer: true
 
 # Assembly Functions
 
-## The Heap
-
-### The Heap
-
-When the OS launches a process, it allocates space in memory for that process to use. 
-
-We will mostly talk about the stack
-
-There is also a heap
-
-
-
-
 ## The Stack
 
 ### Process Memory
@@ -27,6 +14,18 @@ When launching a process:
 - And it allocates an address space for that process
 
 Part of that address space is **the stack**
+
+### Remember From Before
+
+The heap is a disorganized pool of memory available to the entire program:
+- Lots of space!
+- You have to "find" space before using it, and manually free it when done
+- Big files might be broken up, causing slower access
+
+The stack is structured:
+- Not as much space
+- Fast access (often cached)
+- Always build on top of the existing stack
 
 ### The Stack
 
