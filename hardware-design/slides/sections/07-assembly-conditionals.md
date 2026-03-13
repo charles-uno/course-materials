@@ -3,6 +3,35 @@ beamer: true
 
 # Assembly Conditionals
 
+## Branching
+
+### Branch (and Sometimes Link)
+
+Recall from our hello world program:
+
+- We print with `bl printf`
+- We exit the program with `b exit`
+
+And recall from the instruction cycle:
+
+- Special register PC is the program counter
+- PC holds the address of the next instruction
+
+### Manipulating the Program Counter
+
+`b` is **branch**. It updates PC. This causes us to "jump" to a different part of the code.
+
+`bl` is **branch and link**. It also updates PC. But first it stores the *current* PC in the link register. This makes it possible for us to return from the 
+
+
+
+
+it also sets the link register (LR) so we know how to get back.
+
+
+
+
+
 ### Branching
 
 - `b`

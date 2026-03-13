@@ -21,6 +21,9 @@ Part of that address space is **the stack**
 - We can assign local variables there
 - We have the special registers SP (stack pointer) and FP (frame pointer) to keep track
 
+% local variables. scope is good for code complexity. 
+% also we can allocate space dynamically, unlike global variables which must be set at compile time
+
 ### Memory Diagram
 
 We can draw a **memory diagram** to keep track of registers and memory for our process:
@@ -283,25 +286,29 @@ $$$
 
 ### What's LR?
 
-LR is the **link register**. It keeps track of the return address from a function
+Hold that thought
 
-Recall we use `bl printf` for output, and `b exit` for exiting the program
-
-
-
-
-
-### Back to the Board
-
-Let's work through this one together on the board
+Let's work through this together
 
 ## Function Calls
 
+### Branch and Link
 
+- We use `bl` to call functions, like `bl printf`
+- `bl` updates the program counter (PC). Instead of executing the next address in memory, we "jump" to some other part of the program
+- Once we're done with the function, we want to get back to the call site
+- That's what the link register (LR) is for
 
+### Step by Step
 
-% also need to store LR
+When we execute `bl printf`:
+- Increment PC to point to whatever instruction comes next
+- Set LR = PC
+- Update PC to point to the address of `printf`
 
+At the end of `printf`, we run `ret`:
+- Set PC = LR
+- This means the next instruction we execute will be the one right after `bl printf`
 
 ### Example Function
 
@@ -353,10 +360,122 @@ $$$
 }\end{multicols}
 $$$
 
+### Back to the Board
+
+Let's work through this one together on the board
+
+### SIMD? More like PITA
+
+- Single Instruction, Multiple Data
+- Remember from our discussion of instruction-level parallelism
+- Aarch64 is a 64-bit architecture. Instructions process 8 bytes at a time
+- Sometimes it does 128 bits (16 bytes) instead
+- I don't have time to worry about that, and neither do you. For the purposes of this class, everything is 16 bytes.
+- This is wasteful! We are using double the memory we need, sometimes more
+- That's ok. We are not trying to become assembly developers. We're here for the concepts
+
+### For the sake of completeness
+
+- `stp` (store pair) is the SIMD version of `str`
+- `ldp` (load pair) is the SIMD version of `ldr`
+- That's how "real" code handles stack frames
+- Those commands even allow SP to be updated at the same time!
+- We are choosing to prioritize a small vocabulary
+
+## Nested Functions
+
+### Why Nest?
+
+Real code very often includes nested functions
+
+We have to be very careful to keep track of FP and LR for each frame in the stack!
+
+### Example Nested Function
+
+$$$
+\begin{multicols}{2}{\tiny
+$$$
 
 
+```arm
+.section .rodata
+prompt: .ascii "int plz: \0"
+input_fmt: .ascii "%d\0"
+output: .ascii "%d + 1 = %d\n\0"
 
+.section .data
+n: .word 0
 
+.text
+.global main
+
+add_one:
+// stack frame setup, no local vars
+sub sp, sp, 0x20
+str fp, [sp]
+str lr, [sp, 0x10]
+add fp, sp, 0x10
+// call nested function
+bl add_one_impl
+// stack frame teardown
+ldr lr, [sp, 0x10]
+ldr fp, [sp]
+add sp, sp, 0x20
+// pass along nested return
+ret
+
+add_one_impl:
+// stack frame setup, no local vars
+sub sp, sp, 0x20
+str fp, [sp]
+str lr, [sp, 0x10]
+add fp, sp, 0x10
+// return input +1
+add x0, x0, 1
+// stack frame teardown
+ldr lr, [sp, 0x10]
+ldr fp, [sp]
+add sp, sp, 0x20
+ret
+
+main: 
+// stack frame setup, no local vars
+sub sp, sp, 0x20
+str fp, [sp]
+str lr, [sp, 0x10]
+add fp, sp, 0x10
+// prompt for input
+ldr x0, =prompt
+bl printf
+// store input to global variable
+ldr x0, =input_fmt
+ldr x1, =n
+bl scanf
+// load input and pass to add_one
+ldr x0, =n
+ldr x0, [x0]
+bl add_one
+// report input and output
+mov x2, x0
+ldr x0, =output
+ldr x1, =n
+ldr x1, [x1]
+bl printf
+// stack frame teardown
+ldr lr, [sp, 0x10]
+ldr fp, [sp]
+add sp, sp, 0x20
+// return 0
+mov x0, 0
+b exit
+```
+$$$
+}\end{multicols}
+$$$
+
+### Board Time
+
+Let's work through it together
 
 
 
@@ -377,33 +496,9 @@ $$$
 % when updating the stack pointer sp, we work in increments of 0x10 bytes (16 bytes)
 % in practice, we are just wasting a bunch of memory in order to worry about less stuff
 
-
 % FP is not strictly necessary
 % some compilers even let you skip it
 % FP is useful for debugging. code is easier to read. integration with debugging tools
 % https://stackoverflow.com/questions/46797915/what-are-the-advantages-of-a-frame-pointer
 
-
-## Calling a Function
-
-### Branch and Link
-
-New command: BL
-
-Branch and Link
-
-Branch = modify PC. Recall: PC tells us what to do next. Usually we just do the next line. In this case, we will jump to some other part of the program. This is how we call a function.
-
-Link = set LR to the PC of the next line. Once we're done with the function, this is how we return to the parent context.
-
-
-
-### SIMD
-
-- SIMD - single instruction, multiple data
-- 64 bit architecture (8 bytes)
-- there are cases where it works in chunks of 16 bytes
-- I don't have time to worry about that, and neither do you. For the purposes of this class, everything is 16 bytes.
-- This is wasteful! We are using double the memory we need, sometimes more
-- That's ok. We are not trying to become assembly developers. We are getting exposure to important concepts
 
