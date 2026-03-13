@@ -1,0 +1,1097 @@
+<setup>
+  <module name="varLabel" newNamespace>
+    <setup>
+      <customAttribute componentType="text" assignNames="varName" attribute="varName" defaultValue=""/>
+      <customAttribute componentType="number" assignNames="y" attribute="y" defaultValue="0"/>
+      <customAttribute componentType="number" assignNames="x" attribute="x" defaultValue="0" fixed/>
+    </setup>
+    <point name="constrainedAnchor" hide>($x, $y)
+      <constraints>
+        <constrainToGrid/>
+      </constraints>
+    </point>
+    <text anchor="($constrainedAnchor.x-.5, $constrainedAnchor.y+.7)" positionFromAnchor="left" draggable="true">$varName</text>
+  </module>
+  
+  <module name="pointer" newNamespace>
+    <setup>
+      <customAttribute componentType="text" assignNames="pointerName" attribute="pointerName" defaultValue=""/>
+      <customAttribute componentType="number" assignNames="y" attribute="y" defaultValue="0"/>
+      <customAttribute componentType="number" assignNames="x" attribute="x" defaultValue="0" fixed/>
+    </setup>
+    <point name="constrainedAnchor" hide>($x, $y)
+      <constraints>
+        <constrainToGrid/>
+      </constraints>
+    </point>
+    <text anchor="($constrainedAnchor.x+1, $constrainedAnchor.y+.7)" positionFromAnchor="right" draggable="true">$pointerName</text>
+    <vector name="v1" head="($constrainedAnchor.x, $constrainedAnchor.y+.7)" tail="($constrainedAnchor.x+.9, $constrainedAnchor.y+.7)"/>
+  </module>
+  
+<module name="memSlots" newNamespace>
+    <setup>
+      <customAttribute componentType="text" assignNames="arrayName" attribute="arrayName" defaultValue=""/>
+      <customAttribute componentType="number" assignNames="size" attribute="size" defaultValue=""/>
+      <customAttribute componentType="textList" assignNames="items" attribute="items" defaultValue=""/>
+      <customAttribute componentType="textList" assignNames="labels" attribute="labels" defaultValue=""/>
+      <customAttribute componentType="boolean" assignNames="inGraph" attribute="inGraph" defaultValue="false"/>
+      <customAttribute componentType="point" assignNames="anchor" attribute="anchor" defaultValue="(0,0)"/>
+    </setup>
+    <conditionalContent>
+      <case condition="not $inGraph">
+        [$items]
+      </case>
+      <case condition="$inGraph">
+        <text anchor="($anchor.x, $anchor.y+.5)" positionFromAnchor="right" draggable="false" >$arrayName</text>
+        <map>
+          <template>
+            <textInput anchor="($anchor.x, $anchor.y-$i-.5)" height="32px" width="80px" positionFromAnchor="right" draggable="false">$items.texts[$i+1]</textInput>
+            <text anchor="($anchor.x, $anchor.y-$i-.5)" positionFromAnchor="left" draggable="false">$labels.texts[$i+1]</text>
+          </template>
+          <sources alias="i">
+            <sequence from="0" to="$size-1" step="1"/>
+          </sources>
+        </map>
+        <text anchor="($anchor.x, $anchor.y-$size-.5)"><ellipsis/></text>
+      </case>
+    </conditionalContent>
+  </module>
+</setup>
+
+<section><title>Assembling a C program with a Function</title>
+
+  <p>Now, let's generate an assembly program from a C program that uses a function (other than main).</p>
+
+  <p>Log into your personal account on your Raspberry Pi, and create a subdirectory for this lab:</p>
+<pre>  cd HD
+  mkdir lab16
+  cd lab16</pre>
+
+<p>In your <c>lab16</c> subdirectory on your Raspberry pi, create a C program with the following command.</p>
+<pre>  emacs function_example.c</pre>
+<p>Copy the following C code into <c>function_example.c</c>.</p>
+<pre>  #include &lt;stdio.h&gt;
+
+int add_one(int x) {
+  x += 1;
+  return x;
+}
+
+int main() {
+  int a = 7;
+  int b = add_one(a);
+  printf("a is %d and b is %d.\n", a, b);
+  return 0;
+}
+</pre>
+
+<p>Save the file by entering C-x C-s, and exit from emacs using C-x C-c.</p>
+
+<p>Compile and run <c>function_example.c</c> with the following commands.</p>
+<pre>  gcc function_example.c -o function_example
+  ./function_example</pre>
+  <p>To produce the assembly language version of this program, enter the command</p>
+<pre>  gcc -c -S function_example.c</pre>
+
+<p>This should produce a file <c>function_example.s</c> that contains assembly code for the program <c>function_example.c</c>. Check that it’s there by entering the <c>ls</c> command.</p>
+
+  <p>Open your assembly program in emacs using the command</p>
+<pre>  emacs function_example.s</pre>
+	 <p>Your assembly program should match the code below (except for the line numbers and some added indentation).</p>
+
+<pre>1:  	.arch armv6
+2:  	.eabi_attribute 28, 1
+3:  	.eabi_attribute 20, 1
+4:  	.eabi_attribute 21, 1
+5:  	.eabi_attribute 23, 3
+6:  	.eabi_attribute 24, 1
+7:  	.eabi_attribute 25, 1
+8:  	.eabi_attribute 26, 2
+9:  	.eabi_attribute 30, 6
+10:  	.eabi_attribute 34, 1
+11:  	.eabi_attribute 18, 4
+12:  	.file	"function_example.c"
+13:  	.text
+14:  	.align	2
+15:  	.global	add_one
+16:  	.arch armv6
+17:  	.syntax unified
+18:  	.arm
+19:  	.fpu vfp
+20:  	.type		add_one, %function
+21:  add_one:
+22:  	@ args = 0, pretend = 0, frame = 8
+23:  	@ frame_needed = 1, uses_anonymous_args = 0
+24:  	@ link register save eliminated.
+25:  	str	fp, [sp, #-4]!
+26:  	add	fp, sp, #0
+27:  	sub	sp, sp, #12
+28:  	str	r0, [fp, #-8]
+29:  	ldr	r3, [fp, #-8]
+30:  	add	r3, r3, #1
+31:  	str	r3, [fp, #-8]
+32:  	ldr	r3, [fp, #-8]
+33:  	mov	r0, r3
+34:  	add	sp, fp, #0
+35:  	@ sp needed
+36:  	ldr	fp, [sp], #4
+37:  	bx	lr
+38:  	.size		add_one, .-add_one
+39:  	.section	.rodata
+40:  	.align	2
+41:  .LC0:
+42:  	.ascii	"a is %d and b is %d.\012\000"
+43:  	.text
+44:  	.align	2
+45:  	.global	main
+46:  	.syntax unified
+47:  	.arm
+48:  	.fpu vfp
+49:  	.type		main, %function
+50:  main:
+51:  	@ args = 0, pretend = 0, frame = 8
+52:  	@ frame_needed = 1, uses_anonymous_args = 0
+53:  	push	{fp, lr}
+54:  	add	fp, sp, #4
+55:  	sub	sp, sp, #8
+56:  	mov	r3, #7
+57:  	str	r3, [fp, #-8]
+58:  	ldr	r0, [fp, #-8]
+59:  	bl	add_one
+60:  	str	r0, [fp, #-12]
+61:  	ldr	r2, [fp, #-12]
+62:  	ldr	r1, [fp, #-8]
+63:  	ldr	r0, .L5
+64:  	bl	printf
+65:  	mov	r3, #0
+66:  	mov	r0, r3
+67:  	sub	sp, fp, #4
+68:  	@ sp needed
+69:  	pop	{fp, pc}
+70:  .L6:
+71:  	.align	2
+72:  .L5:
+73:  	.word		.LC0
+74:  	.size		main, .-main
+75:  	.ident	"GCC: (Raspbian 8.3.0-6+rpi1) 8.3.0"
+76:  	.section	.note.GNU-stack,"",%progbits</pre>
+
+</section>
+
+<p>In the assembly program, find the code that sets up the stack frame for <c>main</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">53,54,55</answer></p>
+
+  <p>Based on the assembly code, how many 4-byte memory slots are included in the stack frame for <c>main</c>? <answer>4</answer></p>
+
+  <p>In the assembly program, find the code that initializes the variable <c>a</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">56,57</answer></p>
+
+  <p>In the assembly code, how do we refer to the variable <c>a</c>?</p> <p><c>[fp, </c><textInput name="minus8"/><c>]</c> <answer><award><when>$minus8 = <text>#-8</text></when></award></answer></p>
+
+  <p>In the assembly program, find the code that initializes the variable <c>b</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">60</answer></p>
+
+  <p>In the assembly code, how do we refer to the variable <c>b</c>?</p> <p><c>[fp, </c><textInput name="minus12"/><c>]</c> <answer><award><when>$minus12 = <text>#-12</text></when></award></answer></p>
+
+  <p>How many arguments does the function <c>add_one</c> take? <answer>1</answer></p>
+
+  <p>In the assembly program, find the code that sets up the arguments for the call to <c>add_one</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">58</answer></p>
+
+  <p>In the assembly program, find the code that calls the function <c>add_one</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">59</answer></p>
+
+  <p>In the assembly program, find the identifier for the function <c>add_one</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">21</answer></p>
+
+  <p>In the assembly program, find the code that sets up the stack frame for <c>add_one</c>. Enter the line number(s) for this code, separated by commas (with no spaces). <answer type="text">25,26,27</answer></p>
+
+  <p>Based on the assembly code, how many 4-byte memory slots are included in the stack frame for main? <answer>4</answer></p>
+
+  <p>How many local variables does the function <c>add_one</c> have? <answer>1</answer> (this may seem strange, given the size of the stack frame - C programs will set up stack frames to be a multiple of 8 bytes.)</p>
+
+  <p>What value is in <c>r0</c> when line 28 is executed? <answer>7</answer></p>
+
+  <p>After line 33 is executed, what is the value in <c>r0</c>? <answer>8</answer></p>
+
+  <p>What value is in <c>r0</c> when line 60 is executed? <answer>8</answer></p>
+
+  <p>In which register is the return value for <c>add_one</c> placed? <answer type="text">r0</answer></p>
+
+    
+<section><title>Assembly Function Example</title>
+
+  <p>Now, let's look at an assembly-only program that uses a function. Here is a description of the program:</p>
+
+  <ul>
+    <li>There will be a function <c>add_two</c>, that takes two arguments, <c>x</c> and <c>y</c>,  and returns their sum.</li>
+<li>In <c>main</c>, there will be three local integer variables, <c>num1</c>, <c>num2</c>, and <c>total</c>. The variable <c>num1</c> will be assigned the value 3, and <c>num2</c> will be assigned the value 6.</li>
+<li>We will print a sentence reporting the values of <c>num1</c> and <c>num2</c>.</li>
+<li>In <c>main</c>, we will call <c>add_two</c> on <c>num1</c> and <c>num2</c>, and the returned value will be stored in the variable <c>total</c>.</li>
+<li>We will print a sentence reporting the value of <c>total</c>, which should be the sum of <c>num1</c> and <c>num2</c>.</li>
+  </ul>
+
+  <p>The program is as follows (with line numbers added).</p>
+
+  <pre>1:  	.section .rodata
+2:  @ Global constants
+3:  report_two: @ formatting string for printing the values of num1, num2
+4:  	.ascii	"num1 is %d and num2 is %d.\012\000"
+5:  report_total: @ formatting string for printing the value of total
+6:  	.ascii	"total is %d.\012\000"
+7:  
+8:  	.text
+9:  	.global add_two
+10:  	@ add_two function
+11:  add_two:
+12:  	@ save registers fp and lr
+13:  	push	{fp, lr}
+14:  	@ set up the stack frame, 2 local variables
+15:  	add	fp, sp, #4
+16:  	sub	sp, sp, #8
+17:  	@ x is [fp, #-8]
+18:  	@ y is [fp, #-12]
+19:     
+20:  	@ initialize the values of the local variables from the arguments
+21:  	str	r0, [fp, #-8]
+22:  	str	r1, [fp, #-12]
+23:  
+24:  	@ add x and y
+25:  	ldr	r1, [fp, #-8]
+26:  	ldr	r2, [fp, #-12]
+27:  	add	r1, r1, r2
+28:  
+29:  	@ move the sum x+y to r0
+30:  	mov 	r0, r1
+31:  
+32:  	@ move sp back to previous position
+33:  	sub	sp, fp, #4
+34:  	@ restore fp and pc
+35:  	pop	{fp, pc}	
+36:  
+37:  	.text
+38:  	.global main
+39:  
+40:  	@ main function
+41:  main:	
+42:  	@ save registers fp and lr
+43:  	push	{fp, lr}
+44:  	@ set up stack frame, 3 local variables
+45:  	add	fp, sp, #4
+46:  	sub	sp, sp, #12
+47:  	@ [fp, #-8] is an integer, num1, storing one of the summands
+48:  	@ [fp, #-12] is an integer, num2, storing one of the summands
+49:  	@ [fp, #-16] is an integer, total, which will store the sum
+50:  
+51:  	@ initialize the values of num1, num2 to 3, 6 (respectively)
+52:  	mov	r3, #3
+53:  	str	r3, [fp, #-8]
+54:  	mov	r3, #6
+55:  	str	r3, [fp, #-12]
+56:  	
+57:  	@ print the values of num1, num2
+58:  	ldr	r0, report_two_ptr
+59:  	ldr	r1, [fp, #-8]
+60:  	ldr	r2, [fp, #-12]
+61:  	bl	printf
+62:  
+63:  	@ setting up call to add_two:
+64:  	@ load num1, num2 into registers r0, r1
+65:  	ldr	r0, [fp, #-8]
+66:  	ldr	r1, [fp, #-12]
+67:  	@ call add_two
+68:  	bl	add_two
+69:  
+70:  	@ store return value from add_two to total
+71:  	str	r0, [fp, #-16]
+72:  	
+73:  	@ print the value of total
+74:  	ldr	r0, report_total_ptr
+75:  	ldr	r1, [fp, #-16]
+76:  	bl	printf
+77:  
+78:  	@ return 0
+79:  	mov	r0, #0
+80:  
+81:   	@ move sp back to original position
+82:  	sub	sp, fp, #4
+83:  
+84:  	@ restore fp and pc
+85:  	pop	{fp, pc}
+86:  
+87:  @ Pointers
+88:  report_two_ptr: @ pointer to the formatting string report_two
+89:  	.word	report_two
+90:  report_total_ptr: @ pointer to the formatting string report_total
+91:  	.word report_total</pre>
+
+<graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+    
+  <module name="registers" copysource="../memSlots" arrayName="Registers" size="4" items= "00000000 00000000 00000000 00000000" labels="r0 r1 r2 r3" inGraph="true" anchor="(2,8.5)"/>
+  <module name="sp_registers" copysource="../memSlots" arrayName="" size="2" items= "00000000 00000038" labels="fp sp" inGraph="true" anchor="(2,3)"/>
+    <rectangle vertices="(1,9.9) (4,.1)" filled fixed/>
+    <text anchor="(1.5,9.5)" fixed>CPU</text>
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="? ? ? ? ? ? ? ? ?" labels="0000001c 00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(7,9.2)"/>
+    <rectangle vertices="(5.8,9.9) (9,.1)" filled fixed/>
+    
+  </graph>
+
+  <p><alert>Note: the data in registers and memory, as well as addresses, will be represented as an 8-digit (32 bit) hexadecimal number (without the prefix 0x).</alert> Feel free to use an online converter calculator as needed.</p>
+
+  <p>The diagram above shows the state of the registers and (part of) memory after the program has been compiled, and <alert>before line 45 has executed</alert>. For simplicity, we don't show the strings and their pointers.</p> 
+
+  <p>Assume that the register <c>sp</c> has the value <c>00000038</c> before line 45 is executed, as shown in the diagram.</p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 46</alert>. <answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000000 00000000 00000000 00000000</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>? ? ? ? ? ? ? ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 55</alert>. <answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000000 00000000 00000000 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>? ? ? ? ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 60</alert>. Assume that the address of <c>report_three_ptr</c> is <c>ffffffde</c>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>ffffffde 00000003 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>? ? ? ? ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 66</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000003 00000006 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>? ? ? ? ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>The line <c>bl add_two</c> links and branches to the identifier <c>add_two</c>, so the program will now continue at line 11. The "link" part means that it saves the address of the next instruction in main after the function call to the link register, <c>lr</c>.</p>
+
+  <p>The line <c>push {fp, lr}</c> is used to save the location of the stack frame for <c>main</c>, as well as the address of the next instruction after the function call (continuing in main after the call to <c>add_two</c> is finished). This happens in the following steps:</p>
+  <ol>
+    <li>We update the address of the stack pointer <c>sp</c>, to be it's previous address minus 4. This moves the stack pointer point to the spot above where it was pointing before.</li>
+    <li>We copy the address in the link register <c>lr</c> to the location pointed to by <c>sp</c>.</li>
+    <li>We again update the address of the stack pointer <c>sp</c>, to be it's previous address minus 4.</li>
+    <li>We copy the address in the frame pointer <c>fp</c> to the location pointed to by <c>sp</c>.</li>
+  </ol>
+  <p>So, at the end of these steps, <c>sp</c> has moved back two memory slots, and we have "pushed" the values of <c>lr</c> and <c>fp</c> onto the stack.</p>
+
+  <p>Based on this explanation, and assuming that <c>lr</c> holds the address <c>fffffff4</c>, update the diagram above to show the state of the registers and memory after running the program <alert>through line 13</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000003 00000006 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 00000024</textList>
+    and $(memory/items) = <textList>? ? 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 16</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000003 00000006 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>00000028 0000001c</textList>
+    and $(memory/items) = <textList>? ? 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 22</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000003 00000006 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>00000028 0000001c</textList>
+    and $(memory/items) = <textList>00000006 00000003 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 27</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000003 00000009 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>00000028 0000001c</textList>
+    and $(memory/items) = <textList>00000006 00000003 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 33</alert>.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000009 00000009 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>00000028 00000024</textList>
+    and $(memory/items) = <textList>00000006 00000003 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>The line <c>pop {fp, pc}</c> is used to reverse the work that we did in the <c>push</c> step, restoring the information to continue with main. This is done in the following steps:</p>
+  <ol>
+    <li>Find the value at the address pointed to by the stack pointer <c>sp</c>, and copy this value into the register <c>fp</c>.</li>
+    <li>We update the address of the stack pointer <c>sp</c>, to be it's previous address plus 4. This moves the stack pointer point to the spot below where it was pointing before.</li>
+    <li>Find the value at the address pointed to by the stack pointer <c>sp</c>, and copy this value into the register <c>pc</c> (not included in the diagram).</li>
+    <li>We update the address of the stack pointer <c>sp</c>, to be it's previous address plus 4. This moves the stack pointer point to the spot below where it was pointing before.</li>
+  </ol>
+  <p>So, at the end of these steps, <c>sp</c> and <c>fp</c> have been positioned to define the stack frame for <c>main</c> again, and <c>pc</c> has the address of the next instruction to execute in <c>main</c>, continuing the program with line 71.</p>
+
+  <p>Based on this explanation, update the diagram above to show the state of the registers and memory after running the program <alert>through line 35</alert> (line 71 will be the next to execute).<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000009 00000009 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>00000006 00000003 0000003c fffffff4 ? 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+  <p>Update the diagram above to show the state of the registers and memory after running the program <alert>through line 71</alert>. Note here that the value in register <c>r0</c> was placed there at the end of the function <c>add_two</c>, specifying its return value.<answer disableAfterCorrect>
+  <award><when>
+    $(registers/items) = <textList>00000009 00000009 00000006 00000006</textList> 
+    and $(sp_registers/items) = <textList>0000003c 0000002c</textList>
+    and $(memory/items) = <textList>00000006 00000003 0000003c fffffff4 00000009 00000006 00000003 ? ?</textList>
+  </when></award>
+</answer></p>
+
+</section>
+
+
+
+<section><title>Writing an Assembly Program with Local Variables and <c>scanf</c></title>
+
+  <p>Note: this section will be graded as part of Homework 4.</p>
+
+  <p>Move back to your <c>HW4</c> directory (created in Lab 13).</p>
+<pre>  cd ~HD/HW4</pre>
+
+  <p>Create a new assembly program, using the following command.</p>
+<pre>  emacs dogs.s</pre>
+
+  <p>Here are comments outlining how this should be structured; copy them into <c>dogs.s.</c></p>
+
+  <pre>	@ Global constants
+	@ dogs_prompt: asks how many dogs the user has
+	@ input: formatting string for getting user input
+	@ response: formatting string for the computer's response
+
+@ main function
+
+	@ save registers fp and lr
+	@ set up the stack frame, 1 local variable
+	@ [fp, #-8] is an integer, num_dogs, storing the number of dogs
+
+	@ print the question asking the user how many dogs they have
+
+	@ load the address of num_dogs in register r1
+	@ load the address of the input formatting string in register r0
+	@ call scanf
+
+    @ load the value of the variable num_dogs into r0
+    @ increment the value in r0 by 1
+    @ store the value in r0 to the variable num_dogs
+
+	@ setting up call to printf:
+	@ load the value of num_dogs into register r1
+	@ load the address of the string response in register r0
+	@ call printf
+
+	@ return 0
+
+	@ move sp back to original position
+	@ restore fp and pc
+
+@ Pointers
+	@ dogs_prompt_ptr: pointer to the question that asks how many dogs the user has
+	@ input_ptr: pointer to the formatting string for user input
+	@ response_ptr: pointer to the formatting string response</pre>
+
+  <p>When you have finished implementing this program, it should look like the following when you run the executable (user input is 4):</p>
+
+  <pre>How many dogs do you have? 4
+I have 5 dogs.</pre>
+
+  <p>Here is another example, where the user enters 11.</p>
+
+  <pre>How many dogs do you have? 100
+I have 101 dogs.</pre>
+
+  <p>Now, it’s up to you to write the assembly code for this program! Here are some notes:</p>
+  <ul>
+<li>When working with local variables, we can load their values into a register with a line like:
+<pre>  ldr	r0, [fp, #-8]</pre>
+Remember that when we had registers storing addresses, the square brackets meant “get the value at this address”. Here, the meaning of <c>[fp, #-8]</c> is similar: this means look at the address stored by <c>fp</c>, adjust the address by adding <c>-8</c>, and then get the value stored at the adjusted address.</li>
+<li>To load the address of a local variable into a register (which is needed for <c>scanf</c>), we would use something like:
+<pre>  sub	r0, fp, #8</pre>
+Note that this does not require loading anything from memory. The register <c>fp</c> stores the address of the bottom of the stack frame, and we can subtract from that address to get the address of local variables. Here, the address that we get in <c>r0</c> corresponds to our local variable <c>[fp, #-8]</c>.</li>
+  </ul>
+
+<p><alert>Remember to write your program incrementally.</alert> That is, implement one step at a time, and compile and run your program to verify that it’s working as expected, before moving on to the next step.</p>
+
+  <p>Verify that your program works correctly by testing it for at least five different values for user input.</p>
+
+  <p>To submit your work in this part: carry these steps out on your Pi.</p>
+<pre>  cd ~/HD/HW4
+  git add dogs.s
+  git commit -m "HW4: Exercise 3 complete"
+  git pull origin main
+  git push origin main</pre>
+
+
+  
+</section>
+
+<section newNamespace><title>A Function with no Parameters or Local Variables</title>
+
+  <p>Suppose we wish to define a function with no parameters or local variables. In C, here's an example of what such a function could look like:</p>
+
+  <pre>  int return_five(){
+    return 5;
+  }</pre>
+
+  <p>Suppose the diagram below shows the pointers <c>fp</c> and <c>sp</c> delimiting the stack frame for main. Move these pointers to their locations during the function call, delimiting the stack frame for a function like <c>return_five</c>.</p>
+  
+<graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="? ? ? ? ? ? ? ? ?" labels="0000001c 00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(3,9.2)"/>
+    <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed/>
+
+  <module name="fp" copySource="../pointer" pointerName="fp" x="5" y="0"/>
+  <module name="sp" copySource="../pointer" pointerName="sp" x="5" y="3"/>
+
+  <triggerSet anchor="(8,2)">
+  <label>Reset Diagram</label>
+  <updateValue target="fp/y" newValue="0"/>
+  <updateValue target="sp/y" newValue="3"/>
+</triggerSet>
+  </graph>
+
+<answer>
+  <award>
+    <when>
+      $(fp/y) = 4 and $(sp/y)=5
+    </when>
+  </award>
+</answer>
+
+    <p>Complete the assembly definition of the function <c>return_five</c> below, setting up and tearing down the stack frame.</p>
+
+    <pre>  return_five:
+      @ set up the stack frame, no local variables
+      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    fp, sp, <answer type="text">#4</answer>
+
+      @ return 5
+      mov    r0, #5
+
+      @ tear down the stack frame
+      sub    sp, fp, <answer type="text">#4</answer>
+      pop    {<textInput name="fp2"/>, <textInput name="pc"/>} <answer><award><when>$fp2 = fp and $pc = pc</when></award></answer></pre>
+
+</section>
+
+<section><title>A Function with one Parameter and no other local variables</title>
+
+  <p>Suppose we wish to define a function with one parameter, and no other local variables. In C, here's an example of what such a function could look like:</p>
+
+  <pre>  int square(int x){
+      return x*x;
+  }</pre>
+
+  <p>Complete the assembly definition of the function <c>square</c> below, setting up and tearing down the stack frame.</p>
+
+  <pre>  square:
+      @ set up the stack frame
+      @ [fp, #-8] is the parameter x
+      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	sp, sp, <answer type="text">#4</answer>
+
+      @ store the argument in r0 to x
+      str   r0, [fp, #-8]
+
+      @ load the value from x
+      ldr	r1, [fp, #-8]
+    
+      @ compute x*x
+      mul   r1, r1, r1
+    
+      @ return x*x
+      mov    r0, r1
+
+      @ tear down the stack frame
+      sub    <textInput name="sp2"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp2 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+</section>
+
+<section newNamespace><title>A Function with no Parameters and One Local Variable</title>
+
+<p>Suppose we wish to define a function with no parameter, and one local variable. In C, here's an example of what such a function could look like:</p>
+
+  <pre>  int return_seven(){
+      int a = 7;
+      return a;
+  }</pre>
+
+  <p>Suppose the diagram below shows the pointers <c>fp</c> and <c>sp</c> delimiting the stack frame for main. Move these pointers to their locations during the function call, delimiting the stack frame for a function like <c>return_seven</c>. Move the label <c>a</c> to indicate the location of the local variable <c>a</c>.</p>
+
+  
+  <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="? ? ? ? ? ? ? ? ?" labels="0000001c 00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(3,9.2)"/>
+    <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed/>
+
+  <module name="fp" copySource="../pointer" pointerName="fp" x="5" y="0"/>
+  <module name="sp" copySource="../pointer" pointerName="sp" x="5" y="3"/>
+
+  <module name="a" copySource="../varLabel" varName="a" x="2" y="9"/>
+
+  <triggerSet anchor="(8,2)">
+  <label>Reset Diagram</label>
+  <updateValue target="fp/y" newValue="0"/>
+  <updateValue target="sp/y" newValue="3"/>
+    <updateValue target="a/y" newValue="9"/>
+</triggerSet>
+  </graph>
+
+<answer>
+  <award>
+    <when>
+      $(fp/y) = 4 and $(sp/y)=6 and $(a/y)=6
+    </when>
+  </award>
+</answer>
+
+  <p>Complete the assembly definition of the function <c>return_seven</c> below, setting up and tearing down the stack frame.</p>
+
+  <pre>  return_seven:
+      @ set up the stack frame
+      @ [fp, #-8] is the local variable a
+      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="four2"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $four2 = <text>#4</text></when></award></answer>
+
+      @ initialize a to 7
+      mov   r0, #7
+      str   r0, [fp, #-8]
+
+      @ load the value from a
+      ldr	r1, [fp, #-8]
+    
+      @ return a
+      mov    r0, r1
+
+      @ tear down the stack frame
+      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four3"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four3 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+</section>
+
+<section newNamespace><title>A Function with one Parameter and one other Local Variable</title>
+
+<p>Suppose we wish to define a function with one parameter, and one other local variable. In C, here's an example of what such a function could look like:</p>
+
+  <pre>  int times_two(int x){
+      int a = 2*x;
+      return a;
+  }</pre>
+
+  <p>Suppose the diagram below shows the pointers <c>fp</c> and <c>sp</c> delimiting the stack frame for main. Move these pointers to their locations during the function call, delimiting the stack frame for a function like <c>times_two</c>. Move the labels <c>x</c> and <c>a</c> to indicate their locations.</p>
+
+  <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="? ? ? ? ? ? ? ? ?" labels="0000001c 00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(3,9.2)"/>
+    <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed/>
+
+  <module name="fp" copySource="../pointer" pointerName="fp" x="5" y="0"/>
+  <module name="sp" copySource="../pointer" pointerName="sp" x="5" y="3"/>
+
+  <module name="a" copySource="../varLabel" varName="a" x="2" y="8"/>
+  <module name="x" copySource="../varLabel" varName="x" x="2" y="9"/>
+
+  <triggerSet anchor="(8,2)">
+  <label>Reset Diagram</label>
+  <updateValue target="fp/y" newValue="0"/>
+  <updateValue target="sp/y" newValue="3"/>
+  <updateValue target="a/y" newValue="8"/>
+  <updateValue target="x/y" newValue="9"/>
+</triggerSet>
+  </graph>
+
+<answer>
+  <award>
+    <when>
+      $(fp/y) = 4 and $(sp/y)=7 and $(a/y)=7 and $(x/y)=6
+    </when>
+  </award>
+</answer>
+
+  <p>Complete the assembly definition of the function <c>times_two</c> below, setting up and tearing down the stack frame.</p>
+
+  <pre>  times_two:
+      @ set up the stack frame
+      @ [fp, #-8] is the parameter x
+      @ [fp, #-12] is the local variable a
+      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="eight"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $eight = <text>#8</text></when></award></answer>
+
+      @ store the argument in r0 to x
+      str   r0, [fp, #-8]
+
+      @ load the value of x
+      ldr   r1, [fp, #-8]
+
+      @ multiple x by 2, store to a
+      mul   r1, r1, #2
+      str   r1, [fp, #-12]
+
+      @ load the value from a
+      ldr	r1, [fp, #-12]
+    
+      @ return a
+      mov    r0, r1
+
+      @ tear down the stack frame
+      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+  
+</section>
+
+<section newNamespace><title>A Function with Two Parameters and One Other Local Variable</title>
+
+  <p>Suppose we wish to define a function with two parameter, and one other local variable. In C, here's an example of what such a function could look like:</p>
+
+  <pre>  int product(int x, int y){
+      int a = x*y;
+      return a;
+  }</pre>
+
+  <p>Suppose the diagram below shows the pointers <c>fp</c> and <c>sp</c> delimiting the stack frame for main. Move these pointers to their locations during the function call, delimiting the stack frame for a function like <c>product</c>. Move the labels <c>x</c>, <c>y</c>, and <c>a</c> to indicate their locations.</p>
+
+  <graph displayXAxis="false" displayYAxis="false" showNavigation="false" showBorder="false" aspectRatio="2/1" size="full" xmin="0" xmax="10" ymin="0" ymax="10">
+
+    <module name="memory" copysource="../memSlots" arrayName="Main Memory" size="9" items="? ? ? ? ? ? ? ? ?" labels="0000001c 00000020 00000024 00000028 0000002c 00000030 00000034 00000038 0000003c" inGraph="true" anchor="(3,9.2)"/>
+    <rectangle vertices="(1.7,9.9) (5,.1)" filled fixed/>
+
+  <module name="fp" copySource="../pointer" pointerName="fp" x="5" y="0"/>
+  <module name="sp" copySource="../pointer" pointerName="sp" x="5" y="3"/>
+
+  <module name="a" copySource="../varLabel" varName="a" x="2" y="7"/>
+  <module name="x" copySource="../varLabel" varName="x" x="2" y="9"/>
+  <module name="y" copySource="../varLabel" varName="y" x="2" y="8"/>
+
+  <triggerSet anchor="(8,2)">
+  <label>Reset Diagram</label>
+  <updateValue target="fp/y" newValue="0"/>
+  <updateValue target="sp/y" newValue="3"/>
+  <updateValue target="a/y" newValue="7"/>
+  <updateValue target="x/y" newValue="9"/>
+    <updateValue target="y/y" newValue="8"/>
+</triggerSet>
+  </graph>
+
+<answer>
+  <award>
+    <when>
+      $(fp/y) = 4 and $(sp/y)=8 and $(a/y)=8 and $(x/y)=6 and $(y/y)=7
+    </when>
+  </award>
+</answer>
+
+  <p>Complete the assembly definition of the function <c>product</c> below, setting up and tearing down the stack frame.</p>
+
+  <pre>  product:
+      @ set up the stack frame
+      @ [fp, #-8] is the parameter x
+      @ [fp, #-12] is the parameter x
+      @ [fp, #-16] is the local variable a
+      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="twelve"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $twelve = <text>#12</text></when></award></answer>
+
+      @ store the arguments in r0, r1 to x, y
+      str   r0, [fp, #-8]
+      str   r1, [fp, #-12]
+
+      @ load the values of x and y
+      ldr   r1, [fp, #-8]
+      ldr   r2, [fp, #-12]
+
+      @ compute x*y, store to a
+      mul   r0, r1, r2
+      str   r0, [fp, #-16]
+
+      @ load the value from a
+      ldr	r1, [fp, #-16]
+    
+      @ return a
+      mov    r0, r1
+
+      @ tear down the stack frame
+      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+</section>
+
+<section><title>Writing an Assembly Program Using a Function: <c>add_two.s</c></title>
+
+  <p>This exercise will be graded with Homework 5. You will write a complete assembly program that uses a function called <c>add_two</c>, which takes two arguments and returns their sum. Here is how this program would work if you wrote it in C:</p>
+
+  <pre>  #include &lt;stdio.h&gt;
+
+  int add_two(int x, int y){
+    return x+y;
+  }
+
+  int main() {
+    int num1;
+    int num2;
+    int total;
+    printf("Enter an integer: ");
+    scanf("%d", &num1);
+    printf("Enter an integer: ");
+    scanf("%d", &num2);
+    total = num1 + num2;
+    printf("The sum of those integers is %d.\n", total);
+    return 0;
+  }</pre>
+
+  <p>Based on the C code above, how many local variables should <c>main</c> have? <answer>3</answer></p>
+
+  <p>Based on the C code above, how many parameters should <c>add_two</c> have? <answer>2</answer></p>
+
+  <p>Based on the C code above, how many local variables (excluding parameters) should <c>add_two</c> have? <answer>0</answer></p>
+
+  <p>Log into your personal account on your Raspberry Pi, and create a subdirectory for Homework 5:</p>
+<pre>  cd HD
+  mkdir HW5
+  cd HW5</pre>
+
+  <p>In your <c>HW5</c> subdirectory on your Raspberry Pi, create an assembly program with the following command.</p>
+	<pre>  code add_two.s</pre>
+
+  <p>You will write an assembly program that does the following:</p>
+  <ul>
+    <li>There will be a function, <c>add_two</c>, that takes two integer arguments, <c>x</c> and <c>y</c>, and returns their sum.</li>
+<li>In main, prompt the user to enter two numbers, printing the prompt twice, and making two calls to <c>scanf</c>.</li>
+<li>Store the inputs to two local variables, <c>num1</c> and <c>num2</c>.</li>
+<li>Call the function <c>add_two</c> on <c>num1</c> and <c>num2</c>, storing the result in another local variable called <c>total</c>.</li>
+<li>Print a sentence reporting the value of <c>total</c>.</li>
+  </ul>
+  <p><alert>Before writing any assembly code:</alert> write comments outlining the structure of your program; these will be graded.</p>
+  <p>As you begin writing your code, remember to write your program incrementally. For example, can you get your calls to <c>printf</c> and <c>scanf</c> working for the local variables before you start defining the function?</p>
+  <p>Verify that your program works by adding an automated test. When you are sure it is working correctly, submit your work with the following steps.</p>
+
+  <pre>  cd ~/HD/HW5
+  git add add_two.s add_two_test.sh
+  git commit -m "HW5: Exercise 4 complete"
+  git pull origin main
+  git push origin main</pre>
+
+</section>
+
+<p>You may find it helpful to reference Sections 6.1, 6.9, 6.10, and 6.11 of the ARM Tutorial <ref uri="http://computerscience.chemeketa.edu/armTutorial/index.html">here</ref>, as well as previous labs and slides on functions in assembly.</p>
+
+<section><title><c>add_one</c></title>
+
+  <p>In this section, you will write a complete assembly program defining and using a function, doing the following:</p>
+
+  <ul>
+<li>In <c>main</c>, initialize two local variables, <c>num1</c> and <c>num2</c>, with values 4 and 7.</li>
+<li>Define a function called <c>add_one</c>, that takes one argument <c>x</c>, and returns <c>x+1</c>.</li>
+<li>Call the function <c>add_one</c> on <c>num1</c>, and store the result to a variable called <c>num1_plus</c>.</li>
+<li>Call the function <c>add_one</c> on <c>num2</c>, and store the result to a variable called <c>num2_plus</c>.</li>
+  </ul>
+
+  <p>Here is how this program would look if it were written in C.</p>
+
+  <pre>  #include &lt;stdio.h&gt;
+
+  int add_one(int x){
+    return x+1;
+  }
+
+  int main() {
+    int num1 = 4;
+    int num2 = 7;
+    int num1_plus = add_one(num1);
+    int num2_plus = add_one(num2);
+    return 0;
+  }</pre>
+
+  <p>How many local variables are there in <c>main</c>? <answer>4</answer></p>
+
+  <p>Complete the assembly code below, setting up the stack frame for <c>main</c>.</p>
+
+<pre newNamespace>      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="sixteen"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $sixteen = <text>#16</text></when></award></answer></pre>
+
+  <p>What is the address of the local variable <c>num1</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-8</answer>]</c></p>
+  <p>What is the address of the local variable <c>num2</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-12</answer>]</c></p>
+  <p>What is the address of the local variable <c>num1_plus</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-16</answer>]</c></p>
+  <p>What is the address of the local variable <c>num2_plus</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-20</answer>]</c></p>
+
+  <p>Complete the assembly code below, tearing down the stack frame for <c>main</c>.</p>
+
+<pre newNamespace>      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+  <p>How many parameters does the function <c>add_one</c> have? <answer>1</answer></p>
+
+  <p>Other than parameters, how many local variables are there in <c>add_one</c>? <answer>0</answer></p>
+
+    <p>Complete the assembly code below, setting up the stack frame for <c>add_one</c>.</p>
+
+<pre newNamespace>      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="four2"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $four2 = <text>#4</text></when></award></answer></pre>
+
+    <p>What is the address of <c>x</c> (when we're in the stack frame for <c>add_one</c>? <c>[fp, #<answer>-8</answer>]</c></p>
+
+    <p>Complete the assembly code below, tearing down the stack frame for <c>add_one</c>.</p>
+
+<pre newNamespace>      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+  <p>Log into your personal account on your Raspberry Pi, and create a subdirectory for Homework 6:</p>
+<pre>  cd HD
+  mkdir HW6
+  cd HW6</pre>
+
+  <p>In your <c>HW6</c> subdirectory on your Raspberry Pi, create an assembly program with the following command.</p>
+	<pre>  emacs add_one.s</pre>
+
+  <p>You will write the assembly program described above; here are some comments to help you get started.</p>
+
+<pre>@ function add_one
+	@ one parameter: x
+	@ returns x+1
+
+@ main
+	@ set up stack frame for main
+	@ local variables: num1, num2, num1_plus, num2_plus
+
+	@ initialize num1 to 4
+
+	@ initialize num2 to 7
+
+	@ call add_one on num1, and store the result to num1_plus
+
+	@ call add_one on num2, and store the result to num2_plus
+
+	@ return 0
+
+	@ tear down stack frame for main
+</pre>
+
+  <p><alert>To verify that your program is working correctly, near the end of <c>main</c>, print the values of all local variables in <c>main</c>.</alert> Leave these lines in your program for submission. When you are sure it is working correctly, submit your work with the following steps.</p>
+
+  <pre>  cd ~/HD/HW6
+  git add add_one.s
+  git commit -m "HW6: Exercise 1 complete"
+  git pull origin main
+  git push origin main</pre>
+    
+  </section>
+
+<section><title>multiply_pairs</title>
+
+  <p>In this section, you will write a complete assembly program defining and using a function, doing the following:</p>
+
+  <ul>
+    <li>In <c>main</c>, initialize three local variables, <c>a</c>, <c>b</c>, and <c>c</c>, with values 4, 9, and 7.</li>
+<li>Define a function called <c>mul_two</c>, that takes two arguments, <c>x</c> and <c>y</c>, and returns their product <c>x*y</c>.</li>
+<li>Call the function <c>mul_two</c> on <c>a</c> and <c>b</c>, and store the result to a variable called <c>a_times_b</c>.</li>
+<li>Call the function <c>mul_two</c> on <c>b</c> and <c>c</c>, and store the result to a variable called <c>b_times_c</c>.</li>
+<li>Call the function <c>mul_two</c> on <c>a</c> and <c>c</c>, and store the result to a variable called <c>a_times_c</c>.</li>
+  </ul>
+
+
+  <p>Here is how this program would look if it were written in C.</p>
+
+<pre>  #include &lt;stdio.h&gt;
+
+  int mul_two(int x, int y){
+    return x*y;
+  }
+
+  int main() {
+    int a = 4;
+    int b = 9;
+    int c = 7;
+    int a_times_b = mul_two(a,b);
+    int b_times_c = mul_two(b,c);
+    int a_times_c = mul_two(a,c);
+    return 0;
+  }</pre>
+
+  <p>How many local variables are there in <c>main</c>? <answer>6</answer></p>
+
+  <p>Complete the assembly code below, setting up the stack frame for <c>main</c>.</p>
+
+<pre newNamespace>      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="twentyFour"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $twentyFour = <text>#24</text></when></award></answer></pre>
+
+  <p>What is the address of the local variable <c>a</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-8</answer>]</c></p>
+  <p>What is the address of the local variable <c>b</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-12</answer>]</c></p>
+  <p>What is the address of the local variable <c>c</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-16</answer>]</c></p>
+  <p>What is the address of the local variable <c>a_times_b</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-20</answer>]</c></p>
+  <p>What is the address of the local variable <c>b_times_c</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-24</answer>]</c></p>
+  <p>What is the address of the local variable <c>a_times_c</c> (when we're in the stack frame for <c>main</c>)? <c>[fp, #<answer>-28</answer>]</c></p>
+
+  <p>Complete the assembly code below, tearing down the stack frame for <c>main</c>.</p>
+
+<pre newNamespace>      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+  <p>How many parameters does the function <c>mul_two</c> have? <answer>2</answer></p>
+
+  <p>Other than parameters, how many local variables are there in <c>add_one</c>? <answer>0</answer></p>
+
+    <p>Complete the assembly code below, setting up the stack frame for <c>mul_two</c>.</p>
+
+<pre newNamespace>      push   {<textInput name="fp1"/>, <textInput name="lr"/>} <answer><award><when>$fp1 = fp and $lr = lr</when></award></answer>
+      add    <textInput name="fp2"/>, <textInput name="sp1"/>, <textInput name="four1"/> <answer><award><when>$fp2 = fp and $sp1 = sp and $four1 = <text>#4</text></when></award></answer>
+      sub	<textInput name="sp2"/>, <textInput name="sp3"/>, <textInput name="eight"/> <answer><award><when>$sp2 = sp and $sp3 = sp and $eight = <text>#8</text></when></award></answer></pre>
+
+    <p>What is the address of <c>x</c> (when we're in the stack frame for <c>mul_two</c>? <c>[fp, #<answer>-8</answer>]</c></p>
+  <p>What is the address of <c>y</c> (when we're in the stack frame for <c>mul_two</c>? <c>[fp, #<answer>-12</answer>]</c></p>
+
+    <p>Complete the assembly code below, tearing down the stack frame for <c>mul_two</c>.</p>
+
+<pre newNamespace>      sub    <textInput name="sp4"/>, <textInput name="fp3"/>, <textInput name="four2"/> <answer><award><when>$sp4 = sp and $fp3 = fp and $four2 = <text>#4</text></when></award></answer>
+      pop    {<textInput name="fp4"/>, <textInput name="pc"/>} <answer><award><when>$fp4 = fp and $pc = pc</when></award></answer></pre>
+
+    <p>In your <c>HW6</c> subdirectory on your Raspberry Pi, create an assembly program with the following command.</p>
+	<pre>  emacs multiply_pairs.s</pre>
+
+  <p>You will write the assembly program described above; here are some comments to help you get started.</p>
+
+<pre>@ function mul_two
+	@ two parameters: x, y
+	@ returns x*y
+
+@ main
+	@ set up stack frame for main
+	@ local variables: a, b, c, a_times_b, b_times_c, a_times_c
+
+	@ initialize a to 4
+
+	@ initialize b to 9
+
+	@ initialize c to 7
+
+	@ call mul_two on a and b, and store the result to a_times_b
+
+	@ call mul_two on b and c, and store the result to b_times_c
+
+	@ call mul_two on a and c, and store the result to a_times_c
+
+	@ return 0
+
+	@ tear down stack frame for main</pre>
+
+    <p><alert>To verify that your program is working correctly, near the end of <c>main</c>, print the values of all local variables in <c>main</c>.</alert> Leave these lines in your program for submission. When you are sure it is working correctly, submit your work (and a test) with the following steps.</p>
+
+  <pre>  cd ~/HD/HW6
+  git add multiply_pairs.s multiply_pairs_test.sh
+  git commit -m "HW6: Exercise 2 complete"
+  git pull origin main
+  git push origin main</pre>
+    
+  </section>
