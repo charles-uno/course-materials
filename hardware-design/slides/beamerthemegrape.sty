@@ -34,7 +34,26 @@
 % original minted is broken with python 3.14 so use minted 2 as a workaround until the fix is deployed https://github.com/gpoore/minted/issues/463
 \usepackage{minted2}
 \usemintedstyle{manni}
-\setminted{autogobble=true, tabsize=4}
+\setminted{
+  autogobble=true,
+  tabsize=4,
+  linenos=true,
+  xleftmargin=3em,   % Push the entire code block to the right
+  numbersep=1em      % Gap between the numbers and the code
+}
+
+% hex line numbers for code blocks
+\ExplSyntaxOn
+\renewcommand{\theFancyVerbLine}{
+  \tiny\ttfamily
+  0x
+  % Check if padding is needed (less than 16)
+  \int_compare:nNnT { \value{FancyVerbLine} } < { 16 } { 0 }
+  \int_to_hex:n { \value{FancyVerbLine} }
+}
+\ExplSyntaxOff
+
+
 
 \hypersetup{
     colorlinks=true,

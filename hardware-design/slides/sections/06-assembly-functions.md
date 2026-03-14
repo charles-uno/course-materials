@@ -166,32 +166,28 @@ $$$
 $$$
 
 ### Local Variable Walkthrough
-
+Initial state:
 $$$
 \bigskip
 \begin{columns}
 \begin{column}{0.4\textwidth}
 $$$
-
 | Register | Value |
 | --- | --- |
-| x0 | ... |
-| x1 | ... |
-| x2 | ... |
-| x3 | ... |
-| sp | ... |
-| fp | ... |
-| pc | ... |
-| lr | ... |
-
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x4010 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
 $$$
 \end{column}
 \begin{column}{0.6\textwidth}
 $$$
-
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
 | 0x3fa0 | ... |
 | 0x3fb0 | ... |
 | 0x3fc0 | ... |
@@ -199,7 +195,7 @@ $$$
 | 0x3fe0 | ... |
 | 0x3ff0 | ... |
 | 0x4000 | ... |
-
+| 0x4010 | (in use) |
 $$$
 \end{column}
 \end{columns}
