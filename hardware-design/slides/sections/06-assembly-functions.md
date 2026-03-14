@@ -51,8 +51,8 @@ $$$
 | x1 | ... |
 | x2 | ... |
 | x3 | ... |
-| sp | 0x4010 |
-| fp | 0x5000 |
+| sp | ... |
+| fp | ... |
 | pc | ... |
 | lr | ... |
 
@@ -164,6 +164,50 @@ b exit
 $$$
 }\end{multicols}
 $$$
+
+### Local Variable Walkthrough
+
+$$$
+\bigskip
+\begin{columns}
+\begin{column}{0.4\textwidth}
+$$$
+
+| Register | Value |
+| --- | --- |
+| x0 | ... |
+| x1 | ... |
+| x2 | ... |
+| x3 | ... |
+| sp | ... |
+| fp | ... |
+| pc | ... |
+| lr | ... |
+
+$$$
+\end{column}
+\begin{column}{0.6\textwidth}
+$$$
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | ... |
+| 0x4000 | ... |
+
+$$$
+\end{column}
+\end{columns}
+$$$
+
+
+
+
 
 ### Exercise
 

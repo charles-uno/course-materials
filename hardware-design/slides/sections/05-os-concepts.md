@@ -342,6 +342,10 @@ Sometimes threads and processes can step on each others' toes:
 - Deadlock. Two processes, each waiting for the other to release a locked resource
 - Race conditions. Two threads both set `x = x + 1` at the same time
 
+% one thread/process per core? not necessarily. hyperthreading, concurrency
+
+
+
 % GPUs -- we talked about these for instruction-level parallelism
 
 
