@@ -21,7 +21,7 @@ $(TARGET).pdf: $(TARGET).tex sections
 # generate tex source then stop. in case the python and latex builds need to happen in different containers
 sections: $(TEX_SECTIONS)
 
-sections/%.gen.tex: sections/%.md
+sections/%.gen.tex: sections/%.md $(MD2TEX)
 	@ $(MD2TEX) $<
 
 # remove output and generated/intermediate files

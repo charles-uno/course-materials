@@ -136,9 +136,6 @@ Here's how we keep track of those variables:
 
 ### Example Local Variable in Assembly
 
-$$$
-\begin{multicols}{2}{\small
-$$$
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
@@ -161,9 +158,6 @@ bl printf
 add sp, sp, 0x10
 b exit
 ```
-$$$
-}\end{multicols}
-$$$
 
 ### Local Variable Walkthrough
 Initial state:
@@ -325,9 +319,6 @@ So what does this look like in Assembly?
 
 ### Example Stack Frame
 
-$$$
-\begin{multicols}{2}{\small
-$$$
 ```arm
 .section .rodata
 output: .ascii "%d+1=%d\n\0"
@@ -350,9 +341,6 @@ ldr fp, [sp]
 add sp, sp, 0x20
 b exit
 ```
-$$$
-}\end{multicols}
-$$$
 
 ### What's LR?
 
@@ -382,9 +370,6 @@ At the end of `printf`, we run `ret`:
 
 ### Example Function
 
-$$$
-\begin{multicols}{2}{\small
-$$$
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
@@ -426,9 +411,6 @@ ldr fp, [sp, 0x20]
 add sp, sp, 0x30
 b exit
 ```
-$$$
-}\end{multicols}
-$$$
 
 ### Back to the Board
 
@@ -469,10 +451,6 @@ Just call `b` to jump straight into the nested function, instead of `bl`
 At the end of the nested function, `ret` goes back to LR from the last time we called `bl` (parent function call)
 
 ### Example Nested Function
-
-$$$
-\begin{multicols}{2}{\tiny
-$$$
 
 ```arm
 .section .rodata
@@ -546,9 +524,6 @@ add sp, sp, 0x20
 mov x0, 0
 b exit
 ```
-$$$
-}\end{multicols}
-$$$
 
 ### Board Time
 

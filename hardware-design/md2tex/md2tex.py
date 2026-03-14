@@ -125,7 +125,7 @@ def to_tex(chunk: str, **kwargs) -> str:
         return get_h3(chunk, is_beamer)
     elif chunk.startswith("```"):
         # mistletoe doesn't handle code blocks nicely
-        return get_code_block(chunk)
+        return get_code_block(chunk, is_beamer=is_beamer)
     elif chunk.startswith("$$$"):
         # pass along fenced tex block
         return get_tex_block(chunk)
@@ -188,14 +188,19 @@ def get_h3(chunk: str, is_beamer: bool) -> str:
         return r"\subsubsection{" + title + "}"
 
 
-def get_code_block(chunk: str) -> str:
+def get_code_block(chunk: str, is_beamer: bool) -> str:
     lines = chunk.splitlines()[:-1]
     language = lines.pop(0)[3:]
     content = "\n".join(lines)
     if not language:
         language = "text"
-    return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
-
+    ret = r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
+    # for more than a handful of lines, use two columns
+    if is_beamer and content.count("\n") > 13:
+        ret = r"\begin{multicols}{2}" + "\n" + r"{\small" + "\n" + ret + "\n}\n" + r"\end{multicols}"
+    if is_beamer and content.count("\n") > 50:
+        ret = ret.replace(r"\small", r"\tiny")
+    return ret
 
 def get_tex_block(chunk: str) -> str:
     return "\n".join(chunk.splitlines()[1:-1])
