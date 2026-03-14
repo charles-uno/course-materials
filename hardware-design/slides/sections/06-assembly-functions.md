@@ -195,6 +195,23 @@ $$$
 \end{columns}
 $$$
 
+### trying wide table
+fizz buzz 
+
+$$$
+\bigskip
+$$$
+
+| Register | Value  | $\hfill$ | Address | Value |
+| -------- | ------ | - | ------- | ----- |
+| x0       | ?      |   | 0x3fa0  | ?     |
+| x1       | ?      |   | 0x3fb0  | ?     |
+| x2       | ?      |   | 0x3fc0  | ?     |
+| x3       | ?      |   | 0x3fd0  | ?     |
+| sp       | 0x4010 |   | 0x3fe0  | ?     |
+| fp       | ?      |   | 0x3ff0  | ?     |
+| pc       | ?      |   | 0x4000  | ?     |
+| lr       | ?      |   | 0x4010  | ?     |
 
 
 
@@ -246,9 +263,9 @@ $$$
 | 0x3fe0 | ... |
 | 0x3ff0 | ... |
 | 0x4000 | ... |
-| 0x4010 | ... $\rdelim\}{3}{3mm}[parent stack frame]$ |
+| 0x4010 | ... |
 | ... | ... |
-| 0x5000 | ... |
+| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
 $$$
 \end{column}
@@ -287,12 +304,12 @@ $$$
 | --- | --- |
 | 0x3fc0 | ... |
 | 0x3fd0 | ... |
-| 0x3fe0 | ... $\rdelim\}{3}{3mm}[main stack frame]$ |
+| 0x3fe0 | ... |
 | 0x3ff0 | ... |
-| 0x4000 | ... |
-| 0x4010 | ... $\rdelim\}{3}{3mm}[parent stack frame]$ |
+| 0x4000 | ... $\rdelim\}{-3}{3mm}[main stack frame]$ |
+| 0x4010 | ... |
 | ... | ... |
-| 0x5000 | ... |
+| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
 $$$
 \end{column}
