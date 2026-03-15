@@ -118,7 +118,7 @@ Here's how we keep track of those variables:
 
 ### Stack Overflow
 
-- If you try to read or write data past the top of your stack, your program will crash
+- If you try to read or write data past the top of your stack, the OS will terminate your program
 - Some languages limit call depth to reduce the risk of stack overflow (eg `RecursionError` in Python)
 - Some languages (eg Rust, Go) start with a small stack and grow it as needed. This adds overhead
 - When allocating a large variable, we usually store the *address* on the stack, but the data in the heap
@@ -128,7 +128,7 @@ Here's how we keep track of those variables:
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
-input_fmt: .ascii "%d\0"
+fmt: .ascii "%d\0"
 output: .ascii "%d+1=%d\n\0"
 .align 2
 
@@ -137,7 +137,7 @@ main:
 sub sp, sp, 0x10
 ldr x0, =prompt
 bl printf
-ldr x0, =input_fmt
+ldr x0, =fmt
 mov x1, sp
 bl scanf
 ldr x0, =output
@@ -148,11 +148,11 @@ add sp, sp, 0x10
 b exit
 ```
 
-### Local Variable Walkthrough
+### Local Variable Walkthrough (0)
+
 Initial state:
 
 |||
-
 | Register | Value |
 | --- | --- |
 | x0 | ? |
@@ -174,8 +174,198 @@ Initial state:
 | 0x3fe0 | ... |
 | 0x3ff0 | ... |
 | 0x4000 | (in use) |
+|||
+
+### Local Variable Walkthrough (1)
+
+```arm
+sub sp, sp, 0x10
+```
 
 |||
+| Register | Value |
+| --- | --- |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3ff0 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | ... |
+| 0x4000 | (in use) |
+|||
+
+### Local Variable Walkthrough (2)
+
+```arm
+ldr x0, =prompt
+bl printf
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | =prompt |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3ff0 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | ... |
+| 0x4000 | (in use) |
+|||
+
+Prints: `int plz: `
+
+### Local Variable Walkthrough (3)
+
+```arm
+ldr x0, =fmt
+mov x1, sp
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=prompt}$ =fmt |
+| x1 | 0x3ff0 |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3ff0 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | ... |
+| 0x4000 | (in use) |
+|||
+
+### Local Variable Walkthrough (4)
+
+```arm
+bl scanf
+```
+Waits for user input. Let's say the user enters `86400`
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=prompt}$ =fmt |
+| x1 | 0x3ff0 |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3ff0 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | 86400 |
+| 0x4000 | (in use) |
+|||
+
+### Local Variable Walkthrough (5)
+
+```arm
+ldr x0, =output
+ldr x1, [sp]
+add x2, x1, 1
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=prompt}$ $\cancel{=fmt}$ =output |
+| x1 | $\cancel{0x3ff0}$ 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3ff0 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | 86400 |
+| 0x4000 | (in use) |
+|||
+
+### Local Variable Walkthrough (6)
+
+```arm
+bl printf
+add sp, sp, 0x10
+b exit
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=prompt}$ $\cancel{=fmt}$ =output |
+| x1 | $\cancel{0x3ff0}$ 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ $\cancel{0x3ff0}$ 0x4000 |
+| fp | ? |
+| pc | ? |
+| lr | ? |
+
+| Address | Value |
+| --- | --- |
+| 0x3f90 | ... |
+| 0x3fa0 | ... |
+| 0x3fb0 | ... |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | 86400 |
+| 0x4000 | (in use) |
+|||
+
+Prints: `86400+1=86401` then exits
 
 ### Exercise
 
@@ -327,7 +517,7 @@ At the end of `printf`, we run `ret`:
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
-input_fmt: .ascii "%d\0"
+fmt: .ascii "%d\0"
 output: .ascii "%d+1=%d\n\0"
 .align 2
 
@@ -351,7 +541,7 @@ str fp, [sp, 0x10]
 add fp, sp, 0x20
 ldr x0, =prompt
 bl printf
-ldr x0, =input_fmt
+ldr x0, =fmt
 mov x1, sp
 bl scanf
 ldr x0, [sp]
@@ -409,7 +599,7 @@ At the end of the nested function, `ret` goes back to LR from the last time we c
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
-input_fmt: .ascii "%d\0"
+fmt: .ascii "%d\0"
 output: .ascii "%d + 1 = %d\n\0"
 
 .section .data
@@ -457,7 +647,7 @@ add fp, sp, 0x10
 ldr x0, =prompt
 bl printf
 // store input to global variable
-ldr x0, =input_fmt
+ldr x0, =fmt
 ldr x1, =n
 bl scanf
 // load input and pass to add_one
