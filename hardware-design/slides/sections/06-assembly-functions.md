@@ -44,25 +44,25 @@ We can draw a **memory diagram** to keep track of registers and memory for our p
 
 | Register | Value |
 | --- | --- |
-| x0 | ... |
-| x1 | ... |
-| x2 | ... |
-| x3 | ... |
-| sp | ... |
-| fp | ... |
-| pc | ... |
-| lr | ... |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | ? |
+| fp | ? |
+| pc | ? |
+| lr | ? |
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
-| 0x4000 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | ? |
+| 0x4000 | ? |
 
 |||
 
@@ -166,13 +166,13 @@ Initial state:
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | ? |
 | 0x4000 | (in use) |
 |||
 
@@ -196,13 +196,13 @@ sub sp, sp, 0x10
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | (reserved) |
 | 0x4000 | (in use) |
 |||
 
@@ -227,13 +227,13 @@ bl printf
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | (reserved) |
 | 0x4000 | (in use) |
 |||
 
@@ -260,13 +260,13 @@ mov x1, sp
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | (reserved) |
 | 0x4000 | (in use) |
 |||
 
@@ -291,12 +291,12 @@ Waits for user input. Let's say the user enters `86400`
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
 | 0x3ff0 | 86400 |
 | 0x4000 | (in use) |
 |||
@@ -323,12 +323,12 @@ add x2, x1, 1
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
 | 0x3ff0 | 86400 |
 | 0x4000 | (in use) |
 |||
@@ -355,21 +355,24 @@ b exit
 
 | Address | Value |
 | --- | --- |
-| 0x3f90 | ... |
-| 0x3fa0 | ... |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | 86400 |
+| 0x3f90 | ? |
+| 0x3fa0 | ? |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | (freed) |
 | 0x4000 | (in use) |
 |||
 
 Prints: `86400+1=86401` then exits
 
-### Exercise
+### Summary
 
-Let's work through this on the board
+- We can store local variables on the stack
+- To allocate space on the stack, move SP up
+- To free that space, move SP back down
+- This is much faster than using the (unstructured) heap
 
 ## Stack Frames
 
@@ -381,34 +384,49 @@ $$$
 \end{center}
 $$$
 
+### The Frame Pointer
+
+In the previous example, we stored a local variable to the stack:
+- Move SP up to reserve space
+- Put input there using `scanf` (or store data with `str`)
+- Load data with `ldr`
+- Move SP back down to free the space
+
+But what if we want to know how much of the stack belongs to the current function?
+
+### The Frame Pointer
+
+- SP always points to the top of the stack
+- FP (the frame pointer) points to the bottom of the **stack frame**
+- A stack frame is the portion of the stack used by a function
+- Tracking FP is not strictly necessary! But debugging is harder without it
+
 ### Initial State
 
 At the start of the program, our memory diagram looks like this:
 
 |||
-
 | Register | Value |
 | --- | --- |
-| x0 | ... |
-| x1 | ... |
-| x2 | ... |
-| x3 | ... |
-| sp | 0x4010 |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x4000 |
 | fp | 0x5000 |
-| pc | ... |
-| lr | ... |
+| pc | ? |
+| lr | ? |
 
 | Address | Value |
 | --- | --- |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
-| 0x4000 | ... |
-| ... | ... |
-| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
-
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | ? |
+| 0x4000 | ? |
+| ... | ? |
+| 0x5000 | ? $\rdelim\}{-3}{3mm}[caller frame]$ |
 |||
 
 The existing stack frame goes from `0x5000` (FP) to `0x4000` (SP)
@@ -418,29 +436,27 @@ The existing stack frame goes from `0x5000` (FP) to `0x4000` (SP)
 After calling into `main`, we update SP and FP to add a new frame to the stack:
 
 |||
-
 | Register | Value |
 | --- | --- |
-| x0 | ... |
-| x1 | ... |
-| x2 | ... |
-| x3 | ... |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
 | sp | 0x3fd0 |
 | fp | 0x3ff0 |
-| pc | ... |
-| lr | ... |
+| pc | ? |
+| lr | ? |
 
 | Address | Value |
 | --- | --- |
-| 0x3fb0 | ... |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... $\rdelim\}{-3}{3mm}[main stack frame]$ |
-| 0x4000 | ... |
-| ... | ... |
-| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
-
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | ? $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | ? |
+| ... | ? |
+| 0x5000 | ? $\rdelim\}{-3}{3mm}[caller frame]$ |
 |||
 
 ### Tracking Stacked Frames
@@ -501,6 +517,9 @@ Let's work through this together
 - Once we're done with the function, we want to get back to the call site
 - That's what the link register (LR) is for
 
+% NOTE: x0, x1, ... are input args
+% x0, x1, ... are also the return values
+
 ### Step by Step
 
 When we execute `bl printf`:
@@ -550,15 +569,527 @@ mov x2, x0
 ldr x0, =output
 ldr x1, [sp]
 bl printf
-ldr lr, [sp, 0x10]
-ldr fp, [sp, 0x20]
+ldr lr, [sp, 0x20]
+ldr fp, [sp, 0x10]
 add sp, sp, 0x30
+mov x0, 0
 b exit
 ```
 
-### Back to the Board
+### Function Call Walkthrough (0)
 
-Let's work through this one together on the board
+Initial state:
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x4000 |
+| fp | 0x5000 |
+| pc | 0x15 |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | ? |
+| 0x3fe0 | ? |
+| 0x3ff0 | ? |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (1)
+
+```arm,firstnumber=21
+sub sp, sp, 0x30
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x4000}$ 0x3fd0 |
+| fp | 0x5000 |
+| pc | $\cancel{...}$ 0x16 |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | (reserved) |
+| 0x3fe0 | (reserved) |
+| 0x3ff0 | (reserved) |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (2)
+
+```arm,firstnumber=22
+str lr, [sp, 0x20]
+str fp, [sp, 0x10]
+add fp, sp, 0x20
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | ? |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | $\cancel{0x5000}$ 0x3ff0 |
+| pc | $\cancel{...}$ 0x19 |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | (reserved) |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (3)
+
+```arm,firstnumber=25
+ldr x0, =prompt
+bl printf
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | =prompt |
+| x1 | ? |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | $\cancel{...}$ 0x1b |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | (reserved) |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+Prints: `int plz:`
+
+### Stack Frames for Built-In Functions?
+
+- `bl printf` is a function call
+- `printf` has its own stack frame
+- Same for `scanf`
+- For the sake of convenience, let's just worry about `add_one`
+
+### Function Call Walkthrough (4)
+
+```arm,firstnumber=27
+ldr x0, =fmt
+mov x1, sp
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=prompt}$ =fmt |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | $\cancel{...}$ 0x1d |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | (reserved) |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (5)
+
+```arm,firstnumber=29
+bl scanf
+```
+
+Reads user input. Let's say they enter `86400`
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=fmt}$ =fmt |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | 0x1e |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (6)
+
+```arm,firstnumber=30
+ldr x0, [sp]
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=fmt}$ 86400 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | 0x1f |
+| lr | (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (7)
+
+```arm,firstnumber=31
+bl add_one
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | 86400 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | $\cancel{0x1f}$ 0x09 |
+| lr | $\cancel{(caller lr)}$ 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | ? |
+| 0x3fc0 | ? |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (8)
+
+```arm,firstnumber=9
+sub sp, sp, 0x20
+str fp, [sp]
+str lr, [sp, 0x10]
+add fp, sp, 0x10
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | 86400 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x3fd0}$ 0x3fb0 |
+| fp | $\cancel{0x3ff0}$ 0x3fc0 |
+| pc | $\cancel{...}$ 0x0d |
+| lr | 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | 0x3fc0 |
+| 0x3fc0 | 0x20 $\rdelim\}{-2}{3mm}[add\_one frame]$ |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (9)
+
+```arm,firstnumber=13
+add x0, x0, 1
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{86400}$ 86401 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fb0 |
+| fp | 0x3fc0 |
+| pc | $\cancel{...}$ 0x0e |
+| lr | 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | 0x3fc0 |
+| 0x3fc0 | 0x20 $\rdelim\}{-2}{3mm}[add\_one frame]$ |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (10)
+
+```arm,firstnumber=14
+ldr lr, [sp, 0x10]
+0x0f ldr fp, [sp]
+0x10 add sp, sp, 0x20
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | 86401 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | $\cancel{0x3fb0}$ 0x3fd0 |
+| fp | $\cancel{0x3fc0}$ 0x3ff0 |
+| pc | $\cancel{...}$ 0x0d |
+| lr | $\cancel{0x20}$ 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (11)
+
+```arm,firstnumber=17
+ret
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | 86401 |
+| x1 | 0x3fd0 |
+| x2 | ? |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | $\cancel{0x12}$ 0x20 |
+| lr | 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (12)
+
+```arm,firstnumber=32
+mov x2, x0
+ldr x0, =output
+ldr x1, [sp]
+bl printf
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{86401}$ =output |
+| x1 | $\cancel{0x3fd0}$ 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
+| pc | $\cancel{...}$ 0x24 |
+| lr | 0x20 |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+Prints: `86400+1=86401`
+
+### Function Call Walkthrough (13)
+
+```arm,firstnumber=36
+ldr lr, [sp, 0x20]
+ldr fp, [sp, 0x10]
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | =output |
+| x1 | 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | 0x3fd0 |
+| fp | $\cancel{0x3ff0}$ 0x5000 |
+| pc | $\cancel{...}$ 0x26 |
+| lr | $\cancel{0x20}$ (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | 86400 |
+| 0x3fe0 | 0x5000 |
+| 0x3ff0 | (caller lr) $\rdelim\}{-3}{3mm}[main frame]$ |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (14)
+
+```arm,firstnumber=38
+add sp, sp, 0x30
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | =output |
+| x1 | 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | $\cancel{0x3fd0}$ 0x4000 |
+| fp | 0x5000 |
+| pc | $\cancel{...}$ 0x27 |
+| lr | $\cancel{0x20}$ (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | (freed) |
+| 0x3fe0 | (freed) |
+| 0x3ff0 | (freed) |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+### Function Call Walkthrough (15)
+
+```arm,firstnumber=39
+mov x0, 0
+b exit
+```
+
+|||
+| Register | Value |
+| --- | --- |
+| x0 | $\cancel{=output}$ 0 |
+| x1 | $\cancel{0x3fd0}$ 86400 |
+| x2 | 86401 |
+| x3 | ? |
+| sp | 0x4000 |
+| fp | 0x5000 |
+| pc | $\cancel{...}$ 0x28 |
+| lr | $\cancel{0x20}$ (caller lr) |
+
+| Address | Value |
+| --- | --- |
+| 0x3fb0 | (freed) |
+| 0x3fc0 | (freed) |
+| 0x3fd0 | (freed) |
+| 0x3fe0 | (freed) |
+| 0x3ff0 | (freed) |
+| 0x4000 | (in use) |
+| ... | (in use) |
+| 0x5000 | (in use) $\rdelim\}{-3}{3mm}[caller frame]$ |
+|||
+
+Exit status 0 (normal)
+
+### Summary
+
+- At the start of every function, move SP to allocate space
+- Make room for FP, LR, and any local variables
+- Update FP to track the bottom of the new frame
+- Maybe call functions, which overwrite LR
+- Stack frame teardown: restore previous FP, LR, SP
 
 ### SIMD? More like PITA
 

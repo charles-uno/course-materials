@@ -204,10 +204,14 @@ def get_h3(chunk: str, is_beamer: bool) -> str:
 def get_code_block(chunk: str, is_beamer: bool) -> str:
     lines = chunk.splitlines()[:-1]
     language = lines.pop(0)[3:]
+    if "," in language:
+        language, flags = language.split(",", 1)
+    else:
+        flags = ""
     content = "\n".join(lines)
     if not language:
         language = "text"
-    ret = r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
+    ret = r"\begin{minted}[" + flags + "]{" + language + "}\n" + content + "\n" + r"\end{minted}"
     # for more than a handful of lines, use two columns
     if is_beamer and content.count("\n") > 13:
         ret = r"\begin{multicols}{2}" + "\n" + r"{\small" + "\n" + ret + "\n}\n" + r"\end{multicols}"

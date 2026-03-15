@@ -33,7 +33,8 @@ mov x2, x0
 ldr x0, =output
 ldr x1, [sp]
 bl printf
-ldr lr, [sp, 0x10]
-ldr fp, [sp, 0x20]
+ldr lr, [sp, 0x20]
+ldr fp, [sp, 0x10]
 add sp, sp, 0x30
+mov x0, 0
 b exit
