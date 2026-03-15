@@ -475,6 +475,24 @@ Wait a sec:
 - At the end of the function, when returning to the previous stack frame, restore FP
 - SP does not need to be stored explicitly. Why not?
 
+### SIMD? More like PITA
+
+- Recall SIMD: Single Instruction, Multiple Data
+- Fetch and decode once, execute in parallel
+- Aarch64 is a 64-bit architecture. Instructions process 8 bytes at a time
+- Sometimes it does 128 bits (16 bytes) instead
+- I don't have time to worry about that, and neither do you. For the purposes of this class, everything is 16 bytes.
+- This is wasteful! We are using double the memory we need, sometimes more
+- We are not trying to become assembly developers. We're here for the concepts
+
+### For the sake of completeness
+
+- `stp` (store pair) is the SIMD version of `str`
+- `ldp` (load pair) is the SIMD version of `ldr`
+- That's how "real" code handles stack frames
+- Those commands even allow SP to be updated at the same time!
+- We are choosing to prioritize a small vocabulary
+
 ### Example Time
 
 So what does this look like in Assembly?
@@ -535,7 +553,7 @@ At the end of `printf`, we run `ret`:
 
 ### Example Function
 
-```arm
+```arm,linenos=true,xleftmargin=1em
 .section .rodata
 prompt: .ascii "int plz: \0"
 fmt: .ascii "%d\0"
@@ -608,7 +626,7 @@ Initial state:
 
 ### Function Call Walkthrough (1)
 
-```arm,firstnumber=21
+```arm,linenos=true,xleftmargin=1em,firstnumber=21
 sub sp, sp, 0x30
 ```
 
@@ -638,7 +656,7 @@ sub sp, sp, 0x30
 
 ### Function Call Walkthrough (2)
 
-```arm,firstnumber=22
+```arm,linenos=true,xleftmargin=1em,firstnumber=22
 str lr, [sp, 0x20]
 str fp, [sp, 0x10]
 add fp, sp, 0x20
@@ -670,7 +688,7 @@ add fp, sp, 0x20
 
 ### Function Call Walkthrough (3)
 
-```arm,firstnumber=25
+```arm,linenos=true,xleftmargin=1em,firstnumber=25
 ldr x0, =prompt
 bl printf
 ```
@@ -710,7 +728,7 @@ Prints: `int plz:`
 
 ### Function Call Walkthrough (4)
 
-```arm,firstnumber=27
+```arm,linenos=true,xleftmargin=1em,firstnumber=27
 ldr x0, =fmt
 mov x1, sp
 ```
@@ -741,7 +759,7 @@ mov x1, sp
 
 ### Function Call Walkthrough (5)
 
-```arm,firstnumber=29
+```arm,linenos=true,xleftmargin=1em,firstnumber=29
 bl scanf
 ```
 
@@ -773,7 +791,7 @@ Reads user input. Let's say they enter `86400`
 
 ### Function Call Walkthrough (6)
 
-```arm,firstnumber=30
+```arm,linenos=true,xleftmargin=1em,firstnumber=30
 ldr x0, [sp]
 ```
 
@@ -803,7 +821,7 @@ ldr x0, [sp]
 
 ### Function Call Walkthrough (7)
 
-```arm,firstnumber=31
+```arm,linenos=true,xleftmargin=1em,firstnumber=31
 bl add_one
 ```
 
@@ -833,7 +851,7 @@ bl add_one
 
 ### Function Call Walkthrough (8)
 
-```arm,firstnumber=9
+```arm,linenos=true,xleftmargin=1em,firstnumber=9
 sub sp, sp, 0x20
 str fp, [sp]
 str lr, [sp, 0x10]
@@ -866,7 +884,7 @@ add fp, sp, 0x10
 
 ### Function Call Walkthrough (9)
 
-```arm,firstnumber=13
+```arm,linenos=true,xleftmargin=1em,firstnumber=13
 add x0, x0, 1
 ```
 
@@ -896,7 +914,7 @@ add x0, x0, 1
 
 ### Function Call Walkthrough (10)
 
-```arm,firstnumber=14
+```arm,linenos=true,xleftmargin=1em,firstnumber=14
 ldr lr, [sp, 0x10]
 ldr fp, [sp]
 add sp, sp, 0x20
@@ -928,7 +946,7 @@ add sp, sp, 0x20
 
 ### Function Call Walkthrough (11)
 
-```arm,firstnumber=17
+```arm,linenos=true,xleftmargin=1em,firstnumber=17
 ret
 ```
 
@@ -958,7 +976,7 @@ ret
 
 ### Function Call Walkthrough (12)
 
-```arm,firstnumber=32
+```arm,linenos=true,xleftmargin=1em,firstnumber=32
 mov x2, x0
 ldr x0, =output
 ldr x1, [sp]
@@ -993,7 +1011,7 @@ Prints: `86400+1=86401`
 
 ### Function Call Walkthrough (13)
 
-```arm,firstnumber=36
+```arm,linenos=true,xleftmargin=1em,firstnumber=36
 ldr lr, [sp, 0x20]
 ldr fp, [sp, 0x10]
 ```
@@ -1024,7 +1042,7 @@ ldr fp, [sp, 0x10]
 
 ### Function Call Walkthrough (14)
 
-```arm,firstnumber=38
+```arm,linenos=true,xleftmargin=1em,firstnumber=38
 add sp, sp, 0x30
 ```
 
@@ -1054,7 +1072,7 @@ add sp, sp, 0x30
 
 ### Function Call Walkthrough (15)
 
-```arm,firstnumber=39
+```arm,linenos=true,xleftmargin=1em,firstnumber=39
 mov x0, 0
 b exit
 ```
@@ -1093,38 +1111,22 @@ Exit status 0 (normal)
 - Maybe call functions, which overwrite LR
 - Stack frame teardown: restore previous FP, LR, SP
 
-### Built-In Function Frames
+### Discussion
 
 - In `main`, we had SP=0x3fd0 and FP=0x3ff0
 - When we called `bl add_one`, we set SP=0x3fb0 and FP=0x3fc0
-- What would SP and FP have been for `scanf` and `printf`?
+- What would SP and FP have been for `scanf`?
+- How about `printf`?
 - Hint: these functions were calles from `main` 
 
-### SIMD? More like PITA
+## Optimization with Functions
 
-- Single Instruction, Multiple Data
-- Remember from our discussion of instruction-level parallelism
-- Aarch64 is a 64-bit architecture. Instructions process 8 bytes at a time
-- Sometimes it does 128 bits (16 bytes) instead
-- I don't have time to worry about that, and neither do you. For the purposes of this class, everything is 16 bytes.
-- This is wasteful! We are using double the memory we need, sometimes more
-- That's ok. We are not trying to become assembly developers. We're here for the concepts
+### tldr
 
-### For the sake of completeness
-
-- `stp` (store pair) is the SIMD version of `str`
-- `ldp` (load pair) is the SIMD version of `ldr`
-- That's how "real" code handles stack frames
-- Those commands even allow SP to be updated at the same time!
-- We are choosing to prioritize a small vocabulary
-
-## Nested Functions
-
-### Why Nest?
-
-Real code usually does not just live in one function. Call stacks are frequently 10+ functions deep!
-
-We have to be very careful to keep track of FP and LR for each frame in the stack
+- In real code, you can get deep call stacks. frequently 10+ functions deep
+- we have ~6 instructions of overhead for every function call
+- this can be significant in small functions, especially if called many times
+- there are a few strategies for reducing this cost
 
 ### Tail Call Optimization
 
@@ -1134,9 +1136,99 @@ Just call `b` to jump straight into the nested function, instead of `bl`
 
 At the end of the nested function, `ret` goes back to LR from the last time we called `bl` (parent function call)
 
-### Example Nested Function
+### Function Inlining
+
+|||
+Before:
+```python
+def plus_one(x):
+	return x + 1
+
+def main():
+	total = 0
+	for i in range(100):
+		total = plus_one(total)
+	return total
+```
+
+After:
+```python
+def main():
+	total = 0
+	for i in range(100):
+		total = total + 1
+	return total
+```
+|||
+
+### So Much Annotation!
 
 ```arm
+.arch armv8-a
+.file "function-mvp.c"
+.text
+.align  2
+.p2align 5,,15
+.global add_one
+.type add_one, %function
+add_one:
+.LFB11:
+.cfi_startproc
+add w0, w0, 1
+ret
+.cfi_endproc
+.LFE11:
+.size add_one, .-add_one
+.section .rodata.str1.8,"aMS",@progbits,1
+.align 3
+.LC0:
+.string "%d + 1 = %d\n"
+.section .text.startup,"ax",@progbits
+.align 2
+.p2align 5,,15
+.global main
+.type main, %function
+main:
+.LFB12:
+.cfi_startproc
+stp x29, x30, [sp, -16]!
+.cfi_def_cfa_offset 16
+.cfi_offset 29, -16
+.cfi_offset 30, -8
+mov w2, 8
+mov w1, 7
+mov x29, sp
+adrp x0, .LC0
+add x0, x0, :lo12:.LC0
+bl printf
+mov w0, 0
+ldp x29, x30, [sp], 16
+.cfi_restore 30
+.cfi_restore 29
+.cfi_def_cfa_offset 0
+ret
+.cfi_endproc
+.LFE12:
+.size main, .-main
+.ident "GCC: (Debian 14.2.0-19) 14.2.0"
+.section .note.GNU-stack,"",@progbits
+```
+
+### So Much Annotation!
+
+
+
+### Performance Instrumentation
+
+For performance-critical applications, we can compile with 
+
+
+
+
+
+### Example Nested Function
+
+```arm,linenos=true,xleftmargin=1em
 .section .rodata
 prompt: .ascii "int plz: \0"
 fmt: .ascii "%d\0"
