@@ -109,7 +109,7 @@ Here's how we keep track of those variables:
 - Then we put the local variables for `buzz` on top of that
 - Then we put the local variables for `fizz` on top of that
 - Etc
-- This is why it's called a stack. We're stacking
+- To allocate more space on the stack, just change SP
 
 ### Stack Overflow
 
@@ -159,44 +159,23 @@ Initial state:
 | x1 | ? |
 | x2 | ? |
 | x3 | ? |
-| sp | 0x4010 |
+| sp | 0x4000 |
 | fp | ? |
 | pc | ? |
 | lr | ? |
 
 | Address | Value |
 | --- | --- |
+| 0x3f90 | ... |
 | 0x3fa0 | ... |
 | 0x3fb0 | ... |
 | 0x3fc0 | ... |
 | 0x3fd0 | ... |
 | 0x3fe0 | ... |
 | 0x3ff0 | ... |
-| 0x4000 | ... |
-| 0x4010 | (in use) |
+| 0x4000 | (in use) |
 
 |||
-
-### trying wide table
-fizz buzz 
-
-$$$
-\bigskip
-$$$
-
-| Register | Value  | $\hfill$ | Address | Value |
-| -------- | ------ | - | ------- | ----- |
-| x0       | ?      |   | 0x3fa0  | ?     |
-| x1       | ?      |   | 0x3fb0  | ?     |
-| x2       | ?      |   | 0x3fc0  | ?     |
-| x3       | ?      |   | 0x3fd0  | ?     |
-| sp       | 0x4010 |   | 0x3fe0  | ?     |
-| fp       | ?      |   | 0x3ff0  | ?     |
-| pc       | ?      |   | 0x4000  | ?     |
-| lr       | ?      |   | 0x4010  | ?     |
-
-
-
 
 ### Exercise
 
@@ -231,53 +210,18 @@ At the start of the program, our memory diagram looks like this:
 
 | Address | Value |
 | --- | --- |
+| 0x3fb0 | ... |
 | 0x3fc0 | ... |
 | 0x3fd0 | ... |
 | 0x3fe0 | ... |
 | 0x3ff0 | ... |
 | 0x4000 | ... |
-| 0x4010 | ... |
 | ... | ... |
 | 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
 |||
 
-The existing stack frame goes from `0x5000` (FP) to `0x4010` (SP)
-
-### Initial State
-
-At the start of the program, our memory diagram looks like this:
-
-|||
-
-| Register | Value |
-| --- | --- |
-| x0 | ... |
-| x1 | ... |
-| x2 | ... |
-| x3 | ... |
-| sp | 0x4010 |
-| fp | 0x5000 |
-| pc | ... |
-| lr | ... |
-
-| Address | Value |
-| --- | --- |
-| 0x3fc0 | ... |
-| 0x3fd0 | ... |
-| 0x3fe0 | ... |
-| 0x3ff0 | ... |
-| 0x4000 | ... |
-| 0x4010 | ... |
-| ... | ... |
-| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
-
-|||
-
-The existing stack frame goes from `0x5000` (FP) to `0x4010` (SP)
-
-
-
+The existing stack frame goes from `0x5000` (FP) to `0x4000` (SP)
 
 ### Stacking Frames
 
@@ -291,19 +235,19 @@ After calling into `main`, we update SP and FP to add a new frame to the stack:
 | x1 | ... |
 | x2 | ... |
 | x3 | ... |
-| sp | 0x3fe0 |
-| fp | 0x4000 |
+| sp | 0x3fd0 |
+| fp | 0x3ff0 |
 | pc | ... |
 | lr | ... |
 
 | Address | Value |
 | --- | --- |
+| 0x3fb0 | ... |
 | 0x3fc0 | ... |
 | 0x3fd0 | ... |
 | 0x3fe0 | ... |
-| 0x3ff0 | ... |
-| 0x4000 | ... $\rdelim\}{-3}{3mm}[main stack frame]$ |
-| 0x4010 | ... |
+| 0x3ff0 | ... $\rdelim\}{-3}{3mm}[main stack frame]$ |
+| 0x4000 | ... |
 | ... | ... |
 | 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
