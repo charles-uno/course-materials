@@ -1222,4 +1222,15 @@ Let's work through it together
 
 
 
+## Advanced Topics
+
+### TODO
+
+should this stuff be tucked into the above content, or together at the end? probably tucked in
+
+- function inlining. too much can cause binary bloat, cache misses
+- tail-call optimization
+- ROP attacks
+- performance instrumentation
+- stack overflow
 
