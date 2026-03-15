@@ -510,16 +510,15 @@ $$$
 - When you go to a website, how does your browser know what to display?
 - When you add an item to your online cart, what data is sent?
 
+|||
 $$$
-\begin{columns}
-    \begin{column}{0.5\textwidth}
-        \includegraphics[width=\columnwidth]{images/data-representation/html-example}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-        \includegraphics[width=\columnwidth]{images/data-representation/json-example}
-    \end{column}
-\end{columns}
+\includegraphics[width=\columnwidth]{images/data-representation/html-example}
 $$$
+|||
+$$$
+\includegraphics[width=\columnwidth]{images/data-representation/json-example}
+$$$
+|||
 
 % ### Group Exercises
 % TODO: this

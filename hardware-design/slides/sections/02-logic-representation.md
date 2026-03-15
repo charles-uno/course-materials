@@ -401,21 +401,19 @@ $$$
 $$$
 
 ### Functional Completeness
+
+|||
+
+- Logic gates are not independent!
+- There are many ways to build gates from other gates.
+- It's even possible to build all gates using only NAND. This is called functional completeness.
+- Why might functional completeness be useful?
+
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{itemize}
-\item Logic gates are not independent!
-\item There are many ways to build gates from other gates.
-\item It's even possible to build all gates using only NAND. This is called functional completeness.
-\item Why might functional completeness be useful?
-	\end{itemize}		
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\includegraphics[width=\columnwidth]{images/logic-representation/functional-completeness.png}
-		\end{column}
-	\end{columns}
+\includegraphics[width=\columnwidth]{images/logic-representation/functional-completeness.png}
 $$$
+
+|||
 
 % ### Group Exercises
 % TODO: this
@@ -427,117 +425,112 @@ $$$
 OK, so we have circuits that can do logic. Now what?
 
 ### Multiplexers
+
+|||
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\includegraphics[width=\columnwidth]{images/logic-representation/multiplexer}
-		\end{column}
-		\begin{column}{0.5\textwidth}
+\includegraphics[width=\columnwidth]{images/logic-representation/multiplexer}
 $$$			
 - When S=1, out=A
 - When S=0, out=B
 - Why might this be useful?
 - Can we build this out of logic gates?
-$$$		
-		\end{column}
-	\end{columns}
-$$$
+|||
 
 ### Latches (aka Flip-Flops)
 What do you suppose this does?
 $$$
-	\resizebox{0.8\columnwidth}{!}{
-		\begin{tikzpicture}
-			% Paths, nodes and wires:
-			\node[jump crossing] at (5.997, 5.857){};
-			\draw (8.162, 6.709) -- (9, 6.714);
-			\draw (8.162, 4.28) -- (9, 4.286);
-			\draw (6, 4) -- (5, 4);
-			\draw (6, 6.989) -- (5, 7);
-			\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
-			\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
-			\draw (6, 6) -- (6, 6.429);
-			\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){S};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){R};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){Q};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){$\overline{Q}$};
-			\node[ieeestd nor port] at (7.081, 4.28){};
-			\node[ieeestd nor port] at (7.081, 6.709){};
-		\end{tikzpicture}
-	}
+\resizebox{0.8\columnwidth}{!}{
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[jump crossing] at (5.997, 5.857){};
+		\draw (8.162, 6.709) -- (9, 6.714);
+		\draw (8.162, 4.28) -- (9, 4.286);
+		\draw (6, 4) -- (5, 4);
+		\draw (6, 6.989) -- (5, 7);
+		\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
+		\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
+		\draw (6, 6) -- (6, 6.429);
+		\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){S};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){R};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){Q};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){$\overline{Q}$};
+		\node[ieeestd nor port] at (7.081, 4.28){};
+		\node[ieeestd nor port] at (7.081, 6.709){};
+	\end{tikzpicture}
+}
 $$$
 
 ### Baseline State
 $$$
-	\resizebox{0.8\columnwidth}{!}{
-		\begin{tikzpicture}
-			% Paths, nodes and wires:
-			\node[jump crossing] at (5.997, 5.857){};
-			\draw (8.162, 6.709) -- (9, 6.714);
-			\draw (8.162, 4.28) -- (9, 4.286);
-			\draw (6, 4) -- (5, 4);
-			\draw (6, 6.989) -- (5, 7);
-			\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
-			\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
-			\draw (6, 6) -- (6, 6.429);
-			\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){1};
-			\node[ieeestd nor port] at (7.081, 4.28){};
-			\node[ieeestd nor port] at (7.081, 6.709){};
-		\end{tikzpicture}
-	}
+\resizebox{0.8\columnwidth}{!}{
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[jump crossing] at (5.997, 5.857){};
+		\draw (8.162, 6.709) -- (9, 6.714);
+		\draw (8.162, 4.28) -- (9, 4.286);
+		\draw (6, 4) -- (5, 4);
+		\draw (6, 6.989) -- (5, 7);
+		\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
+		\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
+		\draw (6, 6) -- (6, 6.429);
+		\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){1};
+		\node[ieeestd nor port] at (7.081, 4.28){};
+		\node[ieeestd nor port] at (7.081, 6.709){};
+	\end{tikzpicture}
+}
 $$$
 
 ### Send a Signal...
 $$$
-	\resizebox{0.8\columnwidth}{!}{
-		\begin{tikzpicture}
-			% Paths, nodes and wires:
-			\node[jump crossing] at (5.997, 5.857){};
-			\draw (8.162, 6.709) -- (9, 6.714);
-			\draw (8.162, 4.28) -- (9, 4.286);
-			\draw (6, 4) -- (5, 4);
-			\draw (6, 6.989) -- (5, 7);
-			\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
-			\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
-			\draw (6, 6) -- (6, 6.429);
-			\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){1};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){1};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){0};
-			\node[ieeestd nor port] at (7.081, 4.28){};
-			\node[ieeestd nor port] at (7.081, 6.709){};
-		\end{tikzpicture}
-	}
+\resizebox{0.8\columnwidth}{!}{
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[jump crossing] at (5.997, 5.857){};
+		\draw (8.162, 6.709) -- (9, 6.714);
+		\draw (8.162, 4.28) -- (9, 4.286);
+		\draw (6, 4) -- (5, 4);
+		\draw (6, 6.989) -- (5, 7);
+		\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
+		\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
+		\draw (6, 6) -- (6, 6.429);
+		\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){1};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){1};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){0};
+		\node[ieeestd nor port] at (7.081, 4.28){};
+		\node[ieeestd nor port] at (7.081, 6.709){};
+	\end{tikzpicture}
+}
 $$$
 
 ### Remove the Signal
 $$$
-	\resizebox{0.8\columnwidth}{!}{
-		\begin{tikzpicture}
-			% Paths, nodes and wires:
-			\node[jump crossing] at (5.997, 5.857){};
-			\draw (8.162, 6.709) -- (9, 6.714);
-			\draw (8.162, 4.28) -- (9, 4.286);
-			\draw (6, 4) -- (5, 4);
-			\draw (6, 6.989) -- (5, 7);
-			\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
-			\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
-			\draw (6, 6) -- (6, 6.429);
-			\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){0};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){1};
-			\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){0};
-			\node[ieeestd nor port] at (7.081, 4.28){};
-			\node[ieeestd nor port] at (7.081, 6.709){};
-		\end{tikzpicture}
-	}
+\resizebox{0.8\columnwidth}{!}{
+	\begin{tikzpicture}
+		% Paths, nodes and wires:
+		\node[jump crossing] at (5.997, 5.857){};
+		\draw (8.162, 6.709) -- (9, 6.714);
+		\draw (8.162, 4.28) -- (9, 4.286);
+		\draw (6, 4) -- (5, 4);
+		\draw (6, 6.989) -- (5, 7);
+		\draw (8.162, 6.709) -- (8.143, 5.857) -- (6.143, 5.857);
+		\draw (8.162, 4.28) -- (8.143, 5.143) -- (6, 5.143) -- (5.997, 5.717);
+		\draw (6, 6) -- (6, 6.429);
+		\draw (5.857, 5.857) -- (5.571, 5.857) -- (5.571, 4.571) -- (6, 4.56);
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 7){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 7.286){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (4.714, 4.143){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (4.429, 4.429){0};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.143, 6.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (8.857, 7.143){1};
+		\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (9.286, 4.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (9, 4.714){0};
+		\node[ieeestd nor port] at (7.081, 4.28){};
+		\node[ieeestd nor port] at (7.081, 6.709){};
+	\end{tikzpicture}
+}
 $$$
 
 ### Latch Behavior
@@ -710,44 +703,38 @@ $$$
 $$$
 
 ### For Example
-$$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-$$$			
+|||
 - Input A can be true (V>0) or false (V=0)
 - Same for input B
 - Output may be true or false depending on inputs
 - Let's discuss how these components behave
 $$$
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (5, 1.143){};
-				\node[npn] at (5, 5){};
-				\draw (2.857, 5) to[american resistor] (4, 5);
-				\node[sground, yscale=-1] at (5, 5.857){};
-				\node[npn] at (5, 3.286){};
-				\draw (2.857, 3.286) to[american resistor] (4, 3.286);
-				\draw (5, 2.429) to[american resistor] (5, 1.286);
-				\draw (5, 2.714) -- (6, 2.714);
-				\draw (5, 2.516) -- (5, 2.429);
-				\draw (5, 1.286) -- (5, 1.143);
-				\draw (5, 4.23) -- (5, 4.056);
-				\draw (5, 5.857) -- (5, 5.77);
-				\draw (4, 5) -- (4.16, 5);
-				\draw (4, 3.286) -- (4.16, 3.286);
-				\draw (2.857, 3.286) -- (2.571, 3.286);
-				\draw (2.857, 5) -- (2.571, 5);
-				\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.143, 5){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (1.857, 5.286){A};
-				\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.143, 3.286){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (1.857, 3.571){B};
-				\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (6.429, 2.714){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (6.143, 3){??};
-				\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (5.571, 6.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (5.286, 6.714){V>0};
-				\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (5.571, 0.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (5.286, 1.143){V=0};
-			\end{tikzpicture}
-		\end{column}
-	\end{columns}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (5, 1.143){};
+	\node[npn] at (5, 5){};
+	\draw (2.857, 5) to[american resistor] (4, 5);
+	\node[sground, yscale=-1] at (5, 5.857){};
+	\node[npn] at (5, 3.286){};
+	\draw (2.857, 3.286) to[american resistor] (4, 3.286);
+	\draw (5, 2.429) to[american resistor] (5, 1.286);
+	\draw (5, 2.714) -- (6, 2.714);
+	\draw (5, 2.516) -- (5, 2.429);
+	\draw (5, 1.286) -- (5, 1.143);
+	\draw (5, 4.23) -- (5, 4.056);
+	\draw (5, 5.857) -- (5, 5.77);
+	\draw (4, 5) -- (4.16, 5);
+	\draw (4, 3.286) -- (4.16, 3.286);
+	\draw (2.857, 3.286) -- (2.571, 3.286);
+	\draw (2.857, 5) -- (2.571, 5);
+	\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.143, 5){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (1.857, 5.286){A};
+	\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (2.143, 3.286){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (1.857, 3.571){B};
+	\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (6.429, 2.714){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (6.143, 3){??};
+	\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (5.571, 6.429){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (5.286, 6.714){V>0};
+	\node[shape=rectangle, minimum width=0.536cm, minimum height=0.536cm] at (5.571, 0.857){} node[anchor=north west, align=left, text width=0.148cm, inner sep=6pt] at (5.286, 1.143){V=0};
+\end{tikzpicture}
 $$$
+|||
 
 ### What is voltage?
 	
@@ -800,43 +787,39 @@ $$$
 
 Voltage drop only happens if electricity is flowing from source to ground. If the circuit is broken, resistors act like wires
 $$$
-	\begin{tikzpicture}
-		% Paths, nodes and wires:
-		\node[ground] at (2.571, 5.659){};
-		\draw (2.571, 8.484) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (2.571, 7.199);
-		\node[sground, yscale=-1] at (2.571, 8.484){};
-		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.893, 7.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.571, 8.143){3V};
-		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.857, 5.429){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.536, 5.714){0V};
-		\draw[-latex] (1.286, 8.143) -- (2.286, 8.571);
-		\draw[-latex] (1.429, 7.714) -- (2.286, 7.286);
-		\draw[-latex] (1.571, 5.429) -- (2.286, 5.571);
-	\end{tikzpicture}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (2.571, 5.659){};
+	\draw (2.571, 8.484) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (2.571, 7.199);
+	\node[sground, yscale=-1] at (2.571, 8.484){};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.893, 7.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.571, 8.143){3V};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (0.857, 5.429){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (0.536, 5.714){0V};
+	\draw[-latex] (1.286, 8.143) -- (2.286, 8.571);
+	\draw[-latex] (1.429, 7.714) -- (2.286, 7.286);
+	\draw[-latex] (1.571, 5.429) -- (2.286, 5.571);
+\end{tikzpicture}
 $$$
 
 ### NOT ALLOWED
-$$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-$$$
+
+|||
+
 We assume:
-		
 - Top rail fixed at V>0
 - Bottom rail fixed at 0V
 - Wires have zero resistance
 
-$$$			
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (1, 8){};
-				\node[sground, yscale=-1] at (1, 9){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-				\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.679, 7.714){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.357, 8){V=0};
-				\draw (1, 9) -- (1, 8);
-			\end{tikzpicture}		\end{column}
-	\end{columns}
 $$$
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 8){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.679, 7.714){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.357, 8){V=0};
+	\draw (1, 9) -- (1, 8);
+\end{tikzpicture}
+$$$
+|||
 If you try to build this, one of those assumptions will fail. What might that look like?
 
 ### Transistors
@@ -857,118 +840,116 @@ If you try to build this, one of those assumptions will fail. What might that lo
 
 % https://www.101computing.net/creating-logic-gates-using-transistors/
 $$$
-	\begin{tikzpicture}
-		% Paths, nodes and wires:
-		\node[ground] at (1, 6.286){};
-		\node[sground, yscale=-1] at (1, 9){};
-		\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-		\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
-		\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
-		\draw (1, 9) -- (1, 8.857);
-		\draw (1, 7.714) -- (2, 7.714);
-		\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output};
-		\draw (-0.857, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.143, 7);
-		\draw (0.286, 7) -- (0.408, 7);
-		\node[npn] at (1, 7){};
-		\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (-1.714, 7){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-2.33, 7.357){input};
-	\end{tikzpicture}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 6.286){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
+	\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
+	\draw (1, 9) -- (1, 8.857);
+	\draw (1, 7.714) -- (2, 7.714);
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output};
+	\draw (-0.857, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.143, 7);
+	\draw (0.286, 7) -- (0.408, 7);
+	\node[npn] at (1, 7){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (-1.714, 7){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-2.33, 7.357){input};
+\end{tikzpicture}
 $$$
 
 ### Transistor Behavior
+|||
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\usetikzlibrary{shapes.geometric}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (1, 6.286){};
-				\node[sground, yscale=-1] at (1, 9){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-				\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
-				\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
-				\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V>0};
-				\draw (1, 6.571) to[cute closed switch] (1, 7.429);
-				\draw (1, 9) -- (1, 8.857);
-				\draw (1, 7.714) -- (1, 7.429);
-				\draw (1, 6.571) -- (1, 6.286);
-				\draw (1, 7.714) -- (2, 7.714);
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){??};
-				\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
-				\draw (0.286, 7) -- (0.408, 7);
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\usetikzlibrary{shapes.geometric}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (1, 6.286){};
-				\node[sground, yscale=-1] at (1, 9){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-				\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
-				\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
-				\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V=0};
-				\draw (1, 6.571) to[cute open switch] (1, 7.429);
-				\draw (1, 9) -- (1, 8.857);
-				\draw (1, 7.714) -- (1, 7.429);
-				\draw (1, 6.571) -- (1, 6.286);
-				\draw (1, 7.714) -- (2, 7.714);
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){??};
-				\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
-				\draw (0.286, 7) -- (0.408, 7);
-			\end{tikzpicture}
-		\end{column}
-	\end{columns}
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 6.286){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
+	\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
+	\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V>0};
+	\draw (1, 6.571) to[cute closed switch] (1, 7.429);
+	\draw (1, 9) -- (1, 8.857);
+	\draw (1, 7.714) -- (1, 7.429);
+	\draw (1, 6.571) -- (1, 6.286);
+	\draw (1, 7.714) -- (2, 7.714);
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){??};
+	\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
+	\draw (0.286, 7) -- (0.408, 7);
+\end{tikzpicture}
 $$$
+|||
+$$$
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 6.286){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
+	\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
+	\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V=0};
+	\draw (1, 6.571) to[cute open switch] (1, 7.429);
+	\draw (1, 9) -- (1, 8.857);
+	\draw (1, 7.714) -- (1, 7.429);
+	\draw (1, 6.571) -- (1, 6.286);
+	\draw (1, 7.714) -- (2, 7.714);
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){??};
+	\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
+	\draw (0.286, 7) -- (0.408, 7);
+\end{tikzpicture}
+$$$
+|||
 
 ### Transistor Behavior
+|||
 $$$
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\usetikzlibrary{shapes.geometric}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (1, 6.286){};
-				\node[sground, yscale=-1] at (1, 9){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-				\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
-				\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
-				\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V>0};
-				\draw (1, 6.571) to[cute closed switch] (1, 7.429);
-				\draw (1, 9) -- (1, 8.857);
-				\draw (1, 7.714) -- (1, 7.429);
-				\draw (1, 6.571) -- (1, 6.286);
-				\draw (1, 7.714) -- (2, 7.714);
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output\\V=0};
-				\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
-				\draw (0.286, 7) -- (0.408, 7);
-			\end{tikzpicture}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\usetikzlibrary{shapes.geometric}
-			\begin{tikzpicture}
-				% Paths, nodes and wires:
-				\node[ground] at (1, 6.286){};
-				\node[sground, yscale=-1] at (1, 9){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
-				\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
-				\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
-				\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V=0};
-				\draw (1, 6.571) to[cute open switch] (1, 7.429);
-				\draw (1, 9) -- (1, 8.857);
-				\draw (1, 7.714) -- (1, 7.429);
-				\draw (1, 6.571) -- (1, 6.286);
-				\draw (1, 7.714) -- (2, 7.714);
-				\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output\\V>0};
-				\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
-				\draw (0.286, 7) -- (0.408, 7);
-			\end{tikzpicture}
-		\end{column}
-	\end{columns}
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 6.286){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
+	\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
+	\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V>0};
+	\draw (1, 6.571) to[cute closed switch] (1, 7.429);
+	\draw (1, 9) -- (1, 8.857);
+	\draw (1, 7.714) -- (1, 7.429);
+	\draw (1, 6.571) -- (1, 6.286);
+	\draw (1, 7.714) -- (2, 7.714);
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output\\V=0};
+	\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
+	\draw (0.286, 7) -- (0.408, 7);
+\end{tikzpicture}
 $$$
+|||
+$$$
+\usetikzlibrary{shapes.geometric}
+\begin{tikzpicture}
+	% Paths, nodes and wires:
+	\node[ground] at (1, 6.286){};
+	\node[sground, yscale=-1] at (1, 9){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (1.813, 9.429){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (1.196, 9.786){V>0};
+	\node[shape=rectangle, minimum width=0.608cm, minimum height=0.536cm] at (1.429, 5.857){} node[anchor=north west, align=left, text width=0.22cm, inner sep=6pt] at (1.107, 6.143){V=0};
+	\draw (1, 8.857) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (1, 7.714);
+	\node[shape=ellipse, draw, line width=1pt, dash pattern={on 1pt off 2pt}, minimum width=1.149cm, minimum height=1.108cm] at (1, 7){};
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.965cm] at (-1.33, 7.143){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (-1.946, 7.643){input\\V=0};
+	\draw (1, 6.571) to[cute open switch] (1, 7.429);
+	\draw (1, 9) -- (1, 8.857);
+	\draw (1, 7.714) -- (1, 7.429);
+	\draw (1, 6.571) -- (1, 6.286);
+	\draw (1, 7.714) -- (2, 7.714);
+	\node[shape=rectangle, minimum width=1.197cm, minimum height=0.679cm] at (2.67, 7.714){} node[anchor=north west, align=left, text width=0.809cm, inner sep=6pt] at (2.054, 8.071){output\\V>0};
+	\draw (-0.714, 7) to[american resistor, /tikz/circuitikz/bipoles/length=1.12cm] (0.286, 7);
+	\draw (0.286, 7) -- (0.408, 7);
+\end{tikzpicture}
+$$$
+|||
 
 ### Historical Transistors
 
