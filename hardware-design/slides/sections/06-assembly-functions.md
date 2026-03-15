@@ -39,11 +39,8 @@ The stack is structured:
 ### Memory Diagram
 
 We can draw a **memory diagram** to keep track of registers and memory for our process:
-$$$
-\bigskip
-\begin{columns}
-\begin{column}{0.4\textwidth}
-$$$
+
+|||
 
 | Register | Value |
 | --- | --- |
@@ -56,11 +53,6 @@ $$$
 | pc | ... |
 | lr | ... |
 
-$$$
-\end{column}
-\begin{column}{0.6\textwidth}
-$$$
-
 | Address | Value |
 | --- | --- |
 | 0x3f90 | ... |
@@ -72,10 +64,7 @@ $$$
 | 0x3ff0 | ... |
 | 0x4000 | ... |
 
-$$$
-\end{column}
-\end{columns}
-$$$
+|||
 
 ### Stack Numbering
 
@@ -161,11 +150,9 @@ b exit
 
 ### Local Variable Walkthrough
 Initial state:
-$$$
-\bigskip
-\begin{columns}
-\begin{column}{0.4\textwidth}
-$$$
+
+|||
+
 | Register | Value |
 | --- | --- |
 | x0 | ? |
@@ -176,10 +163,7 @@ $$$
 | fp | ? |
 | pc | ? |
 | lr | ? |
-$$$
-\end{column}
-\begin{column}{0.6\textwidth}
-$$$
+
 | Address | Value |
 | --- | --- |
 | 0x3fa0 | ... |
@@ -190,10 +174,8 @@ $$$
 | 0x3ff0 | ... |
 | 0x4000 | ... |
 | 0x4010 | (in use) |
-$$$
-\end{column}
-\end{columns}
-$$$
+
+|||
 
 ### trying wide table
 fizz buzz 
@@ -234,11 +216,7 @@ $$$
 
 At the start of the program, our memory diagram looks like this:
 
-$$$
-\bigskip
-\begin{columns}
-\begin{column}{0.4\textwidth}
-$$$
+|||
 
 | Register | Value |
 | --- | --- |
@@ -251,10 +229,37 @@ $$$
 | pc | ... |
 | lr | ... |
 
-$$$
-\end{column}
-\begin{column}{0.6\textwidth}
-$$$
+| Address | Value |
+| --- | --- |
+| 0x3fc0 | ... |
+| 0x3fd0 | ... |
+| 0x3fe0 | ... |
+| 0x3ff0 | ... |
+| 0x4000 | ... |
+| 0x4010 | ... |
+| ... | ... |
+| 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
+
+|||
+
+The existing stack frame goes from `0x5000` (FP) to `0x4010` (SP)
+
+### Initial State
+
+At the start of the program, our memory diagram looks like this:
+
+|||
+
+| Register | Value |
+| --- | --- |
+| x0 | ... |
+| x1 | ... |
+| x2 | ... |
+| x3 | ... |
+| sp | 0x4010 |
+| fp | 0x5000 |
+| pc | ... |
+| lr | ... |
 
 | Address | Value |
 | --- | --- |
@@ -267,22 +272,18 @@ $$$
 | ... | ... |
 | 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
-$$$
-\end{column}
-\end{columns}
-$$$
+|||
 
 The existing stack frame goes from `0x5000` (FP) to `0x4010` (SP)
+
+
+
 
 ### Stacking Frames
 
 After calling into `main`, we update SP and FP to add a new frame to the stack:
 
-$$$
-\bigskip
-\begin{columns}
-\begin{column}{0.4\textwidth}
-$$$
+|||
 
 | Register | Value |
 | --- | --- |
@@ -295,11 +296,6 @@ $$$
 | pc | ... |
 | lr | ... |
 
-$$$
-\end{column}
-\begin{column}{0.6\textwidth}
-$$$
-
 | Address | Value |
 | --- | --- |
 | 0x3fc0 | ... |
@@ -311,10 +307,7 @@ $$$
 | ... | ... |
 | 0x5000 | ... $\rdelim\}{-3}{3mm}[parent stack frame]$ |
 
-$$$
-\end{column}
-\end{columns}
-$$$
+|||
 
 ### Tracking Stacked Frames
 

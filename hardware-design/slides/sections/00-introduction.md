@@ -25,6 +25,13 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 - Building electrical circuits to perform logic
 - Programming in Assembly (a very low-level language)
 
+
+% ### Why bother?
+
+% this stuff is interesting!
+% concepts carry over in ways that are not always obvious
+
+
 ## Grading
 
 ### Course Grade Breakdown

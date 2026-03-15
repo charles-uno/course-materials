@@ -82,6 +82,7 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
         "## ",
         "### ",
         "%",
+        "|||"
     ]
     fence_markers = [
         "```",
@@ -141,8 +142,20 @@ def fix_frame(frame: str) -> str:
         return frame
     if r"\begin{minted}" in frame or r"\verb" in frame:
         frame = frame.replace(r"\begin{frame}", r"\begin{frame}[fragile]")
-    return frame + "\n\n" + r"\end{frame}"
-
+    frame += "\n\n" + r"\end{frame}"
+    # pipe fencing is for multicolumn. can explicitly specify columns or just
+    # make a multicolumn environment
+    if frame.count("|||") == 3:
+        frame = frame.replace("|||", r"\bigskip\begin{columns}\begin{column}{0.5\textwidth}", count=1)
+        frame = frame.replace("|||", r"\end{column}\begin{column}{0.5\textwidth}", count=1)
+        frame = frame.replace("|||", r"\end{column}\end{columns}\bigskip", count=1)
+    elif frame.count("|||") == 2:
+        frame = frame.replace("|||", r"\bigskipr\begin{multicols}{2}", count=1)
+        frame = frame.replace("|||", r"\end{multicols}\bigskip", count=1)
+    elif frame.count("|||") != 0:
+        frame_title = frame.splitlines()[0].split("### ")[-1]
+        raise ParseFailure(f"ambiguous multicolumn setup after '{frame_title}'")
+    return frame
 
 def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool:
     tex = "\n\n".join(tex_chunks)
