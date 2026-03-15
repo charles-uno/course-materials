@@ -401,6 +401,8 @@ But what if we want to know how much of the stack belongs to the current functio
 - A stack frame is the portion of the stack used by a function
 - Tracking FP is not strictly necessary! But debugging is harder without it
 
+% https://stackoverflow.com/questions/46797915/what-are-the-advantages-of-a-frame-pointer
+
 ### Initial State
 
 At the start of the program, our memory diagram looks like this:
@@ -748,7 +750,7 @@ Reads user input. Let's say they enter `86400`
 |||
 | Register | Value |
 | --- | --- |
-| x0 | $\cancel{=fmt}$ =fmt |
+| x0 | =fmt |
 | x1 | 0x3fd0 |
 | x2 | ? |
 | x3 | ? |
@@ -896,8 +898,8 @@ add x0, x0, 1
 
 ```arm,firstnumber=14
 ldr lr, [sp, 0x10]
-0x0f ldr fp, [sp]
-0x10 add sp, sp, 0x20
+ldr fp, [sp]
+add sp, sp, 0x20
 ```
 
 |||
@@ -1091,6 +1093,13 @@ Exit status 0 (normal)
 - Maybe call functions, which overwrite LR
 - Stack frame teardown: restore previous FP, LR, SP
 
+### Built-In Function Frames
+
+- In `main`, we had SP=0x3fd0 and FP=0x3ff0
+- When we called `bl add_one`, we set SP=0x3fb0 and FP=0x3fc0
+- What would SP and FP have been for `scanf` and `printf`?
+- Hint: these functions were calles from `main` 
+
 ### SIMD? More like PITA
 
 - Single Instruction, Multiple Data
@@ -1113,9 +1122,9 @@ Exit status 0 (normal)
 
 ### Why Nest?
 
-Real code very often includes nested functions
+Real code usually does not just live in one function. Call stacks are frequently 10+ functions deep!
 
-We have to be very careful to keep track of FP and LR for each frame in the stack!
+We have to be very careful to keep track of FP and LR for each frame in the stack
 
 ### Tail Call Optimization
 
@@ -1210,26 +1219,7 @@ Let's work through it together
 - Local variables are stored on the stack too
 - What happens if user input overflows the local variable and overwrites LR?
 
-% we have talked about global constants and global variables
-% those ones have to be declared at implementation time
-% what if you want to declare variables on the fly?
 
-% the stack is a region of memory that the OS has set aside for your program
-% we use special register sp to keep track of our location in that memory
 
-% sp always points to the top of the stack
-% if we need more memory, we can move sp up
-% when we're done with that memory, we can move sp back down
-
-% SIMD
-% an ascii char is 1 byte
-% we store numbers as words (4 bytes)
-% when updating the stack pointer sp, we work in increments of 0x10 bytes (16 bytes)
-% in practice, we are just wasting a bunch of memory in order to worry about less stuff
-
-% FP is not strictly necessary
-% some compilers even let you skip it
-% FP is useful for debugging. code is easier to read. integration with debugging tools
-% https://stackoverflow.com/questions/46797915/what-are-the-advantages-of-a-frame-pointer
 
 
