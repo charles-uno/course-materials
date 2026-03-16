@@ -1111,6 +1111,12 @@ Exit status 0 (normal)
 - Maybe call functions, which overwrite LR
 - Stack frame teardown: restore previous FP, LR, SP
 
+### Return-Oriented Programming Attacks
+
+- LR is stored on the stack
+- Local variables are stored on the stack too
+- What happens if user input overflows the local variable and overwrites LR?
+
 ### Discussion
 
 - In `main`, we had SP=0x3fd0 and FP=0x3ff0
@@ -1121,35 +1127,38 @@ Exit status 0 (normal)
 
 ## Optimization with Functions
 
-### tldr
+### Why Optimize Functions?
 
 - In real code, you can get deep call stacks. frequently 10+ functions deep
 - we have ~6 instructions of overhead for every function call
 - this can be significant in small functions, especially if called many times
 - there are a few strategies for reducing this cost
 
+also: functions are logical groupings of code. and they have names. good spot for instrumentation
+
 ### Tail Call Optimization
 
-When the last thing a function does is call another function, the compiler can "reuse" the current stack frame instead of creating a new one
-
-Just call `b` to jump straight into the nested function, instead of `bl`
-
-At the end of the nested function, `ret` goes back to LR from the last time we called `bl` (parent function call)
+- When the last thing a function does is call another function, the compiler can "reuse" the current stack frame instead of creating a new one
+- Just call `b` to jump straight into the nested function, instead of `bl`
+- At the end of the nested function, `ret` goes back to LR from the last time we called `bl` (parent function call)
 
 ### Function Inlining
 
 |||
+
 Before:
 ```python
-def plus_one(x):
+def plus1(x):
 	return x + 1
 
 def main():
 	total = 0
 	for i in range(100):
-		total = plus_one(total)
+		total = plus1(total)
 	return total
 ```
+
+|||
 
 After:
 ```python
@@ -1159,6 +1168,7 @@ def main():
 		total = total + 1
 	return total
 ```
+
 |||
 
 ### So Much Annotation!
@@ -1216,15 +1226,31 @@ ret
 
 ### So Much Annotation!
 
+- Local labels: `.LFB`, `.LFE`, etc. Affects visibility across files and in the debugger
+- `.size` - explicitly tell the compiler/linker the size of this function for better garbage collection
+- `.align` vs `.p2align`. There is historical inconsistency with `.align`
+- `cfi_whatever`. Call frame information. Allows debuggers to trace the stack without FP
+- `@progbits`. Labels boundaries of executable instructions
 
+### What's a Debugger?
+
+Debugging tools (eg `gdb`) allow you to step through your code, inspect registers, etc
+
+$$$
+\includegraphics[width=\columnwidth]{images/assembly-functions/gdb-stephan-avenwedde-cc-by-sa}
+$$$
+
+The code we write doesn't give them much to work with
 
 ### Performance Instrumentation
 
-For performance-critical applications, we can compile with 
+For performance-critical applications, you can ask the compiler to add *more* overhead in order to gather performance data
 
+$$$
+\includegraphics[width=\columnwidth]{images/assembly-functions/craypat}
+$$$
 
-
-
+(Then tweak the code and recompile a clean version later)
 
 ### Example Nested Function
 
@@ -1304,25 +1330,3 @@ b exit
 ### Board Time
 
 Let's work through it together
-
-### Return-Oriented Programming Attacks
-
-- LR is stored on the stack
-- Local variables are stored on the stack too
-- What happens if user input overflows the local variable and overwrites LR?
-
-
-
-
-## Advanced Topics
-
-### TODO
-
-should this stuff be tucked into the above content, or together at the end? probably tucked in
-
-- function inlining. too much can cause binary bloat, cache misses
-- tail-call optimization
-- ROP attacks
-- performance instrumentation
-- stack overflow
-
