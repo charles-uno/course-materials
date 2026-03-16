@@ -1228,7 +1228,6 @@ ret
 
 - Local labels: `.LFB`, `.LFE`, etc. Affects visibility across files and in the debugger
 - `.size` - explicitly tell the compiler/linker the size of this function for better garbage collection
-- `.align` vs `.p2align`. There is historical inconsistency with `.align`
 - `cfi_whatever`. Call frame information. Allows debuggers to trace the stack without FP
 - `@progbits`. Labels boundaries of executable instructions
 
@@ -1254,6 +1253,6 @@ $$$
 
 ### Summary
 
-- We're looking at textbook stack frames. For "real" code, compilers may cut corners for better efficiency
+- We're looking at textbook stack frames. For "real" code, compilers may bend the rules for better efficiency
 - Textbook code sometimes skips debugger annotations in favor of legibility
 - We have to balance implementation cost vs runtime cost. Sometimes we invest a lot of time for a small performance gain
