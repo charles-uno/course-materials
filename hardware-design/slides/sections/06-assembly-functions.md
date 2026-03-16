@@ -1252,81 +1252,10 @@ $$$
 
 (Then tweak the code and recompile a clean version later)
 
-### Example Nested Function
+### Summary
 
-```arm,linenos=true,xleftmargin=1em
-.section .rodata
-prompt: .ascii "int plz: \0"
-fmt: .ascii "%d\0"
-output: .ascii "%d + 1 = %d\n\0"
+- We're looking at textbook stack frames
+- Compilers sometimes cut corners to improve performance
+- Textbook code may also skips debugger annotation, etc
+- How do you balance cost of implementation vs cost at runtime?
 
-.section .data
-n: .word 0
-
-.text
-.global main
-
-add_one:
-// stack frame setup, no local vars
-sub sp, sp, 0x20
-str fp, [sp]
-str lr, [sp, 0x10]
-add fp, sp, 0x10
-// call nested function
-bl add_one_impl
-// stack frame teardown
-ldr lr, [sp, 0x10]
-ldr fp, [sp]
-add sp, sp, 0x20
-// pass along nested return
-ret
-
-add_one_impl:
-// stack frame setup, no local vars
-sub sp, sp, 0x20
-str fp, [sp]
-str lr, [sp, 0x10]
-add fp, sp, 0x10
-// return input +1
-add x0, x0, 1
-// stack frame teardown
-ldr lr, [sp, 0x10]
-ldr fp, [sp]
-add sp, sp, 0x20
-ret
-
-main: 
-// stack frame setup, no local vars
-sub sp, sp, 0x20
-str fp, [sp]
-str lr, [sp, 0x10]
-add fp, sp, 0x10
-// prompt for input
-ldr x0, =prompt
-bl printf
-// store input to global variable
-ldr x0, =fmt
-ldr x1, =n
-bl scanf
-// load input and pass to add_one
-ldr x0, =n
-ldr x0, [x0]
-bl add_one
-// report input and output
-mov x2, x0
-ldr x0, =output
-ldr x1, =n
-ldr x1, [x1]
-bl printf
-// stack frame teardown
-ldr lr, [sp, 0x10]
-ldr fp, [sp]
-add sp, sp, 0x20
-// return 0
-mov x0, 0
-b exit
-```
-
-### Board Time
-
-Let's work through it together
