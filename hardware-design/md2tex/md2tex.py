@@ -146,12 +146,12 @@ def fix_frame(frame: str) -> str:
     # pipe fencing is for multicolumn. can explicitly specify columns or just
     # make a multicolumn environment
     if frame.count("|||") == 3:
-        frame = frame.replace("|||", r"\bigskip\begin{columns}\begin{column}{0.5\textwidth}", count=1)
-        frame = frame.replace("|||", r"\end{column}\begin{column}{0.5\textwidth}", count=1)
-        frame = frame.replace("|||", r"\end{column}\end{columns}\bigskip", count=1)
+        frame = frame.replace("|||", r"\bigskip\begin{columns}\begin{column}{0.5\textwidth}", 1)
+        frame = frame.replace("|||", r"\end{column}\begin{column}{0.5\textwidth}", 1)
+        frame = frame.replace("|||", r"\end{column}\end{columns}\bigskip", 1)
     elif frame.count("|||") == 2:
-        frame = frame.replace("|||", r"\bigskipr\begin{multicols}{2}", count=1)
-        frame = frame.replace("|||", r"\end{multicols}\bigskip", count=1)
+        frame = frame.replace("|||", r"\bigskipr\begin{multicols}{2}", 1)
+        frame = frame.replace("|||", r"\end{multicols}\bigskip", 1)
     elif frame.count("|||") != 0:
         frame_title = frame.splitlines()[0].split("### ")[-1]
         raise ParseFailure(f"ambiguous multicolumn setup after '{frame_title}'")
