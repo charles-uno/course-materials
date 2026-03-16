@@ -1144,8 +1144,9 @@ also: functions are logical groupings of code. and they have names. good spot fo
 
 ### Function Inlining
 
-|||
+To skip function overhead, the compiler may skip the function entirely:
 
+|||
 Before:
 ```python
 def plus1(x):
@@ -1157,9 +1158,7 @@ def main():
 		total = plus1(total)
 	return total
 ```
-
 |||
-
 After:
 ```python
 def main():
@@ -1168,8 +1167,9 @@ def main():
 		total = total + 1
 	return total
 ```
-
 |||
+
+If overdone, this can cause "binary bloat" and more cache misses
 
 ### So Much Annotation!
 
@@ -1254,8 +1254,6 @@ $$$
 
 ### Summary
 
-- We're looking at textbook stack frames
-- Compilers sometimes cut corners to improve performance
-- Textbook code may also skips debugger annotation, etc
-- How do you balance cost of implementation vs cost at runtime?
-
+- We're looking at textbook stack frames. For "real" code, compilers may cut corners for better efficiency
+- Textbook code sometimes skips debugger annotations in favor of legibility
+- We have to balance implementation cost vs runtime cost. Sometimes we invest a lot of time for a small performance gain
