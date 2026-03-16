@@ -150,7 +150,7 @@ def fix_frame(frame: str) -> str:
         frame = frame.replace("|||", r"\end{column}\begin{column}{0.5\textwidth}", 1)
         frame = frame.replace("|||", r"\end{column}\end{columns}\bigskip", 1)
     elif frame.count("|||") == 2:
-        frame = frame.replace("|||", r"\bigskipr\begin{multicols}{2}", 1)
+        frame = frame.replace("|||", r"\bigskip\begin{multicols}{2}", 1)
         frame = frame.replace("|||", r"\end{multicols}\bigskip", 1)
     elif frame.count("|||") != 0:
         frame_title = frame.splitlines()[0].split("### ")[-1]
