@@ -3,19 +3,21 @@
 #include <string.h>
 #include <time.h>
 
-// What happens if you make this way way bigger?
-const size_t ARRAY_SIZE = 64;
 
-void run_stack_test(long loops) {
-    for (long i = 0; i < loops; i++) {
+const size_t ARRAY_SIZE = 64;
+const long N_LOOPS = 10000000;
+
+
+void run_stack_test() {
+    for (long i = 0; i < N_LOOPS; i++) {
         // Allocated by moving the Stack Pointer (SP)
         volatile char buffer[ARRAY_SIZE]; 
         buffer[0] = (char)(i % 255);
     }
 }
 
-void run_heap_test(long loops) {
-    for (long i = 0; i < loops; i++) {
+void run_heap_test() {
+    for (long i = 0; i < N_LOOPS; i++) {
         // Allocated by the memory manager (malloc/free)
         char *buffer = (char *)malloc(ARRAY_SIZE * sizeof(char));
         if (!buffer) return;
@@ -25,25 +27,24 @@ void run_heap_test(long loops) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 3) {
-        printf("Usage: %s <num_loops> [-s|--stack|-h|--heap]\n", argv[0]);
+    if (argc < 2) {
+        printf("Usage: %s [-s|--stack|-h|--heap]\n", argv[0]);
         return 1;
     }
 
-    long loops = atol(argv[1]);
-    char *mode = argv[2];
+    char *mode = argv[1];
     clock_t start, end;
 
     if (strcmp(mode, "-s") == 0 || strcmp(mode, "--stack") == 0) {
-        printf("Testing STACK with %ld loops...\n", loops);
+        printf("Testing STACK with %ld loops...\n", N_LOOPS);
         start = clock();
-        run_stack_test(loops);
+        run_stack_test();
         end = clock();
     } 
     else if (strcmp(mode, "-h") == 0 || strcmp(mode, "--heap") == 0) {
-        printf("Testing HEAP with %ld loops...\n", loops);
+        printf("Testing HEAP with %ld loops...\n", N_LOOPS);
         start = clock();
-        run_heap_test(loops);
+        run_heap_test();
         end = clock();
     } 
     else {
