@@ -1132,9 +1132,7 @@ Exit status 0 (normal)
 - In real code, you can get deep call stacks. frequently 10+ functions deep
 - we have ~6 instructions of overhead for every function call
 - this can be significant in small functions, especially if called many times
-- there are a few strategies for reducing this cost
-
-also: functions are logical groupings of code. and they have names. good spot for instrumentation
+- This is an opportunity for optimization
 
 ### Tail Call Optimization
 
@@ -1169,7 +1167,7 @@ def main():
 ```
 |||
 
-If overdone, this can cause "binary bloat" and more cache misses
+If overdone, this can cause "binary bloat", grow the file size, and increase cache misses
 
 ### So Much Annotation!
 
@@ -1249,7 +1247,7 @@ $$$
 \includegraphics[width=\columnwidth]{images/assembly-functions/craypat}
 $$$
 
-(Then tweak the code and recompile a clean version later)
+(Then tweak the code for better performance and recompile a clean version later)
 
 ### Summary
 
