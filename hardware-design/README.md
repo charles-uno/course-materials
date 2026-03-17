@@ -39,8 +39,6 @@ Update syllabus to use markdown. Maybe exams too
 
 Figure out how to create tagged PDFs for accessibility
 
-For tests: explicitly say to turn in a SCAN not a PHOTO
-
 Add a slide with example two's complement subtraction
 
 Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
@@ -57,6 +55,8 @@ Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use c
 - Pi may not be allowed on wifi
 
 Update AI use policy in the syllabus
+
+Write a script to create the stack frame walkthrough? It's super tedious and error prone when done manually
 
 Get better ASCII table for tests (make sure null byte is visible)
 
