@@ -3,7 +3,8 @@
 #include <string.h>
 #include <time.h>
 
-#define ARRAY_SIZE 64
+// What happens if you make this way way bigger?
+const size_t ARRAY_SIZE = 64;
 
 void run_stack_test(long loops) {
     for (long i = 0; i < loops; i++) {
