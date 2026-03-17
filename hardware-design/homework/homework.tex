@@ -39,7 +39,15 @@
 
 \begin{document}
 
+% no section numbering in TOC
+% \makeatletter
+% \renewcommand{\numberline}[1]{}
+% \makeatother
+% no section numbers in headers
+\setcounter{secnumdepth}{1}
+
 \maketitle
+\setcounter{tocdepth}{2}
 \tableofcontents
 
 \newpage
@@ -49,7 +57,8 @@
 \input{sections/assembly-functions.gen.tex}
 
 \begin{appendices}
-\input{sections/coding-setup.gen.tex}
+\input{sections/pi-setup.gen.tex}
+\input{sections/csgit-setup.gen.tex}
 \input{sections/shell-scripts.gen.tex}
 \end{appendices}
 
