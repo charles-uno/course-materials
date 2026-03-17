@@ -220,7 +220,7 @@ bl printf
 | x1 | ? |
 | x2 | ? |
 | x3 | ? |
-| sp | $\cancel{0x4000}$ 0x3ff0 |
+| sp | 0x3ff0 |
 | fp | ? |
 | pc | ? |
 | lr | ? |
@@ -253,7 +253,7 @@ mov x1, sp
 | x1 | 0x3ff0 |
 | x2 | ? |
 | x3 | ? |
-| sp | $\cancel{0x4000}$ 0x3ff0 |
+| sp | 0x3ff0 |
 | fp | ? |
 | pc | ? |
 | lr | ? |
@@ -280,11 +280,11 @@ Waits for user input. Let's say the user enters `86400`
 |||
 | Register | Value |
 | --- | --- |
-| x0 | $\cancel{=prompt}$ =fmt |
+| x0 | =fmt |
 | x1 | 0x3ff0 |
 | x2 | ? |
 | x3 | ? |
-| sp | $\cancel{0x4000}$ 0x3ff0 |
+| sp | 0x3ff0 |
 | fp | ? |
 | pc | ? |
 | lr | ? |
@@ -312,7 +312,7 @@ add x2, x1, 1
 |||
 | Register | Value |
 | --- | --- |
-| x0 | $\cancel{=prompt}$ $\cancel{=fmt}$ =output |
+| x0 | $\cancel{=fmt}$ =output |
 | x1 | $\cancel{0x3ff0}$ 86400 |
 | x2 | 86401 |
 | x3 | ? |
@@ -344,11 +344,11 @@ b exit
 |||
 | Register | Value |
 | --- | --- |
-| x0 | $\cancel{=prompt}$ $\cancel{=fmt}$ =output |
-| x1 | $\cancel{0x3ff0}$ 86400 |
+| x0 | =output |
+| x1 | 86400 |
 | x2 | 86401 |
 | x3 | ? |
-| sp | $\cancel{0x4000}$ $\cancel{0x3ff0}$ 0x4000 |
+| sp | $\cancel{0x3ff0}$ 0x4000 |
 | fp | ? |
 | pc | ? |
 | lr | ? |
