@@ -3,6 +3,26 @@
 
 # Assembly Functions
 
+
+## The Stack
+
+can we do something hands on to compare stack vs heap?
+
+stack overflow on the stack, safe on the heap?
+
+
+## Local Variables
+
+## Stack Frames
+
+## Function Calls
+
+
+## Optimization with Functions
+
+
+
+
 ## Function Calls
 
 ```c
