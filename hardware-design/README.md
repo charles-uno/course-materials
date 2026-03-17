@@ -43,20 +43,15 @@ Add a slide with example two's complement subtraction
 
 Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
 
-Add image flashing to coding setup
-
 circuitverse - clarify that the button is a different type of input
 
 Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues:
-- SSH setting didn't stick when the card was flashed
-- Local network permissions (Mac)
-- Internet sharing (Mac) (may require St Olaf Guest network)
-- Get the IP address from network settings
-- Pi may not be allowed on wifi
 
 Update AI use policy in the syllabus
 
 Write a script to create the stack frame walkthrough? It's super tedious and error prone when done manually
+
+talk about extra annotation in AP! do not wait until stack frames
 
 Get better ASCII table for tests (make sure null byte is visible)
 
@@ -75,4 +70,3 @@ Update standards and calendar. Three tests with three standards each (plus overh
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
 
-Build PDFs using GitHub actions? Then they can be readily accessed from the repo
