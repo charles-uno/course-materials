@@ -112,6 +112,29 @@ nmcli -o
 
 If stuck connecting (orange) 
 
+```bash
+sudo mv /etc/netplan/90-NM-*.yaml /tmp/netplan-backup.yaml
+```
+
+```bash
+touch /etc/netplan/01-netcfg.yaml 
+```
+
+
+```bash
+network:
+	version: 2
+	renderer: NetworkManager
+```
+
+```bash
+sudo netplan apply
+```
+
+then reboot
+
+
+
 ### IPv4 Forwarding Disabled
 
 **Windows:** make sure internet sharing is enabled for both IPv4 and IPv6
