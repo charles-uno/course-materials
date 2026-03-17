@@ -92,6 +92,10 @@ put some break points in there
 
 work through this individually, then compare your results with a neighbor. if they do not match *exactly*, talk it out until you reach agreement
 
+$$$
+\newpage
+$$$
+
 ## Bigger Memory Diagrams
 
 Put some break points in here. have them produce the memory diagram at that point
@@ -161,66 +165,70 @@ mov x0, 0
 b exit
 ```
 
+$$$
+\newpage
+$$$
+
 ## Writing Assembly Without Reference
 
 Below is the skeleton of an assembly program, with a bunch of comments. Fill in the missing code.
 
 ```arm
 .section .rodata
-  // global constants (if any)
+// global constants (if any)
 
 
 
 
 .section .data
-    // global variables (if any)
+// global variables (if any)
 
 
 .text
 get_n_thumbs:
-    // stack frame setup, no local variables
+// stack frame setup, no local variables
 
 
 
-    // compute the number of thumbs
+// compute the number of thumbs
 
 
 
-    // stack frame teardown
+// stack frame teardown
 
 
 
-    // return the result
+// return the result
 
 
 
 .global main
 main: 
-    // stack frame setup, one local variable
+// stack frame setup, one local variable
 
 
 
-    // ask the user how many koalas they have
+// ask the user how many koalas they have
 
 
 
-    // read their response into a local variable
+// read their response into a local variable
 
 
 
-    // load the value from memory and pass it to get_n_thumbs
+// load the value from memory and pass it to get_n_thumbs
 
 
 
-    // report the number of thumbs to the user
+// report the number of thumbs to the user
 
 
 
-    // stack frame teardown
+// stack frame teardown
 
 
 
-    // exit (normal status code)
+// exit (normal status code)
 
 
 
