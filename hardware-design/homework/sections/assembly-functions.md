@@ -71,7 +71,7 @@ gcc -O3 func.c -S
 
 Write `add_one_twice.s` in assembly. This code should do the same thing as the above C code. You may refer to the compiled code as you work, but your code should stick to the vocabulary we use in class (eg no `stp`). Also make sure your code creates a stack frame for every function, even if the compiler left them out
 
-### Mark it up!
+## Mark it up!
 
 Print the code out on paper. I recommend two colums
 
@@ -105,7 +105,7 @@ When prompted for an int, assume the user enters 8
 ```arm
 .section .rodata
 prompt: .ascii "int plz: \0"
-input_fmt: .ascii "%d\0"
+fmt: .ascii "%d\0"
 output: .ascii "%d + 1 = %d\n\0"
 
 .section .data
@@ -143,7 +143,7 @@ str lr, [sp, 0x10]
 add fp, sp, 0x10
 ldr x0, =prompt
 bl printf
-ldr x0, =input_fmt
+ldr x0, =fmt
 ldr x1, =n
 bl scanf
 ldr x0, =n
@@ -159,4 +159,69 @@ ldr fp, [sp]
 add sp, sp, 0x20
 mov x0, 0
 b exit
+```
+
+## Writing Assembly Without Reference
+
+Below is the skeleton of an assembly program, with a bunch of comments. Fill in the missing code.
+
+```arm
+.section .rodata
+  // global constants (if any)
+
+
+
+
+.section .data
+    // global variables (if any)
+
+
+.text
+get_n_thumbs:
+    // stack frame setup, no local variables
+
+
+
+    // compute the number of thumbs
+
+
+
+    // stack frame teardown
+
+
+
+    // return the result
+
+
+
+.global main
+main: 
+    // stack frame setup, one local variable
+
+
+
+    // ask the user how many koalas they have
+
+
+
+    // read their response into a local variable
+
+
+
+    // load the value from memory and pass it to get_n_thumbs
+
+
+
+    // report the number of thumbs to the user
+
+
+
+    // stack frame teardown
+
+
+
+    // exit (normal status code)
+
+
+
 ```

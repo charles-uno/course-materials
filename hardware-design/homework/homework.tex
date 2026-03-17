@@ -23,6 +23,16 @@
 \setlength\parindent{0pt}
 \usepackage{parskip} 
 
+\usepackage{minted2}
+\usemintedstyle{manni}
+\setminted{
+  autogobble=true,
+  tabsize=4,
+%  linenos=true,
+%  xleftmargin=1em,   % Push the entire code block to the right to make room for numbering
+  numbersep=1em      % Gap between the numbers and the code
+}
+
 \title{CSCI 241: Hardware Design}
 \author{Professor Charles Fyfe}
 \date{St Olaf College $\cdot$ Spring 2026}
@@ -41,8 +51,5 @@
 \begin{appendices}
 \input{sections/coding-setup.gen.tex}
 \end{appendices}
-
-
-
 
 \end{document}
