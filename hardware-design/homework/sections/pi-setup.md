@@ -169,3 +169,5 @@ Make this setting persist so we don't have to do it repeatedly
 
 
 ### Add Host to VSCode
+
+Also add the folder! This is necessary to get the file navigator, drag and drop files

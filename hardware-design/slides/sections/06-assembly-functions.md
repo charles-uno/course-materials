@@ -3,7 +3,7 @@ beamer: true
 
 # Assembly Functions
 
-## The Stack
+## The Stack and The Heap
 
 ### Process Memory
 
@@ -13,9 +13,15 @@ When launching a process:
 - It initializes the CPU
 - And it allocates an address space for that process
 
-Part of that address space is **the stack**
+### Address Space
 
-### Remember From Before
+The address space for this process contains a **stack** and a **heap**
+
+$$$
+\includegraphics[width=0.7\columnwidth]{images/os-concepts/address-space}
+$$$
+
+### Stack and Heap
 
 The heap is a disorganized pool of memory available to the entire program:
 - Lots of space!
@@ -24,8 +30,14 @@ The heap is a disorganized pool of memory available to the entire program:
 
 The stack is structured:
 - Not as much space
-- Fast access (often cached)
+- Fast access (usually cached)
 - Always build on top of the existing stack
+
+### Stick to the Stack
+
+We will mostly be talking about the stack
+
+It's closely related to function calls and local variables
 
 ### The Stack
 

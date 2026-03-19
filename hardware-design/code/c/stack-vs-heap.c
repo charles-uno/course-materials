@@ -5,7 +5,7 @@
 
 
 const size_t ARRAY_SIZE = 64;
-const long N_LOOPS = 10000000;
+const long N_LOOPS = 1000000;
 
 
 void run_stack_test() {
