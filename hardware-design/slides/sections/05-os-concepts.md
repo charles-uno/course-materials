@@ -86,13 +86,13 @@ To be a bit more specific:
 
 ### Kernel Responsibilities
 
-Yes:
+Kernel mode:
 - Reading a file from disk as binary
 - Enforcing which processes have access to which memory addresses
 - Receiving keystrokes from the keyboard
 - Sending and receiving network traffic
 
-No:
+User mode:
 - Turning binary data into documents, images, videos, etc
 - User accounts and passwords
 - Keyboard shortcuts, entering text in forms

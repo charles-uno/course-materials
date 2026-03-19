@@ -155,7 +155,7 @@ Set-NetIPInterface -InterfaceAlias "Ethernet" -Forwarding Enabled
 Make this setting persist so we don't have to do it repeatedly
 
 1. Win + R, type regedit.
-2. Go to: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\SharedAccess
+2. Go to: `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\SharedAccess`
 3. Right-click > New > DWORD (32-bit) Value.
 4. Name it EnableRebootPersistConnection and set the value to 1
 
