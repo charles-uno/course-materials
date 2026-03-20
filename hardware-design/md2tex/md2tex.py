@@ -146,6 +146,9 @@ def fix_frame(frame: str) -> str:
     if r"\begin{minted}" in frame or r"\verb" in frame:
         frame = frame.replace(r"\begin{frame}", r"\begin{frame}[fragile]")
     frame += "\n\n" + r"\end{frame}"
+
+    frame = frame.replace(r"\begin{tabular}", "\n" + r"\begin{tabular}")
+
     # pipe fencing is for multicolumn. can explicitly specify columns or just
     # make a multicolumn environment
     if frame.count("|||") == 3:

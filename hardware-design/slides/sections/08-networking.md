@@ -3,29 +3,6 @@ beamer: true
 
 # Networking
 
-## The Physical Layer
-
-
-## Network Protocols
-
-
-## Internet Infrastructure & Navigation
-
-
-
-## The Application Layer
-
-
-
-
-
-## Security & Privacy
-
-
-
-
-
-
 ### What is a Computer Network?
 
 A network is a group of interconnected devices exchanging data. We refer to the devices connected by a network as nodes.
@@ -35,6 +12,10 @@ Examples:
 - Personal network, connecting smartphone to smartwatch, headphones using Bluetooth. This is a **PAN** (Personal Area Network).
 - St. Olaf campus network, connecting laptops, phones, servers (csgit). This is a **CAN** (Campus Area Network), made up of many LANs.
 - Internet, connects networks across huge distances. This is a **WAN** (Wide Area Network).
+
+
+
+
 
 ### TCP/IP Model
 
@@ -268,4 +249,106 @@ You will be asked a series of conceptual questions, and you will be evaluated on
 - Switching vs. Routing
 - Packets
 
+
+## Day 1: The Local Network (The "Mailroom")
+
+Goal: How does a computer talk to the device next to it?
+
+- The Hardware (5 mins): Ditch hubs/bridges; focus on the Network Interface Card (NIC) and the Switch.
+- Switching & MAC Addresses (10 mins): Explain that every device has a permanent "Social Security Number" (MAC Address). A switch is a smart mailroom that sends data only to the specific port where that MAC lives.
+- The Client-Server Model (10 mins): Most internet interaction is just a "Client" (student's laptop) asking a "Server" (Google/Discord) for a file.
+- Packets (5 mins): Data isn't sent in one big chunk; it’s chopped into tiny envelopes called packets.
+
+Day 2: The Global Internet (The "Postal Service")
+
+Goal: How does that packet find a server 3,000 miles away?
+
+- IP Addresses & Routing (10 mins): If a MAC is a name, an IP address is a "Mailing Address." Explain that Routers are the GPS of the internet—they look at the IP and decide which city/country to send the packet to next.
+- DNS & HTTP/HTTPS (10 mins): Students don't type IPs; they type google.com. Explain DNS as the "Contacts App" of the internet. Then, briefly explain HTTP as the language used to ask for the website once you arrive.
+TCP/UDP & Security (10 mins):
+- TCP: "Did you get that?" (Guaranteed delivery for websites/email).
+- UDP: "Hope you get this!" (Fast, but messy—for gaming/video calls).
+- Encryption: Mention that HTTPS (the 'S') is just a locked envelope so the routers in the middle can't read your password.
+
+
+
+
+
+switch cares about MAC address. does not know anything about IP address. delivers messages within a network/neighborhood
+
+switch watches traffic to see which MAC address is where. stores entries in a table. when data wants to go to a known address, it can send it directly. if data wants to go to an unknown address, it yells to everyone and waits for a response.
+
+router knows about IP address. it sends the data to the appropriate network/neighborhood
+
+if you ping google. your computer knows that it's not a nearby IP address. it sends it to the MAC address of the router
+
+MAC address is hard-coded into the NIC when manufactured. NIC is supposed to ignore any traffic addressed to a different MAC
+
+
+
+
+signals on the computer run in parallel. eg 64-bit system ostensibly means your logic path is 64 bits wide. the NIC takes that and turns it into one channel for the network
+
+
+
+
+
+switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
+- MAC Flooding
+- ARP Spoofing
+
+
+
+
+
+
+## The Physical Layer
+
+### outline placeholder
+
+- Basic networking hardware (Hubs, bridges, NICs, cables)
+- Switching vs. Routing (Focusing on Layer 2 switching)
+- The OSI Model (Introduction to the 7-layer framework) 
+
+## Network Protocols
+
+### outline placeholder
+
+- The TCP/IP Model (Comparing it to OSI)
+- IP Addresses (IPv4, IPv6, and subnets)
+- Packets (Encapsulation and structure)
+- TCP vs. UDP (Connection-oriented vs. connectionless)
+- Switching vs. Routing (Focusing on Layer 3 routing) 
+
+## Internet Infrastructure \& Navigation
+
+### outline placeholder
+
+- How the internet works (The "network of networks" concept)
+- DNS (Domain Name System and the resolution process)
+- The client-server model (Request/response architecture)
+
+## The Application Layer
+
+### outline placeholder
+
+- HTTP/HTTPS (Web traffic and state)
+- The client-server model (As it relates specifically to web apps)
+
+## Security \& Privacy
+
+### outline placeholder
+
+- Encryption (Symmetric, asymmetric, and hashing)
+- HTTPS (The role of SSL/TLS certificates)
+- Network security and attacks (DDoS, Man-in-the-Middle, packet sniffing)
+
+
+
+### summary
+
+DNS finds the address.
+TCP chops the data into Packets.
+Routers move them across the world.
+Switches deliver them to the right desk.
 
