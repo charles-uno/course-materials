@@ -210,8 +210,6 @@ def get_image(chunk: str) -> str:
     return r"\begin{center}\includegraphics[width=0.9\columnwidth, height=0.9\textheight, keepaspectratio]{" + img_url + r"}\end{center}"
 
 
-
-
 def get_code_block(chunk: str, is_beamer: bool) -> str:
     lines = chunk.splitlines()[:-1]
     language = lines.pop(0)[3:]
