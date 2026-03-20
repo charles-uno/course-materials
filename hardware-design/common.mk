@@ -13,7 +13,7 @@ REPORT := if [[ -f $(TARGET).pdf ]]; then echo "\033[92mdone\033[0m"; else echo 
 all: $(TARGET).pdf
 
 $(TARGET).pdf: $(TARGET).tex sections
-	@ printf "\033[95mpreliminary build for toc ... \033[0m"
+	@ printf "\033[95mpre-build for toc ... \033[0m"
 	@ $(BUILD) ; $(REPORT)
 	@ printf "\033[95mfinal build ... \033[0m"
 	@ $(BUILD) ; $(REPORT)
