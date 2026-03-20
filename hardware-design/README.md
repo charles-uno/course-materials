@@ -16,10 +16,17 @@ PDFs are built automatically using GitHub Actions. Check out the `Actions` tab u
 
 - **code.** Source code for assignments. This includes benchmarking tools (eg `pthreads`) for exploring caching and ILP, as well as example code for Aarch64 exercises. Aarch64 is meant to be compiled on a 64-bit Raspberry Pi
 - **doenet-assignments.** Auto-graded warmups. Also includes prompts for circuitverse work, coding exercises, etc. Decent chance we should split the warmups from the "real" work (see TODOs at the bottom)
+- **homework.** Prompts for lab exercises and homework. There is some overlap with the Doenet stuff. Reorganization in progress.
 - **exams.**
 - **md2tex.** Script for converting Markdown files to LaTeX source. This is purely for convenience. Markdown is quicker to write and easier on the eyes
 - **slides.**
 - **syllabus.**
+
+
+
+
+
+
 
 ## Building Locally
 
@@ -70,3 +77,6 @@ Update standards and calendar. Three tests with three standards each (plus overh
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
 
+OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
+
+ALSO MAYBE: instead of O(10) standards, maybe have O(10) units, with a handful of standard each? That gives more granularity on what students got right and wrong. Might make homework grading easier, since each section is worth the same. Might also help stratify the grade distribution. Biggest downside is a *lot* of new columns in the Moodle gradebook
