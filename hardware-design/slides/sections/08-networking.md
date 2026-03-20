@@ -19,6 +19,37 @@ Examples:
 
 ### TCP/IP Model
 
+- Application Layer
+- Transport Layer
+- Internet Layer
+- Network Access Layer
+
+
+
+## Application Layer
+
+
+
+## Transport Layer
+
+
+
+## Internet Layer
+
+
+
+## Network Access Layer
+
+
+
+## Network Security
+
+
+
+
+
+### TCP/IP Model
+
 The TCP/IP Model provides rules for computer systems to communicate over a network. By dividing the tasks into layers, it makes it easier for different technologies to communicate. 
 
 TCP/IP Basics:
@@ -30,20 +61,27 @@ TCP/IP Basics:
 ### TCP/IP Model
 
 Application Layer (closest to user): where applications (e.g. web browsers, email clients) connect to the network.
+
 - Manages data formatting
 - Manages encryption
 - Manages connection sessions
 - Protocols: HTTP, FTP, SMTP, DNS
+
 Transport Layer: ensures that data is sent reliably and completely.
+
 - Checks for errors
 - Resends packets if needed
 - Keeps track of order
 - Protocols: TCP, UDP
+
 Internet Layer: finds path across different networks for data to reach its destination.
+
 - Routing
 - Finding the best way to travel
 - Protocols: IP
+
 Network Access Layer (physical connection): ensures data can travel over the hardware within a local network.
+
 - Data travels over wires, switches, wireless signals.
 - MAC addresses identify devices
 
