@@ -13,9 +13,7 @@ beamer: true
 
 The operating system is special software sits between applications and hardware (and allows them to communicate with one another)
 
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/os-location}
-$$$
+![OS location](images/os-concepts/os-location)
 
 ### What does the OS do?
 
@@ -100,9 +98,7 @@ User mode:
 
 ### Computers are like onions. They have layers
 
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/device-drivers}
-$$$
+![device drivers](images/os-concepts/device-drivers)
 
 ### System Calls
 
@@ -118,9 +114,7 @@ $$$
 - The CPU stops running the application and switches over to the system call handler
 - System calls are just one type of **vectored event**
 
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/call-to-os}
-$$$
+![call to OS](images/os-concepts/call-to-os)
 
 ### Vectored Events
 
@@ -163,9 +157,8 @@ Initiating program execution:
 - OS initializes CPU to start running program instructions
 
 ### Launching a Process
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/starting-a-program}
-$$$
+
+![starting a program](images/os-concepts/starting-a-program)
 
 ### Address Space
 
@@ -173,9 +166,7 @@ $$$
 - The process sees available memory as a contiguous block from 0x00000000 to 0xffffffff
 - Physical location of that memory may be very different
 
-$$$
-\includegraphics[width=0.7\columnwidth]{images/os-concepts/address-space}
-$$$
+![address space](images/os-concepts/address-space)
 
 ### Address Spaces -- Why??
 
@@ -202,17 +193,11 @@ Processes can create additional processes (called children).
 
 % For example: running a command in the terminal in VSCode
 
-$$$
-\begin{center}
-\includegraphics[width=0.5\columnwidth]{images/os-concepts/forks}
-\end{center}
-$$$
+![forks](images/os-concepts/forks)
 
 ### Process Life Cycle
 
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/process-states}
-$$$
+![process life cycle](images/os-concepts/process-states)
 
 ### Process Life Cycle
 
@@ -265,9 +250,7 @@ There are a few different scheduling strategies:
 
 ### AKA Concurrency
 
-$$$
-\includegraphics[width=\columnwidth]{images/os-concepts/multicore1}
-$$$
+![concurrent processing](images/os-concepts/multicore1)
 
 ## Parallelism
 

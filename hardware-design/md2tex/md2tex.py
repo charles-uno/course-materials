@@ -82,7 +82,8 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
         "## ",
         "### ",
         "%",
-        "|||"
+        "|||",
+        "!["
     ]
     fence_markers = [
         "```",
@@ -124,6 +125,8 @@ def to_tex(chunk: str, **kwargs) -> str:
     elif chunk.startswith("### "):
         # for beamer builds, h3 is new frame
         return get_h3(chunk, is_beamer)
+    elif chunk.startswith("!["):
+        return get_image(chunk)
     elif chunk.startswith("```"):
         # mistletoe doesn't handle code blocks nicely
         return get_code_block(chunk, is_beamer=is_beamer)
@@ -199,6 +202,14 @@ def get_h3(chunk: str, is_beamer: bool) -> str:
         return r"\begin{frame}{" + title + "}"
     else:
         return r"\subsubsection{" + title + "}"
+
+
+def get_image(chunk: str) -> str:
+    # ![alt text](image url)
+    alt_text, img_url = chunk[2:-1].split("](", 1)
+    return r"\begin{center}\includegraphics[width=0.9\columnwidth, height=0.9\textheight, keepaspectratio]{" + img_url + r"}\end{center}"
+
+
 
 
 def get_code_block(chunk: str, is_beamer: bool) -> str:
