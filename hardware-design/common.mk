@@ -1,6 +1,6 @@
 .PHONY: all sections clean tidy
 
-MD_SECTIONS := $(wildcard sections/*.md)
+MD_SECTIONS := $(wildcard ../chapters/*/slides.md)
 TEX_SECTIONS := $(MD_SECTIONS:.md=.gen.tex)
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
@@ -21,7 +21,7 @@ $(TARGET).pdf: $(TARGET).tex sections
 # generate tex source then stop. in case the python and latex builds need to happen in different containers
 sections: $(TEX_SECTIONS)
 
-sections/%.gen.tex: sections/%.md $(MD2TEX)
+../chapters/%/slides.gen.tex: ../chapters/%/slides.md $(MD2TEX)
 	@ $(MD2TEX) $<
 
 # remove output and generated/intermediate files
