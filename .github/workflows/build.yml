@@ -15,20 +15,27 @@ jobs:
           pip3 install -r hardware-design/requirements.txt
 
       - name: generate tex source
-        run: cd hardware-design/slides && make sections
+        run: cd hardware-design && make chapters
 
       - name: sanity checks
         run: |
           python3 --version
           pip3 freeze
-          ls hardware-design/slides/
+          ls hardware-design
 
       # note: surprisingly enough, all the requirements already seem to be
       # present. even ARM syntax highlighting, which is pretty niche
       - name: build slides
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: hardware-design/slides/slides.tex
+          root_file: hardware-design/slides.tex
+          work_in_root_file_dir: true
+          latexmk_shell_escape: true # Required for minted
+
+      - name: build homework
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: hardware-design/homework.tex
           work_in_root_file_dir: true
           latexmk_shell_escape: true # Required for minted
 
