@@ -12,7 +12,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3 python3-pip
-          pip3 install -r hardware-design/requirements.txt
+          pip3 install -r hardware-design/build/requirements.txt
 
       - name: generate tex source
         run: cd hardware-design && make chapters
