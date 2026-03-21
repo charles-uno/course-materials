@@ -1,6 +1,9 @@
 ---
 ---
 
+---
+---
+
 # Raspberry Pi Setup
 
 
@@ -156,7 +159,7 @@ Make this setting persist so we don't have to do it repeatedly
 
 1. Win + R, type regedit.
 2. Go to: `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\SharedAccess`
-3. Right-click > New > DWORD (32-bit) Value.
+3. Right-click \> New \> DWORD (32-bit) Value.
 4. Name it EnableRebootPersistConnection and set the value to 1
 
 
@@ -171,3 +174,13 @@ Make this setting persist so we don't have to do it repeatedly
 ### Add Host to VSCode
 
 Also add the folder! This is necessary to get the file navigator, drag and drop files
+
+# CSGit Setup
+
+
+### Repo Not Found
+
+Watch out for typos in the URL. Like `hd` vs `hd-241`
+
+
+# Shell Scripts
