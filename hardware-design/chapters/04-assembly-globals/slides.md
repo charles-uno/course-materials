@@ -506,5 +506,3 @@ You can copy-paste whatever you want from the slides or elsewhere
 
 
 
-
-
