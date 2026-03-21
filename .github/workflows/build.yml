@@ -17,38 +17,37 @@ jobs:
       - name: generate tex source
         run: cd hardware-design && make chapters
 
-      - name: sanity checks
-        run: |
-          python3 --version
-          pip3 freeze
-          ls hardware-design
+      - name: compile pdfs via makefile
+        uses: xu-cheng/texlive-action@v3
+        with:
+          run: ch hardware-design && make
 
       # note: surprisingly enough, all the requirements already seem to be
       # present. even ARM syntax highlighting, which is pretty niche
-      - name: build slides and homework
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: hardware-design/*.tex
-          work_in_root_file_dir: true
-          latexmk_shell_escape: true # Required for minted
+#      - name: build slides and homework
+#        uses: xu-cheng/latex-action@v3
+#        with:
+#          root_file: hardware-design/*.tex
+#          work_in_root_file_dir: true
+#          latexmk_shell_escape: true # Required for minted
 
-      - name: build syllabus
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: hardware-design/syllabus/syllabus.tex
-          work_in_root_file_dir: true
-          latexmk_shell_escape: true # Required for minted
+#      - name: build syllabus
+#        uses: xu-cheng/latex-action@v3
+#        with:
+#          root_file: hardware-design/syllabus/syllabus.tex
+#          work_in_root_file_dir: true
+#          latexmk_shell_escape: true # Required for minted
 
-      - name: build exams
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: hardware-design/exams/*.tex
-          work_in_root_file_dir: true
-          latexmk_shell_escape: true # Required for minted
+#      - name: build exams
+#        uses: xu-cheng/latex-action@v3
+#        with:
+#          root_file: hardware-design/exams/*.tex
+#          work_in_root_file_dir: true
+#          latexmk_shell_escape: true # Required for minted
 
       # TODO: this currently misses slides and homework!
-      - name: upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-pdfs
-          path: "hardware-design/**/*.pdf"
+#      - name: upload artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: built-pdfs
+#          path: "hardware-design/**/*.pdf"
