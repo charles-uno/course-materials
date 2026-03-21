@@ -28,6 +28,17 @@ Examples:
 
 ## Application Layer
 
+### Client-Server Model
+
+### HTTP and HTTPS
+
+### DNS
+
+### Ports
+
+
+
+
 
 
 ## Transport Layer
