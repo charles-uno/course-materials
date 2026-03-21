@@ -18,7 +18,7 @@ When launching a process:
 The address space for this process contains a **stack** and a **heap**
 
 $$$
-\includegraphics[width=0.7\columnwidth]{images/os-concepts/address-space}
+\includegraphics[width=0.7\columnwidth]{images/address-space}
 $$$
 
 ### Stack and Heap
@@ -392,7 +392,7 @@ Prints: `86400+1=86401` then exits
 
 $$$
 \begin{center}
-\includegraphics[width=0.8\columnwidth]{images/assembly-functions/sure-grandma}
+\includegraphics[width=0.8\columnwidth]{images/sure-grandma}
 \end{center}
 $$$
 
@@ -1246,7 +1246,7 @@ ret
 Debugging tools (eg `gdb`) allow you to step through your code, inspect registers, etc
 
 $$$
-\includegraphics[width=\columnwidth]{images/assembly-functions/gdb-stephan-avenwedde-cc-by-sa}
+\includegraphics[width=\columnwidth]{images/gdb-stephan-avenwedde-cc-by-sa}
 $$$
 
 The code we write doesn't give them much to work with
@@ -1256,7 +1256,7 @@ The code we write doesn't give them much to work with
 For performance-critical applications, you can ask the compiler to add *more* overhead in order to gather performance data
 
 $$$
-\includegraphics[width=\columnwidth]{images/assembly-functions/craypat}
+\includegraphics[width=\columnwidth]{images/craypat}
 $$$
 
 (Then tweak the code for better performance and recompile a clean version later)
