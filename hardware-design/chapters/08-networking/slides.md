@@ -42,6 +42,8 @@ Data doesn't move on its own:
 - Clients issue **requests**
 - Servers send **responses**
 
+![client server model](images/client-server-model)
+
 % server is ready to respond at all times
 
 ### Client-Server Model
@@ -279,6 +281,10 @@ TODO: this
 
 
 
+
+
+
+
 ### Exercise
 
 We can use the `traceroute` command on our Raspberry Pi to track the path that packets take from your computer to a destination. For example, try:
@@ -292,24 +298,6 @@ If you’ve seen Dr. Horrible’s Sing-Along Blog, try:
 traceroute bad.horse
 ```
 
-### TCP vs UDP
-
-TCP and UDP are transport layer protocols for sending data, ensuring that data arrives quickly, reliably, and in order.
-TCP (Transmission Control Protocol) requires a connection to be established before sending data. It guarantees that all packets are delivered correctly and in the proper order.
-- Used for web browsing, email, file transfers
-- Slower than UDP
-UDP (User Datagram Protocol) does not require a connection to send packets. It does not guarantee that packets will be received, or received in order.
-- Used for video streaming, online gaming
-- Faster than TCP
-
-### Client-Server Model
-
-In the client-server model, clients (e.g. web browsers, email applications) request services and servers provide them.
-
-- The client initiates communication by requesting data or services from a server.
-- The server waits for client requests, and then responds by sending data or performing requested tasks.
-
-![client server model](images/client-server-model)
 
 ### Application Protocols
 
@@ -340,6 +328,10 @@ DNS (Domain Name System) translates domain names (like www.google.com) into IP a
 4. The browser sends an HTTP request to the website server, requesting the content of the website.
 5. The server processes this request, sending back the requested files (probably HTML, CSS, JavaScript).
 6. The browser processes the received files and renders the website.
+
+
+
+
 
 ### Metrics of Network Performance
 
@@ -384,12 +376,10 @@ Really cool cryptography: public-key encryption, RSA
 
 
 
+switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
+- MAC Flooding
+- ARP Spoofing
 
-### Cache!
-
-- Communicating over a network is way slower than loading a value from memory
-- Software often caches data locally (eg by writing it to a file) to avoid duplicate calls later
-- images on a website, for example
 
 
 
@@ -408,30 +398,6 @@ You will be asked a series of conceptual questions, and you will be evaluated on
 - Packets
 
 
-## Day 1: The Local Network (The "Mailroom")
-
-Goal: How does a computer talk to the device next to it?
-
-- The Hardware (5 mins): Ditch hubs/bridges; focus on the Network Interface Card (NIC) and the Switch.
-- Switching & MAC Addresses (10 mins): Explain that every device has a permanent "Social Security Number" (MAC Address). A switch is a smart mailroom that sends data only to the specific port where that MAC lives.
-- The Client-Server Model (10 mins): Most internet interaction is just a "Client" (student's laptop) asking a "Server" (Google/Discord) for a file.
-- Packets (5 mins): Data isn't sent in one big chunk; it’s chopped into tiny envelopes called packets.
-
-Day 2: The Global Internet (The "Postal Service")
-
-Goal: How does that packet find a server 3,000 miles away?
-
-- IP Addresses & Routing (10 mins): If a MAC is a name, an IP address is a "Mailing Address." Explain that Routers are the GPS of the internet—they look at the IP and decide which city/country to send the packet to next.
-- DNS & HTTP/HTTPS (10 mins): Students don't type IPs; they type google.com. Explain DNS as the "Contacts App" of the internet. Then, briefly explain HTTP as the language used to ask for the website once you arrive.
-TCP/UDP & Security (10 mins):
-- TCP: "Did you get that?" (Guaranteed delivery for websites/email).
-- UDP: "Hope you get this!" (Fast, but messy—for gaming/video calls).
-- Encryption: Mention that HTTPS (the 'S') is just a locked envelope so the routers in the middle can't read your password.
-
-
-
-
-
 switch cares about MAC address. does not know anything about IP address. delivers messages within a network/neighborhood
 
 switch watches traffic to see which MAC address is where. stores entries in a table. when data wants to go to a known address, it can send it directly. if data wants to go to an unknown address, it yells to everyone and waits for a response.
@@ -445,68 +411,5 @@ MAC address is hard-coded into the NIC when manufactured. NIC is supposed to ign
 
 
 
-signals on the computer run in parallel. eg 64-bit system ostensibly means your logic path is 64 bits wide. the NIC takes that and turns it into one channel for the network
 
-
-
-
-
-switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
-- MAC Flooding
-- ARP Spoofing
-
-
-
-
-
-
-## The Physical Layer
-
-### outline placeholder
-
-- Basic networking hardware (Hubs, bridges, NICs, cables)
-- Switching vs. Routing (Focusing on Layer 2 switching)
-- The OSI Model (Introduction to the 7-layer framework) 
-
-## Network Protocols
-
-### outline placeholder
-
-- The TCP/IP Model (Comparing it to OSI)
-- IP Addresses (IPv4, IPv6, and subnets)
-- Packets (Encapsulation and structure)
-- TCP vs. UDP (Connection-oriented vs. connectionless)
-- Switching vs. Routing (Focusing on Layer 3 routing) 
-
-## Internet Infrastructure \& Navigation
-
-### outline placeholder
-
-- How the internet works (The "network of networks" concept)
-- DNS (Domain Name System and the resolution process)
-- The client-server model (Request/response architecture)
-
-## The Application Layer
-
-### outline placeholder
-
-- HTTP/HTTPS (Web traffic and state)
-- The client-server model (As it relates specifically to web apps)
-
-## Security \& Privacy
-
-### outline placeholder
-
-- Encryption (Symmetric, asymmetric, and hashing)
-- HTTPS (The role of SSL/TLS certificates)
-- Network security and attacks (DDoS, Man-in-the-Middle, packet sniffing)
-
-
-
-### summary
-
-DNS finds the address.
-TCP chops the data into Packets.
-Routers move them across the world.
-Switches deliver them to the right desk.
 
