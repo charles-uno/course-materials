@@ -1,3 +1,5 @@
+// TODO: do this without local variables, stack frames
+
 .section .rodata
     prompt: .ascii "Enter a number: \0"
     format: .ascii "%d\0"
