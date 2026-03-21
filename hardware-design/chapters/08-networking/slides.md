@@ -105,6 +105,7 @@ Network Access Layer (physical connection): ensures data can travel over the har
 - A Wireless Access Point allows wireless devices to connect to a wired network.
 - A Network Interface Card is a hardware component in a computer, allowing it to connect to a network.
 
+
 ### Network Diagram
 
 ![network diagram](images/network-diagram)

@@ -1,34 +1,39 @@
-.PHONY: all chapters clean tidy
-
-# Now handles both targets
-TARGETS := homework slides
-
-MD_CHAPTERS := $(wildcard chapters/*/*.md)
-# This generates .gen.tex for every .md file found
-TEX_CHAPTERS := $(MD_CHAPTERS:.md=.gen.tex)
+.PHONY: all clean tidy
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
 MD2TEX := $(REPO_ROOT)/hardware-design/build/md2tex/md2tex.py
 
-# Build all targets by default
-all: $(foreach t,$(TARGETS),$(t).pdf)
+# 1. Define separate lists of generated tex files
+HOMEWORK_TEX := $(wildcard chapters/*/homework.md)
+HOMEWORK_TEX := $(HOMEWORK_TEX:.md=.gen.tex)
 
-# Pattern rule for the PDFs
-%.pdf: %.tex chapters
+SLIDES_TEX := $(wildcard chapters/*/slides.md)
+SLIDES_TEX := $(SLIDES_TEX:.md=.gen.tex)
+
+# 2. Shared build/report logic using variables (NAME is target-specific)
+BUILD = pdflatex -interaction=nonstopmode -shell-escape $(NAME).tex >/dev/null
+REPORT = if [[ -f $(NAME).pdf ]]; then echo "\033[92mdone\033[0m"; else \
+         echo "\033[91mfailed\033[0m (see $(NAME).log)"; cat $(NAME).log; exit 1; fi
+
+all: homework.pdf slides.pdf
+
+# 3. Explicitly link each PDF to its specific sub-dependencies
+homework.pdf: NAME := homework
+homework.pdf: homework.tex $(HOMEWORK_TEX)
 	@ printf "\033[95mbuilding $@... \033[0m"
-	@ pdflatex -interaction=nonstopmode -shell-escape $*.tex >/dev/null ; \
-	  pdflatex -interaction=nonstopmode -shell-escape $*.tex >/dev/null ; \
-	  if [[ -f $@ ]]; then echo "\033[92mdone\033[0m"; else \
-	  echo "\033[91mfailed\033[0m (see $*.log)"; cat $*.log; exit 1; fi
+	@ $(BUILD) ; $(BUILD) ; $(REPORT)
 
-chapters: $(TEX_CHAPTERS)
+slides.pdf: NAME := slides
+slides.pdf: slides.tex $(SLIDES_TEX)
+	@ printf "\033[95mbuilding $@... \033[0m"
+	@ $(BUILD) ; $(BUILD) ; $(REPORT)
 
-# Static pattern rule: handles homework.gen.tex, slides.gen.tex, etc.
-$(TEX_CHAPTERS): %.gen.tex: %.md $(MD2TEX)
+# 4. Keep the generic rule for generating .tex from .md
+%.gen.tex: %.md $(MD2TEX)
 	@ $(MD2TEX) $<
 
 clean: tidy
-	@ rm -rf $(foreach t,$(TARGETS),$(t).pdf) ||:
+	@ rm -rf homework.pdf slides.pdf ||:
 
 tidy: 
 	@ rm -rf *.log *.aux *.toc *.nav *.out *.snm *.fdb_latex *.fls *.vrb _minted* *.data.minted *.fdb_latexmk *.cpt *.gen.tex */*.log */*.gen.tex */*/*.gen.tex ||:
