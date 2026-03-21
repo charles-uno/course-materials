@@ -115,6 +115,7 @@ TODO: this
 ### TCP vs UDP
 
 We choose the protocol based on the use case.
+
 - TCP (Transmission Control Protocol). Delivery is guaranteed. Lost packets are re-sent. Web browsing, email, file transfers
 - UDP (User Datagram Protocol). Faster but not guaranteed. Lost packets are gone. Gaming, video calls, streaming
 
@@ -154,12 +155,33 @@ TODO: this
 
 ## Internet Layer
 
-### IP Addresses
+### IP and MAC Addresses
 
-Explain that if a MAC address is a person's name, an IP address is their mailing address.
-IPv4 vs. IPv6: Briefly mention that we ran out of the old 4-billion addresses (IPv4), so we’re moving to a much longer version (IPv6).
-Structure: An IP address like 192.168.1.15 isn't just a random number; it contains a Network ID (the street) and a Host ID (the house number).
-Public vs. Private: This is crucial for Raspberry Pi users. Their Pi has a "Private" IP (only seen inside the room), while the Router has a "Public" IP (seen by the whole world).
+- Public IP address - How to get to your network
+- Private IP address - Your address within the network (transient)
+- MAC address - Unique to your computer (burned onto the NIC)
+
+### IPv4
+
+|||
+- Introduced in 1982-1983
+- Still used to route most internet traffic
+- Uses 32-bit addresses (about 4 billion unique addresses)
+- Not enough unique addresses for the global internet; IPv4 address exhaustion issue
+|||
+![ipv4 breakdown](images/ipv4-address)
+|||
+
+### IPv6
+
+|||
+- Most recent version of the Internet Protocol
+- Developed to handle IPv4 address exhaustion, replacing IPv4
+- Uses 128-bit addresses
+- Other improvements over IPv4
+|||
+![ipv6 breakdown](images/ipv6-address)
+|||
 
 ### Packets
 
@@ -181,6 +203,18 @@ A router looks at the destination IP address
 
 - If the address is in the local neighborhood, pass it along to the switch (more on this in a minute)
 - Otherwise, use its **routing table** to figure out which direction to send it
+
+### Exercises
+
+On your Raspberry Pi, view the status of your active network interfaces:
+```bash
+ifconfig
+```
+- Can you find the connection to your laptop?
+- Find the IP address(es) of your computer for your internet connection.
+- Find the MAC address(es) of your computer.
+
+You may need to Google how to read the output of `ifconfig` in order to answer these questions.
 
 ## Network Access Layer (AKA Link Layer)
 
@@ -232,11 +266,10 @@ Laptop, port 443... let's call that port 100001
 
 Raspberry Pi, port 22... let's call that port 100002
 
-
-
-### Exercise
+### Exercises
 
 TODO: this
+
 
 ## Network Security
 
@@ -258,54 +291,6 @@ If you’ve seen Dr. Horrible’s Sing-Along Blog, try:
 ```bash
 traceroute bad.horse
 ```
-
-### MAC and IP Addressing
-
-A MAC address is a permanent address for local communication, tied to hardware. It is hard-coded into a device’s network interface card.
-An IP address is a software-based address for broader network communication. It identifies a device on a network, and can change if the device connects to a different network.
-To deliver data, the router uses the IP address to find the correct network, and it uses the MAC address to find the specific device.
-
-### Internet Protocol
-
-The Internet Protocol (IP) establishes rules for how data is sent across the internet (or other networks). Data is divided into packets, and unique IP addresses are used to route packets to the correct destination.
-- Every device on the network is assigned a unique IP address
-- Another protocol (e.g. TCP) is used to ensure that the data arrives reliably, without errors.
-- Two major versions: IPv4 and IPv6
-
-### IPv4
-
-|||
-- Introduced in 1982-1983
-- Still used to route most internet traffic
-- Uses 32-bit addresses (about 4 billion unique addresses)
-- Not enough unique addresses for the global internet; IPv4 address exhaustion issue
-|||
-![ipv4 breakdown](images/ipv4-address)
-|||
-
-### IPv6
-
-|||
-- Most recent version of the Internet Protocol
-- Developed to handle IPv4 address exhaustion, replacing IPv4
-- Uses 128-bit addresses
-- Other improvements over IPv4
-|||
-![ipv6 breakdown](images/ipv6-address)
-|||
-
-### Exercise
-
-Connect your Raspberry Pi to St. Olaf Wi-Fi (St. Olaf Guest is fine)
-On your Raspberry Pi, view the status of your active network interfaces:
-```bash
-ifconfig
-```
-Can you find the connection to your laptop?
-Find the IP address(es) of your computer for your internet connection.
-Find the MAC address(es) of your computer.
-
-You may need to Google how to read the output of `ifconfig` in order to answer these questions.
 
 ### TCP vs UDP
 
