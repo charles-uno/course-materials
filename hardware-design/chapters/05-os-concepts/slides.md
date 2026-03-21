@@ -13,7 +13,7 @@ beamer: true
 
 The operating system is special software sits between applications and hardware (and allows them to communicate with one another)
 
-![OS location](images/os-concepts/os-location)
+![OS location](images/os-location)
 
 ### What does the OS do?
 
@@ -98,7 +98,7 @@ User mode:
 
 ### Computers are like onions. They have layers
 
-![device drivers](images/os-concepts/device-drivers)
+![device drivers](images/device-drivers)
 
 ### System Calls
 
@@ -114,7 +114,7 @@ User mode:
 - The CPU stops running the application and switches over to the system call handler
 - System calls are just one type of **vectored event**
 
-![call to OS](images/os-concepts/call-to-os)
+![call to OS](images/call-to-os)
 
 ### Vectored Events
 
@@ -158,7 +158,7 @@ Initiating program execution:
 
 ### Launching a Process
 
-![starting a program](images/os-concepts/starting-a-program)
+![starting a program](images/starting-a-program)
 
 ### Address Space
 
@@ -166,7 +166,7 @@ Initiating program execution:
 - The process sees available memory as a contiguous block from 0x00000000 to 0xffffffff
 - Physical location of that memory may be very different
 
-![address space](images/os-concepts/address-space)
+![address space](images/address-space)
 
 ### Address Spaces -- Why??
 
@@ -193,11 +193,11 @@ Processes can create additional processes (called children).
 
 % For example: running a command in the terminal in VSCode
 
-![forks](images/os-concepts/forks)
+![forks](images/forks)
 
 ### Process Life Cycle
 
-![process life cycle](images/os-concepts/process-states)
+![process life cycle](images/process-states)
 
 ### Process Life Cycle
 
@@ -250,7 +250,7 @@ There are a few different scheduling strategies:
 
 ### AKA Concurrency
 
-![concurrent processing](images/os-concepts/multicore1)
+![concurrent processing](images/multicore1)
 
 ## Parallelism
 
@@ -262,11 +262,11 @@ There are a few different scheduling strategies:
 ### Concurrent vs Parallel
 
 $$$
-\includegraphics[width=0.5\columnwidth]{images/os-concepts/multicore1}
+\includegraphics[width=0.5\columnwidth]{images/multicore1}
 $$$
 
 $$$
-\includegraphics[width=0.5\columnwidth]{images/os-concepts/multicore2}
+\includegraphics[width=0.5\columnwidth]{images/multicore2}
 $$$
 
 ### Why Parallelism?

@@ -484,7 +484,7 @@ There are many cases where we want a computer to store non-numerical data:
 
 ### ASCII Table
 $$$
-\includegraphics[width=\columnwidth]{images//data-representation/ascii-table}
+\includegraphics[width=\columnwidth]{images/ascii-table}
 $$$
 
 ### Colors and Images
@@ -493,7 +493,7 @@ $$$
 - We can represent an image as a grid of colored pixels
 - Question: do we need a null byte at the end of a pixel/row/image? Why or why not?
 $$$
-\includegraphics[width=\columnwidth]{images/data-representation/mario-pixels}
+\includegraphics[width=\columnwidth]{images/mario-pixels}
 $$$
 
 ### Sound
@@ -502,7 +502,7 @@ $$$
 - We can create sound by moving a speaker cone rapidly
 - To store sound, store the movement of the speaker cone
 $$$
-\includegraphics[width=0.5\columnwidth]{images/data-representation/speakers}
+\includegraphics[width=0.5\columnwidth]{images/speakers}
 $$$
 
 ### Structured Data
@@ -512,11 +512,11 @@ $$$
 
 |||
 $$$
-\includegraphics[width=\columnwidth]{images/data-representation/html-example}
+\includegraphics[width=\columnwidth]{images/html-example}
 $$$
 |||
 $$$
-\includegraphics[width=\columnwidth]{images/data-representation/json-example}
+\includegraphics[width=\columnwidth]{images/json-example}
 $$$
 |||
 

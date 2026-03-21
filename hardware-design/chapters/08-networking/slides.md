@@ -107,13 +107,13 @@ Network Access Layer (physical connection): ensures data can travel over the har
 
 ### Network Diagram
 
-![network diagram](images/networking/network-diagram)
+![network diagram](images/network-diagram)
 
 ### Packet Switching
 
 When data is transmitted over a network, it’s divided into small pieces called packets. These packets are sent independently through the network (possibly through different paths), and reassembled at the destination.
 
-![packet switching](images/networking/packet-switching)
+![packet switching](images/packet-switching)
 
 ### Packet Switching
 
@@ -156,7 +156,7 @@ The Internet Protocol (IP) establishes rules for how data is sent across the int
 - Uses 32-bit addresses (about 4 billion unique addresses)
 - Not enough unique addresses for the global internet; IPv4 address exhaustion issue
 |||
-![ipv4 breakdown](images/networking/ipv4-address)
+![ipv4 breakdown](images/ipv4-address)
 |||
 
 ### IPv6
@@ -167,7 +167,7 @@ The Internet Protocol (IP) establishes rules for how data is sent across the int
 - Uses 128-bit addresses
 - Other improvements over IPv4
 |||
-![ipv6 breakdown](images/networking/ipv6-address)
+![ipv6 breakdown](images/ipv6-address)
 |||
 
 ### Exercise
@@ -200,7 +200,7 @@ In the client-server model, clients (e.g. web browsers, email applications) requ
 - The client initiates communication by requesting data or services from a server.
 - The server waits for client requests, and then responds by sending data or performing requested tasks.
 
-![client server model](images/networking/client-server-model)
+![client server model](images/client-server-model)
 
 ### Application Protocols
 
@@ -263,14 +263,14 @@ You can test your throughput using `www.speedtest.net` (will be affected if othe
 
 ### Network Security
 
-![man in the middle](images/networking/man-in-the-middle)
+![man in the middle](images/man-in-the-middle)
 
 ### Encryption
 
 Encryption is a powerful tool against eavesdropping. Encryption scrambles data being sent, so that (in theory) only the intended recipient can unscramble it to read the message. For example, HTTPS encrypts communications.
 Really cool cryptography: public-key encryption, RSA
 
-![encryption](images/networking/encryption)
+![encryption](images/encryption)
 
 
 
