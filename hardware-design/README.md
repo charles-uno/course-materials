@@ -61,7 +61,7 @@ Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely.
 
 Add makefile check to confirm that sections line up in the slides and the assignments
 
-Update standards and calendar. Three tests with three standards each (plus overhead: pi setup, csgit setup)
+Update standards:
 1. **Data Representation.** Integers, hex, arithmetic, two's complement, floating point, ASCII, structured data
 2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations
 3. **Assembly Programming.** Global variables, global constants, printf, scanf, automated testing
@@ -71,7 +71,8 @@ Update standards and calendar. Three tests with three standards each (plus overh
 7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
+10. **Networking**? 
 
-OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
+Maybe three quizzes with three standards each. OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
 
 ALSO MAYBE: instead of O(10) standards, maybe have O(10) units, with a handful of standard each? That gives more granularity on what students got right and wrong. Might make homework grading easier, since each section is worth the same. Might also help stratify the grade distribution. Biggest downside is a *lot* of new columns in the Moodle gradebook
