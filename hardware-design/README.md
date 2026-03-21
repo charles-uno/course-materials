@@ -14,19 +14,14 @@ PDFs are built automatically using GitHub Actions. Check out the `Actions` tab u
 
 ## Repo Summary
 
-- **code.** Source code for assignments. This includes benchmarking tools (eg `pthreads`) for exploring caching and ILP, as well as example code for Aarch64 exercises. Aarch64 is meant to be compiled on a 64-bit Raspberry Pi
-- **doenet-assignments.** Auto-graded warmups. Also includes prompts for circuitverse work, coding exercises, etc. Decent chance we should split the warmups from the "real" work (see TODOs at the bottom)
-- **homework.** Prompts for lab exercises and homework. There is some overlap with the Doenet stuff. Reorganization in progress.
-- **exams.**
-- **md2tex.** Script for converting Markdown files to LaTeX source. This is purely for convenience. Markdown is quicker to write and easier on the eyes
-- **slides.**
-- **syllabus.**
+Heads up! Stuff is moving around right now. 
 
-
-
-
-
-
+- `chapters` - This holds most of the actual content! Split up by chapter (aka unit, aka standard). Each directory contains `slides.md`, maybe some homework, maybe some support files
+- `slides.tex` - build target for the whole slide deck. Pulls content from `chapters/*/slides.md`
+- `homework.tex` - build target for the big bundle of homework. Pulls content from `chapters/*/homework.md`. Probably want to split this up into multiple files actually
+- `build` - Templates and scripts for building our Markdown source files into PDFs via LaTeX
+- `syllabus` - The syllabus
+- `exams` - Quizzes and final. A bit of a mishmash from multiple semesters. Need to get this cleaned up
 
 ## Building Locally
 
@@ -42,7 +37,7 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO
 
-Update syllabus to use markdown. Maybe exams too
+Update syllabus to use markdown? Maybe exams too
 
 Figure out how to create tagged PDFs for accessibility
 
