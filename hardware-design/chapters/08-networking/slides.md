@@ -77,6 +77,8 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 - HTTP: Sending a postcard. Anyone (hackers, ISPs) can read it as it passes by.
 - HTTPS: Sending a locked box. The 'S' stands for Secure (via TLS/SSL encryption). It ensures that even if someone "sees" the data, they can't read your password or credit card info.
 
+% get, put, post, delete?
+
 ### DNS
 
 - Computers use numbers, not words
@@ -166,11 +168,10 @@ TODO: this
 
 ## Internet Layer
 
-### IP and MAC Addresses
+### IP Addresses
 
 - Public IP address - How to get to your network
 - Private IP address - Your address within the network (transient)
-- MAC address - Unique to your computer (burned onto the NIC)
 
 ### IPv4
 
@@ -217,24 +218,15 @@ A router looks at the destination IP address
 
 ### Exercises
 
-On your Raspberry Pi, view the status of your active network interfaces:
-```bash
-ifconfig
-```
-- Can you find the connection to your laptop?
-- Find the IP address(es) of your computer for your internet connection.
-- Find the MAC address(es) of your computer.
+TODO: this
 
-You may need to Google how to read the output of `ifconfig` in order to answer these questions.
-
-## Network Access Layer (AKA Link Layer)
+## Network Access Layer
 
 ### Physical Media
 
-This is the literal physical stuff. On a Raspberry Pi, students usually deal with two types:
-Ethernet (Copper): Electricity pulsing through wires.
-Wi-Fi (Radio): Invisible waves in the air.
-Fiber (Light): Lasers through glass (usually for the "backbone" of the internet).
+- Ethernet: voltage in metal wires
+- Wifi: radio waves (invisible, incorporeal)
+- Fiber: Lasers through glass
 
 ### MAC Addresses
 
@@ -266,7 +258,6 @@ The Frame (Network Access Layer): The entire Packet is stuffed inside an Etherne
 - router gets a packet addressed to its own MAC address
 - uses a **routing table** to figure out the next hop to get to the destination IP address
 
-
 ### Layer Violation!
 
 Most routers just look at IP address to figure out where to send data next
@@ -285,10 +276,16 @@ traceroute google.com
 ```
 This sends packets through the internet, and shows every server or router passed through along the way.
 
-If you’ve seen Dr. Horrible’s Sing-Along Blog, try:
+On your Raspberry Pi, view the status of your active network interfaces:
 ```bash
-traceroute bad.horse
+ifconfig
 ```
+- Can you find the connection to your laptop?
+- Find the IP address(es) of your computer for your internet connection.
+- Find the MAC address(es) of your computer.
+
+You may need to Google how to read the output of `ifconfig` in order to answer these questions.
+
 
 ## Performance \& Security
 
@@ -342,71 +339,5 @@ ping www.google.com
 This should work on Raspberry Pi or Mac.
 
 You can test your throughput using `www.speedtest.net` (will be affected if other pages/applications are using the internet). There is also a command line version of this, but it requires installation.
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Application Protocols
-
-HTTP (HyperText Transfer Protocol) defines how clients (such as web browsers) and servers exchange information.
-- The browser sends an HTTP request to the server hosting the website.
-- The server processes the request, and sends an HTTP response containing the requested data.
-- HTTP request methods:
-    - GET: retrieve a resource (e.g., content of a webpage)
-    - POST: submit data to the server (e.g., submit a form)
-    - PUT: update or create a resource at a specific location (e.g., upload profile picture)
-    - DELETE: remove a resource
-HTTPS is HyperText Transfer Protocol Secure, adding security by encrypting the data being exchanged.
-
-### Application Layer Protocols
-
-DNS (Domain Name System) translates domain names (like www.google.com) into IP addresses (like 173.194.39.78).
-- When you type a web address (URL) into your browser, the browser sends a DNS query to a DNS server.
-- The DNS server looks up the domain name, and returns the corresponding IP address.
-- Purpose: Users can remember domain names, instead of IP addresses.
-
-% when facebook.com goes down, DNS goes down for a decent chunk of the internet
-
-
-
-
-
-You will be asked a series of conceptual questions, and you will be evaluated on how well your answers demonstrate understanding of the following networking concepts:
-- Basic definitions
-- How the internet works
-- Basic networking hardware
-- The client-server model
-- The OSI Model
-- THE TCP/IP Model
-- IP Addresses
-- TCP vs. UDP
-- HTTP/HTTPS
-- DNS
-- Switching vs. Routing
-- Packets
-
-
-switch cares about MAC address. does not know anything about IP address. delivers messages within a network/neighborhood
-
-switch watches traffic to see which MAC address is where. stores entries in a table. when data wants to go to a known address, it can send it directly. if data wants to go to an unknown address, it yells to everyone and waits for a response.
-
-router knows about IP address. it sends the data to the appropriate network/neighborhood
-
-if you ping google. your computer knows that it's not a nearby IP address. it sends it to the MAC address of the router
-
-MAC address is hard-coded into the NIC when manufactured. NIC is supposed to ignore any traffic addressed to a different MAC
-
-
-
-
 
 
