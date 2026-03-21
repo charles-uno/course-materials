@@ -84,6 +84,15 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 - We use DNS to bridge the gap
 - When you ask for `google.com`, your computer uses DNS to look up the corresponding IP address
 
+### What happens when you visit a website?
+
+1. You enter a web address (a URL, Uniform Resource Locator) into a browser.
+2. The browser queries a DNS server, converting the domain to an IP address.
+3. If the website uses HTTPS, a secure and encrypted connection is established between the browser and the website server.
+4. The browser sends an HTTP request to the website server, requesting the content of the website.
+5. The server processes this request, sending back the requested files (probably HTML, CSS, JavaScript).
+6. The browser processes the received files and renders the website.
+
 ### DNS Can Fail!
 
 - Your computer and local router do not know the layout of the whole internet
@@ -270,23 +279,6 @@ Raspberry Pi, port 22... let's call that port 100002
 
 ### Exercises
 
-TODO: this
-
-
-## Network Security
-
-
-
-
-
-
-
-
-
-
-
-### Exercise
-
 We can use the `traceroute` command on our Raspberry Pi to track the path that packets take from your computer to a destination. For example, try:
 ```bash
 traceroute google.com
@@ -298,39 +290,7 @@ If you’ve seen Dr. Horrible’s Sing-Along Blog, try:
 traceroute bad.horse
 ```
 
-
-### Application Protocols
-
-HTTP (HyperText Transfer Protocol) defines how clients (such as web browsers) and servers exchange information.
-- The browser sends an HTTP request to the server hosting the website.
-- The server processes the request, and sends an HTTP response containing the requested data.
-- HTTP request methods:
-    - GET: retrieve a resource (e.g., content of a webpage)
-    - POST: submit data to the server (e.g., submit a form)
-    - PUT: update or create a resource at a specific location (e.g., upload profile picture)
-    - DELETE: remove a resource
-HTTPS is HyperText Transfer Protocol Secure, adding security by encrypting the data being exchanged.
-
-### Application Layer Protocols
-
-DNS (Domain Name System) translates domain names (like www.google.com) into IP addresses (like 173.194.39.78).
-- When you type a web address (URL) into your browser, the browser sends a DNS query to a DNS server.
-- The DNS server looks up the domain name, and returns the corresponding IP address.
-- Purpose: Users can remember domain names, instead of IP addresses.
-
-% when facebook.com goes down, DNS goes down for a decent chunk of the internet
-
-### What happens when you visit a website?
-
-1. You enter a web address (a URL, Uniform Resource Locator) into a browser.
-2. The browser queries a DNS server, converting the domain to an IP address.
-3. If the website uses HTTPS, a secure and encrypted connection is established between the browser and the website server.
-4. The browser sends an HTTP request to the website server, requesting the content of the website.
-5. The server processes this request, sending back the requested files (probably HTML, CSS, JavaScript).
-6. The browser processes the received files and renders the website.
-
-
-
+## Performance \& Security
 
 
 ### Metrics of Network Performance
@@ -345,16 +305,6 @@ DNS (Domain Name System) translates domain names (like www.google.com) into IP a
 **Packet Loss** is the percent of packets that fail to reach their destination.
 - High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
 - Inconsistency in timing of data received.
-
-### Exercise
-
-You can use the `ping` command to measure latency and packet loss to a specific host. For example,
-```bash
-ping www.google.com
-```
-This should work on Raspberry Pi or Mac.
-
-You can test your throughput using `www.speedtest.net` (will be affected if other pages/applications are using the internet). There is also a command line version of this, but it requires installation.
 
 ### Network Security
 
@@ -379,6 +329,53 @@ Really cool cryptography: public-key encryption, RSA
 switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
 - MAC Flooding
 - ARP Spoofing
+
+
+
+
+### Exercise
+
+You can use the `ping` command to measure latency and packet loss to a specific host. For example,
+```bash
+ping www.google.com
+```
+This should work on Raspberry Pi or Mac.
+
+You can test your throughput using `www.speedtest.net` (will be affected if other pages/applications are using the internet). There is also a command line version of this, but it requires installation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Application Protocols
+
+HTTP (HyperText Transfer Protocol) defines how clients (such as web browsers) and servers exchange information.
+- The browser sends an HTTP request to the server hosting the website.
+- The server processes the request, and sends an HTTP response containing the requested data.
+- HTTP request methods:
+    - GET: retrieve a resource (e.g., content of a webpage)
+    - POST: submit data to the server (e.g., submit a form)
+    - PUT: update or create a resource at a specific location (e.g., upload profile picture)
+    - DELETE: remove a resource
+HTTPS is HyperText Transfer Protocol Secure, adding security by encrypting the data being exchanged.
+
+### Application Layer Protocols
+
+DNS (Domain Name System) translates domain names (like www.google.com) into IP addresses (like 173.194.39.78).
+- When you type a web address (URL) into your browser, the browser sends a DNS query to a DNS server.
+- The DNS server looks up the domain name, and returns the corresponding IP address.
+- Purpose: Users can remember domain names, instead of IP addresses.
+
+% when facebook.com goes down, DNS goes down for a decent chunk of the internet
+
 
 
 
