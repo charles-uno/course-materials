@@ -13,7 +13,14 @@ Examples:
 - St. Olaf campus network, connecting laptops, phones, servers (csgit). This is a **CAN** (Campus Area Network), made up of many LANs.
 - Internet, connects networks across huge distances. This is a **WAN** (Wide Area Network).
 
+### Getting Plugged In
 
+Each computer talks to the network using a **NIC** (Network Interface Card):
+
+- Not a literal card these days
+- Keeps track of connections over wifi, ethernet
+- Incoming and outgoing traffic
+- Translates between CPU (64+ lanes) and network (maybe just 1 lane)
 
 ### TCP/IP Model
 
@@ -22,16 +29,45 @@ Examples:
 - Internet Layer
 - Network Access Layer
 
+### Data Encapsulation
 
+![frame, packet, and segment](images/network-layers)
 
 ## Application Layer
 
 ### Client-Server Model
 
-This is the fundamental "conversation" of the web.
-The Client: The browser (Chrome, Safari) that asks for data.
-The Server: The powerful computer (at Google or Amazon) that listens for requests 24/7 and serves the files.
-Key Concept: Data doesn't just "flow"—it is explicitly requested and then delivered.
+Data doesn't move on its own:
+
+- Clients issue **requests**
+- Servers send **responses**
+
+% server is ready to respond at all times
+
+### Client-Server Model
+
+Clients initiate network connections:
+- Your phone
+- Your laptop
+- ATMs
+
+Servers listen and respond:
+- Google
+- Amazon
+- Spotify
+
+### Client And Server
+
+Can one device be both a client and a server?
+
+If so, can it perform both roles at the same time?
+
+### Client-Server Model
+
+Yes!
+
+- When you type `ping google.com` on your Raspberry Pi to check the internet connection, the Pi is acting as a client
+- When you type `ssh kiwi@raspberrypi.local` on your laptop, your Pi is acting as a server
 
 ### HTTP and HTTPS
 
@@ -41,36 +77,166 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 
 ### DNS
 
-Computers hate names. They love numbers.
-Humans can’t remember 142.250.190.46.
-The Domain Name System. When you type google.com, the Application Layer sends a background request to a DNS server to "look up" the IP address so the lower layers (Routing) can actually find the server.
+- Computers use numbers, not words
+- Huamns can't remember `142.250.190.46`
+- We use DNS to bridge the gap
+- When you ask for `google.com`, your computer uses DNS to look up the corresponding IP address
 
-DNS is a website. If the DNS server doesn't reply, you can't get to Google (even if your internet connection is fine and Google is fine)
-This happened when Facebook went down for a day about 5 years ago
+### DNS Can Fail!
+
+- Your computer and local router do not know the layout of the whole internet
+- DNS lookup requires a request over the internet
+- If your DNS server is down, you won't get a response
+- Websites may be "up" but inaccessible by name
+- This happens every few years!
+
+% The Dyn Attack (2016): DDoS attack hit Dyn, a major DNS provider. Twitter, Spotify, Reddit, and Netflix went dark
+% The Facebook/Meta Outage (2021): configuration error removed FB from DNS. Internal systems worked, but no external access
+% Akamai Bug (2021): infra bug caused a global DNS disruption affecting airlines, banks
+% AWS "Cascading" DNS Failure (2021): AWS bug broke their internal DNS. Disrupted sites hosted on AWS (snapshat, disnet+, venmo)
 
 ### Ports
 
-- Bridges the gap between the Application Layer and the Transport Layer (TCP/UDP).
-- Your computer might be running Spotify, Zoom, and Chrome at the same time. How does it know which incoming packet goes to which app?
+- Your computer might be running Spotify, Zoom, and Chrome at the same time. 
+- How does it know which incoming data goes to which app?
 - Each application "listens" on a specific Port.
-    - Port 80/443: Web traffic (HTTP/HTTPS)
-    - Port 25: Email (SMTP)
-    - Port 53: DNS
-    - Port 22: SSH
+- Firewalls may look at port number when deciding to let traffic through
+%    - Port 80/443: Web traffic (HTTP/HTTPS)
+%    - Port 25: Email (SMTP)
+%    - Port 53: DNS
+%    - Port 22: SSH
 
-Port is in the packet header. Firewalls may look at port number when deciding to let traffic through
+### Exercise
+
+TODO: this
 
 ## Transport Layer
 
+### TCP vs UDP
 
+We choose the protocol based on the use case.
+- TCP (Transmission Control Protocol). Delivery is guaranteed. Lost packets are re-sent. Web browsing, email, file transfers
+- UDP (User Datagram Protocol). Faster but not guaranteed. Lost packets are gone. Gaming, video calls, streaming
+
+### The Three-Way Handshake
+
+How does TCP ensure a reliable connection?
+
+1. Client: Hey my name is Charles (sync), can you synchronize with me?
+2. Server: Hi Charles (ack), my name is Telemachus (sync)
+3. Client: Hi Telemachus (ack)
+
+### Segmentation and Reassembly
+
+- TCP chops data into **segments** before sending
+- Each segment has a header including port and sequence ID
+- Recipient NIC/OS uses the header to reassemble the data
+- Why do you suppose we do this?
+
+### Why Segmentize?
+
+- The internet can't handle one giant 5GB file at once
+- Resiliency. Eggs in multiple baskets
+- Easier for your NIC (network card) to take turns
+
+% don't want all our eggs in one basket
+
+### Multiplexing and De-Multiplexing
+
+- HTTPS is on port 443, SSH is on port 22, etc
+- Different apps may be running at the same time
+- Data is getting chopped up into segments
+- How do we make sure the data doesn't get mixed up?
+
+### Exercise
+
+TODO: this
 
 ## Internet Layer
 
+### IP Addresses
+
+Explain that if a MAC address is a person's name, an IP address is their mailing address.
+IPv4 vs. IPv6: Briefly mention that we ran out of the old 4-billion addresses (IPv4), so we’re moving to a much longer version (IPv6).
+Structure: An IP address like 192.168.1.15 isn't just a random number; it contains a Network ID (the street) and a Host ID (the house number).
+Public vs. Private: This is crucial for Raspberry Pi users. Their Pi has a "Private" IP (only seen inside the room), while the Router has a "Public" IP (seen by the whole world).
+
+### Packets
+
+- Segment gets wrapped in an IP header 
+- Source IP address, destination IP address
+- This layer does not touch the data inside the packet
+
+### Packets
+
+Packets may take different paths. What happens if they get stuck in a loop?
+
+% header also includes a "timer". Drops by 1 every time the packet hits a router. If the timer runs out, the packet is deleted
+
+![packet switching](images/packet-switching)
+
+### Routing
+
+A router looks at the destination IP address
+
+- If the address is in the local neighborhood, pass it along to the switch (more on this in a minute)
+- Otherwise, use its **routing table** to figure out which direction to send it
+
+## Network Access Layer (AKA Link Layer)
+
+### Physical Media
+
+This is the literal physical stuff. On a Raspberry Pi, students usually deal with two types:
+Ethernet (Copper): Electricity pulsing through wires.
+Wi-Fi (Radio): Invisible waves in the air.
+Fiber (Light): Lasers through glass (usually for the "backbone" of the internet).
+
+### MAC Addresses
+
+This is the most important concept for this layer.
+Physical vs. Logical: An IP address (Internet Layer) is assigned by the network. A MAC address is burned into the NIC at the factory.
+The Scope: MAC addresses only matter locally. Your router uses your Pi's MAC address to find it in the room, but a server in Japan has no idea what your MAC address is—it only sees your IP.
+
+### Frames
+
+Frame wraps around the packet (which wraps around the segment)
+
+As we discussed, this is the final "envelope."
+The Header: It adds the Source MAC and Destination MAC.
+The Trailer (FCS): This layer adds a "checksum" at the end of the data. If the electricity flickers and a bit gets flipped, the NIC detects the error and throws the frame away before it even reaches the CPU.
+
+### ARP
+
+This is the "glue" between the Internet Layer and Network Access Layer.
+The Problem: Your Pi knows the IP of the Router, but the Switch only understands MACs. How do we find the MAC?
+The Solution: ARP (Address Resolution Protocol). Your Pi shouts: "Who has IP 192.168.1.1? Tell me your MAC!" The router replies, and now the Pi can build the Frame.
+
+### Routers and Switches
+
+To be technically precise for your Raspberry Pi lab, the "nesting" order looks like this:
+The Segment (Transport Layer): This is your data (like a piece of a webpage) plus the TCP/UDP header (Source/Destination Ports). [1, 2]
+The Packet (Internet Layer): The entire Segment is stuffed inside an IP header (Source/Destination IP Addresses). [1, 3]
+The Frame (Network Access Layer): The entire Packet is stuffed inside an Ethernet header (Source/Destination MAC Addresses). [1, 4]
+
+- router gets a packet addressed to its own MAC address
+- uses a **routing table** to figure out the next hop to get to the destination IP address
 
 
-## Network Access Layer
+### Layer Violation!
+
+Most routers just look at IP address to figure out where to send data next
+
+Your home router breaks the rule. It also looks at port
+
+Laptop, port 443... let's call that port 100001
+
+Raspberry Pi, port 22... let's call that port 100002
 
 
+
+### Exercise
+
+TODO: this
 
 ## Network Security
 
@@ -78,69 +244,7 @@ Port is in the packet header. Firewalls may look at port number when deciding to
 
 
 
-### TCP/IP Model
 
-The TCP/IP Model provides rules for computer systems to communicate over a network. By dividing the tasks into layers, it makes it easier for different technologies to communicate. 
-
-TCP/IP Basics:
-- Ensures that data arrives safely and correctly.
-- Data is broken into small pieces, called packets, to be sent.
-- Packets are sent separately.
-- Packets are reassembled into the correct order when they are received.
-
-### TCP/IP Model
-
-Application Layer (closest to user): where applications (e.g. web browsers, email clients) connect to the network.
-
-- Manages data formatting
-- Manages encryption
-- Manages connection sessions
-- Protocols: HTTP, FTP, SMTP, DNS
-
-Transport Layer: ensures that data is sent reliably and completely.
-
-- Checks for errors
-- Resends packets if needed
-- Keeps track of order
-- Protocols: TCP, UDP
-
-Internet Layer: finds path across different networks for data to reach its destination.
-
-- Routing
-- Finding the best way to travel
-- Protocols: IP
-
-Network Access Layer (physical connection): ensures data can travel over the hardware within a local network.
-
-- Data travels over wires, switches, wireless signals.
-- MAC addresses identify devices
-
-### Network Devices
-
-- A router directs data between different networks (e.g., home network and internet).
-- A network switch connects devices on the same local network (LAN).
-- A modem connects your local network to your internet service provider (ISP); gateway to the internet.
-- A firewall monitors network traffic to protect against unauthorized access.
-- A Wireless Access Point allows wireless devices to connect to a wired network.
-- A Network Interface Card is a hardware component in a computer, allowing it to connect to a network.
-
-
-### Network Diagram
-
-![network diagram](images/network-diagram)
-
-### Packet Switching
-
-When data is transmitted over a network, it’s divided into small pieces called packets. These packets are sent independently through the network (possibly through different paths), and reassembled at the destination.
-
-![packet switching](images/packet-switching)
-
-### Packet Switching
-
-- Efficiently uses available bandwidth
-- Reliable (can detect missing packets, request retransmission)
-- Packets may arrive out of order
-- Use sequence number to reassembly packets in correct order
 
 ### Exercise
 
