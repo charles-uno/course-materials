@@ -4,7 +4,7 @@ MD_SECTIONS := $(wildcard ../chapters/*/slides.md)
 TEX_SECTIONS := $(MD_SECTIONS:.md=.gen.tex)
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
-MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
+MD2TEX := $(REPO_ROOT)/hardware-design/build/md2tex/md2tex.py
 
 TARGET := $(notdir $(CURDIR))
 BUILD := pdflatex -interaction=nonstopmode -shell-escape $(TARGET).tex >/dev/null

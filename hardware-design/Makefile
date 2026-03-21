@@ -6,7 +6,7 @@ MD_CHAPTERS := $(wildcard chapters/*/*.md)
 TEX_CHAPTERS := $(MD_CHAPTERS:.md=.gen.tex)
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
-MD2TEX := $(REPO_ROOT)/hardware-design//md2tex/md2tex.py
+MD2TEX := $(REPO_ROOT)/hardware-design/build/md2tex/md2tex.py
 
 BUILD := pdflatex -interaction=nonstopmode -shell-escape $(TARGET).tex >/dev/null
 REPORT := if [[ -f $(TARGET).pdf ]]; then echo "\033[92mdone\033[0m"; else echo "\033[91mfailed\033[0m (see $(TARGET).log)"; cat $(TARGET).log; exit 1; fi
