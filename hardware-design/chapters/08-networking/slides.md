@@ -15,8 +15,6 @@ Examples:
 
 
 
-
-
 ### TCP/IP Model
 
 - Application Layer
@@ -30,16 +28,37 @@ Examples:
 
 ### Client-Server Model
 
+This is the fundamental "conversation" of the web.
+The Client: The browser (Chrome, Safari) that asks for data.
+The Server: The powerful computer (at Google or Amazon) that listens for requests 24/7 and serves the files.
+Key Concept: Data doesn't just "flow"—it is explicitly requested and then delivered.
+
 ### HTTP and HTTPS
+
+HyperText Transfer Protocol is the set of rules for how a browser asks for a webpage.
+- HTTP: Sending a postcard. Anyone (hackers, ISPs) can read it as it passes by.
+- HTTPS: Sending a locked box. The 'S' stands for Secure (via TLS/SSL encryption). It ensures that even if someone "sees" the data, they can't read your password or credit card info.
 
 ### DNS
 
+Computers hate names. They love numbers.
+Humans can’t remember 142.250.190.46.
+The Domain Name System. When you type google.com, the Application Layer sends a background request to a DNS server to "look up" the IP address so the lower layers (Routing) can actually find the server.
+
+DNS is a website. If the DNS server doesn't reply, you can't get to Google (even if your internet connection is fine and Google is fine)
+This happened when Facebook went down for a day about 5 years ago
+
 ### Ports
 
+- Bridges the gap between the Application Layer and the Transport Layer (TCP/UDP).
+- Your computer might be running Spotify, Zoom, and Chrome at the same time. How does it know which incoming packet goes to which app?
+- Each application "listens" on a specific Port.
+    - Port 80/443: Web traffic (HTTP/HTTPS)
+    - Port 25: Email (SMTP)
+    - Port 53: DNS
+    - Port 22: SSH
 
-
-
-
+Port is in the packet header. Firewalls may look at port number when deciding to let traffic through
 
 ## Transport Layer
 
