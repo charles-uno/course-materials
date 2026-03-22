@@ -13,6 +13,12 @@ Examples:
 - St. Olaf campus network, connecting laptops, phones, servers (csgit). This is a **CAN** (Campus Area Network), made up of many LANs.
 - Internet, connects networks across huge distances. This is a **WAN** (Wide Area Network).
 
+### Physical Media
+
+- Ethernet: voltage in metal wires
+- Wifi: radio waves (invisible, incorporeal)
+- Fiber: Lasers through glass
+
 ### Getting Plugged In
 
 Each computer talks to the network using a **NIC** (Network Interface Card):
@@ -40,7 +46,7 @@ Each computer talks to the network using a **NIC** (Network Interface Card):
 Data doesn't move on its own:
 
 - Clients issue **requests**
-- Servers send **responses**
+- Servers listen and send **responses**
 
 ![client server model](images/client-server-model)
 
@@ -52,11 +58,13 @@ Clients initiate network connections:
 - Your phone
 - Your laptop
 - ATMs
+- Your smart TV
 
 Servers listen and respond:
-- Google
-- Amazon
-- Spotify
+- Websites
+- App backends
+- Databases
+- Minecraft server
 
 ### Client And Server
 
@@ -71,15 +79,7 @@ Yes!
 - When you type `ping google.com` on your Raspberry Pi to check the internet connection, the Pi is acting as a client
 - When you type `ssh kiwi@raspberrypi.local` on your laptop, your Pi is acting as a server
 
-### HTTP and HTTPS
-
-HyperText Transfer Protocol is the set of rules for how a browser asks for a webpage.
-- HTTP: Sending a postcard. Anyone (hackers, ISPs) can read it as it passes by.
-- HTTPS: Sending a locked box. The 'S' stands for Secure (via TLS/SSL encryption). It ensures that even if someone "sees" the data, they can't read your password or credit card info.
-
-% get, put, post, delete?
-
-### DNS
+### Domain Name System (DNS)
 
 - Computers use numbers, not words
 - Huamns can't remember `142.250.190.46`
@@ -98,7 +98,7 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 ### DNS Can Fail!
 
 - Your computer and local router do not know the layout of the whole internet
-- DNS lookup requires a request over the internet
+- DNS lookups are distributed across the internet
 - If your DNS server is down, you won't get a response
 - Websites may be "up" but inaccessible by name
 - This happens every few years!
@@ -107,6 +107,19 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 % The Facebook/Meta Outage (2021): configuration error removed FB from DNS. Internal systems worked, but no external access
 % Akamai Bug (2021): infra bug caused a global DNS disruption affecting airlines, banks
 % AWS "Cascading" DNS Failure (2021): AWS bug broke their internal DNS. Disrupted sites hosted on AWS (snapshat, disnet+, venmo)
+
+### HTTP and HTTPS
+
+Hyper Text Transfer Protocol (HTTP) is the set of rules for how a browser asks for a webpage.
+- Request types: `GET`, `PUT`, `POST`, `DELETE`
+- Status code: 200 (normal), 30x (redirect), 40x (client error), 50x (server error)
+- HTTPS: same rules but the data is encrypted (more on this later)
+
+### HTTP and HTTPS
+
+- You can also attach data to an HTTP/HTTPS request!
+- A `GET` request often does not include any data. Just asking for website contents
+- A `POST` request could be sending an email. Includes email data, metadata, auth, etc
 
 ### Ports
 
@@ -119,26 +132,18 @@ HyperText Transfer Protocol is the set of rules for how a browser asks for a web
 %    - Port 53: DNS
 %    - Port 22: SSH
 
+### Summary
+
+- Human types in a URL
+- Computer uses DNS to look up the corresponding IP address
+- Send a request: IP address, port (eg 443), type (eg `PUT`), data
+- Get a response: IP address, port, status (eg `404`), data
+
 ### Exercise
 
 TODO: this
 
 ## Transport Layer
-
-### TCP vs UDP
-
-We choose the protocol based on the use case.
-
-- TCP (Transmission Control Protocol). Delivery is guaranteed. Lost packets are re-sent. Web browsing, email, file transfers
-- UDP (User Datagram Protocol). Faster but not guaranteed. Lost packets are gone. Gaming, video calls, streaming
-
-### The Three-Way Handshake
-
-How does TCP ensure a reliable connection?
-
-1. Client: Hey my name is Charles (sync), can you synchronize with me?
-2. Server: Hi Charles (ack), my name is Telemachus (sync)
-3. Client: Hi Telemachus (ack)
 
 ### Segmentation and Reassembly
 
@@ -162,21 +167,60 @@ How does TCP ensure a reliable connection?
 - Data is getting chopped up into segments
 - How do we make sure the data doesn't get mixed up?
 
+### What happens if a segment gets lost along the way?
+
+- We can ask the other machine to re-send the missing data
+- Should we do so? Or just move on without it?
+
+### TCP vs UDP
+
+We choose the protocol based on the use case.
+
+- TCP (Transmission Control Protocol). Delivery is guaranteed. Lost packets are re-sent. Web browsing, email, file transfers
+- UDP (User Datagram Protocol). Faster but not guaranteed. Lost packets are gone. Gaming, video calls, streaming
+
+### The Three-Way Handshake
+
+How does TCP ensure a reliable connection?
+
+1. Client: Hey my name is Charles (sync), can you synchronize with me?
+2. Server: Hi Charles (ack), my name is Telemachus (sync)
+3. Client: Hi Telemachus (ack)
+
+### Summary
+
+- Requests get broken down into segments for transmission
+- TCP: slower, guaranteed delivery
+- UDP: faster, best effort
+- Multiple apps can take turns sending segments
+
 ### Exercise
 
 TODO: this
 
 ## Internet Layer
 
+### Routing Segments
+
+- App uses a certain port, and attaches that data to each segment of data
+- Computer knows the destination IP address from DNS
+- How do we keep track of both?
+- Wrap each segment into a **packet**
+
+### Remember: Layers of Encapsulation!
+
+![network layers but frames are partially hidden by a SPOILERS banner](images/network-layers-spoiler.png)
+
 ### IP Addresses
 
-- Public IP address - How to get to your network
-- Private IP address - Your address within the network (transient)
+- Public IP address: How to get to your network
+- Private IP address: Your address within the network (transient)
+- This is important because there are more devices than addresses
 
 ### IPv4
 
 |||
-- Introduced in 1982-1983
+- Introduced in 1982
 - Still used to route most internet traffic
 - Uses 32-bit addresses (about 4 billion unique addresses)
 - Not enough unique addresses for the global internet; IPv4 address exhaustion issue
@@ -195,13 +239,18 @@ TODO: this
 ![ipv6 breakdown](images/ipv6-address)
 |||
 
-### Packets
+### Routing Packets
 
-- Segment gets wrapped in an IP header 
-- Source IP address, destination IP address
-- This layer does not touch the data inside the packet
+- Your laptop sends each packet to a **router**, which looks at the destination IP address
+- If the address is in the local neighborhood, deliver it
+- Otherwise, use a **routing table** to figure out which direction to send it
+- Different segments may take different paths, then get reassembled later
 
-### Packets
+
+TODO: probably talk about NAT here? switching between local IP and global IP
+
+
+### Routing Packets
 
 Packets may take different paths. What happens if they get stuck in a loop?
 
@@ -209,12 +258,12 @@ Packets may take different paths. What happens if they get stuck in a loop?
 
 ![packet switching](images/packet-switching)
 
-### Routing
+### Summary
 
-A router looks at the destination IP address
-
-- If the address is in the local neighborhood, pass it along to the switch (more on this in a minute)
-- Otherwise, use its **routing table** to figure out which direction to send it
+- Data segments are wrapped in packets which contain the destination IP address
+- Routers pass packets along until they get to that address
+- IPv4: limited address space, so we network address + private address
+- IPv6: plenty of addresses, not yet widely used
 
 ### Exercises
 
@@ -222,31 +271,84 @@ TODO: this
 
 ## Network Access Layer
 
-### Physical Media
-
-- Ethernet: voltage in metal wires
-- Wifi: radio waves (invisible, incorporeal)
-- Fiber: Lasers through glass
-
 ### MAC Addresses
 
-This is the most important concept for this layer.
-Physical vs. Logical: An IP address (Internet Layer) is assigned by the network. A MAC address is burned into the NIC at the factory.
-The Scope: MAC addresses only matter locally. Your router uses your Pi's MAC address to find it in the room, but a server in Japan has no idea what your MAC address is—it only sees your IP.
+- Every NIC (network card) has a unique ID burned into it at the factory
+- This is how data is ultimately delivered
+- Important because local IP addresses are transient
 
 ### Frames
 
-Frame wraps around the packet (which wraps around the segment)
+- Remember: a packet contains the destination IP address
+- But how do we specify one step in that journey?
+- Wrap the packet in a **frame**
+- Frame contains the MAC address of the next device
 
-As we discussed, this is the final "envelope."
-The Header: It adds the Source MAC and Destination MAC.
-The Trailer (FCS): This layer adds a "checksum" at the end of the data. If the electricity flickers and a bit gets flipped, the NIC detects the error and throws the frame away before it even reaches the CPU.
+### Frames
 
-### ARP
+![frame, packet, and segment](images/frame-encapsulation)
+
+### Wrap Unwrap Wrap Unwrap
+
+- The frame contains the MAC address of the *next* device
+- Data may pass through dozens of routers along the way
+- Each router must unwrap the frame, look at the IP address, figure out the next step, and rewrap it
+- Your computer attaches your MAC address to each outbound frame, but that MAC address doesn't leave your local network
+
+### Delivering to a MAC Address
+
+How does a router know the MAC addresses of its neighbors?
+
+% it listens to outgoing traffic and builds a table (ARP)
+
+% local traffic uses a SWITCH
+
+### Address Resolution Protocol (ARP)
 
 This is the "glue" between the Internet Layer and Network Access Layer.
 The Problem: Your Pi knows the IP of the Router, but the Switch only understands MACs. How do we find the MAC?
 The Solution: ARP (Address Resolution Protocol). Your Pi shouts: "Who has IP 192.168.1.1? Tell me your MAC!" The router replies, and now the Pi can build the Frame.
+
+### Frames Trailer
+
+- In addition to the MAC address, a frame also contains a checksum
+- This allows the NIC to identify incomplete or corrupted data
+
+### NAT and PAT
+
+Network Address Translation
+
+Port Address Translation
+
+
+### Every Router Except the Last One
+
+- Receive a frame addressed to itself
+- Remove the outer wrapper (leaving the packet)
+- Read the destination IP address
+- Figure out the next hop along the path
+
+
+- Use a routing table to identify the next router
+- Wrap the packet in a new frame with that address
+- Send it along
+
+### The Last Router
+
+- Receive a frame addressed to itself
+- IP address is for this network
+- Look up the corresponding MAC address
+- Send it to the switch
+- Port lookup shenanigans (NAT) to get the appropriate private IP address MAC address
+
+
+### The Switch
+
+- We have a bunch of computers
+- Each computer is plugged into the switch (via ethernet or wifi)
+- Switch keeps track of the MAC address for each
+- Delivers packets based on MAC address
+- A **gateway** is just a router and a switch in the same box
 
 ### Routers and Switches
 
@@ -257,16 +359,6 @@ The Frame (Network Access Layer): The entire Packet is stuffed inside an Etherne
 
 - router gets a packet addressed to its own MAC address
 - uses a **routing table** to figure out the next hop to get to the destination IP address
-
-### Layer Violation!
-
-Most routers just look at IP address to figure out where to send data next
-
-Your home router breaks the rule. It also looks at port
-
-Laptop, port 443... let's call that port 100001
-
-Raspberry Pi, port 22... let's call that port 100002
 
 ### Exercises
 
@@ -327,6 +419,16 @@ switch only sends data to the right MAC address. but you can tell your NIC to pr
 - MAC Flooding
 - ARP Spoofing
 
+
+### Layer Violation!
+
+Most routers just look at IP address to figure out where to send data next
+
+Your home router breaks the rule. It also looks at port
+
+Laptop, port 443... let's call that port 100001
+
+Raspberry Pi, port 22... let's call that port 100002
 
 
 
