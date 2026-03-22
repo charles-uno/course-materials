@@ -30,10 +30,12 @@ Each computer talks to the network using a **NIC** (Network Interface Card):
 
 ### TCP/IP Model
 
+When talking about networking, we have a few different layers of abstraction:
+
 - Application Layer
 - Transport Layer
 - Internet Layer
-- Network Access Layer
+- Link Layer
 
 ### Data Encapsulation
 
@@ -85,21 +87,13 @@ Yes!
 - Huamns can't remember `142.250.190.46`
 - We use DNS to bridge the gap
 - When you ask for `google.com`, your computer uses DNS to look up the corresponding IP address
-
-### What happens when you visit a website?
-
-1. You enter a web address (a URL, Uniform Resource Locator) into a browser.
-2. The browser queries a DNS server, converting the domain to an IP address.
-3. If the website uses HTTPS, a secure and encrypted connection is established between the browser and the website server.
-4. The browser sends an HTTP request to the website server, requesting the content of the website.
-5. The server processes this request, sending back the requested files (probably HTML, CSS, JavaScript).
-6. The browser processes the received files and renders the website.
+- We'll talk more about IP addresses later (internet layer)
 
 ### DNS Can Fail!
 
 - Your computer and local router do not know the layout of the whole internet
 - DNS lookups are distributed across the internet
-- If your DNS server is down, you won't get a response
+- If the DNS server is down, you won't get a response
 - Websites may be "up" but inaccessible by name
 - This happens every few years!
 
@@ -119,25 +113,14 @@ Hyper Text Transfer Protocol (HTTP) is the set of rules for how a browser asks f
 
 - You can also attach data to an HTTP/HTTPS request!
 - A `GET` request often does not include any data. Just asking for website contents
-- A `POST` request could be sending an email. Includes email data, metadata, auth, etc
-
-### Ports
-
-- Your computer might be running Spotify, Zoom, and Chrome at the same time. 
-- How does it know which incoming data goes to which app?
-- Each application "listens" on a specific Port.
-- Firewalls may look at port number when deciding to let traffic through
-%    - Port 80/443: Web traffic (HTTP/HTTPS)
-%    - Port 25: Email (SMTP)
-%    - Port 53: DNS
-%    - Port 22: SSH
+- A `POST` request could be sending an email. Includes email contents, metadata, auth, etc
 
 ### Summary
 
 - Human types in a URL
 - Computer uses DNS to look up the corresponding IP address
-- Send a request: IP address, port (eg 443), type (eg `PUT`), data
-- Get a response: IP address, port, status (eg `404`), data
+- Send a request: IP address, type (eg `PUT`), data
+- Get a response: IP address, status (eg `404`), data
 
 ### Exercise
 
@@ -148,9 +131,11 @@ TODO: this
 ### Segmentation and Reassembly
 
 - TCP chops data into **segments** before sending
-- Each segment has a header including port and sequence ID
+- Each segment has a header including a sequence ID
 - Recipient NIC/OS uses the header to reassemble the data
 - Why do you suppose we do this?
+
+% may be multiple apps using the NIC at the same time. port
 
 ### Why Segmentize?
 
@@ -160,12 +145,19 @@ TODO: this
 
 % don't want all our eggs in one basket
 
-### Multiplexing and De-Multiplexing
+### Multiple Applications
 
-- HTTPS is on port 443, SSH is on port 22, etc
-- Different apps may be running at the same time
-- Data is getting chopped up into segments
-- How do we make sure the data doesn't get mixed up?
+- Your computer might be running Spotify, Zoom, and Chrome at the same time
+- Data for each app is getting chopped up into segments
+- How do we keep track of what goes where?
+
+### Ports
+
+- Each application "listens" on a certain port
+- Ports are assigned by the OS
+- SSH server always listens on port 22, HTTPS server always listens on port 443, etc
+- Client and server ports do not need to match
+- Ports are included in the segment header
 
 ### What happens if a segment gets lost along the way?
 
@@ -190,9 +182,9 @@ How does TCP ensure a reliable connection?
 ### Summary
 
 - Requests get broken down into segments for transmission
+- Segments can be reassembled using header data: port, sequence ID
 - TCP: slower, guaranteed delivery
 - UDP: faster, best effort
-- Multiple apps can take turns sending segments
 
 ### Exercise
 
@@ -202,53 +194,21 @@ TODO: this
 
 ### Routing Segments
 
-- App uses a certain port, and attaches that data to each segment of data
-- Computer knows the destination IP address from DNS
-- How do we keep track of both?
-- Wrap each segment into a **packet**
+- We have segments: data, port, seq ID
+- We want to send those segments to an IP address (from DNS)
+- What does that process look like?
+- Wrap the segment in a **packet**
 
 ### Remember: Layers of Encapsulation!
 
 ![network layers but frames are partially hidden by a SPOILERS banner](images/network-layers-spoiler.png)
 
-### IP Addresses
-
-- Public IP address: How to get to your network
-- Private IP address: Your address within the network (transient)
-- This is important because there are more devices than addresses
-
-### IPv4
-
-|||
-- Introduced in 1982
-- Still used to route most internet traffic
-- Uses 32-bit addresses (about 4 billion unique addresses)
-- Not enough unique addresses for the global internet; IPv4 address exhaustion issue
-|||
-![ipv4 breakdown](images/ipv4-address)
-|||
-
-### IPv6
-
-|||
-- Most recent version of the Internet Protocol
-- Developed to handle IPv4 address exhaustion, replacing IPv4
-- Uses 128-bit addresses
-- Other improvements over IPv4
-|||
-![ipv6 breakdown](images/ipv6-address)
-|||
-
 ### Routing Packets
 
 - Your laptop sends each packet to a **router**, which looks at the destination IP address
 - If the address is in the local neighborhood, deliver it
-- Otherwise, use a **routing table** to figure out which direction to send it
-- Different segments may take different paths, then get reassembled later
-
-
-TODO: probably talk about NAT here? switching between local IP and global IP
-
+- Otherwise, use a routing table to figure out which direction to send it
+- Different packets may take different paths, then get reassembled later
 
 ### Routing Packets
 
@@ -258,18 +218,74 @@ Packets may take different paths. What happens if they get stuck in a loop?
 
 ![packet switching](images/packet-switching)
 
+### IP Addresses
+
+- What does my IP address actually look like?
+- Ostensibly it's just four numbers separated by periods
+- IP address is 32 bits long. What's $2^{32}$? How many devices are there on the planet?
+
+% IPv4 exhaustion
+
+![ipv4 breakdown](images/ipv4-address)
+
+### IPv4 Exhaustion
+
+- There are about 4 billion possible IPv4 addresses
+- There are more than 4 billion network devices
+- Eventually we'll switch to IPv6 (128 bits)
+- In the meantime we use **public** and **private** IP addresses
+
+![ipv6 breakdown](images/ipv6-address)
+
+### Public and Private IP Addresses
+
+- *Public* IP is the address of your network (eg St Olaf College)
+- Public IP address is (mostly) constant to play nice with DNS
+- *Private* IP if the address within that network (eg your laptop)
+- Private IP addresses can change all the time
+- A few IP address patterns are reserved for private (eg `192.168.x.x`, `172.16.x.x`) 
+
+### Public and Private IP Addresses
+
+Network Address Translation (NAT):
+- When you send a request to Google, the packet includes your private IP address
+- The router at the edge of the network switches the request to use the public IP address instead
+
+Port Address Translation (PAT):
+- Multiple machines on the same public IP address
+- Some may be using the same ports!
+- The router switches your private port to a unique public port
+
+In both cases, the router keeps a table to swap back
+
+### Layer Violation!
+
+- Most routers just look at IP address (packet header)
+- The router at the edge of the network also looks at port (segment header)
+- This seems weird, but does it really matter?
+
+% digging deeper is more CPU intensive
+
+### Layer Violation!
+
+- In principle, a router is just moving packets around
+- NAT/PAT means it is reading and manipulating packet content
+- You can't trust intermediate machines not to read your data
+- If you want privacy, you have to encrypt (more on this later)
+
 ### Summary
 
 - Data segments are wrapped in packets which contain the destination IP address
 - Routers pass packets along until they get to that address
-- IPv4: limited address space, so we network address + private address
-- IPv6: plenty of addresses, not yet widely used
+- IPv4 has limited addresses, so we use public + private addresses
+- Public/private swap is handled at the edge of the network
+- IPv6 replaces public + private, isn't widely used yet
 
 ### Exercises
 
 TODO: this
 
-## Network Access Layer
+## Link Layer
 
 ### MAC Addresses
 
@@ -313,13 +329,6 @@ The Solution: ARP (Address Resolution Protocol). Your Pi shouts: "Who has IP 192
 
 - In addition to the MAC address, a frame also contains a checksum
 - This allows the NIC to identify incomplete or corrupted data
-
-### NAT and PAT
-
-Network Address Translation
-
-Port Address Translation
-
 
 ### Every Router Except the Last One
 
@@ -418,17 +427,6 @@ Really cool cryptography: public-key encryption, RSA
 switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
 - MAC Flooding
 - ARP Spoofing
-
-
-### Layer Violation!
-
-Most routers just look at IP address to figure out where to send data next
-
-Your home router breaks the rule. It also looks at port
-
-Laptop, port 443... let's call that port 100001
-
-Raspberry Pi, port 22... let's call that port 100002
 
 
 
