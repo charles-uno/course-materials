@@ -103,6 +103,22 @@ Yes!
 % Akamai Bug (2021): infra bug caused a global DNS disruption affecting airlines, banks
 % AWS "Cascading" DNS Failure (2021): AWS bug broke their internal DNS. Disrupted sites hosted on AWS (snapshat, disnet+, venmo)
 
+### Distributed Denial of Service (DDoS) Attacks
+
+% in fact, one of the ways DNS can fail is if the DNS server is attacked!
+
+- A server (DNS or otherwise) is just a computer
+- It can handle a handful of tasks at a time
+- What happens if we send a million requests to the same server at once?
+
+### Load Balancing
+
+Google gets millions of requests all the time. Why does it not crash?
+
+- The address `google.com` points to a **load balancer**
+- Specialized server that does not process any data
+- It just forwards requests to other servers
+
 ### Hyper Text Transfer Protocol (HTTP)
 
 HTTP is the set of rules for how a browser asks for a webpage.
@@ -121,20 +137,6 @@ HTTP is the set of rules for how a browser asks for a webpage.
 - Same rules as HTTP but the data is encrypted
 - There are ways for attackers to access your data on the network (more on this later)
 - If your data is encrypted, it will be gibberish to them
-
-### Distributed Denial of Service (DDoS) Attacks
-
-- A server is just a computer
-- It can handle a handful of tasks at once
-- What happens if we send a million requests to the same server at once?
-
-### Load Balancing
-
-Google gets millions of requests all the time. Why does it not crash?
-
-- The address `google.com` points to a **load balancer**
-- Specialized server that does not process any data
-- It just forwards requests to other servers
 
 ### Summary
 
@@ -243,6 +245,12 @@ Packets may take different paths. What happens if they get stuck in a loop?
 
 ![packet switching](images/packet-switching)
 
+### BGP Hijacking
+
+- Routing tables are computed based on data from ISPs (called Border Gateway Protocol)
+- An attacker can affect routing by compromising or impersonating an ISP
+- They can then observe or manipulate data as it passes through
+
 ### IP Addresses
 
 - What does my IP address actually look like?
@@ -288,9 +296,28 @@ Port Address Translation (PAT):
 - In principle, a router is just moving packets around
 - NAT/PAT means it is reading and manipulating packet content
 - You can't trust intermediate machines not to read your data
-- If you want privacy, you have to encrypt (more on this later)
+- If you want privacy, you have to encrypt your data!
 
 % also: digging deeper is more CPU intensive
+
+
+
+
+
+% ### Man in the Middle
+
+% Bad actors can intercept and manipulate unencrypted data without your knowledge:
+
+% - Unsecured wifi network controlled by a bad actor
+% - DNS server controlled by a bad actor, redirects traffic
+% - Malware installed via social engineering (eg posing as a VPN or security certificate)
+
+
+% compromised wifi is man in the middle
+% malware and DNS aren't really
+% might be leaning too hard into security
+
+
 
 ### Summary
 
@@ -344,6 +371,8 @@ Attackers can trick a router into sending them someone else's data:
 
 - MAC Flooding - fill the router's table with fake addresses so it broadcasts everything to everyone
 - ARP Spoofing - pretend to be the router so all traffic passes through the attacker's machine
+
+Encryption ensures that ill-gotten data is not legible
 
 ### Exercises
 
