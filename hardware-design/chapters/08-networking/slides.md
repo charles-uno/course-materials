@@ -13,6 +13,53 @@ A network is a group of interconnected devices exchanging data. Examples:
 - CAN (Campus Area Network) - computers, phones, servers (eg csgit), etc
 - WAN (Wide Area Network) - the internet! Many devices over huge distances
 
+### TCP/IP Model
+
+We talk about networking in terms of layers:
+
+- Application Layer - client requests, server responses
+- Transport Layer - chopping data into segments
+- Internet Layer - connecting routers to make a network
+- Link Layer - individual steps across the network
+
+% ### Data Encapsulation
+
+% ![frame, packet, and segment](images/network-layers)
+
+% ### Metrics of Network Performance
+%**Bandwidth** is the maximum rate at which data can be transmitted over a network.
+%**Throughput** is the actual amount of data successfully transmitted over the network in a given time period.
+%- Low throughput is perceived as buffering or slow downloads.
+%- Limit on volume of data transmitted.
+%**Latency** is the time between a packet being sent, and a response being received.
+%- High latency is perceived as slow or delayed actions (e.g. lag in video games).
+%- Limit on speed of data transmitted.
+%**Packet Loss** is the percent of packets that fail to reach their destination.
+%- High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
+%- Inconsistency in timing of data received.
+
+
+## Network Hardware
+
+### What are networks made of?
+
+We have just focused on routers. There are other types of hardware too:
+
+- firewall. not hardware, but often looks like it in network diagrams. program that filters packets based on IP address, port, etc
+- Fiber optic
+- Wires
+- coaxial cable (the same kind used for cable TV)
+- Wifi, bluetooth
+- Repeater - makes a signal stronger in case of long wires
+- Modem - translates ISP signal (eg fiber, cable) to ethernet
+- Switch - delivers frames to the appropriate MAC address
+- Bridge - switch with only 2 ports
+- WAP - like a switch but for wifi. white boxes on the ceiling
+- Hub - like a switch but not smart. sends everything to everyone
+- Gateway - a plastic box containing router, modem, switch
+
+
+
 ### How Are Networks Connected?
 There are a few different ways for devices to communicate:
 
@@ -29,18 +76,6 @@ Each device talks to the network using a **NIC** (Network Interface Card):
 - Incoming and outgoing traffic
 - Translates between CPU (64+ lanes) and network
 
-### TCP/IP Model
-
-We talk about networking in terms of layers:
-
-- Application Layer - typing `google.com` into Firefox
-- Transport Layer - chopping data into segments
-- Internet Layer - how many routers fit together to make a network
-- Link Layer - getting from one device to the next
-
-### Data Encapsulation
-
-![frame, packet, and segment](images/network-layers)
 
 ## Application Layer
 
@@ -377,70 +412,3 @@ Encryption ensures that ill-gotten data is not legible
 ### Exercises
 
 TODO: this
-
-## Performance \& Security
-
-### Metrics of Network Performance
-
-**Bandwidth** is the maximum rate at which data can be transmitted over a network.
-**Throughput** is the actual amount of data successfully transmitted over the network in a given time period.
-- Low throughput is perceived as buffering or slow downloads.
-- Limit on volume of data transmitted.
-**Latency** is the time between a packet being sent, and a response being received.
-- High latency is perceived as slow or delayed actions (e.g. lag in video games).
-- Limit on speed of data transmitted.
-**Packet Loss** is the percent of packets that fail to reach their destination.
-- High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
-- Inconsistency in timing of data received.
-
-### Attacking the Server
-
-These happen as data travels across the web.
-
-- Man-in-the-Middle (MitM): This is the "big picture" version of ARP spoofing. The attacker sits between the Client and Server, reading (and sometimes changing) the data.
-- The Big One You’re Missing: IP Spoofing. Faking the "Source IP" on a packet to bypass firewalls or pretend to be a trusted server.
-
-
-### Network Security
-
-- Eavesdropping is intercepting network traffic to steal sensitive information.
-- While packets traverse a network, they can be captured by unauthorized parties. This is called packet sniffing.
-- In a Man-in-the-Middle (MitM) attack, an attacker positions themselves between communicating parties. This allows them to intercept, and potentially alter, messages.
-
-### Network Security
-
-![man in the middle](images/man-in-the-middle)
-
-### Encryption
-
-Encryption is a powerful tool against eavesdropping. Encryption scrambles data being sent, so that (in theory) only the intended recipient can unscramble it to read the message. For example, HTTPS encrypts communications.
-Really cool cryptography: public-key encryption, RSA
-
-![encryption](images/encryption)
-
-
-
-
-
-### Exercise
-
-TODO: this
-
-
-## Network Hardware
-
-We have just focused on routers. There are other types of hardware too:
-
-- firewall. not hardware, but often looks like it in network diagrams. program that filters packets based on IP address, port, etc
-- Fiber optic
-- Wires
-- coaxial cable (the same kind used for cable TV)
-- Wifi, bluetooth
-- Repeater - makes a signal stronger in case of long wires
-- Modem - translates ISP signal (eg fiber, cable) to ethernet
-- Switch - delivers frames to the appropriate MAC address
-- Bridge - switch with only 2 ports
-- WAP - like a switch but for wifi. white boxes on the ceiling
-- Hub - like a switch but not smart. sends everything to everyone
-- Gateway - a plastic box containing router, modem, switch
-
