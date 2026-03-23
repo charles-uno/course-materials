@@ -199,9 +199,9 @@ TODO: this
 - What does that process look like?
 - Wrap the segment in a **packet**
 
-### Remember: Layers of Encapsulation!
+### Wrapping the Wrapper
 
-![network layers but frames are partially hidden by a SPOILERS banner](images/network-layers-spoiler.png)
+![from the emperor's new groove: "and then I'll put that box inside another box!"](images/box-in-a-box.gif)
 
 ### Routing Packets
 
