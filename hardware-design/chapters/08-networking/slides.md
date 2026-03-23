@@ -103,25 +103,46 @@ Yes!
 % Akamai Bug (2021): infra bug caused a global DNS disruption affecting airlines, banks
 % AWS "Cascading" DNS Failure (2021): AWS bug broke their internal DNS. Disrupted sites hosted on AWS (snapshat, disnet+, venmo)
 
-### HTTP and HTTPS
+### Hyper Text Transfer Protocol (HTTP)
 
-Hyper Text Transfer Protocol (HTTP) is the set of rules for how a browser asks for a webpage.
+HTTP is the set of rules for how a browser asks for a webpage.
 - Request types: `GET`, `PUT`, `POST`, `DELETE`
 - Status code: 200 (normal), 30x (redirect), 40x (client error), 50x (server error)
-- HTTPS: same rules but the data is encrypted (more later)
 
-### HTTP and HTTPS
+### HTTP
 
-- You can also attach data to an HTTP/HTTPS request!
+- You can also attach data to an HTTP request!
 - A `GET` request often does not include any data. Just asking for website contents
 - A `POST` request could be sending an email. Includes email contents, metadata, auth, etc
+
+### HTTPS
+
+- S for "secure"
+- Same rules as HTTP but the data is encrypted
+- There are ways for attackers to access your data on the network (more on this later)
+- If your data is encrypted, it will be gibberish to them
+
+### Distributed Denial of Service (DDoS) Attacks
+
+- A server is just a computer
+- It can handle a handful of tasks at once
+- What happens if we send a million requests to the same server at once?
+
+### Load Balancing
+
+Google gets millions of requests all the time. Why does it not crash?
+
+- The address `google.com` points to a **load balancer**
+- Specialized server that does not process any data
+- It just forwards requests to other servers
 
 ### Summary
 
 - Human types in a URL
 - Computer uses DNS to look up the corresponding IP address
-- Send a request: IP address, type (eg `PUT`), data
-- Get a response: IP address, status (eg `404`), data
+- Send a HTTP request: IP address, type (eg `PUT`), data
+- Get a HTTP response: IP address, status (eg `404`), data
+- Use HTTPS to encrypt data before sending it
 
 ### Exercise
 
@@ -175,9 +196,13 @@ We choose the protocol based on the use case.
 
 How does TCP ensure a reliable connection?
 
-1. Client: Hey my name is Charles (sync), can you synchronize with me?
-2. Server: Hi Charles (ack), my name is Telemachus (sync)
+1. Client: Hey my name is Charles (syn), can you synchronize with me?
+2. Server: Hi Charles (ack), my name is Telemachus (syn)
 3. Client: Hi Telemachus (ack)
+
+### SYN Flooding
+
+What happens if an attacker sends thousands of handshake requests to the same server, but leaves them hanging without the final acknowledge? 
 
 ### Summary
 
@@ -310,38 +335,21 @@ TODO: this
 
 - How does a router know the MAC addresses of its neighbors?
 - It watches traffic and keeps a table
-- It can also ask its neighbors to identify themselves (eg "please respond if your IP address is 192.168.137.14")
+- For unknown addresses, it broadcasts a frame to everyone and waits for the response
 - A NIC (in theory) ignores any frame not addressed to its MAC address
 
-### Modems, Switches, and Gateways
+### MAC Attacks
 
-We have just focused on routers. There are other types of hardware too:
+Attackers can trick a router into sending them someone else's data:
 
-- Modem - translates ISP signal (eg fiber, cable) to ethernet
-- Switch - delivers frames to the appropriate MAC address
-- Gateway - a plastic box containing router, modem, switch
+- MAC Flooding - fill the router's table with fake addresses so it broadcasts everything to everyone
+- ARP Spoofing - pretend to be the router so all traffic passes through the attacker's machine
 
 ### Exercises
 
-We can use the `traceroute` command on our Raspberry Pi to track the path that packets take from your computer to a destination. For example, try:
-```bash
-traceroute google.com
-```
-This sends packets through the internet, and shows every server or router passed through along the way.
-
-On your Raspberry Pi, view the status of your active network interfaces:
-```bash
-ifconfig
-```
-- Can you find the connection to your laptop?
-- Find the IP address(es) of your computer for your internet connection.
-- Find the MAC address(es) of your computer.
-
-You may need to Google how to read the output of `ifconfig` in order to answer these questions.
-
+TODO: this
 
 ## Performance \& Security
-
 
 ### Metrics of Network Performance
 
@@ -355,6 +363,14 @@ You may need to Google how to read the output of `ifconfig` in order to answer t
 **Packet Loss** is the percent of packets that fail to reach their destination.
 - High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
 - Inconsistency in timing of data received.
+
+### Attacking the Server
+
+These happen as data travels across the web.
+
+- Man-in-the-Middle (MitM): This is the "big picture" version of ARP spoofing. The attacker sits between the Client and Server, reading (and sometimes changing) the data.
+- The Big One You’re Missing: IP Spoofing. Faking the "Source IP" on a packet to bypass firewalls or pretend to be a trusted server.
+
 
 ### Network Security
 
@@ -376,20 +392,26 @@ Really cool cryptography: public-key encryption, RSA
 
 
 
-switch only sends data to the right MAC address. but you can tell your NIC to pretend to be many MAC addresses
-- MAC Flooding
-- ARP Spoofing
-
-
 
 ### Exercise
 
-You can use the `ping` command to measure latency and packet loss to a specific host. For example,
-```bash
-ping www.google.com
-```
-This should work on Raspberry Pi or Mac.
+TODO: this
 
-You can test your throughput using `www.speedtest.net` (will be affected if other pages/applications are using the internet). There is also a command line version of this, but it requires installation.
 
+## Network Hardware
+
+We have just focused on routers. There are other types of hardware too:
+
+- firewall. not hardware, but often looks like it in network diagrams. program that filters packets based on IP address, port, etc
+- Fiber optic
+- Wires
+- coaxial cable (the same kind used for cable TV)
+- Wifi, bluetooth
+- Repeater - makes a signal stronger in case of long wires
+- Modem - translates ISP signal (eg fiber, cable) to ethernet
+- Switch - delivers frames to the appropriate MAC address
+- Bridge - switch with only 2 ports
+- WAP - like a switch but for wifi. white boxes on the ceiling
+- Hub - like a switch but not smart. sends everything to everyone
+- Gateway - a plastic box containing router, modem, switch
 

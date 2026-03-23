@@ -29,14 +29,6 @@ Command: nmap [STUDENT_PI_IP]
 What to look for: A list of open ports and the services running on them (e.g., 22/tcp open ssh).
 Security Angle: This is a great transition into your Network Security topic—if a port is open, a hacker has a way in. 
 
-
-Summary Table for Students
-Goal 	Command	Layer Focus
-Find an IP	dig or nslookup	Application (DNS)
-Inspect a Web Header	curl -I	Application (HTTP/S)
-View Active Connections	netstat -an	Transport/App (Ports)
-Scan for Vulnerabilities	nmap	Security/App (Services)
-
 Pro-Tip: If you have time, have them run traceroute google.com. It visually shows the "hops" (Routers) their packet takes to leave the classroom and reach the destination. 
 
 ## Transport Layer
@@ -74,3 +66,30 @@ Goal: Find the link/ether line. That 12-digit hex code (e.g., b8:27:eb...) is th
 Command 2: arp -a
 Goal: See the "Address Resolution" table. This shows every other device the Pi has talked to recently and their corresponding MAC addresses.
 Activity: Have two students compare their MAC addresses. They’ll notice the first 6 digits are often identical—that’s the "OUI" (Organizationally Unique Identifier) that identifies the manufacturer as Raspberry Pi Trading Ltd.
+
+We can use the `traceroute` command on our Raspberry Pi to track the path that packets take from your computer to a destination. For example, try:
+```bash
+traceroute google.com
+```
+This sends packets through the internet, and shows every server or router passed through along the way.
+
+On your Raspberry Pi, view the status of your active network interfaces:
+```bash
+ifconfig
+```
+- Can you find the connection to your laptop?
+- Find the IP address(es) of your computer for your internet connection.
+- Find the MAC address(es) of your computer.
+
+You may need to Google how to read the output of `ifconfig` in order to answer these questions.
+
+
+
+You can use the `ping` command to measure latency and packet loss to a specific host. For example,
+```bash
+ping www.google.com
+```
+This should work on Raspberry Pi or Mac.
+
+You can test your throughput using `www.speedtest.net` (will be affected if other pages/applications are using the internet). There is also a command line version of this, but it requires installation.
+
