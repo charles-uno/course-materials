@@ -5,37 +5,38 @@ beamer: true
 
 ### What is a Computer Network?
 
-A network is a group of interconnected devices exchanging data. We refer to the devices connected by a network as nodes.
-Examples:
-- Home network, connecting laptops, smartphones, printer. Devices share internet connection, can all access the printer. This is a **LAN** (Local Area Network). 
-- If it uses WiFi to connect devices, this is a **WLAN** (Wireless Local Area Network).
-- Personal network, connecting smartphone to smartwatch, headphones using Bluetooth. This is a **PAN** (Personal Area Network).
-- St. Olaf campus network, connecting laptops, phones, servers (csgit). This is a **CAN** (Campus Area Network), made up of many LANs.
-- Internet, connects networks across huge distances. This is a **WAN** (Wide Area Network).
+A network is a group of interconnected devices exchanging data. Examples:
 
-### Physical Media
+- LAN (Local Area Network) - home network with desktops, wired laptops, printer
+- WLAN (Wireless Local Area Network) - same, but wifi instead of ethernet cords
+- PAN (Personal Area Network) - smartphone, smartwatch, bluetooth accessories
+- CAN (Campus Area Network) - computers, phones, servers (eg csgit), etc
+- WAN (Wide Area Network) - the internet! Many devices over huge distances
+
+### How Are Networks Connected?
+There are a few different ways for devices to communicate:
 
 - Ethernet: voltage in metal wires
-- Wifi: radio waves (invisible, incorporeal)
+- Wifi, bluetooth: electromagnetic radiation (aka radio waves)
 - Fiber: Lasers through glass
 
 ### Getting Plugged In
 
-Each computer talks to the network using a **NIC** (Network Interface Card):
+Each device talks to the network using a **NIC** (Network Interface Card):
 
 - Not a literal card these days
-- Keeps track of connections over wifi, ethernet
+- Keeps track of connections over wifi, ethernet, etc
 - Incoming and outgoing traffic
-- Translates between CPU (64+ lanes) and network (maybe just 1 lane)
+- Translates between CPU (64+ lanes) and network
 
 ### TCP/IP Model
 
-When talking about networking, we have a few different layers of abstraction:
+We talk about networking in terms of layers:
 
-- Application Layer
-- Transport Layer
-- Internet Layer
-- Link Layer
+- Application Layer - typing `google.com` into Firefox
+- Transport Layer - chopping data into segments
+- Internet Layer - how many routers fit together to make a network
+- Link Layer - getting from one device to the next
 
 ### Data Encapsulation
 
@@ -84,14 +85,14 @@ Yes!
 ### Domain Name System (DNS)
 
 - Computers use numbers, not words
-- Huamns can't remember `142.250.190.46`
+- Humans can't remember `142.250.190.46`
 - We use DNS to bridge the gap
 - When you ask for `google.com`, your computer uses DNS to look up the corresponding IP address
 - We'll talk more about IP addresses later (internet layer)
 
 ### DNS Can Fail!
 
-- Your computer and local router do not know the layout of the whole internet
+- Your computer does not know the layout of the whole internet
 - DNS lookups are distributed across the internet
 - If the DNS server is down, you won't get a response
 - Websites may be "up" but inaccessible by name
@@ -107,7 +108,7 @@ Yes!
 Hyper Text Transfer Protocol (HTTP) is the set of rules for how a browser asks for a webpage.
 - Request types: `GET`, `PUT`, `POST`, `DELETE`
 - Status code: 200 (normal), 30x (redirect), 40x (client error), 50x (server error)
-- HTTPS: same rules but the data is encrypted (more on this later)
+- HTTPS: same rules but the data is encrypted (more later)
 
 ### HTTP and HTTPS
 
@@ -156,8 +157,7 @@ TODO: this
 - Each application "listens" on a certain port
 - Ports are assigned by the OS
 - SSH server always listens on port 22, HTTPS server always listens on port 443, etc
-- Client and server ports do not need to match
-- Ports are included in the segment header
+- Every request has a return address + port for the response
 
 ### What happens if a segment gets lost along the way?
 
@@ -221,8 +221,8 @@ Packets may take different paths. What happens if they get stuck in a loop?
 ### IP Addresses
 
 - What does my IP address actually look like?
-- Ostensibly it's just four numbers separated by periods
-- IP address is 32 bits long. What's $2^{32}$? How many devices are there on the planet?
+- Ostensibly it's just four 8-bit numbers separated by periods
+- How many possible IP addresses are there? How many devices are there?
 
 % IPv4 exhaustion
 
@@ -248,23 +248,15 @@ Packets may take different paths. What happens if they get stuck in a loop?
 ### Public and Private IP Addresses
 
 Network Address Translation (NAT):
-- When you send a request to Google, the packet includes your private IP address
-- The router at the edge of the network switches the request to use the public IP address instead
+- When you send a request to Google, the packet includes your private IP address for the response
+- The router at the edge of the network switches it to use the public IP address instead
 
 Port Address Translation (PAT):
 - Multiple machines on the same public IP address
 - Some may be using the same ports!
 - The router switches your private port to a unique public port
 
-In both cases, the router keeps a table to swap back
-
-### Layer Violation!
-
-- Most routers just look at IP address (packet header)
-- The router at the edge of the network also looks at port (segment header)
-- This seems weird, but does it really matter?
-
-% digging deeper is more CPU intensive
+% in both cases, the router keeps a table so it can swap back to deliver the response appropriately
 
 ### Layer Violation!
 
@@ -272,6 +264,8 @@ In both cases, the router keeps a table to swap back
 - NAT/PAT means it is reading and manipulating packet content
 - You can't trust intermediate machines not to read your data
 - If you want privacy, you have to encrypt (more on this later)
+
+% also: digging deeper is more CPU intensive
 
 ### Summary
 
@@ -296,9 +290,10 @@ TODO: this
 ### Frames
 
 - Remember: a packet contains the destination IP address
-- But how do we specify one step in that journey?
+- But how does data get from one router to the next along the way?
 - Wrap the packet in a **frame**
 - Frame contains the MAC address of the next device
+- Frame also contains a checksum
 
 ### Frames
 
@@ -311,63 +306,20 @@ TODO: this
 - Each router must unwrap the frame, look at the IP address, figure out the next step, and rewrap it
 - Your computer attaches your MAC address to each outbound frame, but that MAC address doesn't leave your local network
 
-### Delivering to a MAC Address
-
-How does a router know the MAC addresses of its neighbors?
-
-% it listens to outgoing traffic and builds a table (ARP)
-
-% local traffic uses a SWITCH
-
 ### Address Resolution Protocol (ARP)
 
-This is the "glue" between the Internet Layer and Network Access Layer.
-The Problem: Your Pi knows the IP of the Router, but the Switch only understands MACs. How do we find the MAC?
-The Solution: ARP (Address Resolution Protocol). Your Pi shouts: "Who has IP 192.168.1.1? Tell me your MAC!" The router replies, and now the Pi can build the Frame.
+- How does a router know the MAC addresses of its neighbors?
+- It watches traffic and keeps a table
+- It can also ask its neighbors to identify themselves (eg "please respond if your IP address is 192.168.137.14")
+- A NIC (in theory) ignores any frame not addressed to its MAC address
 
-### Frames Trailer
+### Modems, Switches, and Gateways
 
-- In addition to the MAC address, a frame also contains a checksum
-- This allows the NIC to identify incomplete or corrupted data
+We have just focused on routers. There are other types of hardware too:
 
-### Every Router Except the Last One
-
-- Receive a frame addressed to itself
-- Remove the outer wrapper (leaving the packet)
-- Read the destination IP address
-- Figure out the next hop along the path
-
-
-- Use a routing table to identify the next router
-- Wrap the packet in a new frame with that address
-- Send it along
-
-### The Last Router
-
-- Receive a frame addressed to itself
-- IP address is for this network
-- Look up the corresponding MAC address
-- Send it to the switch
-- Port lookup shenanigans (NAT) to get the appropriate private IP address MAC address
-
-
-### The Switch
-
-- We have a bunch of computers
-- Each computer is plugged into the switch (via ethernet or wifi)
-- Switch keeps track of the MAC address for each
-- Delivers packets based on MAC address
-- A **gateway** is just a router and a switch in the same box
-
-### Routers and Switches
-
-To be technically precise for your Raspberry Pi lab, the "nesting" order looks like this:
-The Segment (Transport Layer): This is your data (like a piece of a webpage) plus the TCP/UDP header (Source/Destination Ports). [1, 2]
-The Packet (Internet Layer): The entire Segment is stuffed inside an IP header (Source/Destination IP Addresses). [1, 3]
-The Frame (Network Access Layer): The entire Packet is stuffed inside an Ethernet header (Source/Destination MAC Addresses). [1, 4]
-
-- router gets a packet addressed to its own MAC address
-- uses a **routing table** to figure out the next hop to get to the destination IP address
+- Modem - translates ISP signal (eg fiber, cable) to ethernet
+- Switch - delivers frames to the appropriate MAC address
+- Gateway - a plastic box containing router, modem, switch
 
 ### Exercises
 
