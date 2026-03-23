@@ -24,124 +24,31 @@ Name: \makebox[3in]{\hrulefill
 
 \newpage
 
-\section*{Assembly Programming}
+\section*{Instructions on Hardware}
 
-Demonstrate understanding of assembly programming by writing a program using global variables, local variables, input with \texttt{scanf}, and/or output with \texttt{printf}.\\
-
-%BEGIN_STANDARD_AP
-
-Write an assembly program called \texttt{square.s} that does the following:
-\begin{itemize}
-\item Ask the user to enter a number, and store their response in a \textbf{global variable} called \texttt{num}.
-\item Compute the square of \texttt{num}, by loading it's value from memory, multiplying it by itself, and storing the result to a \textbf{local variable} called \texttt{square}.
-\item Print the sentence ``The square of \{num\} is \{square\}'', where \{num\} is replaced with the value of the global variable \texttt{num}, and \{square\} is replaced with the value of the local variable \texttt{square}. For example, if the user entered 7, the program would print ``The square of 7 is 49''.
-\end{itemize}
-
-The next two pages outline the structure of the program with comments. You may write your assembly code between the comments, or on a separate sheet of paper. If you write on a separate sheet of paper, you do not need to rewrite the comments.\\
-
-\newpage
-
-\textbf{square.s}
-
-\begin{verbatim}
-@ Global constants
-@ prompt: string asking the user to enter a number
-
-
-
-@ input_string: formatting string for reading the user's input
-
-
-
-@ print_report: formatting string for reporting the square of the user's number
-
-
-
-@ Global variables
-@ num: integer, the number entered by the user
-
-
-
-@ main
-     @ set up stack frame for main, one local variable
-
-
-
-     @ ask the user to enter a number
-
-
-     
-     @ store the response in num
-
-
-     
-     @ load the value of num from memory
-
-
-
-     @ multiple the value by itself, store the result in square
-
-
-     
-     @ load the values of num and square from memory
-
-
-     
-     @ print a sentence saying what the square of number is
-
-
-     
-     @ return 0, stack frame teardown
-
-
-\end{verbatim}
-
-
-
-\vfill
-
-\standardsfooter
-
-%END_STANDARD_AP
-
-\newpage
-
-\section*{Hardware Components}
-
-Demonstrate understanding of hardware components and their purposes through answering conceptual questions and identifying components.\\
-
-%BEGIN_STANDARD_HC
+%BEGIN_STANDARD_IH
 
 \begin{enumerate}
 \item What is the role of the CPU in a computer?
 \vfill
 \item What is the role of main memory in a computer?
 \vfill
-\item What is the role of the control unit in a computer?
+\item Choose one type of instruction-level parallelism (eg pipelining, VLIW, SIMD, superscalar execution). Explain how it works. What's the best-case performance improvement? Does it require specialized hardware? Does code need to be written in a certain way to take advantage of it? 
 \vfill
-\item What is the role of the processing unit in a computer? 
+\item What are temporal locality and spatial locality? How are they used by the cache to run programs more efficiently?
 \vfill
-\item If the clock rate is 4 GHz, how long does it take one instruction to complete? Explain your answer.
+\item If the clock rate is 1 GHz, how long does it take one instruction to complete? Explain your answer using words.
 \vfill
-\item If the clock rate is 1 GHz, how many ticks per second does the computer have? Explain your answer.
-\vfill
-\end{enumerate}
 
 \pagebreak
 
-For each of the following, include which hardware components are involved, information sent on the address, control, and/or data bus, and the use of and updates to special registers.
-
-\begin{enumerate}
-
-  \setcounter{enumi}{6}
-
-\item Write a detailed description of what happens in the fetch phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the \textbf{fetch} phase of instruction execution in the von Neumann architecture. Be sure to note which hardware components (eg registers, memory, busses) are involved.
 \vfill
-\item Write a detailed description of what happens in the decode phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the \textbf{decode} phase of instruction execution in the von Neumann architecture.
 \vfill
-\item Write a detailed description of what happens in the execute phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the \textbf{execute} phase of instruction execution in the von Neumann architecture.
 \vfill
-\item Write a detailed description of what happens in the store phase of instruction execution in the von Neumann architecture.
+\item Write a detailed description of what happens in the \textbf{write} phase of instruction execution in the von Neumann architecture.
 \vfill
 \end{enumerate}
 
@@ -150,6 +57,79 @@ For each of the following, include which hardware components are involved, infor
 
 \standardsfooter
 
-%END_STANDARD_HC
+%END_STANDARD_IH
+
+\newpage
+
+\section*{Assembly Programming}
+
+Demonstrate understanding of assembly programming by writing a program using global variables, input with \texttt{scanf}, and/or output with \texttt{printf}.\\
+
+%BEGIN_STANDARD_AP
+
+Write an assembly program called \texttt{koalas.s} that does the following:
+\begin{itemize}
+\item Ask the user how many koalas they have
+\item Store their input in a global variable named \texttt{num\_koalas}.
+\item Load the value from memory
+\item Compute the number of thumbs. Note: each koala has 6 thumbs
+\item Report the result
+\end{itemize}
+
+For example, if the user has 4 koalas, the report should say:
+\begin{verbatim}
+That's 24 thumbs!
+\end{verbatim}
+
+The next page outline the structure of the program with comments. You may write your assembly code between the comments, or on a separate sheet of paper. If you write on a separate sheet of paper, you do not need to rewrite the comments.
+
+\vfill
+
+\standardsfooter
+
+\newpage
+
+\begin{verbatim}
+// global constants: prompt, input format, report
+.section .rodata
+
+
+
+.align 2
+// global variable: num_koalas
+.section .data
+
+
+
+.section .text
+.global main
+main:
+// prompt the user for input
+
+
+
+// store their response in num_koalas
+
+
+
+// load num_koalas from memory
+
+
+
+// compute the number of thumbs
+
+
+
+// report the result
+
+
+
+// return 0 (normal exit status)
+mov x0, 0
+b exit
+\end{verbatim}
+
+
+%END_STANDARD_AP
 
 \end{document}
