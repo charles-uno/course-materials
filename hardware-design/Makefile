@@ -1,17 +1,12 @@
 .PHONY: all clean tidy
 
-REPO_ROOT := $(shell git rev-parse --show-toplevel)
-MD2TEX := build/md2tex/md2tex.py
+MD2TEX := build/md2tex.py
 
 HOMEWORK_TEX := $(wildcard chapters/*/homework.md)
 HOMEWORK_TEX := $(HOMEWORK_TEX:.md=.gen.tex)
 
 SLIDES_TEX := $(wildcard chapters/*/slides.md)
 SLIDES_TEX := $(SLIDES_TEX:.md=.gen.tex)
-
-BUILD = latexmk -pdf -interaction=nonstopmode -shell-escape -cd $(NAME)*.tex >/dev/null
-REPORT = if [[ -f $(NAME)*.pdf ]]; then echo "\033[92mdone\033[0m"; else \
-         echo "\033[91mfailed\033[0m (see $(NAME).log)"; cat $(NAME)*.log; exit 1; fi
 
 define build_latex
 	@# 1. Determine the source: .gen.tex if it exists, else .tex
@@ -34,11 +29,7 @@ define build_latex
 endef
 
 
-# all: syllabus/syllabus.pdf homework.pdf slides.pdf 
-all: homework.pdf slides.pdf 
-
-# target to build just the tex input
-chapters: $(HOMEWORK_TEX) $(SLIDES_TEX)
+all: syllabus/syllabus.pdf homework.pdf slides.pdf 
 
 homework.pdf: homework.tex $(HOMEWORK_TEX)
 	@ $(call build_latex,homework)
