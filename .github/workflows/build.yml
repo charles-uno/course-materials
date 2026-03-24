@@ -27,10 +27,9 @@ jobs:
       - name: build pdfs via makefile
         uses: xu-cheng/texlive-action@v3
         with:
-          os: debian
           run: |
             cd hardware-design
-            apt-get update && apt-get install -y python3-pip make
+            apk add --no-cache python3 py3-pip make yaml-dev gcc musl-dev python3-dev
             pip3 install -r requirements.txt --break-system-packages
             make
 
