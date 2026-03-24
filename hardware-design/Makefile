@@ -1,7 +1,7 @@
 .PHONY: all clean tidy
 
 REPO_ROOT := $(shell git rev-parse --show-toplevel)
-MD2TEX := $(REPO_ROOT)/hardware-design/build/md2tex/md2tex.py
+MD2TEX := build/md2tex/md2tex.py
 
 HOMEWORK_TEX := $(wildcard chapters/*/homework.md)
 HOMEWORK_TEX := $(HOMEWORK_TEX:.md=.gen.tex)
