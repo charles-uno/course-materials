@@ -30,7 +30,7 @@ jobs:
           run: |
             cd hardware-design
             apk add --no-cache python3 py3-pip make yaml-dev gcc musl-dev python3-dev
-            pip3 install -r requirements.txt --break-system-packages
+            pip3 install -r build/requirements.txt --break-system-packages
             make
 
 
