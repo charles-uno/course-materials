@@ -22,10 +22,6 @@ We talk about networking in terms of layers:
 - Internet Layer - connecting routers to make a network
 - Link Layer - individual steps across the network
 
-% ### Data Encapsulation
-
-% ![frame, packet, and segment](images/network-layers)
-
 % ### Metrics of Network Performance
 %**Bandwidth** is the maximum rate at which data can be transmitted over a network.
 %**Throughput** is the actual amount of data successfully transmitted over the network in a given time period.
@@ -38,44 +34,77 @@ We talk about networking in terms of layers:
 %- High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
 %- Inconsistency in timing of data received.
 
-
 ## Network Hardware
 
-### What are networks made of?
+### First Things First
 
-We have just focused on routers. There are other types of hardware too:
+- We are going to be talking a lot about data. Requests, responses, then breaking it down into packets and addresses and ports
+- But this is (ostensibly) a class about hardware
+- What, physically, is a network made of?
 
-- firewall. not hardware, but often looks like it in network diagrams. program that filters packets based on IP address, port, etc
-- Fiber optic
-- Wires
-- coaxial cable (the same kind used for cable TV)
-- Wifi, bluetooth
-- Repeater - makes a signal stronger in case of long wires
-- Modem - translates ISP signal (eg fiber, cable) to ethernet
-- Switch - delivers frames to the appropriate MAC address
-- Bridge - switch with only 2 ports
-- WAP - like a switch but for wifi. white boxes on the ceiling
-- Hub - like a switch but not smart. sends everything to everyone
-- Gateway - a plastic box containing router, modem, switch
+### End Device
 
+This is the everyday stuff:
 
+- Any device at the "edge" of the network
+- Laptop, smartphone, Raspberry Pi, etc
+- Bluetooth mouse does not count (it's not independent)
 
-### How Are Networks Connected?
-There are a few different ways for devices to communicate:
+### Network Interface Card (NIC)
 
-- Ethernet: voltage in metal wires
-- Wifi, bluetooth: electromagnetic radiation (aka radio waves)
-- Fiber: Lasers through glass
+- Every device connected to the network has a NIC
+- Not a literal card these days. Usually a little chip on the motherboard
+- Translates between the CPU (64+ lanes) and network
+- Each NIC has a unique address from the factory (MAC address)
 
-### Getting Plugged In
+### Network Connections
 
-Each device talks to the network using a **NIC** (Network Interface Card):
+How, physically, are network devices connected?
 
-- Not a literal card these days
-- Keeps track of connections over wifi, ethernet, etc
-- Incoming and outgoing traffic
-- Translates between CPU (64+ lanes) and network
+- Ethernet, coaxial cable - electrical current in metal wires
+- Fiber optic - lasers through glass
+- Wifi - radio waves caught by little antennas
 
+### Routers
+
+- A router is a device that routes data to other devices
+- The "middle" of the internet is a bunch of routers plugged into each other
+- In later sections we will mostly talk in terms of routers
+
+% we will mostly talk about routers (and not explitly mention the stuff connecting the routers)
+
+### Switches and Hubs
+
+- A hub receives data from a router then forwards it to all connected devices via ethernet
+- A switch receives data and forwards it to a specific recipient via ethernet
+- Modern infrastructure doesn't really use hubs anymore
+- A wireless access point (WAP) is like a hub for wifi
+- Why don't WAPs act like switches instead?
+
+### Repeaters
+
+- Signals get weak over long wires
+- A repeater takes a weak signal and makes it strong
+
+### Modems
+
+- Modulator-demodulator
+- Converts a signal between ethernet and cable/fiber
+
+### Gateways
+
+- Modem, router, switch, and WAP all in one box
+- Convenient for household use
+
+### Summary
+
+- End device - anything used by people
+- NIC - hardware in a machine that allows it to talk to the network
+- Router - routes data from one device to another
+- Pretty much everything else - helps routers work better
+
+% ### Exercise
+% TODO: this
 
 ## Application Layer
 
@@ -181,9 +210,8 @@ HTTP is the set of rules for how a browser asks for a webpage.
 - Get a HTTP response: IP address, status (eg `404`), data
 - Use HTTPS to encrypt data before sending it
 
-### Exercise
-
-TODO: this
+% ### Exercise
+% TODO: this
 
 ## Transport Layer
 
@@ -248,9 +276,8 @@ What happens if an attacker sends thousands of handshake requests to the same se
 - TCP: slower, guaranteed delivery
 - UDP: faster, best effort
 
-### Exercise
-
-TODO: this
+% ### Exercise
+% TODO: this
 
 ## Internet Layer
 
@@ -335,25 +362,6 @@ Port Address Translation (PAT):
 
 % also: digging deeper is more CPU intensive
 
-
-
-
-
-% ### Man in the Middle
-
-% Bad actors can intercept and manipulate unencrypted data without your knowledge:
-
-% - Unsecured wifi network controlled by a bad actor
-% - DNS server controlled by a bad actor, redirects traffic
-% - Malware installed via social engineering (eg posing as a VPN or security certificate)
-
-
-% compromised wifi is man in the middle
-% malware and DNS aren't really
-% might be leaning too hard into security
-
-
-
 ### Summary
 
 - Data segments are wrapped in packets which contain the destination IP address
@@ -362,9 +370,8 @@ Port Address Translation (PAT):
 - Public/private swap is handled at the edge of the network
 - IPv6 replaces public + private, isn't widely used yet
 
-### Exercises
-
-TODO: this
+% ### Exercises
+% TODO: this
 
 ## Link Layer
 
@@ -409,6 +416,18 @@ Attackers can trick a router into sending them someone else's data:
 
 Encryption ensures that ill-gotten data is not legible
 
-### Exercises
+% ### Exercises
+% TODO: this
 
-TODO: this
+
+
+
+% ### Man in the Middle
+% Bad actors can intercept and manipulate unencrypted data without your knowledge:
+% - Unsecured wifi network controlled by a bad actor
+% - DNS server controlled by a bad actor, redirects traffic
+% - Malware installed via social engineering (eg posing as a VPN or security certificate)
+% compromised wifi is man in the middle
+% malware and DNS aren't really
+% might be leaning too hard into security
+

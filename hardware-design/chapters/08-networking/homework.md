@@ -1,12 +1,21 @@
 ---
 ---
 
-Classroom Pro-Tip: Have your students open their browser's "Developer Tools" (F12) and look at the Network tab. When they refresh a page, they can see the actual HTTP Requests and Responses happening in real-time.
-
 # Networking
 
+## Network Hardware
+
+1. Find a network device on campus. Take a photo of it.
+2. What type of device is it? (Hint: find the model number)
+3. What does it do?
+4. Are there any wires plugged into it? If is, what type of wires are they and what are they carrying?
+5. Repeat for at least four other devices. Make sure each device is a different type.
 
 ## Application Layer
+
+Classroom Pro-Tip: Have your students open their browser's "Developer Tools" (F12) and look at the Network tab. When they refresh a page, they can see the actual HTTP Requests and Responses happening in real-time.
+
+
 
 1. DNS: The "Phonebook" Investigation
 Students use dig (Domain Information Groper) or nslookup to see how names become numbers. 
