@@ -24,15 +24,15 @@ jobs:
 
 
 
-      - name: Build slides and homework using Makefile
+      - name: build pdfs via makefile
         uses: xu-cheng/texlive-action@v3
         with:
           os: debian
           run: |
             cd hardware-design
             apt-get update && apt-get install -y python3-pip make
-            pip3 install -r requirements.txt
-            make all
+            pip3 install -r requirements.txt --break-system-packages
+            make
 
 
 
