@@ -262,11 +262,15 @@ There are a few different scheduling strategies:
 ### Concurrent vs Parallel
 
 $$$
-\includegraphics[width=0.5\columnwidth]{images/multicore1}
+\begin{center}
+\includegraphics[height=0.5\textheight]{images/multicore1}
+\end{center}
 $$$
 
 $$$
-\includegraphics[width=0.5\columnwidth]{images/multicore2}
+\begin{center}
+\includegraphics[height=0.5\textheight]{images/multicore2}
+\end{center}
 $$$
 
 ### Why Parallelism?
