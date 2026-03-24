@@ -9,36 +9,56 @@ HOMEWORK_TEX := $(HOMEWORK_TEX:.md=.gen.tex)
 SLIDES_TEX := $(wildcard chapters/*/slides.md)
 SLIDES_TEX := $(SLIDES_TEX:.md=.gen.tex)
 
-BUILD = latexmk -pdf -interaction=nonstopmode -shell-escape -cd $(NAME)/*.tex >/dev/null
-REPORT = if [[ -f $(NAME).pdf ]]; then echo "\033[92mdone\033[0m"; else \
-         echo "\033[91mfailed\033[0m (see $(NAME).log)"; cat $(NAME).log; exit 1; fi
+BUILD = latexmk -pdf -interaction=nonstopmode -shell-escape -cd $(NAME)*.tex >/dev/null
+REPORT = if [[ -f $(NAME)*.pdf ]]; then echo "\033[92mdone\033[0m"; else \
+         echo "\033[91mfailed\033[0m (see $(NAME).log)"; cat $(NAME)*.log; exit 1; fi
+
+define build_latex
+	@# 1. Determine the source: .gen.tex if it exists, else .tex
+	$(eval SRC := $(shell [ -f $(1).gen.tex ] && echo $(1).gen.tex || echo $(1).tex))
+	@# 2. Extract just the filename (e.g., 'bar' from 'foo/bar')
+	$(eval BASE := $(notdir $(1)))
+	@# 3. Extract the directory (e.g., 'foo' from 'foo/bar')
+	$(eval DIR := $(or $(dir $(1)), .))
+	
+	@printf "\033[95mbuilding $(1).pdf from $(SRC)... \033[0m"
+	@# -cd changes to the directory of the file
+	@# -jobname=$(BASE) ensures it's 'bar.pdf' even if input is 'bar.gen.tex'
+	@latexmk -pdf -jobname=$(BASE) -interaction=nonstopmode -shell-escape -cd $(SRC) >/dev/null ; \
+	if [ -f $(1).pdf ]; then \
+		echo "\033[92mdone\033[0m"; \
+	else \
+		echo "\033[91mfailed\033[0m (see $(1).log)"; \
+		cat $(1).log; exit 1; \
+	fi
+endef
 
 
-all: homework.pdf slides.pdf syllabus/syllabus.pdf
+all: syllabus/syllabus.pdf homework.pdf slides.pdf 
 
 # target to build just the tex input
 chapters: $(HOMEWORK_TEX) $(SLIDES_TEX)
 
-homework.pdf: NAME := homework
 homework.pdf: homework.tex $(HOMEWORK_TEX)
-	@ printf "\033[95mbuilding $@... \033[0m"
-	@ $(BUILD) ; $(REPORT)
+	@ $(call build_latex,homework)
 
-slides.pdf: NAME := slides
 slides.pdf: slides.tex $(SLIDES_TEX)
-	@ printf "\033[95mbuilding $@... \033[0m"
-	@ $(BUILD) ; $(REPORT)
+	@ $(call build_latex,slides)
 
-syllabus/syllabus.pdf: NAME := syllabus
 syllabus/syllabus.pdf: syllabus/syllabus.gen.tex
-	@ printf "\033[95mbuilding $@... \033[0m"
-	@ $(BUILD) ; $(REPORT)
+	@ $(call build_latex,syllabus/syllabus)
 
 %.gen.tex: %.md $(MD2TEX)
 	@ $(MD2TEX) $<
 
+# remove junk per the .gitignore
 clean: tidy
 	@ git clean -fdX
 
+# remove junk per .gitignore but leave the PDFs
 tidy: 
 	@ git clean -fdX -e "*.pdf"
+
+
+
+
