@@ -27,11 +27,12 @@ jobs:
       - name: Build slides and homework using Makefile
         uses: xu-cheng/texlive-action@v3
         with:
+          os: debian
           run: |
             cd hardware-design
-            pip3 install -r build/requirements.txt
-            cd hardware-design && make
-
+            apt-get update && apt-get install -y python3-pip make
+            pip3 install -r requirements.txt
+            make all
 
 
 
