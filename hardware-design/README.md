@@ -37,15 +37,20 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO
 
-Update syllabus to use markdown? Maybe exams too
+Update exams to use markdown?
 
 Figure out how to create tagged PDFs for accessibility
 
 Add a slide with example two's complement subtraction
 
+Add a slide with `concurrent` block when talking about multiprogramming. you can do multiprogramming within a program!
+
+
 Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
 
 circuitverse - clarify that the button is a different type of input
+switch over to a different circuit simulator? logic.ly? 
+add screenshots to help with testbench setup
 
 Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues:
 

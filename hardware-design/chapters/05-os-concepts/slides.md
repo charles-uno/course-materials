@@ -252,6 +252,25 @@ There are a few different scheduling strategies:
 
 ![concurrent processing](images/multicore1)
 
+
+### Concurrency within a Program
+
+Your music app might do something like this:
+
+```php
+concurrent {
+    await get_next_song();
+    await get_featured_playlists();
+    await get_cover_image();
+}
+```
+
+This tells the machine that it's safe to jump back and forth between these tasks while waiting for a response from the network
+
+### Summary
+
+TODO: this
+
 ## Parallelism
 
 ### Concurrent vs Parallel
