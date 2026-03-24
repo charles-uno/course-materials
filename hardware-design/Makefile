@@ -34,7 +34,8 @@ define build_latex
 endef
 
 
-all: syllabus/syllabus.pdf homework.pdf slides.pdf 
+# all: syllabus/syllabus.pdf homework.pdf slides.pdf 
+all: homework.pdf slides.pdf 
 
 # target to build just the tex input
 chapters: $(HOMEWORK_TEX) $(SLIDES_TEX)
