@@ -27,6 +27,7 @@ define build_latex
 	@latexmk -pdf -jobname=$(BASE) -interaction=nonstopmode -shell-escape -cd $(SRC) >/dev/null ; \
 	if [ -f $(1).pdf ]; then \
 		echo "\033[92mdone\033[0m"; \
+		# TODO: remove temporary files from this build only
 	else \
 		echo "\033[91mfailed\033[0m (see $(1).log)"; \
 		cat $(1).log; exit 1; \

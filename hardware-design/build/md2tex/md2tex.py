@@ -40,7 +40,6 @@ def maybe_apply_template(content: str, filename: str, **kwargs) -> str:
     header_path = kwargs.get("header")
     if not header_path:
         return content
-
     # header path is relative to the md source path
     os.path.dirname(filename)
     header_path = os.path.join(os.path.dirname(filename), header_path)
