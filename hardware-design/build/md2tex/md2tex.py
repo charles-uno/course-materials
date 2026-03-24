@@ -32,7 +32,24 @@ def get_tex(filename: str) -> list[str]:
 
     # fix formatting for beamer builds
     frames = chunks_to_frames(chunks)
-    return join_pretty(frames)
+    content =  join_pretty(frames)
+    return maybe_apply_template(content, filename, **header)
+
+
+def maybe_apply_template(content: str, filename: str, **kwargs) -> str:
+    header_path = kwargs.get("header")
+    if not header_path:
+        return content
+
+    # header path is relative to the md source path
+    os.path.dirname(filename)
+    header_path = os.path.join(os.path.dirname(filename), header_path)
+    with open(header_path, "r") as handle:
+        header = handle.read()
+    content = header + "\n\n" + content
+    if r"\begin{document}" in content and r"\end{document}" not in content:
+        content += "\n\n" + r"\end{document}"
+    return content
 
 
 def chunks_to_frames(chunks: list[str]) -> list[str]:
