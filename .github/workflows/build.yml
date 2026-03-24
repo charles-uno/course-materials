@@ -8,14 +8,14 @@ jobs:
         uses: actions/checkout@v4
 
       # a lot of work is done in markdown. we convert to tex via python scripts
-      - name: install python requirements
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3 python3-pip
-          pip3 install -r hardware-design/build/requirements.txt
+#      - name: install python requirements
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y python3 python3-pip
+#          pip3 install -r hardware-design/build/requirements.txt
 
-      - name: generate tex source
-        run: cd hardware-design && make chapters
+#      - name: generate tex source
+#        run: cd hardware-design && make chapters
 
 #      - name: compile pdfs via makefile
 #        uses: xu-cheng/texlive-action@v3
@@ -27,7 +27,10 @@ jobs:
       - name: Build slides and homework using Makefile
         uses: xu-cheng/texlive-action@v3
         with:
-          run: cd hardware-design && make
+          run: |
+            cd hardware-design
+            pip3 install -r build/requirements.txt
+            cd hardware-design && make
 
 
 
