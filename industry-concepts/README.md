@@ -53,6 +53,17 @@ A significant portion of the course grade will be based on the peer reviews they
 - Publisher/subscriber vs producer/consumer
 
 
+### AI Usage?
+
+How do we make effective use of AI?
+- tests
+- static code analysis
+- APIs
+
+
+
+
+
 # Readings
 
 https://how.complexsystems.fail/

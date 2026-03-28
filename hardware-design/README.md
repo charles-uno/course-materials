@@ -43,9 +43,6 @@ Figure out how to create tagged PDFs for accessibility
 
 Add a slide with example two's complement subtraction
 
-Add a slide with `concurrent` block when talking about multiprogramming. you can do multiprogramming within a program!
-
-
 Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
 
 circuitverse - clarify that the button is a different type of input
@@ -73,7 +70,7 @@ Update standards:
 4. **Electronic Circuits.** Resistors, transistors, breadboard labs
 5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving, RAID, virtual memory, erase before write, MMIO, 4kB storage alignment, write endurance, memory-mapped IO
 6. **Control Flow.** Comparison, branching, if/else, loops
-7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelization
+7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelism
 8. **Stack Frames.** Local variables, functions, context switching
 9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
 10. **Networking**? 
