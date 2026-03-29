@@ -37,6 +37,9 @@
 \author{Prof Charles Fyfe $\quad \cdot \quad$ Prof Melissa Lynn}
 \date{St Olaf College $\cdot$ Spring 2026}
 
+% subimport so we can use relative paths for images in MD files
+\usepackage{import}
+
 \begin{document}
 
 % no section numbering in TOC
@@ -52,14 +55,18 @@
 
 \newpage
 
-\input{chapters/00-introduction/homework.gen.tex}
+\subimport{chapters/00-introduction/}{homework.gen.tex}
 
-\input{chapters/01-data-representation/homework.gen.tex}
+\subimport{chapters/01-data-representation/}{homework.gen.tex}
 
-\input{chapters/06-assembly-functions/homework.gen.tex}
+\subimport{chapters/06-assembly-functions/}{homework.gen.tex}
+
+\subimport{chapters/07-assembly-conditionals/}{homework.gen.tex}
+
+%\subimport{chapters/08-networking/}{homework.gen.tex}
 
 \begin{appendices}
-\input{chapters/99-appendix/homework.gen.tex}
+\subimport{chapters/99-appendix/}{homework.gen.tex}
 \end{appendices}
 
 \end{document}

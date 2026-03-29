@@ -1,4 +1,4 @@
----
+
 ---
 
 # Networking
@@ -45,7 +45,7 @@ Teaching Tip: Use the command sudo tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn|tcp
 Hands-on Pi Exercise: ip and traceroute
 This makes the abstract "path" visible to the students.
 Command 1: ip addr
-Goal: Find their own IP and identify if it’s Private (usually starts with 192.168 or 10.).
+Goal: Find their own IP and identify if it's Private (usually starts with 192.168 or 10.).
 Command 2: ip route
 Goal: Find the default via IP. This is their "Default Gateway" (the Router).
 Command 3: traceroute 8.8.8.8
@@ -57,10 +57,10 @@ Goal: Watch the packet "hop" through different routers across the world. They wi
 Hands-on Pi Exercise: ip link and arp
 Let the students see their hardware's "fingerprint."
 Command 1: ip link show
-Goal: Find the link/ether line. That 12-digit hex code (e.g., b8:27:eb...) is their Pi’s unique MAC address.
+Goal: Find the link/ether line. That 12-digit hex code (e.g., b8:27:eb...) is their Pi's unique MAC address.
 Command 2: arp -a
 Goal: See the "Address Resolution" table. This shows every other device the Pi has talked to recently and their corresponding MAC addresses.
-Activity: Have two students compare their MAC addresses. They’ll notice the first 6 digits are often identical—that’s the "OUI" (Organizationally Unique Identifier) that identifies the manufacturer as Raspberry Pi Trading Ltd.
+Activity: Have two students compare their MAC addresses. They'll notice the first 6 digits are often identical—that's the "OUI" (Organizationally Unique Identifier) that identifies the manufacturer as Raspberry Pi Trading Ltd.
 
 We can use the `traceroute` command on our Raspberry Pi to track the path that packets take from your computer to a destination. For example, try:
 ```bash
