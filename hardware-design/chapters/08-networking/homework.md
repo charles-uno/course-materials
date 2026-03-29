@@ -37,6 +37,11 @@ Teaching Tip: Use the command sudo tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn|tcp
 
 ## Internet Layer
 
+- run `traceroute google.com`. route from the current machine to google HQ. do you see rows of asterisks? what do you suppose it means?
+- run `ip route`. find your own IP, verify that it's private
+- run `ip route`. find the default via IP. default gateway (router... probably the laptop)
+- `traceroute 8.8.8.8`
+
 Hands-on Pi Exercise: ip and traceroute
 This makes the abstract "path" visible to the students.
 Command 1: ip addr
