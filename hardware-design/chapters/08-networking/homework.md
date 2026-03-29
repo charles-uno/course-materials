@@ -15,9 +15,13 @@
 
 - have your students open their browser's "Developer Tools" (F12) and look at the Network tab. When they refresh a page, they can see the actual HTTP Requests and Responses happening in real-time.
 - use `dig` to see how DNS lookups work. Have them find the "ANSWER SECTION" to see the IP address. Run `dig -x [IP_ADDRESS]` (a reverse lookup) to see if the number points back to the same name. This demonstrates that DNS is a two-way directory. 
-2. HTTP: use curl to see the "hidden" conversation between a browser and a server. `curl -I https://www.google.com` (headers only). Look for HTTP status codes. shows that the web is just text requests and responses
-3. Ports: Seeing the "Open Doors". use `ss -tuln` to see open ports. what does it mean that port 22 is open? what other ports are open? why?
-4. Port Scanning: from your pi, scan with `nmap localhost` or target your own laptop. see what services are exposed. if a port is open, a hacker has a way in. NOTE: do not scan people without their permission!
+- HTTP: use curl to see the "hidden" conversation between a browser and a server.
+  ```bash
+  curl -I https://www.google.com
+  ```
+  (headers only). Look for HTTP status codes. shows that the web is just text requests and responses
+- Ports: Seeing the "Open Doors". use `ss -tuln` to see open ports. what does it mean that port 22 is open? what other ports are open? why?
+- Port Scanning: from your pi, scan with `nmap localhost` or target your own laptop. see what services are exposed. if a port is open, a hacker has a way in. NOTE: do not scan people without their permission!
 
 ## Transport Layer
 

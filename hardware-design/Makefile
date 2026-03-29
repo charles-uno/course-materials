@@ -18,9 +18,10 @@ define build_latex
 	@printf "\033[35mbuilding $(1).pdf from $(SRC)... \033[0m"
 	@# -cd changes to the directory of the file
 	@# -jobname=$(BASE) ensures it's 'bar.pdf' even if input is 'bar.gen.tex'
-	@latexmk -pdf -jobname=$(BASE) -interaction=nonstopmode -shell-escape -cd $(SRC) >/dev/null ; \
+	@latexmk -silent -pdf -jobname=$(BASE) -interaction=nonstopmode -shell-escape -cd $(SRC) >/dev/null ; \
 	if [ -f $(1).pdf ]; then \
         printf "\033[92mdone\033[0m\n"; \
+		latexmk -c -jobname=$(BASE) -cd -e '$$clean_ext = "nav snm vrb"' $(SRC) >/dev/null; \
 	else \
 		echo "\033[31mfailed\033[0m (see $(1).log)"; \
 		cat $(1).log; exit 1; \
@@ -29,7 +30,6 @@ endef
 
 
 
-#		latexmk -c -jobname=$(BASE) -cd -e '$$clean_ext = "nav snm vrb"' $(SRC) >/dev/null; \
 
 
 

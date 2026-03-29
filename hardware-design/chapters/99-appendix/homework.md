@@ -1,7 +1,4 @@
----
----
 
----
 ---
 
 # Raspberry Pi Setup
