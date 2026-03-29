@@ -69,10 +69,10 @@ Update standards:
 3. **Assembly Programming.** Global variables, global constants, printf, scanf, automated testing
 4. **Electronic Circuits.** Resistors, transistors, breadboard labs
 5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving, RAID, virtual memory, erase before write, MMIO, 4kB storage alignment, write endurance, memory-mapped IO
-6. **Control Flow.** Comparison, branching, if/else, loops
-7. **The CPU.** Instruction cycle, clock-driven execution, instruction-level parallelism
+7. **Executing Instructions.** Instruction cycle, clock-driven execution, instruction-level parallelism, booting, ILP?
 8. **Stack Frames.** Local variables, functions, context switching
-9. **OS Concepts.** Booting, user/kernel modes, system calls, traps/exceptions/interrupts, multithreading, multiprocessing, concurrency, hyperthreading
+6. **Control Flow.** Comparison, branching, if/else, loops
+9. **Concurrency & Parallelism.** User/kernel modes, system calls, traps/exceptions/interrupts, ILP?, multithreading, multiprocessing, concurrency, hyperthreading
 10. **Networking**? 
 
 Maybe three quizzes with three standards each. OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
