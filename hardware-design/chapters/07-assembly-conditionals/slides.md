@@ -24,9 +24,6 @@ And recall from the instruction cycle:
 
 `bl` is **branch and link**. It also updates PC. But first it stores the *current* PC in the link register. This makes it possible for us to return from the 
 
-
-
-
 it also sets the link register (LR) so we know how to get back.
 
 
@@ -55,6 +52,23 @@ it also sets the link register (LR) so we know how to get back.
 if x > 0:
     print("positive")
 ```
+
+
+### What's Happening Under the Hood?
+
+
+N (Negative): Set if the result is negative (MSB is 1).
+Z (Zero): Set if the result is zero (the operands were equal).
+C (Carry): Set if the subtraction did not require a "borrow" (used for unsigned comparisons).
+V (oVerflow): Set if the result overflowed the signed integer range
+
+
+
+
+### Again - reducerd vocabulary
+
+CBZ - combare and branch if zero
+
 
 ### If/Else
 
