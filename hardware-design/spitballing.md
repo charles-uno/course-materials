@@ -67,5 +67,5 @@ Concurrency & Parallelism
 Networking
 - Network hardware
 - TCP/IP model
-- Security/encryption
+- Security, attacks, exploits, encryption
 
