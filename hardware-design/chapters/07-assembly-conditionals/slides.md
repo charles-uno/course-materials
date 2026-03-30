@@ -95,6 +95,7 @@ else:
 ### If/Else (Assembly)
 
 ```arm
+    and x0, x0, 1
     cmp x0, 0
     bne odd
 even:
