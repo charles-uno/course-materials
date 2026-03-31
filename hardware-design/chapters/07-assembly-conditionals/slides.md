@@ -52,6 +52,25 @@ After setting the processor flags, how do we use them?
 - Example: `cbz` (compare and branch if zero)
 - We are prioritizing small vocabulary
 
+### Signed and Unsigned
+
+The previous ones are meant for unsigned (aka two's complement) numbers. For unsigned we *should* use:
+
+| Instruction | Description |
+| ----------- | ----------- |
+| `blo`       | Branch if lower than |
+| `bls`       | Branch if lower or same |
+| `bhi`       | Branch if higher than |
+| `bhs`       | Branch if higher or same |
+
+In this class we'll keep out numbers pretty small, so we don't need to worry about overflow
+
+### Summary
+
+- Use `cmp` to compare two values, set processor flags
+- Use `beq` (etc) to execute logic based on those flags
+- As long as we don't worry about huge numbers, we can pretend `bgt` is the same as `bhi`
+
 ## Conditional Logic
 
 ### If (Python)
@@ -94,6 +113,8 @@ else:
 
 ### If/Else (Assembly)
 
+Note: `endif` is just a label. You can call it anything
+
 ```arm
     and x0, x0, 1
     cmp x0, 0
@@ -107,6 +128,11 @@ odd:
 endif:
     bl printf
 ```
+
+### Summary
+
+- If: use a conditional branch to skip a line
+- Else: conditional branch followed by an unconditional branch
 
 ## Loops
 
@@ -150,7 +176,7 @@ loop_test:
 
 - The example above does everything in registers for brevity
 - In "real" code, local variables live on the stack
-- How does that update the code?
+- How would the code need to change to reflect that?
 
 ### For Loop (C)
 
@@ -182,3 +208,62 @@ loop_done:
     bl printf
 ```
 
+### Summary
+
+- While loop: body (may include increment), test
+- For loop: test, body, increment
+
+## Nested Comparisons
+
+### Nested Comparisons
+
+- There is only one set of processor flags (NZCV)
+- We have to be very careful to do the conditional branch before overwriting
+
+### Nested Example
+
+```arm
+.section .rodata
+prompt: .ascii "Please say 5: \0"
+input_fmt: .ascii "%d\0"
+reply_no: .ascii "No.\n\0"
+reply_yes: .ascii "Yes!\n\0"
+
+.section .data
+guess: .word 0
+
+.text
+.global main
+main: 
+begin_loop:
+    // ask for input
+    ldr x0, =prompt
+    bl printf
+    // read the guess
+    ldr x0, =input_fmt
+    ldr x1, =guess
+    bl scanf
+    // load guess from memory
+    ldr x1, =guess
+    ldr x1, [x1]
+    // check the guess
+    cmp x1, 5
+    // if it's 5, we're done
+    beq break
+    // otherwise, try again
+    ldr x0, =reply_no
+    bl printf
+    b begin_loop
+break:
+    ldr x0, =reply_yes
+    bl printf
+    // return zero
+    mov x0, 0
+    b exit
+```
+
+### Another Example
+
+TODO: sum of odd numbers?
+
+check if a number is prime?
