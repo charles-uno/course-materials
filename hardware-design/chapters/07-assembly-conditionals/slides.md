@@ -46,6 +46,10 @@ After setting the processor flags, how do we use them?
 | `bgt`       | Branch if greater than |
 | `bge`       | Branch if greater than or equal |
 
+### Labels
+
+Wait -- how are these different from functions?
+
 ### Vocabulary Reminder
 
 - There are other commands too
