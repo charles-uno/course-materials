@@ -22,16 +22,26 @@ Recall from before:
 
 ### Comparison
 
-- New instruction: `cmp` (aka compare)
-- Updates processor flags NZCV
+- New instruction: `cmp` (aka compare). Sets processor flags:
 
-### Processor Flags
+- N (Negative)
+- Z (Zero)
+- C (Carry)
+- V (oVerflow)
 
-You don't need to know the details, but for the sake of completeness:
-- N (Negative): Set if the result is negative (MSB is 1).
-- Z (Zero): Set if the result is zero (the operands were equal).
-- C (Carry): Set if the subtraction did not require a "borrow" (used for unsigned comparisons).
-- V (oVerflow): Set if the result overflowed the signed integer range
+### Comparison Breakdown
+
+```arm
+cmp 0xffffffff, 0x1
+```
+
+`cmp` does not know if your data is signed or unsigned. It just sees ones and zeroes
+
+Unsigned 0xffffffff is 4.3 billion
+
+Signed 0xffffffff is -1
+
+
 
 ### Conditional Branching
 
