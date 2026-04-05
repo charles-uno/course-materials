@@ -202,7 +202,7 @@ def get_h1(chunk: str, is_beamer: bool) -> str:
     if is_beamer:
         return r"\Section{" + title + "}"
     else:
-        return r"\section{" + title + "}"
+        return r"\newpage\section{" + title + "}"
 
 
 def get_h2(chunk: str, is_beamer: bool) -> str:

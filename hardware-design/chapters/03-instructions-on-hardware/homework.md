@@ -1,7 +1,5 @@
----
----
 
-
+---
 
 # Instructions on Hardware
 
