@@ -22,26 +22,26 @@ Recall from before:
 
 ### Comparison
 
-- New instruction: `cmp` (aka compare). Sets processor flags:
-
-- N (Negative)
-- Z (Zero)
-- C (Carry)
-- V (oVerflow)
-
-### Comparison Breakdown
-
+New instruction:
 ```arm
-cmp 0xffffffff, 0x1
+cmp x0, 5
+cmp x0, x1
 ```
 
-`cmp` does not know if your data is signed or unsigned. It just sees ones and zeroes
+Compares the two inputs. Sets processor flags accordingly
 
-Unsigned 0xffffffff is 4.3 billion
+### Processor Flags
 
-Signed 0xffffffff is -1
+```arm
+cmp x0, x1
+```
 
+This sets the NZCV processor flags:
 
+- Negative - `x0-x1` is negative (when interpreted as a *signed* int)
+- Zero - `x0-x1` is zero
+- Carry - `x0-x1` is positive (when interpreted as an *unsigned* int)
+- oVerflow - `x0-x1` overflows (when interpreted as a *signed* int)
 
 ### Conditional Branching
 
@@ -56,19 +56,21 @@ After setting the processor flags, how do we use them?
 | `bgt`       | Branch if greater than |
 | `bge`       | Branch if greater than or equal |
 
-### Labels
-
-Wait -- how are these different from functions?
-
-### Vocabulary Reminder
-
-- There are other commands too
-- Example: `cbz` (compare and branch if zero)
-- We are prioritizing small vocabulary
-
 ### Signed and Unsigned
 
-The previous ones are meant for unsigned (aka two's complement) numbers. For unsigned we *should* use:
+Importantly: `cmp` is just comparing binary data! It does not know what the data represents
+
+```arm
+cmp 0xffffffff, 0x1
+```
+
+- Unsigned 0xffffffff is 4.3 billion
+- Signed 0xffffffff is -1
+- So which is bigger? 0xFFFFFFFF or 0x1?
+
+### Don't Worry About It
+
+The conditional branch instructions before are meant for signed numbers (aka two's complement). For unsigned we *should* use:
 
 | Instruction | Description |
 | ----------- | ----------- |
@@ -77,15 +79,31 @@ The previous ones are meant for unsigned (aka two's complement) numbers. For uns
 | `bhi`       | Branch if higher than |
 | `bhs`       | Branch if higher or same |
 
-In this class we'll keep out numbers pretty small, so we don't need to worry about overflow
+In this class, we will be dealing with small numbers. You can just use `bgt` and forget about `bhi`
+
+### Labels
+
+Conditional branch instructions update PC to "jump" execution to the given label. For example:
+
+```arm
+cmp x0, 5
+bgt logic_for_handling_six_plus
+```
+
+This looks just like what we did for functions! How are function labels different from conditional labels?
+
+### It's All The Same
+
+- Labels allow us to jump within the code
+- Aarch64 doesn't know about functions, conditionals, loops. It just knows PC
+- Recall: we manually handle function input, output, local variables
 
 ### Summary
 
 - Use `cmp` to compare two values, set processor flags
 - Use `beq` (etc) to execute logic based on those flags
-- As long as we don't worry about huge numbers, we can pretend `bgt` is the same as `bhi`
 
-## Conditional Logic
+## If
 
 ### If (Python)
 
@@ -116,6 +134,13 @@ nonpositive:
     b exit
 ```
 
+### Summary
+
+- Conditionally skip the code that would be in the `if` block
+- This means your conditional should be the opposite of what you would write in the `if`
+
+## If/Else
+
 ### If/Else (Python)
 
 ```python
@@ -145,10 +170,10 @@ endif:
 
 ### Summary
 
-- If: use a conditional branch to skip a line
-- Else: conditional branch followed by an unconditional branch
+- If/else: conditional branch followed by an unconditional branch
+- The two are mutually exclusive. Always want to execute one, never both
 
-## Loops
+## While Loop
 
 ### While Loop (Python)
 
@@ -192,9 +217,18 @@ loop_test:
 - In "real" code, local variables live on the stack
 - How would the code need to change to reflect that?
 
+### Summary
+
+- Jump forward to the loop test
+- Maybe jump back to the loop body
+- At the end of the loop body, we get back to the test
+- Don't forget to increment or you'll go forever
+
+## For Loop
+
 ### For Loop (C)
 
-Let's not worry about what `range(5)` is actually doing in Python
+Note: `range(5)` is actually pretty weird in Python. Back to the classic:
 
 ```C
 for (int i = 0; i < 5; i++) {
@@ -203,7 +237,15 @@ for (int i = 0; i < 5; i++) {
 printf("done\n");
 ```
 
-### For Loop 
+### For Loop Breakdown
+
+- Initialize `i=0`
+- Perform the loop test (`i<5`)
+- If it passes, perform the loop body (print)
+- Increment `i`
+- Back up to the loop test
+
+### For Loop (Assembly)
 
 ```arm
     mov x19, 0
@@ -224,17 +266,36 @@ loop_done:
 
 ### Summary
 
-- While loop: body (may include increment), test
-- For loop: test, body, increment
+- Loop test first
+- Maybe bail from the loop
+- Loop body
+- Increment
+- Unconditionally back to the top
 
-## Nested Comparisons
+## Nested Logic
 
-### Nested Comparisons
+### Use Flags Promptly
 
-- There is only one set of processor flags (NZCV)
-- We have to be very careful to do the conditional branch before overwriting
+Any concerns here?
 
-### Nested Example
+```arm
+cmp x4, 100
+bl printf
+// branch based on the value of x4
+beq handle_large_value
+```
+
+### Use Flags Promptly
+
+- The processor has only one set of flags (NZCV)
+- It's very likely that there are more `cmp` calls within `printf`
+- That `beq` is not going to work as intended
+
+### Writing Nested Logic
+
+Be careful to use your processor flags before you overwrite them!
+
+### Nested Logic Example
 
 ```arm
 .section .rodata
@@ -276,8 +337,9 @@ break:
     b exit
 ```
 
-### Another Example
+### Summary
 
-TODO: sum of odd numbers?
-
-check if a number is prime?
+- `cmp` sets the processor flags
+- There is only one set of flags
+- If you call `b`, `bl`, etc, generally assume they have been overwritten
+- Don't accidentally overwrite them before you use them!
