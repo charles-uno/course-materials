@@ -168,6 +168,41 @@ endif:
     bl printf
 ```
 
+### If/Elif/Else (Python)
+
+In other languages this may use a `switch` statement
+
+```python
+if x > 0:
+    print("positive")
+elif x == 0:
+    print("zero")
+else:
+    print("negative")
+```
+
+
+
+### If/Elif/Else (Assembly)
+
+```arm
+    and x0, x0, 1
+    cmp x0, 0
+    bne odd
+    beq zero
+even:
+    ldr x0, =reply_even
+    b endif
+zero:
+    ldr x0, =reply_zero
+    b endif
+odd:
+    ldr x0, =reply_odd
+    b endif
+endif:
+    bl printf
+```
+
 ### Summary
 
 - If/else: conditional branch followed by an unconditional branch

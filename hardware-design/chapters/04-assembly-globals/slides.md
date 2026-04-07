@@ -200,7 +200,7 @@ add x0, x1, x7 // add x1 + x7, store in x0
 mov x4, 5 // set x4 = 5 (literal number)
 mov x4, x5 // set x4 = x5
 mul x2, x8, x3 // multiply x8 * x3, store in x2
-mul x2, x8, 12 // multiply x8 * 12, store in x2
+// note: mul does not accept literals!
 sub x5, x4, 3 // subtract x4 - 3, store in x5
 sub x5, x4, x3 // subtract x4 - x3, store in x5
 ```
