@@ -64,16 +64,62 @@ Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely.
 Add makefile check to confirm that sections line up in the slides and the assignments
 
 Update standards:
-1. **Data Representation.** Integers, hex, arithmetic, two's complement, floating point, ASCII, structured data
-2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations
-3. **Assembly Programming.** Global variables, global constants, printf, scanf, automated testing
-4. **Electronic Circuits.** Resistors, transistors, breadboard labs
-5. **Data Storage.** Memory hierarchy, caching, locality, physical storage mechanisms, redundancy, memory interleaving, RAID, virtual memory, erase before write, MMIO, 4kB storage alignment, write endurance, memory-mapped IO
-7. **Executing Instructions.** Instruction cycle, clock-driven execution, instruction-level parallelism, booting, ILP?
-8. **Stack Frames.** Local variables, functions, context switching
-6. **Control Flow.** Comparison, branching, if/else, loops
-9. **Concurrency & Parallelism.** User/kernel modes, system calls, traps/exceptions/interrupts, ILP?, multithreading, multiprocessing, concurrency, hyperthreading
-10. **Networking**? 
+
+1. **Data Representation.**
+    - Positive integers and arithmetic
+    - Hexadecimal
+    - Two's complement
+    - Floating point
+    - ASCII, strings
+    - Structured data (HTML, JSON)
+2. **Logic Representation.**
+    - Boolean logic
+    - Logic gates
+    - Logic circuits
+    - Control circuits
+    - Circuitverse simulations (or logic.ly?)
+3. **Electronic Circuits.**
+    - Resistors
+    - Transistors
+    - Building logic gates
+    - Breadboard labs
+4. **Assembly Programming.**
+    - Assembly program structure
+    - Global constants and variables
+    - Printf and scanf
+    - Automated testing
+5. **Data Storage.**
+    - Memory hierarchy
+    - Cache and locality
+    - Physical storage mechanisms
+    - Redundancy, RAID
+    - Memory interleaving, storage alignment
+    - Erase before write, write endurance
+    - MMIO
+7. **Executing Instructions.**
+    - Instruction cycle
+    - Clock-driven execution
+    - Instruction-level parallelism
+    - Booting
+8. **Stack Frames.**
+    - Local variables
+    - Functions
+    - Context switching?
+6. **Control Flow.**
+    - Processor flags
+    - Conditionals
+    - Loops
+    - Nested control flow
+9. **Concurrency & Parallelism.**
+    - User/kernel modes, system calls, traps, exceptions, interrupts
+    - Concurrency
+    - Multicore systems
+    - Multiprocessing
+    - Multithreading, hyperthreading
+10. **Networking**
+    - Network hardware
+    - TCP/IP model
+    - Security, encryption
 
 Maybe three quizzes with three standards each. OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
 
