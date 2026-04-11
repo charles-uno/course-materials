@@ -1,7 +1,7 @@
 beamer: true
 ---
 
-# Assembly Conditionals
+# Control Flow
 
 ### Branch (and Sometimes Link)
 

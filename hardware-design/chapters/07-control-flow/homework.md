@@ -1,9 +1,9 @@
 
 ---
 
-# Assembly Conditionals
+# Control Flow
 
-Do all coding for this assignment in the directory `HD/assembly-conditionals`. Submit via `csgit`. Submit notes, screenshots, and scans via Moodle.
+Do all coding for this assignment in the directory `HD/control-flow`. Submit via `csgit`. Submit notes, screenshots, and scans via Moodle.
 
 Please work on your own, then compare your results with at least two of your peers. If you find nontrivial differences, talk them out until everyone is on the same page.
 
