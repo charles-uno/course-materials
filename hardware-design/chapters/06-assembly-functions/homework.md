@@ -3,9 +3,9 @@
 
 # Assembly Functions
 
-% reading: Dive into Systems 9.5, 9.6
+% reading: Dive into Systems 9.5 (functions), 9.6 (recursion)
 
-Submit code via csgit. Submit notes, screenshots, and scans via Moodle.
+Submit code via `csgit`. Submit notes, screenshots, and scans via Moodle.
 
 Please work on your own, then compare your results with at least two of your peers. If you find nontrivial differences, talk them out until everyone is on the same page.
 
