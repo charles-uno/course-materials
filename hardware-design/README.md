@@ -39,11 +39,15 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 Update exams to use markdown?
 
+Actually use `str` for local variables! In the current material we only ever use `scanf` to put data in memory
+
 Figure out how to create tagged PDFs for accessibility
 
 Add a slide with example two's complement subtraction
 
-Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key?
+functions: add *recursion*. probably need to do functions after control flow then
+
+Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key? might depend on if there is entropy in the system
 
 circuitverse - clarify that the button is a different type of input
 switch over to a different circuit simulator? logic.ly? 
@@ -96,6 +100,11 @@ Update standards:
     - Memory interleaving, storage alignment
     - Erase before write, write endurance
     - MMIO
+6. **Control Flow.**
+    - Processor flags
+    - Conditionals
+    - Loops
+    - Nested control flow
 7. **Executing Instructions.**
     - Instruction cycle
     - Clock-driven execution
@@ -105,11 +114,7 @@ Update standards:
     - Local variables
     - Functions
     - Context switching?
-6. **Control Flow.**
-    - Processor flags
-    - Conditionals
-    - Loops
-    - Nested control flow
+    - Recursion?
 9. **Concurrency & Parallelism.**
     - User/kernel modes, system calls, traps, exceptions, interrupts
     - Concurrency
