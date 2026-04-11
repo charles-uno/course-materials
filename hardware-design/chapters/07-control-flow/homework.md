@@ -3,7 +3,7 @@
 
 # Assembly Conditionals
 
-Submit code via `csgit`. Submit notes, screenshots, and scans via Moodle.
+Do all coding for this assignment in the directory `HD/assembly-conditionals`. Submit via `csgit`. Submit notes, screenshots, and scans via Moodle.
 
 Please work on your own, then compare your results with at least two of your peers. If you find nontrivial differences, talk them out until everyone is on the same page.
 
@@ -19,7 +19,38 @@ Read [Dive Into Systems](https://diveintosystems.org) 9.4.
 
 ## Understanding Conditional Code
 
-TODO: provide some C code here. Have them print it out and mark it up.
+Copy this code into `say-five.c`. Compile to an executable. Run it. Does it do what you expect?
+
+Now compile the C code to Assembly:
+
+```bash
+gcc -S say-five.c
+```
+
+Print out both versions of the code. Mark them up. Explain as much as you can. Indicate which part of the Assembly code corresponds to which part of the C.
+
+```c
+#include <stdio.h>
+
+int main() {
+    int is_valid, number;
+    while (1) {
+        printf("Please enter 5: ");
+        is_valid = scanf("%d", &number);
+        if (is_valid == 1 && number == 5) {
+            printf("Correct!\n");
+            break; 
+        } else {
+            printf("Incorrect.\n");
+            // Clear the input buffer to prevent accidental infinite loop
+            while (getchar() != '\n') {}
+        }
+    }
+    return 0;
+}
+```
+
+
 
 ## Fizzbuzz
 
@@ -54,5 +85,13 @@ This is a complex program with multiple nested comparisons! I strongly encourage
 
 Make sure to include a test with your code! It should include coverage for corner cases. 
 
-## Word flipper?
+## Prime Finder
+
+Write an Assembly program `prime-checker.s` which checks if a positive integer is prime. Stick to the arithmetic we have covered in class. That means you will be implementing division yourself using `add`, `sub`, and/or `mul`. 
+
+
+
+
+
+
 
