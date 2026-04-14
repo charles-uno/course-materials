@@ -531,11 +531,11 @@ git config --global receive.denyCurrentBranch warn</pre>
         <title>Create SSH keys on your Pi</title>
         <p>This allows you to connect to csgit securely. This is similar to what VSCode is
             doing under the hood when it connects from your laptop to your Pi.</p>
-        <pre>ssh-keygen</pre>
+        <pre>ssh-keygen -t rsa</pre>
         <p>This command will print a series of prompts. Keep pressing enter/return as it prompts for input. DO NOT ENTER
             ANYTHING.</p>
         <p>Confirm you now have a public key: </p>
-        <pre>cat .ssh/id_rsa.pub</pre>
+        <pre>~/.ssh/id_rsa.pub</pre>
         <p>The output should look something like this:</p>
         <pre>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD1eHUPVNztOF4awQFbDXXVfJ9fL5sU/ZHxX9SBDnBhE9Zrrbfts0/wEAy46xRPj1uxyIV09566KHQDTIP24XjpiRa7EkOLL/UQTfHOwN+OMsck2/mXcW7GFjChpskykuTkUE4O9F5RnU5IrNdyRvX1/kSiZlFquR4Itg1OUDXfZQxyVx7z+jVLay4rd8Zyirfhf93yfi36SOTx/y6SDCKOrcEHTzwADMyUAo6+U2RWPWYx0GsRVfo637p+EbR+o0ztBGMU32h75mqG87qGtgeJN+rvz9RpnGjMob2PeFp/IGs7+qE+9R55d0uyZzJp6EDjtnJ5W2Br2mq8wwvXzt9Z lynn5@raspberrypi</pre>
         <answer>

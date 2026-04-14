@@ -92,13 +92,13 @@ You will receive extra credit for attending department events such as colloquims
 
 ## Late Work Policy
 
-Please try to get your work in on time. Otherwise you are likely to fall behind in the course.
+Please try to get your homework in on time. Otherwise you are likely to fall behind in the course.
 
-Late work is inconvenient for the graders. They may be grumpy and vindictive when grading late work.
+Late homework is inconvenient for the graders. They may be grumpy and vindictive when grading it.
 
 No late work will be accepted for the last two weeks of the semester. The graders have their own finals to worry about!
 
-When submitting late work, you must notify the graders by email. Otherwise they will not know to look for it.
+When submitting late homework, you must notify the graders by email. Otherwise they will not know to look for it.
 
 ## Important Links
 
