@@ -28,6 +28,14 @@ directory
 
 ### Common Commands
 
+- ls
+- pwd
+- echo
+- mkdir
+- rm
+- cat 
+
+
 ### Common Idioms
 
 pipe into:
@@ -36,7 +44,7 @@ pipe into:
 - cut
 - sort, uniq
 - awk, sed
-
+- head, tail
 
 ## Variables
 
@@ -61,5 +69,7 @@ pipe into:
 
 ### Loops
 
+
+### Functions
 
 
