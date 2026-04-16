@@ -11,11 +11,58 @@ When printing code to mark it up, I recommend formatting the text with multiple 
 
 When parsing C code, you may reference whatever people and resources you like. You do not need to be able to reproduce it, but I would like you to generally understand it when you look at it. 
 
-When writing Assembly code, you may reference whatever people and materials you like. But make sure the code you turn in reflects your own understanding. 
+When writing Assembly code, you may reference whatever people and materials you like. But make sure the code you turn in reflects your own understanding. You may need to reproduce this on a test!
 
 ## Reading
 
 Read [Dive Into Systems](https://diveintosystems.org) 9.4.
+
+## Absolute Value
+
+Write an Assembly program `absolute-value.s` that does the following:
+
+- Prompt the user to enter an integer
+- If the input is positive or zero, print it back
+- Otherwise, multiply by -1 and print the result
+
+
+## Leap Year Checker
+
+Write an Assembly program `leap-year-checker.s` which does the following:
+
+- Prompt the user to enter a year between 0 and 9999
+- If they enter a number that is too small or too big, print an error message and exit
+- Print whether or not the number is a leap year
+
+Note: X is a leap year if it is divisible by 4, but not divisible by 100, unless divisible by 400. For example:
+
+- 1900: not a leap year (multiple of 100)
+- 1992: leap year (multiple of 4)
+- 1993: not a leap year (not a multiple of 4)
+- 2000: leap year (multiple of 400)
+
+You may use `UDIV` and `MSUB` for division. You may also implement your own logic to check division and remainder. For example, something like the following:
+```python
+def is_divisible_by(numerator, denominator):
+    remainder = numerator
+    while remainder > 0:
+        remainder = remainder - denominator
+    return remainder == 0
+```
+
+
+
+
+## Character Flipper
+
+Write an Assembly program `char-flipper.s` that does the following:
+
+- Prompt the user to enter a character
+- If the input is a lowercase letter, print the same letter as uppercase
+- If the input is an uppercase letter, print it flipped to lowercase
+- Otherwise, print the same character back
+
+Be sure to include a test, and make sure your test covers corner cases
 
 ## Understanding Conditional Code
 
@@ -52,6 +99,10 @@ int main() {
 
 
 
+
+
+
+
 ## Fizzbuzz
 
 Write an Assembly program `fizzbuzz.s`. It should do the following:
@@ -85,9 +136,13 @@ This is a complex program with multiple nested comparisons! I strongly encourage
 
 Make sure to include a test with your code! It should include coverage for corner cases. 
 
-## Prime Finder
 
-Write an Assembly program `prime-checker.s` which checks if a positive integer is prime. Stick to the arithmetic we have covered in class. That means you will be implementing division yourself using `add`, `sub`, and/or `mul`. 
+
+
+
+
+
+
 
 
 
