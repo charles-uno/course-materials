@@ -97,12 +97,6 @@ int main() {
 }
 ```
 
-
-
-
-
-
-
 ## Fizzbuzz
 
 Write an Assembly program `fizzbuzz.s`. It should do the following:
@@ -135,6 +129,27 @@ This is a complex program with multiple nested comparisons! I strongly encourage
 7. Etc...
 
 Make sure to include a test with your code! It should include coverage for corner cases. 
+
+## Prime Checker
+
+Write an Assembly program `prime-checker.s` that prompts the user for a positive integer, then reports whether or not the number is prime.
+
+This is a tricky one! I suggest you start small and build one step at a time. For example, you could do:
+
+1. Write a program with a global constant `N` that you set manually. It checks whether `N` is divisible by 3 and reports the result
+2. Update the program to switch `N` to a global variable. Prompt the user for its value at runtime.
+3. Update the program to prompt the user for two numbers, `N` and `D`. Check if `N` is divisible by `D` (aka check if `N/D` has remainder zero)
+4. Update the program to loop over all values of `D` from 2 to `N-1`. If `N` is not divisible by any of them, it's prime
+5. Update the program to be more efficient! As soon as you find a divisor, you know `N` is not prime, so you can break out of the loop
+
+You are not required to use functions. However, you may find them useful to organize your code. 
+
+
+
+
+
+
+
 
 
 

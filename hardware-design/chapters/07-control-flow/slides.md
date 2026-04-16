@@ -122,6 +122,8 @@ What, explicitly, is that code doing?
 
 ### If (Assembly)
 
+We can do this by conditionally *skipping* the print:
+
 ```arm
     cmp x0, 0
     ble nonpositive
@@ -132,6 +134,25 @@ nonpositive:
     ldr x0, =reply_done
     bl printf
     b exit
+```
+
+### If V2 (Assembly)
+
+The previous slide showed how to get this behavior by skipping code. We can also do it by running the extra code. This reads more like the Python:
+
+
+```arm
+    cmp x0, 0
+    ble positive
+endif:
+    ldr x0, =reply_done
+    bl printf
+    b exit
+
+positive:
+    ldr x0, =reply_positive
+    bl printf
+    b endif
 ```
 
 ### Summary
@@ -186,18 +207,17 @@ else:
 ### If/Elif/Else (Assembly)
 
 ```arm
-    and x0, x0, 1
     cmp x0, 0
-    bne odd
     beq zero
-even:
-    ldr x0, =reply_even
+    blt negative
+positive:
+    ldr x0, =reply_positive
     b endif
 zero:
     ldr x0, =reply_zero
     b endif
-odd:
-    ldr x0, =reply_odd
+negative:
+    ldr x0, =reply_negative
     b endif
 endif:
     bl printf
