@@ -134,8 +134,9 @@ def get_next_chunk(lines: list[str]) -> tuple[str, list[str]]:
 
 def to_tex(chunk: str, **kwargs) -> str:
     is_beamer = kwargs.get("beamer", False)
+    new_page_for_section = kwargs.get("new_page_for_section", False)
     if chunk.startswith("# "):
-        return get_h1(chunk, is_beamer)
+        return get_h1(chunk, is_beamer, new_page_for_section)
     elif chunk.startswith("## "):
         return get_h2(chunk, is_beamer)
     elif chunk.startswith("### "):
@@ -196,13 +197,15 @@ def should_end_frame_before_chunk(tex_chunks: list[str], tex_chunk: str) -> bool
     return any(tex_chunk.startswith(x) for x in need_frame_closed)
 
 
-def get_h1(chunk: str, is_beamer: bool) -> str:
+def get_h1(chunk: str, is_beamer: bool, new_page_for_section: bool) -> str:
     assert chunk.startswith("# ")
     title = chunk[2:].splitlines()[0]
     if is_beamer:
         return r"\Section{" + title + "}"
-    else:
+    elif new_page_for_section:
         return r"\newpage\section{" + title + "}"
+    else:
+        return r"\section{" + title + "}"
 
 
 def get_h2(chunk: str, is_beamer: bool) -> str:
