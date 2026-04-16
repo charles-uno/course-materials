@@ -46,12 +46,8 @@ pipe into:
 - awk, sed
 - head, tail
 
-## Variables
-
-## Command Substitution
 
 
-## Redirecting Input and Output
 
 
 
@@ -60,6 +56,14 @@ pipe into:
 ### The Shebang
 
 ### Permissions
+
+
+### Variables
+
+
+### Command Substitution
+
+
 
 
 ## Control Flow
