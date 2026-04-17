@@ -37,7 +37,24 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO
 
+
+Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
+
 Update exams to use markdown?
+
+Add dedicated DISCUSSION slides. not just a question in the middle of a list
+
+Add BOARD WORK slides. Ideally one per section. Dedicaetd group work
+
+Split sections out into their own subdirectories? This would make sense if we want to be strict about having the sections match between slides and homework. Probably have each section line up with a checkbox on the test. Maybe even sections on the test?
+
+
+Split the "explain fetch" etc into smaller more specific questions!
+- What is happening on the data/address/control bus during the fetch stage of execution instruction?
+- etc
+
+
+
 
 Actually use `str` for local variables! In the current material we only ever use `scanf` to put data in memory
 

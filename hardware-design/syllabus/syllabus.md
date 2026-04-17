@@ -68,7 +68,7 @@ You only have to demonstrate proficiency once per standard! If you get it on the
 
 Tests are take-home. No book, no notes, no computer, no nothing. Just paper and pencil. See the calendar on Moodle for dates.
 
-Revisions are closed-book as well (honor code also applies). Start with your graded test and a blank piece of paper. Write out the complete correct solution in your absolute best handwriting. Email it to me. You may alternatively stop by office hours and work through it on the whiteboard. 
+Revisions are closed-book as well (honor code also applies). Start with your graded test and a blank piece of paper. Write out the complete correct solution in your absolute best handwriting. Email it to me. Also include a scan or photo of the original (with my markups). You may alternatively stop by office hours and work through it on the whiteboard. 
 
 **Assignments.** There is one assignment per standard. Assignments are found on Doenet. There will be a few different types of work. A single assignment will often include a mix of the following:
 
