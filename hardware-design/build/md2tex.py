@@ -49,16 +49,26 @@ def get_tex(header: dict, lines: list[str]) -> list[str]:
     return join_pretty(frames)
 
 
-def maybe_apply_template(content: str, filename: str, **kwargs) -> str:
+def maybe_apply_template(content_to_wrap: str, filename: str, **kwargs) -> str:
     template_path = kwargs.get("template")
     if not template_path:
-        return content
+        return content_to_wrap
     # template path is relative to the md source path
     os.path.dirname(filename)
     template_path = os.path.join(os.path.dirname(filename), template_path)
     with open(template_path, "r") as handle:
         template = handle.read()
-    return template.replace("INSERT_CONTENT_HERE", content)
+    content_wrapped = template.replace("INSERT_CONTENT_HERE", content_to_wrap)
+    if "title" in kwargs:
+        content_wrapped = content_wrapped.replace("INSERT_TITLE_HERE", kwargs["title"])
+    if "date" in kwargs:
+        content_wrapped = content_wrapped.replace("INSERT_DATE_HERE", kwargs["date"])
+    return content_wrapped
+
+
+
+
+
 
 
 def chunks_to_frames(chunks: list[str]) -> list[str]:
