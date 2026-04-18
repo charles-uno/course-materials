@@ -9,18 +9,25 @@ import sys
 import yaml
 
 
-def main():
+def main() -> int:
     args = parse_args()
     max_path_length = max(len(p) for p in args.md_paths)
     for md_path in args.md_paths:
 
         header, lines = get_header_and_lines(md_path)
-        # template indicates a standalone doc. otherwise it needs to be imported
+
+        # .main.md turns into a standalone tex doc
+        # .incl.md turns into content to be imported
+        is_marked_main = md_path.endswith(".main.md")
         has_template = header.get("template", False)
+        if is_marked_main and not has_template:
+            print(f"\033[91mmissing template in {md_path}\033[0m")
+            return 1
+        if has_template and not is_marked_main:
+            print(f"\033[91munexpected template in {md_path}\033[0m")
+            return 1
 
-        # TODO: indicate buildable vs importable in the path probably
         output_path = md_path.replace(".md", ".gen.tex")
-
         print(f"\033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
         sys.stdout.flush()
 
@@ -32,7 +39,7 @@ def main():
             handle.write(content)
 
         print("\033[92mdone\033[0m")
-    return
+    return 0
 
 
 def get_tex(header: dict, lines: list[str]) -> list[str]:
@@ -321,4 +328,4 @@ class ParseFailure(Exception):
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
