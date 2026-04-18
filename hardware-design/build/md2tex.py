@@ -13,27 +13,34 @@ def main():
     args = parse_args()
     max_path_length = max(len(p) for p in args.md_paths)
     for md_path in args.md_paths:
-        output_path = md_path.replace(".md", ".gen.tex")
+
+        header, lines = get_header_and_lines(md_path)
+        # template indicates a standalone doc. otherwise it needs to be imported
+        has_template = header.get("template", False)
+        if has_template:
+            output_path = md_path.replace(".md", ".gen.buildable.tex")
+        else:
+            output_path = md_path.replace(".md", ".gen.importable.tex")
 
         print(f"\033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
         sys.stdout.flush()
 
+        content = get_tex(header, lines)
+        if has_template:
+            content = maybe_apply_template(content, md_path, **header)
+
         with open(output_path, "w") as handle:
-            handle.write(get_tex(md_path))
+            handle.write(content)
 
         print("\033[92mdone\033[0m")
     return
 
 
-def get_tex(filename: str) -> list[str]:
-    header, lines = get_header_and_lines(filename)
-
+def get_tex(header: dict, lines: list[str]) -> list[str]:
     chunks = get_chunks(lines, **header)
-
     # fix formatting for beamer builds
     frames = chunks_to_frames(chunks)
-    content =  join_pretty(frames)
-    return maybe_apply_template(content, filename, **header)
+    return join_pretty(frames)
 
 
 def maybe_apply_template(content: str, filename: str, **kwargs) -> str:
