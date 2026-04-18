@@ -3,18 +3,19 @@
 MD2TEX := build/md2tex.py
 
 # some markdown files turn into standalone tex docs
-MD_MAIN := $(shell find * -mindepth 1 -name "*.main.md")
-TEX_MAIN := $(MD_MAIN:.md=.gen.tex)
+MAIN_MD := $(shell find * -mindepth 1 -name "*.main.md")
+MAIN_TEX := $(MAIN_MD:.md=.gen.tex)
+MAIN_PDF := $(MAIN_MD:.main.md=.pdf)
 
 # some markdown files generate content to be imported
-MD_INCL := $(wildcard chapters/*/*.incl.md)
-MD_INCL := $(MD_INCL:.md=.gen.tex)
+INCL_MD := $(wildcard chapters/*/*.incl.md)
+INCL_TEX := $(INCL_MD:.md=.gen.tex)
 
 # some manual tex docs to import the above
 MANUAL_TEX := $(shell find . -name "*.tex" ! -name "*.gen.*")
+MANUAL_PDF := $(MANUAL_TEX:.tex=.pdf)
 
-PDFS := $(MANUAL_TEX:.tex=.pdf) $(MD_MAIN:.main.md=.pdf)
-
+all: $(MAIN_PDF) $(MANUAL_PDF)
 
 define build_latex
 	$(eval BASE := $(notdir $(1)))
@@ -29,13 +30,10 @@ define build_latex
 	fi
 endef
 
-
-all: $(PDFS)
-
-%.pdf: %.tex $(INCL_TEX)
+$(MANUAL_PDF): %.pdf: %.tex $(INCL_TEX)
 	@$(call build_latex,$*,$<)
 
-%.pdf: %.main.gen.tex
+$(MAIN_PDF): %.pdf: %.main.gen.tex
 	@$(call build_latex,$*,$<)
 
 %.gen.tex: %.md $(MD2TEX)
@@ -48,7 +46,3 @@ clean: tidy
 # remove junk per .gitignore but leave the PDFs
 tidy: 
 	@ git clean -fdX -e "*.pdf"
-
-
-
-
