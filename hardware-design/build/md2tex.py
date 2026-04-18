@@ -17,10 +17,9 @@ def main():
         header, lines = get_header_and_lines(md_path)
         # template indicates a standalone doc. otherwise it needs to be imported
         has_template = header.get("template", False)
-        if has_template:
-            output_path = md_path.replace(".md", ".gen.buildable.tex")
-        else:
-            output_path = md_path.replace(".md", ".gen.importable.tex")
+
+        # TODO: indicate buildable vs importable in the path probably
+        output_path = md_path.replace(".md", ".gen.tex")
 
         print(f"\033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
         sys.stdout.flush()
