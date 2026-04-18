@@ -1,4 +1,4 @@
-header: ../build/syllabus-header.tex
+template: ../build/syllabus-template.tex
 ---
 
 $$$
