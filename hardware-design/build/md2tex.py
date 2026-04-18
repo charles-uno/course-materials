@@ -66,11 +66,6 @@ def maybe_apply_template(content_to_wrap: str, filename: str, **kwargs) -> str:
     return content_wrapped
 
 
-
-
-
-
-
 def chunks_to_frames(chunks: list[str]) -> list[str]:
     frame_markers = [
         r"\begin{frame}",
