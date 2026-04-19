@@ -29,7 +29,15 @@
 \renewcommand{\baselinestretch}{1.2}
 
 \usepackage{enumitem}
-\setlist[enumerate]{itemsep=2.5in} 
+\setlist[enumerate]{itemsep=2.5in}
+% \makeatletter
+% Prevents breaking between the question and the first line of the answer space
+% \@beginparpenalty=1000
+% Strongly discourages breaking in the middle of an item
+%\@itempenalty=10000
+%\interlinepenalty=10000
+%\makeatother
+
 
 \newcommand{\standardsfooter}{
 \vfill
@@ -53,8 +61,8 @@ $\square$ You have not demonstrated proficiency
 \begin{itemize}
   \item This is a closed-book exam. Please do not use outside resources such as notes, past work, calculators, AI, or other people. 
   \item You have one hour for this test.
-  \item You may turn in your test in person or email it to me. If you email it, be sure to send a \textbf{scan} (not a photo).
-  \item If your answer does not fit in the space provided, use more paper. Put your name on each page. Label your work clearly so I can tell which answer is for which question. 
+  \item You may turn in your test in person or email it to me. If you email it, be sure to send a scan (not a photo).
+  \item If your answer does not fit in the space provided, use more paper. Put your name on each page. Label your work clearly. 
   \item I have confidence in you!
 \end{itemize}
 }

@@ -6,10 +6,20 @@ new_page_for_section: true
 
 # OS Concepts
 
-- Foo
-- Bar
-- Fizz
-- Buzz
+
+% - why make multiple cores rather than just make the CPU clock faster?
+% - Your Raspberry Pi has four cores. What does this mean? Describe two examples where a multi-core machine might be better than a single-core machine
+
+1. What does it mean for a program to perform a system call? Give two examples.
+1. Briefly explain context switching. Give two examples where it might happen.
+1. Briefly explain user mode and kernel mode. Give one way they are the same. Give one way they are different.
+1. Briefly explain processes and threads. Give one way they are the same. Give one way they are different.
+1. Briefly explain concurrency and parallelism. Give one way they are the same. Give one way they are different.
+
+
+
+
+
 
 $$$
 \standardsfooter
@@ -20,8 +30,8 @@ $$$
 1. What is one use case where we should store data on the stack? Why?
 2. What is one use case where we should store data on the heap? Why?
 1. In class, we discussed a few strategies that compilers use to improve the efficiency of function calls (tail call optimization, inlining, etc). Choose one. Explain how it works.
-2. There is an Assembly program `koala-thumbs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
-3. Draw a memory diagram for `koala-thumbs.s`. Start at the beginning of `main` and stop after line `0x0d`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
+2. There is an Assembly program `spider-legs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
+3. Draw a memory diagram for `spider-legs.s`. Start at the beginning of `main` and stop after line `0x0d`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
 
 $$$
 \standardsfooter
@@ -30,12 +40,12 @@ $$$
 
 ```arm,linenos=true
 // ... global constants etc omitted for brevity
-get_n_thumbs:
+get_n_legs:
     sub sp, sp, 0x20
     str fp, [sp]
     str lr, [sp, 0x10]
     add fp, sp, 0x10
-    mov x4, 6
+    mov x4, 8
     mul x3, x0, x4
     mov x0, x3
     ldr lr, [sp, 0x10]
@@ -53,7 +63,7 @@ main:
     mov x1, fp
     bl scanf
     ldr x0, [fp]
-    bl get_n_thumbs
+    bl get_n_legs
     mov x1, x0
     ldr x0, =report
     bl printf
