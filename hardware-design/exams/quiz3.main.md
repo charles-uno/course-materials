@@ -1,6 +1,6 @@
 title: Test 3
 date: April 24, 2026
-template: ../build/test-template.tex
+template: ../build/quiz-template.tex
 ---
 
 # OS Concepts
