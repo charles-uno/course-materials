@@ -11,11 +11,25 @@
   numbersep=1em
 }
 
+% hex line numbers for code blocks
+\ExplSyntaxOn
+\renewcommand{\theFancyVerbLine}{
+  \tiny\ttfamily
+  0x
+  % Check if padding is needed (less than 16)
+  \int_compare:nNnT { \value{FancyVerbLine} } < { 16 } { 0 }
+  \int_to_hex:n { \value{FancyVerbLine} }
+}
+\ExplSyntaxOff
+
 \setlength{\parindent}{0in}
 \setlength{\parskip}{1em}
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
 \renewcommand{\baselinestretch}{1.2}
+
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=2.5in} 
 
 \newcommand{\standardsfooter}{
 \vfill

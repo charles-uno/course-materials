@@ -19,7 +19,7 @@ all: $(MAIN_PDF) $(MANUAL_PDF)
 
 define build_latex
 	$(eval BASE := $(notdir $(1)))
-	@printf "\033[35mbuilding $(1).pdf from $(2)... \033[0m"
+	@printf "building \033[35m$(2)\033[0m -> \033[35m$(1).pdf\033[0m ... "
 	@latexmk -silent -pdf -jobname=$(BASE) -interaction=nonstopmode -shell-escape -cd $(2) >/dev/null 2>&1; \
 	if [ -f $(1).pdf ]; then \
 		printf "\033[92mdone\033[0m\n"; \

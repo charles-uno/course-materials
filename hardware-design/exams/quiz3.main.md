@@ -17,61 +17,50 @@ $$$
 
 # Assembly Functions
 
-1. Show the expected output of this program. You may choose any number of koalas you like.
-2. Draw a memory diagram showing the state of the program where it says `DIAGRAM 1 STOP HERE` below. Assume the user has 4 koalas. 
-3. Draw a memory diagram showing the state of the program where it says `DIAGRAM 2 STOP HERE` below. Assume the user has 4 koalas. 
-4. Draw a memory diagram showing the state of the program where it says `DIAGRAM 3 STOP HERE` below. Assume the user has 4 koalas. 
-
-
-```arm
-@ global constants
-.section .rodata
-prompt: .ascii "How many koalas do you have? \0"
-input_format: .ascii "%d\0"
-reply: .ascii "That's %d thumbs!\n\0"
-
-num_thumbs:
-    @ stack frame setup, no local variables
-    push {fp, lr}
-    add fp, sp, #4
-    @ ----------> DIAGRAM 2 STOP HERE
-    @ multiply the number of koalas by 6, return result
-    mov r2, #6
-    mul r0, r0, r2
-    @ stack frame teardown
-    pop {fp, pc}
-
-.text
-.global main
-main: 
-    @ set up stack frame for main, one local variable
-    push {fp, lr}
-    add fp, sp, #4
-    sub sp, sp, #4
-    @ ask the user how many koalas they have
-    ldr r0, prompt_ptr
-    bl printf
-    @ store response to local variable
-    sub r1, fp, #8
-    ldr r0, input_format_ptr
-    bl scanf
-    @ ----------> DIAGRAM 1 STOP HERE
-    @ load local variable, pass it into num_thumbs
-    ldr r0, [fp, #-8]
-    bl num_thumbs    
-    @ ----------> DIAGRAM 3 STOP HERE
-    @ print the results
-    mov r1, r0
-    ldr r0, reply_ptr
-    bl printf
-    @ return 0, stack frame teardown
-    mov r0, #0
-    sub sp, fp, #4
-    pop {fp, pc}
-```
-
-
+1. What is one use case where we should store data on the stack? Why?
+2. What is one use case where we should store data on the heap? Why?
+1. In class, we discussed a few strategies that compilers use to improve the efficiency of function calls (tail call optimization, inlining, etc). Choose one. Explain how it works.
+2. There is an Assembly program `koala-thumbs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
+3. Draw a memory diagram for `koala-thumbs.s`. Start at the beginning of `main` and stop after line `0x0d`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
 
 $$$
 \standardsfooter
+\newpage
 $$$
+
+```arm,linenos=true
+// ... global constants etc omitted for brevity
+get_n_thumbs:
+    sub sp, sp, 0x20
+    str fp, [sp]
+    str lr, [sp, 0x10]
+    add fp, sp, 0x10
+    mov x4, 6
+    mul x3, x0, x4
+    mov x0, x3
+    ldr lr, [sp, 0x10]
+    ldr fp, [sp]
+    add sp, sp, 0x20
+    ret
+main:
+    sub sp, sp, 0x30
+    str fp, [sp]
+    str lr, [sp, 0x10]
+    add fp, sp, 0x20
+    ldr x0, =prompt
+    bl printf
+    ldr x0, =fmt
+    mov x1, fp
+    bl scanf
+    ldr x0, [fp]
+    bl get_n_thumbs
+    mov x1, x0
+    ldr x0, =report
+    bl printf
+    ldr lr, [sp, 0x10]
+    ldr fp, [sp]
+    mov x0, 0
+    b exit
+```
+
+

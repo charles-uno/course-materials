@@ -28,7 +28,7 @@ def main() -> int:
             return 1
 
         output_path = md_path.replace(".md", ".gen.tex")
-        print(f"\033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
+        print(f"building \033[96m{md_path.ljust(max_path_length)}\033[0m -> \033[96m{output_path.ljust(max_path_length+5)}\033[0m ... ", end="")
         sys.stdout.flush()
 
         content = get_tex(header, lines)

@@ -1,7 +1,3 @@
-// arm7 had push and pop. arm64 does not. more info about the switch
-// https://stackoverflow.com/questions/64638627/explain-arm64-instruction-stp
-// https://developer.arm.com/documentation/ddi0602/2025-12/Base-Instructions/STR--immediate---Store-register--immediate--?lang=en
-
 .section .rodata
 prompt: .ascii "int plz: \0"
 input_fmt: .ascii "%d\0"
