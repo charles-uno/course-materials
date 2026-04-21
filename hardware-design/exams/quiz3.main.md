@@ -12,9 +12,9 @@ new_page_for_section: true
 
 1. What does it mean for a program to perform a system call? Give two examples.
 1. Briefly explain context switching. Give two examples where it might happen.
-1. Briefly explain user mode and kernel mode. Give one way they are the same. Give one way they are different.
-1. Briefly explain processes and threads. Give one way they are the same. Give one way they are different.
+1. Your Raspberry Pi has four cores. What does this mean? Give an example of a situation where a computer with multiple cores is preferrable to a computer with a single core.
 1. Briefly explain concurrency and parallelism. Give one way they are the same. Give one way they are different.
+1. Briefly explain processes and threads. Give one way they are the same. Give one way they are different.
 
 
 
@@ -31,7 +31,7 @@ $$$
 2. What is one use case where we should store data on the heap? Why?
 1. In class, we discussed a few strategies that compilers use to improve the efficiency of function calls (tail call optimization, inlining, etc). Choose one. Explain how it works.
 2. There is an Assembly program `spider-legs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
-3. Draw a memory diagram for `spider-legs.s`. Start at the beginning of `main` and stop after line `0x0d`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
+3. Draw a memory diagram for `spider-legs.s`. Start at the beginning of `main` and stop after line `0x08`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
 
 $$$
 \standardsfooter
