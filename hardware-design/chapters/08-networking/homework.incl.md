@@ -13,7 +13,18 @@
 
 ## Application Layer
 
-- have your students open their browser's "Developer Tools" (F12) and look at the Network tab. When they refresh a page, they can see the actual HTTP Requests and Responses happening in real-time.
+![chrome developer tools](images/chrome-developer-panel.png)
+
+1. Open the developer tools tab in your browser (F12). Go to the `Network` tab and make sure the `Method` column is visible (see screenshot). Visit some websites. 
+    - Make a note of five different `GET` requests. Explain in words what each of those requests is doing. Don't explain the whole page -- just explain *that* request specifically.
+    - Do the same for five different `POST` requests. 
+    - HTTP also supports several other types of request, such as `PUT` and `DELETE`. Can you find a case where the browser sends any of these? Please explain either way. You can look this up, but make sure what you turn in reflects your own understanding!
+
+
+
+
+
+
 - use `dig` to see how DNS lookups work. Have them find the "ANSWER SECTION" to see the IP address. Run `dig -x [IP_ADDRESS]` (a reverse lookup) to see if the number points back to the same name. This demonstrates that DNS is a two-way directory. 
 - HTTP: use curl to see the "hidden" conversation between a browser and a server.
   ```bash

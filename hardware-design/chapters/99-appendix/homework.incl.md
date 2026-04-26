@@ -47,7 +47,6 @@ bar
 
 ## Verify/Debug Connection
 
-
 ### Lost WiFi on Laptop
 
 Update priority order for network connections
@@ -57,7 +56,6 @@ Update priority order for network connections
 Are you plugged in?
 
 Are you sure there is an image on this SD card?
-
 
 ### SSH: Unknown Name
 
