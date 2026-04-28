@@ -35,54 +35,13 @@ These requirements are for Mac OS. Linux is probably pretty much the same. If yo
 
 Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/designer/)
 
-# TODO
-
-
-Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
-
-Update exams to use markdown?
+# TODO - Curriculum
 
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicaetd group work
 
-Split sections out into their own subdirectories? This would make sense if we want to be strict about having the sections match between slides and homework. Probably have each section line up with a checkbox on the test. Maybe even sections on the test?
-
-
-Split the "explain fetch" etc into smaller more specific questions!
-- What is happening on the data/address/control bus during the fetch stage of execution instruction?
-- etc
-
-
-
-
-Actually use `str` for local variables! In the current material we only ever use `scanf` to put data in memory
-
-Figure out how to create tagged PDFs for accessibility
-
-Add a slide with example two's complement subtraction
-
-functions: add *recursion*. probably need to do functions after control flow then
-
-Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key? might depend on if there is entropy in the system
-
-circuitverse - clarify that the button is a different type of input
-switch over to a different circuit simulator? logic.ly? 
-add screenshots to help with testbench setup
-
-Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues:
-
-Update AI use policy in the syllabus
-
-Write a script to create the stack frame walkthrough? It's super tedious and error prone when done manually
-
-talk about extra annotation in AP! do not wait until stack frames
-
-Get better ASCII table for tests (make sure null byte is visible)
-
-Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. Just have people check against their neighbors
-
-Add makefile check to confirm that sections line up in the slides and the assignments
+Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Make the expectations clear and also give us some granularity on the grading
 
 Update standards:
 
@@ -143,6 +102,46 @@ Update standards:
     - TCP/IP model
     - Security, encryption
 
-Maybe three quizzes with three standards each. OR MAYBE just have a quiz after every standard? Don't even clump them together? I like the idea of touching base on the standard a week later. Make sure it sinks in deeper than just short term memory. 
+Switch from `word` to `long`? Some weirdness around 64-bit comparisons on 32-bit values
 
-ALSO MAYBE: instead of O(10) standards, maybe have O(10) units, with a handful of standard each? That gives more granularity on what students got right and wrong. Might make homework grading easier, since each section is worth the same. Might also help stratify the grade distribution. Biggest downside is a *lot* of new columns in the Moodle gradebook
+Split out the FDEW quiz questions into smaller bits! "explain how fetch works" is too vague. Huge difference in detail between responses. What am I actually asking for?
+- Explain what's happening on the data, instruction, and control buses during each step of FDEW
+- What's happening in the ALU during each stage?
+- Etc
+
+Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues
+
+Update AI use policy in the syllabus
+
+Get better ASCII table for tests (make sure null byte is visible)
+
+Actually use `str` for local variables! In the current material we only ever use `scanf` to put data in memory
+
+Add a slide with example two's complement subtraction
+
+functions: add *recursion*. probably need to do functions after control flow then
+
+talk about extra annotation in AP! do not wait until stack frames
+
+
+# TODO - Tooling
+
+Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
+
+Update exams to use markdown?
+
+Figure out how to create tagged PDFs for accessibility
+
+
+Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key? might depend on if there is entropy in the system
+
+circuitverse - clarify that the button is a different type of input
+switch over to a different circuit simulator? logic.ly? 
+add screenshots to help with testbench setup
+
+
+
+Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. Just have people check against their neighbors
+
+Add makefile check to confirm that sections line up in the slides and the assignments
+
