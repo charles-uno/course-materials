@@ -41,16 +41,34 @@ Standalone homework docs. Standalone quiz docs. Slides... not sure
 
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
-Add BOARD WORK slides. Ideally one per section. Dedicaetd group work
+Add BOARD WORK slides. Ideally one per section. Dedicated group work
 
-Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Make the expectations clear and also give us some granularity on the grading
+Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Make the expectations clear and also give us some granularity on the grading. For example:
+
+
+- Data representation:
+    - Converting positive integers between hex, binary, and decimal
+    - Negation and arithmetic with two's complement
+    - Floating point numbers (conceptual? math?)
+    - ASCII and structured data (conceptual? math?)
+- Logic Representation:
+    - Converting between truth tables, logical expressions, and logic circuits
+    - Building logic gates from transistors
+    - Control circuits (conceptual?)
+- Assembly Programming:
+    - global constants and variables
+    - basic instructions
+    - Printf, scanf
+
+
+
 
 Update standards:
 
 0. **Shell Scripting.** Shell command basics, shell control flow (conditionals, loops, functions), raspberry pi setup, csgit setup
 1. **Data Representation.** Positive integers, arithmetic, hexadecimal, two's complement, floating point, ASCII, strings, structured data (HTML, JSON)
-2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations (or logic.ly?), *maybe* do breadboard here?
-3. **Electronic Circuits.** resistors, transistors, building logic gates, breadboard labs
+2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations (or logic.ly?)
+3. **Electronic Circuits.** resistors, transistors, building logic gates, breadboard labs -- not sure if this is its own section or if we should bundle it in with logic circuits
 4. **Assembly Programming.** Assembly program structure, global constants and variables, printf and scanf, automated testing
 5. **Data Storage.** Memory hierarchy, cache and locality, physical storage mechanisms, redundancy, RAID, memory interleaving, storage alignment, erase before write, write endurance, MMIO
 6. **Control Flow.** Processor flags, conditionals, loops, nested control flow
