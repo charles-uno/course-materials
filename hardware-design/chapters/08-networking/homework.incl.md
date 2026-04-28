@@ -13,6 +13,46 @@
 
 ## Application Layer
 
+$$$
+\begin{enumerate}
+
+  \item Open the developer tools tab in your browser (F12). Go to the `Network` tab and make sure the `Method` column is visible (see screenshot). Visit some websites. 
+
+  \begin{itemize}
+\item Make a note of five different \verb|GET| requests. Explain in words what each of those requests is doing. Don't explain the whole page -- just explain *that* request specifically.
+
+\includegraphics[width=0.9\columnwidth, height=0.9\textheight, keepaspectratio]{images/chrome-developer-panel.png}
+
+\end{itemize}
+
+\item Something something \verb|dig|
+
+\item HTTP: use curl to see the "hidden" conversation between a browser and a server.
+\begin{minted}{bash}
+curl -I https://www.google.com
+\end{minted}
+(headers only). Look for HTTP status codes. shows that the web is just text requests and responses
+
+\item Ports: Seeing the "Open Doors". use `ss -tuln` to see open ports. NOTE: do not scan people without permission!
+
+\begin{itemize}
+\item what does it mean that port 22 is open? what other ports are open? why?
+\item Port Scanning: from your pi, scan with `nmap localhost` or target your own laptop. see what services are exposed. if a port is open, a hacker has a way in. NOTE: do not scan people without their permission!
+\end{itemize}
+
+\end{enumerate}
+$$$
+
+
+
+---
+
+
+---
+
+
+---
+
 ![chrome developer tools](images/chrome-developer-panel.png)
 
 1. Open the developer tools tab in your browser (F12). Go to the `Network` tab and make sure the `Method` column is visible (see screenshot). Visit some websites. 

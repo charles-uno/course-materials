@@ -86,15 +86,37 @@ def chunks_to_frames(chunks: list[str]) -> list[str]:
 
 
 def join_pretty(chunks: list[str]) -> str:
+    chunks = [wrap_urls(c) for c in chunks]
     ret = "\n\n".join(chunks).lstrip().replace("\\item \n", "\\item ").replace("\n\n\\item", "\n\\item").replace("\n\n\\end", "\n\\end")
     while "\n\n\n" in ret:
         ret = ret.replace("\n\n\n", "\n\n")
-
-    # find urls starting with http(s), avoid those already in brackets or parens
-    url_pattern = r'(?<![\{\[\(])(https?:\/\/[^\s<>]+)(?![\}\]\)])'
-    # wrap in \url for nicer formatting
-    ret = re.sub(url_pattern, r'\\url{\1}', ret)
     return ret
+
+
+def wrap_urls(chunk: str) -> str: 
+    lines = []
+    is_in_code_block = False
+    for line in chunk.splitlines():
+        if line.strip().startswith(r"\begin{minted}"):
+            is_in_code_block = True
+        elif is_in_code_block and line.strip().startswith(r"\end{minted}"):
+            is_in_code_block = False
+        elif is_in_code_block:
+            pass
+        else:
+            # find urls starting with http(s), avoid those already in brackets or parens
+            url_pattern = r'(?<![\{\[\(])(https?:\/\/[^\s<>]+)(?![\}\]\)])'
+            # wrap in \url for nicer formatting
+            line = re.sub(url_pattern, r'\\url{\1}', line)
+        lines.append(line)
+    return "\n".join(lines)
+
+
+
+
+
+
+
 
 
 def get_chunks(lines: list[str], **kwargs) -> list[str]:
