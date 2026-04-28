@@ -37,6 +37,8 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO - Curriculum
 
+Standalone homework docs. Standalone quiz docs. Slides... not sure
+
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicaetd group work
@@ -45,62 +47,21 @@ Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Ma
 
 Update standards:
 
-1. **Data Representation.**
-    - Positive integers and arithmetic
-    - Hexadecimal
-    - Two's complement
-    - Floating point
-    - ASCII, strings
-    - Structured data (HTML, JSON)
-2. **Logic Representation.**
-    - Boolean logic
-    - Logic gates
-    - Logic circuits
-    - Control circuits
-    - Circuitverse simulations (or logic.ly?)
-3. **Electronic Circuits.**
-    - Resistors
-    - Transistors
-    - Building logic gates
-    - Breadboard labs
-4. **Assembly Programming.**
-    - Assembly program structure
-    - Global constants and variables
-    - Printf and scanf
-    - Automated testing
-5. **Data Storage.**
-    - Memory hierarchy
-    - Cache and locality
-    - Physical storage mechanisms
-    - Redundancy, RAID
-    - Memory interleaving, storage alignment
-    - Erase before write, write endurance
-    - MMIO
-6. **Control Flow.**
-    - Processor flags
-    - Conditionals
-    - Loops
-    - Nested control flow
-7. **Executing Instructions.**
-    - Instruction cycle
-    - Clock-driven execution
-    - Instruction-level parallelism
-    - Booting
-8. **Stack Frames.**
-    - Local variables
-    - Functions
-    - Context switching?
-    - Recursion?
-9. **Concurrency & Parallelism.**
-    - User/kernel modes, system calls, traps, exceptions, interrupts
-    - Concurrency
-    - Multicore systems
-    - Multiprocessing
-    - Multithreading, hyperthreading
-10. **Networking**
-    - Network hardware
-    - TCP/IP model
-    - Security, encryption
+0. **Shell Scripting.** Shell command basics, shell control flow (conditionals, loops, functions), raspberry pi setup, csgit setup
+1. **Data Representation.** Positive integers, arithmetic, hexadecimal, two's complement, floating point, ASCII, strings, structured data (HTML, JSON)
+2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations (or logic.ly?), *maybe* do breadboard here?
+3. **Electronic Circuits.** resistors, transistors, building logic gates, breadboard labs
+4. **Assembly Programming.** Assembly program structure, global constants and variables, printf and scanf, automated testing
+5. **Data Storage.** Memory hierarchy, cache and locality, physical storage mechanisms, redundancy, RAID, memory interleaving, storage alignment, erase before write, write endurance, MMIO
+6. **Control Flow.** Processor flags, conditionals, loops, nested control flow
+7. **Executing Instructions.** Instruction cycle, clock-driven execution, instruction-level parallelism, booting
+8. **Stack Frames.** Stack vs heap, local variables, functions, recursion
+9. **Concurrency & Parallelism.** User/kernel modes, system calls, traps, exceptions, interrupts, context switching, concurrency, multicore systems, multiprocessing, multithreading, hyperthreading
+10. **Networking.** Network hardware, TCP/IP model, security, encryption
+
+The timing gets weird with quizzes at the end of the semester. Especially with revisions. A few options:
+- Stop doing revisions. Increase the granularity of grading for each standard
+- Dedicate the last week or two of the term to a project
 
 Switch from `word` to `long`? Some weirdness around 64-bit comparisons on 32-bit values
 
@@ -123,8 +84,11 @@ functions: add *recursion*. probably need to do functions after control flow the
 
 talk about extra annotation in AP! do not wait until stack frames
 
+circuitverse - clarify that the button is a different type of input
+switch over to a different circuit simulator? logic.ly? 
+add screenshots to help with testbench setup
 
-# TODO - Tooling
+# TODO - Repo
 
 Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
 
@@ -132,16 +96,7 @@ Update exams to use markdown?
 
 Figure out how to create tagged PDFs for accessibility
 
-
 Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key? might depend on if there is entropy in the system
-
-circuitverse - clarify that the button is a different type of input
-switch over to a different circuit simulator? logic.ly? 
-add screenshots to help with testbench setup
-
-
-
-Split warmups (Doenet) from assignments (PDF). Maybe get rid of Doenet entirely. Just have people check against their neighbors
 
 Add makefile check to confirm that sections line up in the slides and the assignments
 
