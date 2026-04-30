@@ -18,63 +18,91 @@ $$$
 
   \item Open the developer tools tab in your browser (F12). Go to the `Network` tab and make sure the `Method` column is visible (see screenshot). Visit some websites. 
 
-  \begin{itemize}
-\item Make a note of five different \verb|GET| requests. Explain in words what each of those requests is doing. Don't explain the whole page -- just explain *that* request specifically.
-
 \includegraphics[width=0.9\columnwidth, height=0.9\textheight, keepaspectratio]{images/chrome-developer-panel.png}
 
-\end{itemize}
+Make a note of five different \verb|GET| requests. Explain in words what each of those requests is doing. Don't explain the whole page -- just explain \textit{that} request specifically.
 
-\item Something something \verb|dig|
+\item Do the same for five different \verb|POST| requests. 
 
-\item HTTP: use curl to see the "hidden" conversation between a browser and a server.
+\item HTTP also supports several other types of request, such as \verb|PUT| and \verb|DELETE|. Can you find a case where the browser sends any of these? Please explain either way. You can look this up, but make sure what you turn in reflects your own understanding!
+
+\item Perform a DNS lookup with \verb|dig|. For example:
 \begin{minted}{bash}
+dig <URL>
+dig -x <IP ADDRESS>
+\end{minted}
+What does it mean for a URL to have more than one IP address? Can you find a case where more than one URL points to the same IP address? In each case, explain what's happening.
+
+\item Use \verb|curl| to request an entire website, then just the headers. For example:
+\begin{minted}{bash}
+curl https://www.google.com
 curl -I https://www.google.com
 \end{minted}
-(headers only). Look for HTTP status codes. shows that the web is just text requests and responses
+Print it out and mark it up. What do you recognize? What information does the header contain? What information does the body contain? How does your browser take this information and create something that looks nice?
 
-\item Ports: Seeing the "Open Doors". use `ss -tuln` to see open ports. NOTE: do not scan people without permission!
+\item This part uses port scanning. You will be scanning only your own ports. \textbf{Do not scan ports without permission!}
 
-\begin{itemize}
-\item what does it mean that port 22 is open? what other ports are open? why?
-\item Port Scanning: from your pi, scan with `nmap localhost` or target your own laptop. see what services are exposed. if a port is open, a hacker has a way in. NOTE: do not scan people without their permission!
-\end{itemize}
+What does it mean for a port to be open? What are the security implications of an open port?
+
+Use \verb|nmap| to scan the ports on your Raspberry Pi:
+\begin{minted}{bash}
+nmap localhost
+\end{minted}
+Which ports are open? Explain each open port (you may need to look some things up)
+
+Now scan your laptop. What's the same? What's different? Why?
 
 \end{enumerate}
 $$$
 
-
-
----
-
-
----
-
-
----
-
-![chrome developer tools](images/chrome-developer-panel.png)
-
-1. Open the developer tools tab in your browser (F12). Go to the `Network` tab and make sure the `Method` column is visible (see screenshot). Visit some websites. 
-    - Make a note of five different `GET` requests. Explain in words what each of those requests is doing. Don't explain the whole page -- just explain *that* request specifically.
-    - Do the same for five different `POST` requests. 
-    - HTTP also supports several other types of request, such as `PUT` and `DELETE`. Can you find a case where the browser sends any of these? Please explain either way. You can look this up, but make sure what you turn in reflects your own understanding!
-
-
-
-
-
-
-- use `dig` to see how DNS lookups work. Have them find the "ANSWER SECTION" to see the IP address. Run `dig -x [IP_ADDRESS]` (a reverse lookup) to see if the number points back to the same name. This demonstrates that DNS is a two-way directory. 
-- HTTP: use curl to see the "hidden" conversation between a browser and a server.
-  ```bash
-  curl -I https://www.google.com
-  ```
-  (headers only). Look for HTTP status codes. shows that the web is just text requests and responses
-- Ports: Seeing the "Open Doors". use `ss -tuln` to see open ports. what does it mean that port 22 is open? what other ports are open? why?
-- Port Scanning: from your pi, scan with `nmap localhost` or target your own laptop. see what services are exposed. if a port is open, a hacker has a way in. NOTE: do not scan people without their permission!
-
 ## Transport Layer
+
+$$$
+\begin{enumerate}
+\item Use \verb|nc| to create a basic chat between two terminal windows on different machines on the same network. The easiest setup is to use a Mac and a Pi plugged into that Mac.
+
+Choose one machine to be the server. Make note of its IP address:
+\begin{minted}{bash}
+hostname -I
+\end{minted}
+Tell the server to listen on port 5555 (or whatever port you like):
+\begin{minted}{bash}
+nc -l 5555
+\end{minted}
+Now tell the client (the other machine) to connect to that port on the server:
+\begin{minted}{bash}
+nc <SERVER IP ADDRESS> 5555
+\end{minted}
+
+Type some text on the server side and hit enter. What happens? Do the same on the client side. 
+
+Use Ctrl+C to kill the process on the server side. What happens on the client side? Why? Do you suppose this connection was TCP or UDP?
+
+\item Create another \verb|nc| connection, but this time use the \verb|-u| flag. On the server:
+\begin{minted}{bash}
+nc -u -l 5555
+\end{minted}
+On the client:
+\begin{minted}{bash}
+nc <SERVER IP ADDRESS> 5555
+\end{minted}
+Confirm that your connection is established and the "chat" functionality works both ways. Then use Ctrl+C to kill the process on the server side. What happens on the client side? How is this different from before?
+
+
+
+
+
+
+\end{itemize}
+
+
+
+
+\end{enumerate}
+
+$$$
+
+
 
 
 
@@ -88,9 +116,22 @@ IP (Layer 3) gets it to the right house.
 TCP/UDP (Layer 4) gets it to the right person (Port) and makes sure they got the whole message.
 
 
+
 Teaching Tip: Use the command sudo tcpdump -i eth0 'tcp[tcpflags] & (tcp-syn|tcp-ack) != 0' on the Pi. It will filter out the boring data and show the students the actual [S] (SYN) and [.] (ACK) flags as they browse the web.
 
 ## Internet Layer
+
+
+$$$
+\begin{enumerate}
+\item Explain the difference between public IP address and private IP address. What are the public and private IP addresses of your Pi? What are the public and private IP addresses of your laptop? Compare these with a classmate.
+
+\item Run \verb|traceroute| for a website. Explain the output. Can you get it to produce rows of asterisks? What's happening?
+
+\end{enumerate}
+
+$$$
+
 
 - run `traceroute google.com`. route from the current machine to google HQ. do you see rows of asterisks? what do you suppose it means?
 - run `ip route`. find your own IP, verify that it's private
@@ -108,6 +149,7 @@ Goal: Watch the packet "hop" through different routers across the world. They wi
 
 
 ## Link Layer
+
 
 Hands-on Pi Exercise: ip link and arp
 Let the students see their hardware's "fingerprint."
