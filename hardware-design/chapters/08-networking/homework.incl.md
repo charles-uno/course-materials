@@ -150,4 +150,5 @@ What do you see? If you went to a different part of campus, would the MAC addres
 \end{enumerate}
 $$$
 
-
+% sudo ip link set eth0 down && sleep 10 && sudo ip link set eth0 up
+% set the link down without locking yourself out permanently
