@@ -85,7 +85,7 @@ nc -u -l 5555
 \end{minted}
 On the client:
 \begin{minted}{bash}
-nc <SERVER IP ADDRESS> 5555
+nc -u <SERVER IP ADDRESS> 5555
 \end{minted}
 \begin{enumerate}
 \item Confirm that your connection is established and the "chat" functionality works both ways. 

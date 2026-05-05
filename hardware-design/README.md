@@ -37,14 +37,13 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO - Curriculum
 
-Standalone homework docs. Standalone quiz docs. Slides... not sure
+Attendance! missing a bunch of classes is a red flag. You are supposed to be present to work with your group. not sure if there should be points deducted for missing class (probably?) but certainly we want to escalate to the dean if they miss a bunch
 
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicated group work
 
 Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Make the expectations clear and also give us some granularity on the grading. For example:
-
 
 - Data representation:
     - Converting positive integers between hex, binary, and decimal
@@ -107,6 +106,8 @@ switch over to a different circuit simulator? logic.ly?
 add screenshots to help with testbench setup
 
 # TODO - Repo
+
+Standalone homework docs. Standalone quiz docs. Slides... not sure
 
 Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
 
