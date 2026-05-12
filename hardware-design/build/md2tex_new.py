@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import json
 import mistletoe
 from mistletoe.latex_renderer import LaTeXRenderer
 import os
@@ -17,6 +18,8 @@ def main() -> int:
 
     doc = Document(md_path)
 
+    print(repr(doc))
+
     with open(tex_path, "w") as handle:
         handle.write(str(doc))
 
@@ -30,53 +33,127 @@ def main() -> int:
 
 
 class DocElement:
-    _params: dict = {}
-    _children: list[DocElement] = []
 
-    def _children_to_str(self) -> str: 
-        return "\n" + "".join(str(c) for c in self._children)
+    def __new__(cls, *args, **kwargs):
+        instance = super().__new__(cls)
+        instance._params = {}
+        instance._children = []
+        return instance
 
+    def _children_to_str(self) -> str:
+        return "\n" + "\n".join(str(c) for c in self._children)
 
+    def to_dict(self) -> dict:
+        return {
+            "class": self.__class__.__name__,
+            "params": self._params,
+            "children": [c.to_dict() for c in self._children],
+        }
 
-def get_next_and_leftovers(body: str, head: dict) -> tuple[DocElement, str]:
-    if body.startswith("# "):
-        return Section.get_with_leftovers(body, head)
+    def __repr__(self) -> str:
+        return json.dumps(self.to_dict(), indent=2)
 
-
-
-    else:
-        return Text(body, head), ""
 
 
 class Section(DocElement):
 
-    def __init__(self, raw_body, head):
-        title, body = raw_body.split("\n", 1)
-        title = title[2:]
+    def __init__(self, raw, head):
+        title, contents = get_title_and_contents(raw)
         self._params = {"title": title}
-        self._children = []
-        while body:
-            next_elt, body = get_next_and_leftovers(body, head)
-            self._children.append(next_elt)
+        self._children = get_children(contents, head)
 
-    def __str__(self):
-        parts = r"\section{" + self._params["title"] + "}" + self._children_to_str()
+    def __str__(self) -> str:
+        return r"\section{" + self._params["title"] + "}" + self._children_to_str()
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Section, str]:
         # Section goes until the next section or the end of the doc
-        section, leftovers = body.split("\n# ", 1)
-        return Section(section, head), leftovers
+        current, leftovers = break_at_line_starting_with(body, ["# "])
+        return Section(current, head), leftovers
+
+
+class Subsection(DocElement):
+
+    def __init__(self, raw, head):
+        title, contents = get_title_and_contents(raw)
+        self._params = {"title": title}
+        self._children = get_children(contents, head)
+
+    def __str__(self) -> str:
+        return r"\subsection{" + self._params["title"] + "}" + self._children_to_str()
+
+    @classmethod
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+        # Section goes until the next section, next subsection, or the end of the doc
+        current, leftovers = break_at_line_starting_with(body, ["## ", "# "])
+        return cls(current, head), leftovers
 
 
 
-class Text(DocElement):
+def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
+    leftover_lines = body.splitlines()
+    # don't break on the first line. we are in a section and looking for the start of the next section
+    lines = [leftover_lines.pop(0)]
+    while leftover_lines:
+        if any(leftover_lines[0].startswith(d) for d in delim):
+            break
+        lines.append(leftover_lines.pop(0))
+    return "\n".join(lines), "\n".join(leftover_lines)
+
+
+def get_title_and_contents(body: str) -> tuple[str, str]:
+    if "\n" in body:
+        title, contents = body.split("\n", 1)
+    else:
+        title, contents = body, ""
+    return title.split(None, 1)[-1], contents
+
+
+
+def get_children(raw: str, head: dict) -> list[DocElement]:
+    children = []
+    while raw:
+        next_elt, raw = get_next_and_leftovers(raw, head)
+        children.append(next_elt)
+    return children
+
+
+def get_next_and_leftovers(body: str, head: dict) -> tuple[DocElement, str]:
+    while body.startswith("\n"):
+        body = body[1:]
+    if body.startswith("# "):
+        return Section.get_with_leftovers(body, head)
+    if body.startswith("## "):
+        return Subsection.get_with_leftovers(body, head)
+    else:
+        return Paragraph(body, head).get_with_leftovers(body, head)
+
+
+
+
+
+
+
+
+class Paragraph(DocElement):
 
     def __init__(self, body, head):
         self._params = {"text": body}
 
     def __str__(self):
         return self._params["text"]
+
+    @classmethod
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+        # empty line is a paragraph break
+        leftover_lines = body.splitlines()
+        lines = [leftover_lines.pop(0)]
+        while leftover_lines:
+            if not leftover_lines[0]:
+                break
+            lines.append(leftover_lines.pop(0))
+        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+
 
 
 class Document(DocElement):
@@ -107,18 +184,6 @@ class Document(DocElement):
 
     def __str__(self) -> str:
         return self._children_to_str()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
