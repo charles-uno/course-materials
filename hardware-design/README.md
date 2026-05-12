@@ -59,7 +59,7 @@ Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Ma
     - basic instructions
     - Printf, scanf
 
-
+Networking homework: make sure we are using Linux syntax that everyone can do on the Pi. Avoid Mac-specific commands unless necessary (and if so, call them out as such)
 
 
 Update standards:

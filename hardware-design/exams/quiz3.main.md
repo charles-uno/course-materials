@@ -33,6 +33,10 @@ $$$
 2. There is an Assembly program `spider-legs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
 3. Draw a memory diagram for `spider-legs.s`. Start at the beginning of `main` and stop after line `0x08`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
 
+
+TODO: add starting values for sp and fp. maybe add starting values for lr and pc also actually
+
+
 $$$
 \standardsfooter
 \newpage
