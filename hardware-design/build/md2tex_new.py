@@ -41,7 +41,7 @@ class DocElement:
         return instance
 
     def _children_to_str(self) -> str:
-        return "\n" + "\n".join(str(c) for c in self._children)
+        return "\n".join(str(c) for c in self._children)
 
     def to_dict(self) -> dict:
         return {
@@ -63,7 +63,7 @@ class Section(DocElement):
         self._children = get_children(contents, head)
 
     def __str__(self) -> str:
-        return r"\section{" + self._params["title"] + "}" + self._children_to_str()
+        return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_str()
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Section, str]:
@@ -80,13 +80,56 @@ class Subsection(DocElement):
         self._children = get_children(contents, head)
 
     def __str__(self) -> str:
-        return r"\subsection{" + self._params["title"] + "}" + self._children_to_str()
+        return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_str()
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
         # Section goes until the next section, next subsection, or the end of the doc
         current, leftovers = break_at_line_starting_with(body, ["## ", "# "])
         return cls(current, head), leftovers
+
+
+
+class UnorderedList(DocElement):
+
+    def __init__(self, raw, head):
+        self._children = self._get_items(raw, head)
+
+    def __str__(self) -> str:
+        return r"\begin{itemize}" + "\n" + self._children_to_str() + "\n" + r"\end{itemize}"
+
+    @classmethod
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+        # list continues as long as we see indented lines and lines starting with list markers
+        # TODO: smarter indentation handling for nested lists
+        current, leftovers = break_at_line_starting_without(body, [" ", "- ", "* "])
+        return cls(current, head), leftovers
+
+    def _get_items(self, body: str, head: dict) -> list[DocElement]:
+
+        print("parsing list contents:", body)
+
+        delims = ["- ", "* "]
+        raw_bodies = []
+        for line in body.splitlines():
+            if any(line.startswith(d) for d in delims):
+                print("new item", line)
+                raw_bodies.append(line)
+            else:
+                print("continuing item", line)
+                raw_bodies[-1] += "\n" + line
+        return [UnorderedListItem(b, head) for b in raw_bodies]
+
+
+
+class UnorderedListItem(DocElement):
+
+    def __init__(self, raw, head):
+        text = raw.split(None, 1)[-1]
+        self._children = [Paragraph(text, head)]
+
+    def __str__(self):
+        return r"\item " + self._children_to_str() + "\n"
 
 
 
@@ -101,13 +144,26 @@ def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
     return "\n".join(lines), "\n".join(leftover_lines)
 
 
+
+def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, str]:
+    leftover_lines = body.splitlines()
+    # don't break on the first line. we are in a section and looking for the start of the next section
+    lines = [leftover_lines.pop(0)]
+    while leftover_lines:
+        if not any(leftover_lines[0].startswith(d) for d in delim):
+            break
+        lines.append(leftover_lines.pop(0))
+    return "\n".join(lines), "\n".join(leftover_lines)
+
+
+
+
 def get_title_and_contents(body: str) -> tuple[str, str]:
     if "\n" in body:
         title, contents = body.split("\n", 1)
     else:
         title, contents = body, ""
     return title.split(None, 1)[-1], contents
-
 
 
 def get_children(raw: str, head: dict) -> list[DocElement]:
@@ -123,15 +179,12 @@ def get_next_and_leftovers(body: str, head: dict) -> tuple[DocElement, str]:
         body = body[1:]
     if body.startswith("# "):
         return Section.get_with_leftovers(body, head)
-    if body.startswith("## "):
+    elif body.startswith("## "):
         return Subsection.get_with_leftovers(body, head)
+    elif body.startswith("- ") or body.startswith("* "):
+        return UnorderedList.get_with_leftovers(body, head)
     else:
         return Paragraph(body, head).get_with_leftovers(body, head)
-
-
-
-
-
 
 
 
