@@ -39,6 +39,8 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 Attendance! missing a bunch of classes is a red flag. You are supposed to be present to work with your group. not sure if there should be points deducted for missing class (probably?) but certainly we want to escalate to the dean if they miss a bunch
 
+add images to the networking hardware slides
+
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicated group work

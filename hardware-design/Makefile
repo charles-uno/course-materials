@@ -1,4 +1,4 @@
-.PHONY: all clean tidy
+.PHONY: all clean tidy final
 
 MD2TEX := build/md2tex.py
 
@@ -46,3 +46,9 @@ clean: tidy
 # remove junk per .gitignore but leave the PDFs
 tidy: 
 	@ git clean -fdX -e "*.pdf"
+
+
+final: exams/grades.csv exams/make_exams.py exams/final.main.gen.tex
+	cd exams && ./make_exams.py -g grades.csv final.main.gen.tex
+	cd exams/output && latexmk -pdf -interaction=nonstopmode -shell-escape *.tex
+	cd exams/output && rm -rf _minted* && latexmk -c *.tex

@@ -53,17 +53,17 @@ def main() -> int:
     for student in students:
         create_exam(raw_exam, student)
 
-    return 0
-
-    if not args.debug:
-        remove_intermediate_files()
+#    if not args.debug:
+#        remove_intermediate_files()
 
     return 0
 
 
 def remove_intermediate_files() -> None:
     for filename in os.listdir(OUTPUT_DIR):
-        if not filename.endswith(".pdf"):
+        if os.path.isdir(os.path.join(OUTPUT_DIR, filename)):
+            os.rmdir(os.path.join(OUTPUT_DIR, filename))
+        elif not filename.endswith(".pdf"):
             os.remove(os.path.join(OUTPUT_DIR, filename))
 
 
@@ -102,13 +102,15 @@ def create_exam(exam_source: str, student: Student) -> None:
     tex_path = os.path.join(OUTPUT_DIR, student.username + ".tex")
     with open(tex_path, "w") as handle:
         handle.write(exam_source)
-    return 
-
+    return
     subprocess.run(
         [
-            "pdflatex",
-            f"-output-directory={OUTPUT_DIR}",
-            tex_path,
+            "latexmk",
+            "-pdf",
+            "-interaction=nonstopmode",
+            "-shell-escape",
+            "-cd",
+            tex_path 
         ],
         capture_output=True,
     )

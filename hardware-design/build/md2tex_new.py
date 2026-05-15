@@ -106,9 +106,6 @@ class UnorderedList(DocElement):
         return cls(current, head), leftovers
 
     def _get_items(self, body: str, head: dict) -> list[DocElement]:
-
-        print("parsing list contents:", body)
-
         delims = ["- ", "* "]
         raw_bodies = []
         for line in body.splitlines():
