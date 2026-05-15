@@ -58,6 +58,15 @@ Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Ma
     - global constants and variables
     - basic instructions
     - Printf, scanf
+- ...
+- Networking
+    - hardware
+    - application layer
+    - transport layer
+    - internet layer
+    - link layer
+    - security
+
 
 Networking homework: make sure we are using Linux syntax that everyone can do on the Pi. Avoid Mac-specific commands unless necessary (and if so, call them out as such)
 
@@ -65,7 +74,7 @@ Networking homework: make sure we are using Linux syntax that everyone can do on
 Update standards:
 
 0. **Shell Scripting.** Shell command basics, shell control flow (conditionals, loops, functions), raspberry pi setup, csgit setup
-1. **Data Representation.** Positive integers, arithmetic, hexadecimal, two's complement, floating point, ASCII, strings, structured data (HTML, JSON)
+1. **Data Representation.** Positive integers, arithmetic, hexadecimal, two's complement, floating point, ASCII, strings, structured data (HTML, JSON), compression, encryption
 2. **Logic Representation.** Boolean logic, logic gates, logic circuits, control circuits, circuitverse simulations (or logic.ly?)
 3. **Electronic Circuits.** resistors, transistors, building logic gates, breadboard labs -- not sure if this is its own section or if we should bundle it in with logic circuits
 4. **Assembly Programming.** Assembly program structure, global constants and variables, printf and scanf, automated testing
