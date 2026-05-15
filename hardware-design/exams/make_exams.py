@@ -26,11 +26,12 @@ CSV_KEY_EMAIL = "Email address"
 CSV_KEY_SECTION = "Section"
 
 TEX_NAME = "%NAME"
-TEX_STANDARD_BEGIN = "%BEGIN_STANDARD_"
-TEX_STANDARD_END = "%END_STANDARD_"
+TEX_STANDARD_BEGIN = "%BEGIN_"
+TEX_STANDARD_END = "%END_"
 TEX_STANDARDS = "%STANDARDS"
 
 OUTPUT_DIR = "output"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
 @dataclass(frozen=True)
@@ -51,6 +52,8 @@ def main() -> int:
 
     for student in students:
         create_exam(raw_exam, student)
+
+    return 0
 
     if not args.debug:
         remove_intermediate_files()
@@ -99,6 +102,8 @@ def create_exam(exam_source: str, student: Student) -> None:
     tex_path = os.path.join(OUTPUT_DIR, student.username + ".tex")
     with open(tex_path, "w") as handle:
         handle.write(exam_source)
+    return 
+
     subprocess.run(
         [
             "pdflatex",
@@ -137,9 +142,9 @@ def get_standards_completed(
 ) -> frozenset[str]:
     standards_completed = []
     for key, val in student_map.items():
-        if not key.startswith(CSV_KEY_STANDARD_PREFIX):
+        standard_short_name = get_standard_name(key)
+        if standard_short_name is None:
             continue
-        standard_short_name = key.split(CSV_KEY_STANDARD_PREFIX)[-1].split()[0]
         try:
             v = float(val)
         except ValueError:
@@ -147,6 +152,16 @@ def get_standards_completed(
         if v >= completion_threshold:
             standards_completed.append(standard_short_name)
     return frozenset(standards_completed)
+
+
+def get_standard_name(key):
+    if key.startswith(CSV_KEY_STANDARD_PREFIX):
+        return key.split(CSV_KEY_STANDARD_PREFIX)[-1].split()[0]
+    if key.endswith(" (Real)"):
+        key = key.split()[0]
+    if len(key) == 2 and key.upper() == key:
+        return key
+    return None
 
 
 def get_raw_exam(exam_path: str) -> str:
