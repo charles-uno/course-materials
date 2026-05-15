@@ -49,6 +49,4 @@ tidy:
 
 
 final: exams/grades.csv exams/make_exams.py exams/final.main.gen.tex
-	cd exams && ./make_exams.py -g grades.csv final.main.gen.tex
-	cd exams/output && latexmk -pdf -interaction=nonstopmode -shell-escape *.tex
-	cd exams/output && rm -rf _minted* && latexmk -c *.tex
+	cd exams && make
