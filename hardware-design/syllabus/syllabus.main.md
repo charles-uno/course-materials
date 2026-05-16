@@ -30,7 +30,9 @@ See Moodle
 
 ## Office Hours
 
-9:00-9:30 and 1:11-11:30 in RMS 600
+Office hours are held immediately after class in my office:
+
+Tuesday and Thursday 11:00-11:30 in RMS 600
 
 If this does not work for you, please email me and we will figure something out!
 
@@ -53,7 +55,10 @@ The course is broken down into eight standards. Each standard weighs equally for
 
 ## Grade Scale
 
-Pretty standard:
+Pretty standard: 
+
+$$$
+$$$
 
 | Grade Percent | Letter Grade | 
 |:-------------:|:-------------|
@@ -98,7 +103,7 @@ Revisions are closed-book as well (honor code also applies). Start with your gra
 
 The prompt on Doenet should make clear how each part of the assignment is to be submitted. Please contact me if you encounter ambiguity!
 
-**Peer reviews.** At the end of the course, you will each write reviews for a few of your peers. These reviews will be short. Less than one page. You will provide \emph{specific examples} of ways your peers helped you succeed.
+**Peer reviews.** At the end of the course, you will each write reviews for a few of your peers. These reviews will be short. Less than one page. You will provide **specific examples** of ways your peers helped you succeed.
 
 Show up. Work together. Make it easy for your peers to write nice things about you. I recommend also keeping some light notes over the course of the semester. Write down whenever one of your peers is particularly helpful or insightful.
 
@@ -130,16 +135,13 @@ When submitting late homework, you must notify the graders by email. Otherwise t
 
 # Bigger Picture
 
-
 ## Academic Integrity
 
 Plagiarism is a serious academic offense. Hand in your own work. Give credit appropriately when you draw from the work of others. For more information please see:
 
-
 - St Olaf Honor Code: https://wp.stolaf.edu/honorcouncil/
 - Faculty Handbook on Academic Integrity: https://wp.stolaf.edu/facultyhandbook/academic-integrity-faculty-handbook-category-2
 - Roadmap to Academic Integrity: https://wp.stolaf.edu/roadmap-to-academic-integrity
-
 
 Work that violates this policy will typically receive no credit. In especially serious cases the penalty can be an F in the course.
 
@@ -148,7 +150,6 @@ Work that violates this policy will typically receive no credit. In especially s
 You are welcome to use AI tools when studying.
 
 Please not submit AI work as your own.
-
 
 % assembly, then C, then Python
 % when you write in Python, you don't care that the resulting assembly is slop
