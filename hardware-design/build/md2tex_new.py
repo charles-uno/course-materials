@@ -27,32 +27,39 @@ def main() -> int:
 
 class DocElement:
 
+    _HTML_TAG = None
+
     def __new__(cls, *args, **kwargs):
         instance = super().__new__(cls)
         instance._params = {}
         instance._children = []
         return instance
 
-    def _children_to_tex(self) -> str:
-        return "\n".join(c.to_tex() for c in self._children)
-
     def to_tex(self) -> str:
         return self._children_to_tex()
 
+    def _children_to_tex(self) -> str:
+        return "\n".join(c.to_tex() for c in self._children)
+
     def to_html(self) -> str:
-        children = "\n".join(c.to_html() for c in self._children)
-        return "\n".join([self._html_open(), indent(children), self._html_close()])
+        return "\n".join([self._html_open(), indent(self._children_to_html()), self._html_close()])
+
+    def _children_to_html(self) -> str:
+        return "\n".join(c.to_html() for c in self._children)
+
+    def _html_tag_name(self) -> str:
+        return self._HTML_TAG or self.__class__.__name__
 
     def _html_open(self, include_params=True) -> str:
         if include_params and self._params:
-            return f"<{self.__class__.__name__} {pretty_html_params(self._params)}>"
-        return f"<{self.__class__.__name__}>"
+            return f"<{self._html_tag_name()} {pretty_html_params(self._params)}>"
+        return f"<{self._html_tag_name()}>"
 
     def _html_close(self) -> str:
-        return f"</{self.__class__.__name__}>"
+        return f"</{self._html_tag_name()}>"
 
     def _html_solo(self) -> str:
-        return f"<{self.__class__.__name__} \\>"
+        return f"<{self._html_tag_name()} \\>"
 
 
 def pretty_html_params(params: dict) -> str:
@@ -119,7 +126,9 @@ class Subsection(DocElement):
 
 class UnorderedList(DocElement):
 
-    MARKERS = ("- ", "* ")
+    _HTML_TAG = "ul"
+
+    _MARKERS = ("- ", "* ")
 
     def __init__(self, raw, head):
         self._children = self._get_items(raw, head)
@@ -129,10 +138,10 @@ class UnorderedList(DocElement):
 
     @classmethod
     def matches(cls, raw: str) -> bool:
-        return any(raw.startswith(m) for m in cls.MARKERS)
+        return any(raw.startswith(m) for m in cls._MARKERS)
 
     @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[DocElement, str]:
         # list continues as long as we see indented lines and lines starting with list markers
         # TODO: smarter indentation handling for nested lists
         current, leftovers = break_at_line_starting_without(body, [" ", "- ", "* "])
@@ -142,14 +151,60 @@ class UnorderedList(DocElement):
         delims = ["- ", "* "]
         raw_items = []
         for line in raw.splitlines():
-            if any(line.startswith(d) for d in delims):
+            if self.matches(line):
                 raw_items.append(line)
             else:
                 raw_items[-1] += "\n" + line
-        return [UnorderedListItem(ri, head) for ri in raw_items]
+        return [ListItem(ri, head) for ri in raw_items]
 
 
-class UnorderedListItem(DocElement):
+class OrderedList(DocElement):
+
+    _HTML_TAG = "ol"
+
+    def __init__(self, raw, head):
+        self._children = self._get_items(raw, head)
+
+    def to_tex(self) -> str:
+        return r"\begin{enumerate}" + "\n" + self._children_to_tex() + "\n" + r"\end{enumerate}"
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        if not raw:
+            return False
+        first_word = raw.split(None, 1)[0]
+        if first_word.endswith(".") or first_word.endswith(")"):
+            return first_word[:-1].isdigit()
+        else:
+            return False
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+        # list continues as long as we see indented lines and lines starting with list markers
+        leftover_lines = raw.splitlines()
+        lines = [leftover_lines.pop(0)]
+        while leftover_lines:
+            line = leftover_lines[0]
+            if line.startswith(" ") or cls.matches(line):
+                lines.append(leftover_lines.pop(0))
+            else:
+                break
+        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+    
+
+    def _get_items(self, raw: str, head: dict) -> list[DocElement]:
+        raw_items = []
+        for line in raw.splitlines():
+            if self.matches(line):
+                raw_items.append(line)
+            else:
+                raw_items[-1] += "\n" + line
+        return [ListItem(ri, head) for ri in raw_items]
+
+
+class ListItem(DocElement):
+
+    _HTML_TAG = "li"
 
     def __init__(self, raw, head):
         # chop off the list item delimiter
@@ -158,11 +213,8 @@ class UnorderedListItem(DocElement):
         # that off so we can identify nested stuff
         if "\n" in raw:
             lines = raw.splitlines()
-            indent = len(lines[1]) - len(lines[1].lstrip())
-            
-            print(lines[1], "indented by:", indent)
-
-            lines = lines[:1] + [l[indent:] for l in lines[1:]]
+            depth = len(lines[1]) - len(lines[1].lstrip())
+            lines = lines[:1] + [l[depth:] for l in lines[1:]]
             raw = "\n".join(lines)
 
         # list items are usually just a line of text. but in principle one list
@@ -171,6 +223,7 @@ class UnorderedListItem(DocElement):
 
     def to_tex(self):
         return r"\item " + self._children_to_tex() + "\n"
+
 
 
 def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
@@ -182,7 +235,6 @@ def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
             break
         lines.append(leftover_lines.pop(0))
     return "\n".join(lines), "\n".join(leftover_lines)
-
 
 
 def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, str]:
@@ -223,6 +275,8 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
         return CodeBlock.get_with_leftovers(raw, head)
     elif UnorderedList.matches(raw):
         return UnorderedList.get_with_leftovers(raw, head)
+    elif OrderedList.matches(raw):
+        return OrderedList.get_with_leftovers(raw, head)
     elif EmptyLine.matches(raw):
         return EmptyLine(raw, head).get_with_leftovers(raw, head)
     else:
@@ -249,7 +303,6 @@ class CodeBlock(DocElement):
         else:
             return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
 
-
     @classmethod
     def matches(cls, raw: str) -> bool:
         return raw.startswith("```")
@@ -261,7 +314,6 @@ class CodeBlock(DocElement):
         assert "\n```" in raw
         body, leftovers = raw.split("\n```", 1)
         return cls(body, head), leftovers
-
 
 
 class Literal(DocElement):
@@ -276,7 +328,6 @@ class Literal(DocElement):
         return self._params["text"]
 
 
-
 class EmptyLine(DocElement):
 
     def __init__(self, body, head):
@@ -286,7 +337,7 @@ class EmptyLine(DocElement):
         return "\n"
     
     def to_html(self) -> str:
-        return self._html_solo()
+        return "<br \\>"
     
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -309,11 +360,13 @@ class Paragraph(DocElement):
     def to_tex(self):
         return self._children_to_tex()
 
+    def to_html(self) -> str:
+        return "<p>" + self._children_to_tex() + "</p>"
+
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Paragraph, str]:
         lines = raw.splitlines()
         return cls(lines[0], head), "\n".join(lines[1:])
-
 
 
 class Document(DocElement):
