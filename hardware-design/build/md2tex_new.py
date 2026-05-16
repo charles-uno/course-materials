@@ -74,7 +74,7 @@ class Section(DocElement):
         self._children = get_children(contents, head)
 
     @classmethod
-    def matches_start(cls, raw: str) -> bool:
+    def matches(cls, raw: str) -> bool:
         return raw.startswith("# ")
 
     def to_tex(self) -> str:
@@ -95,7 +95,7 @@ class Subsection(DocElement):
         self._children = get_children(contents, head)
 
     @classmethod
-    def matches_start(cls, raw: str) -> bool:
+    def matches(cls, raw: str) -> bool:
         return raw.startswith("## ")
 
     def to_tex(self) -> str:
@@ -108,13 +108,20 @@ class Subsection(DocElement):
         return cls(current, head), leftovers
 
 
+
 class UnorderedList(DocElement):
+
+    MARKERS = ("- ", "* ")
 
     def __init__(self, raw, head):
         self._children = self._get_items(raw, head)
 
     def to_tex(self) -> str:
         return r"\begin{itemize}" + "\n" + self._children_to_tex() + "\n" + r"\end{itemize}"
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return any(raw.startswith(m) for m in cls.MARKERS)
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
@@ -200,13 +207,13 @@ def get_children(raw: str, head: dict) -> list[DocElement]:
 def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
     while raw.startswith("\n"):
         raw = raw[1:]
-    if Section.matches_start(raw):
+    if Section.matches(raw):
         return Section.get_with_leftovers(raw, head)
-    elif Subsection.matches_start(raw):
+    elif Subsection.matches(raw):
         return Subsection.get_with_leftovers(raw, head)
-    elif starts_with_onordered_list_marker(raw):
+    elif UnorderedList.matches(raw):
         return UnorderedList.get_with_leftovers(raw, head)
-    elif EmptyLine.matches_start(raw):
+    elif EmptyLine.matches(raw):
         return EmptyLine(raw, head).get_with_leftovers(raw, head)
     else:
         return TextLine(raw, head).get_with_leftovers(raw, head)
@@ -214,12 +221,6 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
 
 
 
-
-
-UNORDERED_LIST_MARKERS = ["- ", "* "]
-
-def starts_with_onordered_list_marker(line: str) -> bool:
-    return any(line.startswith(m) for m in UNORDERED_LIST_MARKERS)
 
 
 
@@ -236,7 +237,7 @@ class EmptyLine(DocElement):
         return f"<{self.__class__.__name__} />"
     
     @classmethod
-    def matches_start(cls, raw: str) -> bool:
+    def matches(cls, raw: str) -> bool:
         return raw and not raw.splitlines()[0].strip()
 
     @classmethod
