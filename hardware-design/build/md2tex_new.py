@@ -36,28 +36,25 @@ class DocElement:
     def _children_to_tex(self) -> str:
         return "\n".join(c.to_tex() for c in self._children)
 
-    def to_dict(self) -> dict:
-        return {
-            "class": self.__class__.__name__,
-            "params": self._params,
-            "children": [c.to_dict() for c in self._children],
-        }
-
     def to_tex(self) -> str:
         return self._children_to_tex()
 
     def to_html(self) -> str:
-        params_pretty = (" " + json.dumps(self._params)) if self._params else ""
-        tag_open = f"<{self.__class__.__name__}{params_pretty}>"
         children = "\n".join(c.to_html() for c in self._children)
         tag_close = f"</{self.__class__.__name__}>"
-        return "\n".join([tag_open, indent(children), tag_close])
+        return "\n".join([self._html_open(), indent(children), self._html_close()])
 
+    def _html_open(self, include_params=True) -> str:
+        if include_params and self._params:
+            params_pretty = json.dumps(self._params)
+            return f"<{self.__class__.__name__} {params_pretty}>"
+        return f"<{self.__class__.__name__}>"
 
-    def __str__(self) -> str:
-#        return yaml.dump(self.to_dict())
-        return json.dumps(self.to_dict(), indent=2)
+    def _html_close(self) -> str:
+        return f"</{self.__class__.__name__}>"
 
+    def _html_solo(self) -> str:
+        return f"<{self.__class__.__name__} \>"
 
 
 def indent(text, depth=2) -> str:
@@ -211,6 +208,8 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
         return Section.get_with_leftovers(raw, head)
     elif Subsection.matches(raw):
         return Subsection.get_with_leftovers(raw, head)
+    elif CodeBlock.matches(raw):
+        return CodeBlock.get_with_leftovers(raw, head)
     elif UnorderedList.matches(raw):
         return UnorderedList.get_with_leftovers(raw, head)
     elif EmptyLine.matches(raw):
@@ -222,6 +221,56 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
 
 
 
+class CodeBlock(DocElement):
+
+    def __init__(self, body, head):
+        first_line, content = body.split("\n", 1)
+        if "," in first_line:
+            language, flags = first_line.split(",", 1)
+        else:
+            language, flags = first_line, ""
+        self._params = {"language": language or "text", "flags": flags, "content": content}
+        self._children = []
+
+    def to_tex(self) -> str:
+        language = self._params["language"]
+        content = self._params["content"]
+        flags = self._params["flags"]
+        if flags:
+            return r"\begin{minted}[" + flags + "]{" + language + "}\n" + content + "\n" + r"\end{minted}"
+        else:
+            return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
+
+
+    def to_html(self) -> str:
+        return self._html_open(False) + self._params["content"] + self._html_close()
+
+
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("```")
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+        assert cls.matches(raw)
+        raw = raw.lstrip("```")
+        assert "\n```" in raw
+        body, leftovers = raw.split("\n```", 1)
+        return cls(body, head), leftovers
+
+
+
+class Literal(DocElement):
+
+    def __init__(self, raw, head):
+        self._params = {"text": raw}
+
+    def to_tex(self):
+        return self._params["text"]
+
+    def to_html(self) -> str:
+        return self._params["text"]
 
 
 
@@ -234,7 +283,7 @@ class EmptyLine(DocElement):
         return "\n"
     
     def to_html(self) -> str:
-        return f"<{self.__class__.__name__} />"
+        return self._html_solo()
     
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -258,7 +307,7 @@ class TextLine(DocElement):
         return r"\text{" + self._params["text"] + "}"
 
     def to_html(self) -> str:
-        return f"<{self.__class__.__name__}>" + self._params["text"] + "</" + self.__class__.__name__ + ">"
+        return self._html_open(False) + self._params["text"] + self._html_close()
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[TextLine, str]:
