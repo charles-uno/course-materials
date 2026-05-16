@@ -51,7 +51,27 @@ The course is broken down into eight standards. Each standard weighs equally for
 - **Assembly Conditionals.** Control flow in Assembly using conditionals and loops.
 - **Networking.** Client/server model. Packets. Routers. Protocols. Domain name resolution.
 
-## Grading
+## Grade Scale
+
+Pretty standard:
+
+| Grade Percent | Letter Grade | 
+|:-------------:|:-------------|
+| 93%           | A            |
+| 90%           | A-           |
+| 87%           | B+           |
+| 83%           | B            |
+| 80%           | B-           |
+| 77%           | C+           |
+| 73%           | C            |
+| 70%           | C-           |
+| 67%           | D+           |
+| 63%           | D            |
+| 60%           | D-           |
+
+I reserve the right to adjust a grade up in consideration of unusual circumstances. I will never adjust a grade down.
+
+## Grading Breakdown
 
 - 45\% Tests
 - 45\% Assignments
