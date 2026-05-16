@@ -18,10 +18,10 @@ def main() -> int:
 
     doc = Document(md_path)
 
-    print(repr(doc))
+    print(doc)
 
     with open(tex_path, "w") as handle:
-        handle.write(str(doc))
+        handle.write(doc.to_tex())
 
     print("\033[92mdone\033[0m")
 
@@ -40,8 +40,8 @@ class DocElement:
         instance._children = []
         return instance
 
-    def _children_to_str(self) -> str:
-        return "\n".join(str(c) for c in self._children)
+    def _children_to_tex(self) -> str:
+        return "\n".join(c.to_tex() for c in self._children)
 
     def to_dict(self) -> dict:
         return {
@@ -50,7 +50,11 @@ class DocElement:
             "children": [c.to_dict() for c in self._children],
         }
 
-    def __repr__(self) -> str:
+    def to_tex(self) -> str:
+        return self._children_to_tex()
+
+
+    def __str__(self) -> str:
         return json.dumps(self.to_dict(), indent=2)
 
 
@@ -62,8 +66,8 @@ class Section(DocElement):
         self._params = {"title": title}
         self._children = get_children(contents, head)
 
-    def __str__(self) -> str:
-        return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_str()
+    def to_tex(self) -> str:
+        return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_tex()
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Section, str]:
@@ -79,8 +83,8 @@ class Subsection(DocElement):
         self._params = {"title": title}
         self._children = get_children(contents, head)
 
-    def __str__(self) -> str:
-        return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_str()
+    def to_tex(self) -> str:
+        return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_tex()
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
@@ -95,8 +99,8 @@ class UnorderedList(DocElement):
     def __init__(self, raw, head):
         self._children = self._get_items(raw, head)
 
-    def __str__(self) -> str:
-        return r"\begin{itemize}" + "\n" + self._children_to_str() + "\n" + r"\end{itemize}"
+    def to_tex(self) -> str:
+        return r"\begin{itemize}" + "\n" + self._children_to_tex() + "\n" + r"\end{itemize}"
 
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
@@ -125,8 +129,8 @@ class UnorderedListItem(DocElement):
         text = raw.split(None, 1)[-1]
         self._children = [Paragraph(text, head)]
 
-    def __str__(self):
-        return r"\item " + self._children_to_str() + "\n"
+    def to_tex(self):
+        return r"\item " + self._children_to_tex() + "\n"
 
 
 
@@ -190,7 +194,7 @@ class Paragraph(DocElement):
     def __init__(self, body, head):
         self._params = {"text": body}
 
-    def __str__(self):
+    def to_tex(self):
         return self._params["text"]
 
     @classmethod
@@ -232,8 +236,8 @@ class Document(DocElement):
             body = "\n".join(header_lines)
         return head, body
 
-    def __str__(self) -> str:
-        return self._children_to_str()
+    def to_tex(self) -> str:
+        return self._children_to_tex()
 
 
 
