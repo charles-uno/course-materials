@@ -41,20 +41,33 @@ class DocElement:
 
     def to_html(self) -> str:
         children = "\n".join(c.to_html() for c in self._children)
-        tag_close = f"</{self.__class__.__name__}>"
         return "\n".join([self._html_open(), indent(children), self._html_close()])
 
     def _html_open(self, include_params=True) -> str:
         if include_params and self._params:
-            params_pretty = json.dumps(self._params)
-            return f"<{self.__class__.__name__} {params_pretty}>"
+            return f"<{self.__class__.__name__} {pretty_html_params(self._params)}>"
         return f"<{self.__class__.__name__}>"
 
     def _html_close(self) -> str:
         return f"</{self.__class__.__name__}>"
 
     def _html_solo(self) -> str:
-        return f"<{self.__class__.__name__} \>"
+        return f"<{self.__class__.__name__} \\>"
+
+
+def pretty_html_params(params: dict) -> str:
+    pretty = []
+    for key, val in params.items():
+        assert isinstance(key, str)
+        if val is None:
+            continue
+        elif isinstance(val, str):
+            pretty.append(f'{key}="{val}"')
+        elif isinstance(val, int) or isinstance(val, float):
+            pretty.append(f'{key}={val}')
+        else:
+            raise ValueError(f"Unsupported HTML params: {params}")
+    return " ".join(pretty)
 
 
 def indent(text, depth=2) -> str:
@@ -216,9 +229,6 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
         return Paragraph(raw, head).get_with_leftovers(raw, head)
 
 
-
-
-
 class CodeBlock(DocElement):
 
     def __init__(self, body, head):
@@ -226,23 +236,18 @@ class CodeBlock(DocElement):
         if "," in first_line:
             language, flags = first_line.split(",", 1)
         else:
-            language, flags = first_line, ""
-        self._params = {"language": language or "text", "flags": flags, "content": content}
-        self._children = []
+            language, flags = first_line, None
+        self._params = {"language": language or "text", "flags": flags}
+        self._children.append(Literal(content, head))
 
     def to_tex(self) -> str:
         language = self._params["language"]
-        content = self._params["content"]
+        content = self._children_to_tex()
         flags = self._params["flags"]
         if flags:
             return r"\begin{minted}[" + flags + "]{" + language + "}\n" + content + "\n" + r"\end{minted}"
         else:
             return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
-
-
-    def to_html(self) -> str:
-        return self._html_open(False) + self._params["content"] + self._html_close()
-
 
 
     @classmethod
@@ -299,7 +304,7 @@ class EmptyLine(DocElement):
 class Paragraph(DocElement):
 
     def __init__(self, body, head):
-        self._children = Literal(body, head)
+        self._children.append(Literal(body, head))
 
     def to_tex(self):
         return self._children_to_tex()
