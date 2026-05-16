@@ -53,6 +53,8 @@ $$$
 %BEGIN_AG
 # Assembly Globals
 
+TODO: make sure the comments in the code line up with the instructions! specifically: storing n_thumbs
+
 Write an assembly program called `koalas.s` that does the following:
 - Ask the user how many koalas they have
 - Store their input in a global variable named `num_koalas`
@@ -144,7 +146,7 @@ $$$
    Note: As you go, you may find it helpful to write down intermediate values for registers and memory. Grading is based only on the final values, not their history.
 
 $$$
-\standardsfooter
+\standardsfooterNoRevision
 \newpage
 $$$
 
