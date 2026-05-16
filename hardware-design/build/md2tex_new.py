@@ -2,10 +2,7 @@
 
 import argparse
 import json
-import mistletoe
-from mistletoe.latex_renderer import LaTeXRenderer
 import os
-import re
 import sys
 import yaml
 
@@ -49,14 +46,24 @@ class DocElement:
     def to_tex(self) -> str:
         return self._children_to_tex()
 
-    def to_html(self, indent=0) -> str:
-        params_pretty = json.dumps(self._params) if self._params else ""
-        children_pretty = "\n".join(c.to_html(indent+2) for c in self._children)
-        return " "*indent + f"<{self.__class__.__name__} {params_pretty}>\n" + children_pretty + "\n" + " "*indent + f"</{self.__class__.__name__}>"
+    def to_html(self) -> str:
+        params_pretty = (" " + json.dumps(self._params)) if self._params else ""
+        tag_open = f"<{self.__class__.__name__}{params_pretty}>"
+        children = "\n".join(c.to_html() for c in self._children)
+        tag_close = f"</{self.__class__.__name__}>"
+        return "\n".join([tag_open, indent(children), tag_close])
+
+
 
     def __str__(self) -> str:
 #        return yaml.dump(self.to_dict())
         return json.dumps(self.to_dict(), indent=2)
+
+
+
+def indent(text, depth=2) -> str:
+    return "\n".join(" "*depth + l for l in text.splitlines())
+
 
 
 
@@ -138,13 +145,10 @@ class UnorderedListItem(DocElement):
 
         # list items are usually just a line of text. but in principle one list
         # item can have multiple lines of text, code blocks, etc.
-        print("breaking into children:", raw)
-
         self._children = get_children(raw, head)
 
     def to_tex(self):
         return r"\item " + self._children_to_tex() + "\n"
-
 
 
 def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
@@ -231,8 +235,8 @@ class EmptyLine(DocElement):
     def to_tex(self):
         return "\n"
     
-    def to_html(self, indent=0) -> str:
-        return " "*indent + f"<{self.__class__.__name__} />"
+    def to_html(self) -> str:
+        return f"<{self.__class__.__name__} />"
     
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
@@ -251,8 +255,8 @@ class TextLine(DocElement):
     def to_tex(self):
         return r"\text{" + self._params["text"] + "}"
 
-    def to_html(self, indent=0) -> str:
-        return " "*indent + f"<{self.__class__.__name__}>" + self._params["text"] + "</" + self.__class__.__name__ + ">"
+    def to_html(self) -> str:
+        return f"<{self.__class__.__name__}>" + self._params["text"] + "</" + self.__class__.__name__ + ">"
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[TextLine, str]:
