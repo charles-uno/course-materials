@@ -54,7 +54,6 @@ class DocElement:
         return "\n".join([tag_open, indent(children), tag_close])
 
 
-
     def __str__(self) -> str:
 #        return yaml.dump(self.to_dict())
         return json.dumps(self.to_dict(), indent=2)
@@ -74,6 +73,10 @@ class Section(DocElement):
         self._params = {"title": title}
         self._children = get_children(contents, head)
 
+    @classmethod
+    def matches_start(cls, raw: str) -> bool:
+        return raw.startswith("# ")
+
     def to_tex(self) -> str:
         return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_tex()
 
@@ -90,6 +93,10 @@ class Subsection(DocElement):
         title, contents = get_title_and_contents(raw)
         self._params = {"title": title}
         self._children = get_children(contents, head)
+
+    @classmethod
+    def matches_start(cls, raw: str) -> bool:
+        return raw.startswith("## ")
 
     def to_tex(self) -> str:
         return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_tex()
@@ -174,8 +181,6 @@ def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, st
     return "\n".join(lines), "\n".join(leftover_lines)
 
 
-
-
 def get_title_and_contents(body: str) -> tuple[str, str]:
     if "\n" in body:
         title, contents = body.split("\n", 1)
@@ -192,27 +197,19 @@ def get_children(raw: str, head: dict) -> list[DocElement]:
     return children
 
 
-
-
 def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
     while raw.startswith("\n"):
         raw = raw[1:]
-    if raw.startswith("# "):
+    if Section.matches_start(raw):
         return Section.get_with_leftovers(raw, head)
-    elif raw.startswith("## "):
+    elif Subsection.matches_start(raw):
         return Subsection.get_with_leftovers(raw, head)
     elif starts_with_onordered_list_marker(raw):
         return UnorderedList.get_with_leftovers(raw, head)
-    elif starts_with_empty_line(raw):
+    elif EmptyLine.matches_start(raw):
         return EmptyLine(raw, head).get_with_leftovers(raw, head)
     else:
         return TextLine(raw, head).get_with_leftovers(raw, head)
-
-
-
-def starts_with_empty_line(raw: str) -> bool:
-    return raw and not raw.splitlines()[0].strip()
-
 
 
 
@@ -238,6 +235,10 @@ class EmptyLine(DocElement):
     def to_html(self) -> str:
         return f"<{self.__class__.__name__} />"
     
+    @classmethod
+    def matches_start(cls, raw: str) -> bool:
+        return raw and not raw.splitlines()[0].strip()
+
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
         # if there are multiple empty lines in a row, absorb them all
@@ -269,9 +270,7 @@ class Document(DocElement):
 
     def __init__(self, md_path: str):
         head, body = self._get_head_and_body(md_path)
-        while body:
-            next_elt, body = get_next_and_leftovers(body, head)
-            self._children.append(next_elt)
+        self._children = get_children(body, head)
 
     def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
         with open(md_path, "r") as handle:
@@ -293,7 +292,6 @@ class Document(DocElement):
 
     def to_tex(self) -> str:
         return self._children_to_tex()
-
 
 
 def md_path(path):
