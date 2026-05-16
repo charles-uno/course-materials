@@ -47,10 +47,10 @@ The course is broken down into eight standards. Each standard weighs equally for
 - **Data Representation.** Representing numbers and other data using ones and zeroes. Binary arithmetic. Hexadecimal. Negative numbers using two's complement. Floating point numbers.
 - **Logic Representation.** Boolean logic and expressions. Logic gates and logic circuits. Circuits for logic and arithmetic. Building logic gates out of transistors.
 - **Instructions on Hardware.** Components of a computer. Memory hierarchy, caching, and locality. The steps of executing an instruction on a clock-driven machine. Pipelining, data hazards, and control hazards.
-- **Assemly Globals.** Fundamentals of Assembly programming. Global constants and variables. Input and output to the terminal. Raspberry Pi setup. 
+- **Assemly Programming.** Fundamentals of Assembly programming. Global constants and variables. Input and output to the terminal. Raspberry Pi setup. 
 - **OS Concepts.** Processes, threads, and cores. Process life cycle. Booting the machine. Concurrency. Kernel and user modes. Traps and interrupts.
-- **Assembly Functions.** Control flow in Assembly using function calls. Stack frames. Memory diagrams. Local variables.
-- **Assembly Conditionals.** Control flow in Assembly using conditionals and loops.
+- **Stack Frames.** Control flow in Assembly using function calls. Stack frames. Memory diagrams. Local variables.
+- **Control Flow.** Conditionals and loops in Assembly.
 - **Networking.** Client/server model. Packets. Routers. Protocols. Domain name resolution.
 
 ## Grade Scale
