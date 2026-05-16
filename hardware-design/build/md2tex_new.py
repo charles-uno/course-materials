@@ -18,7 +18,7 @@ def main() -> int:
 
     doc = Document(md_path)
 
-    print(doc)
+    print(doc.to_html())
 
     with open(tex_path, "w") as handle:
         handle.write(doc.to_tex())
@@ -26,10 +26,6 @@ def main() -> int:
     print("\033[92mdone\033[0m")
 
     return 0
-
-
-
-
 
 
 class DocElement:
@@ -53,8 +49,13 @@ class DocElement:
     def to_tex(self) -> str:
         return self._children_to_tex()
 
+    def to_html(self, indent=0) -> str:
+        params_pretty = json.dumps(self._params) if self._params else ""
+        children_pretty = "\n".join(c.to_html(indent+2) for c in self._children)
+        return " "*indent + f"<{self.__class__.__name__} {params_pretty}>\n" + children_pretty + "\n" + " "*indent + f"</{self.__class__.__name__}>"
 
     def __str__(self) -> str:
+#        return yaml.dump(self.to_dict())
         return json.dumps(self.to_dict(), indent=2)
 
 
@@ -93,7 +94,6 @@ class Subsection(DocElement):
         return cls(current, head), leftovers
 
 
-
 class UnorderedList(DocElement):
 
     def __init__(self, raw, head):
@@ -109,25 +109,38 @@ class UnorderedList(DocElement):
         current, leftovers = break_at_line_starting_without(body, [" ", "- ", "* "])
         return cls(current, head), leftovers
 
-    def _get_items(self, body: str, head: dict) -> list[DocElement]:
+    def _get_items(self, raw: str, head: dict) -> list[DocElement]:
         delims = ["- ", "* "]
-        raw_bodies = []
-        for line in body.splitlines():
+        raw_items = []
+        for line in raw.splitlines():
             if any(line.startswith(d) for d in delims):
-                print("new item", line)
-                raw_bodies.append(line)
+                raw_items.append(line)
             else:
-                print("continuing item", line)
-                raw_bodies[-1] += "\n" + line
-        return [UnorderedListItem(b, head) for b in raw_bodies]
-
+                raw_items[-1] += "\n" + line
+        return [UnorderedListItem(ri, head) for ri in raw_items]
 
 
 class UnorderedListItem(DocElement):
 
     def __init__(self, raw, head):
-        text = raw.split(None, 1)[-1]
-        self._children = [Paragraph(text, head)]
+        # chop off the list item delimiter
+        raw = raw.split(None, 1)[-1]
+        # if this is a multi-line item, following lines are indented. chop
+        # that off so we can identify nested stuff
+        if "\n" in raw:
+            lines = raw.splitlines()
+            indent = len(lines[1]) - len(lines[1].lstrip())
+            
+            print(lines[1], "indented by:", indent)
+
+            lines = lines[:1] + [l[indent:] for l in lines[1:]]
+            raw = "\n".join(lines)
+
+        # list items are usually just a line of text. but in principle one list
+        # item can have multiple lines of text, code blocks, etc.
+        print("breaking into children:", raw)
+
+        self._children = get_children(raw, head)
 
     def to_tex(self):
         return r"\item " + self._children_to_tex() + "\n"
@@ -175,38 +188,76 @@ def get_children(raw: str, head: dict) -> list[DocElement]:
     return children
 
 
-def get_next_and_leftovers(body: str, head: dict) -> tuple[DocElement, str]:
-    while body.startswith("\n"):
-        body = body[1:]
-    if body.startswith("# "):
-        return Section.get_with_leftovers(body, head)
-    elif body.startswith("## "):
-        return Subsection.get_with_leftovers(body, head)
-    elif body.startswith("- ") or body.startswith("* "):
-        return UnorderedList.get_with_leftovers(body, head)
+
+
+def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
+    while raw.startswith("\n"):
+        raw = raw[1:]
+    if raw.startswith("# "):
+        return Section.get_with_leftovers(raw, head)
+    elif raw.startswith("## "):
+        return Subsection.get_with_leftovers(raw, head)
+    elif starts_with_onordered_list_marker(raw):
+        return UnorderedList.get_with_leftovers(raw, head)
+    elif starts_with_empty_line(raw):
+        return EmptyLine(raw, head).get_with_leftovers(raw, head)
     else:
-        return Paragraph(body, head).get_with_leftovers(body, head)
+        return TextLine(raw, head).get_with_leftovers(raw, head)
 
 
 
-class Paragraph(DocElement):
+def starts_with_empty_line(raw: str) -> bool:
+    return raw and not raw.splitlines()[0].strip()
+
+
+
+
+
+
+
+UNORDERED_LIST_MARKERS = ["- ", "* "]
+
+def starts_with_onordered_list_marker(line: str) -> bool:
+    return any(line.startswith(m) for m in UNORDERED_LIST_MARKERS)
+
+
+
+
+class EmptyLine(DocElement):
+
+    def __init__(self, body, head):
+        pass
+
+    def to_tex(self):
+        return "\n"
+    
+    def to_html(self, indent=0) -> str:
+        return " "*indent + f"<{self.__class__.__name__} />"
+    
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
+        # if there are multiple empty lines in a row, absorb them all
+        lines = raw.splitlines()
+        while lines and not lines[0].strip():
+            lines.pop(0)
+        return cls("", head), "\n".join(lines)
+
+
+class TextLine(DocElement):
 
     def __init__(self, body, head):
         self._params = {"text": body}
 
     def to_tex(self):
-        return self._params["text"]
+        return r"\text{" + self._params["text"] + "}"
+
+    def to_html(self, indent=0) -> str:
+        return " "*indent + f"<{self.__class__.__name__}>" + self._params["text"] + "</" + self.__class__.__name__ + ">"
 
     @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
-        # empty line is a paragraph break
-        leftover_lines = body.splitlines()
-        lines = [leftover_lines.pop(0)]
-        while leftover_lines:
-            if not leftover_lines[0]:
-                break
-            lines.append(leftover_lines.pop(0))
-        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[TextLine, str]:
+        lines = raw.splitlines()
+        return cls(lines[0], head), "\n".join(lines[1:])
 
 
 
@@ -265,4 +316,9 @@ class ParseFailure(Exception):
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+
+    try:
+        sys.exit(main())
+    except RecursionError:
+        print("RECURSION ERROR")
+        sys.exit(1)
