@@ -61,8 +61,6 @@ def indent(text, depth=2) -> str:
     return "\n".join(" "*depth + l for l in text.splitlines())
 
 
-
-
 class Section(DocElement):
 
     def __init__(self, raw, head):
@@ -215,7 +213,7 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
     elif EmptyLine.matches(raw):
         return EmptyLine(raw, head).get_with_leftovers(raw, head)
     else:
-        return TextLine(raw, head).get_with_leftovers(raw, head)
+        return Paragraph(raw, head).get_with_leftovers(raw, head)
 
 
 
@@ -298,19 +296,16 @@ class EmptyLine(DocElement):
         return cls("", head), "\n".join(lines)
 
 
-class TextLine(DocElement):
+class Paragraph(DocElement):
 
     def __init__(self, body, head):
-        self._params = {"text": body}
+        self._children = Literal(body, head)
 
     def to_tex(self):
-        return r"\text{" + self._params["text"] + "}"
-
-    def to_html(self) -> str:
-        return self._html_open(False) + self._params["text"] + self._html_close()
+        return self._children_to_tex()
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[TextLine, str]:
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Paragraph, str]:
         lines = raw.splitlines()
         return cls(lines[0], head), "\n".join(lines[1:])
 
