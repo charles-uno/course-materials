@@ -311,10 +311,36 @@ class EmptyLine(DocElement):
         return cls("", head), "\n".join(lines)
 
 
+class TexBlock(DocElement):
+
+    def __init__(self, raw, head):
+        self._children.append(Literal(raw, head))
+
+    def to_tex(self) -> str:
+        return self._children_to_tex()
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("$$$")
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+        assert cls.matches(raw)
+        raw = raw.lstrip("$")
+        assert "\n$$$" in raw
+        body, leftovers = raw.split("\n$$$", 1)
+        return cls(body, head), leftovers
+
+
 class Paragraph(DocElement):
 
     def __init__(self, body, head):
         self._children.append(Literal(body, head))
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        # this is the default that catches everything unmatched
+        return True
 
     def to_tex(self):
         return self._children_to_tex()
@@ -397,40 +423,21 @@ def get_children(raw: str, head: dict) -> list[DocElement]:
 def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
     while raw.startswith("\n"):
         raw = raw[1:]
-
-    doc_element_types = [
+    doc_element_types: list[DocElement] = [
         Section,
         Subsection,
         Subsubsection,
         CodeBlock,
+        TexBlock,
         UnorderedList,
         OrderedList,
         EmptyLine,
-        # Make sure this one goes last! It's the catchall
-        Paragraph,
     ]
-
-
-
-
-
-
-    if Section.matches(raw):
-        return Section.get_with_leftovers(raw, head)
-    elif Subsection.matches(raw):
-        return Subsection.get_with_leftovers(raw, head)
-    elif Subsubsection.matches(raw):
-        return Subsubsection.get_with_leftovers(raw, head)
-    elif CodeBlock.matches(raw):
-        return CodeBlock.get_with_leftovers(raw, head)
-    elif UnorderedList.matches(raw):
-        return UnorderedList.get_with_leftovers(raw, head)
-    elif OrderedList.matches(raw):
-        return OrderedList.get_with_leftovers(raw, head)
-    elif EmptyLine.matches(raw):
-        return EmptyLine(raw, head).get_with_leftovers(raw, head)
-    else:
-        return Paragraph(raw, head).get_with_leftovers(raw, head)
+    for elt_type in doc_element_types:
+        if elt_type.matches(raw):
+            return elt_type.get_with_leftovers(raw, head)
+    # Paragraph is the catchall for anything that doesn't match elsewhere
+    return Paragraph.get_with_leftovers(raw, head)
 
 
 def indent(text, depth=2) -> str:
