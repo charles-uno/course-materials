@@ -15,6 +15,8 @@ ldr fp, [sp, 0x10]
 
 more text
 
+### sub-subsection or maybe a frame
+
 1. this is an ordered list
 35) the index numbers don't matter
   this entry has multiple lines
@@ -22,6 +24,14 @@ more text
   - preheat your oven
   - chop the garlic
   - add tomatoes
+
+
+### another frame title!
+
+| foo | bar |
+|----:|:----|
+| fizz | buzz |
+| 123 | 456 |
 
 
 
@@ -42,7 +52,15 @@ more text
   - another entry in the nested list
 - continuing the original list
 
+## Another subsection
 
+$$$
+literal tex block
 
+foo bar
+
+\begin{align}
+\end{align}
+$$$
 
 # section number two, nothing following
