@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import json
 import os
 import sys
 import yaml
@@ -77,10 +76,6 @@ def pretty_html_params(params: dict) -> str:
     return " ".join(pretty)
 
 
-def indent(text, depth=2) -> str:
-    return "\n".join(" "*depth + l for l in text.splitlines())
-
-
 class Section(DocElement):
 
     def __init__(self, raw, head):
@@ -122,6 +117,28 @@ class Subsection(DocElement):
         current, leftovers = break_at_line_starting_with(body, ["## ", "# "])
         return cls(current, head), leftovers
 
+
+
+
+class Subsubsection(DocElement):
+
+    def __init__(self, raw, head):
+        title, contents = get_title_and_contents(raw)
+        self._params = {"title": title}
+        self._children = get_children(contents, head)
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("### ")
+
+    def to_tex(self) -> str:
+        return "\n" + r"\subsubsection{" + self._params["title"] + "}\n" + self._children_to_tex()
+
+    @classmethod
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+        # Section goes until the next section, next subsection, or the end of the doc
+        current, leftovers = break_at_line_starting_with(body, ["### ", "## ", "# "])
+        return cls(current, head), leftovers
 
 
 class UnorderedList(DocElement):
@@ -223,64 +240,6 @@ class ListItem(DocElement):
 
     def to_tex(self):
         return r"\item " + self._children_to_tex() + "\n"
-
-
-
-def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
-    leftover_lines = body.splitlines()
-    # don't break on the first line. we are in a section and looking for the start of the next section
-    lines = [leftover_lines.pop(0)]
-    while leftover_lines:
-        if any(leftover_lines[0].startswith(d) for d in delim):
-            break
-        lines.append(leftover_lines.pop(0))
-    return "\n".join(lines), "\n".join(leftover_lines)
-
-
-def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, str]:
-    leftover_lines = body.splitlines()
-    # don't break on the first line. we are in a section and looking for the start of the next section
-    lines = [leftover_lines.pop(0)]
-    while leftover_lines:
-        if not any(leftover_lines[0].startswith(d) for d in delim):
-            break
-        lines.append(leftover_lines.pop(0))
-    return "\n".join(lines), "\n".join(leftover_lines)
-
-
-def get_title_and_contents(body: str) -> tuple[str, str]:
-    if "\n" in body:
-        title, contents = body.split("\n", 1)
-    else:
-        title, contents = body, ""
-    return title.split(None, 1)[-1], contents
-
-
-def get_children(raw: str, head: dict) -> list[DocElement]:
-    children = []
-    while raw:
-        next_elt, raw = get_next_and_leftovers(raw, head)
-        children.append(next_elt)
-    return children
-
-
-def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
-    while raw.startswith("\n"):
-        raw = raw[1:]
-    if Section.matches(raw):
-        return Section.get_with_leftovers(raw, head)
-    elif Subsection.matches(raw):
-        return Subsection.get_with_leftovers(raw, head)
-    elif CodeBlock.matches(raw):
-        return CodeBlock.get_with_leftovers(raw, head)
-    elif UnorderedList.matches(raw):
-        return UnorderedList.get_with_leftovers(raw, head)
-    elif OrderedList.matches(raw):
-        return OrderedList.get_with_leftovers(raw, head)
-    elif EmptyLine.matches(raw):
-        return EmptyLine(raw, head).get_with_leftovers(raw, head)
-    else:
-        return Paragraph(raw, head).get_with_leftovers(raw, head)
 
 
 class CodeBlock(DocElement):
@@ -395,6 +354,87 @@ class Document(DocElement):
 
     def to_tex(self) -> str:
         return self._children_to_tex()
+
+
+def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
+    leftover_lines = body.splitlines()
+    # don't break on the first line. we are in a section and looking for the start of the next section
+    lines = [leftover_lines.pop(0)]
+    while leftover_lines:
+        if any(leftover_lines[0].startswith(d) for d in delim):
+            break
+        lines.append(leftover_lines.pop(0))
+    return "\n".join(lines), "\n".join(leftover_lines)
+
+
+def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, str]:
+    leftover_lines = body.splitlines()
+    # don't break on the first line. we are in a section and looking for the start of the next section
+    lines = [leftover_lines.pop(0)]
+    while leftover_lines:
+        if not any(leftover_lines[0].startswith(d) for d in delim):
+            break
+        lines.append(leftover_lines.pop(0))
+    return "\n".join(lines), "\n".join(leftover_lines)
+
+
+def get_title_and_contents(body: str) -> tuple[str, str]:
+    if "\n" in body:
+        title, contents = body.split("\n", 1)
+    else:
+        title, contents = body, ""
+    return title.split(None, 1)[-1], contents
+
+
+def get_children(raw: str, head: dict) -> list[DocElement]:
+    children = []
+    while raw:
+        next_elt, raw = get_next_and_leftovers(raw, head)
+        children.append(next_elt)
+    return children
+
+
+def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
+    while raw.startswith("\n"):
+        raw = raw[1:]
+
+    doc_element_types = [
+        Section,
+        Subsection,
+        Subsubsection,
+        CodeBlock,
+        UnorderedList,
+        OrderedList,
+        EmptyLine,
+        # Make sure this one goes last! It's the catchall
+        Paragraph,
+    ]
+
+
+
+
+
+
+    if Section.matches(raw):
+        return Section.get_with_leftovers(raw, head)
+    elif Subsection.matches(raw):
+        return Subsection.get_with_leftovers(raw, head)
+    elif Subsubsection.matches(raw):
+        return Subsubsection.get_with_leftovers(raw, head)
+    elif CodeBlock.matches(raw):
+        return CodeBlock.get_with_leftovers(raw, head)
+    elif UnorderedList.matches(raw):
+        return UnorderedList.get_with_leftovers(raw, head)
+    elif OrderedList.matches(raw):
+        return OrderedList.get_with_leftovers(raw, head)
+    elif EmptyLine.matches(raw):
+        return EmptyLine(raw, head).get_with_leftovers(raw, head)
+    else:
+        return Paragraph(raw, head).get_with_leftovers(raw, head)
+
+
+def indent(text, depth=2) -> str:
+    return "\n".join(" "*depth + l for l in text.splitlines())
 
 
 def md_path(path):
