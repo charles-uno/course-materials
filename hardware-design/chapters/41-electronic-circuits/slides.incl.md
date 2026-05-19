@@ -3,15 +3,13 @@ beamer: true
 
 # Electronic Circuits
 
+% resistors in parallel and in series
+
+% need to talk about capacitors?
 
 % Low-pass filter. Every wire has a little bit of resistance. two wires close together have capacitance. so the chip is full of accidental low-pass filters. This is a limit on how fast you can make the clock speed
 
 % high-pass filter. edge detection. gives you a sharp edge on your clock ticks
-
-
-
-
-
 
 
 
