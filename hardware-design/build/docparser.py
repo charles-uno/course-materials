@@ -50,17 +50,6 @@ class DocElement:
         return "\n".join(" "*depth + l for l in text.splitlines())
 
     @classmethod
-    def break_at_line_starting_with(cls, body: str, delim: list[str]) -> tuple[str, str]:
-        leftover_lines = body.splitlines()
-        # don't break on the first line. we are in a section and looking for the start of the next section
-        lines = [leftover_lines.pop(0)]
-        while leftover_lines:
-            if any(leftover_lines[0].startswith(d) for d in delim):
-                break
-            lines.append(leftover_lines.pop(0))
-        return "\n".join(lines), "\n".join(leftover_lines)
-
-    @classmethod
     def break_at_line_starting_without(cls, body: str, delim: list[str]) -> tuple[str, str]:
         leftover_lines = body.splitlines()
         # don't break on the first line. we are in a section and looking for the start of the next section
@@ -84,13 +73,6 @@ class DocElement:
             else:
                 raise ValueError(f"Unsupported HTML param: {val}")
         return " ".join(pretty)
-
-    def get_title_and_contents(self, body: str) -> tuple[str, str]:
-        if "\n" in body:
-            title, contents = body.split("\n", 1)
-        else:
-            title, contents = body, ""
-        return title.split(None, 1)[-1], contents
 
     def get_children(self, raw: str, head: dict) -> list[DocElement]:
         children = []
@@ -124,67 +106,70 @@ class DocElement:
 
 
 
-class Section(DocElement):
+
+
+class SectionBase(DocElement):
+
+    _DEPTH = 0
 
     def __init__(self, raw, head):
         title, contents = self.get_title_and_contents(raw)
         self._params = {"title": title}
         self._children = self.get_children(contents, head)
 
+    def get_title_and_contents(self, body: str) -> tuple[str, str]:
+        if "\n" in body:
+            title, contents = body.split("\n", 1)
+        else:
+            title, contents = body, ""
+        return title.split(None, 1)[-1], contents
+
     @classmethod
     def matches(cls, raw: str) -> bool:
-        return raw.startswith("# ")
+        return raw.startswith("#"*cls._DEPTH + " ")
+
+    @classmethod
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+        current, leftovers = cls.get_contents_and_leftovers(body)
+        return cls(current, head), leftovers
+
+    @classmethod
+    def get_contents_and_leftovers(cls, body: str) -> tuple[str, str]:
+        # Section ends when we hit another section or end of file. Subsection
+        # ends when we hit section, subsection, or EOF. etc
+        delims = [i*"#" + " " for i in range(1, cls._DEPTH+1)]
+        leftover_lines = body.splitlines()
+        # don't break on the first line. we are in a section and looking for the start of the next section
+        lines = [leftover_lines.pop(0)]
+        while leftover_lines:
+            if any(leftover_lines[0].startswith(d) for d in delims):
+                break
+            lines.append(leftover_lines.pop(0))
+        return "\n".join(lines), "\n".join(leftover_lines)
+
+
+class Section(SectionBase):
+
+    _DEPTH = 1
 
     def to_tex(self) -> str:
         return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_tex()
 
-    @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Section, str]:
-        # Section goes until the next section or the end of the doc
-        current, leftovers = cls.break_at_line_starting_with(body, ["# "])
-        return Section(current, head), leftovers
 
+class Subsection(SectionBase):
 
-class Subsection(DocElement):
-
-    def __init__(self, raw, head):
-        title, contents = self.get_title_and_contents(raw)
-        self._params = {"title": title}
-        self._children = self.get_children(contents, head)
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("## ")
+    _DEPTH = 2
 
     def to_tex(self) -> str:
         return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_tex()
 
-    @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
-        # Section goes until the next section, next subsection, or the end of the doc
-        current, leftovers = cls.break_at_line_starting_with(body, ["## ", "# "])
-        return cls(current, head), leftovers
 
+class Subsubsection(SectionBase):
 
-class Subsubsection(DocElement):
-
-    def __init__(self, raw, head):
-        title, contents = self.get_title_and_contents(raw)
-        self._params = {"title": title}
-        self._children = self.get_children(contents, head)
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("### ")
+    _DEPTH = 3
 
     def to_tex(self) -> str:
         return "\n" + r"\subsubsection{" + self._params["title"] + "}\n" + self._children_to_tex()
-
-    @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
-        # Section goes until the next section, next subsection, or the end of the doc
-        current, leftovers = cls.break_at_line_starting_with(body, ["### ", "## ", "# "])
-        return cls(current, head), leftovers
 
 
 class UnorderedList(DocElement):
