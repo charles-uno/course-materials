@@ -109,6 +109,8 @@ class DocElement:
         # Paragraph is the catchall for anything that doesn't match elsewhere
         return Paragraph.get_with_leftovers(raw, head)
 
+    def split_md_table_row(self, row: str) -> list[str]:
+        return row.split("|")[1:-1]
 
 
 
@@ -178,7 +180,6 @@ class Subsubsection(DocElement):
 class UnorderedList(DocElement):
 
     _HTML_TAG = "ul"
-
     _MARKERS = ("- ", "* ")
 
     def __init__(self, raw, head):
@@ -376,7 +377,7 @@ class Table(DocElement):
             self._children.append(TableRow(line, head))
 
     def get_alignment(self, row) -> str:
-        entries = split_md_table_row(row)
+        entries = self.split_md_table_row(row)
         alignments = []
         for entry in entries:
             if entry.startswith(":") and not entry.endswith(":"):
@@ -410,14 +411,10 @@ class Table(DocElement):
         return cls("\n".join(lines), head), "\n".join(leftover_lines)
 
 
-def split_md_table_row(row: str) -> list[str]:
-    return row.split("|")[1:-1]
-
-
 class TableRow(DocElement):
 
     def __init__(self, raw, head):
-        values = split_md_table_row(raw)
+        values = self.split_md_table_row(raw)
         self._children = [Literal(v, head) for v in values]
 
     def to_tex(self) -> str:
