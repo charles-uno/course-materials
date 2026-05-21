@@ -41,7 +41,7 @@ class DocElement:
         return "\n".join(c.to_tex() for c in self._children)
 
     def to_html(self) -> str:
-        return "\n".join([self._html_open(), indent(self._children_to_html()), self._html_close()])
+        return "\n".join([self._html_open(), self.indent(self._children_to_html()), self._html_close()])
 
     def _children_to_html(self) -> str:
         return "\n".join(c.to_html() for c in self._children)
@@ -51,7 +51,7 @@ class DocElement:
 
     def _html_open(self, include_params=True) -> str:
         if include_params and self._params:
-            return f"<{self._html_tag_name()} {pretty_html_params(self._params)}>"
+            return f"<{self._html_tag_name()} {self.pretty_html_params()}>"
         return f"<{self._html_tag_name()}>"
 
     def _html_close(self) -> str:
@@ -60,20 +60,44 @@ class DocElement:
     def _html_solo(self) -> str:
         return f"<{self._html_tag_name()} \\>"
 
+    def indent(self, text, depth=2) -> str:
+        return "\n".join(" "*depth + l for l in text.splitlines())
 
-def pretty_html_params(params: dict) -> str:
-    pretty = []
-    for key, val in params.items():
-        assert isinstance(key, str)
-        if val is None:
-            continue
-        elif isinstance(val, str):
-            pretty.append(f'{key}="{val}"')
-        elif isinstance(val, int) or isinstance(val, float):
-            pretty.append(f'{key}={val}')
-        else:
-            raise ValueError(f"Unsupported HTML params: {params}")
-    return " ".join(pretty)
+    @classmethod
+    def break_at_line_starting_with(cls, body: str, delim: list[str]) -> tuple[str, str]:
+        leftover_lines = body.splitlines()
+        # don't break on the first line. we are in a section and looking for the start of the next section
+        lines = [leftover_lines.pop(0)]
+        while leftover_lines:
+            if any(leftover_lines[0].startswith(d) for d in delim):
+                break
+            lines.append(leftover_lines.pop(0))
+        return "\n".join(lines), "\n".join(leftover_lines)
+
+    @classmethod
+    def break_at_line_starting_without(cls, body: str, delim: list[str]) -> tuple[str, str]:
+        leftover_lines = body.splitlines()
+        # don't break on the first line. we are in a section and looking for the start of the next section
+        lines = [leftover_lines.pop(0)]
+        while leftover_lines:
+            if not any(leftover_lines[0].startswith(d) for d in delim):
+                break
+            lines.append(leftover_lines.pop(0))
+        return "\n".join(lines), "\n".join(leftover_lines)
+
+    def pretty_html_params(self) -> str:
+        pretty = []
+        for key, val in self._params.items():
+            assert isinstance(key, str)
+            if val is None:
+                continue
+            elif isinstance(val, str):
+                pretty.append(f'{key}="{val}"')
+            elif isinstance(val, int) or isinstance(val, float):
+                pretty.append(f'{key}={val}')
+            else:
+                raise ValueError(f"Unsupported HTML params: {params}")
+        return " ".join(pretty)
 
 
 class Section(DocElement):
@@ -93,7 +117,7 @@ class Section(DocElement):
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Section, str]:
         # Section goes until the next section or the end of the doc
-        current, leftovers = break_at_line_starting_with(body, ["# "])
+        current, leftovers = cls.break_at_line_starting_with(body, ["# "])
         return Section(current, head), leftovers
 
 
@@ -114,7 +138,7 @@ class Subsection(DocElement):
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
         # Section goes until the next section, next subsection, or the end of the doc
-        current, leftovers = break_at_line_starting_with(body, ["## ", "# "])
+        current, leftovers = cls.break_at_line_starting_with(body, ["## ", "# "])
         return cls(current, head), leftovers
 
 
@@ -137,7 +161,7 @@ class Subsubsection(DocElement):
     @classmethod
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
         # Section goes until the next section, next subsection, or the end of the doc
-        current, leftovers = break_at_line_starting_with(body, ["### ", "## ", "# "])
+        current, leftovers = cls.break_at_line_starting_with(body, ["### ", "## ", "# "])
         return cls(current, head), leftovers
 
 
@@ -161,7 +185,7 @@ class UnorderedList(DocElement):
     def get_with_leftovers(cls, body: str, head: dict) -> tuple[DocElement, str]:
         # list continues as long as we see indented lines and lines starting with list markers
         # TODO: smarter indentation handling for nested lists
-        current, leftovers = break_at_line_starting_without(body, [" ", "- ", "* "])
+        current, leftovers = cls.break_at_line_starting_without(body, [" ", "- ", "* "])
         return cls(current, head), leftovers
 
     def _get_items(self, raw: str, head: dict) -> list[DocElement]:
@@ -360,7 +384,7 @@ class Table(DocElement):
         [self._children[0].to_tex(), r"\hline"] + [child.to_tex() for child in self._children[1:]]
         )
         close = r"\end{tabular}"
-        return open + "\n" + indent(content) + "\n" + close
+        return open + "\n" + self.indent(content) + "\n" + close
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -441,27 +465,6 @@ class Document(DocElement):
         return self._children_to_tex()
 
 
-def break_at_line_starting_with(body: str, delim: list[str]) -> tuple[str, str]:
-    leftover_lines = body.splitlines()
-    # don't break on the first line. we are in a section and looking for the start of the next section
-    lines = [leftover_lines.pop(0)]
-    while leftover_lines:
-        if any(leftover_lines[0].startswith(d) for d in delim):
-            break
-        lines.append(leftover_lines.pop(0))
-    return "\n".join(lines), "\n".join(leftover_lines)
-
-
-def break_at_line_starting_without(body: str, delim: list[str]) -> tuple[str, str]:
-    leftover_lines = body.splitlines()
-    # don't break on the first line. we are in a section and looking for the start of the next section
-    lines = [leftover_lines.pop(0)]
-    while leftover_lines:
-        if not any(leftover_lines[0].startswith(d) for d in delim):
-            break
-        lines.append(leftover_lines.pop(0))
-    return "\n".join(lines), "\n".join(leftover_lines)
-
 
 def get_title_and_contents(body: str) -> tuple[str, str]:
     if "\n" in body:
@@ -500,8 +503,6 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
     return Paragraph.get_with_leftovers(raw, head)
 
 
-def indent(text, depth=2) -> str:
-    return "\n".join(" "*depth + l for l in text.splitlines())
 
 
 def md_path(path):
