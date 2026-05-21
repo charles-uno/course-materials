@@ -20,7 +20,7 @@ more text
 1. this is an ordered list
 35) the index numbers don't matter
   this entry has multiple lines
-4. this is an ordered list item that contains an unordered list
+4. this is an ordered list *item* that contains an unordered list
   - preheat your oven
   - chop the garlic
   - add tomatoes
@@ -38,7 +38,7 @@ more text
 ## another subsection
 
 - unordered
-  this item has multiple lines
+  this item has **multiple** lines
   ```bash
   gcc foo.c
   ```
@@ -51,6 +51,10 @@ more text
   - starting a nested list
   - another entry in the nested list
 - continuing the original list
+- this list includes `inline code`
+
+
+`typewriter` at the start of a paragraph
 
 ## Another subsection
 

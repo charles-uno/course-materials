@@ -13,11 +13,21 @@ class DocElement:
     def to_tex(self) -> str:
         return self._children_to_tex()
 
+    def _child_to_tex(self) -> str:
+        assert len(self._children) == 1
+        return self._children[0].to_tex()
+
     def _children_to_tex(self) -> str:
         return "\n".join(c.to_tex() for c in self._children)
 
     def to_html(self) -> str:
-        return "\n".join([self._html_open(), self.indent(self._children_to_html()), self._html_close()])
+        return "\n".join(
+            [self._html_open(), self.indent(self._children_to_html()), self._html_close()]
+        )
+
+    def _child_to_html(self) -> str:
+        assert len(self._children) == 1
+        return self._children[0].to_html()
 
     def _children_to_html(self) -> str:
         return "\n".join(c.to_html() for c in self._children)
@@ -290,7 +300,7 @@ class CodeBlock(DocElement):
 
     def to_tex(self) -> str:
         language = self._params["language"]
-        content = self._children_to_tex()
+        content = self._child_to_tex()
         flags = self._params["flags"]
         if flags:
             return r"\begin{minted}[" + flags + "]{" + language + "}\n" + content + "\n" + r"\end{minted}"
@@ -352,7 +362,7 @@ class TexBlock(DocElement):
         self._children.append(Literal(raw, head))
 
     def to_tex(self) -> str:
-        return self._children_to_tex()
+        return self._child_to_tex()
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -424,8 +434,10 @@ class TableRow(DocElement):
 
 class Paragraph(DocElement):
 
-    def __init__(self, body, head):
-        self._children.append(Literal(body, head))
+    _HTML_TAG = "p"
+
+    def __init__(self, raw, head):
+        self._children.append(Literal(raw, head))
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -433,16 +445,80 @@ class Paragraph(DocElement):
         return True
 
     def to_tex(self):
-        return self._children_to_tex()
-
-    def to_html(self) -> str:
-        return "<p>" + self._children_to_tex() + "</p>"
+        return self._child_to_tex()
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Paragraph, str]:
         lines = raw.splitlines()
         return cls(lines[0], head), "\n".join(lines[1:])
 
+
+"""
+class InlineElement(DocElement):
+
+    @classmethod
+    def get_with_leftovers_inline(cls, raw: str, head: dict, delim: str) -> tuple[DocElement, str]:
+        assert raw.startswith(delim)
+        raw = raw.lstrip(delim)
+        content, leftovers = raw.split(delim, 1)
+        return cls(content, head), leftovers
+
+
+
+
+class Italic(InlineElement):
+
+    def __init__(self, raw, head):
+        assert raw.startswith("*") and not raw.startswith("**")
+        assert raw.endswith("*") and not raw.endswith("**")
+        self._children.append(Literal(raw[1:-1], head))
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("*") and not raw.startswith("**")
+
+    def to_tex(self) -> str:
+        return r"\\emph{" + self._child_to_tex() + "}"
+
+    def to_html(self) -> str:
+        return "<i>" + self._child_to_html() + "</i>"
+
+
+class Bold(InlineElement):
+
+    def __init__(self, raw, head):
+        assert raw.startswith("**")
+        assert raw.endswith("**")
+        self._children.append(Literal(raw[2:-2], head))
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("**")
+
+    def to_tex(self) -> str:
+        return r"\textbf{" + self._child_to_tex() + "}"
+
+    def to_html(self) -> str:
+        return "<b>" + self._child_to_html() + "</b>"
+
+
+class InlineCode(InlineElement):
+
+    def __init__(self, raw, head):
+        assert raw.startswith("`")
+        assert raw.endswith("`")
+        self._children.append(Literal(raw[1:-1], head))
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("**")
+
+    def to_tex(self) -> str:
+        return r"\verb|" + self._child_to_tex() + "|"
+
+    def to_html(self) -> str:
+        return "<code>" + self._child_to_html() + "</code>"
+"""
 
 class Document(DocElement):
 
