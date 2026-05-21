@@ -418,7 +418,17 @@ class Paragraph(DocElement):
     _HTML_TAG = "p"
 
     def __init__(self, raw, head):
-        self._children.append(Literal(raw, head))
+        self._children = self.get_inline_children(raw, head)
+
+    def get_inline_children(self, raw, head):
+        parts = raw.split("`")
+        children = []
+        for i, part in enumerate(parts):
+            if i % 2 == 0:
+                children.append(Literal(part, head))
+            else:
+                children.append(InlineCode(part, head))
+        return children
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -426,7 +436,7 @@ class Paragraph(DocElement):
         return True
 
     def to_tex(self):
-        return self._child_to_tex()
+        return "".join(c.to_tex() for c in self._children)
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
@@ -434,7 +444,6 @@ class Paragraph(DocElement):
         return cls(lines[0], head), "\n".join(lines[1:])
 
 
-"""
 class InlineElement(DocElement):
 
     @classmethod
@@ -445,26 +454,23 @@ class InlineElement(DocElement):
         return cls(content, head), leftovers
 
 
-
-
-class Italic(InlineElement):
+class InlineCode(InlineElement):
 
     def __init__(self, raw, head):
-        assert raw.startswith("*") and not raw.startswith("**")
-        assert raw.endswith("*") and not raw.endswith("**")
-        self._children.append(Literal(raw[1:-1], head))
+        self._children.append(Literal(raw, head))
 
     @classmethod
     def matches(cls, raw: str) -> bool:
-        return raw.startswith("*") and not raw.startswith("**")
+        return raw.startswith("`")
 
     def to_tex(self) -> str:
-        return r"\\emph{" + self._child_to_tex() + "}"
+        return r"\verb|" + self._child_to_tex() + "|"
 
     def to_html(self) -> str:
-        return "<i>" + self._child_to_html() + "</i>"
+        return "<code>" + self._child_to_html() + "</code>"
+    
 
-
+"""
 class Bold(InlineElement):
 
     def __init__(self, raw, head):
@@ -483,22 +489,22 @@ class Bold(InlineElement):
         return "<b>" + self._child_to_html() + "</b>"
 
 
-class InlineCode(InlineElement):
+class Italic(InlineElement):
 
     def __init__(self, raw, head):
-        assert raw.startswith("`")
-        assert raw.endswith("`")
+        assert raw.startswith("*") and not raw.startswith("**")
+        assert raw.endswith("*") and not raw.endswith("**")
         self._children.append(Literal(raw[1:-1], head))
 
     @classmethod
     def matches(cls, raw: str) -> bool:
-        return raw.startswith("**")
+        return raw.startswith("*") and not raw.startswith("**")
 
     def to_tex(self) -> str:
-        return r"\verb|" + self._child_to_tex() + "|"
+        return r"\\emph{" + self._child_to_tex() + "}"
 
     def to_html(self) -> str:
-        return "<code>" + self._child_to_html() + "</code>"
+        return "<i>" + self._child_to_html() + "</i>"
 """
 
 class Document(DocElement):

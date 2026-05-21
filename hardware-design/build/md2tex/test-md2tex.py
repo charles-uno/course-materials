@@ -11,7 +11,10 @@ def main():
     test_case_name = path.split("/")[-1].split(".md")[0]
 
     print(f"testing \033[96m{test_case_name}\033[0m ... ", end="")
-    run_md2tex(path)
+    returncode = run_md2tex(path)
+    if returncode != 0:
+        print(f"\033[91mbuild failed\033[0m")
+        return
     result = check_output(path)
     if result == "ok":
         print("\033[92mok\033[0m")
@@ -20,7 +23,7 @@ def main():
 
 
 def run_md2tex(path):
-    sp.run(["./md2tex_new.py", path], capture_output=True)
+    return sp.run(["./md2tex_new.py", path], capture_output=True).returncode
 
 
 def check_output(input_path):
