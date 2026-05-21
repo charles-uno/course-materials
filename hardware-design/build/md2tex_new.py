@@ -332,6 +332,65 @@ class TexBlock(DocElement):
         return cls(body, head), leftovers
 
 
+class Table(DocElement):
+
+    def __init__(self, raw, head):
+        lines = raw.splitlines()
+        self._children.append(TableRow(lines[0], head))
+        self._params['align'] = self.get_alignment(lines[1])
+        for line in lines[2:]:
+            self._children.append(TableRow(line, head))
+
+    def get_alignment(self, row) -> str:
+        entries = split_md_table_row(row)
+        alignments = []
+        for entry in entries:
+            if entry.startswith(":") and not entry.endswith(":"):
+                alignments.append("l")
+            elif not entry.startswith(":") and entry.endswith(":"):
+                alignments.append("r")
+            else:
+                alignments.append("c")
+        return " ".join(alignments)
+
+    def to_tex(self) -> str:
+        # horizontal line after the header
+        open = r"\begin{tabular}{" + self._params['align'] + "}"
+        content = "\n".join(
+        [self._children[0].to_tex(), r"\hline"] + [child.to_tex() for child in self._children[1:]]
+        )
+        close = r"\end{tabular}"
+        return open + "\n" + indent(content) + "\n" + close
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith("|")
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+        assert cls.matches(raw)
+        lines = []
+        leftover_lines = raw.splitlines()
+        while leftover_lines and cls.matches(leftover_lines[0]):
+            lines.append(leftover_lines.pop(0))
+        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+
+
+def split_md_table_row(row: str) -> list[str]:
+    return row.split("|")[1:-1]
+
+
+class TableRow(DocElement):
+
+    def __init__(self, raw, head):
+        values = split_md_table_row(raw)
+        self._children = [Literal(v, head) for v in values]
+
+    def to_tex(self) -> str:
+        children = [c.to_tex() for c in self._children]
+        return " & ".join(children) + r" \\"
+
+
 class Paragraph(DocElement):
 
     def __init__(self, body, head):
@@ -432,6 +491,7 @@ def get_next_and_leftovers(raw: str, head: dict) -> tuple[DocElement, str]:
         UnorderedList,
         OrderedList,
         EmptyLine,
+        Table,
     ]
     for elt_type in doc_element_types:
         if elt_type.matches(raw):
