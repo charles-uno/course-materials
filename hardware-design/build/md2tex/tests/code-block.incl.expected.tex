@@ -1,6 +1,7 @@
 
-\begin{minted}{bash}
-TEST_CASES := $(wildcard tests/*.incl.md)
-test:
-	@for TC in $(TEST_CASES); do ./test-md2tex.py $$TC; done
+this is a code block, including language and params to pass along:
+
+\begin{minted}[linenos=true,xleftmargin=1em,firstnumber=36]{arm}
+ldr lr, [sp, 0x20]
+ldr fp, [sp, 0x10]
 \end{minted}

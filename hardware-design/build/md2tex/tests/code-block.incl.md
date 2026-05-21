@@ -1,9 +1,9 @@
 
 ---
 
+this is a code block, including language and params to pass along:
 
-```bash
-TEST_CASES := $(wildcard tests/*.incl.md)
-test:
-	@for TC in $(TEST_CASES); do ./test-md2tex.py $$TC; done
+```arm,linenos=true,xleftmargin=1em,firstnumber=36
+ldr lr, [sp, 0x20]
+ldr fp, [sp, 0x10]
 ```
