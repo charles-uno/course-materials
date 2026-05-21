@@ -381,7 +381,7 @@ class Table(DocElement):
 
     def to_tex(self) -> str:
         # horizontal line after the header
-        open = r"\begin{tabular}{" + self._params['align'] + "}"
+        open = r"\begin{tabular}{" + self._params["align"] + "}"
         content = "\n".join(
         [self._children[0].to_tex(), r"\hline"] + [child.to_tex() for child in self._children[1:]]
         )
@@ -429,7 +429,7 @@ class Paragraph(DocElement):
         return self._child_to_tex()
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Paragraph, str]:
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         lines = raw.splitlines()
         return cls(lines[0], head), "\n".join(lines[1:])
 
