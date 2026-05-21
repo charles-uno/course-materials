@@ -105,9 +105,6 @@ class DocElement:
         return row.split("|")[1:-1]
 
 
-
-
-
 class SectionBase(DocElement):
 
     _DEPTH = 0
@@ -272,7 +269,28 @@ class ListItem(DocElement):
         return r"\item " + self._children_to_tex() + "\n"
 
 
-class CodeBlock(DocElement):
+
+class FencedBlock(DocElement):
+
+    _FENCE = None
+
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.startswith(cls._FENCE)
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+        assert cls.matches(raw)
+        raw = raw.lstrip(cls._FENCE)
+        assert "\n" + cls._FENCE
+        body, leftovers = raw.split("\n" + cls._FENCE, 1)
+        return cls(body, head), leftovers
+
+
+
+class CodeBlock(FencedBlock):
+
+    _FENCE = "```"
 
     def __init__(self, body, head):
         first_line, content = body.split("\n", 1)
@@ -291,18 +309,6 @@ class CodeBlock(DocElement):
             return r"\begin{minted}[" + flags + "]{" + language + "}\n" + content + "\n" + r"\end{minted}"
         else:
             return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("```")
-
-    @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
-        assert cls.matches(raw)
-        raw = raw.lstrip("```")
-        assert "\n```" in raw
-        body, leftovers = raw.split("\n```", 1)
-        return cls(body, head), leftovers
 
 
 class Literal(DocElement):
@@ -341,25 +347,15 @@ class EmptyLine(DocElement):
         return cls("", head), "\n".join(lines)
 
 
-class TexBlock(DocElement):
+class TexBlock(FencedBlock):
+
+    _FENCE = "$$$"
 
     def __init__(self, raw, head):
         self._children.append(Literal(raw, head))
 
     def to_tex(self) -> str:
         return self._child_to_tex()
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("$$$")
-
-    @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
-        assert cls.matches(raw)
-        raw = raw.lstrip("$")
-        assert "\n$$$" in raw
-        body, leftovers = raw.split("\n$$$", 1)
-        return cls(body, head), leftovers
 
 
 class Table(DocElement):
