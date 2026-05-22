@@ -1,0 +1,24 @@
+
+\begin{frame}{frame title!}
+
+    no code in this one. it should not be fragile
+
+\end{frame}
+
+\begin{frame}[fragile]{beamer frame title}
+
+    this frame should be marked fragile because it contains a code block:
+
+    \begin{minted}{python}
+        print("hello world!")
+    \end{minted}
+
+\end{frame}
+
+\begin{frame}[fragile]{this is the frame title}
+
+    frame contents here, which contain some \verb|inline code| in the text
+
+    maybe even \verb|twice| or \verb|three|  times
+
+\end{frame}
