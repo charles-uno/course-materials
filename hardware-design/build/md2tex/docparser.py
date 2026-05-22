@@ -513,10 +513,10 @@ class Italic(InlineBase):
     _DELIM = "*"
 
     def to_tex(self) -> str:
-        return r"\emph{" + self._children_to_tex() + "}"
+        return r"\emph{" + self._child_to_tex() + "}"
 
     def to_html(self) -> str:
-        return "<i>" + self._children_to_html() + "</i>"
+        return "<i>" + self._child_to_html() + "</i>"
 
 
 class Document(DocElement):
