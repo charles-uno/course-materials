@@ -236,17 +236,10 @@ class OrderedList(DocElement):
             else:
                 break
         return cls("\n".join(lines), head), "\n".join(leftover_lines)
-    
 
     def _get_items(self, raw: str, head: dict) -> list[DocElement]:
-
-        print("looking at:", raw)
-
         raw_items = []
         for line in raw.splitlines():
-
-            print("line:", line)
-
             if self.matches(line) or not raw_items:
                 raw_items.append(line)
             else:
@@ -436,10 +429,6 @@ class Paragraph(DocElement):
     def get_next_and_leftovers_inline(self, raw, head):
         for cls in [InlineCode, Bold, Italic]:
             if cls.matches(raw):
-
-                if cls == Italic:
-                    print("matched italics:", raw)
-
                 return cls.get_with_leftovers_inline(raw, head)
         # otherwise just grab the next word
         next_word_and_leftovers = raw.split(None, 1)
@@ -506,6 +495,25 @@ class Bold(InlineBase):
 
     def to_html(self) -> str:
         return "<b>" + self._child_to_html() + "</b>"
+
+
+class Link(InlineBase):
+
+    @classmethod
+    def matches(cls, raw):
+        return raw.startswith("http://") or raw.startswith("https://")
+
+    @classmethod
+    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+        assert cls.matches(raw)
+        next_word_and_leftovers = raw.split(None, 1)
+        if len(next_word_and_leftovers) > 1:
+            return cls(next_word_and_leftovers[0], head), next_word_and_leftovers[1]
+        else:
+            return cls(raw, head), ""
+
+    def to_tex(self) -> str:
+        return r"\url{" + self._child_to_tex() + "}"
 
 
 class Italic(InlineBase):

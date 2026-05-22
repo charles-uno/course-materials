@@ -11,4 +11,4 @@ this one has italics *here* and more *later* on
 
 this one ends with a italic *word*
 
-and also we can do *italic* and **bold** in the same sentence. maybe even some `code` too. but **bold** and *italic* are the tricky ones because they share the same delimiter
+and also we can do *italic* and **bold** in the same sentence. maybe even some `code` too. but **bold** and *italic* are the tricky ones because they share the same delimiter. links too, like http://google.com for example
