@@ -127,9 +127,6 @@ class Document(DocElement):
     def __init__(self, md_path: str):
         head, body = self._get_head_and_body(md_path)
         self._children = self.get_children(body, head)
-
-        print("head:", head)
-
         self._params = head
 
     def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:

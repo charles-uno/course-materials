@@ -4,7 +4,7 @@ MD2TEX := build/md2tex.py
 
 
 # some markdown files turn into standalone tex docs
-MAIN_MD := $(shell find * -mindepth 1 -name "*.main.md")
+MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.main.md")
 MAIN_TEX := $(MAIN_MD:.md=.gen.tex)
 MAIN_PDF := $(MAIN_MD:.main.md=.pdf)
 
@@ -13,7 +13,7 @@ INCL_MD := $(wildcard chapters/*/*.incl.md)
 INCL_TEX := $(INCL_MD:.md=.gen.tex)
 
 # some manual tex docs to import the above
-MANUAL_TEX := $(shell find . -name "*.tex" ! -name "*.gen.*")
+MANUAL_TEX := $(shell find . -name "*.tex" ! -name "*.gen.*" -not -path "./build/*")
 MANUAL_PDF := $(MANUAL_TEX:.tex=.pdf)
 
 all: $(MAIN_PDF) $(MANUAL_PDF)

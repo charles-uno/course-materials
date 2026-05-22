@@ -1,5 +1,5 @@
 beamer: true
-template: ../../build/slides-template.tex
+template: ../../build/templates/slides.tex
 ---
 
 # Data Representation
