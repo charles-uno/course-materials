@@ -100,7 +100,7 @@ class DocElement:
         return Paragraph.get_with_leftovers(raw, head)
 
     def split_md_table_row(self, row: str) -> list[str]:
-        return row.split("|")[1:-1]
+        return [x.strip() for x in row.split("|")[1:-1]]
 
 
 class SectionBase(DocElement):
@@ -405,7 +405,10 @@ class TableRow(DocElement):
 
     def __init__(self, raw, head):
         values = self.split_md_table_row(raw)
-        self._children = [Literal(v, head) for v in values]
+
+        [print(v) for v in values]
+
+        self._children = [Paragraph(v, head) for v in values]
 
     def to_tex(self) -> str:
         children = [c.to_tex() for c in self._children]
@@ -427,7 +430,7 @@ class Paragraph(DocElement):
         return children
 
     def get_next_and_leftovers_inline(self, raw, head):
-        for cls in [InlineCode, Bold, Italic]:
+        for cls in [InlineCode, Bold, Italic, Link]:
             if cls.matches(raw):
                 return cls.get_with_leftovers_inline(raw, head)
         # otherwise just grab the next word
