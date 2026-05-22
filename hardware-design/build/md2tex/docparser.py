@@ -10,9 +10,13 @@ class DocElement:
         instance._children = []
         return instance
 
-    def contains_code(self):
+    def contains_code(self) -> bool:
+
+        print("checking for code...", repr(self))
+
         # frames that contain code need to be marked [fragile]
-        if self is CodeBlock or self is InlineCode:
+        if isinstance(self, CodeBlock) or isinstance(self, InlineCode):
+            print("code!")
             return True
         return any(c.contains_code() for c in self._children)
 
@@ -185,9 +189,9 @@ class Subsubsection(SectionBase):
 
     def to_tex(self) -> str:
         if self._is_beamer and self.contains_code():
-            return "\\begin{frame}[fragile]{" + self._title + "}" + self._children_to_tex()
+            return "\\begin{frame}[fragile]{" + self._title + "}" + self._children_to_tex() + "\n\\end{frame}"
         elif self._is_beamer:
-            return "\\begin{frame}{" + self._title + "}" + self._children_to_tex()
+            return "\\begin{frame}{" + self._title + "}" + self._children_to_tex() + "\n\\end{frame}"
         else:
             return "\n\\subsubsection{" + self._title + "}\n" + self._children_to_tex()
 
