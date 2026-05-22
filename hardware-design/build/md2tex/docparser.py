@@ -436,7 +436,12 @@ class Paragraph(DocElement):
     def get_next_and_leftovers_inline(self, raw, head):
         for cls in [InlineCode, Bold, Italic]:
             if cls.matches(raw):
+
+                if cls == Italic:
+                    print("matched italics:", raw)
+
                 return cls.get_with_leftovers_inline(raw, head)
+        # otherwise just grab the next word
         next_word_and_leftovers = raw.split(None, 1)
         if len(next_word_and_leftovers) > 1:
             return Literal(next_word_and_leftovers[0], head), next_word_and_leftovers[1]
@@ -454,7 +459,6 @@ class Paragraph(DocElement):
     def to_html(self):
         return " ".join(c.to_html() for c in self._children)
 
-
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         lines = raw.splitlines()
@@ -464,6 +468,10 @@ class Paragraph(DocElement):
 class InlineBase(DocElement):
 
     _DELIM = ""
+
+    # TODO: need to handle code within bold. italic within bold
+    def __init__(self, raw, head):
+        self._children.append(Literal(raw, head))
 
     @classmethod
     def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
@@ -482,9 +490,6 @@ class InlineCode(InlineBase):
 
     _DELIM = "`"
 
-    def __init__(self, raw, head):
-        self._children.append(Literal(raw, head))
-
     def to_tex(self) -> str:
         return r"\verb|" + self._child_to_tex() + "|"
 
@@ -495,9 +500,6 @@ class InlineCode(InlineBase):
 class Bold(InlineBase):
 
     _DELIM = "**"
-
-    def __init__(self, raw, head):
-        self._children.append(Literal(raw, head))
 
     def to_tex(self) -> str:
         return r"\textbf{" + self._child_to_tex() + "}"
@@ -511,10 +513,10 @@ class Italic(InlineBase):
     _DELIM = "*"
 
     def to_tex(self) -> str:
-        return r"\\emph{" + self._child_to_tex() + "}"
+        return r"\emph{" + self._children_to_tex() + "}"
 
     def to_html(self) -> str:
-        return "<i>" + self._child_to_html() + "</i>"
+        return "<i>" + self._children_to_html() + "</i>"
 
 
 class Document(DocElement):
