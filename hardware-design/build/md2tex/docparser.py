@@ -179,7 +179,12 @@ class Document(DocElement):
             print(key, ":", val)
 
             if f"@@{key}@@" in content:
-                content = content.replace(f"@@{key}@@", val)
+
+                val_to_tex = Paragraph(val, {}).to_tex()
+
+
+
+                content = content.replace(f"@@{key}@@", val_to_tex)
         return content
 
 

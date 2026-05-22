@@ -1,4 +1,4 @@
-foo: variable *string* with inline `formatting` and **also a link**: http://instagram.com
+foo: variable *string* with inline `formatting` and **also a link** see http://instagram.com
 ---
 
 @@foo@@
