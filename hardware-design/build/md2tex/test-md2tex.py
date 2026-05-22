@@ -32,7 +32,7 @@ def check_output(input_path):
     output_path = input_path.replace(".md", ".gen.tex")
     if not os.path.isfile(output_path):
         return "build failed"
-    expected_path = output_path.replace(".gen.tex", ".expected.tex")
+    expected_path = input_path.replace(".md", ".tex")
     if not os.path.isfile(expected_path):
         return "missing " + expected_path
     actual_output = read_file(output_path)
