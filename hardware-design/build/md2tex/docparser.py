@@ -1,3 +1,4 @@
+import pathlib
 import yaml
 
 
@@ -122,6 +123,10 @@ class Document(DocElement):
         head, body = self._get_head_and_body(md_path)
         self._children = self.get_children(body, head)
 
+        print("head:", head)
+
+        self._params["template"] = head.get("template")
+
     def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
         with open(md_path, "r") as handle:
             lines = [x.rstrip() for x in handle.readlines()]
@@ -139,6 +144,25 @@ class Document(DocElement):
             head = {}
             body = "\n".join(header_lines)
         return head, body
+
+    def to_tex(self):
+        contents = self._children_to_tex()
+        return self.maybe_apply_template(contents)
+
+    def maybe_apply_template(self, content):
+        template_name = self._params["template"]
+        if not template_name:
+            return content
+        # this script lives in build/md2tex
+        # templates dir is build/templates
+        build_path = pathlib.Path(__file__).resolve().parent.parent
+        template_path = f"{build_path}/templates/{template_name}"
+
+        print("template path:", template_path)
+
+        with open(template_path, "r") as handle:
+            template = handle.read()
+        return template.replace("@@content@@", content)
 
 
 # ==========
