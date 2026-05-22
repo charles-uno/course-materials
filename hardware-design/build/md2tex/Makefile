@@ -1,7 +1,4 @@
 
-
-
-
 TEST_CASES := $(wildcard tests/*.incl.md)
 
 test: clean

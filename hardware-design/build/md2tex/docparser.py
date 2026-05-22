@@ -11,12 +11,8 @@ class DocElement:
         return instance
 
     def contains_code(self) -> bool:
-
-        print("checking for code...", repr(self))
-
         # frames that contain code need to be marked [fragile]
         if isinstance(self, CodeBlock) or isinstance(self, InlineCode):
-            print("code!")
             return True
         return any(c.contains_code() for c in self._children)
 
@@ -434,9 +430,6 @@ class TableRow(DocElement):
 
     def __init__(self, raw, head):
         values = self.split_md_table_row(raw)
-
-        [print(v) for v in values]
-
         self._children = [Paragraph(v, head) for v in values]
 
     def to_tex(self) -> str:
