@@ -10,6 +10,12 @@ class DocElement:
         instance._children = []
         return instance
 
+    def contains_code(self):
+        # frames that contain code need to be marked [fragile]
+        if self is CodeBlock or self is InlineCode:
+            return True
+        return any(c.contains_code() for c in self._children)
+
     def to_tex(self) -> str:
         return self._children_to_tex()
 
@@ -109,8 +115,16 @@ class SectionBase(DocElement):
 
     def __init__(self, raw, head):
         title, contents = self.get_title_and_contents(raw)
-        self._params = {"title": title}
+        self._params = {"title": title, "beamer": head.get("beamer", False)}
         self._children = self.get_children(contents, head)
+
+    @property
+    def _title(self):
+        return self._params["title"]
+
+    @property
+    def _is_beamer(self):
+        return self._params["beamer"]
 
     def get_title_and_contents(self, body: str) -> tuple[str, str]:
         if "\n" in body:
@@ -148,7 +162,10 @@ class Section(SectionBase):
     _DEPTH = 1
 
     def to_tex(self) -> str:
-        return "\n" + r"\section{" + self._params["title"] + "}\n" + self._children_to_tex()
+        if self._is_beamer:
+            return "\n\\Section{" + self._title + "}\n" + self._children_to_tex()
+        else:
+            return "\n\\section{" + self._title + "}\n" + self._children_to_tex()
 
 
 class Subsection(SectionBase):
@@ -156,7 +173,10 @@ class Subsection(SectionBase):
     _DEPTH = 2
 
     def to_tex(self) -> str:
-        return "\n" + r"\subsection{" + self._params["title"] + "}\n" + self._children_to_tex()
+        if self._is_beamer:
+            return "\n\\Subsection{" + self._title + "}\n" + self._children_to_tex()
+        else:
+            return "\n\\subsection{" + self._title + "}\n" + self._children_to_tex()
 
 
 class Subsubsection(SectionBase):
@@ -164,7 +184,12 @@ class Subsubsection(SectionBase):
     _DEPTH = 3
 
     def to_tex(self) -> str:
-        return "\n" + r"\subsubsection{" + self._params["title"] + "}\n" + self._children_to_tex()
+        if self._is_beamer and self.contains_code():
+            return "\\begin{frame}[fragile]{" + self._title + "}" + self._children_to_tex()
+        elif self._is_beamer:
+            return "\\begin{frame}{" + self._title + "}" + self._children_to_tex()
+        else:
+            return "\n\\subsubsection{" + self._title + "}\n" + self._children_to_tex()
 
 
 class UnorderedList(DocElement):
