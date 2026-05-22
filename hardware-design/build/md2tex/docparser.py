@@ -182,8 +182,6 @@ class Document(DocElement):
 
                 val_to_tex = Paragraph(val, {}).to_tex()
 
-
-
                 content = content.replace(f"@@{key}@@", val_to_tex)
         return content
 
@@ -516,7 +514,9 @@ class Paragraph(DocElement):
         # otherwise just grab the next word
         next_word_and_leftovers = raw.split(None, 1)
         if len(next_word_and_leftovers) > 1:
-            return Literal(next_word_and_leftovers[0], head), next_word_and_leftovers[1]
+            next_word = next_word_and_leftovers[0]
+            leftovers = next_word_and_leftovers[1].lstrip()
+            return Literal(next_word, head), leftovers
         else:
             return Literal(raw, head), ""
 
