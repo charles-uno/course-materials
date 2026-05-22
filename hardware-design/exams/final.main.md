@@ -1,6 +1,6 @@
 title: Final Exam
 date: May 15, 2026
-template: ../build/final-template.tex
+template: ../build/templates/final.tex
 new_page_for_section: true
 ---
 

@@ -1,6 +1,6 @@
 title: Test 3
 date: April 24, 2026
-template: ../build/quiz-template.tex
+template: ../build/templates/quiz.tex
 new_page_for_section: true
 ---
 

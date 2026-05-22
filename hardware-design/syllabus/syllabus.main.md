@@ -1,4 +1,4 @@
-template: ../build/syllabus-template.tex
+template: ../build/templates/syllabus.tex
 ---
 
 $$$
