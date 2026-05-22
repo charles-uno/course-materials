@@ -5,21 +5,23 @@ import os
 import subprocess as sp
 import sys
 
+import helpers
+
 
 def main():
     path = get_path()
     test_case_name = path.split("/")[-1].split(".md")[0]
 
-    print(f"testing \033[96m{test_case_name}\033[0m ... ", end="")
+    print(f"testing", helpers.blue(test_case_name), "... ", end="")
     returncode = run_md2tex(path)
     if returncode != 0:
-        print(f"\033[91mbuild failed\033[0m")
+        print(helpers.red("build failed"))
         return
     result = check_output(path)
     if result == "ok":
-        print("\033[92mok\033[0m")
+        print(helpers.green("ok"))
     else:
-        print(f"\033[91m{result}\033[0m")
+        print(helpers.red(result))
 
 
 def run_md2tex(path):
@@ -32,13 +34,15 @@ def check_output(input_path):
         return "build failed"
     expected_path = output_path.replace(".gen.tex", ".expected.tex")
     if not os.path.isfile(expected_path):
-        return "missing expected output"
+        return "missing " + expected_path
     actual_output = read_file(output_path)
     expected_output = read_file(expected_path)
+    if not expected_output:
+        return "empty " + expected_path
     if is_consistent(expected_output, actual_output):
         return "ok"
     else:
-        return "fail"
+        return "output does not match"
 
 
 def is_consistent(expected: str, actual: str) -> bool:

@@ -6,25 +6,29 @@ import sys
 import yaml
 
 import docparser
+import helpers
+
 
 def main() -> int:
     md_path = get_md_path()
     tex_path = md_path.replace(".md", ".gen.tex")
-    print(f"building \033[96m{md_path}\033[0m -> \033[96m{tex_path}\033[0m ... ", end="")
+    print(f"building", helpers.blue(md_path), "->", helpers.blue(tex_path), "... ", end="")
     sys.stdout.flush()
 
-    doc = docparser.Document(md_path)
+    try:
+        doc = docparser.Document(md_path)
+    except docparser.ParseFailure as exc:
+        print(helpers.red(exc))
+        return 1
 
 #    print(doc.to_html())
 
     with open(tex_path, "w") as handle:
         handle.write(doc.to_tex())
 
-    print("\033[92mdone\033[0m")
+    print(helpers.green("done"))
 
     return 0
-
-
 
 
 

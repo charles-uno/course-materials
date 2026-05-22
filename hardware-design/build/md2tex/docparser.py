@@ -2,6 +2,10 @@ import pathlib
 import yaml
 
 
+class ParseFailure(Exception):
+    pass
+
+
 # ==========
 
 
@@ -137,7 +141,10 @@ class Document(DocElement):
                 break
             header_lines.append(line)
         if lines:
-            head = yaml.safe_load("\n".join(header_lines)) or {}
+            try:
+                head = yaml.safe_load("\n".join(header_lines)) or {}
+            except yaml.scanner.ScannerError:
+                raise ParseFailure("failed to parse yaml header")
             body = "\n".join(lines)
         else:
             # no YAML header
