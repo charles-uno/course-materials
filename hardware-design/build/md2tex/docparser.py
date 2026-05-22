@@ -82,8 +82,6 @@ class DocElement:
         return children
 
     def get_next_and_leftovers(self, raw: str, head: dict) -> tuple[DocElement, str]:
-        while raw.startswith("\n"):
-            raw = raw[1:]
         doc_element_types: list[DocElement] = [
             Section,
             Subsection,
@@ -216,7 +214,11 @@ class OrderedList(DocElement):
     def matches(cls, raw: str) -> bool:
         if not raw:
             return False
-        first_word = raw.split(None, 1)[0]
+        # look only at the first line. do not absorb leading empty lines
+        first_line = raw.split("\n", 1)[0]
+        if not first_line.strip():
+            return False
+        first_word = first_line.split(None, 1)[0]
         if first_word.endswith(".") or first_word.endswith(")"):
             return first_word[:-1].isdigit()
         else:
@@ -237,9 +239,15 @@ class OrderedList(DocElement):
     
 
     def _get_items(self, raw: str, head: dict) -> list[DocElement]:
+
+        print("looking at:", raw)
+
         raw_items = []
         for line in raw.splitlines():
-            if self.matches(line):
+
+            print("line:", line)
+
+            if self.matches(line) or not raw_items:
                 raw_items.append(line)
             else:
                 raw_items[-1] += "\n" + line
@@ -269,7 +277,6 @@ class ListItem(DocElement):
         return r"\item " + self._children_to_tex() + "\n"
 
 
-
 class FencedBlock(DocElement):
 
     _FENCE = None
@@ -285,7 +292,6 @@ class FencedBlock(DocElement):
         assert "\n" + cls._FENCE
         body, leftovers = raw.split("\n" + cls._FENCE, 1)
         return cls(body, head), leftovers
-
 
 
 class CodeBlock(FencedBlock):
