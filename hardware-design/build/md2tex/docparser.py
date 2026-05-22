@@ -180,9 +180,13 @@ class Document(DocElement):
 
             if f"@@{key}@@" in content:
 
-                val_to_tex = Paragraph(val, {}).to_tex()
+                if isinstance(val, str):
+                    tex_val = Paragraph(val, {}).to_tex()
+                elif isinstance(val, list):
+                    md_val = "\n".join(f"- {x}" for x in val)
+                    tex_val = UnorderedList(md_val, {}).to_tex()
 
-                content = content.replace(f"@@{key}@@", val_to_tex)
+                content = content.replace(f"@@{key}@@", tex_val)
         return content
 
 
