@@ -548,9 +548,9 @@ class InlineBase(DocElement):
     @classmethod
     def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
-        raw = raw.lstrip(cls._DELIM)
-        content, leftovers = raw.split(cls._DELIM, 1)
-        return cls(content, head), leftovers
+        content, leftovers = raw.lstrip(cls._DELIM).split(cls._DELIM, 1)
+        # watch out for leading space or we'll miss consecutive format
+        return cls(content, head), leftovers.lstrip(" ")
 
     @classmethod
     def matches(cls, raw) -> bool:
