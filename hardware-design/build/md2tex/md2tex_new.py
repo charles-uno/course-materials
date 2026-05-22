@@ -15,7 +15,7 @@ def main() -> int:
 
     doc = docparser.Document(md_path)
 
-    print(doc.to_html())
+#    print(doc.to_html())
 
     with open(tex_path, "w") as handle:
         handle.write(doc.to_tex())

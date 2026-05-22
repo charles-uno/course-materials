@@ -125,7 +125,7 @@ class Document(DocElement):
 
         print("head:", head)
 
-        self._params["template"] = head.get("template")
+        self._params = head
 
     def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
         with open(md_path, "r") as handle:
@@ -147,22 +147,33 @@ class Document(DocElement):
 
     def to_tex(self):
         contents = self._children_to_tex()
-        return self.maybe_apply_template(contents)
+        return self.with_variables(self.with_template(contents))
 
-    def maybe_apply_template(self, content):
-        template_name = self._params["template"]
+    def with_template(self, content: str) -> str:
+        template_name = self._params.get("template")
         if not template_name:
             return content
         # this script lives in build/md2tex
         # templates dir is build/templates
         build_path = pathlib.Path(__file__).resolve().parent.parent
         template_path = f"{build_path}/templates/{template_name}"
-
-        print("template path:", template_path)
-
         with open(template_path, "r") as handle:
             template = handle.read()
         return template.replace("@@content@@", content)
+
+    def with_variables(self, content: str) -> str:
+
+        print("swapping in variables:", self._params)
+
+        # TODO: allow lists and inline formatting in variables
+
+        for key, val in self._params.items():
+
+            print(key, ":", val)
+
+            if f"@@{key}@@" in content:
+                content = content.replace(f"@@{key}@@", val)
+        return content
 
 
 # ==========
