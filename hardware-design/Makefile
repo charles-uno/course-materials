@@ -2,6 +2,7 @@
 
 MD2TEX := build/md2tex.py
 
+
 # some markdown files turn into standalone tex docs
 MAIN_MD := $(shell find * -mindepth 1 -name "*.main.md")
 MAIN_TEX := $(MAIN_MD:.md=.gen.tex)
@@ -46,6 +47,13 @@ clean: tidy
 # remove junk per .gitignore but leave the PDFs
 tidy: 
 	@ git clean -fdX -e "*.pdf"
+
+
+syllabus/syllabus.main.gen.tex: syllabus/syllabus.main.md build/templates/syllabus.tex
+	./build/md2tex/md2tex_new.py syllabus/syllabus.main.md
+
+
+syllabus: syllabus/syllabus.pdf
 
 
 final: exams/grades.csv exams/make_exams.py exams/final.main.gen.tex
