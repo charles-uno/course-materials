@@ -427,14 +427,21 @@ class Paragraph(DocElement):
         self._children = self.get_inline_children(raw, head)
 
     def get_inline_children(self, raw, head):
-        parts = raw.split("`")
         children = []
-        for i, part in enumerate(parts):
-            if i % 2 == 0:
-                children.append(Literal(part, head))
-            else:
-                children.append(InlineCode(part, head))
+        while raw:
+            child, raw = self.get_next_and_leftovers_inline(raw, head)
+            children.append(child)
         return children
+
+    def get_next_and_leftovers_inline(self, raw, head):
+        for cls in [InlineCode, Bold, Italic]:
+            if cls.matches(raw):
+                return cls.get_with_leftovers_inline(raw, head)
+        next_word_and_leftovers = raw.split(None, 1)
+        if len(next_word_and_leftovers) > 1:
+            return Literal(next_word_and_leftovers[0], head), next_word_and_leftovers[1]
+        else:
+            return Literal(raw, head), ""
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -442,7 +449,11 @@ class Paragraph(DocElement):
         return True
 
     def to_tex(self):
-        return "".join(c.to_tex() for c in self._children)
+        return " ".join(c.to_tex() for c in self._children)
+
+    def to_html(self):
+        return " ".join(c.to_html() for c in self._children)
+
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
@@ -450,24 +461,29 @@ class Paragraph(DocElement):
         return cls(lines[0], head), "\n".join(lines[1:])
 
 
-class InlineElement(DocElement):
+class InlineBase(DocElement):
+
+    _DELIM = ""
 
     @classmethod
-    def get_with_leftovers_inline(cls, raw: str, head: dict, delim: str) -> tuple[DocElement, str]:
-        assert raw.startswith(delim)
-        raw = raw.lstrip(delim)
-        content, leftovers = raw.split(delim, 1)
+    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+        assert cls.matches(raw)
+        raw = raw.lstrip(cls._DELIM)
+        content, leftovers = raw.split(cls._DELIM, 1)
         return cls(content, head), leftovers
 
+    @classmethod
+    def matches(cls, raw) -> bool:
+        # watch out for overlapping delimiters, such as italic (*) and bold (**)
+        return raw.startswith(cls._DELIM) and not raw[1:].startswith(cls._DELIM)
 
-class InlineCode(InlineElement):
+
+class InlineCode(InlineBase):
+
+    _DELIM = "`"
 
     def __init__(self, raw, head):
         self._children.append(Literal(raw, head))
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("`")
 
     def to_tex(self) -> str:
         return r"\verb|" + self._child_to_tex() + "|"
@@ -476,17 +492,12 @@ class InlineCode(InlineElement):
         return "<code>" + self._child_to_html() + "</code>"
     
 
-"""
-class Bold(InlineElement):
+class Bold(InlineBase):
+
+    _DELIM = "**"
 
     def __init__(self, raw, head):
-        assert raw.startswith("**")
-        assert raw.endswith("**")
-        self._children.append(Literal(raw[2:-2], head))
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("**")
+        self._children.append(Literal(raw, head))
 
     def to_tex(self) -> str:
         return r"\textbf{" + self._child_to_tex() + "}"
@@ -495,23 +506,16 @@ class Bold(InlineElement):
         return "<b>" + self._child_to_html() + "</b>"
 
 
-class Italic(InlineElement):
+class Italic(InlineBase):
 
-    def __init__(self, raw, head):
-        assert raw.startswith("*") and not raw.startswith("**")
-        assert raw.endswith("*") and not raw.endswith("**")
-        self._children.append(Literal(raw[1:-1], head))
-
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw.startswith("*") and not raw.startswith("**")
+    _DELIM = "*"
 
     def to_tex(self) -> str:
         return r"\\emph{" + self._child_to_tex() + "}"
 
     def to_html(self) -> str:
         return "<i>" + self._child_to_html() + "</i>"
-"""
+
 
 class Document(DocElement):
 
