@@ -512,7 +512,7 @@ class Paragraph(DocElement):
         return children
 
     def get_next_and_leftovers_inline(self, raw, head):
-        for cls in [InlineCode, Bold, Italic, Link]:
+        for cls in [InlineCode, Bold, Italic, URL, Hyperlink]:
             if cls.matches(raw):
                 return cls.get_with_leftovers_inline(raw, head)
         # otherwise just grab the next word
@@ -584,7 +584,18 @@ class Bold(InlineBase):
         return "<b>" + self._child_to_html() + "</b>"
 
 
-class Link(InlineBase):
+class Italic(InlineBase):
+
+    _DELIM = "*"
+
+    def to_tex(self) -> str:
+        return r"\emph{" + self._child_to_tex() + "}"
+
+    def to_html(self) -> str:
+        return "<i>" + self._child_to_html() + "</i>"
+
+
+class URL(InlineBase):
 
     @classmethod
     def matches(cls, raw):
@@ -603,15 +614,28 @@ class Link(InlineBase):
         return r"\url{" + self._child_to_tex() + "}"
 
 
-class Italic(InlineBase):
 
-    _DELIM = "*"
+
+class Hyperlink(InlineBase):
+
+    def __init__(self, text, url, head): 
+        self._children = [Paragraph(text, {})]
+        self._params = head
+        self._params["url"] = url
+
+    @classmethod
+    def matches(cls, raw):
+        return raw.startswith("[") and "](" in raw and ")" in raw.split("](")[1]
+
+    @classmethod
+    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+        assert cls.matches(raw)
+        text, leftovers = raw[1:].split("](", 1)
+        url, leftovers = leftovers.split(")", 1)
+        return cls(text, url, head), leftovers
 
     def to_tex(self) -> str:
-        return r"\emph{" + self._child_to_tex() + "}"
-
-    def to_html(self) -> str:
-        return "<i>" + self._child_to_html() + "</i>"
+        return r"\href{" + self._params["url"] + "}{" + self._child_to_tex() + "}"
 
 
 # ==========

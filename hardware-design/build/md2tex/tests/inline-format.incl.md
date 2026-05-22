@@ -1,6 +1,10 @@
 
 ---
 
+here we have a [link](www.yahoo.com)
+
+we can also have a [link with **bold**](http://github.com)
+
 this paragraph has *italic* text
 
 this one has *multiple italic words* consecutively
