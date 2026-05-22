@@ -1,5 +1,9 @@
 import yaml
 
+
+# ==========
+
+
 class DocElement:
 
     _HTML_TAG = None
@@ -109,6 +113,37 @@ class DocElement:
         return [x.strip() for x in row.split("|")[1:-1]]
 
 
+# ==========
+
+
+class Document(DocElement):
+
+    def __init__(self, md_path: str):
+        head, body = self._get_head_and_body(md_path)
+        self._children = self.get_children(body, head)
+
+    def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
+        with open(md_path, "r") as handle:
+            lines = [x.rstrip() for x in handle.readlines()]
+        header_lines = []
+        while lines:
+            line = lines.pop(0)
+            if line.startswith("---"):
+                break
+            header_lines.append(line)
+        if lines:
+            head = yaml.safe_load("\n".join(header_lines)) or {}
+            body = "\n".join(lines)
+        else:
+            # no YAML header
+            head = {}
+            body = "\n".join(header_lines)
+        return head, body
+
+
+# ==========
+
+
 class SectionBase(DocElement):
 
     _DEPTH = 0
@@ -190,6 +225,9 @@ class Subsubsection(SectionBase):
             return "\\begin{frame}{" + self._title + "}" + self._children_to_tex() + "\n\\end{frame}"
         else:
             return "\n\\subsubsection{" + self._title + "}\n" + self._children_to_tex()
+
+
+# ==========
 
 
 class UnorderedList(DocElement):
@@ -295,6 +333,9 @@ class ListItem(DocElement):
         return r"\item " + self._children_to_tex() + "\n"
 
 
+# ==========
+
+
 class FencedBlock(DocElement):
 
     _FENCE = None
@@ -335,42 +376,6 @@ class CodeBlock(FencedBlock):
             return r"\begin{minted}{" + language + "}\n" + content + "\n" + r"\end{minted}"
 
 
-class Literal(DocElement):
-
-    def __init__(self, raw, head):
-        self._params = {"text": raw}
-
-    def to_tex(self):
-        return self._params["text"]
-
-    def to_html(self) -> str:
-        return self._params["text"]
-
-
-class EmptyLine(DocElement):
-
-    def __init__(self, body, head):
-        pass
-
-    def to_tex(self):
-        return "\n"
-    
-    def to_html(self) -> str:
-        return "<br \\>"
-    
-    @classmethod
-    def matches(cls, raw: str) -> bool:
-        return raw and not raw.splitlines()[0].strip()
-
-    @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
-        # if there are multiple empty lines in a row, absorb them all
-        lines = raw.splitlines()
-        while lines and not lines[0].strip():
-            lines.pop(0)
-        return cls("", head), "\n".join(lines)
-
-
 class TexBlock(FencedBlock):
 
     _FENCE = "$$$"
@@ -380,6 +385,9 @@ class TexBlock(FencedBlock):
 
     def to_tex(self) -> str:
         return self._child_to_tex()
+
+
+# ==========
 
 
 class Table(DocElement):
@@ -435,6 +443,9 @@ class TableRow(DocElement):
     def to_tex(self) -> str:
         children = [c.to_tex() for c in self._children]
         return " & ".join(children) + r" \\"
+
+
+# ==========
 
 
 class Paragraph(DocElement):
@@ -552,30 +563,40 @@ class Italic(InlineBase):
         return "<i>" + self._child_to_html() + "</i>"
 
 
-class Document(DocElement):
+# ==========
 
-    def __init__(self, md_path: str):
-        head, body = self._get_head_and_body(md_path)
-        self._children = self.get_children(body, head)
 
-    def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
-        with open(md_path, "r") as handle:
-            lines = [x.rstrip() for x in handle.readlines()]
-        header_lines = []
-        while lines:
-            line = lines.pop(0)
-            if line.startswith("---"):
-                break
-            header_lines.append(line)
-        if lines:
-            head = yaml.safe_load("\n".join(header_lines)) or {}
-            body = "\n".join(lines)
-        else:
-            # no YAML header
-            head = {}
-            body = "\n".join(header_lines)
-        return head, body
+class EmptyLine(DocElement):
 
-    def to_tex(self) -> str:
-        return self._children_to_tex()
+    def __init__(self, body, head):
+        pass
 
+    def to_tex(self):
+        return "\n"
+    
+    def to_html(self) -> str:
+        return "<br \\>"
+    
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw and not raw.splitlines()[0].strip()
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
+        # if there are multiple empty lines in a row, absorb them all
+        lines = raw.splitlines()
+        while lines and not lines[0].strip():
+            lines.pop(0)
+        return cls("", head), "\n".join(lines)
+
+
+class Literal(DocElement):
+
+    def __init__(self, raw, head):
+        self._params = {"text": raw}
+
+    def to_tex(self):
+        return self._params["text"]
+
+    def to_html(self) -> str:
+        return self._params["text"]
