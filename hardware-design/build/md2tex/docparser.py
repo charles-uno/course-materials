@@ -105,6 +105,7 @@ class DocElement:
             TexBlock,
             UnorderedList,
             OrderedList,
+            Image,
             EmptyLine,
             Table,
         ]
@@ -169,23 +170,15 @@ class Document(DocElement):
         return template.replace("@@content@@", content)
 
     def with_variables(self, content: str) -> str:
-
-        print("swapping in variables:", self._params)
-
-        # TODO: allow lists and inline formatting in variables
-
         for key, val in self._params.items():
-
-            print(key, ":", val)
-
             if f"@@{key}@@" in content:
-
                 if isinstance(val, str):
                     tex_val = Paragraph(val, {}).to_tex()
                 elif isinstance(val, list):
                     md_val = "\n".join(f"- {x}" for x in val)
                     tex_val = UnorderedList(md_val, {}).to_tex()
-
+                else:
+                    raise ParseFailure(f"unable to insert value for '{key}'")
                 content = content.replace(f"@@{key}@@", tex_val)
         return content
 
@@ -639,6 +632,29 @@ class Hyperlink(InlineBase):
 
 
 # ==========
+
+
+class Image(DocElement):
+
+    def __init__(self, alt_text, url):
+        self._params = {"alt_text": alt_text, "url": url}
+        self._children = []
+
+    @classmethod
+    def matches(cls, raw):
+        return raw.startswith("![") and "](" in raw and ")" in raw.split("](", 1)[1]
+
+    @classmethod
+    def get_with_leftovers(cls, raw, head):
+        assert cls.matches(raw)
+        alt_text, leftovers = raw[2:].split("](")
+        url, leftovers = leftovers.split(")", 1)
+        return cls(alt_text, url), leftovers
+
+    def to_tex(self):
+        alt_text = self._params["alt_text"]
+        url = self._params["url"]
+        return r"\begin{center}\includegraphics[width=0.9\columnwidth, height=0.9\textheight, keepaspectratio]{" + url + r"}\end{center}"
 
 
 class EmptyLine(DocElement):
