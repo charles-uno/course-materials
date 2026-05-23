@@ -61,6 +61,11 @@ syllabus: syllabus/syllabus.pdf
 syllabus/syllabus.main.gen.tex: syllabus/syllabus.main.md build/templates/syllabus.tex $(BUILD_TOOLS)
 	./build/md2tex/md2tex_new.py syllabus/syllabus.main.md
 
+project: project/project.pdf
+
+project/project.main.gen.tex: project/project.main.md build/templates/project.tex $(BUILD_TOOLS)
+	./build/md2tex/md2tex_new.py project/project.main.md
+
 
 
 
