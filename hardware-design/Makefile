@@ -1,5 +1,8 @@
 .PHONY: all clean tidy final
 
+
+BUILD_TOOLS := $(wildcard build/md2tex/*.py)
+
 MD2TEX := build/md2tex.py
 
 
@@ -49,12 +52,21 @@ tidy:
 	@ git clean -fdX -e "*.pdf"
 
 
-syllabus/syllabus.main.gen.tex: syllabus/syllabus.main.md build/templates/syllabus.tex
-	./build/md2tex/md2tex_new.py syllabus/syllabus.main.md
+
+
 
 
 syllabus: syllabus/syllabus.pdf
 
+syllabus/syllabus.main.gen.tex: syllabus/syllabus.main.md build/templates/syllabus.tex $(BUILD_TOOLS)
+	./build/md2tex/md2tex_new.py syllabus/syllabus.main.md
 
-final: exams/grades.csv exams/make_exams.py exams/final.main.gen.tex
+
+
+
+
+
+
+
+final: 
 	cd exams && make
