@@ -41,16 +41,15 @@ $(MANUAL_PDF): %.pdf: %.tex $(INCL_TEX)
 $(MAIN_PDF): %.pdf: %.main.gen.tex
 	@$(call build_latex,$*,$<)
 
+
+
+# foo.md -> foo.gen.tex
+# this rule is used by pretty much everything
 %.gen.tex: %.md $(MD2TEX)
 	@$(MD2TEX) $<
 
-# remove junk per the .gitignore
-clean: tidy
-	@ git clean -fdX
 
-# remove junk per .gitignore but leave the PDFs
-tidy: 
-	@ git clean -fdX -e "*.pdf"
+
 
 
 
@@ -81,3 +80,12 @@ quiz: $(QUIZ_PDF)
 
 final: 
 	cd exams && make
+
+
+# remove junk per the .gitignore
+clean: tidy
+	@ git clean -fdX
+
+# remove junk per .gitignore but leave the PDFs
+tidy: 
+	@ git clean -fdX -e "*.pdf"
