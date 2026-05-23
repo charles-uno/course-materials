@@ -1,6 +1,6 @@
 template: quiz.tex
 title: Data Representation
-due_date: Feb 1, 2027
+date: Feb 1, 2027
 ---
 
 1. Convert the unsigned binary integer `0b00011101` to decimal.
