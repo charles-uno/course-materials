@@ -3,7 +3,8 @@
 
 BUILD_TOOLS := $(wildcard build/md2tex/*.py)
 
-MD2TEX := build/md2tex.py
+# MD2TEX := build/md2tex.py
+MD2TEX := build/md2tex/md2tex_new.py
 
 
 # some markdown files turn into standalone tex docs
@@ -67,7 +68,12 @@ project/project.main.gen.tex: project/project.main.md build/templates/project.te
 	./build/md2tex/md2tex_new.py project/project.main.md
 
 
+QUIZ_MD := $(wildcard chapters/*/quiz.main.md)
+QUIZ_TEX := $(QUIZ_MD:.md=.gen.tex)
+QUIZ_PDF := $(QUIZ_MD:.main.md=.pdf)
 
+
+quiz: $(QUIZ_PDF)
 
 
 
