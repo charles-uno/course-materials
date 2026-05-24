@@ -12,11 +12,11 @@ PDFs are built automatically using GitHub Actions. Check out the `Actions` tab u
 
 Heads up! Stuff is moving around right now. 
 
+- `syllabus` - The syllabus. Information about curriculum, grading, policies, etc
 - `chapters` - This holds most of the actual content! Each chapter contains slides, homework, and a quiz
-- `build` - Templates and scripts for building our Markdown source files into PDFs via LaTeX
-- `syllabus` - The syllabus
 - `project` - Document explaining the final project for the course
-- `final` - The final exam. Also some tooling to generate personalized exams for each student based on what they need to reattempt
+- `final` - The final exam. Also some tooling to generate personalized exams for each student based on what they've already demonstrated
+- `build` - Templates and scripts for building our Markdown source files into PDFs via LaTeX
 
 ## Building Locally
 
