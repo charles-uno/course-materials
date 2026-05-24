@@ -1,4 +1,5 @@
 beamer: true
+template: slides.tex
 ---
 
 # Electronic Circuits
