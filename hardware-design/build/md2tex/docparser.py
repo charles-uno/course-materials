@@ -107,6 +107,8 @@ class DocElement:
             OrderedList,
             Image,
             EmptyLine,
+            # multicolumn block must come before table
+            MulticolumnBlock,
             Table,
         ]
         for elt_type in doc_element_types:
@@ -424,6 +426,24 @@ class TexBlock(FencedBlock):
 
     def to_tex(self) -> str:
         return self._child_to_tex()
+
+
+
+
+class MulticolumnBlock(FencedBlock):
+
+    _FENCE = "|||"
+
+    def __init__(self, raw, head):
+        self._children = self.get_children(raw, head)
+
+    def to_tex(self) -> str:
+        return r"\bigskip\begin{multicols}{2}" + "\n" + self.indent(self._children_to_tex()) + "\n" + r"\end{multicols}\bigskip"
+
+
+
+
+
 
 
 # ==========
