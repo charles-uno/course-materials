@@ -3,6 +3,8 @@ template: homework.tex
 
 # Networking
 
+TODO: make sure we are using Linux syntax that everyone can do on the Pi. Avoid Mac-specific commands unless necessary (and if so, call them out as such)
+
 ## Network Hardware
 
 1. Find a network device on campus. Take a photo of it.

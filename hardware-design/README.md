@@ -1,10 +1,6 @@
 # Hardware Design (CSCI 241)
 
-Taught by Prof Charles Fyfe (St Olaf College)
-
-Adapted in part from materials by Prof Melissa Lynn (St Olaf College)
-
-> TODO: check if ML wants an author credit on the slides
+Course materials by Charles Fyfe. Adapted in part from materials by Melissa Lynn
 
 Course listing [here](https://catalog.stolaf.edu/academic-programs/computer-science)
 
@@ -16,7 +12,7 @@ PDFs are built automatically using GitHub Actions. Check out the `Actions` tab u
 
 Heads up! Stuff is moving around right now. 
 
-- `chapters` - This holds most of the actual content! Split up by chapter (aka unit, aka standard). Each directory contains `slides.md`, maybe some homework, maybe some support files
+- `chapters` - This holds most of the actual content! Each chapter contains slides, homework, and a quiz
 - `build` - Templates and scripts for building our Markdown source files into PDFs via LaTeX
 - `syllabus` - The syllabus
 - `project` - Document explaining the final project for the course
@@ -67,10 +63,6 @@ Just do a quiz per standard. Have a handful of checkboxes. O(5) per standard. Ma
     - internet layer
     - link layer
     - security
-
-
-Networking homework: make sure we are using Linux syntax that everyone can do on the Pi. Avoid Mac-specific commands unless necessary (and if so, call them out as such)
-
 
 Update standards:
 
