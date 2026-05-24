@@ -1,6 +1,58 @@
 template: quiz.tex
-title: xxx
-date: xxx
+title: Stack Frames
+date: April 24, 2026
 ---
 
-placeholder text
+# Assembly Functions
+
+1. What is one use case where we should store data on the stack? Why?
+2. What is one use case where we should store data on the heap? Why?
+1. In class, we discussed a few strategies that compilers use to improve the efficiency of function calls (tail call optimization, inlining, etc). Choose one. Explain how it works.
+2. There is an Assembly program `spider-legs.s` on the next page. Explain in words what this code does. Make a guess about what the output looks like. Briefly explain any assumptions you have made. 
+3. Draw a memory diagram for `spider-legs.s`. Start at the beginning of `main` and stop after line `0x08`. If you need the memory address of an instruction, use the line number. Make sure to include the special registers `sp`, `fp`, `pc`, and `lr`. Briefly explain any assumptions. 
+
+TODO: add starting values for sp and fp. maybe add starting values for lr and pc also actually
+
+
+$$$
+\standardsfooter
+\newpage
+$$$
+
+```arm,linenos=true
+// ... global constants etc omitted for brevity
+get_n_legs:
+    sub sp, sp, 0x20
+    str fp, [sp]
+    str lr, [sp, 0x10]
+    add fp, sp, 0x10
+    mov x4, 8
+    mul x3, x0, x4
+    mov x0, x3
+    ldr lr, [sp, 0x10]
+    ldr fp, [sp]
+    add sp, sp, 0x20
+    ret
+main:
+    sub sp, sp, 0x30
+    str fp, [sp]
+    str lr, [sp, 0x10]
+    add fp, sp, 0x20
+    ldr x0, =prompt
+    bl printf
+    ldr x0, =fmt
+    mov x1, fp
+    bl scanf
+    ldr x0, [fp]
+    bl get_n_legs
+    mov x1, x0
+    ldr x0, =report
+    bl printf
+    ldr lr, [sp, 0x10]
+    ldr fp, [sp]
+    mov x0, 0
+    b exit
+```
+
+
+
