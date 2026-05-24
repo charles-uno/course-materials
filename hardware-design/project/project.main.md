@@ -1,4 +1,4 @@
-template: syllabus.tex
+template: homework.tex
 title: Final Project
 ---
 
