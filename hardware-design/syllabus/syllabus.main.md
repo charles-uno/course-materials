@@ -1,4 +1,5 @@
 template: syllabus.tex
+title: Syllabus
 ---
 
 $$$

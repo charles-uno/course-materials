@@ -1,4 +1,5 @@
-template: project.tex
+template: syllabus.tex
+title: Final Project
 ---
 
 # Final Project!
