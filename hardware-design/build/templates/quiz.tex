@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass{scrartcl} 
 
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb, amsmath,graphicx,hyperref,xcolor}
@@ -91,28 +91,32 @@ I pledge my honor that on this examination I have neither given nor received ass
 $\square$\quad I have intentionally not signed the pledge. (check only if appropriate)
 }
 
-\usepackage{fancyhdr}
-\rhead{}
+%\usepackage{fancyhdr}
+%\rhead{}
 
-\pagestyle{fancy}
-\lhead{St Olaf College}
-\rhead{CSCI 241}
+%\pagestyle{fancy}
+%\lhead{St Olaf College}
+%\rhead{CSCI 241}
+%\cfoot{\thepage}
 
-\cfoot{\thepage}
+\titlehead{\hfill\includegraphics[width=3cm]{images/stolaf-logo.png}}
+
+\title{Quiz: @@title@@}
+\subtitle{Hardware Design (CSCI 241)}
+\author{Prof Charles Fyfe}
+\date{Due @@date@@}
 
 \begin{document}
+
+\maketitle
+
+\vfill
 
 Name: \makebox[3in]{\hrulefill
 %NAME
 \hrulefill}
 
 \vfill
-
-\begin{center}
-{\huge @@title@@}
-
-{\large Due @@date@@}
-\end{center}
 
 \testrules
 
