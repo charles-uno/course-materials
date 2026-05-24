@@ -80,7 +80,7 @@ Hello world!
 %		gcc hello.c -o hello
 %	\end{minted}
 %	This creates several intermediate files, eventually creating an executable file (which we can run).
-%	`hello.c' -> preprocessor -> `hello.i' -> compiler -> `hello.s' -> assembler -> `hello.o' -> linker -> `hello`
+%	`hello.c` -> preprocessor -> `hello.i` -> compiler -> `hello.s` -> assembler -> `hello.o` -> linker -> `hello`
 
 % per wikipedia:
 % Each computer architecture has its own machine language. Computers differ in the number and type of operations they support, in the different sizes and numbers of registers, and in the representations of data in storage. While most general-purpose computers are able to carry out essentially the same functionality, the ways they do so differ; the corresponding assembly languages reflect these differences.
