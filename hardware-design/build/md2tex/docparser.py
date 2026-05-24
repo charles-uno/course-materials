@@ -531,7 +531,13 @@ class Paragraph(DocElement):
     def get_next_and_leftovers_inline(self, raw, head):
         for cls in [InlineCode, Bold, Italic, URL, Hyperlink]:
             if cls.matches(raw):
-                return cls.get_with_leftovers_inline(raw, head)
+
+                try:
+                    return cls.get_with_leftovers_inline(raw, head)
+                except Exception:
+                    print("UH OH")
+                    print(cls, "choked on:", repr(raw))
+
         # otherwise just grab the next word
         next_word_and_leftovers = raw.split(None, 1)
         if len(next_word_and_leftovers) > 1:
