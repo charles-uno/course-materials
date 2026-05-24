@@ -5,7 +5,7 @@ SLIDES_MD := $(wildcard chapters/*/slides.main.md)
 HOMEWORK_MD := $(wildcard chapters/*/homework.main.md)
 QUIZ_MD := $(wildcard chapters/*/quiz.main.md)
 
-all: syllabus project slides quiz homework final
+all: syllabus project slides quiz homework # final
 	build/consolidate-artifacts.sh
 
 syllabus: syllabus/syllabus.pdf
