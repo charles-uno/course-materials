@@ -17,18 +17,17 @@ PDFs are built automatically using GitHub Actions. Check out the `Actions` tab u
 Heads up! Stuff is moving around right now. 
 
 - `chapters` - This holds most of the actual content! Split up by chapter (aka unit, aka standard). Each directory contains `slides.md`, maybe some homework, maybe some support files
-- `slides.tex` - build target for the whole slide deck. Pulls content from `chapters/*/slides.md`
-- `homework.tex` - build target for the big bundle of homework. Pulls content from `chapters/*/homework.md`. Probably want to split this up into multiple files actually
 - `build` - Templates and scripts for building our Markdown source files into PDFs via LaTeX
 - `syllabus` - The syllabus
-- `exams` - Quizzes and final. A bit of a mishmash from multiple semesters. Need to get this cleaned up
+- `project` - Document explaining the final project for the course
+- `final` - The final exam. Also some tooling to generate personalized exams for each student based on what they need to reattempt
 
 ## Building Locally
 
 Typesetting is done via LaTeX. Source code for LaTeX is pretty ugly, so much of the content is written in Markdown and converted over at build time. If you want to run that process locally, you'll need:
 
 - MikTex, MacTex, or similar. The big install
-- Python 3, plus the packages in `requirements.txt`
+- Python 3, plus the packages in `build/requirements.txt`
 - Make
 
 These requirements are for Mac OS. Linux is probably pretty much the same. If you need it to run on Windows, I'll bet an AI bot can figure it out
