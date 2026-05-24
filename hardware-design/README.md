@@ -116,11 +116,7 @@ md2tex pending updates:
 
 Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
 
-Update exams to use markdown?
-
 Figure out how to create tagged PDFs for accessibility
-
-Pi setup -- ssh gen no longer does `id_rsa.pub`? It does a different type of key? might depend on if there is entropy in the system
 
 Add makefile check to confirm that sections line up in the slides and the assignments
 
