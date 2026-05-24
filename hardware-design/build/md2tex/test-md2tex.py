@@ -25,7 +25,7 @@ def main():
 
 
 def run_md2tex(path):
-    return sp.run(["./md2tex_new.py", path], capture_output=True).returncode
+    return sp.run(["./md2tex.py", path], capture_output=True).returncode
 
 
 def check_output(input_path):
