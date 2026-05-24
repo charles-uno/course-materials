@@ -2,6 +2,8 @@ beamer: true
 template: slides.tex
 ---
 
+TODO: add a slide with example two's complement subtraction
+
 # Data Representation
 
 ### How do computers store information?

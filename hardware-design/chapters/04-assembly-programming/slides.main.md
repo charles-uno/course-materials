@@ -2,7 +2,9 @@ beamer: true
 template: slides.tex
 ---
 
-# Assembly Globals
+# Assembly Programming
+
+TODO: talk about debugger annotation here! do not wait for stack frames
 
 ### Coding in Assembly
 

@@ -2,6 +2,8 @@ beamer: true
 template: slides.tex
 ---
 
+TODO: add images to the slides about hardware types
+
 # Networking
 
 ### What is a Computer Network?

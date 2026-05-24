@@ -145,6 +145,8 @@ Work that violates this policy will typically receive no credit. In especially s
 
 ## AI Usage Policy
 
+TODO: flesh this out
+
 You are welcome to use AI tools when studying.
 
 Please not submit AI work as your own.

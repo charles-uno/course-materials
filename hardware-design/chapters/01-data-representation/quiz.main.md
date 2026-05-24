@@ -3,6 +3,8 @@ title: Data Representation
 date: Feb 1, 2027
 ---
 
+TODO: get a better ASCII table? make sure the null byte is explicitly visible
+
 1. Convert the unsigned binary integer `0b00011101` to decimal.
 2. Convert the unsigned binary integer `0b00011101` to hexadecimal.
 3. Convert the decimal number -22 to 8-bit two's complement binary.

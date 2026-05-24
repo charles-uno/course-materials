@@ -1,6 +1,10 @@
 template: assignment.tex
 ---
 
+
+TODO: Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues
+
+
 # Shell Scripting
 
 intro to shell scripting for CS
