@@ -164,8 +164,11 @@ class Document(DocElement):
         # templates dir is build/templates
         build_path = pathlib.Path(__file__).resolve().parent.parent
         template_path = f"{build_path}/templates/{template_name}"
-        with open(template_path, "r") as handle:
-            template = handle.read()
+        try:
+            with open(template_path, "r") as handle:
+                template = handle.read()
+        except FileNotFoundError:
+            raise ParseFailure(f"template '{template_name}' not found")
         return template.replace("@@content@@", content)
 
     def with_variables(self, content: str) -> str:

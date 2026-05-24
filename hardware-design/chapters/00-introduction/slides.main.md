@@ -1,4 +1,6 @@
 beamer: true
+template: slides.tex
+title: Introduction
 ---
 
 # Introduction
