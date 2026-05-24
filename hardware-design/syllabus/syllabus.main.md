@@ -2,6 +2,9 @@ template: syllabus.tex
 title: Syllabus
 ---
 
+**TODO:** attendance policy. participate in group work. missing a bunch of classes is a red flag that should probably be tackled early or even escalated to the dean
+
+
 $$$
 \begin{overpic}[width=\textwidth]{dune-robot-hbo}
 	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}

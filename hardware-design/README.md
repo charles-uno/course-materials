@@ -32,8 +32,6 @@ Circuit diagrams created using [this tool](https://www.circuit2tikz.tf.fau.de/de
 
 # TODO - Curriculum
 
-Attendance! missing a bunch of classes is a red flag. You are supposed to be present to work with your group. not sure if there should be points deducted for missing class (probably?) but certainly we want to escalate to the dean if they miss a bunch
-
 Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicated group work
@@ -74,10 +72,6 @@ Update standards:
 9. **Concurrency & Parallelism.** User/kernel modes, system calls, traps, exceptions, interrupts, context switching, concurrency, multicore systems, multiprocessing, multithreading, hyperthreading
 10. **Networking.** Network hardware, TCP/IP model, security, encryption
 
-The timing gets weird with quizzes at the end of the semester. Especially with revisions. A few options:
-- Stop doing revisions. Increase the granularity of grading for each standard
-- Dedicate the last week or two of the term to a project
-
 Switch from `word` to `long`? Some weirdness around 64-bit comparisons on 32-bit values
 
 circuitverse - clarify that the button is a different type of input
@@ -95,5 +89,4 @@ Add `header.yaml` or similar. Handle it along with YAML headers in the markdown 
 
 Figure out how to create tagged PDFs for accessibility
 
-Add makefile check to confirm that sections line up in the slides and the assignments
 
