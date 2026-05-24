@@ -15,4 +15,4 @@ $$$
 \standardsfooter
 $$$
 
-![ascii table](wikimedia-ascii-table.png)
+![ascii table](images/ascii-table.png)
