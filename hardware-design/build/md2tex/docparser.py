@@ -392,8 +392,12 @@ class FencedBlock(DocElement):
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
         assert cls.matches(raw)
         raw = raw.lstrip(cls._FENCE)
-        assert "\n" + cls._FENCE
-        body, leftovers = raw.split("\n" + cls._FENCE, 1)
+        assert ("\n" + cls._FENCE) in raw
+        body_and_leftovers = raw.split("\n" + cls._FENCE, 1)
+        if len(body_and_leftovers) > 1:
+            body, leftovers = body_and_leftovers
+        else:
+            body, leftovers = body_and_leftovers[0], ""
         return cls(body, head), leftovers
 
 
