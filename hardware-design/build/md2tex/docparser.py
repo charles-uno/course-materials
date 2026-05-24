@@ -637,8 +637,6 @@ class URL(InlineBase):
         return r"\url{" + self._child_to_tex() + "}"
 
 
-
-
 class Hyperlink(InlineBase):
 
     def __init__(self, text, url, head): 
@@ -659,6 +657,26 @@ class Hyperlink(InlineBase):
 
     def to_tex(self) -> str:
         return r"\href{" + self._params["url"] + "}{" + self._child_to_tex() + "}"
+
+
+
+
+class Quote(InlineBase):
+
+    def __init__(self, body, head):
+        self._children = [Literal(body, head)]
+
+    def to_tex(self):
+        return "%" + self._child_to_tex()
+    
+    @classmethod
+    def matches(cls, raw: str) -> bool:
+        return raw.lstrip().startswith("%")
+
+    @classmethod
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[InlineBase, str]:
+        # Quote absorbs the whole remaining line
+        return cls(raw.lstrip()[1:], head), ""
 
 
 # ==========
