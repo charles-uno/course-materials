@@ -19,3 +19,4 @@ _minted*
 *.synctex.gz
 *.gen.tex
 __pycache__
+artifacts
