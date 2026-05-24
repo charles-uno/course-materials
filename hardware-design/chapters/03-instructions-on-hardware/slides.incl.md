@@ -12,7 +12,7 @@ $$$
 \includegraphics[width=\columnwidth]{images/von-neumann-architecture.png}
 $$$
 
-## Hardware Components
+# Hardware Components
 
 ### What's Where?
 $$$
@@ -83,7 +83,7 @@ We'll talk more about storage later
 % ### Group Exercises
 % TODO: this
 
-## Executing an Instruction
+# Executing an Instruction
 
 ### Execution Steps
 There are four steps to executing an instruction:
@@ -144,7 +144,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-## Clock-Driven Execution
+# Clock-Driven Execution
 
 ### Clock-Driven Execution
 
@@ -178,7 +178,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-## Instruction-Level Parallelism
+# Instruction-Level Parallelism
 
 % out of order execution
 

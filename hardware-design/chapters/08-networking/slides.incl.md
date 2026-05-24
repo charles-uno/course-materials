@@ -34,7 +34,7 @@ We talk about networking in terms of layers:
 %- High packet loss is perceived as choppy audio/video, generally slower performance due to retransmission.
 %- Inconsistency in timing of data received.
 
-## Network Hardware
+# Network Hardware
 
 ### First Things First
 
@@ -106,7 +106,7 @@ How, physically, are network devices connected?
 % ### Exercise
 % TODO: this
 
-## Application Layer
+# Application Layer
 
 ### Client-Server Model
 
@@ -213,7 +213,7 @@ HTTP is the set of rules for how a browser asks for a webpage.
 % ### Exercise
 % TODO: this
 
-## Transport Layer
+# Transport Layer
 
 ### Segmentation and Reassembly
 
@@ -279,7 +279,7 @@ What happens if an attacker sends thousands of handshake requests to the same se
 % ### Exercise
 % TODO: this
 
-## Internet Layer
+# Internet Layer
 
 ### Routing Segments
 
@@ -373,7 +373,7 @@ Port Address Translation (PAT):
 % ### Exercises
 % TODO: this
 
-## Link Layer
+# Link Layer
 
 ### MAC Addresses
 

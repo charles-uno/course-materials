@@ -32,7 +32,7 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 % concepts carry over in ways that are not always obvious
 
 
-## Grading
+# Grading
 
 ### Course Grade Breakdown
 
@@ -66,7 +66,7 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 - You can get full credit here without too much trouble. Show up. Work together. Make it easy for your peers to write nice things about you
 - I recommend keeping notes over the course of the semester when someone is particularly helpful, insightful, etc
 
-## Important Links
+# Important Links
 
 ### Important Links
 
@@ -76,7 +76,7 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 - ARM Simulator: http://163.238.35.161/~zhangs/arm64simulator/
 - Circuitverse: https://circuitverse.org/simulator
 
-## Everything Else
+# Everything Else
 
 ### Everything Else 
 

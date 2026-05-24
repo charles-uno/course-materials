@@ -13,7 +13,7 @@ Computers work using electrical signals which can be on or off. If we let:
 
 We can use sequences of 0s and 1s to represent information
 
-## Positive Integers in Binary
+# Positive Integers in Binary
 
 ### Numbers in Base Ten (aka Decimal)
 
@@ -144,7 +144,7 @@ see the textbook.
 % ### Group Exercises
 % TODO: this
 
-## Hexadecimal
+# Hexadecimal
 
 ### What? Why?
 
@@ -207,7 +207,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-## Negatives in Binary
+# Negatives in Binary
 
 ### First Attempt: Signed Magnitude
 
@@ -336,7 +336,7 @@ happened?
 % ### Group Exercises
 % TODO: this
 
-## Fractions and Decimals
+# Fractions and Decimals
 
 ### The Decimal Point
 
@@ -461,7 +461,7 @@ So what's the catch?
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
-## Beyond Numbers
+# Beyond Numbers
 
 ### What else do computers store?
 

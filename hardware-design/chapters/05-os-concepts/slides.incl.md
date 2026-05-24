@@ -24,7 +24,7 @@ Big picture:
 - The OS allows applications to access hardware. SSD, mouse, keyboard, network, etc
 - The OS also usually provides a GUI (graphical user interface)
 
-## Booting
+# Booting
 
 ### Booting
 
@@ -62,7 +62,7 @@ The boot loader is not technically part of the OS. But it's doing similar work:
 % ### Exercises
 % TODO: this
 
-## The OS Kernel
+# The OS Kernel
 
 ### What does the OS do?
 
@@ -139,7 +139,7 @@ What happens to the running process when the kernel takes over?
 - Loads context for the other process (the interrupt handler)
 - This is called **context switching**
 
-## Managing a Process
+# Managing a Process
 
 ### OS Responsibilities (Again)
 
@@ -205,7 +205,7 @@ Processes can create additional processes (called children).
 - Exited processes get cleaned up
 - Blocked processes get sidelined (aka we use context switching to let the CPU work on something else)
 
-## Multiprogramming
+# Multiprogramming
 
 ### Multiple Programs
 
@@ -271,7 +271,7 @@ This tells the machine that it's safe to jump back and forth between these tasks
 
 TODO: this
 
-## Parallelism
+# Parallelism
 
 ### Concurrent vs Parallel
 

@@ -87,7 +87,7 @@ Hello world!
 % ### Group Exercises
 % TODO: this
 
-## Assembly Program Structure
+# Assembly Program Structure
 
 ### Assembly Program Structure
 
@@ -173,7 +173,7 @@ b exit
 % ### Group Exercises
 % TODO: this
 
-## Assembly Commands
+# Assembly Commands
 
 ### Register Names
 
@@ -271,7 +271,7 @@ $$$
 % TODO: this
 
 
-## Printf
+# Printf
 
 ### Printf in C
 
@@ -373,7 +373,7 @@ b exit
 % ### Group Exercises
 % TODO: this
 
-## Scanf
+# Scanf
 
 ### Minimal Read
 ```arm
@@ -427,7 +427,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-## Automated Testing
+# Automated Testing
 
 ### Expectations on Assignments
 

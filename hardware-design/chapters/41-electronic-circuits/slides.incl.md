@@ -13,7 +13,7 @@ beamer: true
 
 
 
-## Electrical Circuits
+# Electrical Circuits
 
 ### The Components
 $$$

@@ -10,7 +10,7 @@ beamer: true
 - Complex logic becomes possible when multiple boolean values are used togather.
 
 
-## Boolean Functions
+# Boolean Functions
 
 ### Truth Tables
 
@@ -60,7 +60,7 @@ Heads up: you may see different symbols elsewhere!
 % ### Group Exercises
 % TODO: this
 
-## Boolean Expressions
+# Boolean Expressions
 
 ### Putting Boolean Functions Together
 
@@ -117,7 +117,7 @@ Then finally we can write the truth table for the whole expression:
 % ### Group Exercises
 % TODO: this
 
-## Logic Gates
+# Logic Gates
 
 ### Logic Gates
 Logic gates are the same thing as boolean functions. But instead of writing them as a word or symbol, we draw them like a flow chart.
@@ -216,7 +216,7 @@ Truth table:
 % ### Group Exercises
 % TODO: this
 
-## Logic Circuits
+# Logic Circuits
 
 ### Multiple Gates Together
 
@@ -418,7 +418,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-## Control Circuits
+# Control Circuits
 
 ### Control Circuits
 
@@ -547,7 +547,7 @@ $$$
 % TODO: this
 % group warmup in Circuitverse. Use the testbench
 
-## Arithmetic with Circuits
+# Arithmetic with Circuits
 
 ### Why bother with circuits over expressions?
 
@@ -669,7 +669,7 @@ $$$
 % ### Group Exercises
 % TODO: group warmup in Circuitverse
 
-## Electrical Circuits
+# Electrical Circuits
 
 ### The Components
 $$$

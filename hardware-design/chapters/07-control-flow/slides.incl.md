@@ -18,7 +18,7 @@ Recall from before:
 - What if we want different behavior on the fly?
 - How do we write conditionals (`if`, `else`) and loops (`for`, `while`)?
 
-## Comparison
+# Comparison
 
 ### Comparison
 
@@ -103,7 +103,7 @@ This looks just like what we did for functions! How are function labels differen
 - Use `cmp` to compare two values, set processor flags
 - Use `beq` (etc) to execute logic based on those flags
 
-## If
+# If
 
 ### If (Python)
 
@@ -160,7 +160,7 @@ positive:
 - Conditionally skip the code that would be in the `if` block
 - This means your conditional should be the opposite of what you would write in the `if`
 
-## If/Else
+# If/Else
 
 ### If/Else (Python)
 
@@ -228,7 +228,7 @@ endif:
 - If/else: conditional branch followed by an unconditional branch
 - The two are mutually exclusive. Always want to execute one, never both
 
-## While Loop
+# While Loop
 
 ### While Loop (Python)
 
@@ -279,7 +279,7 @@ loop_test:
 - At the end of the loop body, we get back to the test
 - Don't forget to increment or you'll go forever
 
-## For Loop
+# For Loop
 
 ### For Loop (C)
 
@@ -327,7 +327,7 @@ loop_done:
 - Increment
 - Unconditionally back to the top
 
-## Nested Logic
+# Nested Logic
 
 ### Use Flags Promptly
 

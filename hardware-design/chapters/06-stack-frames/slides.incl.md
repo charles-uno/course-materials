@@ -3,7 +3,7 @@ beamer: true
 
 # Assembly Functions
 
-## The Stack and The Heap
+# The Stack and The Heap
 
 ### Process Memory
 
@@ -91,7 +91,7 @@ We can draw a **memory diagram** to keep track of registers and memory for our p
 - There are lots of cases where the code may break these rules for better efficiency
 - We will talk about a few of those cases too
 
-## Local Variables
+# Local Variables
 
 ### Variable Scope
 
@@ -386,7 +386,7 @@ Prints: `86400+1=86401` then exits
 - To free that space, move SP back down
 - This is much faster than using the (unstructured) heap
 
-## Stack Frames
+# Stack Frames
 
 ### Utterly Deranged
 
@@ -540,7 +540,7 @@ Hold that thought
 
 Let's work through this together
 
-## Function Calls
+# Function Calls
 
 ### Branch and Link
 
@@ -1137,7 +1137,7 @@ Exit status 0 (normal)
 - How about `printf`?
 - Hint: these functions were calles from `main` 
 
-## Optimization with Functions
+# Optimization with Functions
 
 ### Why Optimize Functions?
 
