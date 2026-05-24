@@ -14,7 +14,7 @@ slides: $(SLIDES_MD:.main.md=.pdf)
 quiz: $(QUIZ_MD:.main.md=.pdf)
 homework: $(HOMEWORK_MD:.main.md=.pdf)
 final:
-	cd exams && make
+	cd final && make
 
 # pretty much everything follows the same pattern:
 # foo.main.md -> foo.main.gen.tex -> foo.pdf
