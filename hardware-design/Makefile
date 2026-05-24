@@ -18,7 +18,7 @@ final:
 # pretty much everything follows the same pattern:
 # foo.main.md -> foo.main.gen.tex -> foo.pdf
 
-MD2TEX := build/md2tex/md2tex_new.py
+MD2TEX := build/md2tex/md2tex.py
 TEX2PDF := build/tex2pdf.sh
 
 MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.main.md")
