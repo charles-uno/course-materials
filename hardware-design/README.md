@@ -84,11 +84,6 @@ The timing gets weird with quizzes at the end of the semester. Especially with r
 
 Switch from `word` to `long`? Some weirdness around 64-bit comparisons on 32-bit values
 
-Split out the FDEW quiz questions into smaller bits! "explain how fetch works" is too vague. Huge difference in detail between responses. What am I actually asking for?
-- Explain what's happening on the data, instruction, and control buses during each step of FDEW
-- What's happening in the ALU during each stage?
-- Etc
-
 Rewrite Pi setup. Encourage use of AI tools for debugging! This is a great use case because (1) it's the sort of thing that lots of nerds argue about in the training data, (2) correctness is easily testable, (3) unlikely to break anything. Also mention a few common issues
 
 Update AI use policy in the syllabus
