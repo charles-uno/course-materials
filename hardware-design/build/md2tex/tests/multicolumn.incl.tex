@@ -1,9 +1,25 @@
 
-
 \bigskip
 
 \begin{multicols}{2}
     everything in here should be in a multicolumn environment
+\end{multicols}
+
+\bigskip
+
+Multicolumn fenced block shares the pipe delimiter with tables. make sure the fenced block is parsed first
+
+\bigskip
+
+\begin{multicols}{2}
+
+    \begin{tabular}{r l c c}
+    foo & bar & fizz & buzz \\
+    \hline
+    fizz & buzz & grover & big bird \\
+    123 & 456 & elmo & abby \\
+  \end{tabular}
+
 \end{multicols}
 
 \bigskip
