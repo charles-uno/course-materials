@@ -1,4 +1,4 @@
-template: homework.tex
+template: assignment.tex
 ---
 
 # Electronic Circuits
