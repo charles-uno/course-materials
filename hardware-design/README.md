@@ -109,7 +109,10 @@ add screenshots to help with testbench setup
 
 # TODO - Repo
 
-Standalone homework docs. Standalone quiz docs. Slides... not sure
+md2tex pending updates:
+- handle links that start within a word, eg parentheses
+- handle block quotes
+- make sure we handle inline comments correctly
 
 Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
 

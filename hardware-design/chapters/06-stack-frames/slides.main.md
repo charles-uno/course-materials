@@ -1169,7 +1169,7 @@ def main():
 		total = plus1(total)
 	return total
 ```
-|||
+
 After:
 ```python
 def main():
