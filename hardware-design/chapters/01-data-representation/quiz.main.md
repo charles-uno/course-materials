@@ -14,3 +14,5 @@ date: Feb 1, 2027
 $$$
 \standardsfooter
 $$$
+
+![ascii table](wikimedia-ascii-table.png)
