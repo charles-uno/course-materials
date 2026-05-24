@@ -1,5 +1,5 @@
 beamer: true
-template: ../../build/templates/slides.tex
+template: slides.tex
 ---
 
 # Data Representation
@@ -515,7 +515,7 @@ $$$
 $$$
 \includegraphics[width=\columnwidth]{images/html-example}
 $$$
-|||
+
 $$$
 \includegraphics[width=\columnwidth]{images/json-example}
 $$$
