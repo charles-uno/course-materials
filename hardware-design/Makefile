@@ -23,10 +23,6 @@ TEX2PDF := build/tex2pdf.sh
 
 BUILD_TOOLS := $(MD2TEX) $(TEX2PDF) $(wildcard build/templates/*.tex)
 
-# so we can import from the templates directory as well as the build directory
-REPO_ROOT := $(shell git rev-parse --show-toplevel)
-export TEXINPUTS := .:$(REPO_ROOT)/hardware-design/build/templates/:
-
 MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.main.md")
 
 $(MAIN_MD:.main.md=.pdf): %.pdf: %.main.gen.tex $(BUILD_TOOLS)

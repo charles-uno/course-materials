@@ -1,5 +1,6 @@
 beamer: true
 template: slides.tex
+title: Assembly Programming
 ---
 
 # Assembly Programming
@@ -78,9 +79,9 @@ Hello world!
 
 
 %	The following command compiles a program in C:
-%	\begin{minted}{bash}
+%	```bash
 %		gcc hello.c -o hello
-%	\end{minted}
+%	```
 %	This creates several intermediate files, eventually creating an executable file (which we can run).
 %	`hello.c` -> preprocessor -> `hello.i` -> compiler -> `hello.s` -> assembler -> `hello.o` -> linker -> `hello`
 
