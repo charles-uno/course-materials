@@ -43,7 +43,7 @@ add screenshots to help with testbench setup
 # TODO - Repo
 
 md2tex pending updates:
-- handle links that start within a word, eg parentheses
+- handle links that do not start immediately following whitespace, eg in parens ([foo](www.yahoo.com))
 - handle block quotes
 - make sure we handle inline comments correctly
 
