@@ -386,7 +386,7 @@ class FencedBlock(DocElement):
 
     @classmethod
     def matches(cls, raw: str) -> bool:
-        return raw.startswith(cls._FENCE)
+        return raw.startswith(cls._FENCE) and "\n" + cls._FENCE in raw
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:

@@ -13,7 +13,6 @@ template: slides.tex
 % high-pass filter. edge detection. gives you a sharp edge on your clock ticks
 
 
-
 # Electrical Circuits
 
 ### The Components
@@ -225,7 +224,7 @@ $$$
 	\draw (0.286, 7) -- (0.408, 7);
 \end{tikzpicture}
 $$$
-|||
+
 $$$
 \usetikzlibrary{shapes.geometric}
 \begin{tikzpicture}
@@ -272,7 +271,7 @@ $$$
 	\draw (0.286, 7) -- (0.408, 7);
 \end{tikzpicture}
 $$$
-|||
+
 $$$
 \usetikzlibrary{shapes.geometric}
 \begin{tikzpicture}

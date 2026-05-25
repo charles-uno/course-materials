@@ -6,14 +6,9 @@ HOMEWORK_MD := $(wildcard chapters/*/homework.main.md)
 QUIZ_MD := $(wildcard chapters/*/quiz.main.md)
 
 all: syllabus project slides quiz homework # final
-	@ build/consolidate-artifacts.sh
 
 syllabus: syllabus/syllabus.pdf
-	@ mkdir -p artifacts && cp $< artifacts
-
 project: project/project.pdf
-	@ mkdir -p artifacts && cp $< artifacts
-
 slides: $(SLIDES_MD:.main.md=.pdf)
 quiz: $(QUIZ_MD:.main.md=.pdf)
 homework: $(HOMEWORK_MD:.main.md=.pdf)
