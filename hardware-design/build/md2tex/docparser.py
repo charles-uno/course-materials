@@ -632,14 +632,8 @@ class URL(InlineBase):
 class Hyperlink(InlineBase):
 
     def __init__(self, text, url, head): 
-
-        print("[", text, "](", url, ")")
-
         self._children = [Paragraph(text, {})]
         self._params = {"url": url}
-
-        print(self.to_tex())
-
 
     @classmethod
     def matches(cls, raw):
