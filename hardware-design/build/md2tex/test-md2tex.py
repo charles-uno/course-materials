@@ -46,11 +46,11 @@ def check_output(input_path):
 
 
 def is_consistent(expected: str, actual: str) -> bool:
-    expected_leftovers = expected
-    for i, actual_line in enumerate(actual.splitlines()):
-        actual_line_nospace = actual_line.replace(" ", "")
-        expected_line, expected_leftovers = split_at_n_real_chars(expected_leftovers, len(actual_line_nospace))
-        expected_line_nospace = expected_line.replace(" ", "").replace("\n", "")
+    actual_leftovers = actual
+    for i, expected_line in enumerate(expected.splitlines()):
+        expected_line_nospace = expected_line.replace(" ", "")
+        actual_line, actual_leftovers = split_at_n_real_chars(actual_leftovers, len(expected_line_nospace))
+        actual_line_nospace = actual_line.replace(" ", "").replace("\n", "")
 
         if actual_line_nospace != expected_line_nospace:
 
