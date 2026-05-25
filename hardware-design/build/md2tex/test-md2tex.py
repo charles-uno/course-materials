@@ -65,7 +65,7 @@ def is_consistent(expected: str, actual: str) -> bool:
 def split_at_n_real_chars(text, n):
     chunk_chars = []
     leftover_chars = list(text)
-    while real_char_count(chunk_chars) < n:
+    while leftover_chars and real_char_count(chunk_chars) < n:
         chunk_chars.append(leftover_chars.pop(0))
     return "".join(chunk_chars), "".join(leftover_chars)
 
