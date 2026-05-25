@@ -529,14 +529,14 @@ class Paragraph(DocElement):
         return children
 
     def get_next_and_leftovers_inline(self, raw, head):
-        for cls in [InlineCode, Bold, Italic, URL, Hyperlink]:
+        for cls in [InlineCode, Bold, Italic, URL, Hyperlink, Comment]:
             if cls.matches(raw):
-
                 try:
                     return cls.get_with_leftovers_inline(raw, head)
                 except Exception:
                     print("UH OH")
                     print(cls, "choked on:", repr(raw))
+                    raise
 
         # otherwise just grab the next word
         next_word_and_leftovers = raw.split(None, 1)
@@ -659,9 +659,7 @@ class Hyperlink(InlineBase):
         return r"\href{" + self._params["url"] + "}{" + self._child_to_tex() + "}"
 
 
-
-
-class Quote(InlineBase):
+class Comment(InlineBase):
 
     def __init__(self, body, head):
         self._children = [Literal(body, head)]
@@ -674,7 +672,7 @@ class Quote(InlineBase):
         return raw.lstrip().startswith("%")
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[InlineBase, str]:
+    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[InlineBase, str]:
         # Quote absorbs the whole remaining line
         return cls(raw.lstrip()[1:], head), ""
 
