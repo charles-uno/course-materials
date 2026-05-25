@@ -519,7 +519,13 @@ class Paragraph(DocElement):
     _HTML_TAG = "p"
 
     def __init__(self, raw, head):
+        print()
+        print(raw)
+
         self._children = self.get_inline_children(raw, head)
+
+        print(self.to_tex())
+
 
     def get_inline_children(self, raw, head):
         children = []
@@ -537,15 +543,10 @@ class Paragraph(DocElement):
                     print("UH OH")
                     print(cls, "choked on:", repr(raw))
                     raise
-
-        # otherwise just grab the next word
-        next_word_and_leftovers = raw.split(None, 1)
-        if len(next_word_and_leftovers) > 1:
-            next_word = next_word_and_leftovers[0]
-            leftovers = next_word_and_leftovers[1].lstrip()
-            return Literal(next_word, head), leftovers
-        else:
-            return Literal(raw, head), ""
+        # otherwise, we're grabbing plain text. Start by just taking one
+        # character at a time. We can optimize this later by taking chunks with
+        # no special characters
+        return Literal(raw[:1], head), raw[1:]
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -553,10 +554,10 @@ class Paragraph(DocElement):
         return True
 
     def to_tex(self):
-        return " ".join(c.to_tex() for c in self._children)
+        return "".join(c.to_tex() for c in self._children)
 
     def to_html(self):
-        return " ".join(c.to_html() for c in self._children)
+        return "".join(c.to_html() for c in self._children)
 
     @classmethod
     def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
@@ -576,8 +577,7 @@ class InlineBase(DocElement):
     def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         content, leftovers = raw.lstrip(cls._DELIM).split(cls._DELIM, 1)
-        # watch out for leading space or we'll miss consecutive format
-        return cls(content, head), leftovers.lstrip(" ")
+        return cls(content, head), leftovers
 
     @classmethod
     def matches(cls, raw) -> bool:
@@ -627,11 +627,9 @@ class URL(InlineBase):
     @classmethod
     def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
-        next_word_and_leftovers = raw.split(None, 1)
-        if len(next_word_and_leftovers) > 1:
-            return cls(next_word_and_leftovers[0], head), next_word_and_leftovers[1]
-        else:
-            return cls(raw, head), ""
+        next_word = raw.split(None, 1)[0]
+        leftovers = raw[len(next_word):]
+        return cls(next_word, head), leftovers
 
     def to_tex(self) -> str:
         return r"\url{" + self._child_to_tex() + "}"

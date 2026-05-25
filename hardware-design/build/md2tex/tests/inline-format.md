@@ -7,43 +7,7 @@ we can also have a [link with **bold**](http://github.com)
 
 can we also handle parenthetical links? ([example](www.yahoo.com))
 
-this paragraph has *italic* text
-
-this one has *multiple italic words* consecutively
-
-this one has italics *here* and more *later* on
-
-we should be able to do *two* *italics* consecutively
-
-*this* one starts with italics
-
-this one ends with a italic *word*
-
-and also we can do *italic* and **bold** and `code` and links like http://yahoo.com in the same sentence
-
-this paragraph includes **bold** text
-
-this one has **multiple bold words** consecutively
-
-this one has bold **here** and more bold **later** on
-
-**this** one starts with bold
-
-this one ends with a bold **word**
-
-and we can do **two** **bold** words in a row
-
-this paragraph includes `code` text
-
-this one has `multiple code words` consecutively
-
-this one has code `here` and more `later` on
-
-`this` one starts with code
-
-this one ends with a code `word`
-
-here we have `two` `code` pieces consecutively
+and also we can do *italic* and **bold** and `code` and links like http://facebook.com in the same sentence
 
 if we put a link in the middle of a sentence, like http://google.com then we expect it to be linked
 

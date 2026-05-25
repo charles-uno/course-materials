@@ -46,8 +46,36 @@ def check_output(input_path):
 
 
 def is_consistent(expected: str, actual: str) -> bool:
-    return squish(expected) == squish(actual)
-                  
+    expected_leftovers = expected
+    for i, actual_line in enumerate(actual.splitlines()):
+        actual_line_nospace = actual_line.replace(" ", "")
+        expected_line, expected_leftovers = split_at_n_real_chars(expected_leftovers, len(actual_line_nospace))
+        expected_line_nospace = expected_line.replace(" ", "").replace("\n", "")
+
+        if actual_line_nospace != expected_line_nospace:
+
+            print("mismatch on line", i)
+            print("expected:", expected_line.replace("\n", ""))
+            print("actual:  ", actual_line)
+
+
+            return False
+    return True
+
+def split_at_n_real_chars(text, n):
+    chunk_chars = []
+    leftover_chars = list(text)
+    while real_char_count(chunk_chars) < n:
+        chunk_chars.append(leftover_chars.pop(0))
+    return "".join(chunk_chars), "".join(leftover_chars)
+
+def real_char_count(chars: list[str]):
+    return len("".join(chars).replace(" ", "").replace("\n", ""))
+
+
+
+
+
                   
 def squish(text: str) -> str:
     return text.replace(" ", "").replace("\n", "")
