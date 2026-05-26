@@ -28,21 +28,16 @@ echopurp() {
 	printf "\033[0;35m%b\033[0m" "$*"
 }
 
-printf "building $(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... "
-
-#REPO_ROOT=$(git rev-parse --show-toplevel)
-#cd "$REPO_ROOT/hardware-design"
-
 ./build/md2tex/md2tex.py "$MD_PATH" > "$DIR/$JOB_NAME.md2tex" 2>&1
 if [[ "$?" != "0" ]]; then
-	echored "md parse failed\n"
+	printf "$(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... $(echored md parse failed)\n"
 	cat "$DIR/$JOB_NAME.md2tex"
 	exit 1
 fi
 
 ./build/tex2pdf.sh "$TEX_PATH" > /dev/null 2>&1
 if [[ ! -f "$PDF_PATH" ]]; then
-	echored "tex build failed\n"
+	printf "$(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... $(echored tex build failed)\n"
 	cat "$DIR/$JOB_NAME.log" | grep -E -A 5 "^\!.*|^l\.[0-9]+"
 	exit 1
 fi
@@ -50,5 +45,4 @@ fi
 mkdir -p artifacts
 mv "$PDF_PATH" "$ARTIFACT_PATH"
 
-echogreen "done"
-echo
+printf "$(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... $(echogreen ok)\n"
