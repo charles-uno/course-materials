@@ -89,14 +89,14 @@ class DocElement:
                 raise ValueError(f"Unsupported HTML param: {val}")
         return " ".join(pretty)
 
-    def get_children(self, raw: str, head: dict) -> list["DocElement"]:
+    def get_children(self, raw: str, **kwargs: dict) -> list["DocElement"]:
         children = []
         while raw:
-            next_elt, raw = self.get_next_and_leftovers(raw, head)
+            next_elt, raw = self.get_next_and_leftovers(raw, **kwargs)
             children.append(next_elt)
         return children
 
-    def get_next_and_leftovers(self, raw: str, head: dict) -> tuple["DocElement", str]:
+    def get_next_and_leftovers(self, raw: str, **kwargs: dict) -> tuple["DocElement", str]:
         doc_element_types: list[DocElement] = [
             Section,
             Subsection,
@@ -113,9 +113,9 @@ class DocElement:
         ]
         for elt_type in doc_element_types:
             if elt_type.matches(raw):
-                return elt_type.get_with_leftovers(raw, head)
+                return elt_type.get_with_leftovers(raw, **kwargs)
         # Paragraph is the catchall for anything that doesn't match elsewhere
-        return Paragraph.get_with_leftovers(raw, head)
+        return Paragraph.get_with_leftovers(raw, **kwargs)
 
     def split_md_table_row(self, row: str) -> list[str]:
         return [x.strip() for x in row.split("|")[1:-1]]
@@ -127,30 +127,30 @@ class DocElement:
 class Document(DocElement):
 
     def __init__(self, md_path: str):
-        head, body = self._get_head_and_body(md_path)
-        self._children = self.get_children(body, head)
-        self._params = head
+        kwargs, body = self._get_kwargs_and_body(md_path)
+        self._children = self.get_children(body, **kwargs)
+        self._params = kwargs
 
-    def _get_head_and_body(self, md_path: str) -> tuple[dict, str]:
+    def _get_kwargs_and_body(self, md_path: str) -> tuple[dict, str]:
         with open(md_path, "r") as handle:
             lines = [x.rstrip() for x in handle.readlines()]
-        header_lines = []
+        kwargs_lines = []
         while lines:
             line = lines.pop(0)
             if line.startswith("---"):
                 break
-            header_lines.append(line)
+            kwargs_lines.append(line)
         if lines:
             try:
-                head = yaml.safe_load("\n".join(header_lines)) or {}
+                kwargs = yaml.safe_load("\n".join(kwargs_lines)) or {}
             except yaml.scanner.ScannerError:
-                raise ParseFailure("failed to parse yaml header")
+                raise ParseFailure("failed to parse yaml **kwargser")
             body = "\n".join(lines)
         else:
             # no YAML header
-            head = {}
-            body = "\n".join(header_lines)
-        return head, body
+            kwargs = {}
+            body = "\n".join(kwargs_lines)
+        return kwargs, body
 
     def to_tex(self):
         contents = self._children_to_tex()
@@ -175,10 +175,10 @@ class Document(DocElement):
         for key, val in self._params.items():
             if f"@@{key}@@" in content:
                 if isinstance(val, str):
-                    tex_val = Paragraph(val, {}).to_tex()
+                    tex_val = Paragraph(val).to_tex()
                 elif isinstance(val, list):
                     md_val = "\n".join(f"- {x}" for x in val)
-                    tex_val = UnorderedList(md_val, {}).to_tex()
+                    tex_val = UnorderedList(md_val).to_tex()
                 else:
                     raise ParseFailure(f"unable to insert value for '{key}'")
                 content = content.replace(f"@@{key}@@", tex_val)
@@ -192,10 +192,10 @@ class SectionBase(DocElement):
 
     _DEPTH = 0
 
-    def __init__(self, raw, head):
+    def __init__(self, raw, **kwargs):
         title, contents = self.get_title_and_contents(raw)
-        self._params = {"title": title, "beamer": head.get("beamer", False)}
-        self._children = self.get_children(contents, head)
+        self._params = {"title": title, "beamer": kwargs.get("beamer", False)}
+        self._children = self.get_children(contents, **kwargs)
 
     @property
     def _title(self):
@@ -217,9 +217,9 @@ class SectionBase(DocElement):
         return raw.startswith("#"*cls._DEPTH + " ")
 
     @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, body: str, **kwargs: dict) -> tuple[DocElement, str]:
         current, leftovers = cls.get_contents_and_leftovers(body)
-        return cls(current, head), leftovers
+        return cls(current, **kwargs), leftovers
 
     @classmethod
     def get_contents_and_leftovers(cls, body: str) -> tuple[str, str]:
@@ -279,8 +279,8 @@ class UnorderedList(DocElement):
     _HTML_TAG = "ul"
     _MARKERS = ("- ", "* ")
 
-    def __init__(self, raw, head):
-        self._children = self._get_items(raw, head)
+    def __init__(self, raw, **kwargs):
+        self._children = self._get_items(raw, **kwargs)
 
     def to_tex(self) -> str:
         return r"\begin{itemize}" + "\n" + self._children_to_tex() + "\n" + r"\end{itemize}"
@@ -290,28 +290,28 @@ class UnorderedList(DocElement):
         return any(raw.startswith(m) for m in cls._MARKERS)
 
     @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, body: str, **kwargs: dict) -> tuple[DocElement, str]:
         # list continues as long as we see indented lines and lines starting with list markers
         # TODO: smarter indentation handling for nested lists
         current, leftovers = cls.break_at_line_starting_without(body, [" ", "- ", "* "])
-        return cls(current, head), leftovers
+        return cls(current, **kwargs), leftovers
 
-    def _get_items(self, raw: str, head: dict) -> list[DocElement]:
+    def _get_items(self, raw: str, **kwargs: dict) -> list[DocElement]:
         raw_items = []
         for line in raw.splitlines():
             if self.matches(line):
                 raw_items.append(line)
             else:
                 raw_items[-1] += "\n" + line
-        return [ListItem(ri, head) for ri in raw_items]
+        return [ListItem(ri, **kwargs) for ri in raw_items]
 
 
 class OrderedList(DocElement):
 
     _HTML_TAG = "ol"
 
-    def __init__(self, raw, head):
-        self._children = self._get_items(raw, head)
+    def __init__(self, raw, **kwargs):
+        self._children = self._get_items(raw, **kwargs)
 
     def to_tex(self) -> str:
         return r"\begin{enumerate}" + "\n" + self._children_to_tex() + "\n" + r"\end{enumerate}"
@@ -331,7 +331,7 @@ class OrderedList(DocElement):
             return False
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         # list continues as long as we see indented lines and lines starting with list markers
         leftover_lines = raw.splitlines()
         lines = [leftover_lines.pop(0)]
@@ -341,23 +341,23 @@ class OrderedList(DocElement):
                 lines.append(leftover_lines.pop(0))
             else:
                 break
-        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+        return cls("\n".join(lines), **kwargs), "\n".join(leftover_lines)
 
-    def _get_items(self, raw: str, head: dict) -> list[DocElement]:
+    def _get_items(self, raw: str, **kwargs: dict) -> list[DocElement]:
         raw_items = []
         for line in raw.splitlines():
             if self.matches(line) or not raw_items:
                 raw_items.append(line)
             else:
                 raw_items[-1] += "\n" + line
-        return [ListItem(ri, head) for ri in raw_items]
+        return [ListItem(ri, **kwargs) for ri in raw_items]
 
 
 class ListItem(DocElement):
 
     _HTML_TAG = "li"
 
-    def __init__(self, raw, head):
+    def __init__(self, raw, **kwargs):
         # chop off the list item delimiter
         raw = raw.split(None, 1)[-1]
         # if this is a multi-line item, following lines are indented. chop
@@ -370,7 +370,7 @@ class ListItem(DocElement):
 
         # list items are usually just a line of text. but in principle one list
         # item can have multiple lines of text, code blocks, etc.
-        self._children = self.get_children(raw, head)
+        self._children = self.get_children(raw, **kwargs)
 
     def to_tex(self):
         return r"\item " + self._children_to_tex() + "\n"
@@ -388,7 +388,7 @@ class FencedBlock(DocElement):
         return raw.startswith(cls._FENCE) and "\n" + cls._FENCE in raw
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         raw = raw.lstrip(cls._FENCE)
         assert ("\n" + cls._FENCE) in raw
@@ -397,21 +397,21 @@ class FencedBlock(DocElement):
             body, leftovers = body_and_leftovers
         else:
             body, leftovers = body_and_leftovers[0], ""
-        return cls(body, head), leftovers
+        return cls(body, **kwargs), leftovers
 
 
 class CodeBlock(FencedBlock):
 
     _FENCE = "```"
 
-    def __init__(self, body, head):
+    def __init__(self, body, **kwargs):
         first_line, content = body.split("\n", 1)
         if "," in first_line:
             language, flags = first_line.split(",", 1)
         else:
             language, flags = first_line, None
         self._params = {"language": language or "text", "flags": flags}
-        self._children.append(Literal(content, head))
+        self._children.append(Literal(content, **kwargs))
 
     def to_tex(self) -> str:
         language = self._params["language"]
@@ -427,8 +427,8 @@ class TexBlock(FencedBlock):
 
     _FENCE = "$$$"
 
-    def __init__(self, raw, head):
-        self._children.append(Literal(raw, head))
+    def __init__(self, raw, **kwargs):
+        self._children.append(Literal(raw, **kwargs))
 
     def to_tex(self) -> str:
         return self._child_to_tex()
@@ -438,8 +438,8 @@ class MulticolumnBlock(FencedBlock):
 
     _FENCE = "|||"
 
-    def __init__(self, raw, head):
-        self._children = self.get_children(raw, head)
+    def __init__(self, raw, **kwargs):
+        self._children = self.get_children(raw, **kwargs)
 
     def to_tex(self) -> str:
         return r"\bigskip\begin{multicols}{2}" + "\n" + self.indent(self._children_to_tex()) + "\n" + r"\end{multicols}\bigskip"
@@ -450,12 +450,12 @@ class MulticolumnBlock(FencedBlock):
 
 class Table(DocElement):
 
-    def __init__(self, raw, head):
+    def __init__(self, raw, **kwargs):
         lines = raw.splitlines()
-        self._children.append(TableRow(lines[0], head))
+        self._children.append(TableRow(lines[0], **kwargs))
         self._params['align'] = self.get_alignment(lines[1])
         for line in lines[2:]:
-            self._children.append(TableRow(line, head))
+            self._children.append(TableRow(line, **kwargs))
 
     def get_alignment(self, row) -> str:
         entries = self.split_md_table_row(row)
@@ -470,7 +470,7 @@ class Table(DocElement):
         return " ".join(alignments)
 
     def to_tex(self) -> str:
-        # horizontal line after the header
+        # horizontal line after the **kwargser
         open = r"\begin{tabular}{" + self._params["align"] + "}"
         content = "\n".join(
         [self._children[0].to_tex(), r"\hline"] + [child.to_tex() for child in self._children[1:]]
@@ -483,20 +483,20 @@ class Table(DocElement):
         return raw.startswith("|")
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         lines = []
         leftover_lines = raw.splitlines()
         while leftover_lines and cls.matches(leftover_lines[0]):
             lines.append(leftover_lines.pop(0))
-        return cls("\n".join(lines), head), "\n".join(leftover_lines)
+        return cls("\n".join(lines), **kwargs), "\n".join(leftover_lines)
 
 
 class TableRow(DocElement):
 
-    def __init__(self, raw, head):
+    def __init__(self, raw, **kwargs):
         values = self.split_md_table_row(raw)
-        self._children = [Paragraph(v, head) for v in values]
+        self._children = [Paragraph(v, **kwargs) for v in values]
 
     def to_tex(self) -> str:
         children = [c.to_tex() for c in self._children]
@@ -510,21 +510,21 @@ class Paragraph(DocElement):
 
     _HTML_TAG = "p"
 
-    def __init__(self, raw, head):
-        self._children = self.get_inline_children(raw, head)
+    def __init__(self, raw, **kwargs):
+        self._children = self.get_inline_children(raw, **kwargs)
 
-    def get_inline_children(self, raw, head):
+    def get_inline_children(self, raw, **kwargs):
         children = []
         while raw:
-            child, raw = self.get_next_and_leftovers_inline(raw, head)
+            child, raw = self.get_next_and_leftovers_inline(raw, **kwargs)
             children.append(child)
         return children
 
-    def get_next_and_leftovers_inline(self, raw, head):
+    def get_next_and_leftovers_inline(self, raw, **kwargs):
         for cls in [InlineCode, Bold, Italic, URL, Hyperlink, Comment]:
             if cls.matches(raw):
                 try:
-                    return cls.get_with_leftovers_inline(raw, head)
+                    return cls.get_with_leftovers_inline(raw, **kwargs)
                 except Exception:
                     print("UH OH")
                     print(cls, "choked on:", repr(raw))
@@ -532,7 +532,7 @@ class Paragraph(DocElement):
         # otherwise, we're grabbing plain text. Start by just taking one
         # character at a time. We can optimize this later by taking chunks with
         # no special characters
-        return Literal(raw[:1], head), raw[1:]
+        return Literal(raw[:1], **kwargs), raw[1:]
 
     @classmethod
     def matches(cls, raw: str) -> bool:
@@ -546,9 +546,9 @@ class Paragraph(DocElement):
         return "".join(c.to_html() for c in self._children)
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         lines = raw.splitlines()
-        return cls(lines[0], head), "\n".join(lines[1:])
+        return cls(lines[0], **kwargs), "\n".join(lines[1:])
 
 
 class InlineBase(DocElement):
@@ -556,14 +556,14 @@ class InlineBase(DocElement):
     _DELIM = ""
 
     # TODO: need to handle code within bold. italic within bold
-    def __init__(self, raw, head):
-        self._children.append(Literal(raw, head))
+    def __init__(self, raw, **kwargs):
+        self._children.append(Literal(raw, **kwargs))
 
     @classmethod
-    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         content, leftovers = raw.lstrip(cls._DELIM).split(cls._DELIM, 1)
-        return cls(content, head), leftovers
+        return cls(content, **kwargs), leftovers
 
     @classmethod
     def matches(cls, raw) -> bool:
@@ -611,11 +611,11 @@ class URL(InlineBase):
         return raw.startswith("http://") or raw.startswith("https://")
 
     @classmethod
-    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         next_word = raw.split(None, 1)[0]
         leftovers = raw[len(next_word):]
-        return cls(next_word, head), leftovers
+        return cls(next_word, **kwargs), leftovers
 
     def to_tex(self) -> str:
         return r"\url{" + self._child_to_tex() + "}"
@@ -623,8 +623,8 @@ class URL(InlineBase):
 
 class Hyperlink(InlineBase):
 
-    def __init__(self, text, url, head): 
-        self._children = [Paragraph(text, {})]
+    def __init__(self, text, url, **kwargs): 
+        self._children = [Paragraph(text)]
         self._params = {"url": url}
 
     @classmethod
@@ -632,11 +632,11 @@ class Hyperlink(InlineBase):
         return raw.startswith("[") and "](" in raw and ")" in raw.split("](")[1]
 
     @classmethod
-    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         text, leftovers = raw[1:].split("](", 1)
         url, leftovers = leftovers.split(")", 1)
-        return cls(text, url, head), leftovers
+        return cls(text, url, **kwargs), leftovers
 
     def to_tex(self) -> str:
         return r"\href{" + self._params["url"] + "}{" + self._child_to_tex() + "}"
@@ -644,8 +644,8 @@ class Hyperlink(InlineBase):
 
 class Comment(InlineBase):
 
-    def __init__(self, body, head):
-        self._children = [Literal(body, head)]
+    def __init__(self, body, **kwargs):
+        self._children = [Literal(body, **kwargs)]
 
     def to_tex(self):
         return "%" + self._child_to_tex()
@@ -655,9 +655,9 @@ class Comment(InlineBase):
         return raw.lstrip().startswith("%")
 
     @classmethod
-    def get_with_leftovers_inline(cls, raw: str, head: dict) -> tuple[InlineBase, str]:
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[InlineBase, str]:
         # Quote absorbs the whole remaining line
-        return cls(raw.lstrip()[1:], head), ""
+        return cls(raw.lstrip()[1:], **kwargs), ""
 
 
 # ==========
@@ -674,7 +674,7 @@ class Image(DocElement):
         return raw.startswith("![") and "](" in raw and ")" in raw.split("](", 1)[1]
 
     @classmethod
-    def get_with_leftovers(cls, raw, head):
+    def get_with_leftovers(cls, raw, **kwargs):
         assert cls.matches(raw)
         alt_text, leftovers = raw[2:].split("](")
         url, leftovers = leftovers.split(")", 1)
@@ -688,7 +688,7 @@ class Image(DocElement):
 
 class EmptyLine(DocElement):
 
-    def __init__(self, body, head):
+    def __init__(self, body, **kwargs):
         pass
 
     def to_tex(self):
@@ -702,17 +702,17 @@ class EmptyLine(DocElement):
         return raw and not raw.splitlines()[0].strip()
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_with_leftovers(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
         # if there are multiple empty lines in a row, absorb them all
         lines = raw.splitlines()
         while lines and not lines[0].strip():
             lines.pop(0)
-        return cls("", head), "\n".join(lines)
+        return cls("", **kwargs), "\n".join(lines)
 
 
 class Literal(DocElement):
 
-    def __init__(self, raw, head):
+    def __init__(self, raw, **kwargs):
         self._params = {"text": raw}
 
     def to_tex(self):
