@@ -33,8 +33,6 @@ printf "building $(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... "
 #REPO_ROOT=$(git rev-parse --show-toplevel)
 #cd "$REPO_ROOT/hardware-design"
 
-FAILURE=""
-
 ./build/md2tex/md2tex.py "$MD_PATH" > "$DIR/$JOB_NAME.md2tex" 2>&1
 if [[ "$?" != "0" ]]; then
 	echored "md parse failed\n"
