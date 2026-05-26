@@ -3,25 +3,25 @@
 import argparse
 import os
 import sys
-import yaml
 
 import docparser
 import helpers
 
 
 def main() -> int:
-    md_path = get_md_path()
-    tex_path = md_path.replace(".md", ".gen.tex")
-    print(f"building", helpers.blue(md_path), "->", helpers.blue(tex_path), "... ", end="")
+    args = get_args()
+    tex_path = args.md_path.replace(".md", ".gen.tex")
+    print(f"building", helpers.blue(args.md_path), "->", helpers.blue(tex_path), "... ", end="")
     sys.stdout.flush()
 
     try:
-        doc = docparser.Document(md_path)
+        doc = docparser.Document(args.md_path)
     except docparser.ParseFailure as exc:
         print(helpers.red(exc))
         return 1
 
-#    print(doc.to_html())
+    if args.debug:
+        print(doc.to_html())
 
     with open(tex_path, "w") as handle:
         handle.write(doc.to_tex())
@@ -40,7 +40,7 @@ def md_path(path):
     return path
 
 
-def get_md_path():
+def get_args():
     parser = argparse.ArgumentParser(
         prog="md2tex",
         description="convert markdown to latex",
@@ -48,7 +48,8 @@ def get_md_path():
     parser.add_argument(
         "md_path", type=md_path, help="path to the input markdown file"
     )
-    return parser.parse_args().md_path
+    parser.add_argument("--debug", action="store_true", help="enable verbose debug output and modify exception handling")
+    return parser.parse_args()
 
 
 class ParseFailure(Exception):
