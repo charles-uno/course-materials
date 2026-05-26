@@ -7,7 +7,7 @@ DIR=$(dirname "$INPUT_PATH")
 JOB_NAME=$(basename "$INPUT_PATH" | cut -d '.' -f 1)
 PDF_PATH="$DIR/$JOB_NAME.pdf"
 
-# printf "building \033[35m$INPUT_PATH\033[0m -> \033[35m$PDF_PATH\033[0m ... "
+printf "building \033[35m$INPUT_PATH\033[0m -> \033[35m$PDF_PATH\033[0m ... "
 
 # so we can import from the templates directory as well as the build directory
 export TEXINPUTS=".:$(pwd)/build/templates/:"
