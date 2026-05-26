@@ -1,4 +1,5 @@
 template: assignment.tex
+date: March 8, 2027
 ---
 
 # Instructions on Hardware
