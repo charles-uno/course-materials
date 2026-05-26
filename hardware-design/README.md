@@ -34,20 +34,19 @@ Add dedicated DISCUSSION slides. not just a question in the middle of a list
 
 Add BOARD WORK slides. Ideally one per section. Dedicated group work
 
+TODO: add stretch goals to the homework? Stuff that is hard! many students will not be able to do it! we don't expect everyone to get it right. not worth that many points. it's like giving your tiger a frozen pumpkin full of hamburger meat. enrichment
+
 Switch from `word` to `long`? Some weirdness around 64-bit comparisons on 32-bit values
 
 circuitverse - clarify that the button is a different type of input
-switch over to a different circuit simulator? logic.ly? 
 add screenshots to help with testbench setup
 
 # TODO - Repo
 
 md2tex pending updates:
-- handle links that do not start immediately following whitespace, eg in parens ([foo](www.yahoo.com))
 - handle block quotes
-- make sure we handle inline comments correctly
 
-Add `header.yaml` or similar. Handle it along with YAML headers in the markdown files. Start with the repo-level one, then course-level, then chapter-level. Ideally want to be able to have author and title info in there to be shared across files
+Handle repo-level `header.yaml`. Same pattern as the directory-level one. Just author and course title I guess
 
 Figure out how to create tagged PDFs for accessibility
 
