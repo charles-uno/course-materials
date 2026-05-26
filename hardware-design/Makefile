@@ -15,21 +15,14 @@ homework: $(HOMEWORK_MD:.main.md=.pdf)
 final:
 	cd final && make
 
-# pretty much everything follows the same pattern:
-# foo.main.md -> foo.main.gen.tex -> foo.pdf
+MD2PDF := build/md2pdf.sh
 
-MD2TEX := build/md2tex/md2tex.py
-TEX2PDF := build/tex2pdf.sh
+BUILD_TOOLS := $(wildcard build/**/*.*)
 
-BUILD_TOOLS := $(MD2TEX) $(TEX2PDF) $(wildcard build/templates/*.tex)
+MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.main.md" | sort)
 
-MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.main.md")
-
-$(MAIN_MD:.main.md=.pdf): %.pdf: %.main.gen.tex $(BUILD_TOOLS)
-	@$(TEX2PDF) $<
-
-%.gen.tex: %.md $(BUILD_TOOLS)
-	@$(MD2TEX) $<
+$(MAIN_MD:.main.md=.pdf): %.pdf: %.main.md $(BUILD_TOOLS)
+	@$(MD2PDF) $<
 
 # remove junk per the .gitignore
 clean: tidy

@@ -18,26 +18,11 @@ export TEXINPUTS=".:$REPO_ROOT/hardware-design/build/templates/:"
 latexmk -silent -pdf -jobname="$JOB_NAME" -cd -interaction=nonstopmode -shell-escape "$INPUT_PATH" >/dev/null 2>&1
 
 if [ -f "$PDF_PATH" ]; then
+	# if the build was successful, clean up temporary files
 	printf "\033[92mdone\033[0m\n"
 	latexmk -c -jobname="$JOB_NAME" -e '$$clean_ext = "nav snm vrb"' "$INPUT_NAME" >/dev/null 2>&1
 else
+	# if the build failed, leave temporary files in place for debugging
 	printf "\033[31mfailed\033[0m (see $DIR/$JOB_NAME.log)\n"
 	[ -f "$DIR/$JOB_NAME.log" ] && cat "$DIR/$JOB_NAME.log"; exit 1
 fi
-
-# consolidate artifacts into one directory for convenience
-# projects, syllabus, etc: foo/foo.pdf -> artifacts/foo.pdf
-# slides, homework, etc: chapters/foo/bar.pdf -> artifaacts/foo-bar.pdf
-
-if [[ "$DIR" == chapters/* ]]; then
-	# chapters/foo/bar.pdf -> artifacts/foo-bar.pdf (slides, homework, etc)
-	CHAPTER_NAME=$(basename "$DIR")
-	ARTIFACT_NAME="artifacts/$CHAPTER_NAME-$JOB_NAME.pdf"
-else
-	# foo/foo.pdf -> artifacts/foo.pdf (syllabus, project, etc)
-	ARTIFACT_NAME="artifacts/$JOB_NAME.pdf"
-fi
-
-mkdir -p artifacts
-printf "moving \033[35m$PDF_PATH\033[0m -> \033[35m$ARTIFACT_NAME\033[0m\n"
-cp "$PDF_PATH" "$ARTIFACT_NAME"
