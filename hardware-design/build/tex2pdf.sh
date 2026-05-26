@@ -10,12 +10,12 @@ PDF_PATH="$DIR/$JOB_NAME.pdf"
 # printf "building \033[35m$INPUT_PATH\033[0m -> \033[35m$PDF_PATH\033[0m ... "
 
 # so we can import from the templates directory as well as the build directory
-REPO_ROOT=$(git rev-parse --show-toplevel)
-export TEXINPUTS=".:$REPO_ROOT/hardware-design/build/templates/:"
+export TEXINPUTS=".:$(cwd)/build/templates/:"
 
-# NOTE: -cd is important here. If we cd to that directory explicitly, the
-# minted lexer runs into name collisions with temporary generated files
-latexmk -silent -pdf -jobname="$JOB_NAME" -cd -interaction=nonstopmode -shell-escape "$INPUT_PATH" >/dev/null 2>&1
+# NOTE: it's important that we run from a parent directory with -cd rather than
+# move to the working directory. The minted lexer will try to import temporary
+# generated files and get confused
+latexmk -silent -halt-on-error -pdf -jobname="$JOB_NAME" -cd -interaction=nonstopmode -shell-escape "$INPUT_PATH" >/dev/null 2>&1
 
 if [ -f "$PDF_PATH" ]; then
 	# if the build was successful, clean up temporary files
@@ -25,7 +25,7 @@ else
 	# if the build failed, leave temporary files in place for debugging
 	printf "\033[31mfailed\033[0m\n"
 	if [ -f "$DIR/$JOB_NAME.log" ]; then
-		cat "$DIR/$JOB_NAME.log"
+		cat "$DIR/$JOB_NAME.log" | texfot
 		exit 1
 	fi
 fi
