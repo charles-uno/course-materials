@@ -19,8 +19,8 @@ fi
 
 printf "building \033[35m$MD_PATH\033[0m -> \033[35m$ARTIFACT_PATH\033[0m ... "
 
-REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT/hardware-design"
+#REPO_ROOT=$(git rev-parse --show-toplevel)
+#cd "$REPO_ROOT/hardware-design"
 
 FAILURE=""
 
