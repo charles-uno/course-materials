@@ -18,6 +18,8 @@ def main() -> int:
         doc = docparser.Document(args.md_path)
     except docparser.ParseFailure as exc:
         print(helpers.red(exc))
+        if args.debug:
+            raise
         return 1
 
     if args.debug:

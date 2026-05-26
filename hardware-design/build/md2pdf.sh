@@ -24,7 +24,7 @@ printf "building \033[35m$MD_PATH\033[0m -> \033[35m$ARTIFACT_PATH\033[0m ... "
 
 FAILURE=""
 
-./build/md2tex/md2tex.py "$MD_PATH" --debug # > /dev/null 2>&1
+./build/md2tex/md2tex.py "$MD_PATH" # > /dev/null 2>&1
 if [[ "$?" != "0" ]]; then FAILURE="md parse failed: ./build/md2tex/md2tex.py $MD_PATH"; fi
 
 ./build/tex2pdf.sh "$TEX_PATH" # > /dev/null 2>&1
