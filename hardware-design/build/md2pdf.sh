@@ -46,5 +46,4 @@ fi
 mkdir -p artifacts
 mv "$PDF_PATH" "$ARTIFACT_PATH"
 
-echogreen "done"
-echo
+echogreen "done\n"
