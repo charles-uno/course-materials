@@ -1,3 +1,4 @@
+import os
 import pathlib
 import yaml
 
@@ -127,9 +128,21 @@ class DocElement:
 class Document(DocElement):
 
     def __init__(self, md_path: str):
+        upstream_kwargs = self._get_upstream_kwargs(md_path)
         kwargs, body = self._get_kwargs_and_body(md_path)
-        self._children = self.get_children(body, **kwargs)
-        self._params = kwargs
+        upstream_kwargs.update(kwargs)
+        self._children = self.get_children(body, **upstream_kwargs)
+        self._params = upstream_kwargs
+
+    def _get_upstream_kwargs(self, md_path) -> dict:
+        # if the directory contains a header.yaml, pick that up as if it was
+        # part of the Markdown YAML header. File-level values take precedent
+        # over directory-level values
+        kwargs_path = os.path.dirname(md_path) + "/header.yaml"
+        if not os.path.isfile(kwargs_path):
+            return {}
+        with open(kwargs_path, "r") as handle:
+            return yaml.safe_load(handle.read()) or {}
 
     def _get_kwargs_and_body(self, md_path: str) -> tuple[dict, str]:
         with open(md_path, "r") as handle:
