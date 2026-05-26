@@ -20,3 +20,4 @@ _minted*
 *.gen.tex
 __pycache__
 artifacts
+*.md2tex
