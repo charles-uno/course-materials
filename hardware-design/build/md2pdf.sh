@@ -35,9 +35,10 @@ printf "building $(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... "
 
 FAILURE=""
 
-./build/md2tex/md2tex.py "$MD_PATH" > /dev/null 2>&1
+./build/md2tex/md2tex.py "$MD_PATH" > "$DIR/$JOB_NAME.md2tex" 2>&1
 if [[ "$?" != "0" ]]; then
 	echored "md parse failed\n"
+	cat "$DIR/$JOB_NAME.md2tex"
 	exit 1
 fi
 

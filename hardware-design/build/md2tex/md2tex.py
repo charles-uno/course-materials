@@ -13,25 +13,11 @@ def main() -> int:
     tex_path = args.md_path.replace(".md", ".gen.tex")
     print(f"building", helpers.blue(args.md_path), "->", helpers.blue(tex_path), "... ", end="")
     sys.stdout.flush()
-
-    try:
-        doc = docparser.Document(args.md_path)
-    except docparser.ParseFailure as exc:
-        print(helpers.red(exc))
-        if args.debug:
-            raise
-        return 1
-
-    if args.debug:
-        print(doc.to_html())
-
+    doc = docparser.Document(args.md_path)
     with open(tex_path, "w") as handle:
         handle.write(doc.to_tex())
-
     print(helpers.green("done"))
-
     return 0
-
 
 
 def md_path(path):

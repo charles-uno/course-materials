@@ -297,7 +297,6 @@ class UnorderedList(DocElement):
         return cls(current, head), leftovers
 
     def _get_items(self, raw: str, head: dict) -> list[DocElement]:
-        delims = ["- ", "* "]
         raw_items = []
         for line in raw.splitlines():
             if self.matches(line):
@@ -435,8 +434,6 @@ class TexBlock(FencedBlock):
         return self._child_to_tex()
 
 
-
-
 class MulticolumnBlock(FencedBlock):
 
     _FENCE = "|||"
@@ -446,11 +443,6 @@ class MulticolumnBlock(FencedBlock):
 
     def to_tex(self) -> str:
         return r"\bigskip\begin{multicols}{2}" + "\n" + self.indent(self._children_to_tex()) + "\n" + r"\end{multicols}\bigskip"
-
-
-
-
-
 
 
 # ==========
