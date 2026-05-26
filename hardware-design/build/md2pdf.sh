@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 MD_PATH="$1"
 DIR=$(dirname "$MD_PATH")
 JOB_NAME=$(basename "$MD_PATH" | cut -d '.' -f 1)
@@ -17,7 +15,20 @@ else
 	ARTIFACT_PATH="artifacts/$JOB_NAME.pdf"
 fi
 
-printf "building \033[35m$MD_PATH\033[0m -> \033[35m$ARTIFACT_PATH\033[0m ... "
+
+echogreen() {
+	printf "\033[0;32m%b\033[0m" "$*"
+}
+
+echored() {
+	printf "\033[0;31m%b\033[0m" "$*"
+}
+
+echopurp() {
+	printf "\033[0;35m%b\033[0m" "$*"
+}
+
+printf "building $(echopurp $MD_PATH) -> $(echopurp $ARTIFACT_PATH) ... "
 
 #REPO_ROOT=$(git rev-parse --show-toplevel)
 #cd "$REPO_ROOT/hardware-design"
@@ -25,18 +36,20 @@ printf "building \033[35m$MD_PATH\033[0m -> \033[35m$ARTIFACT_PATH\033[0m ... "
 FAILURE=""
 
 ./build/md2tex/md2tex.py "$MD_PATH" > /dev/null 2>&1
-if [[ "$?" != "0" ]]; then FAILURE="md parse failed: ./build/md2tex/md2tex.py $MD_PATH"; fi
+if [[ "$?" != "0" ]]; then
+	echored "md parse failed\n"
+	exit 1
+fi
 
 ./build/tex2pdf.sh "$TEX_PATH" > /dev/null 2>&1
-if [[ ! -f "$PDF_PATH" ]]; then FAILURE="tex build failed: ./build/tex2pdf.sh $TEX_PATH"; fi
-
-if [[ "$FAILURE" != "" ]]; then
-	printf "\033[31m$FAILURE\033[0m\n"
+if [[ ! -f "$PDF_PATH" ]]; then
+	echored "tex build failed\n"
+	cat "$DIR/$JOB_NAME.log" | grep -E -A 5 "^\!.*|^l\.[0-9]+"
 	exit 1
-else
-	printf "\033[92mdone\033[0m\n"
 fi
 
 mkdir -p artifacts
 mv "$PDF_PATH" "$ARTIFACT_PATH"
 
+echogreen "done"
+echo

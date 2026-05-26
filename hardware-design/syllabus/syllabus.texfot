@@ -1,0 +1,7 @@
+/Library/TeX/texbin/texfot: invoking: latexmk -silent -halt-on-error -pdf -jobname=syllabus -cd -interaction=nonstopmode -shell-escape syllabus/syllabus.gen.tex
+[stderr] Latexmk: Sometimes, the -f option can be used to get latexmk
+[stderr]   to try to force complete processing.
+[stderr]   But normally, you will need to correct the file(s) that caused the
+[stderr]   error, and then rerun latexmk.
+[stderr]   In some cases, it is best to clean out generated files before rerunning
+[stderr]   latexmk after you've corrected the files.

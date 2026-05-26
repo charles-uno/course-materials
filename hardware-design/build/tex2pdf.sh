@@ -15,7 +15,7 @@ export TEXINPUTS=".:$(pwd)/build/templates/:"
 # NOTE: it's important that we run from a parent directory with -cd rather than
 # move to the working directory. The minted lexer will try to import temporary
 # generated files and get confused
-latexmk -silent -halt-on-error -pdf -jobname="$JOB_NAME" -cd -interaction=nonstopmode -shell-escape "$INPUT_PATH" >/dev/null 2>&1
+texfot latexmk -silent -halt-on-error -pdf -jobname="$JOB_NAME" -cd -interaction=nonstopmode -shell-escape "$INPUT_PATH" > "$DIR/$JOB_NAME.texfot"
 
 if [ -f "$PDF_PATH" ]; then
 	# if the build was successful, clean up temporary files
