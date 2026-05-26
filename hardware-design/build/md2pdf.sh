@@ -5,7 +5,7 @@ set -e
 MD_PATH="$1"
 DIR=$(dirname "$MD_PATH")
 JOB_NAME=$(basename "$MD_PATH" | cut -d '.' -f 1)
-TEX_PATH="$DIR/$JOB_NAME.main.gen.tex"
+TEX_PATH="$DIR/$JOB_NAME.gen.tex"
 PDF_PATH="$DIR/$JOB_NAME.pdf"
 
 if [[ "$DIR" == chapters/* ]]; then
