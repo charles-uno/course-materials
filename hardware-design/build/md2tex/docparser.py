@@ -89,14 +89,14 @@ class DocElement:
                 raise ValueError(f"Unsupported HTML param: {val}")
         return " ".join(pretty)
 
-    def get_children(self, raw: str, head: dict) -> list[DocElement]:
+    def get_children(self, raw: str, head: dict) -> list["DocElement"]:
         children = []
         while raw:
             next_elt, raw = self.get_next_and_leftovers(raw, head)
             children.append(next_elt)
         return children
 
-    def get_next_and_leftovers(self, raw: str, head: dict) -> tuple[DocElement, str]:
+    def get_next_and_leftovers(self, raw: str, head: dict) -> tuple["DocElement", str]:
         doc_element_types: list[DocElement] = [
             Section,
             Subsection,
@@ -217,7 +217,7 @@ class SectionBase(DocElement):
         return raw.startswith("#"*cls._DEPTH + " ")
 
     @classmethod
-    def get_with_leftovers(cls, body: str, head: dict) -> tuple[Subsection, str]:
+    def get_with_leftovers(cls, body: str, head: dict) -> tuple[DocElement, str]:
         current, leftovers = cls.get_contents_and_leftovers(body)
         return cls(current, head), leftovers
 
@@ -389,7 +389,7 @@ class FencedBlock(DocElement):
         return raw.startswith(cls._FENCE) and "\n" + cls._FENCE in raw
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         raw = raw.lstrip(cls._FENCE)
         assert ("\n" + cls._FENCE) in raw
@@ -491,7 +491,7 @@ class Table(DocElement):
         return raw.startswith("|")
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[Subsection, str]:
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         assert cls.matches(raw)
         lines = []
         leftover_lines = raw.splitlines()
@@ -710,7 +710,7 @@ class EmptyLine(DocElement):
         return raw and not raw.splitlines()[0].strip()
 
     @classmethod
-    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[EmptyLine, str]:
+    def get_with_leftovers(cls, raw: str, head: dict) -> tuple[DocElement, str]:
         # if there are multiple empty lines in a row, absorb them all
         lines = raw.splitlines()
         while lines and not lines[0].strip():
