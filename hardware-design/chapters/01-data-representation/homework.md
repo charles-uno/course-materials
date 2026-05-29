@@ -65,20 +65,22 @@ Make sure to include the appropriate prefixes on binary and hex values. The numb
     Is the number above positive or negative?
     
     After the sign bit, then next eight bits are the exponent bits, representing an unsigned binary integer. What are these eight bits? 
-    
+
     The remaining bits are the significand bits. What are these bits? 
     
     Imagine there is a binary point before the start of these bits, and convert the resulting binary fixed point number into decimal. Your answer should be between 0 and 1. 
             
-    To put these pieces together, we use: $(-1)^{\textrm{[sign bit]}}\times 2^{\textrm{[converted exponent bits]}} \times 1.\textrm{[converted significand bits]}$
+    To put these pieces together, we use:
+    $(-1)^{\textrm{[sign bit]}}\times 2^{\textrm{[converted exponent bits]}} \times 1.\textrm{[converted significand bits]}$
+
 
 ## Serialization
 
 
 Look up an ASCII table. and use it to fill out the corresponding values for each character below. Enter values in decimal. An ASCII table will be provided if you need one on the test.
             
-1. Write the string $"CSCI241"$ as a sequence of ASCII values. Don't forget the null byte at the end of the string.
-1. Write the string $"h3ll0 :)"$ as a sequence of ASCII values.
+1. Write the string `"CSCI241"` as a sequence of ASCII values. Don't forget the null byte at the end of the string.
+1. Write the string `"h3ll0 :)"` as a sequence of ASCII values.
 
 
 
