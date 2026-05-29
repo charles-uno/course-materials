@@ -581,7 +581,7 @@ class InlineBase(DocElement):
     @classmethod
     def matches(cls, raw) -> bool:
         # watch out for overlapping delimiters, such as italic (*) and bold (**)
-        return raw.startswith(cls._DELIM) and not raw[1:].startswith(cls._DELIM)
+        return raw.startswith(cls._DELIM) and not raw[1:].startswith(cls._DELIM) and cls._DELIM in raw[2:]
 
 
 class InlineCode(InlineBase):
