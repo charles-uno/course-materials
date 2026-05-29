@@ -51,3 +51,11 @@ Handle repo-level `header.yaml`. Same pattern as the directory-level one. Just a
 Figure out how to create tagged PDFs for accessibility
 
 
+
+each group has a captain/speaker/??
+
+- can volunteer or choose randomly. try to mix it up
+- the speaker *does not* lead discussion while working
+- the speaker *does* escalate questions to the prof when thr group is stuck
+- the speaker *does* present the group's work to the class
+

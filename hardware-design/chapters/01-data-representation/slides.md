@@ -400,6 +400,7 @@ Why offset the exponent?
 
 Why add 1 to the significand fraction?
 
+% normalizing to 1.xxx gives us a free bit of precision
 
 % Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
 

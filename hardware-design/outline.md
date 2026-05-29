@@ -1,0 +1,172 @@
+
+Data Representation
+- Integers and arithmetic in binary
+    - What is decimal?
+    - Positive integers in binary
+    - Aside: hexadecimal
+    - Addition and multiplication
+    - Overflow
+    - Signed magnitude vs two's complement
+    - Subtraction with two's complement
+    - **BOARD WORK:** conversions and arithmetic
+- Floating point operations and limitations
+    - Fixed point vs floating point
+    - Breaking down the standard
+    - Precision vs magnitude
+    - Representation errors (0.1 + 0.2 = ...)
+    - Cancellation of significance
+    - **BOARD WORK:** representation of non-exact values, subtraction with formulas
+- Data serialization (aka marshalling)
+    - ASCII and unicode
+    - Sound, color, images, video
+    - HTML, JSON
+    - Thrift
+    - **BOARD WORK:** convert a string to ASCII to ones and zeroes
+- Data transformation
+    - Hashing
+    - Checksums
+    - Compression
+    - Space-time complexity tradeoff
+    - LLMs are good at compressing! Their whole deal is finding patterns
+    - Lossy vs lossless
+    - Encryption
+    - **BOARD WORK:**
+Logic Representation
+- Truth tables
+    - Boolean logic
+    - Boolean operators
+    - **BOARD WORK:** convert between boolean expressions, truth tables
+- Logic circuits
+    - Logic gates
+    - Functional completeness
+    - Multiple inputs/outputs
+    - **BOARD WORK:**
+- Math circuits
+    - Addition
+    - Multiplication
+    - Comparison
+    - **BOARD WORK:** truth table then circuit for two-bit multiplication
+- Control circuits
+    - Multiplexer
+    - Latch
+    - **BOARD WORK:** truth table then circuit for a multiplexer
+Breadboards
+- Resistors
+    - Water analogy
+    - Series
+    - Parallel
+    - **BOARD WORK:** breadboard! look at LED brightness
+- Capacitors
+    - Water analogy
+    - Low-pass filter
+    - High-pass filter
+    - **BOARD WORK:** breadboard! make filters
+- Transistors
+    - Water analogy
+    - Logic gates
+    - **BOARD WORK:** breadboard! make logic gates
+Shell Scripting
+- VM setup?
+    - **BOARD WORK:**
+- Shell commands?
+    - **BOARD WORK:**
+- Piping?
+    - **BOARD WORK:**
+- Conditionals and Loops?
+    - **BOARD WORK:**
+Assembly Programming
+- Registers, variable sizes. Scratch vs callee-saved. PC? 
+    - **BOARD WORK:**
+- Basic operations... ADD, SUB, AND, MUL, LSL... this is pretty awkward to test
+    - **BOARD WORK:**
+- Loading and storing data
+    - **BOARD WORK:**
+- IO using printf and scanf
+    - **BOARD WORK:**
+Executing Instructions
+- Von Neumann Architecture
+    - CPU
+    - ALU
+    - Registers
+    - Memory
+    - Busses
+    - IO
+    - **BOARD WORK:**
+- Execution cycle
+    - Fetch
+    - Decode
+    - Execute
+    - Write
+    - Clock-driven execution
+    - **BOARD WORK:**
+- Pipelining and hazards
+    - Data hazard
+    - Register renaming
+    - Control hazard
+    - Branch prediction
+    - Eager execution
+    - Superpipelining. 15+ stages, not just the 4 from the textbook
+    - **BOARD WORK:**
+- Instruction-level parallelism
+    - Superscalar execution
+    - VLIW
+    - SIMD
+    - **BOARD WORK:**
+Control Flow
+- Conditionals
+    - this is a whole day
+    - **BOARD WORK:** identify lowercase letters
+- Loops
+    - this is a whole day
+    - **BOARD WORK:** 
+Storage
+- Storage Hierarchy
+    - Book storage hierarchy
+    - Caching
+    - Temporal locality, spatial locality
+    - **BOARD WORK:**
+- Physical storage mechanisms
+    - Latches / flip-flops. SRAM, cache, registers
+    - Capacitors. Leaky. DRAM. Leaky. must be refreshed. Write by row (~kB)
+    - Charge traps. SSDs. Write endurance. Write by page (~kB), erase by block (~MB)
+    - Magnetic domains. HDD. Write by sector (~kB)
+    - **BOARD WORK:**
+- Performance
+    - Prefetching
+    - Write-back caching
+    - Hardware compression
+    - Block-level deduplication
+    - Log-structured filesystem (write changes rather than rewriting the whole file)
+    - memory interleaving (banks need to recharge after use, split consecutive values between them. bank is 512MB maybe)
+    - storage alignment (do not allow one value to straddle two words/cache lines. 64 bytes usually)
+    - **BOARD WORK:**
+- Resiliency
+    - Cosmic rays, hardware failure, power failure
+    - Journaling
+    - ECC, CRC. Hamming codes, checksums
+    - Copy on write. Never overwrite. do a new write and move the pointer
+    - Mirroring, RAID, XOR parity
+    - **BOARD WORK:**
+Stack Frames
+- Stack and heap
+    - **BOARD WORK:**
+- Local variables
+    - **BOARD WORK:**
+- Function calls. BL, LR
+    - **BOARD WORK:**
+- Recursion
+    - **BOARD WORK:**
+Parallelism & Concurrency
+- Booting, kernel, system calls
+    - **BOARD WORK:**
+- Process life cycle
+    - **BOARD WORK:**
+- Concurrency vs parallelism (generalize the idea of context switching)
+    - **BOARD WORK:**
+- Cores, processes, threads (and hyperthreading)
+    - **BOARD WORK:** pthreads timing data
+
+
+
+
+
