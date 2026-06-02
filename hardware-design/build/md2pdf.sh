@@ -44,6 +44,6 @@ if [[ ! -f "$PDF_PATH" ]]; then
 fi
 
 mkdir -p artifacts
-mv "$PDF_PATH" "$ARTIFACT_PATH"
+cp "$PDF_PATH" "$ARTIFACT_PATH"
 
 echogreen "done\n"
