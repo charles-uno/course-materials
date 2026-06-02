@@ -50,7 +50,7 @@ Logic Representation
     - Multiplexer
     - Latch
     - **BOARD WORK:** truth table then circuit for a multiplexer
-Breadboards
+Electronic Circuits
 - Resistors
     - Water analogy
     - Series
@@ -65,7 +65,7 @@ Breadboards
     - Water analogy
     - Logic gates
     - **BOARD WORK:** breadboard! make logic gates
-Shell Scripting
+Linux Shell
 - VM setup?
     - **BOARD WORK:**
 - Shell commands?
@@ -83,7 +83,7 @@ Assembly Programming
     - **BOARD WORK:**
 - IO using printf and scanf
     - **BOARD WORK:**
-Executing Instructions
+Instruction Cycles
 - Von Neumann Architecture
     - CPU
     - ALU
@@ -112,14 +112,6 @@ Executing Instructions
     - VLIW
     - SIMD
     - **BOARD WORK:**
-Control Flow
-- Conditionals
-    - this is a whole day
-    - **BOARD WORK:** identify lowercase letters
-- Loops
-    - this is a whole day
-    - **BOARD WORK:** 
-Storage
 - Storage Hierarchy
     - Book storage hierarchy
     - Caching
@@ -136,9 +128,9 @@ Storage
     - Write-back caching
     - Hardware compression
     - Block-level deduplication
-    - Log-structured filesystem (write changes rather than rewriting the whole file)
-    - memory interleaving (banks need to recharge after use, split consecutive values between them. bank is 512MB maybe)
-    - storage alignment (do not allow one value to straddle two words/cache lines. 64 bytes usually)
+    - Log-structured filesystem
+    - memory interleaving
+    - storage alignment
     - **BOARD WORK:**
 - Resiliency
     - Cosmic rays, hardware failure, power failure
@@ -147,14 +139,12 @@ Storage
     - Copy on write. Never overwrite. do a new write and move the pointer
     - Mirroring, RAID, XOR parity
     - **BOARD WORK:**
-Stack Frames
-- Stack and heap
-    - **BOARD WORK:**
-- Local variables
-    - **BOARD WORK:**
-- Function calls. BL, LR
-    - **BOARD WORK:**
-- Recursion
+Control Flow
+- Conditionals
+    - this is a whole day
+    - **BOARD WORK:** identify lowercase letters
+- Loops
+    - this is a whole day
     - **BOARD WORK:**
 Parallelism & Concurrency
 - Booting, kernel, system calls
@@ -165,8 +155,21 @@ Parallelism & Concurrency
     - **BOARD WORK:**
 - Cores, processes, threads (and hyperthreading)
     - **BOARD WORK:** pthreads timing data
-
-
-
+Stack Frames
+- Stack and heap
+    - **BOARD WORK:**
+- Local variables
+    - **BOARD WORK:**
+- Function calls. BL, LR
+    - **BOARD WORK:**
+- Recursion
+    - **BOARD WORK:**
+Networking
+- Network hardware
+- Application Layer
+- Transport Layer
+- Internet Layer
+- Link Layer
+- Security (maybe mixed in)
 
 

@@ -6,6 +6,8 @@ HOMEWORK_MD := $(wildcard chapters/*/homework.md)
 QUIZ_MD := $(wildcard chapters/*/quiz.md)
 CHAPTERS_MD := $(wildcard chapters/*/*.md)
 
+CHAPTER_PATHS := $(wildcard chapters/*)
+
 MD2PDF := build/md2pdf.sh
 BUILD_TOOLS := $(wildcard build/**/*.*)
 
@@ -23,6 +25,8 @@ chapters: $(CHAPTERS_MD:.md=.pdf)
 
 final:
 	cd final && make
+
+$(CHAPTER_PATHS): %: %/slides.pdf %/homework.pdf %/quiz.pdf
 
 $(MAIN_MD:.md=.pdf): %.pdf: %.md $(BUILD_TOOLS)
 	@$(MD2PDF) $<

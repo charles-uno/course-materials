@@ -4,6 +4,14 @@ template: slides.tex
 
 TODO: add a slide with example two's complement subtraction
 
+### Goals
+
+Goals for this chapter:
+
+@@goals@@
+
+
+
 # Data Representation
 
 ### How do computers store information?

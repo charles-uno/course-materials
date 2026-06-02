@@ -1,1 +1,6 @@
 title: Data Representation
+goals:
+  - Integers and arithmetic in binary
+  - Fractions and decimals in binary
+  - Data serialization
+  - Data transformation
