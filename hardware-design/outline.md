@@ -1,13 +1,17 @@
 
 Data Representation
 - Integers and arithmetic in binary
-    - What is decimal?
-    - Positive integers in binary
-    - Aside: hexadecimal
-    - Addition and multiplication
+    - Positive Integers in Decimal
+    - Positive Integers in Binary
+    - Converting from Decimal to Binary
+    - Converting from Binary to Decimal
+    - Addition in Binary
+    - Multiplication in Binary (note: no division)
     - Overflow
-    - Signed magnitude vs two's complement
-    - Subtraction with two's complement
+    - Two's Complement
+    - Subtraction in Binary
+    - Side Note: Hexadecimal
+    - Converting Between Binary and Hexadecimal
     - **BOARD WORK:** conversions and arithmetic
 - Floating point operations and limitations
     - Fixed point vs floating point
