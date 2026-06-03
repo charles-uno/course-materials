@@ -8,8 +8,6 @@ Goals for this chapter:
 
 @@goals@@
 
-# Data Representation
-
 ### How do computers store information?
 
 Computers work using electrical signals which can be on or off. If we let:
@@ -19,7 +17,7 @@ Computers work using electrical signals which can be on or off. If we let:
 
 We can use sequences of 0s and 1s to represent information
 
-# Positive Integers in Binary
+# Integers in Binary
 
 ### Numbers in Base Ten (aka Decimal)
 
@@ -140,15 +138,12 @@ $$$
 
 ### Division in Binary
 
-To divide by 2, shift the bits one place to the right. \\
+To divide by 2, shift the bits one place to the right.
 
-To divide by 4, shift the bits two places to the right. \\
+To divide by 4, shift the bits two places to the right.
 
 That's about as deep as we go in this class. If you're curious to learn more,
 see the textbook.
-
-% ### Group Exercises
-% TODO: this
 
 # Hexadecimal
 
@@ -209,9 +204,6 @@ $$$
     \end{array}
 \]
 $$$
-
-% ### Group Exercises
-% TODO: this
 
 # Negatives in Binary
 
@@ -468,7 +460,7 @@ So what's the catch?
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
-# Serialization
+# Binary Serialization
 
 ### What else do computers store?
 
@@ -531,7 +523,7 @@ $$$
 % ### Group Exercises
 % TODO: this
 
-# Transformation
+# Transforming Binary Data
 
 ### Hashing
 
