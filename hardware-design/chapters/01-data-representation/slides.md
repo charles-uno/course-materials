@@ -2,15 +2,11 @@ beamer: true
 template: slides.tex
 ---
 
-TODO: add a slide with example two's complement subtraction
-
 ### Goals
 
 Goals for this chapter:
 
 @@goals@@
-
-
 
 # Data Representation
 
@@ -472,7 +468,7 @@ So what's the catch?
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
-# Beyond Numbers
+# Serialization
 
 ### What else do computers store?
 
@@ -535,6 +531,16 @@ $$$
 % ### Group Exercises
 % TODO: this
 
+# Transformation
 
+### Hashing
 
+### Checksums
 
+### Compression
+
+### Space/Time Tradeoff
+
+### Lossy vs Lossless
+
+### Encryption
