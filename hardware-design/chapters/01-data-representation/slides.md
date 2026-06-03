@@ -145,67 +145,16 @@ To divide by 4, shift the bits two places to the right.
 That's about as deep as we go in this class. If you're curious to learn more,
 see the textbook.
 
-# Hexadecimal
+### Overflow
 
-### What? Why?
+### Counting Backwards from Zero
 
-Binary is how machines store data. But writing out binary by hand is a chore.
-In practice, it's often convenient to use hexadecimal (base 16) instead.
+### Two's Complement (Negative Integers in Binary)
 
-- Decimal uses ten digits, 0-9
-- Binary uses two digits, 0 and 1
-- Hexadecimal uses sixteen digits: 0-9 along with A-F
+### Subtraction in Binary
 
-Hexadecimal values are always prefixed with "0x" to avoid ambiguity.
 
-### Converting Between Binary and Hexadecimal
 
-Converting back and forth between binary and hexadecimal does not require any
-math! Every four bits become one hex digit.
-$$$
-\begin{align*}
-    0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
-    0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
-    0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
-    0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
-    0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
-    0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
-    0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
-    0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
-\end{align*}
-$$$
-
-### Converting from Decimal to Hexadecimal
-
-Hexadecimal is base 16. So each place corresponds to a power of 16.
-$$$
-\begin{align*}
-    0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
-            & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
-            & = 768 + 160 + 11                                  \\
-            & = 954                                             \\
-\end{align*}
-$$$
-
-Hexadecimal is very compact! These numbers get big fast
-
-### Arithmetic in Hexadecimal
-
-Addition and multiplication work in hexadecimal just like they do in binary and
-decimal. Just be careful about carrying.
-$$$
-\[
-    \begin{array}{ccccc}
-        1 &   &   & 1 &   \\
-            & 4 & 1 & 7 & B \\
-        + & C & 2 & 0 & F \\
-        \hline
-        1 & 0 & 3 & 8 & A \\
-    \end{array}
-\]
-$$$
-
-# Negatives in Binary
 
 ### First Attempt: Signed Magnitude
 
@@ -331,8 +280,79 @@ $$$
 These are two's complement numbers. Convert them to decimal. What just
 happened?
 
-% ### Group Exercises
-% TODO: this
+% # Hexadecimal
+
+### What? Why?
+
+Binary is how machines store data. But writing out binary by hand is a chore.
+In practice, it's often convenient to use hexadecimal (base 16) instead.
+
+- Decimal uses ten digits, 0-9
+- Binary uses two digits, 0 and 1
+- Hexadecimal uses sixteen digits: 0-9 along with A-F
+
+Hexadecimal values are always prefixed with "0x" to avoid ambiguity.
+
+### Converting Between Binary and Hexadecimal
+
+Converting back and forth between binary and hexadecimal does not require any
+math! Every four bits become one hex digit.
+$$$
+\begin{align*}
+    0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
+    0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
+    0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
+    0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
+    0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
+    0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
+    0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
+    0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
+\end{align*}
+$$$
+
+### Converting from Decimal to Hexadecimal
+
+Hexadecimal is base 16. So each place corresponds to a power of 16.
+$$$
+\begin{align*}
+    0x3AB & = 3 \times 16^2 + 10 \times 16^1 + 11 \times 16^0 \\
+            & = 3 \times 256 + 10 \times 16 + 11 \times 1       \\
+            & = 768 + 160 + 11                                  \\
+            & = 954                                             \\
+\end{align*}
+$$$
+
+Hexadecimal is very compact! These numbers get big fast
+
+### Arithmetic in Hexadecimal
+
+Addition and multiplication work in hexadecimal just like they do in binary and
+decimal. Just be careful about carrying.
+$$$
+\[
+    \begin{array}{ccccc}
+        1 &   &   & 1 &   \\
+            & 4 & 1 & 7 & B \\
+        + & C & 2 & 0 & F \\
+        \hline
+        1 & 0 & 3 & 8 & A \\
+    \end{array}
+\]
+$$$
+
+### Summary
+
+TODO: this
+
+### Group Work
+
+Let's perform 58 - 87 in binary:
+
+- Convert 58 to binary
+- Convert 87 to binary
+- Compute -87 in binary
+- Add 58 + (-87) in binary
+- Convert the result back to decimal
 
 # Fractions and Decimals
 
