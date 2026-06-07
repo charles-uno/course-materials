@@ -1,6 +1,6 @@
 
 Data Representation
-- Integers and arithmetic in binary
+- Positive Integers
     - Positive Integers in Decimal
     - Positive Integers in Binary
     - Converting from Decimal to Binary
@@ -8,19 +8,21 @@ Data Representation
     - Addition in Binary
     - Multiplication in Binary (note: no division)
     - Overflow
+- Negative Integers
+
+
     - Two's Complement
     - Subtraction in Binary
     - Side Note: Hexadecimal
     - Converting Between Binary and Hexadecimal
     - **BOARD WORK:** conversions and arithmetic
-- Floating point operations and limitations
+- Non-Integer Data
     - Fixed point vs floating point
     - Breaking down the standard
     - Precision vs magnitude
     - Representation errors (0.1 + 0.2 = ...)
     - Cancellation of significance
     - **BOARD WORK:** representation of non-exact values, subtraction with formulas
-- Data serialization (aka marshalling)
     - ASCII and unicode
     - Sound, color, images, video
     - HTML, JSON

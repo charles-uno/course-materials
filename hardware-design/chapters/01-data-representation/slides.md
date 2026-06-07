@@ -17,11 +17,11 @@ Computers work using electrical signals which can be on or off. If we let:
 
 We can use sequences of 0s and 1s to represent information
 
-# Integers in Binary
+# Positive Integers in Binary
 
 ### Numbers in Base Ten (aka Decimal)
 
-Let's start by talking about how we write numbers normally.
+Let's start by talking about how we write numbers normally:
 
 $$$
 \begin{center}$\begin{array}{ccccccc}
@@ -30,7 +30,7 @@ $$$
 \end{array}$\end{center}
 $$$
 
-This way of writing numbers is called decimal (aka base ten). We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
+This way of writing numbers is called decimal, or base ten. We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
 
 In terms of math, there is nothing special about base ten. We probably use it
 because we have ten fingers. Some ancient civilizations used sompletely
@@ -41,7 +41,7 @@ different systems for counting!
 Computers don't have fingers. They express everything as sequences of 1s and 0s. This format is called binary:
 $$$
 \begin{align*}
-    0b1101101 & =
+    0\text{b}1101101 & =
     1 \Times 2^6 +
     1 \Times 2^5 +
     0 \Times 2^4 +
@@ -54,43 +54,26 @@ $$$
 \end{align*}
 $$$
 
-
-
-$$$
-\begin{center}$\begin{array}{ccccccccccccccc}
-    0b1101101 & = & 1 \Times 2^6 & + & 1 \Times 2^5 & + &
-    0 \Times 2^4 & + & 1 \Times 2^3 & + & 1 \Times 2^2 & + & 0 \Times 2^1 & + & 1 \Times 2^0 \\
-                & = & 64 &+& 32 &+& 0 &+& 8 &+& 4 &+& 0 &+& 1 \\
-                & = &109                         \\
-\end{array}$\end{center}
-$$$
-
-
-
-
-
 Importantly: we always use the prefix "0b" to avoid confusion when writing numbers in binary.
 
-1101 is one thousand one hundred and one
-
-0b1101 is thirteen
+- 1101 is one thousand one hundred and one
+- 0b1101 is thirteen
 
 ### Converting from Decimal to Binary
 
-If the number is odd, append a 1 on the left. Otherwise, append a 0. Then
-divide your decimal number by two and ignore any remainder. Repeat until your
+Divide your decimal number by two and keep track of the remainder. Repeat until your
 decimal number is zero.
 
 For example, starting with 58:
 
-- 58 is even, so append **0**. Divide by two, leaving 29.
-- 29 is odd, so append **1**0. Divide by two, leaving 14.
-- 14 is even, so append **0**10. Divide by two, leaving 7.
-- 7 is odd, so append **1**010. Divide by two, leaving 3.
-- 3 is odd, so append **1**1010. Divide by two, leaving 1.
-- 1 is odd, so append **1**11010. Divide by two, leaving 0.
+- 58/2 = 29, remainder 0
+- 29/2 = 14, remainder 1
+- 14/2 = 7, remainder 0
+- 7/2 = 3, remainder 1
+- 3/2 = 1, remainder 1
+- 1/2 = 0, remainder 1
 
-So 58 in binary is 0b111010.
+So, reading from the bottom, 58 in binary is 0b111010.
 
 ### Converting from Binary to Decimal
 
@@ -98,7 +81,7 @@ We can confirm by converting back. The rightmost bit is worth 1, then 2, then
 4, and so on:
 $$$
 \begin{align*}
-    0b111010 & =
+    0\text{b}111010 & =
     1 \Times 2^5 +
     1 \Times 2^4 +
     1 \Times 2^3 +
@@ -119,16 +102,14 @@ For example:
 $$$
 \[
     \begin{array}{ccccccccc}
-        1 & 1 & 1 & 1 & 1 &   &   &   &   \\
+         & 1 & 1 & 1 & 1 &   &   &   &   \\
             & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0 \\
-        + & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+        + & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
         \hline
-        1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+         & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
     \end{array}
 \]
 $$$
-What happens if we try to perform this operation but we only have 8 bits to
-store the answer?
 
 ### Multiplication in Binary
 
@@ -162,142 +143,19 @@ see the textbook.
 
 ### Overflow
 
-### Counting Backwards from Zero
-
-### Two's Complement (Negative Integers in Binary)
-
-### Subtraction in Binary
-
-
-
-
-### First Attempt: Signed Magnitude
-
-We can use the first digit to hold the sign, then the rest of the digits to
-hold magnitue:
-
-- 0b**0**1011001 is positive 0b10110001, so 89
-- 0b**1**1011001 is negative 0b1011001, so -89
-
-This is nice and straightforward!
-
-### Addition and Subtraction with Signed Magnitude
-
-Adding positive numbers works just the same. But what happens if we throw a minus sign in there?
-
-For example, let's look at 12 - 5. First, rewrite it as 12 + (-5). Then:
-$$$
-\[
-    \begin{array}{ccccccccc}
-            & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0 \\
-        + & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
-        \hline
-            & ? & ? & ? & ? & ? & ? & ? & ? \\
-    \end{array}
-\]
-$$$
-
-We know the result should be 7 (0b00000111). But our regular rules for addition
-do not get us there.
-
-### Zero with Signed Magnitude
-
-Using signed magnitude, 0b00000000 is zero.
-
-And 0b10000000 is negative zero (which is also zero).
-
-Using this convention, we have to worry about the difference between numerical
-equality and bitwise equality. That seems pretty messy.
-
-### Can We Do Better?
-
-Signed magnitude was a swing and a miss. What do we want when we talk about negative numbers?
-
-- We want positive numbers to work like we expect
-- We want 0b00000000 to be zero, with no ambiguity
-- We want addition and subtraction to work the same for positive and negative
-
-### Another Idea: Two's Complement
-
-We know 1 - 1 = 0. Put another way, 1 + (-1) = 0. Can we work backwards from there to figure out how to write -1?
-$$$
-\[
-    \begin{array}{ccccccccc}
-            & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
-        + & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
-        \hline
-            & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-    \end{array}
-\]
-$$$
-Remember: on a computer, our numbers have to fit in a set number of bits.
-Anything past that gets thrown away. This is called overflow. In this case,
-overflow works in our favor!
-
-### Working Backwards from Zero
-
-We can use the same trick to identify the rest of the negative numbers:
-
-- 0b00000000 is 0
-- 0b11111111 is -1
-- 0b11111110 is -2
-- 0b11111101 is -3
-- 0b11111100 is -4
-- etc
-
-### The Sign Bit (Again)
-
-We only have 256 possible integers. How do we decide where the positives end and the negatives begin?
-
-Unsigned int: bits are worth 1, 2, 4, 8, 16, 32, 64, 128
-
-Signed magnitude: bits are worth $\pm1, \pm2, \pm4, \pm8, \pm16, \pm32, \pm64$,
-and the last bit tells us whether to use positive or negative (yikes)
-
-Two's complement: bits are worth 1, 2, 4, 8, 16, 32, 64, **-128**
-
-Range of possible values is -128 to 127.
-
-### Flipping Signs in Two's Complement
-
-To flip the sign of a two's complement integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers.
-
-For example:
-
-- 55 is 0b01010111
-- Flip the bits: 0b10101000, then add 1: 0b10101001
-- So -55 is 0b10101001
-- Flip the bits again: 0b01010110, add 1: 0b01010111
-- So -(-55) = 55 = 0b01010111
-
-What happens if we negate zero?
-
-### Binary Subtraction
-
-TODO: this slide
+- Let's say we are using 8-bit binary numbers. 
+- What happens when we add $0b11111111 + 0b00000001$?
 
 ### Overflow
 
-Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
+- Let's say we are using 8-bit binary numbers
+- What happens when we add $0b11111111 + 0b00000001$?
+- The sum is 0b100000000 (9 bits long), but we only have 8 bits to store it
+- In some situations, an overflow error may crash your program
+- Most of the time, the computer silently throws away the extra bit
+- This is called **overflow**
 
-Try adding 0b01101001 + 0b01011010:
-$$$
-\[
-    \begin{array}{ccccccccc}
-            &   & 1 & 1 & 1 &   &   &   &   \\
-            & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
-        + & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
-        \hline
-            & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
-    \end{array}
-\]
-$$$
-These are two's complement numbers. Convert them to decimal. What just
-happened?
-
-% # Hexadecimal
-
-### What? Why?
+### Hexadecimal
 
 Binary is how machines store data. But writing out binary by hand is a chore.
 In practice, it's often convenient to use hexadecimal (base 16) instead.
@@ -355,9 +213,93 @@ $$$
 \]
 $$$
 
+Note: it's very easy to make mistakes by hand. I will **not** ask you to do this on the quiz.
+
 ### Summary
 
+- We normally write numbers in decimal. Ten digits, each place scaled by a power of ten
+- Computers use binary. Two digits, each place scaled by a power of two
+- Rules for addition and multiplication are the same
+- Hexadecimal (base 16) is like binary but more compact
+
+### Group Work
+
 TODO: this
+
+
+
+
+
+
+## Negative Integers
+
+### Recall: Overflow
+
+For 8-bit addition, $0b11111111 + 0b00000001 = 0b00000000$
+
+255 + 1 = 0
+
+
+### Counting Backwards from Zero
+
+- The computer says $0b11111111 + 0b00000001 = 0b00000000$
+- In other words: $0b11111111 + 1 = 0$
+- Can we say $0b11111111 = -1$?
+- Likewise 0b11111110 is -2
+- 0b11111101 is -3
+- 0b11111100 is -4
+- etc
+
+### Negative Integers in Binary
+
+8-bit unsigned integer:
+- Bits are worth 1, 2, 4, 8, 16, 32, 64, 128
+- Range of possible values: 0 to 255
+
+8-bit signed integer:
+- Bits are worth 1, 2, 4, 8, 16, 32, 64, **-128**
+- Range of possible values is -128 to 127.
+
+This way of writing signed integers is called **two's complement**.
+
+Important: the computer just stores ones and zeroes! It does not know if 0b11111111 is -1 or 255. That must be tracked within your program
+
+### Flipping Signs
+
+To flip the sign of a two's complement binary integer, flip all the bits then add 1. Ignore the overflow (if any). This works for both positive and negative numbers.
+
+For example:
+
+- 55 is 0b01010111
+- Flip the bits: 0b10101000, then add 1: 0b10101001
+- So -55 is 0b10101001
+- Flip the bits again: 0b01010110, add 1: 0b01010111
+- So -(-55) = 55 = 0b01010111
+
+What happens if we negate zero?
+
+### Binary Subtraction
+
+TODO: this slide
+
+### Overflow
+
+Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
+
+Try adding 0b01101001 + 0b01011010:
+$$$
+\[
+    \begin{array}{ccccccccc}
+            &   & 1 & 1 & 1 &   &   &   &   \\
+            & 0 & 1 & 1 & 0 & 1 & 0 & 0 & 1 \\
+        + & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+        \hline
+            & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\
+    \end{array}
+\]
+$$$
+These are two's complement numbers. Convert them to decimal. What just
+happened?
 
 ### Group Work
 
