@@ -311,13 +311,16 @@ Let's perform 58 - 87 in binary:
 
 ### Fractions and Decimals
 
-### Floating Point Advantages
-
-### Floating Point Limitations
+- fixed point
+- floating point
 
 ### Floating Point Examples
 
 ### Floating Point Special Cases
+
+### Floating Point Advantages
+
+### Floating Point Limitations
 
 ### Characters and Strings
 
@@ -328,6 +331,10 @@ Let's perform 58 - 87 in binary:
 ### Color
 
 ### Images
+
+### Sound
+
+### Video
 
 ### Serializing Structured Data
 
