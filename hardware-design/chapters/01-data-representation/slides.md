@@ -23,14 +23,14 @@ We can use sequences of 0s and 1s to represent information
 
 Let's start by talking about how we write numbers normally.
 
-For example, let's look at the number 109:
 $$$
-\begin{align*}
-	109 & = 100 \;+\; 0 \;+\; 9                                   \\
-		& = 1 \Times 10^2 \;+\; 0 \Times 10^1 \;+\; 9 \Times 10^0
-\end{align*}
+\begin{center}$\begin{array}{ccccccc}
+	109 & = & 100 & + & 0 & + & 9                                   \\
+		& = & 1 \Times 10^2 & + & 0 \Times 10^1 & + & 9 \Times 10^0
+\end{array}$\end{center}
 $$$
-This way of writing numbers is called base ten. We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
+
+This way of writing numbers is called decimal (aka base ten). We use ten digits (0 to 9 inclusive) and each position in the number is scaled by a power of ten.
 
 In terms of math, there is nothing special about base ten. We probably use it
 because we have ten fingers. Some ancient civilizations used sompletely
@@ -53,6 +53,21 @@ $$$
                 & = 109                         \\
 \end{align*}
 $$$
+
+
+
+$$$
+\begin{center}$\begin{array}{ccccccccccccccc}
+    0b1101101 & = & 1 \Times 2^6 & + & 1 \Times 2^5 & + &
+    0 \Times 2^4 & + & 1 \Times 2^3 & + & 1 \Times 2^2 & + & 0 \Times 2^1 & + & 1 \Times 2^0 \\
+                & = & 64 &+& 32 &+& 0 &+& 8 &+& 4 &+& 0 &+& 1 \\
+                & = &109                         \\
+\end{array}$\end{center}
+$$$
+
+
+
+
 
 Importantly: we always use the prefix "0b" to avoid confusion when writing numbers in binary.
 
@@ -419,6 +434,9 @@ Why add 1 to the significand fraction?
 % normalizing to 1.xxx gives us a free bit of precision
 
 % Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
+
+### Machine Epsilon
+
 
 ### Floating Point Examples
 

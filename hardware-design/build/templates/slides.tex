@@ -30,10 +30,12 @@
 \usepackage{graphicx}
 % make \oplus look nice
 \usepackage{amssymb}
+\usepackage{amsmath} % for \text
+
 
 % HEADS UP!
 % minted is a pain in the ass, but the quality is much better than the next best option. specifically:
-% must build with -shall-escape
+% must build with -shell-escape
 % must have python installed with latexminted
 % the latexminted package seems to have been bundled with something, as I did not have to install it manually on 2025 Mac OS
 % 
@@ -93,7 +95,7 @@
 % omit navigation panel from the bottom of each slide
 \setbeamertemplate{navigation symbols}{}
 
-\newcommand{\Times}{\!\times\!}
+\newcommand{\Times}{\ensuremath{\!\times\!}}
 \newcommand{\LogicNot}[1]{{\ensuremath{\overline{#1}}}}
 \newcommand{\LogicAnd}[2]{{\ensuremath{{#1 \& #2}}}}
 \newcommand{\LogicNand}[2]{\LogicNot{\LogicAnd{#1}{#2}}}

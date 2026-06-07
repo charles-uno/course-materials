@@ -534,7 +534,7 @@ class Paragraph(DocElement):
         return children
 
     def get_next_and_leftovers_inline(self, raw, **kwargs):
-        for cls in [InlineCode, Bold, Italic, URL, Hyperlink, Comment]:
+        for cls in [InlineCode, Bold, Italic, URL, Hyperlink, Comment, BinaryNumber, HexNumber]:
             if cls.matches(raw):
                 try:
                     return cls.get_with_leftovers_inline(raw, **kwargs)
@@ -632,6 +632,50 @@ class URL(InlineBase):
 
     def to_tex(self) -> str:
         return r"\url{" + self._child_to_tex() + "}"
+
+
+class BinaryNumber(InlineBase):
+
+    DIGS = "01"
+
+    @classmethod
+    def matches(cls, raw):
+        return raw.startswith("0b") and len(raw) > 3 and raw[2] in cls.DIGS
+
+    @classmethod
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
+        assert cls.matches(raw)
+        leftovers = raw[2:]
+        contents = ""        
+        while leftovers and leftovers[0] in cls.DIGS:
+            contents += leftovers[0]
+            leftovers = leftovers[1:]
+        return cls(contents, **kwargs), leftovers
+
+    def to_tex(self) -> str:
+        return r"0\text{b}" + self._child_to_tex()
+
+
+class HexNumber(InlineBase):
+
+    DIGS = "0123456789abcdefABCDEF"
+
+    @classmethod
+    def matches(cls, raw):
+        return raw.startswith("0x") and len(raw) > 3 and raw[2] in cls.DIGS
+
+    @classmethod
+    def get_with_leftovers_inline(cls, raw: str, **kwargs: dict) -> tuple[DocElement, str]:
+        assert cls.matches(raw)
+        leftovers = raw[2:]
+        contents = ""        
+        while leftovers and leftovers[0] in cls.DIGS:
+            contents += leftovers[0]
+            leftovers = leftovers[1:]
+        return cls(contents, **kwargs), leftovers
+
+    def to_tex(self) -> str:
+        return r"0\text{x}" + self._child_to_tex()
 
 
 class Hyperlink(InlineBase):
