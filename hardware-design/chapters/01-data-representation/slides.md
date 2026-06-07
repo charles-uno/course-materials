@@ -227,11 +227,7 @@ Note: it's very easy to make mistakes by hand. I will **not** ask you to do this
 TODO: this
 
 
-
-
-
-
-## Negative Integers
+# Negative Integers
 
 ### Recall: Overflow
 
@@ -311,7 +307,37 @@ Let's perform 58 - 87 in binary:
 - Add 58 + (-87) in binary
 - Convert the result back to decimal
 
-# Fractions and Decimals
+# Non-Integer Data
+
+### Fractions and Decimals
+
+### Floating Point Advantages
+
+### Floating Point Limitations
+
+### Floating Point Examples
+
+### Floating Point Special Cases
+
+### Characters and Strings
+
+### ASCII
+
+### Unicode
+
+### Color
+
+### Images
+
+### Serializing Structured Data
+
+### Summary
+
+data -> numbers -> binary
+
+
+
+
 
 ### The Decimal Point
 
