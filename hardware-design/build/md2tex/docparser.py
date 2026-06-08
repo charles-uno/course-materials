@@ -483,14 +483,16 @@ class Table(DocElement):
         return " ".join(alignments)
 
     def to_tex(self) -> str:
-        # horizontal line after the **kwargser
-        open = r"\begin{tabular}{" + self._params["align"] + "}"
+        begin_center = r"\begin{center}"
+        end_center = r"\end{center}"
+        # horizontal line after the header
+        begin_table = r"\begin{tabular}{" + self._params["align"] + "}"
         content = "\n".join(
         [self._children[0].to_tex(), r"\hline"] + [child.to_tex() for child in self._children[1:]]
         )
-        close = r"\end{tabular}"
-        return open + "\n" + self.indent(content) + "\n" + close
-
+        end_table = r"\end{tabular}"
+        return "\n".join([begin_center, begin_table, content, end_table, end_center])
+    
     @classmethod
     def matches(cls, raw: str) -> bool:
         return raw.startswith("|")

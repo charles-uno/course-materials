@@ -170,18 +170,32 @@ Hexadecimal values are always prefixed with "0x" to avoid ambiguity.
 
 Converting back and forth between binary and hexadecimal does not require any
 math! Every four bits become one hex digit.
-$$$
-\begin{align*}
-    0b0000 & = 0x0 = 0 & 0b1000 & = 0x8 = 8  \\
-    0b0001 & = 0x1 = 1 & 0b1001 & = 0x9 = 9  \\
-    0b0010 & = 0x2 = 2 & 0b1010 & = 0xA = 10 \\
-    0b0011 & = 0x3 = 3 & 0b1011 & = 0xB = 11 \\
-    0b0100 & = 0x4 = 4 & 0b1100 & = 0xC = 12 \\
-    0b0101 & = 0x5 = 5 & 0b1101 & = 0xD = 13 \\
-    0b0110 & = 0x6 = 6 & 0b1110 & = 0xE = 14 \\
-    0b0111 & = 0x7 = 7 & 0b1111 & = 0xF = 15 \\
-\end{align*}
-$$$
+
+|||
+
+| Binary | Hex | Decimal |
+|--------|-----|---------|
+| 0b0000   | 0x0   | 0 |
+| 0b0001   | 0x1   | 1 |
+| 0b0010   | 0x2   | 2 |
+| 0b0011   | 0x3   | 3 |
+| 0b0100   | 0x4   | 4 |
+| 0b0101   | 0x5   | 5 |
+| 0b0110   | 0x6   | 6 |
+| 0b0111   | 0x7   | 7 |
+
+| Binary | Hex | Decimal |
+|--------|-----|---------|
+| 0b1000   | 0x8   | 8 |
+| 0b1001   | 0x9   | 9 |
+| 0b1010   | 0xA   | 10 |
+| 0b1011   | 0xB   | 11 |
+| 0b1100   | 0xC   | 12 |
+| 0b1101   | 0xD   | 13 |
+| 0b1110   | 0xE   | 14 |
+| 0b1111   | 0xF   | 15 |
+
+|||
 
 ### Converting from Decimal to Hexadecimal
 
@@ -226,7 +240,6 @@ Note: it's very easy to make mistakes by hand. I will **not** ask you to do this
 
 TODO: this
 
-
 # Negative Integers
 
 ### Recall: Overflow
@@ -234,7 +247,6 @@ TODO: this
 For 8-bit addition, $0b11111111 + 0b00000001 = 0b00000000$
 
 255 + 1 = 0
-
 
 ### Counting Backwards from Zero
 
@@ -314,9 +326,36 @@ Let's perform 58 - 87 in binary:
 - fixed point
 - floating point
 
+
 ### Floating Point Examples
 
+$$$
+	\begin{align*}
+		\underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
+		                                                                                                               & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
+		                                                                                                               & = 1                                                                  \\
+	\end{align*}
+	\begin{align*}
+		0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
+		                         & \approx 0.33325195                                                     \\
+	\end{align*}
+	\begin{align*}
+		1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
+		                         & = -65504                                                                \\
+	\end{align*}
+$$$
+
 ### Floating Point Special Cases
+
+| Sign | Exp   | Mantissa   | $\rightarrow$ | Meaning   |
+|------|-------|------------|---------------|-----------|
+| 0    | 00000 | 0000000000 | $\rightarrow$ |  0        |
+| 1    | 00000 | 0000000000 | $\rightarrow$ | -0        |
+| 0    | 11111 | 0000000000 | $\rightarrow$ | $\infty$  |
+| 1    | 11111 | 0000000000 | $\rightarrow$ | $-\infty$ |
+| 0    | 11111 | nonzero    | $\rightarrow$ | NaN       |
+
+There's more to it than this. If you're curious, read up on subnormal numbers [here](https://en.wikipedia.org/wiki/Half-precision_floating-point_format)
 
 ### Floating Point Advantages
 
@@ -410,41 +449,6 @@ Why add 1 to the significand fraction?
 
 % Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
 
-### Machine Epsilon
-
-
-### Floating Point Examples
-
-$$$
-	\begin{align*}
-		\underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
-		                                                                                                               & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
-		                                                                                                               & = 1                                                                  \\
-	\end{align*}
-	\begin{align*}
-		0 \; 01101 \; 0101010101 & = (-1)^0 \times 2^{13 - 15} \times \left( 1 + \frac{341}{1024} \right) \\
-		                         & \approx 0.33325195                                                     \\
-	\end{align*}
-	\begin{align*}
-		1 \; 11110 \; 1111111111 & = (-1)^1 \times 2^{30 - 15} \times \left( 1 + \frac{1023}{1024} \right) \\
-		                         & = -65504                                                                \\
-	\end{align*}
-$$$
-
-### Floating Point Special Cases
-$$$
-\[
-    \begin{array}{ccccr}
-        0 & 00000 & 0000000000     & = 0          \\
-        1 & 00000 & 0000000000     & = -0         \\
-        0 & 11111 & 0000000000     & = \infty     \\
-        1 & 11111 & 0000000000     & = -\infty    \\
-        0 & 11111 & \text{nonzero} & = \text{NaN} \\
-    \end{array}
-\]
-$$$
-
-There's more to it than this. If you're curious, read up on subnormal numbers [here](https://en.wikipedia.org/wiki/Half-precision_floating-point_format)
 
 
 ### Floating Point for Big Integers
