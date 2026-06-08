@@ -295,6 +295,7 @@ TODO: this slide
 Overflow is important for two's complement. It ensures that positive zero and negative zero are the same. But it is also a constraint!
 
 Try adding 0b01101001 + 0b01011010:
+
 $$$
 \[
     \begin{array}{ccccccccc}
@@ -306,8 +307,7 @@ $$$
     \end{array}
 \]
 $$$
-These are two's complement numbers. Convert them to decimal. What just
-happened?
+These are two's complement numbers. Convert them to decimal. What just happened?
 
 ### Group Work
 
