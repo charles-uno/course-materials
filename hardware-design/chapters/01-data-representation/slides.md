@@ -321,11 +321,78 @@ Let's perform 58 - 87 in binary:
 
 # Non-Integer Data
 
-### Fractions and Decimals
+### What else do computers store?
 
-- fixed point
-- floating point
+There are many cases where we want a computer to store non-numerical data:
 
+- Fractions/decimals
+- Text
+- Colors
+- Sounds
+- Images
+- Videos
+- Websites
+- Multiple things at once
+
+### The Decimal Point
+
+Sometimes we need to store numbers that aren't integers.
+
+Before we worry about binary, what does 21.867 mean?
+$$$
+\begin{align*}
+    21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times ?? + 6 \Times ?? + 7 \Times ??
+\end{align*}
+$$$
+
+### Fixed Point Decimals
+
+In decimal:
+$$$
+\begin{align*}
+    21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
+            & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
+\end{align*}
+$$$
+In binary, we can use the same idea:
+$$$
+\begin{align*}
+    0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
+                & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
+                & = 5.25                                                                                             \\
+\end{align*}
+$$$
+
+### Fixed Point Decimals
+
+The computer just stores 1s and 0s, not decimal points. How do we distinguish these values?
+- 0b0101110.1 = 46.5
+- 0b010111.01 = 23.25
+- 0b01011.101 = 11.625
+
+### Floating Point Representation
+
+Floating point numbers are a bit more complicated, but much more flexible. For
+a 16-bit floating point number we get:
+
+- 1 bit for the sign
+- 5 bits for the exponent (value -14 to 15)
+- 10 bits for the significand (value 0 to 1023)
+
+To turn those components into a value we use:
+$$$
+\begin{align*}
+    \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
+\end{align*}
+$$$
+
+Why offset the exponent?
+
+Why add 1 to the significand fraction?
+
+% normalizing to 1.xxx gives us a free bit of precision
+
+% Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
 
 ### Floating Point Examples
 
@@ -357,100 +424,6 @@ $$$
 
 There's more to it than this. If you're curious, read up on subnormal numbers [here](https://en.wikipedia.org/wiki/Half-precision_floating-point_format)
 
-### Floating Point Advantages
-
-### Floating Point Limitations
-
-### Characters and Strings
-
-### ASCII
-
-### Unicode
-
-### Color
-
-### Images
-
-### Sound
-
-### Video
-
-### Serializing Structured Data
-
-### Summary
-
-data -> numbers -> binary
-
-
-
-
-
-### The Decimal Point
-
-Sometimes we need to store numbers that aren't integers.
-
-Before we worry about binary, what does 21.867 mean?
-$$$
-\begin{align*}
-    21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times ?? + 6 \Times ?? + 7 \Times ??
-\end{align*}
-$$$
-
-### The Decimal Point
-
-In decimal:
-$$$
-\begin{align*}
-    21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
-            & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
-\end{align*}
-$$$
-In binary, we can use the same idea:
-$$$
-\begin{align*}
-    0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
-                & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
-                & = 5.25                                                                                             \\
-\end{align*}
-$$$
-
-### Fixed Point Representation
-
-The computer just stores 1s and 0s, not decimal points. How do we distinguish these values?
-- 0b0101110.1 = 46.5
-- 0b010111.01 = 23.25
-- 0b01011.101 = 11.625
-
-One option is to specify the location of the decimal point ahead of time. For example, we could say that our eight-bit binary decimal always has two decimal bits.
-
-What is an upside of this approach? What is a downside?
-
-### Floating Point Representation
-
-Floating point numbers are a bit more complicated, but much more flexible. For
-a 16-bit floating point number we get:
-
-- 1 bit for the sign
-- 5 bits for the exponent (value -14 to 15)
-- 10 bits for the significand (value 0 to 1023)
-
-To turn those components into a value we use:
-$$$
-\begin{align*}
-    \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
-\end{align*}
-$$$
-
-Why offset the exponent?
-
-Why add 1 to the significand fraction?
-
-% normalizing to 1.xxx gives us a free bit of precision
-
-% Explanation here for the 127 offset: https://www.quora.com/Why-do-we-add-127-to-the-exponent-in-IEEE-754-floating-number-format-to-get-the-actual-exponent-value
-
-
-
 ### Floating Point for Big Integers
 
 If we're dealing with big numbers, floating point often works better than fixed
@@ -477,25 +450,11 @@ So what's the catch?
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
 
-# Binary Serialization
-
-### What else do computers store?
-
-There are many cases where we want a computer to store non-numerical data:
-
-- Text
-- Colors
-- Sounds
-- Images
-- Videos
-- Websites
-- Multiple things at once
-
 ### Characters and Strings
 
 - Each character is represented by a number
 - The most straightforward encoding is ASCII
-- Modern use cases typically use Unicode (much bigger)
+- Modern use cases typically use Unicode (accents, emoji, etc)
 - To make a string, put a bunch of characters in a row
 - Question: how do we identify the end of a string?
 
@@ -504,41 +463,50 @@ $$$
 \includegraphics[width=\columnwidth]{images/ascii-table}
 $$$
 
-### Colors and Images
+### Character Encodings
+
+- ASCII strictly uses one byte per character
+- Unicode uses 1-4 characters per bit
+- How 
+
+% ASCII is 128 characters. first bit of the byte is always zero. go from there
+% first 128 characters of unicode are backwards compatible
+
+### Color and Images
 
 - A color can be described by three numbers (R, G, B)
 - We can represent an image as a grid of colored pixels
 - Question: do we need a null byte at the end of a pixel/row/image? Why or why not?
-$$$
-\includegraphics[width=\columnwidth]{images/mario-pixels}
-$$$
+![video game sprite by pixel](images/mario-pixels)
 
 ### Sound
 
 - Sound is pressure vibrations in the air
 - We can create sound by moving a speaker cone rapidly
 - To store sound, store the movement of the speaker cone
-$$$
-\includegraphics[width=0.5\columnwidth]{images/speakers}
-$$$
+![speakers](images/speakers)
 
-### Structured Data
+### Video
+
+### Serializing Structured Data
 
 - When you go to a website, how does your browser know what to display?
 - When you add an item to your online cart, what data is sent?
 
 |||
-$$$
-\includegraphics[width=\columnwidth]{images/html-example}
-$$$
+![example html](images/html-example)
 
-$$$
-\includegraphics[width=\columnwidth]{images/json-example}
-$$$
+![example json](images/json-example)
 |||
 
 % ### Group Exercises
 % TODO: this
+
+### Summary
+
+data -> numbers -> binary
+
+
 
 # Transforming Binary Data
 

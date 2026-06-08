@@ -725,8 +725,9 @@ class Image(DocElement):
     @classmethod
     def get_with_leftovers(cls, raw, **kwargs):
         assert cls.matches(raw)
-        alt_text, leftovers = raw[2:].split("](")
-        url, leftovers = leftovers.split(")", 1)
+        alt_text, leftovers = raw[2:].split("](", 1)
+        url = leftovers.split(")")[0]
+        leftovers = leftovers[len(url)+1:]
         return cls(alt_text, url), leftovers
 
     def to_tex(self):
