@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# reverse path lookup. Much easier here than in the makefile
+if [[ "$1" == artifacts/*.pdf && "$2" == "--get-md-path" ]]; then
+	ARTIFACT_PATH="$1"
+	NAME=$(basename "$ARTIFACT_PATH" | cut -d '.' -f 1)
+	# no dashes: artifacts/syllabus.pdf -> syllabus/syllabus.pdf
+	# at least one dash: artifacts/foo-bar-baz.pdf -> chapters/foo-bar/baz.pdf
+	NAME_LAST_PART=$(echo "$NAME" | rev | cut -d '-' -f 1 | rev)
+	if [[ "$NAME_LAST_PART" == "$NAME" ]]; then
+		echo "$NAME/$NAME.md"
+	else
+		NAME_PREFIX=$(echo "$NAME" | rev | cut -d '-' -f 2- | rev)
+		echo "chapters/$NAME_PREFIX/$NAME_LAST_PART.md"
+	fi
+	exit 0
+fi
+
+if [[ "$1" == artifacts/* || "$1" != *.md ]]; then
+	echored "expected path to markdown input file"
+	exit 1
+fi
+
 MD_PATH="$1"
 DIR=$(dirname "$MD_PATH")
 JOB_NAME=$(basename "$MD_PATH" | cut -d '.' -f 1)
@@ -13,6 +34,12 @@ if [[ "$DIR" == chapters/* ]]; then
 else
 	# foo/foo.pdf -> artifacts/foo.pdf (syllabus, project, etc)
 	ARTIFACT_PATH="artifacts/$JOB_NAME.pdf"
+fi
+
+# path lookup for use in the makefile
+if [[ "$2" == "--get-pdf-path" ]]; then
+	echo "$ARTIFACT_PATH"
+	exit 0
 fi
 
 echogreen() {

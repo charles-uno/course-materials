@@ -1,35 +1,27 @@
-
 .PHONY: all clean tidy syllabus project slides quiz homework final
-
-SLIDES_MD := $(wildcard chapters/*/slides.md)
-HOMEWORK_MD := $(wildcard chapters/*/homework.md)
-QUIZ_MD := $(wildcard chapters/*/quiz.md)
-CHAPTERS_MD := $(wildcard chapters/*/*.md)
-
-CHAPTER_DIRS := $(wildcard chapters/*)
 
 MD2PDF := build/md2pdf.sh
 BUILD_TOOLS := $(wildcard build/**/*.*)
 
-MAIN_MD := $(shell find * -mindepth 1 -not -path "build/*" -name "*.md" | sort)
-MAIN_PDF := $(MAIN_MD:.md=.pdf)
+TARGET_MDS := $(shell find * -mindepth 1 -not -path "build/*" -name "*.md" | sort)
+TARGET_PDFS := $(foreach f,$(TARGET_MDS),$(shell $(MD2PDF) $(f) --get-pdf-path))
 
-all: syllabus project chapters # final
+all: $(TARGET_PDFS)
 
-syllabus: syllabus/syllabus.pdf
-project: project/project.pdf
-slides: $(SLIDES_MD:.md=.pdf)
-quiz: $(QUIZ_MD:.md=.pdf)
-homework: $(HOMEWORK_MD:.md=.pdf)
-chapters: $(CHAPTERS_MD:.md=.pdf)
+slides: $(filter %-slides.pdf,$(TARGET_PDFS))
+homework: $(filter %-homework.pdf,$(TARGET_PDFS))
+quiz: $(filter %-quiz.pdf,$(TARGET_PDFS))
 
+syllabus: artifacts/syllabus.pdf
+project: artifacts/project.pdf
+
+# final is special. personalized build for each student based on CSV
 final:
 	cd final && make
 
-$(CHAPTER_DIRS): %: %/slides.pdf %/homework.pdf %/quiz.pdf
-
-$(MAIN_MD:.md=.pdf): %.pdf: %.md $(BUILD_TOOLS)
-	@$(MD2PDF) $<
+# reverse dry run to get the input path from the destination path
+$(TARGET_PDFS):
+	@ $(MD2PDF) $(shell $(MD2PDF) $@ --get-md-path)
 
 # remove junk per the .gitignore
 clean: tidy
