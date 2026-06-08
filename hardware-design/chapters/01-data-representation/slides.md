@@ -17,7 +17,7 @@ Computers work using electrical signals which can be on or off. If we let:
 
 We can use sequences of 0s and 1s to represent information
 
-# Positive Integers in Binary
+# Positive Integers
 
 ### Numbers in Base Ten (aka Decimal)
 
@@ -351,7 +351,7 @@ In decimal:
 $$$
 \begin{align*}
     21.867 & = 2 \Times 10^1 + 1 \Times 10^0 + 8 \Times 10^{-1} + 6 \Times 10^{-2} + 7 \Times 10^{-3}             \\
-            & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000} \\
+            & =2 \Times 10 + 1 \Times 1 + 8 \Times \frac{1}{10} + 6 \Times \frac{1}{100} + 7 \Times \frac{1}{1000}
 \end{align*}
 $$$
 In binary, we can use the same idea:
@@ -359,7 +359,7 @@ $$$
 \begin{align*}
     0b101.010 & = 1 \Times 2^2 + 0 \Times 2^1 + 1 \Times 2^0 + 0 \Times 2^{-1} + 1 \Times 2^{-2} + 0 \Times 2^{-3} \\
                 & = 1 \Times 4 + 0 + 1 \Times 1 + 0 + 1 \Times \frac{1}{4} + 0                                       \\
-                & = 5.25                                                                                             \\
+                & = 5.25                                                                                            
 \end{align*}
 $$$
 
@@ -442,12 +442,9 @@ point. This is true even if both formats use the same number of bits.
 
 So what's the catch?
 
-
 % can't express some numbers exactly. 0.1 + 0.2 = 0.30000000000000004
 % loss of precision when subtracting similar numbers
 % large gap between representable large numbers
-
-
 
 % ### Group Exercises
 % TODO: this
@@ -512,9 +509,12 @@ $$$
 
 ### Summary
 
-data -> numbers -> binary
-
-
+- We can approximate decimals as fractions
+- We can express fractions using integers
+- We can express sound and color using integers
+- Strings are sequences of characters
+- We can express characters using integers
+- Integers can be converted to binary
 
 # Transforming Binary Data
 
