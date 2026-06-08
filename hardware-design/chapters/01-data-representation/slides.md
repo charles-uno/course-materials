@@ -377,18 +377,18 @@ a 16-bit floating point number we get:
 
 - 1 bit for the sign
 - 5 bits for the exponent (value -14 to 15)
-- 10 bits for the significand (value 0 to 1023)
+- 10 bits for the mantissa (value 0 to 1023)
 
 To turn those components into a value we use:
 $$$
 \begin{align*}
-    \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{significand}}{1024} \right)
+    \text{value} & = (-1)^{\text{sign}} \times 2^{\text{exponent} - 15} \times \left(1 + \frac{\text{mantissa}}{1024} \right)
 \end{align*}
 $$$
 
 Why offset the exponent?
 
-Why add 1 to the significand fraction?
+Why add 1 to the mantissa fraction?
 
 % normalizing to 1.xxx gives us a free bit of precision
 
@@ -398,7 +398,7 @@ Why add 1 to the significand fraction?
 
 $$$
 	\begin{align*}
-		\underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{significand} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
+		\underbrace{0}_\text{sign} \; \underbrace{01111}_\text{exponent} \; \underbrace{0000000000}_\text{mantissa} & = (-1)^0 \times 2^{15 - 15} \times \left( 1 + \frac{0}{1024} \right) \\
 		                                                                                                               & = 1 \times 2^0   \times \left( 1 + 0 \right)                         \\
 		                                                                                                               & = 1                                                                  \\
 	\end{align*}
@@ -442,6 +442,13 @@ point. This is true even if both formats use the same number of bits.
 
 So what's the catch?
 
+
+% can't express some numbers exactly. 0.1 + 0.2 = 0.30000000000000004
+% loss of precision when subtracting similar numbers
+% large gap between representable large numbers
+
+
+
 % ### Group Exercises
 % TODO: this
 
@@ -449,6 +456,7 @@ So what's the catch?
 %        \item Convert 23.75 from decimal to fixed-point binary.
 %        \item Add fixed-point binary numbers 0b101101.01 + 0b010011.11. Convert to decimal to confirm your result.
 %        \item Show that the 16-bit floating point expression ${1 \; 01000 \; 1100000000}$ is equal to -3.5 in decimal.
+
 
 ### Characters and Strings
 
