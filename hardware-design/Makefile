@@ -1,4 +1,4 @@
-.PHONY: all clean tidy syllabus project slides quiz homework final
+.PHONY: all clean tidy syllabus project slides quiz homework final placeholder
 
 MD2PDF := build/md2pdf.sh
 BUILD_TOOLS := $(wildcard build/**/*.*)
@@ -12,15 +12,20 @@ slides: $(filter %-slides.pdf,$(TARGET_PDFS))
 homework: $(filter %-homework.pdf,$(TARGET_PDFS))
 quiz: $(filter %-quiz.pdf,$(TARGET_PDFS))
 
+chapters/%: placeholder
+	$(eval CH_DIR := $(patsubst %/,%,$*))
+	$(eval MATCHING_PDFS := $(filter artifacts/$(CH_DIR)-%,$(TARGET_PDFS)))
+	@if [ -n "$(MATCHING_PDFS)" ]; then $(MAKE) $(MATCHING_PDFS); else echo "No targets for chapter: $(CH_DIR)"; fi
+
+placeholder: # avoid confusion since the chapter target is a directory
+
 syllabus: artifacts/syllabus.pdf
 project: artifacts/project.pdf
 
-# final is special. personalized build for each student based on CSV
 final:
 	cd final && make
 
-# reverse dry run to get the input path from the destination path
-$(TARGET_PDFS):
+$(TARGET_PDFS): $(BUILD_TOOLS)
 	@ $(MD2PDF) $(shell $(MD2PDF) $@ --get-md-path)
 
 # remove junk per the .gitignore
