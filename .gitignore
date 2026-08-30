@@ -21,3 +21,4 @@ _minted*
 __pycache__
 artifacts
 *.md2tex
+*.texfot
