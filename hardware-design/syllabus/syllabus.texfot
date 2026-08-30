@@ -1,3 +1,0 @@
-/Library/TeX/texbin/texfot: invoking: latexmk -silent -halt-on-error -pdf -jobname=syllabus -cd -interaction=nonstopmode -shell-escape syllabus/syllabus.gen.tex
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex)
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex)
