@@ -9,8 +9,6 @@ Data Representation
     - Multiplication in Binary (note: no division)
     - Overflow
 - Negative Integers
-
-
     - Two's Complement
     - Subtraction in Binary
     - Side Note: Hexadecimal
@@ -89,6 +87,13 @@ Assembly Programming
     - **BOARD WORK:**
 - IO using printf and scanf
     - **BOARD WORK:**
+
+NOTE: do we want to pull control flow in here? If we can get away with it, then yes. let students use AI. writing this code by hand manually is pretty rough. give them more time to play. Might be a bit much. Alternatively, we could do functions and conditionals together? they are both control flow. then local variables go with AP
+
+
+
+
+
 Instruction Cycles
 - Von Neumann Architecture
     - CPU
@@ -178,4 +183,61 @@ Networking
 - Link Layer
 - Security (maybe mixed in)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data Representation
+- Positive Integers
+- Negative Integers
+- Non-Integer Data
+- Data Transformation
+Logic Representation
+- Truth tables
+- Logic circuits
+- Math circuits
+- Control circuits
+Electronic Circuits
+- Resistors
+- Capacitors
+- Transistors
+Computer Architecture
+- Von Neumann Architecture
+- Execution cycle
+- Pipelining and hazards, ILP
+- Storage hierarchy, physical mechanisms, caching
+- Performance & resiliency
+
+
+Linux Shell
+- VM setup?
+- Shell commands?
+- Piping?
+- Conditionals and Loops?
+Assembly Programming
+- Basic operations
+- Loading and storing data, global and local variables... stack vs heap?
+- IO using printf and scanf
+- Conditionals & loops
+Parallelism & Concurrency
+- Booting, kernel, system calls
+- Process life cycle
+- Concurrency vs parallelism (generalize the idea of context switching)
+- Cores, processes, threads (and hyperthreading)
+Networking
+- Network hardware
+- Application Layer
+- Transport Layer
+- Internet Layer
+- Link Layer
+- Security (maybe mixed in)
 
