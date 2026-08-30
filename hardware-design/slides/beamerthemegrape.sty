@@ -1,5 +1,3 @@
-\documentclass{beamer}
-
 \RequirePackage{tikz, xcolor, textpos}
 \usetikzlibrary{shapes.geometric}
 \definecolor{TextColor}{RGB}{0, 0, 0}
@@ -24,18 +22,15 @@
 \usepackage[T1]{fontenc}
 \usepackage{circuitikz}
 \usepackage{multirow}
-% vertical paragraph gaps instead of indentation
 \usepackage{parskip}
 \usepackage{multicol}
 \usepackage{graphicx}
 % make \oplus look nice
 \usepackage{amssymb}
-\usepackage{amsmath} % for \text
-
 
 % HEADS UP!
 % minted is a pain in the ass, but the quality is much better than the next best option. specifically:
-% must build with -shell-escape
+% must build with -shall-escape
 % must have python installed with latexminted
 % the latexminted package seems to have been bundled with something, as I did not have to install it manually on 2025 Mac OS
 % 
@@ -45,6 +40,8 @@
 \setminted{
   autogobble=true,
   tabsize=4,
+%  linenos=true,
+%  xleftmargin=1em,   % Push the entire code block to the right to make room for numbering
   numbersep=1em      % Gap between the numbers and the code
 }
 
@@ -75,7 +72,7 @@
 \setbeamercolor{title}{fg=PaperColor}
 \setbeamercolor{frametitle}{fg=PaperColor}
 \setbeamercolor{author}{fg=TextColor}
-\setbeamercolor{institute}{fg=TextColor}
+\setbeamercolor{institute}{fg=PaperColor}
 \setbeamercolor{date}{fg=TextColor}
 \setbeamercolor{normal text}{fg=TextColor}
 \setbeamercolor{item}{fg=TextColor}
@@ -89,13 +86,15 @@
 \setbeamercolor{part title}{fg=red}
 \setbeamercolor{subtitle}{fg=red}
 
-% ordered list formatting
 \setbeamertemplate{items}[circle]
 
 % omit navigation panel from the bottom of each slide
 \setbeamertemplate{navigation symbols}{}
 
-\newcommand{\Times}{\ensuremath{\!\times\!}}
+\newcommand{\Highlight}[1]{\textbf{\textcolor{AccentColor}{#1}}}
+
+\newcommand{\Times}{\!\times\!}
+
 \newcommand{\LogicNot}[1]{{\ensuremath{\overline{#1}}}}
 \newcommand{\LogicAnd}[2]{{\ensuremath{{#1 \& #2}}}}
 \newcommand{\LogicNand}[2]{\LogicNot{\LogicAnd{#1}{#2}}}
@@ -104,11 +103,27 @@
 \newcommand{\LogicXor}[2]{{\ensuremath{{#1 \text{\textasciicircum} #2}}}}
 \newcommand{\LogicXnor}[2]{\LogicNot{\LogicXor{#1}{#2}}}
 
+\newcommand{\Arm}[1]{\mintinline{arm}{#1}}
+
 % default slide background
 \setbeamertemplate{background}{
 \begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
     \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
     \draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.1);
+\end{scope}
+\end{tikzpicture}
+}
+
+% title page background and layout
+\setbeamertemplate{title page}{
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+\draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.5);
+\draw[draw=PaperColor, fill=PaperColor] (0, 0.5) rectangle (1, 1);
+\node at (0.5, 0.25) {\usebeamertemplate{institute}};
+\node at (0.5, 0.4) {\usebeamertemplate{title}};
+\node at (0.5, 0.6) {\usebeamertemplate{author}};
+\node at (0.5, 0.9) {\usebeamertemplate{date}};
 \end{scope}
 \end{tikzpicture}
 }
@@ -123,27 +138,36 @@
   \end{frame}
   % show subsections elsewhere
   \setcounter{tocdepth}{2}
-}
-
-% title page background and layout
-\setbeamertemplate{title page}{
-\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
-\begin{scope}[x={(current page.north east)},y={(current page.south west)}]
-\draw[draw=AccentColor, fill=AccentColor] (0, 0) rectangle (1, 0.5);
-\draw[draw=PaperColor, fill=PaperColor] (0, 0.5) rectangle (1, 1);
-\node at (0.5, 0.25) {\textcolor{PaperColor}{CSCI 241: Hardware Design}};
-\node at (0.5, 0.4) {\usebeamertemplate{title}};
-\node at (0.5, 0.6) {\usebeamertemplate{author}};
-% \node at (0.5, 0.75) {\usebeamertemplate{institute}};
-\node at (0.85, 0.93) {\small\usebeamertemplate{date}};
-\node at (0.5, 0.8) {\includegraphics[width=3cm]{images/stolaf-logo.png}};
-\end{scope}
-\end{tikzpicture}
-}
+  }
 
 % section page
 \newcommand{\Section}[1]{
 \section{#1}
+\begin{frame}{#1}
+% do not use \sectionpage because it makes the section name into a link and the color gets lost
+\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
+    \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
+    \draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
+    \draw[draw=AccentColor, fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
+    \node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
+    \end{scope}
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Outline}
+
+%    \begin{multicols*}{2}
+        \tableofcontents[currentsection,sectionstyle=hide,subsectionstyle=show/show/hide]
+%	\end{multicols*}
+\end{frame}
+}
+
+% subsection
+\newcommand{\Subsection}[1]{
+% TODO: figure out how to accept an optional short title for the TOC. See:
+% https://tex.stackexchange.com/questions/537219/conditionals-inside-newcommand-with-empty-argument
+% https://tex.stackexchange.com/questions/6862/how-can-i-display-a-short-chapter-name-in-the-header-and-a-long-chapter-name-in
+\subsection{#1}
 \begin{frame}
 \begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
 \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
@@ -152,20 +176,6 @@
 \node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
 \end{scope}
 \end{tikzpicture}
-\end{frame}
-}
-
-% subsection
-\newcommand{\Subsection}[1]{
-\subsection{#1}
-\begin{frame}{#1}
-\begin{tikzpicture}[remember picture,overlay,shift=(current page.north west)]
-    \begin{scope}[x={(current page.north east)},y={(current page.south west)}]
-    \draw[draw=PaperColor, fill=PaperColor] (0, 0) rectangle (1, 1);
-    \draw[draw=AccentColor, fill=AccentColor] (0.1, 0) rectangle (0.9, 1);
-    \node at (0.5, 0.5) {\textcolor{PaperColor}{#1}};
-    \end{scope}
-    \end{tikzpicture}
 \end{frame}
 }
 
@@ -232,22 +242,3 @@
     \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
   \fi%
   \beamer@resumemode}
-
-
-\title{@@title@@}
-\date{\today}
-\author{Prof Charles Fyfe $\quad \cdot \quad$ Prof Melissa Lynn}
-\institute{St Olaf College}
-
-\begin{document}
-
-\titlepage
-
-
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
-
-@@content@@
-
-\end{document}
