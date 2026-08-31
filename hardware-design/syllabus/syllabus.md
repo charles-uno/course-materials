@@ -1,17 +1,8 @@
-template: syllabus.tex
-title: Syllabus
+
 ---
 
-**TODO:** attendance policy. participate in group work. missing a bunch of classes is a red flag that should probably be tackled early or even escalated to the dean
-
-
-**TODO:** this course is about building a foundation? scaffolding? for you to do lots of cool computer stuff. touch a bunch of things. you will have the opportunity to go deeper on your favorite content for the project
-
-
-
-
 $$$
-\begin{overpic}[width=\textwidth]{dune-robot-hbo}
+\begin{overpic}[width=\textwidth]{../imports/introduction/images/dune-robot-hbo}
 	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}
 	\put (70, 3) {\textcolor{white}{Dune, Frank Herbert}}
 \end{overpic}
@@ -19,48 +10,57 @@ $$$
 
 # Course Information
 
-## Course Description
-
-Computers sometimes feel like magic! You write code (or maybe even a sentence)
-and it figures out complex tasks. But it's not magic. It's not alive. It's just
-a few layers of physics and logic.
-
-This course is about breaking down the fundamental components and processes
-that power computers. In particular:
-
-- The basic components of a computer
-- How data is stored using ones and zeroes
-- Building electrical circuits to perform math and logic
-- Coding exercises in Assembly (a very low-level language)
-
 ## Course Schedule
 
 See Moodle
 
 ## Office Hours
 
-Office hours are held immediately after class in my office:
-
-Tuesday and Thursday 11:00-11:30 in RMS 600
+Office hours are held immediately after class in my office: Tuesday and Thursday 11:00-11:30 in RMS 600
 
 If this does not work for you, please email me and we will figure something out!
 
 Office hours can be for more than just course work. I am happy to chat about career stuff too.
 
-**I strongly encourage you to take advantage of office hours!** St Olaf costs a lot more money than a state school. More than anything else, you are paying for access to faculty. Professors here set aside time every week to talk to you and answer your questions. That is not necessarily the case at a bigger school. 
+## Course Description
 
-## Standards
+Computers sometimes feel like magic! You write code (or maybe even a sentence) and it figures out complex tasks. But it's not magic. It's physics and logic. 
 
-The course is broken down into eight standards. Each standard weighs equally for the final grade. 
+This course is about breaking down the fundamental components and processes that power computers. In particular:
 
-- **Data Representation.** Representing numbers and other data using ones and zeroes. Binary arithmetic. Hexadecimal. Negative numbers using two's complement. Floating point numbers.
-- **Logic Representation.** Boolean logic and expressions. Logic gates and logic circuits. Circuits for logic and arithmetic. Building logic gates out of transistors.
-- **Instructions on Hardware.** Components of a computer. Memory hierarchy, caching, and locality. The steps of executing an instruction on a clock-driven machine. Pipelining, data hazards, and control hazards.
-- **Assemly Programming.** Fundamentals of Assembly programming. Global constants and variables. Input and output to the terminal. Raspberry Pi setup. 
-- **OS Concepts.** Processes, threads, and cores. Process life cycle. Booting the machine. Concurrency. Kernel and user modes. Traps and interrupts.
-- **Stack Frames.** Control flow in Assembly using function calls. Stack frames. Memory diagrams. Local variables.
-- **Control Flow.** Conditionals and loops in Assembly.
-- **Networking.** Client/server model. Packets. Routers. Protocols. Domain name resolution.
+- The basic components of a computer
+- How data is stored using ones and zeroes
+- Building electrical circuits to perform math and logic
+- Coding exercises in Assembly (a very low-level language)
+
+## Material Covered
+
+Course material is broken down into nine units:
+
+- **Data Representation.** Representation of numbers, text, and other data using ones and zeroes
+- **Logic Representation.** Logic gates, logic circuits, control circuits, and arithmetic
+- **Computer Architecture.** Execution and storage on a clock-driven system
+- **Linux Shell.** Navigating a Linux system or network using a command line interface
+- **Assemly Programming.** Text input, text output, and basic commands in Assembly
+- **Control Flow.** Functions, conditionals, and loops in Assembly
+- **OS Concepts.** Booting, parallelism, concurrency, and OS kernels
+- **Breadboards.** Hands-on computer logic using resistors and transistors
+- **Networking.** TCP/IP model for network communication
+
+## Grading
+
+Your grade is determined as follows:
+
+- 30\% Quiz 1
+- 30\% Quiz 2
+- 30\% Quiz 3
+- 10\% Project
+
+Each quiz covers three units. The final covers all nine again. It's basically a do-over on the quizzes. I'll keep whichever score is better for each unit. 
+
+If you get full credit for a unit on the quiz, you can skip that part of the final entirely. 
+
+Homework assignments are practice for the quiz. They are also an opportunity to get feedback from the TAs. The goal for homework should not be to get it right. The goal is to spend some time engaging with the material. 
 
 ## Grade Scale
 
@@ -82,54 +82,13 @@ Pretty standard:
 
 I reserve the right to adjust a grade up in consideration of unusual circumstances. I will never adjust a grade down.
 
-## Grading Breakdown
-
-- 45\% Tests
-- 45\% Assignments
-- 10\% Peer Reviews
-
-**Tests.** This class has four tests, each covering two standards. All eight standards are covered again on the final. Each standard is graded as follows:
-
-- You have demonstrated proficiency. Full credit. Well done!
-- You are close! Half credit. Revise within a week for full credit
-- Partial proficiency. Half credit. Please try again on the final
-- You have not yet demonstrated proficiency. Please try again on the final
-
-You only have to demonstrate proficiency once per standard! If you get it on the test, you get to skip that part of the final. If you demonstrate proficiency on the final, you get full credit for that standard regardless of what your score was on the test.
-
-Tests are take-home. No book, no notes, no computer, no nothing. Just paper and pencil. See the calendar on Moodle for dates.
-
-Revisions are closed-book as well (honor code also applies). Start with your graded test and a blank piece of paper. Write out the complete correct solution in your absolute best handwriting. Email it to me. Also include a scan or photo of the original (with my markups). You may alternatively stop by office hours and work through it on the whiteboard. 
-
-**Assignments.** There is one assignment per standard. Assignments are found on Doenet. There will be a few different types of work. A single assignment will often include a mix of the following:
-
-- Worksheets graded automatically via Doenet
-- Work submitted as a PDF via Moodle. This may include pencil-and-paper work, screenshots of circuit simulations, etc
-- Code exercises submitted via CSGit. We will set this up in class
-
-The prompt on Doenet should make clear how each part of the assignment is to be submitted. Please contact me if you encounter ambiguity!
-
-**Peer reviews.** At the end of the course, you will each write reviews for a few of your peers. These reviews will be short. Less than one page. You will provide **specific examples** of ways your peers helped you succeed.
-
-Show up. Work together. Make it easy for your peers to write nice things about you. I recommend also keeping some light notes over the course of the semester. Write down whenever one of your peers is particularly helpful or insightful.
-
 ## Final Exam
 
 May 15th at 9am
 
 ## Extra Credit
 
-You will receive extra credit for attending department events such as colloquims. Please email me a selfie of yourself at the event along with a few sentences about something you learned.
-
-## Late Work Policy
-
-Please try to get your homework in on time. Otherwise you are likely to fall behind in the course.
-
-Late homework is inconvenient for the graders. They may be grumpy and vindictive when grading it.
-
-No late work will be accepted for the last two weeks of the semester. The graders have their own finals to worry about!
-
-When submitting late homework, you must notify the graders by email. Otherwise they will not know to look for it.
+You can earn a small amount of extra credit for attending department events such as colloquia. Please email me a selfie of yourself at the event along with a few sentences about something you learned.
 
 ## Important Links
 
@@ -153,16 +112,15 @@ Work that violates this policy will typically receive no credit. In especially s
 
 ## AI Usage Policy
 
-TODO: flesh this out
+AI is very good at answering questions about computer science. You are welcome to use it as a study aid. Please do not use AI as an answer machine, as doing so will sabotage your own learning.
 
-You are welcome to use AI tools when studying.
+I am happy to discuss further. Please feel free to reach out by email or stop by my office.
 
-Please not submit AI work as your own.
+## Attendance Policy
 
-% assembly, then C, then Python
-% when you write in Python, you don't care that the resulting assembly is slop
-% AI can cost you time and space, but we don't want it to cost us correctness
-% we are not studying to become assembly developers. we are learning a little bit of assembly to drill concepts into your brains. learning those concepts will probably even make you better at using AI in the future!
+Please attend class and participate in group exercises.
+
+If I notice that you frequently miss class, I will likely reach out to you directly. In extreme cases, I may escalate to the dean. 
 
 ## Disability Accommodation
 
