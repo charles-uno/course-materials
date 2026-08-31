@@ -8,3 +8,6 @@ syllabus.pdf: syllabus.tex syllabus.gen.tex
 
 syllabus.gen.tex: syllabus.md
 	@ $(MD2TEX) syllabus.md
+
+clean:
+	cd .. && $(MAKE) clean
