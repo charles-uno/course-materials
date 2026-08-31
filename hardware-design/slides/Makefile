@@ -11,16 +11,14 @@ MAIN_TEX = hardware-design-slides.tex
 
 all: $(TARGET)
 
-$(TARGET): $(MAIN_TEX) $(TEX_OUTPUTS)
+$(TARGET): $(MAIN_TEX) $(TEX_OUTPUTS) beamerthemegrape.sty
 	@ $(TEX2PDF) $(MAIN_TEX)
 
 ../imports/%/slides.gen.tex: ../imports/%/slides.md
 	@ $(MD2TEX) $<
 
-# remove junk per the .gitignore
-clean: tidy
-	@ git clean -fdX
+clean:
+	cd .. && $(MAKE) clean
 
-# remove junk per .gitignore but leave the PDFs
-tidy: 
-	@ git clean -fdX -e "*.pdf"
+tidy:
+	cd .. && $(MAKE) tidy
