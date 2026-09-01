@@ -1,7 +1,7 @@
 MD2TEX = ../build/md2tex/md2tex.py
 TEX2PDF = ../build/tex2pdf.sh
 
-MD_SOURCES = $(wildcard imports/*.md)
+MD_SOURCES = $(wildcard imports/*/slides.md)
 TEX_OUTPUTS = $(MD_SOURCES:.md=.gen.tex)
 
 TARGET = hardware-design-slides.pdf
