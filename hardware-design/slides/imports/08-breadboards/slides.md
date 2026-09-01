@@ -3,9 +3,15 @@ beamer: true
 
 # Breadboards
 
-## Subsection
+## Resistors
 
-### Foo Bar
+### Foo
 
-- fizz
-- buzz
+## Capacitors
+
+### Bar
+
+## Transistors
+
+### Baz
+
