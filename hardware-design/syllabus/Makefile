@@ -3,11 +3,11 @@ TEX2PDF = ../build/tex2pdf.sh
 
 all: syllabus.pdf
 
-syllabus.pdf: syllabus.tex syllabus.gen.tex
+syllabus.pdf: syllabus.tex imports/syllabus.gen.tex
 	@ $(TEX2PDF) syllabus.tex
 
-syllabus.gen.tex: syllabus.md
-	@ $(MD2TEX) syllabus.md
+imports/syllabus.gen.tex: imports/syllabus.md
+	@ $(MD2TEX) imports/syllabus.md
 
 clean:
 	cd .. && $(MAKE) clean

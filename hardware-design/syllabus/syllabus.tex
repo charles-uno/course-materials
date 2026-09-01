@@ -17,7 +17,9 @@
 
 \usepackage{parskip}
 
-\titlehead{\hfill\includegraphics[width=3cm]{../imports/introduction/images/stolaf-logo.png}}
+\usepackage{import}
+
+\titlehead{\hfill\includegraphics[width=3cm]{imports/images/stolaf-logo.png}}
 
 \title{Course Syllabus}
 \subtitle{CSCI 241: Hardware Design}
@@ -33,6 +35,6 @@
 \tableofcontents
 \newpage
 
-\input{syllabus.gen.tex}
+\subimport{imports/}{syllabus.gen.tex}
 
 \end{document}
