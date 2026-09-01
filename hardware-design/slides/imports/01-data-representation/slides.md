@@ -407,6 +407,10 @@ $$$
 	\end{align*}
 $$$
 
+### Floating Point
+
+![Invincible floating point meme](images/invincible-fraction)
+
 ### Floating Point Special Cases
 
 | Sign | Exp   | Mantissa   | $\rightarrow$ | Meaning   |
