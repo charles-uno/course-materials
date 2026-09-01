@@ -1,13 +1,6 @@
 
 ---
 
-$$$
-\begin{overpic}[width=\textwidth]{../imports/introduction/images/dune-robot-hbo}
-	\put (4,8) {\textcolor{white}{\textbf{Thou shalt not make a machine in the likeness of a human mind}}}
-	\put (70, 3) {\textcolor{white}{Dune, Frank Herbert}}
-\end{overpic}
-$$$
-
 # Course Information
 
 ## Course Schedule
@@ -93,7 +86,7 @@ You can earn a small amount of extra credit for attending department events such
 ## Important Links
 
 - Dive Into Systems: https://diveintosystems.org/book/index.html
-- Doenet: https://www.doenet.org/course?tool=dashboard&courseId=_GnqAk2zB64CHKPeZY9Ren
+% - Doenet: https://www.doenet.org/course?tool=dashboard&courseId=_GnqAk2zB64CHKPeZY9Ren
 - ARM Tutorial: https://diveintosystems.org/book/C9-ARM64/index.html
 - ARM Simulator: http://163.238.35.161/~zhangs/arm64simulator/
 - Circuitverse: https://circuitverse.org/simulator
