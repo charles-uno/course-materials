@@ -7,7 +7,7 @@ TEX_OUTPUTS = $(MD_SOURCES:.md=.gen.tex)
 TARGET = hardware-design-slides.pdf
 MAIN_TEX = hardware-design-slides.tex
 
-.PHONY: all clean
+.PHONY: all clean tidy
 
 all: $(TARGET)
 
@@ -17,8 +17,10 @@ $(TARGET): $(MAIN_TEX) $(TEX_OUTPUTS) beamerthemegrape.sty
 imports/%.gen.tex: imports/%.md
 	@ $(MD2TEX) $<
 
-clean:
-	cd .. && $(MAKE) clean
+# remove junk per the .gitignore
+clean: tidy
+	@ git clean -fdX
 
-tidy:
-	cd .. && $(MAKE) tidy
+# remove junk per .gitignore but leave the PDFs
+tidy: 
+	@ git clean -fdX -e "*.pdf"
