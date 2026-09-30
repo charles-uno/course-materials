@@ -27,7 +27,6 @@ beamer: true
 % high-pass filter. edge detection. gives you a sharp edge on your clock ticks
 
 
-# Electrical Circuits
 
 ### The Components
 $$$
