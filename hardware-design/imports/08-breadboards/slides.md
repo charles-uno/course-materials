@@ -18,8 +18,6 @@ beamer: true
 
 
 
-# Electronic Circuits
-
 % resistors in parallel and in series
 
 % need to talk about capacitors?

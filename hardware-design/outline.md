@@ -64,6 +64,7 @@ Assembly Programming
 Control Flow
 - Local variables
 - Function calls (recursion?)
+- Stack frames
 - Conditionals
 - Loops
 OS Concepts
