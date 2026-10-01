@@ -149,6 +149,7 @@ see the textbook.
 - In some situations, an overflow error may crash your program
 - Most of the time, the computer silently throws away the extra bit
 - This is called **overflow**
+- We will talk more about this when we get into negatives!
 
 ### Hexadecimal
 

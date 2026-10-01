@@ -14,7 +14,7 @@ $$$
 
 ### Course Overview
 
-Computers feel like magic. You type words. The machine does complex things. Especially in the era of large language models
+Computers feel like magic. You type words. The machine does complex things. Especially in the era of LLMs
 
 But it's not magic. Computers are made of semiconductors, metal, and magnets. Three different kinds of rocks
 
@@ -43,17 +43,27 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 
 - Course content is broken into nine standards
 - Each exam covers three standards
-- The final covers all nine
+- The final exam is a do-over on all nine
 - You only have to demonstrate proficiency once
 - If you demonstrate proficiency on the quiz, you're good. Full credit. You can skip that part of the final
 - If you demonstrate profociency on the final, full credit, regardless of your grade on the quiz
 
-### LLM (AI) Use
+## Group Work
 
-- LLMs are very good at computer science
-- You are welcome to use LLMs as a study aid
-- Please do not use them as an answer machine. Doing so will sabotage your own learning
-- You will *not* have access to LLMs while taking tests
+### Group Work
+
+- We will regularly break into groups to work on problems
+- 2-4 people per group
+- Please actually work together!
+- Talk it out until everyone is on the same page
+- Anyone in your group may be called on
+
+### Please Actually Work Together!
+
+- You may prefer to work alone
+- I am asking you to work together
+- If the room is dead quiet, I can tell if you are not actually working together
+- I will make the rules more complicated if necessary
 
 ## Important Links
 
@@ -65,7 +75,14 @@ This course is about demystifying the machine and exploring how, fundamentally, 
 - ARM Simulator: http://163.238.35.161/~zhangs/arm64simulator/
 - Circuitverse: https://circuitverse.org/simulator
 
-## Everything Else
+## Policies
+
+### LLM (AI) Use
+
+- LLMs are very good at computer science
+- You are welcome to use LLMs as a study aid
+- Please do not use them as an answer machine. Doing so will sabotage your own learning
+- You will *not* have access to LLMs while taking tests
 
 ### Everything Else 
 

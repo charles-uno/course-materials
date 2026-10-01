@@ -58,6 +58,8 @@ Assembly Programming
 - Basic operations... ADD, SUB, AND, MUL, LSL... this is pretty awkward to test
     - **BOARD WORK:**
 - Loading and storing data
+    - global variables
+    - local variables
     - **BOARD WORK:**
 - IO using printf and scanf
     - **BOARD WORK:**
