@@ -18,7 +18,7 @@ Recall from before:
 - What if we want different behavior on the fly?
 - How do we write conditionals (`if`, `else`) and loops (`for`, `while`)?
 
-## Comparison
+## Conditionals
 
 ### Comparison
 
@@ -103,8 +103,6 @@ This looks just like what we did for functions! How are function labels differen
 - Use `cmp` to compare two values, set processor flags
 - Use `beq` (etc) to execute logic based on those flags
 
-## If
-
 ### If (Python)
 
 ```python
@@ -155,13 +153,6 @@ positive:
     b endif
 ```
 
-### Summary
-
-- Conditionally skip the code that would be in the `if` block
-- This means your conditional should be the opposite of what you would write in the `if`
-
-## If/Else
-
 ### If/Else (Python)
 
 ```python
@@ -202,8 +193,6 @@ else:
     print("negative")
 ```
 
-
-
 ### If/Elif/Else (Assembly)
 
 ```arm
@@ -225,10 +214,12 @@ endif:
 
 ### Summary
 
+- Conditionally skip the code that would be in the `if` block
+- This means your conditional should be the opposite of what you would write in the `if`
 - If/else: conditional branch followed by an unconditional branch
 - The two are mutually exclusive. Always want to execute one, never both
 
-## While Loop
+## Loops
 
 ### While Loop (Python)
 
@@ -272,15 +263,6 @@ loop_test:
 - In "real" code, local variables live on the stack
 - How would the code need to change to reflect that?
 
-### Summary
-
-- Jump forward to the loop test
-- Maybe jump back to the loop body
-- At the end of the loop body, we get back to the test
-- Don't forget to increment or you'll go forever
-
-## For Loop
-
 ### For Loop (C)
 
 Note: `range(5)` is actually pretty weird in Python. Back to the classic:
@@ -321,11 +303,11 @@ loop_done:
 
 ### Summary
 
-- Loop test first
-- Maybe bail from the loop
+There are a few different ways to construct a loop. We always need:
+
+- Loop test
 - Loop body
 - Increment
-- Unconditionally back to the top
 
 ## Nested Logic
 
@@ -398,9 +380,6 @@ break:
 - There is only one set of flags
 - If you call `b`, `bl`, etc, generally assume they have been overwritten
 - Don't accidentally overwrite them before you use them!
-
-
-
 
 
 ## Assembly Functions

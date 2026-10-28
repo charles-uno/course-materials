@@ -63,12 +63,20 @@ Assembly Programming
     - **BOARD WORK:**
 - IO using printf and scanf
     - **BOARD WORK:**
+
+
+- Assembly program structure (incl global variables)
+- Basic commands (includes STR, LDR)
+- IO using Printf and Scanf
+- Automated Testing?
+
 Control Flow
-- Local variables
-- Function calls (recursion?)
-- Stack frames
-- Conditionals
+- Comparison & Conditionals
 - Loops
+- Function Calls
+- Local variables (incl stack frames)
+
+
 OS Concepts
 - Booting, kernel, system calls
     - **BOARD WORK:**
