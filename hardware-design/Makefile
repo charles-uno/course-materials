@@ -3,7 +3,7 @@
 MD2PDF := build/md2pdf.sh
 BUILD_TOOLS := $(wildcard build/**/*.*)
 
-TARGET_MDS := $(shell find * -mindepth 1 -not -path "build/*" -name "*.md" | sort)
+TARGET_MDS := $(shell find * -mindepth 1 -not -path "build/*" -not -path "imports/*" -not -path "*/imports/*" -name "*.md" | sort)
 TARGET_PDFS := $(foreach f,$(TARGET_MDS),$(shell $(MD2PDF) $(f) --get-pdf-path))
 
 all: $(TARGET_PDFS)
