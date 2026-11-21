@@ -48,34 +48,28 @@
     - Cosmic rays, hardware failure, power failure, journaling, ECC, CRC, Hamming codes, checksums, copy on write, mirroring, RAID, XOR parity
     - *GROUP WORK:*
 ## Linux Shell
+- GUIs are nice! AI is super convenient! but sometimes you need to work with a system where that stuff is not available. You might be the one setting it up!
 - VM setup?
 - Shell commands?
 - Piping?
 - Conditionals and Loops?
 ## Assembly Programming
-- Registers, variable sizes. Scratch vs callee-saved. PC? 
+- Intro: remember von neuman arch. registers
     - *GROUP WORK:*
 - Basic operations... ADD, SUB, AND, MUL, LSL... this is pretty awkward to test
     - *GROUP WORK:*
 - Loading and storing data
-    - global variables
-    - local variables
+    - Stack vs heap
+    - STR, LDR
     - *GROUP WORK:*
 - IO using printf and scanf
     - *GROUP WORK:*
-
-- Assembly program structure (incl global variables)
-- Basic commands (includes STR, LDR)
-- IO using Printf and Scanf
 - Automated Testing?
-
 ## Control Flow
 - Comparison & Conditionals
 - Loops
-- Function Calls
-- Local variables (incl stack frames)
-
-
+- Function Calls (`BL`, `RET`)
+- Stack frames
 ## OS Concepts
 - Booting, kernel, system calls
     - *GROUP WORK:*
@@ -96,10 +90,9 @@
     - Water analogy, logic gates
     - *GROUP WORK:* breadboard! make logic gates
 ## Networking
-- Network hardware
+- Intro: what is a router? Also other hardware
 - Application Layer
 - Transport Layer
 - Internet Layer
 - Link Layer
-- Security (maybe mixed in)
 
