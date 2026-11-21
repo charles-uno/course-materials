@@ -64,20 +64,19 @@
 - IO using printf and scanf
     - *GROUP WORK:*
 
-
 - Assembly program structure (incl global variables)
 - Basic commands (includes STR, LDR)
 - IO using Printf and Scanf
 - Automated Testing?
 
-Control Flow
+## Control Flow
 - Comparison & Conditionals
 - Loops
 - Function Calls
 - Local variables (incl stack frames)
 
 
-OS Concepts
+## OS Concepts
 - Booting, kernel, system calls
     - *GROUP WORK:*
 - Process life cycle
@@ -86,7 +85,7 @@ OS Concepts
     - *GROUP WORK:*
 - Cores, processes, threads (and hyperthreading)
     - *GROUP WORK:* pthreads timing data
-Breadboards
+## Breadboards
 - Resistors
     - Water analogy, series, parallel
     - *GROUP WORK:* breadboard! look at LED brightness
@@ -96,7 +95,7 @@ Breadboards
 - Transistors
     - Water analogy, logic gates
     - *GROUP WORK:* breadboard! make logic gates
-Networking
+## Networking
 - Network hardware
 - Application Layer
 - Transport Layer
