@@ -9,8 +9,10 @@ TARGET_PDFS := $(foreach f,$(TARGET_MDS),$(shell $(MD2PDF) $(f) --get-pdf-path))
 all: $(TARGET_PDFS)
 
 slides: $(filter %-slides.pdf,$(TARGET_PDFS))
-homework: $(filter %-homework.pdf,$(TARGET_PDFS))
 quiz: $(filter %-quiz.pdf,$(TARGET_PDFS))
+
+homework:
+	cd homework && $(MAKE)
 
 chapters/%: placeholder
 	$(eval CH_DIR := $(patsubst %/,%,$*))
