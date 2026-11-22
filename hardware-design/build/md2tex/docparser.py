@@ -167,7 +167,19 @@ class Document(DocElement):
 
     def to_tex(self):
         contents = self._children_to_tex()
-        return self.with_variables(self.with_template(contents))
+        if self._params.get("template"):
+            return self.with_variables(self.with_template(contents))
+        return self.with_variables(self.with_header(contents))
+
+    def with_header(self, content: str) -> str:
+        header_lines = []
+        for field in ("title", "subtitle", "author", "date"):
+            if field in self._params:
+                header_lines.append(f"\\{field}{{{self._params[field]}}}")
+        if header_lines:
+            header_lines.append("\\maketitle")
+            return "\n".join(header_lines) + "\n\n" + content
+        return content
 
     def with_template(self, content: str) -> str:
         template_name = self._params.get("template")
