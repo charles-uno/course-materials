@@ -1,12 +1,8 @@
-MD2TEX = ../build/md2tex/md2tex.py
-TEX2PDF = ../build/tex2pdf.sh
+include ../build/common.mk
 
 MD_SOURCES = $(wildcard ../imports/*/homework.md)
 CHAPTERS = $(notdir $(patsubst %/,%,$(dir $(MD_SOURCES))))
 TARGETS = $(addsuffix -homework.pdf,$(CHAPTERS))
-
-.PHONY: all clean tidy
-.SECONDARY:
 
 all: $(TARGETS)
 
@@ -25,14 +21,3 @@ all: $(TARGETS)
 			.replace("@@import_dir@@", f"../imports/{sys.argv[3]}/")); \
 		open(sys.argv[4], "w").write(out)' \
 		template.tex ../imports/$*/homework.md $* $@
-
-../imports/%/homework.gen.tex: ../imports/%/homework.md
-	@ $(MD2TEX) $<
-
-# remove junk per the .gitignore
-clean: tidy
-	@ git clean -fdX
-
-# remove junk per the .gitignore but leave the PDFs
-tidy:
-	@ git clean -fdX -e "*.pdf"
