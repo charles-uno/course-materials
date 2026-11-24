@@ -1,6 +1,4 @@
-template: quiz.tex
-date: April 24, 2026
-title: OS Concepts
+
 ---
 
 # OS Concepts
