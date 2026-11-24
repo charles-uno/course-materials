@@ -8,11 +8,21 @@ TARGET_PDFS := $(foreach f,$(TARGET_MDS),$(shell $(MD2PDF) $(f) --get-pdf-path))
 
 all: $(TARGET_PDFS)
 
-slides: $(filter %-slides.pdf,$(TARGET_PDFS))
 quiz: $(filter %-quiz.pdf,$(TARGET_PDFS))
+
+slides:
+	cd slides && $(MAKE)
 
 homework:
 	cd homework && $(MAKE)
+
+syllabus: artifacts/syllabus.pdf
+
+project:
+	cd project && $(MAKE)
+
+final:
+	cd final && make
 
 chapters/%: placeholder
 	$(eval CH_DIR := $(patsubst %/,%,$*))
@@ -20,12 +30,6 @@ chapters/%: placeholder
 	@if [ -n "$(MATCHING_PDFS)" ]; then $(MAKE) $(MATCHING_PDFS); else echo "No targets for chapter: $(CH_DIR)"; fi
 
 placeholder: # avoid confusion since the chapter target is a directory
-
-syllabus: artifacts/syllabus.pdf
-project: artifacts/project.pdf
-
-final:
-	cd final && make
 
 $(TARGET_PDFS): $(BUILD_TOOLS)
 	@ $(MD2PDF) $(shell $(MD2PDF) $@ --get-md-path)

@@ -1,6 +1,4 @@
-template: assignment.tex
-title: Final Project
-date: May 10, 2027
+
 ---
 
 # Final Project!
