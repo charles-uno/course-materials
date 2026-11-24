@@ -10,13 +10,17 @@ all: $(TARGET_PDFS)
 
 quiz: $(filter %-quiz.pdf,$(TARGET_PDFS))
 
+exams:
+	cd exams && $(MAKE)
+
 slides:
 	cd slides && $(MAKE)
 
 homework:
 	cd homework && $(MAKE)
 
-syllabus: artifacts/syllabus.pdf
+syllabus: 
+	cd syllabus && $(MAKE)
 
 project:
 	cd project && $(MAKE)
