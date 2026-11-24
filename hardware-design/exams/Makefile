@@ -17,11 +17,11 @@ EXAM3_IMPORTS = \
 
 all: exam1.pdf exam2.pdf exam3.pdf
 
-exam1.pdf: exam1.tex exam-preamble.tex $(EXAM1_IMPORTS)
+exam1.pdf: exam1.tex exam-preamble.tex $(VARS_TEX) $(EXAM1_IMPORTS)
 	@ $(TEX2PDF) exam1.tex
 
-exam2.pdf: exam2.tex exam-preamble.tex $(EXAM2_IMPORTS)
+exam2.pdf: exam2.tex exam-preamble.tex $(VARS_TEX) $(EXAM2_IMPORTS)
 	@ $(TEX2PDF) exam2.tex
 
-exam3.pdf: exam3.tex exam-preamble.tex $(EXAM3_IMPORTS)
+exam3.pdf: exam3.tex exam-preamble.tex $(VARS_TEX) $(EXAM3_IMPORTS)
 	@ $(TEX2PDF) exam3.tex

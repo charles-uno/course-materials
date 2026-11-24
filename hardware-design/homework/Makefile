@@ -6,7 +6,7 @@ TARGETS = $(addsuffix -homework.pdf,$(CHAPTERS))
 
 all: $(TARGETS)
 
-%-homework.pdf: %-homework.gen.tex ../imports/%/homework.gen.tex
+%-homework.pdf: %-homework.gen.tex $(VARS_TEX) ../imports/%/homework.gen.tex
 	@ $(TEX2PDF) $<
 
 %-homework.gen.tex: template.tex
