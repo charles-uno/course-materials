@@ -10,7 +10,8 @@ PDF_PATH="$DIR/$JOB_NAME.pdf"
 printf "building \033[35m$INPUT_PATH\033[0m -> \033[35m$PDF_PATH\033[0m ... "
 
 # so we can import from the templates directory as well as the build directory
-export TEXINPUTS=".:$(pwd)/build/templates/:"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+export TEXINPUTS=".:$SCRIPT_DIR/templates/:"
 
 # NOTE: it's important that we run from a parent directory with -cd rather than
 # move to the working directory. The minted lexer will try to import temporary

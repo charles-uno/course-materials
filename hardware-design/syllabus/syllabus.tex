@@ -1,33 +1,9 @@
-\documentclass{scrartcl} 
+\documentclass{scrartcl}
 
-\usepackage[percent]{overpic}
-
-\usepackage{graphicx}
-\usepackage{xcolor}
-\definecolor{AccentColor}{RGB}{124, 98, 177}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    % internal links
-    linkcolor=AccentColor,
-    filecolor=AccentColor,      
-    % external links
-    urlcolor=AccentColor,
-    }
-
-\usepackage{parskip}
-
-\usepackage{import}
-
-\titlehead{\hfill\includegraphics[width=3cm]{../imports/syllabus/images/stolaf-logo.png}}
+\usepackage{course-doc}
 
 \title{Course Syllabus}
-\subtitle{CSCI 241: Hardware Design}
-\author{Prof Charles Fyfe}
 \date{Spring 2027}
-
-% do not show numbers in section headers or TOC
-\setcounter{secnumdepth}{0}
 
 \begin{document}
 
@@ -35,6 +11,6 @@
 \tableofcontents
 \newpage
 
-\subimport{../imports/syllabus}{syllabus.gen.tex}
+\subimport{../imports/syllabus/}{syllabus.gen.tex}
 
 \end{document}
