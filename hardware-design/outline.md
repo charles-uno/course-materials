@@ -96,3 +96,23 @@
 - Internet Layer
 - Link Layer
 
+## Bonus: Project Topics
+- Control circuits beyond arithmetic, multiplexer, latch
+- Deep dive on VLIW, GPUs, SIMD, or other form of ILP
+- Write endurance
+- Write by page, erase by block
+- Magnetic domains on an SSD
+- Write-back caching
+- Hardware compression
+- Block-level deduplication
+- Log-structured filesystem
+- Memory interleaving
+- Storage alignment
+- Hamming codes, ECC, CRC
+- Copy on write
+- Mirroring, RAID, XOR parity
+- Linux terminal??
+- History of Assembly programming
+- Something ambitious on a breadboard
+
+
