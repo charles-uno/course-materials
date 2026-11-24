@@ -1,4 +1,4 @@
-template: assignment.tex
+
 ---
 
 # OS Concepts

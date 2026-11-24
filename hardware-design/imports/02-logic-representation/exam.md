@@ -1,4 +1,3 @@
-template: quiz.tex
 title: Logic Representation
 date: March 1, 2027
 ---
