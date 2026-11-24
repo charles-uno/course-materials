@@ -167,8 +167,6 @@ class Document(DocElement):
 
     def to_tex(self):
         contents = self._children_to_tex()
-        if self._params.get("template"):
-            return self.with_variables(self.with_template(contents))
         return self.with_variables(self.with_header(contents))
 
     def with_header(self, content: str) -> str:
@@ -180,21 +178,6 @@ class Document(DocElement):
             header_lines.append("\\maketitle")
             return "\n".join(header_lines) + "\n\n" + content
         return content
-
-    def with_template(self, content: str) -> str:
-        template_name = self._params.get("template")
-        if not template_name:
-            return content
-        # this script lives in build/md2tex
-        # templates dir is build/templates
-        build_path = pathlib.Path(__file__).resolve().parent.parent
-        template_path = f"{build_path}/templates/{template_name}"
-        try:
-            with open(template_path, "r") as handle:
-                template = handle.read()
-        except FileNotFoundError:
-            raise ParseFailure(f"template '{template_name}' not found")
-        return template.replace("@@content@@", content)
 
     def with_variables(self, content: str) -> str:
         for key, val in self._params.items():
