@@ -1,4 +1,4 @@
-.PHONY: all clean tidy syllabus project slides quiz homework final placeholder
+.PHONY: all clean tidy syllabus project slides quiz homework final placeholder exams
 
 MD2PDF := build/md2pdf.sh
 BUILD_TOOLS := $(wildcard build/**/*.*)
