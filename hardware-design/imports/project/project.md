@@ -12,7 +12,7 @@ I want you to be the top expert in this class about the topic. Know more than I 
 Then turn your expertise into something cool. Truly open-ended
 
 - Slides
-- Sculpture, painting, drawing
+- Sculpture, painting, drawing, poetry, dance
 - Essay
 - Breadboard
 
