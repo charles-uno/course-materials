@@ -79,4 +79,4 @@ clean: tidy
 
 # remove junk per the .gitignore but leave the PDFs
 tidy:
-	@ git clean -fdX -e "*.pdf"
+	@ git clean -fdX -e "*.pdf" -e "artifacts/"
