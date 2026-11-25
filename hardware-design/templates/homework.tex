@@ -13,6 +13,9 @@
 
 \usepackage{circuitikz}
 
+\let\origdate\date
+\renewcommand{\date}[1]{\origdate{Due #1}}
+
 \begin{document}
 
 \subimport{@@import_dir@@}{homework.gen.tex}
