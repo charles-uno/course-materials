@@ -161,6 +161,14 @@ Look up an ASCII table. and use it to fill out the corresponding values for each
     TODO
 1. Write the string "Hardware Design" as a sequence of ASCII values, by matching up each character with its ASCII value. Don't forget the null character!
 
+## JSON
+
+
+
+
+
+
+
 ## Encryption
 
 In this exercise you and a peer will perform RSA encryption by hand. You may use a calculator for the math.
